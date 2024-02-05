@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
     <meta charset="utf-8">
@@ -8,178 +8,80 @@
     <!-- provide the csrf token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/assets/bootstrap-5.3/css/bootstrap.min.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" /> -->
-    <link rel="stylesheet" href="{{ asset('admin_assets/assets/css/app.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin_assets/assets/css/custom.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin_assets/assets/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin_assets/assets/css/morris.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/material.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/morris/morris.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+        <link rel="stylesheet" href="path/to/select2.min.css">
 
+        
+    @stack('styles')
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
+<body>
+    <!--header-->
+    @include('admin.includes.header')
 
-<body class="light light-sidebar theme-white">
-    <div id="app">
-        <div class="main-wrapper main-wrapper-1">
-            <!--header-->
-            @include('admin.includes.header')
+    <!--end header-->
+    <!--sidebar-wrapper-->
+    @include('admin.includes.sidebar')
+    <!--end sidebar-wrapper-->
 
-            <!--end header-->
-            <!--sidebar-wrapper-->
-            @include('admin.includes.sidebar')
-            <!--end sidebar-wrapper-->
+    <!--page-wrapper-->
+    @yield('content')
 
-            <!--page-wrapper-->
-            @yield('content')
+    <!--end page-wrapper-->
 
-            <!--end page-wrapper-->
+    <!--footer -->
+    {{-- @include('admin.includes.footer') --}}
 
-            <!--footer -->
-            @include('admin.includes.footer')
-
-            <!-- end footer -->
-        </div>
-    </div>
+    <!-- end footer -->
 
 </body>
+<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="{{ asset('admin_assets/js/jquery-3.6.0.min.js') }}"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('admin_assets/assets/bootstrap-5.3/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('admin_assets/assets/js/raphael-min.js') }}"></script>
-<script src="{{ asset('admin_assets/assets/js/morris.min.js') }}"></script>
-<script src="{{ asset('admin_assets/assets/js/Chart.min.js') }}"></script>
-<script src="{{ asset('admin_assets/assets/js/custom.js') }}" async=""></script>
-<script src="{{ asset('admin_assets/assets/js/app.min.js') }}"></script>
-<script src="{{ asset('admin_assets/assets/js/scripts.js') }}" async=""></script>
-<script src="{{ asset('admin_assets/assets/js/jquery-ui.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+<script src="{{ asset('admin_assets/js/bootstrap.bundle.min.js') }}"></script>
 
-{{-- toastr message cdn --}}
+<script src="{{ asset('admin_assets/js/jquery.slimscroll.min.js') }}"></script>
+
+<script src="{{ asset('admin_assets/plugins/morris/morris.min.js') }}"></script>
+<script src="{{ asset('admin_assets/plugins/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/chart.js') }}"></script>
+<script src="{{ asset('admin_assets/js/Chart.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/greedynav.js') }}"></script>
+<script src="{{ asset('admin_assets/js/select2.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+<script src="{{ asset('admin_assets/js/layout.js') }}"></script>
+{{-- <script src="{{ asset('admin_assets/js/theme-settings.js') }}"></script> --}}
+<script src="{{ asset('admin_assets/js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-{{-- sweet alert cdn --}}
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
-
-<script type="text/javascript">
-    var colorDanger = "#F4B11A";
-    Morris.Donut({
-        element: 'donut-example',
-        resize: false,
-        colors: [
-            '#E34804 ',
-            '#E34804 ',
-            '#F1EFFB',
-            '#F1EFFB'
-        ],
-        //labelColor:"#cccccc", // text color
-        //backgroundColor: '#333333', // border color
-        data: [{
-                label: "Total Booking",
-                value: 200,
-                color: colorDanger
-            },
-            {
-                label: "Total Booking",
-                value: 120
-            },
-            {
-                label: "Total Booking",
-                value: 80
-            }
-        ]
-    });
+<script src="path/to/select2.min.js"></script>
 
 
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
-            datasets: [{
-                label: 'Flight',
-                data: [200, 250, 100, 150, 180, 90, 70],
-                backgroundColor: "#97C7FF"
-            }, {
-                label: 'Hotel',
-                data: [300, 200, 250, 100, 200, 40, 60],
-                backgroundColor: "#1BAC18"
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }],
-                xAxes: [{
-                    // Change here
-                    barPercentage: 0.8,
-                    gridLines: {
-                        drawOnChartArea: false,
-                        color: "black",
-                        zeroLineColor: "black"
-                    }
-                }]
-            }
-        }
-    });
-
-    var ctx = document.getElementById("myChart2").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
-            datasets: [{
-                label: 'Agency',
-                data: [200, 250, 100, 150, 180, 90, 70],
-                backgroundColor: "#97C7FF"
-            }, {
-                label: 'Corporate',
-                data: [300, 200, 250, 100, 200, 40, 60],
-                backgroundColor: "1BAC18"
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-
-                }],
-                xAxes: [{
-                    // Change here
-                    barPercentage: 0.8,
-                    gridLines: {
-                        drawOnChartArea: false,
-                        color: "black",
-                        zeroLineColor: "black"
-                    }
-                }]
-
-            }
-        }
-    });
-</script>
 <script>
     @if (Session::has('message'))
         toastr.options = {
@@ -213,6 +115,17 @@
         toastr.warning("{{ session('warning') }}");
     @endif
 </script>
+
+<script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5"></script>
+    {{-- trippy --}}
+    <script>
+        tippy('[data-tippy-content]', {
+            allowHTML: true,
+            placement: 'bottom',
+            theme: 'light-theme',
+        });
+    </script>
 
 
 @stack('scripts')

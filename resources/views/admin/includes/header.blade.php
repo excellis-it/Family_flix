@@ -1,83 +1,181 @@
-<div class="navbar-bg"></div>
-            <nav class="navbar navbar-expand-lg main-navbar sticky">
-                <div class="form-inline mr-auto">
-                    <ul class="navbar-nav mr-3">
-                        <li>
-                            <a href="" data-toggle="sidebar" class="nav-link nav-link-lg collapse-btn">
-                                
-                                <svg xmlns="http: //www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-menu">
-                                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                                </svg>
-                            </a>
-                        </li>
-                        <li></li>
-                    </ul>
-                </div>
-                <ul class="navbar-nav navbar-right">
-
-                    <!--<li class="dropdown">-->
-                    <!--    <a href="" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">-->
-                    <!--        <i class="ph-bell"></i> <span class="notification_round">10</span>-->
-                    <!--    </a>-->
-                    <!--    <div class="dropdown-menu dropdown-menu-right pullDown">-->
-                    <!--        <div class="dropdown-title">Notification</div>-->
-                    <!--        <div class="notification_scroll">-->
-                    <!--            <div class="notify_me">-->
-                    <!--                <a href="" class="notify_me_a">-->
-                    <!--                    <span class="number_notify">1</span>-->
-                    <!--                    <p>Today’s New Bookings</p>-->
-                    <!--                </a>-->
-                    <!--                <a href="" class="notify_me_a">-->
-                    <!--                    <span class="number_notify">2</span>-->
-                    <!--                    <p>Today’s New Bookings</p>-->
-                    <!--                </a>-->
-                    <!--                <a href="" class="notify_me_a">-->
-                    <!--                    <span class="number_notify">3</span>-->
-                    <!--                    <p>Today’s New Bookings</p>-->
-                    <!--                </a>-->
-                    <!--                <a href="" class="notify_me_a">-->
-                    <!--                    <span class="number_notify">4</span>-->
-                    <!--                    <p>Today’s New Bookings</p>-->
-                    <!--                </a>-->
-                    <!--                <a href="" class="notify_me_a">-->
-                    <!--                    <span class="number_notify">5</span>-->
-                    <!--                    <p>Today’s New Bookings</p>-->
-                    <!--                </a>-->
-                    <!--                <a href="" class="notify_me_a">-->
-                    <!--                    <span class="number_notify">6</span>-->
-                    <!--                    <p>Today’s New Bookings</p>-->
-                    <!--                </a>-->
-
-                    <!--            </div>-->
-                    <!--        </div>-->
-
-                    <!--    </div>-->
-                    <!--</li>-->
-                    <!-- <li>
-                        <a href="" class="nav-link nav-link-lg fullscreen-btn">
-                            <i class="ph-gear"></i>
-                        </a>
-                    </li> -->
-                    <li class="dropdown">
-                        <a href="" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('admin_assets/assets/img/profile.png') }}" class="user-img-radious-style" /> {{ Auth::user()->name }}
-                            <!---<span class="d-sm-none d-lg-inline-block"><i class="ph-caret-down"></i></span>---->
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right pullDown">
-                            <div class="dropdown-title">Hello {{ Auth::user()->name }}</div>
-                            <a href="{{ route('admin.profile') }}"><div class="dropdown-title">Profile</div></a>
-                            <button type="submit" class="dropdown-item has-icon text-danger">
-                                
-                                <a href="{{ route('admin.logout') }}" class="has-icon text-danger">
-                                    Logout
-                                </a>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+<div class="main-wrapper">
+    <div class="header">
+        <div class="header-left">
+            <span class="logo">
+              Family Flix
+            </span>
            
+        </div>
+        <a id="toggle_btn" href="javascript:void(0);">
+            <span class="bar-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </a>
+
+        <div class="page-title-box">
+            <!--<h3>Welcome to admin panel</h3>-->
+        </div>
+
+        <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+        <ul class="nav user-menu">
+            <li class="nav-item dropdown dropdown-large">
+              <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="position-relative">
+                  <span class="notify-badge">8</span>
+                  <i class="las la-bell"></i>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a href="javascript:void(0);">
+                  <div class="msg-header">
+                    <p class="msg-header-title">Notifications</p>
+                    <p class="msg-header-clear ms-auto">Marks all as read</p>
+                  </div>
+                </a>
+                <div class="header-notifications-list ps">
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-primary">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
+                            ago</span></h6>
+                        <p class="msg-info">You have recived new orders</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-danger">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">New Customers<span class="msg-time float-end">14 Sec
+                            ago</span></h6>
+                        <p class="msg-info">5 new user registered</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-success">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">24 PDF File<span class="msg-time float-end">19 min
+                            ago</span></h6>
+                        <p class="msg-info">The pdf files generated</p>
+                      </div>
+                    </div>
+                  </a>
+
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-info">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">New Product Approved <span class="msg-time float-end">2 hrs ago</span></h6>
+                        <p class="msg-info">Your new product has approved</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-warning">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">Time Response <span class="msg-time float-end">28 min
+                            ago</span></h6>
+                        <p class="msg-info">5.1 min avarage time response</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-danger">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">New Comments <span class="msg-time float-end">4 hrs
+                            ago</span></h6>
+                        <p class="msg-info">New customer comments recived</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-primary">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">New 24 authors<span class="msg-time float-end">1 day
+                            ago</span></h6>
+                        <p class="msg-info">24 new authors joined last week</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-success">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">Your item is shipped <span class="msg-time float-end">5 hrs
+                            ago</span></h6>
+                        <p class="msg-info">Successfully shipped your item</p>
+                      </div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <div class="d-flex align-items-center">
+                      <div class="notify text-warning">
+                        <i class="las la-bell"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="msg-name">Defense Alerts <span class="msg-time float-end">2 weeks
+                            ago</span></h6>
+                        <p class="msg-info">45% less alerts last 4 weeks</p>
+                      </div>
+                    </div>
+                  </a>
+                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+                <a href="javascript:;">
+                  <div class="text-center msg-footer">View All Notifications</div>
+                </a>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown has-arrow main-drop">
+                <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                    <span class="user-img">
+                        @if (Auth::user()->profile_picture)
+                            <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="">
+                        @else
+                            <img src="{{ asset('admin_assets/img/profiles/avatar-21.jpg') }}" alt="">
+                        @endif
+                        <span class="status online"></span>
+                    </span>
+                    <!--<span>{{ Auth::user()->name }}</span>-->
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('admin.profile') }}">My Profile</a>
+                    <a class="dropdown-item" href="{{ route('admin.password') }}">Change Password</a>
+                    <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="dropdown mobile-user-menu">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="{{ route('admin.profile') }}">My Profile</a>
+                <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>

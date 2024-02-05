@@ -113,7 +113,6 @@ class AdminController extends Controller
 
     public function delete($id)
     {
-
         User::findOrFail($id)->delete();
         return redirect()->back()->with('error', 'Admin has been deleted!');
     }

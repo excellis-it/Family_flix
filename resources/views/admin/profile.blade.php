@@ -1,106 +1,122 @@
 @extends('admin.layouts.master')
 @section('title')
-Profile Update - {{ env('APP_NAME') }}
+    {{ env('APP_NAME') }} | Profile
 @endsection
 @push('styles')
 @endpush
 
 @section('content')
-    <section class="section_breadcrumb d-block d-sm-flex justify-content-between">
-        <div class="">
-            <h4 class="page-title m-b-0">Update Profile</h4>
-            <!-- <h5 class="page">Hello Evano 👋🏼,</h5> -->
-        </div>
-        <div class="">
-            <ul class="breadcrumb breadcrumb-style">
-                <li class="breadcrumb-item">
-                    Home
-                </li>
-                <li class=""> >>  Profile</li>
-            </ul>
-        </div>
-    </section>
+    <div class="page-wrapper">
+        <!--page-content-wrapper-->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <!--breadcrumb-->
+                <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                    {{-- <div class="breadcrumb-title pe-3">Admin Profile</div> --}}
+                    <div class="ps-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 p-0">
+                                {{-- <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class='bx bx-home-alt'></i></a>
+                            </li> --}}
+                                {{-- <li class="breadcrumb-item active" aria-current="page">Admin Profile</li> --}}
+                            </ol>
+                        </nav>
+                    </div>
 
-    <div class="main-content">
-        <div class="inner_page">
-            <div class="card-title">
-                <div class="row justify-content-between">
-                    <div class="col-md-6">
-                        <h4 class="mb-0">Create</h4>
+                </div>
+                <!--end breadcrumb-->
+                <div class="user-profile-page">
+                    <div class="card radius-15">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-lg-7 border-right">
+                                    <div class="d-md-flex align-items-center">
+                                        <div class="mb-md-0 mb-3">
+                                            @if (!Auth::user()->profile_picture)
+                                                <a href="{{ asset('admin_assets/img/profiles/avatar-21.jpg') }}"
+                                                    target="_blank">
+                                                    <img src="{{ asset('admin_assets/img/profiles/avatar-21.jpg') }}"
+                                                        class="rounded-circle shadow" width="130px" height="130px"
+                                                        alt="" /></a>
+                                            @else
+                                                <a href="{{ Storage::url(Auth::user()->profile_picture) }}" target="_blank">
+                                                    <img src="{{ Storage::url(Auth::user()->profile_picture) }}"
+                                                        class="rounded-circle shadow" width="130px" height="130px"
+                                                        alt=""></a>
+                                            @endif
+                                        </div>
+                                        <div class="ms-md-4 flex-grow-1">
+                                            <div class="d-flex align-items-center mb-1">
+                                                <h4 class="mb-0">{{ Auth::user()->name }}</h4>
+                                            </div>
+                                            <p class="mb-0 text-muted">Admin</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--end row-->
+
+                            <div class="tab-content mt-3">
+                                <div class="tab-pane fade show active" id="Edit-Profile">
+                                    <div class="card shadow-none border mb-0 radius-15">
+                                        <div class="card-body">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-5 border-right">
+                                                        <form class="row g-3" action="{{ route('admin.profile.update') }}"
+                                                            method="post" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="col-12">
+                                                                <label class="form-label">Profile Picture</label>
+                                                                <input type="file" name="profile_picture"
+                                                                    class="form-control">
+                                                                @if ($errors->has('profile_picture'))
+                                                                    <div class="error" style="color:red;">
+                                                                        {{ $errors->first('profile_picture') }}</div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label class="form-label">Name</label>
+                                                                <input type="text" value="{{ Auth::user()->name }}"
+                                                                    name="name" class="form-control">
+                                                                @if ($errors->has('name'))
+                                                                    <div class="error" style="color:red;">
+                                                                        {{ $errors->first('name') }}</div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label class="form-label">Email</label>
+                                                                <input type="text" value="{{ Auth::user()->email }}"
+                                                                    name="email" class="form-control">
+                                                                @if ($errors->has('email'))
+                                                                    <div class="error" style="color:red;">
+                                                                        {{ $errors->first('email') }}</div>
+                                                                @endif
+                                                            </div>
+
+                                                            <div class="col-6">
+                                                                <button type="submit"
+                                                                    class="btn px-5 submit-btn">Update</button>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card search_bar sales-report-card">
-                <div class="sales-report-card-wrap">
-                    <div class="form-head">
-                        <h4>Profile Information</h4>
-                    </div>
-                    <form action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row justify-content-between">
-                            <div class="col-md-6">
-                                <div class="form-group-div">
-                                    <div class="form-group">
-                                        <label for="floatingInputValue"> Name*</label>
-                                        <input type="text" name="name" class="form-control" id="floatingInputValue"
-                                            placeholder="Enter name*" value="{{ Auth::user()->name }}">
-                                        @if ($errors->has('name'))
-                                            <div class="error" style="color:red;">{{ $errors->first('name') }}</div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <div class="form-group-div">
-                                    <div class="form-group">
-                                        <label for="floatingInputValue">Email*</label>
-                                        <input type="text" name="email" class="form-control" id="floatingInputValue"
-                                            placeholder="Enter email*" value="{{old('email', Auth::user()->email)}}">
-                                        @if ($errors->has('email'))
-                                            <div class="error" style="color:red;">{{ $errors->first('email') }}</div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-between">
-                            <div class="col-md-6">
-                                <div class="form-group-div">
-                                    <div class="form-group">
-                                        <label for="floatingInputValue">Phone</label>
-                                        <input type="text" name="phone" class="form-control" id="floatingInputValue"
-                                            placeholder="Enter phone" value="{{ Auth::user()->phone }}">
-                                       
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group-div">
-                                    <div class="form-group">
-                                        <label for="floatingInputValue">Password</label>
-                                        <input type="password" name="password" placeholder="Enter password"  class="form-control" id="floatingInputValue" >                                     
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-between">
-                            <div class="col-xl-12">
-                                <div class="btn-1">
-                                    <button type="submit">Update</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
+        <!--end page-content-wrapper-->
     </div>
 @endsection
 
 @push('scripts')
-  
 @endpush
