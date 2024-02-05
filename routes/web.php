@@ -45,22 +45,16 @@ Route::get('/career-form/{id}', [HomeController::class, 'careerForm'])->name('ca
 
 Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
-
-
 Route::get('/blog/{slug}', [HomeController::class, 'blogDetails'])->name('blog-details');
 Route::post('/blog-comment',[HomeController::class, 'blogComment'])->name('blog.comment.submit');
-
 
 Route::get('/our-work', [HomeController::class, 'ourWork'])->name('our.work');
 Route::post('/our-work/filter',[HomeController::class, 'ourWorkFilter'])->name('our-work.filter');
 Route::post('/plan/filter',[HomeController::class, 'pricingFilter'])->name('pricing.filter');
 Route::post('/plan-checking',[HomeController::class, 'planChecking'])->name('plan.checking');
 
-
 Route::post('/job-apply',[HomeController::class, 'JobApply'])->name('submit.job-apply');
 Route::get('/services',[HomeController::class, 'services'])->name('services');
-
-
 
 /* ----------------- Admin Routes -----------------*/
 
