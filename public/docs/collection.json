@@ -1,0 +1,870 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "White-Glove",
+        "_postman_id": "c26cb652-3272-4548-a272-92e41573931e",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "description": "\nAPIs for Authentication",
+            "item": [
+                {
+                    "name": "Login Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"john@yopmail.com\",\"password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"data\": {\n     \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDM4ZGQxMzMwMWI4NDRhMTdiMjBiNmE5ODE4MGJhMjQzYjM1NWE5NzIwMDY1MDVkMDYzZTRmZDkzMTczYTFhNzUxOTAzNTQ1Njk2YThkNjkiLCJpYXQiOjE2ODM3MDg5MDIuMTU2MDQ5LCJuYmYiOjE2ODM3MDg5MDIuMTU2MDU1LCJleHAiOjE3MTUzMzEzMDIuMTE4Njk1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.FIoFzfcobt83QQp73zJaTKvhs-1ta-ROBiAL0q7Ex8UMm2Se5ouPf2RdkDpNs43ydfMhEUEEp6rk_-5cRXTt8T_B_4jtngxDkcO5OYyPvHMUGw7q0F5tiTd1jOiMUfq-89UU-k41h7nTPW_VGjvVHiJWJMfDqBAc-Z84lKk-uVnK24tcRxHbaLyk4Q8vM-4Nhz0Gbwcj8y2WdRItrPTp6mpXbV-q37OYbQiy7ctJPZgHxPmB6CjQji4kH8_qc6hbW7cQBOOj1KpNj-IHwCB3hKvEpe-rx4gBZmol-TCyiJAcNkSnm9NULuKf5_ZCZ1rU62EmmOFjBr6-A7xpdjPs0PexOpb3h-UmWgzFcq5_TBQu2ETmfiPKTq2v-7zUZBkEZZNNIteySYijX5bCNZY2XYCAR1I_pzAm8Ue-L9BKPoTvVPme9T5c9hL69HESgF3wr2521CvxWkY-kAd-_fkaveVjz_8sJwB7o-Fme0Ah2R7uT55btmtp6VpX2p_VkknU4Zb5BKc7XTWPwbAno98leUMyeuzVzZW3jyu3eA66RDOjO4D_LurKUgfp5tq27o_cuz707MrFQ1gv76JXeHdr0HeY8S1PTUisIJtjC-4MkE391v-mw42jZ874ndDrwKQ0ml09ARdSE478JpDp2afAN0hUg9YcjjX3WkvZOYndkbg\",\n     \"user\": {\n         \"id\": 3,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n         \"status\": 1\n     }\n   }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n \"status\": false,\n \"statusCode\": 401,\n \"error\": \"Invalid user & Password!\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Register Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"aniya.walsh@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"data\": {\n     \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDM4ZGQxMzMwMWI4NDRhMTdiMjBiNmE5ODE4MGJhMjQzYjM1NWE5NzIwMDY1MDVkMDYzZTRmZDkzMTczYTFhNzUxOTAzNTQ1Njk2YThkNjkiLCJpYXQiOjE2ODM3MDg5MDIuMTU2MDQ5LCJuYmYiOjE2ODM3MDg5MDIuMTU2MDU1LCJleHAiOjE3MTUzMzEzMDIuMTE4Njk1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.FIoFzfcobt83QQp73zJaTKvhs-1ta-ROBiAL0q7Ex8UMm2Se5ouPf2RdkDpNs43ydfMhEUEEp6rk_-5cRXTt8T_B_4jtngxDkcO5OYyPvHMUGw7q0F5tiTd1jOiMUfq-89UU-k41h7nTPW_VGjvVHiJWJMfDqBAc-Z84lKk-uVnK24tcRxHbaLyk4Q8vM-4Nhz0Gbwcj8y2WdRItrPTp6mpXbV-q37OYbQiy7ctJPZgHxPmB6CjQji4kH8_qc6hbW7cQBOOj1KpNj-IHwCB3hKvEpe-rx4gBZmol-TCyiJAcNkSnm9NULuKf5_ZCZ1rU62EmmOFjBr6-A7xpdjPs0PexOpb3h-UmWgzFcq5_TBQu2ETmfiPKTq2v-7zUZBkEZZNNIteySYijX5bCNZY2XYCAR1I_pzAm8Ue-L9BKPoTvVPme9T5c9hL69HESgF3wr2521CvxWkY-kAd-_fkaveVjz_8sJwB7o-Fme0Ah2R7uT55btmtp6VpX2p_VkknU4Zb5BKc7XTWPwbAno98leUMyeuzVzZW3jyu3eA66RDOjO4D_LurKUgfp5tq27o_cuz707MrFQ1gv76JXeHdr0HeY8S1PTUisIJtjC-4MkE391v-mw42jZ874ndDrwKQ0ml09ARdSE478JpDp2afAN0hUg9YcjjX3WkvZOYndkbg\",\n     \"user\": {\n         \"id\": 3,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n         \"status\": 1\n     }\n   }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"message\": [\n      \"The email has already been taken.\",\n      \"The confirm password and password must match.\"\n  ]\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cart",
+            "description": "APIs for managing cart",
+            "item": [
+                {
+                    "name": "Cart list Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cart\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cart\/list"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"message\": \"Cart list\",\n  \"data\": [\n      \"id\": 24,\n      \"user_id\": 7,\n      \"product_id\": 4,\n      \"quantity\": 1,\n      \"product\": {\n          \"id\": 4,\n          \"name\": \"AMAZING SPIDER-MAN #22 (2023) 1ST PRINTING MAIN COVER MARVEL COMICS\",\n          \"description\": \"lorem ipsum dolor sit amet\",\n          \"specification\": \"<ul>\\r\\n\\t<li>\\r\\n\\t<p><strong>Writer:&nbsp;<\/strong><a href=\\\"https:\/\/www.marvel.com\/comics\/creators\/10409\/zeb_wells\\\">Zeb Wells<\/a><\/p>\\r\\n\\t<\/li>\\r\\n\\t<li>\\r\\n\\t<p><strong>Penciler:&nbsp;<\/strong><a href=\\\"https:\/\/www.marvel.com\/comics\/creators\/13196\/john_romita_jr.\\\">John Romita<\/a><\/p>\\r\\n\\t<\/li>\\r\\n\\t<li>\\r\\n\\t<p><strong>Cover Artist:&nbsp;<\/strong><a href=\\\"https:\/\/www.marvel.com\/comics\/creators\/13196\/john_romita_jr.\\\">John Romita<\/a><\/p>\\r\\n\\t<\/li>\\r\\n<\/ul>\",\n          \"price\": 550,\n          \"quantity\": \"3\",\n          \"discount\": \"60\",\n          \"image\": \"products\/1681364473_49323_d601fe08-3231-4429-8263-b039c9f58497.jpg\",\n          \"review\": []\n      }\n  ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 401,\n \"message\": \"Cart is empty\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Add To Cart Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cart\/add",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cart\/add"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"quantity\":18,\"product_id\":6}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"message\": \"Product added to cart successfully.\",\n  \"data\": {\n      \"user_id\": 7,\n      \"product_id\": 4,\n      \"quantity\": 1,\n      \"updated_at\": \"2023-05-23T07:35:46.000000Z\",\n      \"created_at\": \"2023-05-23T07:35:46.000000Z\",\n      \"id\": 24\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n    \"message\": [\n          \"The selected product id is invalid.\"\n      ]\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 401,\n\"message\": \"Product not found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n \"status\": false,\n\"statusCode\": 401,\n\"message\": \"Product stock is not available\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cart Product Remove Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cart\/remove",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cart\/remove"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"cart_id\":84}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"status\": true,\n     \"statusCode\": 200,\n      \"message\": \"Product remove from cart\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n      \"statusCode\": 401,\n      \"error\": {\n         \"message\": [\n             \"The selected cart id is invalid.\"\n         ]\n      }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cart Product Quantity Increase Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cart\/increase-quantity",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cart\/increase-quantity"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"cart_id\":4927.002,\"quantity\":1}"
+                        },
+                        "description": "@bodyParam cart_id int required Cart id of the product.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 401,\n \"message\": \"Cart not found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cart Product Quantity Decrease Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cart\/decrease-quantity",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cart\/decrease-quantity"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"cart_id\":330.400883,\"quantity\":13}"
+                        },
+                        "description": "@bodyParam cart_id int required Cart id of the product.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n \"statusCode\": 401,\n \"message\": \"Cart not found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cms",
+            "description": "\nAPIs for Cms",
+            "item": [
+                {
+                    "name": "About-Us Cms Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/about-us",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/about-us"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"About us find successfully\",\n\"data\": {\n  \"id\": 1,\n  \"banner_name\": \"ABOUT\",\n  \"section_1_img\": \"about\/about1.jpg\",\n  \"section_1_name\": \"About Us\",\n  \"section_1_title\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim.\",\n  \"section_1_description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna. Consequat cursus donec in diam pellentesque imperdiet elit. Et sagittis, morbi non adipiscing malesuada nibh diam quam. Arcu, et convallis arcu in mi. Proin dui non, risus tincidunt. Nunc id sollicitudin diam aliquet volutpat nam rhoncus morbi. Non sit ac pulvinar commodo tincidunt magnis nascetur. Scelerisque eget accumsan eget nisl vestibulum, tristique praesent tempus eget. Vestibulum viverra ut dapibus aliquam nunc auctor. Orci ultrices pellentesque sed ultricies ipsum quis neque, elementum. Enim donec sed pellentesque aliquet mi ultricies turpis non maecenas. Purus aliquet iaculis amet, vel eleifend ut elit. Vulputate amet, metus purus aenean sapien tempor, neque turpis risus. Egestas id urna ultrices dignissim.Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam.\",\n  \"section_2_banner\": \"about\/about2.png\",\n  \"section_2_title\": \"Present the \\\"Gods & Monsters\\\" Collection\",\n  \"section_3_img\": \"about\/about3.jpg\",\n  \"section_3_name\": \"Mission & Vision\",\n  \"section_3_title\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna.\",\n  \"section_3_description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna. Consequat cursus donec in diam pellentesque imperdiet elit. Et sagittis, morbi non adipiscing malesuada nibh diam quam. Arcu, et convallis arcu in mi. Proin dui non, risus tincidunt. Nunc id sollicitudin diam aliquet volutpat nam rhoncus morbi. Non sit ac pulvinar commodo tincidunt magnis nascetur. Scelerisque eget accumsan eget nisl vestibulum, tristique praesent tempus eget. Vestibulum viverra ut dapibus aliquam nunc auctor. Orci ultrices pellentesque sed ultricies ipsum quis neque, elementum. Enim donec sed pellentesque aliquet mi ultricies turpis non maecenas. Purus aliquet iaculis amet, vel eleifend ut elit. Vulputate amet, metus purus aenean sapien tempor, neque turpis risus. Egestas id urna ultrices dignissim.Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna. Consequat cursus donec in diam pellentesque imperdiet elit. Et sagittis, morbi non adipiscing malesuada nibh diam quam. Arcu, et convallis arcu in mi. Proin dui non, risus tincidunt. Nunc id sollicitudin diam aliquet volutpat nam rhoncus morbi. Non sit ac pulvinar commodo tincidunt magnis nascetur. Scelerisque eget accumsan eget nisl vestibulum, tristique praesent tempus eget. Vestibulum viverra ut dapibus aliquam nunc auctor. Orci ultrices pellentesque sed ultricies ipsum quis neque, elementum. Enim donec sed pellentesque aliquet mi ultricies turpis non maecenas. Purus aliquet iaculis amet, vel eleifend ut elit. Vulputate amet, metus purus aenean sapien tempor, neque turpis risus. Egestas id urna ultrices dignissim.Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam.\\r\\n                                        Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam..\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Forgot Password",
+            "description": "",
+            "item": [
+                {
+                    "name": "Forgot Password Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/forgot-password",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/forgot-password"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"john@yopmail.com\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"message\": \"Please! check your mail to reset your password.\",\n    \"status\": true\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n    \"error\": {\n       \"email\": [\n          \"The email field is required.\"\n     ]\n },\n\"status\": false\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Listing APIs",
+            "description": "\nAPIs for Listing",
+            "item": [
+                {
+                    "name": "Category Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/list\/category",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/list\/category"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Category find successfully.\",\n\"data\": [\n      {\n          \"id\": 1,\n          \"name\": \"The Secret Hideout. - (Home Decor)\",\n          \"slug\": \"home-decor\",\n          \"image\": \"categories\/1681361528_87105_75cd8827-d885-4a9c-970b-3ca9919c16c1.png\"\n      },\n      {\n          \"id\": 2,\n          \"name\": \"Comics - The Silver Age - (1956-1969)\",\n          \"slug\": \"comics-silver-age\",\n          \"image\": \"categories\/1681361498_15818_91db8aac-e160-418a-aa89-96b44e83b8b9.jpg\"\n      },\n  ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"message\": [\n     \"No detail found!\"\n ]\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Featured Product List Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/list\/featured-products",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/list\/featured-products"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"success\": true,\n\"message\": \"Featured Product List\",\n\"data\": [\n     {\n         \"id\": 1,\n         \"name\": \"home decor spider\",\n         \"price\": 300,\n         \"discount\": \"50\",\n         \"image\": \"products\/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\"\n         \"review\": [\n          {\n              \"id\": 1,\n              \"product_id\": 4,\n              \"user_id\": 2,\n              \"comment\": \"good book\",\n              \"rating\": \"3\",\n              \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n              \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n          }\n      ]\n     },\n     {\n         \"id\": 2,\n         \"name\": \"best quality utility belt\",\n         \"price\": 200,\n         \"discount\": \"20\",\n         \"image\": \"products\/1681364299_70340_8e8d5a8c-cf9f-4587-8f78-0ecca4bcb69d.jpg\"\n         \"review\": [\n          {\n              \"id\": 1,\n              \"product_id\": 4,\n              \"user_id\": 2,\n              \"comment\": \"good book\",\n              \"rating\": \"3\",\n              \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n              \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n          },\n     ]\n   }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"success\": false,\n\"message\": \"Featured Product Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "All Product List Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/list\/all-products",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/list\/all-products"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"success\": true,\n\"message\": \"All Product List\",\n\"data\": [\n         {\n             \"id\": 1,\n             \"name\": \"home decor spider\",\n             \"price\": 300,\n             \"discount\": \"50\",\n             \"image\": \"products\/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\"\n             \"review\": [\n                  {\n                      \"id\": 1,\n                      \"product_id\": 4,\n                      \"user_id\": 2,\n                      \"comment\": \"good book\",\n                      \"rating\": \"3\",\n                      \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                      \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n                  }\n              ]\n         },\n         {\n             \"id\": 2,\n             \"name\": \"best quality utility belt\",\n             \"price\": 200,\n             \"discount\": \"20\",\n             \"image\": \"products\/1681364299_70340_8e8d5a8c-cf9f-4587-8f78-0ecca4bcb69d.jpg\"\n             \"review\": [\n                  {\n                      \"id\": 1,\n                      \"product_id\": 4,\n                      \"user_id\": 2,\n                      \"comment\": \"good book\",\n                      \"rating\": \"3\",\n                      \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                      \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n                  }\n              ]\n         },\n     ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"success\": false,\n\"message\": \"All Product Not Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Best Seller Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/list\/best-selling-products",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/list\/best-selling-products"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Best seller find successfully\",\n \"data\": [\n      {\n      \"product_id\": 6,\n      \"total\": 1,\n      \"product\": {\n          \"id\": 6,\n          \"category_id\": 3,\n          \"name\": \"DEADLY GENESIS\",\n          \"description\": \"Of Jack Kirby & Stan Lee's Silver Age Marvel creations, the X-Men had the bumpiest start. Stuck with a team dynamic that never fully gelled and a concept never explored to its fullest potential, the team's eponymous book was canceled in 1970. Five years later, writer Len Wein and artist Dave Cockrum revived the team with \\\"Giant-Size X-Men\\\" by introducing a new cast. Alongside old team leaders Professor X & Cyclops, this issue introduced Wolverine, Storm, Colossus, and Nightcrawler to the team; all have become some of Marvel's most iconic mutants.\",\n          \"specification\": \"<ul>\\r\\n\\t<li><strong>written by<\/strong>:&nbsp;Len Wein &amp; Dave Cockrum<\/li>\\r\\n\\t<li><strong>published by<\/strong> : comics world publisher<\/li>\\r\\n<\/ul>\",\n          \"price\": 300,\n          \"quantity\": \"17\",\n          \"discount\": \"20\",\n          \"slug\": \"deadly-genesis\",\n          \"meta_title\": \"deadly-genesis\",\n          \"meta_description\": \"deadly-genesis\",\n          \"image\": \"products\/1681364791_24160_56c8dab2-00d9-40d9-90ee-9c41da75b56e.jpg\",\n          \"status\": 1,\n          \"feature_product\": 1,\n          \"created_at\": \"2023-04-13T05:46:31.000000Z\",\n          \"updated_at\": \"2023-04-28T07:01:39.000000Z\"\n          \"review\": [\n                      {\n                          \"id\": 1,\n                          \"product_id\": 4,\n                          \"user_id\": 2,\n                          \"comment\": \"good book\",\n                          \"rating\": \"3\",\n                          \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                          \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n                      },\n                  ]\n          }\n     },\n  ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n     \"message\": [\n         \"No detail found!\"\n     ]\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Product",
+            "description": "",
+            "item": [
+                {
+                    "name": "Product Details Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/product\/details",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/product\/details"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"product_id\":7}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"message\": \"Product details found.\",\n\"status\": true,\n\"data\": {\n     \"id\": 1,\n     \"category_id\": 1,\n     \"name\": \"home decor spider\",\n     \"description\": \"Spider-Man is a superhero appearing in American comic books published by Marvel Comics. Created by writer-editor Stan Lee and artist Steve Ditko, ...\",\n     \"specification\": \"<p>good quality<\/p>\",\n     \"price\": 300,\n     \"quantity\": \"20\",\n     \"discount\": \"50\",\n     \"slug\": \"home-decor-spider\",\n     \"meta_title\": \"spider-man\",\n     \"meta_description\": \"spider-man\",\n     \"image\": \"products\/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\",\n     \"category\": {\n         \"id\": 1,\n         \"name\": \"The Secret Hideout. - (Home Decor)\",\n         \"slug\": \"home-decor\",\n         \"image\": \"categories\/1681361528_87105_75cd8827-d885-4a9c-970b-3ca9919c16c1.png\"\n     }\n }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n     \"status\": false,\n     \"error\": \"Product not found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Product list by category Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/product\/list-by-category",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/product\/list-by-category"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"category_id\":370492868.08969116,\"category\":\"dolorum\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Product list find successfully\",\n \"data\": [\n      {\n          \"id\": 1,\n          \"category_id\": 1,\n          \"name\": \"home decor spider\",\n          \"description\": \"Spider-Man is a superhero appearing in American comic books published by Marvel Comics. Created by writer-editor Stan Lee and artist Steve Ditko, ...\",\n          \"specification\": \"<p>good quality<\/p>\",\n          \"price\": 300,\n          \"quantity\": \"20\",\n          \"discount\": \"50\",\n          \"slug\": \"home-decor-spider\",\n          \"meta_title\": \"spider-man\",\n          \"meta_description\": \"spider-man\",\n          \"image\": \"products\/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\",\n          \"review\": [\n              {\n                  \"id\": 1,\n                  \"product_id\": 1,\n                  \"user_id\": 2,\n                  \"comment\": \"good book\",\n                  \"rating\": \"3\",\n                  \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                  \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n              },\n              {\n                  \"id\": 4,\n                  \"product_id\": 1,\n                  \"user_id\": 7,\n                  \"comment\": \"good material\",\n                  \"rating\": \"5\",\n                  \"created_at\": \"2023-05-22T04:32:31.000000Z\",\n                  \"updated_at\": \"2023-05-22T04:32:31.000000Z\"\n              }\n          ]\n      },\n  ]\n\n @response 401 {\n     \"status\": false,\n     \"statusCode\": 401,\n     \"error\": {\n         \"message\": [\n             \"The category_id field is required.\",\n         ]\n     }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n     \"message\": \"No detail found!\",\n     \"status\": false\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Profile",
+            "description": "",
+            "item": [
+                {
+                    "name": "Details Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/profile-details",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/profile-details"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"success\": {\n         \"id\": 1,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n       \"email_verified_at\": null,\n      \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n    \"updated_at\": \"2021-05-27T06:50:50.000000Z\"\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n   \"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Profile Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/profile-update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/profile-update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"whiteglovecomics@gmail.com\",\"phone\":\"+1 1234 567 890\",\"profile_picture\":\"est\",\"address\":\"USA,678\",\"pincode\":\"659865\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"message\": \"User details updated successfully.\",\n\"data\": {\n      \"status\": true,\n      \"message\": \"User details updated successfully.\",\n      \"success\": {\n      \"id\": 7,\n      \"name\": \"test user\",\n      \"email\": \"testuser@gmail.com\",\n      \"phone\": 9089990090,\n      \"email_verified_at\": null,\n      \"profile_picture\": null,\n      \"address\": \"lorem ipsum\",\n      \"city\": null,\n      \"country\": null,\n      \"pincode\": 789078,\n      \"social_id\": null,\n      \"social_type\": null,\n      \"status\": 1,\n      \"created_at\": \"2023-05-19T08:25:27.000000Z\",\n      \"updated_at\": \"2023-05-22T06:17:29.000000Z\"\n  }\n }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Wishlist",
+            "description": "",
+            "item": [
+                {
+                    "name": "Listing Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/wishlist\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/wishlist\/list"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"message\": \"Wishlist\",\n\"data\": [\n  {\n      \"id\": 14,\n      \"user_id\": 2,\n      \"product_id\": 5,\n      \"product\": {\n          \"id\": 5,\n          \"name\": \"DOCTOR DOOM\",\n          \"description\": \"In the pantheon of excellent comic book villains, Doctor Doom has a privileged place. As the arch-nemesis of the Fantastic Four, Doctor Doom has been part of nearly sixty years of comic book continuity. Although he possesses magical and supernatural abilities, Doom's true power is his genius-level intellect. Indeed, Doom is among the cleverest characters in Marvel comics, the elevation of the archetypical \\\"mad scientist\\\" trope.\",\n          \"specification\": \"<p>&nbsp;<\/p>\\r\\n\\r\\n<ul>\\r\\n\\t<li>&nbsp;the character first appeared in&nbsp;<em><a href=\\\"https:\/\/en.wikipedia.org\/wiki\/Fantastic_Four_(comic_book)\\\" title=\\\"Fantastic Four (comic book)\\\">The Fantastic Four<\/a><\/em><\/li>\\r\\n\\t<li>Created by&nbsp;<a href=\\\"https:\/\/en.wikipedia.org\/wiki\/Stan_Lee\\\" title=\\\"Stan Lee\\\">Stan Lee<\/a>,&nbsp;<a href=\\\"https:\/\/en.wikipedia.org\/wiki\/Jack_Kirby\\\" title=\\\"Jack Kirby\\\">Jack Kirby<\/a>,<\/li>\\r\\n<\/ul>\",\n          \"price\": 400,\n          \"quantity\": \"30\",\n          \"discount\": \"30\",\n          \"image\": \"products\/1681364605_33422_7db59e8f-2e60-4f90-9180-379a9fad09a5.jpg\",\n          \"review\": []\n      }\n  }\n  ]\n }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"message\": \"No data found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Add-Remove  Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/wishlist\/add-remove",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/wishlist\/add-remove"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"product_id\":19}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"message\": \"Product added to wishlist\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"message\": \"Product already added to wishlist\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n     \"status\": false,\n      \"statusCode\": 401,\n      \"error\": {\n          \"message\": [\n              \"The selected product id is invalid.\"\n          ]\n      }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

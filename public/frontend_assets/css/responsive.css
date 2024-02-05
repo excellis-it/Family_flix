@@ -1,0 +1,297 @@
+@media (max-width:1440px){
+    .bg_btm_left_icon {
+        padding: 0px 12px;
+    }
+    .services::before {
+        border-radius: 0% 300px 0% 0%;
+    }
+    .faq-sec::before{
+        border-radius: 0% 0% 0% 300px;
+    }
+    .our-approach-tab .nav-link:before{
+        height: 19px;
+    }
+    .services-head h2 {
+        font-size: 40px;
+    }
+    .ready-text h3 {
+        margin-bottom: 12px;
+    }
+    .ready-text {
+        padding: 41px 45px;
+    }
+}
+@media (max-width:1366px){
+    .bn-text h1 {
+        font-size: 55px;
+    }
+    .follow_us span {
+        height: 59px;
+        padding-left: 79px;
+        font-size: 8px;
+    }   
+    .follow_us ul {
+        padding-left: 60px;
+    }   
+    .follow_us ul li {
+        font-size: 12px;
+    }  
+    .services-head h3 {
+        font-size: 18px;
+    }
+    .services-sec-2 h2{
+        font-size: 85px;  
+    }
+	.logo {
+    width: 138px;
+}
+    .contact-1 {
+        min-height: 140px;
+    }
+    .contact-1 p a{
+      font-size: 12px;  
+    }
+    .contact-1 p .num {
+        font-size: 12px;
+    }
+    .contact-1 i {
+        font-size: 28px;
+    }
+}
+@media (max-width:1280px){}
+
+@media (max-width:1024px){
+    
+    .bn-text span {
+        font-size: 18px;
+    }
+    .bn-text h1 {
+        font-size: 42px;
+        line-height: 48px;
+    }  
+    .services-sec-2 h2 {
+        font-size: 56px;
+    }
+    .services-text-wrap {
+        margin-top: 20%;
+    }
+    
+    .services-head {
+        margin-bottom: 25px;
+    }
+    .contact-1 {
+        min-height: 100px;
+        margin-bottom: 20px;
+    }
+    .ftr-menu ul li{
+      font-size: 10px;  
+    }
+    .contact-1 p{
+      font-size: 14px;
+    }
+    .contact-1 {
+        padding: 36px 16px;
+    }
+	.ftr-logo-1 img{
+  width: 100%;
+}
+.core-menu li a{
+	font-size:12px;
+}
+.customer-slide {
+    padding: 15px;
+}
+.services::before {
+    border-radius: 0% 170px 0% 0%;
+}
+.faq-sec::before {
+    border-radius: 0% 0% 0% 170px;
+}
+.faq-sec-left .accordion-item{
+    margin: 28px 0px;
+}
+.bg_btm_left_text {
+    padding: 0px 15px;
+}
+.bg_btm_left_text h2 {
+    font-size: 30px;
+}
+.bg_btm .bg_btm_left_box {
+    min-height: 132px;
+}
+.frm_text {
+    padding: 0 0 30px;
+}
+.our-approach-tab .nav-link:before {
+    height: 12px;
+}
+}
+@media (max-width:768px){
+    
+    .bn-text h1 {
+        font-size: 30px;
+        line-height: 44px;
+    }
+    .ser-box{
+      margin-bottom: 20px;  
+    }
+    .ser-wrap {
+     margin: 50px 0px;
+    }
+    .services-text-wrap{
+      margin-top: 0%;
+    }
+    .serv-2-img {
+      margin-top:0;
+    }
+    .benifit-sec {
+        padding-top: 50px;
+    }
+    .funding-sec{
+      margin-top: 0;  
+    }
+    .ftr-logo{
+       text-align: center; 
+    }
+    .ftr-logo img {
+        width: 35%;
+    }
+    .contact-1{
+      min-height: 84px;  
+      padding: 0px 16px;
+    }
+	.banner_sec{
+		height:70vh;
+	}
+	.services-sec {
+    padding: 115px 0px;
+}
+.three_div_img {
+    margin-top: 59px;
+}
+.benifit-list-wrap {
+    margin-left: 0;
+}
+.services-sec-2 h2{
+	top:0;
+}
+.referral {
+    padding: 9px 10px;
+}
+.bg_btm {
+    margin-top: 3%;
+}
+.faq-sec::before, .services::before{
+    border-radius: 0;
+}
+.faq-sec-left .accordion-content h2 {
+    font-size: 30px;
+}
+.services-head h2 {
+    font-size: 30px;
+}
+.our-approach-seo-left{
+    min-height: auto;
+}
+.thank_you_sec {
+    padding: 30px 0;
+    height: auto;
+}
+.social_sec{
+    margin-bottom: 15px;
+}
+.thank_you_text h3 {
+    font-size: 50px;
+}
+.social_sec {
+    padding: 25px;
+}
+}
+@media (max-width:767px){
+  
+  
+.banner_sec {
+    height: auto;
+}
+  .ftr-logo img{
+    width: 100%;
+  }
+  .bn-wrap {
+    margin-top: 12%;
+}
+.our-approach-tab .nav-link:before{
+    display: none;
+}
+.our-approach-seo-icon-box{
+    border-right: 0;
+    border-bottom: 1px solid #fff;
+}
+.ftr-img{
+    display: none;
+}
+.invoice-ticket a {
+    font-size: 32px;
+    line-height: 36px;
+}
+.make-bill h2 {
+    font-size: 40px;
+    line-height: 44px;
+}
+.banner_sec .slick-dots {
+    bottom: 19%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.invoice-sample-head h2 {
+    font-size: 35px;
+    line-height:40px;
+}
+.sign_up_1_sec {
+    padding: 50px 0px;
+}
+.invoice-sample {
+    padding: 20px 0px;
+}
+
+}
+@media (max-width:480px){
+    
+    
+    .services-head h3 {
+        font-size: 24px;
+    }
+    .benifit-list-wrap {
+        margin-left: 0px;
+    }
+    .benifit-list ul li {
+        font-size: 12px;
+    }  
+    .ftr-menu{
+        padding: 60px 0px 0px 0px;  
+    }
+    .banner_sec, .banner_sec .slick-slide {
+        height: 50vh;
+    }
+}
+@media (max-width:375.98px){
+   
+    .services-head h3 {
+        font-size: 24px;
+    }
+    .benifit-list-wrap {
+        margin-left: 0px;
+    }
+    .benifit-list ul li {
+        font-size: 12px;
+    }  
+    .ftr-menu{
+        padding: 60px 0px 0px 0px;  
+    }
+}
+@media (max-width:320.98px){
+   
+    .services-sec-2 h2 {
+        font-size: 38px;
+        top: 1%;
+    }
+}

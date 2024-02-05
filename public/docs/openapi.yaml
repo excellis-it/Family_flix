@@ -1,0 +1,1146 @@
+openapi: 3.0.3
+info:
+  title: White-Glove
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/login:
+    post:
+      summary: 'Login Api'
+      operationId: loginApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    auth_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDM4ZGQxMzMwMWI4NDRhMTdiMjBiNmE5ODE4MGJhMjQzYjM1NWE5NzIwMDY1MDVkMDYzZTRmZDkzMTczYTFhNzUxOTAzNTQ1Njk2YThkNjkiLCJpYXQiOjE2ODM3MDg5MDIuMTU2MDQ5LCJuYmYiOjE2ODM3MDg5MDIuMTU2MDU1LCJleHAiOjE3MTUzMzEzMDIuMTE4Njk1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.FIoFzfcobt83QQp73zJaTKvhs-1ta-ROBiAL0q7Ex8UMm2Se5ouPf2RdkDpNs43ydfMhEUEEp6rk_-5cRXTt8T_B_4jtngxDkcO5OYyPvHMUGw7q0F5tiTd1jOiMUfq-89UU-k41h7nTPW_VGjvVHiJWJMfDqBAc-Z84lKk-uVnK24tcRxHbaLyk4Q8vM-4Nhz0Gbwcj8y2WdRItrPTp6mpXbV-q37OYbQiy7ctJPZgHxPmB6CjQji4kH8_qc6hbW7cQBOOj1KpNj-IHwCB3hKvEpe-rx4gBZmol-TCyiJAcNkSnm9NULuKf5_ZCZ1rU62EmmOFjBr6-A7xpdjPs0PexOpb3h-UmWgzFcq5_TBQu2ETmfiPKTq2v-7zUZBkEZZNNIteySYijX5bCNZY2XYCAR1I_pzAm8Ue-L9BKPoTvVPme9T5c9hL69HESgF3wr2521CvxWkY-kAd-_fkaveVjz_8sJwB7o-Fme0Ah2R7uT55btmtp6VpX2p_VkknU4Zb5BKc7XTWPwbAno98leUMyeuzVzZW3jyu3eA66RDOjO4D_LurKUgfp5tq27o_cuz707MrFQ1gv76JXeHdr0HeY8S1PTUisIJtjC-4MkE391v-mw42jZ874ndDrwKQ0ml09ARdSE478JpDp2afAN0hUg9YcjjX3WkvZOYndkbg
+                    user:
+                      id: 3
+                      name: 'John Doe'
+                      email: john@yopmail.com
+                      status: 1
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      auth_token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDM4ZGQxMzMwMWI4NDRhMTdiMjBiNmE5ODE4MGJhMjQzYjM1NWE5NzIwMDY1MDVkMDYzZTRmZDkzMTczYTFhNzUxOTAzNTQ1Njk2YThkNjkiLCJpYXQiOjE2ODM3MDg5MDIuMTU2MDQ5LCJuYmYiOjE2ODM3MDg5MDIuMTU2MDU1LCJleHAiOjE3MTUzMzEzMDIuMTE4Njk1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.FIoFzfcobt83QQp73zJaTKvhs-1ta-ROBiAL0q7Ex8UMm2Se5ouPf2RdkDpNs43ydfMhEUEEp6rk_-5cRXTt8T_B_4jtngxDkcO5OYyPvHMUGw7q0F5tiTd1jOiMUfq-89UU-k41h7nTPW_VGjvVHiJWJMfDqBAc-Z84lKk-uVnK24tcRxHbaLyk4Q8vM-4Nhz0Gbwcj8y2WdRItrPTp6mpXbV-q37OYbQiy7ctJPZgHxPmB6CjQji4kH8_qc6hbW7cQBOOj1KpNj-IHwCB3hKvEpe-rx4gBZmol-TCyiJAcNkSnm9NULuKf5_ZCZ1rU62EmmOFjBr6-A7xpdjPs0PexOpb3h-UmWgzFcq5_TBQu2ETmfiPKTq2v-7zUZBkEZZNNIteySYijX5bCNZY2XYCAR1I_pzAm8Ue-L9BKPoTvVPme9T5c9hL69HESgF3wr2521CvxWkY-kAd-_fkaveVjz_8sJwB7o-Fme0Ah2R7uT55btmtp6VpX2p_VkknU4Zb5BKc7XTWPwbAno98leUMyeuzVzZW3jyu3eA66RDOjO4D_LurKUgfp5tq27o_cuz707MrFQ1gv76JXeHdr0HeY8S1PTUisIJtjC-4MkE391v-mw42jZ874ndDrwKQ0ml09ARdSE478JpDp2afAN0hUg9YcjjX3WkvZOYndkbg
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 3
+                          name:
+                            type: string
+                            example: 'John Doe'
+                          email:
+                            type: string
+                            example: john@yopmail.com
+                          status:
+                            type: integer
+                            example: 1
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'Invalid user & Password!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'Invalid user & Password!'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: john@yopmail.com
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: '12345678'
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/register:
+    post:
+      summary: 'Register Api'
+      operationId: registerApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    auth_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDM4ZGQxMzMwMWI4NDRhMTdiMjBiNmE5ODE4MGJhMjQzYjM1NWE5NzIwMDY1MDVkMDYzZTRmZDkzMTczYTFhNzUxOTAzNTQ1Njk2YThkNjkiLCJpYXQiOjE2ODM3MDg5MDIuMTU2MDQ5LCJuYmYiOjE2ODM3MDg5MDIuMTU2MDU1LCJleHAiOjE3MTUzMzEzMDIuMTE4Njk1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.FIoFzfcobt83QQp73zJaTKvhs-1ta-ROBiAL0q7Ex8UMm2Se5ouPf2RdkDpNs43ydfMhEUEEp6rk_-5cRXTt8T_B_4jtngxDkcO5OYyPvHMUGw7q0F5tiTd1jOiMUfq-89UU-k41h7nTPW_VGjvVHiJWJMfDqBAc-Z84lKk-uVnK24tcRxHbaLyk4Q8vM-4Nhz0Gbwcj8y2WdRItrPTp6mpXbV-q37OYbQiy7ctJPZgHxPmB6CjQji4kH8_qc6hbW7cQBOOj1KpNj-IHwCB3hKvEpe-rx4gBZmol-TCyiJAcNkSnm9NULuKf5_ZCZ1rU62EmmOFjBr6-A7xpdjPs0PexOpb3h-UmWgzFcq5_TBQu2ETmfiPKTq2v-7zUZBkEZZNNIteySYijX5bCNZY2XYCAR1I_pzAm8Ue-L9BKPoTvVPme9T5c9hL69HESgF3wr2521CvxWkY-kAd-_fkaveVjz_8sJwB7o-Fme0Ah2R7uT55btmtp6VpX2p_VkknU4Zb5BKc7XTWPwbAno98leUMyeuzVzZW3jyu3eA66RDOjO4D_LurKUgfp5tq27o_cuz707MrFQ1gv76JXeHdr0HeY8S1PTUisIJtjC-4MkE391v-mw42jZ874ndDrwKQ0ml09ARdSE478JpDp2afAN0hUg9YcjjX3WkvZOYndkbg
+                    user:
+                      id: 3
+                      name: 'John Doe'
+                      email: john@yopmail.com
+                      status: 1
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      auth_token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDM4ZGQxMzMwMWI4NDRhMTdiMjBiNmE5ODE4MGJhMjQzYjM1NWE5NzIwMDY1MDVkMDYzZTRmZDkzMTczYTFhNzUxOTAzNTQ1Njk2YThkNjkiLCJpYXQiOjE2ODM3MDg5MDIuMTU2MDQ5LCJuYmYiOjE2ODM3MDg5MDIuMTU2MDU1LCJleHAiOjE3MTUzMzEzMDIuMTE4Njk1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.FIoFzfcobt83QQp73zJaTKvhs-1ta-ROBiAL0q7Ex8UMm2Se5ouPf2RdkDpNs43ydfMhEUEEp6rk_-5cRXTt8T_B_4jtngxDkcO5OYyPvHMUGw7q0F5tiTd1jOiMUfq-89UU-k41h7nTPW_VGjvVHiJWJMfDqBAc-Z84lKk-uVnK24tcRxHbaLyk4Q8vM-4Nhz0Gbwcj8y2WdRItrPTp6mpXbV-q37OYbQiy7ctJPZgHxPmB6CjQji4kH8_qc6hbW7cQBOOj1KpNj-IHwCB3hKvEpe-rx4gBZmol-TCyiJAcNkSnm9NULuKf5_ZCZ1rU62EmmOFjBr6-A7xpdjPs0PexOpb3h-UmWgzFcq5_TBQu2ETmfiPKTq2v-7zUZBkEZZNNIteySYijX5bCNZY2XYCAR1I_pzAm8Ue-L9BKPoTvVPme9T5c9hL69HESgF3wr2521CvxWkY-kAd-_fkaveVjz_8sJwB7o-Fme0Ah2R7uT55btmtp6VpX2p_VkknU4Zb5BKc7XTWPwbAno98leUMyeuzVzZW3jyu3eA66RDOjO4D_LurKUgfp5tq27o_cuz707MrFQ1gv76JXeHdr0HeY8S1PTUisIJtjC-4MkE391v-mw42jZ874ndDrwKQ0ml09ARdSE478JpDp2afAN0hUg9YcjjX3WkvZOYndkbg
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 3
+                          name:
+                            type: string
+                            example: 'John Doe'
+                          email:
+                            type: string
+                            example: john@yopmail.com
+                          status:
+                            type: integer
+                            example: 1
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'The email has already been taken.'
+                      - 'The confirm password and password must match.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                          - 'The confirm password and password must match.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                email:
+                  type: string
+                  description: 'The email of the user. Example:'
+                  example: aniya.walsh@example.com
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: '12345678'
+                confirm_password:
+                  type: string
+                  description: 'The confirm_password of the user.'
+                  example: '12345678'
+              required:
+                - name
+                - email
+                - password
+                - confirm_password
+      security: []
+  /api/v1/cart/list:
+    get:
+      summary: 'Cart list Api'
+      operationId: cartListApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"message\": \"Cart list\",\n  \"data\": [\n      \"id\": 24,\n      \"user_id\": 7,\n      \"product_id\": 4,\n      \"quantity\": 1,\n      \"product\": {\n          \"id\": 4,\n          \"name\": \"AMAZING SPIDER-MAN #22 (2023) 1ST PRINTING MAIN COVER MARVEL COMICS\",\n          \"description\": \"lorem ipsum dolor sit amet\",\n          \"specification\": \"<ul>\\r\\n\\t<li>\\r\\n\\t<p><strong>Writer:&nbsp;</strong><a href=\\\"https://www.marvel.com/comics/creators/10409/zeb_wells\\\">Zeb Wells</a></p>\\r\\n\\t</li>\\r\\n\\t<li>\\r\\n\\t<p><strong>Penciler:&nbsp;</strong><a href=\\\"https://www.marvel.com/comics/creators/13196/john_romita_jr.\\\">John Romita</a></p>\\r\\n\\t</li>\\r\\n\\t<li>\\r\\n\\t<p><strong>Cover Artist:&nbsp;</strong><a href=\\\"https://www.marvel.com/comics/creators/13196/john_romita_jr.\\\">John Romita</a></p>\\r\\n\\t</li>\\r\\n</ul>\",\n          \"price\": 550,\n          \"quantity\": \"3\",\n          \"discount\": \"60\",\n          \"image\": \"products/1681364473_49323_d601fe08-3231-4429-8263-b039c9f58497.jpg\",\n          \"review\": []\n      }\n  ]\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  message: 'Cart is empty'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: 'Cart is empty'
+      tags:
+        - Cart
+      security: []
+  /api/v1/cart/add:
+    post:
+      summary: 'Add To Cart Api'
+      operationId: addToCartApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Product added to cart successfully.'
+                  data:
+                    user_id: 7
+                    product_id: 4
+                    quantity: 1
+                    updated_at: '2023-05-23T07:35:46.000000Z'
+                    created_at: '2023-05-23T07:35:46.000000Z'
+                    id: 24
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Product added to cart successfully.'
+                  data:
+                    type: object
+                    properties:
+                      user_id:
+                        type: integer
+                        example: 7
+                      product_id:
+                        type: integer
+                        example: 4
+                      quantity:
+                        type: integer
+                        example: 1
+                      updated_at:
+                        type: string
+                        example: '2023-05-23T07:35:46.000000Z'
+                      created_at:
+                        type: string
+                        example: '2023-05-23T07:35:46.000000Z'
+                      id:
+                        type: integer
+                        example: 24
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  message: 'Product stock is not available'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: 'Product stock is not available'
+      tags:
+        - Cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  description: 'The quantity of the product.'
+                  example: 18
+                product_id:
+                  type: integer
+                  description: 'The id of the product.'
+                  example: 6
+              required:
+                - quantity
+                - product_id
+      security: []
+  /api/v1/cart/remove:
+    post:
+      summary: 'Cart Product Remove Api'
+      operationId: cartProductRemoveApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Product remove from cart'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Product remove from cart'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'The selected cart id is invalid.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'The selected cart id is invalid.'
+                        items:
+                          type: string
+      tags:
+        - Cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cart_id:
+                  type: integer
+                  description: 'Cart id of the product.'
+                  example: 84
+              required:
+                - cart_id
+      security: []
+  /api/v1/cart/increase-quantity:
+    post:
+      summary: 'Cart Product Quantity Increase Api'
+      operationId: cartProductQuantityIncreaseApi
+      description: '@bodyParam cart_id int required Cart id of the product.'
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  message: 'Cart not found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: 'Cart not found'
+      tags:
+        - Cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cart_id:
+                  type: number
+                  description: ''
+                  example: 4927.002
+                quantity:
+                  type: integer
+                  description: "The quantity of the product.\n @response 200 {\n \"status\": true,\n     \"statusCode\": 200,\n     \"message\": \"Product quantity increased successfully\",\n     \"data\": {\n      \"status\": true,\n      \"message\": \"Product quantity increase\",\n      \"data\": {\n          \"id\": 25,\n          \"user_id\": 7,\n          \"session_id\": null,\n          \"product_id\": 4,\n          \"quantity\": 2,\n          \"created_at\": \"2023-05-23T07:45:12.000000Z\",\n          \"updated_at\": \"2023-05-23T07:45:26.000000Z\"\n      }\n   }\n}"
+                  example: 1
+              required:
+                - cart_id
+                - quantity
+      security: []
+  /api/v1/cart/decrease-quantity:
+    post:
+      summary: 'Cart Product Quantity Decrease Api'
+      operationId: cartProductQuantityDecreaseApi
+      description: '@bodyParam cart_id int required Cart id of the product.'
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  message: 'Cart not found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: 'Cart not found'
+      tags:
+        - Cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cart_id:
+                  type: number
+                  description: ''
+                  example: 330.400883
+                quantity:
+                  type: integer
+                  description: "The quantity of the product.\n @response 200 {\n \"status\": true,\n     \"statusCode\": 200,\n     \"message\": \"Product quantity decrease successfully\",\n     \"data\": {\n      \"status\": true,\n      \"message\": \"Product quantity decrease\",\n      \"data\": {\n          \"id\": 25,\n          \"user_id\": 7,\n          \"session_id\": null,\n          \"product_id\": 4,\n          \"quantity\": 2,\n          \"created_at\": \"2023-05-23T07:45:12.000000Z\",\n          \"updated_at\": \"2023-05-23T07:45:26.000000Z\"\n      }\n   }\n}\n @response 401 {\n      \"status\": false,\n      \"statusCode\": 401,\n      \"error\": {\n          \"message\": [\n              \"The selected cart id is invalid.\"\n          ]\n      }\n  }"
+                  example: 13
+              required:
+                - cart_id
+                - quantity
+      security: []
+  /api/v1/cms/about-us:
+    get:
+      summary: 'About-Us Cms Api'
+      operationId: aboutUsCmsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"About us find successfully\",\n\"data\": {\n  \"id\": 1,\n  \"banner_name\": \"ABOUT\",\n  \"section_1_img\": \"about/about1.jpg\",\n  \"section_1_name\": \"About Us\",\n  \"section_1_title\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim.\",\n  \"section_1_description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna. Consequat cursus donec in diam pellentesque imperdiet elit. Et sagittis, morbi non adipiscing malesuada nibh diam quam. Arcu, et convallis arcu in mi. Proin dui non, risus tincidunt. Nunc id sollicitudin diam aliquet volutpat nam rhoncus morbi. Non sit ac pulvinar commodo tincidunt magnis nascetur. Scelerisque eget accumsan eget nisl vestibulum, tristique praesent tempus eget. Vestibulum viverra ut dapibus aliquam nunc auctor. Orci ultrices pellentesque sed ultricies ipsum quis neque, elementum. Enim donec sed pellentesque aliquet mi ultricies turpis non maecenas. Purus aliquet iaculis amet, vel eleifend ut elit. Vulputate amet, metus purus aenean sapien tempor, neque turpis risus. Egestas id urna ultrices dignissim.Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam.\",\n  \"section_2_banner\": \"about/about2.png\",\n  \"section_2_title\": \"Present the \\\"Gods & Monsters\\\" Collection\",\n  \"section_3_img\": \"about/about3.jpg\",\n  \"section_3_name\": \"Mission & Vision\",\n  \"section_3_title\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna.\",\n  \"section_3_description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna. Consequat cursus donec in diam pellentesque imperdiet elit. Et sagittis, morbi non adipiscing malesuada nibh diam quam. Arcu, et convallis arcu in mi. Proin dui non, risus tincidunt. Nunc id sollicitudin diam aliquet volutpat nam rhoncus morbi. Non sit ac pulvinar commodo tincidunt magnis nascetur. Scelerisque eget accumsan eget nisl vestibulum, tristique praesent tempus eget. Vestibulum viverra ut dapibus aliquam nunc auctor. Orci ultrices pellentesque sed ultricies ipsum quis neque, elementum. Enim donec sed pellentesque aliquet mi ultricies turpis non maecenas. Purus aliquet iaculis amet, vel eleifend ut elit. Vulputate amet, metus purus aenean sapien tempor, neque turpis risus. Egestas id urna ultrices dignissim.Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et mauris enim, viverra convallis blandit facilisi eget id urna. Consequat cursus donec in diam pellentesque imperdiet elit. Et sagittis, morbi non adipiscing malesuada nibh diam quam. Arcu, et convallis arcu in mi. Proin dui non, risus tincidunt. Nunc id sollicitudin diam aliquet volutpat nam rhoncus morbi. Non sit ac pulvinar commodo tincidunt magnis nascetur. Scelerisque eget accumsan eget nisl vestibulum, tristique praesent tempus eget. Vestibulum viverra ut dapibus aliquam nunc auctor. Orci ultrices pellentesque sed ultricies ipsum quis neque, elementum. Enim donec sed pellentesque aliquet mi ultricies turpis non maecenas. Purus aliquet iaculis amet, vel eleifend ut elit. Vulputate amet, metus purus aenean sapien tempor, neque turpis risus. Egestas id urna ultrices dignissim.Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam.\\r\\n                                        Libero aenean vestibulum placerat ultrices nullam. Semper sit ac a iaculis et morbi mattis. Pellentesque lacus, id semper id lectus ac. Dui elit pellentesque at mi quam tincidunt praesent a. Condimentum pretium aliquet aenean eu tincidunt vitae. Ac auctor sapien pretium in. Egestas metus pulvinar eu eu maecenas et. Vel fringilla quam mattis mollis vitae eu. Scelerisque dignissim turpis urna egestas suspendisse eget non. Egestas mattis felis platea sed in morbi aliquam..\"\n}"
+      tags:
+        - Cms
+      security: []
+  /api/v1/forgot-password:
+    post:
+      summary: 'Forgot Password Api'
+      operationId: forgotPasswordApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Please! check your mail to reset your password.'
+                  status: true
+                properties:
+                  message:
+                    type: string
+                    example: 'Please! check your mail to reset your password.'
+                  status:
+                    type: boolean
+                    example: true
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    email:
+                      - 'The email field is required.'
+                  status: false
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+                  status:
+                    type: boolean
+                    example: false
+      tags:
+        - 'Forgot Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: john@yopmail.com
+              required:
+                - email
+      security: []
+  /api/v1/list/category:
+    get:
+      summary: 'Category Api'
+      operationId: categoryApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Category find successfully.\",\n\"data\": [\n      {\n          \"id\": 1,\n          \"name\": \"The Secret Hideout. - (Home Decor)\",\n          \"slug\": \"home-decor\",\n          \"image\": \"categories/1681361528_87105_75cd8827-d885-4a9c-970b-3ca9919c16c1.png\"\n      },\n      {\n          \"id\": 2,\n          \"name\": \"Comics - The Silver Age - (1956-1969)\",\n          \"slug\": \"comics-silver-age\",\n          \"image\": \"categories/1681361498_15818_91db8aac-e160-418a-aa89-96b44e83b8b9.jpg\"\n      },\n  ]\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'No detail found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'No detail found!'
+                        items:
+                          type: string
+      tags:
+        - 'Listing APIs'
+      security: []
+  /api/v1/list/featured-products:
+    get:
+      summary: 'Featured Product List Api'
+      operationId: featuredProductListApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"success\": true,\n\"message\": \"Featured Product List\",\n\"data\": [\n     {\n         \"id\": 1,\n         \"name\": \"home decor spider\",\n         \"price\": 300,\n         \"discount\": \"50\",\n         \"image\": \"products/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\"\n         \"review\": [\n          {\n              \"id\": 1,\n              \"product_id\": 4,\n              \"user_id\": 2,\n              \"comment\": \"good book\",\n              \"rating\": \"3\",\n              \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n              \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n          }\n      ]\n     },\n     {\n         \"id\": 2,\n         \"name\": \"best quality utility belt\",\n         \"price\": 200,\n         \"discount\": \"20\",\n         \"image\": \"products/1681364299_70340_8e8d5a8c-cf9f-4587-8f78-0ecca4bcb69d.jpg\"\n         \"review\": [\n          {\n              \"id\": 1,\n              \"product_id\": 4,\n              \"user_id\": 2,\n              \"comment\": \"good book\",\n              \"rating\": \"3\",\n              \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n              \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n          },\n     ]\n   }\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Featured Product Not Found'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Featured Product Not Found'
+      tags:
+        - 'Listing APIs'
+      security: []
+  /api/v1/list/all-products:
+    get:
+      summary: 'All Product List Api'
+      operationId: allProductListApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"success\": true,\n\"message\": \"All Product List\",\n\"data\": [\n         {\n             \"id\": 1,\n             \"name\": \"home decor spider\",\n             \"price\": 300,\n             \"discount\": \"50\",\n             \"image\": \"products/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\"\n             \"review\": [\n                  {\n                      \"id\": 1,\n                      \"product_id\": 4,\n                      \"user_id\": 2,\n                      \"comment\": \"good book\",\n                      \"rating\": \"3\",\n                      \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                      \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n                  }\n              ]\n         },\n         {\n             \"id\": 2,\n             \"name\": \"best quality utility belt\",\n             \"price\": 200,\n             \"discount\": \"20\",\n             \"image\": \"products/1681364299_70340_8e8d5a8c-cf9f-4587-8f78-0ecca4bcb69d.jpg\"\n             \"review\": [\n                  {\n                      \"id\": 1,\n                      \"product_id\": 4,\n                      \"user_id\": 2,\n                      \"comment\": \"good book\",\n                      \"rating\": \"3\",\n                      \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                      \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n                  }\n              ]\n         },\n     ]\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'All Product Not Found'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'All Product Not Found'
+      tags:
+        - 'Listing APIs'
+      security: []
+  /api/v1/list/best-selling-products:
+    get:
+      summary: 'Best Seller Api'
+      operationId: bestSellerApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Best seller find successfully\",\n \"data\": [\n      {\n      \"product_id\": 6,\n      \"total\": 1,\n      \"product\": {\n          \"id\": 6,\n          \"category_id\": 3,\n          \"name\": \"DEADLY GENESIS\",\n          \"description\": \"Of Jack Kirby & Stan Lee's Silver Age Marvel creations, the X-Men had the bumpiest start. Stuck with a team dynamic that never fully gelled and a concept never explored to its fullest potential, the team's eponymous book was canceled in 1970. Five years later, writer Len Wein and artist Dave Cockrum revived the team with \\\"Giant-Size X-Men\\\" by introducing a new cast. Alongside old team leaders Professor X & Cyclops, this issue introduced Wolverine, Storm, Colossus, and Nightcrawler to the team; all have become some of Marvel's most iconic mutants.\",\n          \"specification\": \"<ul>\\r\\n\\t<li><strong>written by</strong>:&nbsp;Len Wein &amp; Dave Cockrum</li>\\r\\n\\t<li><strong>published by</strong> : comics world publisher</li>\\r\\n</ul>\",\n          \"price\": 300,\n          \"quantity\": \"17\",\n          \"discount\": \"20\",\n          \"slug\": \"deadly-genesis\",\n          \"meta_title\": \"deadly-genesis\",\n          \"meta_description\": \"deadly-genesis\",\n          \"image\": \"products/1681364791_24160_56c8dab2-00d9-40d9-90ee-9c41da75b56e.jpg\",\n          \"status\": 1,\n          \"feature_product\": 1,\n          \"created_at\": \"2023-04-13T05:46:31.000000Z\",\n          \"updated_at\": \"2023-04-28T07:01:39.000000Z\"\n          \"review\": [\n                      {\n                          \"id\": 1,\n                          \"product_id\": 4,\n                          \"user_id\": 2,\n                          \"comment\": \"good book\",\n                          \"rating\": \"3\",\n                          \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                          \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n                      },\n                  ]\n          }\n     },\n  ]\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'No detail found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'No detail found!'
+                        items:
+                          type: string
+      tags:
+        - 'Listing APIs'
+      security: []
+  /api/v1/product/details:
+    post:
+      summary: 'Product Details Api'
+      operationId: productDetailsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"message\": \"Product details found.\",\n\"status\": true,\n\"data\": {\n     \"id\": 1,\n     \"category_id\": 1,\n     \"name\": \"home decor spider\",\n     \"description\": \"Spider-Man is a superhero appearing in American comic books published by Marvel Comics. Created by writer-editor Stan Lee and artist Steve Ditko, ...\",\n     \"specification\": \"<p>good quality</p>\",\n     \"price\": 300,\n     \"quantity\": \"20\",\n     \"discount\": \"50\",\n     \"slug\": \"home-decor-spider\",\n     \"meta_title\": \"spider-man\",\n     \"meta_description\": \"spider-man\",\n     \"image\": \"products/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\",\n     \"category\": {\n         \"id\": 1,\n         \"name\": \"The Secret Hideout. - (Home Decor)\",\n         \"slug\": \"home-decor\",\n         \"image\": \"categories/1681361528_87105_75cd8827-d885-4a9c-970b-3ca9919c16c1.png\"\n     }\n }"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  error: 'Product not found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  error:
+                    type: string
+                    example: 'Product not found'
+      tags:
+        - Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                  description: 'The id of the product.'
+                  example: 7
+              required:
+                - product_id
+      security: []
+  /api/v1/product/list-by-category:
+    post:
+      summary: 'Product list by category Api'
+      operationId: productListByCategoryApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Product list find successfully\",\n \"data\": [\n      {\n          \"id\": 1,\n          \"category_id\": 1,\n          \"name\": \"home decor spider\",\n          \"description\": \"Spider-Man is a superhero appearing in American comic books published by Marvel Comics. Created by writer-editor Stan Lee and artist Steve Ditko, ...\",\n          \"specification\": \"<p>good quality</p>\",\n          \"price\": 300,\n          \"quantity\": \"20\",\n          \"discount\": \"50\",\n          \"slug\": \"home-decor-spider\",\n          \"meta_title\": \"spider-man\",\n          \"meta_description\": \"spider-man\",\n          \"image\": \"products/1681364200_72050_bba8b753-ae8d-4db5-9d62-ac603ae5431a.png\",\n          \"review\": [\n              {\n                  \"id\": 1,\n                  \"product_id\": 1,\n                  \"user_id\": 2,\n                  \"comment\": \"good book\",\n                  \"rating\": \"3\",\n                  \"created_at\": \"2023-04-13T05:50:58.000000Z\",\n                  \"updated_at\": \"2023-04-13T05:58:16.000000Z\"\n              },\n              {\n                  \"id\": 4,\n                  \"product_id\": 1,\n                  \"user_id\": 7,\n                  \"comment\": \"good material\",\n                  \"rating\": \"5\",\n                  \"created_at\": \"2023-05-22T04:32:31.000000Z\",\n                  \"updated_at\": \"2023-05-22T04:32:31.000000Z\"\n              }\n          ]\n      },\n  ]\n\n @response 401 {\n     \"status\": false,\n     \"statusCode\": 401,\n     \"error\": {\n         \"message\": [\n             \"The category_id field is required.\",\n         ]\n     }\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No detail found!'
+                  status: false
+                properties:
+                  message:
+                    type: string
+                    example: 'No detail found!'
+                  status:
+                    type: boolean
+                    example: false
+      tags:
+        - Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                  description: ''
+                  example: 370492868.08969
+                category:
+                  type: string
+                  description: 'Category Id'
+                  example: dolorum
+              required:
+                - category_id
+                - category
+      security: []
+  /api/v1/customer/profile-details:
+    post:
+      summary: 'Details Api'
+      operationId: detailsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success:
+                    id: 1
+                    name: 'John Doe'
+                    email: john@yopmail.com
+                    email_verified_at: null
+                    created_at: '2021-05-27T06:50:50.000000Z'
+                    updated_at: '2021-05-27T06:50:50.000000Z'
+                properties:
+                  success:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: john@yopmail.com
+                      email_verified_at:
+                        type: string
+                        example: null
+                      created_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthorised
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - Profile
+  /api/v1/customer/profile-update:
+    post:
+      summary: 'Update Profile Api'
+      operationId: updateProfileApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User details updated successfully.'
+                  data:
+                    status: true
+                    message: 'User details updated successfully.'
+                    success:
+                      id: 7
+                      name: 'test user'
+                      email: testuser@gmail.com
+                      phone: 9089990090
+                      email_verified_at: null
+                      profile_picture: null
+                      address: 'lorem ipsum'
+                      city: null
+                      country: null
+                      pincode: 789078
+                      social_id: null
+                      social_type: null
+                      status: 1
+                      created_at: '2023-05-19T08:25:27.000000Z'
+                      updated_at: '2023-05-22T06:17:29.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'User details updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: boolean
+                        example: true
+                      message:
+                        type: string
+                        example: 'User details updated successfully.'
+                      success:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 7
+                          name:
+                            type: string
+                            example: 'test user'
+                          email:
+                            type: string
+                            example: testuser@gmail.com
+                          phone:
+                            type: integer
+                            example: 9089990090
+                          email_verified_at:
+                            type: string
+                            example: null
+                          profile_picture:
+                            type: string
+                            example: null
+                          address:
+                            type: string
+                            example: 'lorem ipsum'
+                          city:
+                            type: string
+                            example: null
+                          country:
+                            type: string
+                            example: null
+                          pincode:
+                            type: integer
+                            example: 789078
+                          social_id:
+                            type: string
+                            example: null
+                          social_type:
+                            type: string
+                            example: null
+                          status:
+                            type: integer
+                            example: 1
+                          created_at:
+                            type: string
+                            example: '2023-05-19T08:25:27.000000Z'
+                          updated_at:
+                            type: string
+                            example: '2023-05-22T06:17:29.000000Z'
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: whiteglovecomics@gmail.com
+                phone:
+                  type: string
+                  description: 'The phone of the user.'
+                  example: '+1 1234 567 890'
+                profile_picture:
+                  type: string
+                  description: ''
+                  example: est
+                address:
+                  type: string
+                  description: 'The address of the user.'
+                  example: 'USA,678'
+                pincode:
+                  type: string
+                  description: 'The pincode of the user.'
+                  example: '659865'
+              required:
+                - name
+                - email
+                - phone
+                - profile_picture
+                - address
+                - pincode
+  /api/v1/wishlist/list:
+    get:
+      summary: 'Listing Api'
+      operationId: listingApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  message: 'No data found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'No data found'
+      tags:
+        - Wishlist
+  /api/v1/wishlist/add-remove:
+    post:
+      summary: 'Add-Remove  Api'
+      operationId: addRemoveApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  message: 'Product already added to wishlist'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Product already added to wishlist'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'The selected product id is invalid.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'The selected product id is invalid.'
+                        items:
+                          type: string
+      tags:
+        - Wishlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                  description: 'The id of the product.'
+                  example: 19
+              required:
+                - product_id
+tags:
+  -
+    name: Authentication
+    description: "\nAPIs for Authentication"
+  -
+    name: Cart
+    description: 'APIs for managing cart'
+  -
+    name: Cms
+    description: "\nAPIs for Cms"
+  -
+    name: 'Forgot Password'
+    description: ''
+  -
+    name: 'Listing APIs'
+    description: "\nAPIs for Listing"
+  -
+    name: Product
+    description: ''
+  -
+    name: Profile
+    description: ''
+  -
+    name: Wishlist
+    description: ''
