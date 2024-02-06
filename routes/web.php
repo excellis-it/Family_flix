@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SiteManagementController;
+use App\Http\Controllers\Admin\MenuManagementController;
+use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
 
@@ -32,31 +35,17 @@ Route::post('change-password', [ForgotPasswordController::class, 'changePassword
 Route::get('forget-password/show', [ForgotPasswordController::class, 'forgetPasswordShow'])->name('forget.password.show');
 Route::get('reset-password/{id}/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
 
-Route::get('/pricing',[HomeController::class, 'pricing'])->name('pricing');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
-Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
-Route::get('/help-center', [HomeController::class, 'helpCenter'])->name('help-center');
-Route::get('/help-centers/details', [HomeController::class, 'helpCenterDetails'])->name('help-centers.get-details');
-Route::get('/career', [HomeController::class, 'career'])->name('career');
-Route::get('/career-details/{id}', [HomeController::class, 'careerDetails'])->name('career.details');
-Route::get('/career-form/{id}', [HomeController::class, 'careerForm'])->name('career-form');
 
 
-Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
-Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
-Route::get('/blog/{slug}', [HomeController::class, 'blogDetails'])->name('blog-details');
-Route::post('/blog-comment',[HomeController::class, 'blogComment'])->name('blog.comment.submit');
 
-Route::get('/our-work', [HomeController::class, 'ourWork'])->name('our.work');
-Route::post('/our-work/filter',[HomeController::class, 'ourWorkFilter'])->name('our-work.filter');
-Route::post('/plan/filter',[HomeController::class, 'pricingFilter'])->name('pricing.filter');
-Route::post('/plan-checking',[HomeController::class, 'planChecking'])->name('plan.checking');
-
-Route::post('/job-apply',[HomeController::class, 'JobApply'])->name('submit.job-apply');
-Route::get('/services',[HomeController::class, 'services'])->name('services');
 
 /* ----------------- Admin Routes -----------------*/
+
+Route::post('forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('admin.forget.password');
+Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
+Route::get('forget-password/show', [ForgetPasswordController::class, 'forgetPasswordShow'])->name('admin.forget.password.show');
+Route::get('reset-password/{id}/{token}', [ForgetPasswordController::class, 'resetPassword'])->name('admin.reset.password');
+Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login-check', [AdminController::class, 'loginCheck'])->name('admin.login.check');
@@ -71,6 +60,11 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/', [ProfileController::class, 'password'])->name('admin.password'); 
             Route::post('/update', [ProfileController::class, 'passwordUpdate'])->name('admin.password.update'); // password update
         });
+
+        Route::resources([
+            'menu-management' => MenuManagementController::class,
+        ]);
+        Route::post('/menuUpdate', [MenuManagementController::class, 'menuUpdate'])->name('admin.menu-management.update'); // password update
         
     });
 });

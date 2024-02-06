@@ -20,8 +20,14 @@
 
                     </ul>
                 </li>
-               
 
+                <li class="menu-title">
+                    <span>Site Management</span>
+                </li>
+                <li class="{{ Request::is('admin/menu-management*') ? 'active' : ' ' }}">
+                    <a href="{{ route('menu-management.index') }}"><i class="la la-users"></i> <span>
+                            Menu Setting</span></a>
+                </li>
             </ul>
         </div>
     </div>

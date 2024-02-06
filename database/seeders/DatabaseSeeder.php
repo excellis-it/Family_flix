@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             assignRoleSeeder::class,
             assignAdminSeeder::class,
-            headerMenuSeeder::class,
+            menuSeeder::class,
            
         ]);
     }
