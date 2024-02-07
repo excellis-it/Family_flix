@@ -22,11 +22,30 @@
                 </li>
 
                 <li class="menu-title">
-                    <span>Site Management</span>
+                    <span>Website Management</span>
                 </li>
-                <li class="{{ Request::is('admin/menu-management*') ? 'active' : ' ' }}">
-                    <a href="{{ route('menu-management.index') }}"><i class="la la-users"></i> <span>
-                            Menu Setting</span></a>
+                <li class="submenu">
+                    <a href="#" class="{{ Request::is('admin/menu-management*') ? 'active' : ' ' }}"><i class="la la-users"></i> <span>
+                            Site Setting</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li class="{{ Request::is('admin/menu-management*') ? 'active' : ' ' }}">
+                                <a href="{{ route('menu-management.index') }}">Menu Management</a>
+                            </li>
+                            <li class="{{ Request::is('admin/privacy-policy*') ? 'active' : ' ' }}">
+                                <a href="{{ route('content-management.privacy-policy') }}">Privacy Policy</a>
+                            </li>
+                            {{-- <li class="{{ Request::is('admin/password*') ? 'active' : ' ' }}">
+                                <a href="{{ route('admin.password') }}">Change Password</a>
+                            </li> --}}
+    
+                        </ul>
+                </li>
+                <li class="menu-title">
+                    <span>Plan Management</span>
+                </li>
+                <li class="{{ Request::is('admin/plan*') ? 'active' : ' ' }}">
+                    <a href="{{ route('plan.index') }}"><i class="la la-plan"></i> <span>
+                            Plan</span></a>
                 </li>
             </ul>
         </div>

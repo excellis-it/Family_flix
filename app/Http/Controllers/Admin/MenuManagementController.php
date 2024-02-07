@@ -18,8 +18,7 @@ class MenuManagementController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('id','desc')->get();
-        
+        $menus = Menu::orderBy('order','asc')->get();
         return view('admin.site_management.menu.list',compact('menus'));
     }
 
@@ -96,6 +95,32 @@ class MenuManagementController extends Controller
         $menu_add->update();
 
         return redirect()->route('menu-management.index')->with('message','Menu updated successfully');
+    }
+
+    public function menuReorder(Request $request)
+    {
+        
+        $menus = Menu::all();
+
+        foreach ($menus as $menu) {
+
+            foreach ($request->order as $order) {
+
+                if ($order['id'] == $menu->id) {
+
+                    $menu->update(['order' => $order['position']]);
+                }
+            }
+        }
+
+        return response(['message' => 'Update Successfully'], 200);
+    }
+
+    public function menuDelete($id)
+    {
+        $menu = Menu::findOrFail($id);
+        $menu->delete();
+        return redirect()->route('menu-management.index')->with('message','Menu deleted successfully');
     }
 
     /**

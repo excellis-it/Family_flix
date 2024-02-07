@@ -2294,22 +2294,9 @@ button.bg-danger:hover {
 
 .page-wrapper .content .page-header {
     margin-bottom: 1rem;
-    background: linear-gradient(268deg, #f37e20 38%, #ad1e23 93.09%);
+    background: #29aae2;
     padding: 30px 20px 30px 0;
     position: relative;
-    border-radius: 0 10px 0 0;
-}
-
-.page-wrapper .content .page-header:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    background: url(https://webexstudio.com/crm/admin_assets/img/web_lag1.png);
-    width: 35%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
     border-radius: 0 10px 0 0;
 }
 
@@ -2318,7 +2305,8 @@ button.bg-danger:hover {
     position: absolute;
     left: -100px;
     top: 0;
-    background: #ad1e23;
+    background: #29aae2;
+    /* background: linear-gradient(268deg, #74bede 38%, #096790 93.09%); */
     width: 100px;
     height: 100%;
 }
@@ -2464,9 +2452,9 @@ input[type="file"].form-control {
     font-weight: 500;
     line-height: 1.5;
     color: #1e1e1e;
-    background-color: #fff5e5;
+    background-color: rgb(255 255 255 / 0%);
     background-clip: padding-box;
-    border: 1px solid rgb(255 160 0 / 50%);
+    border: 1px solid rgb(128 128 128 / 51%);
     appearance: none;
     border-radius: 7px;
     box-shadow: unset;
@@ -2788,7 +2776,7 @@ input[type="file"].form-control {
 .header:before {
     content: '';
     position: absolute;
-    background: linear-gradient(265deg, #f37e20 46%, #ad1e23 85.09%);
+    background: linear-gradient(265deg, #8cc640 46%, #29aae2 85.09%);
     left: 0;
     top: 0;
     width: 100%;
@@ -3082,7 +3070,7 @@ input[type="file"].form-control {
 }
 
 .header .user-menu.nav>li>a {
-    color: #000;
+    color: #fff;
     font-size: 15px;
     line-height: 60px;
     height: 60px;
@@ -3358,7 +3346,7 @@ input[type="file"].form-control {
 
 .sidebar .sidebar-menu ul li.menu-title,
 .two-col-bar .sidebar-menu ul li.menu-title {
-    color: #ffa000;
+    color: #31CDB0;
     font-size: 14px;
     opacity: 1;
     padding: 5px 5px 5px 67px;
@@ -3396,7 +3384,7 @@ input[type="file"].form-control {
 .sidebar .sidebar-menu ul li a:hover,
 .two-col-bar .sidebar-menu ul li a:hover {
     color: #202124;
-    background: rgb(255 160 0 / 12%)
+    background: rgb(140 198 64 / 11%);
 }
 
 .sidebar .sidebar-menu ul li a span,
@@ -3526,7 +3514,7 @@ input[type="file"].form-control {
 .sidebar .sidebar-menu ul li.active a,
 .two-col-bar .sidebar-menu ul li.active a {
     color: #fff;
-    background-color: #f37e20;
+    background-color: #f15b26;
 }
 
 .sidebar .sidebar-menu ul ul,
@@ -3752,7 +3740,7 @@ table.dataTable thead th {
     position: absolute;
     left: 0;
     top: 0;
-    background: #ac1e23;
+    background: #29aae2;
     width: 60px;
     height: 100%;
     border-radius: 0 5px 0 0;
@@ -9451,9 +9439,9 @@ button.close {
 /* End Toogle   */
 
 .submit-btn {
-    background: #f37e20;
+    background: #f15b26;
+    /* background: linear-gradient(153deg, #8cc640 29%, #29aae2 90%); */
     color: #fff;
-    border: 1px solid #f37e20;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
@@ -9479,16 +9467,17 @@ button.close {
 
 .submit-btn:hover,
 .submit-btn:focus {
-    background-color: #fff;
-    color: #f37e20;
+    background: #29aae2;
+    /* background: linear-gradient(-20deg, #8cc640 29%, #29aae2 90%); */
+    color: #fff;
     transition: all ease-in .3s;
     text-decoration: none;
 }
 
 
 table.dataTable thead th {
-    background: #ffdfc5;
-    color: #ac1e23;
+    background: #e4f7ff;
+    color: #50d4bc;
 }
 
 table.dataTable tbody th,
@@ -9881,7 +9870,7 @@ textarea.parsley-error {
 }
 
 .table-hover > tbody > tr:hover > *{
-    --bs-table-accent-bg: rgb(255 160 0 / 8%);
+    --bs-table-accent-bg: rgb(140 198 64 / 15%);
     color: var(--bs-table-hover-color);
 }
 

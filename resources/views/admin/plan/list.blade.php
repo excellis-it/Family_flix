@@ -10,6 +10,9 @@
     </style>
 
 
+
+
+
 @endpush
 
 @section('content')
@@ -23,9 +26,9 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h3 class="page-title">Menu Information</h3>
+                        <h3 class="page-title">Plan Information</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('menu-management.index') }}">Menus</a>
+                            <li class="breadcrumb-item"><a href="{{ route('plan.index') }}">Plans</a>
                             </li>
                             <li class="breadcrumb-item active">List</li>
                         </ul>
@@ -39,11 +42,11 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-0">Menu List</h4>
+                                <h4 class="mb-0">Plan List</h4>
                             </div>
                             <div class="col-md-6 text-end">
-                                <a href="{{ route('menu-management.create') }}" class="btn px-5 submit-btn"><i
-                                        class="fas fa-plus"></i> Add New Menu</a>
+                                <a href="{{ route('plan.create') }}" class="btn px-5 submit-btn"><i
+                                        class="fas fa-plus"></i> Add New Plan</a>
                             </div>
                         </div>
                     </div>
@@ -52,30 +55,32 @@
                         <table id="myTable" class="dd table table-striped table-hover" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th> Menu name</th>
-                                    <th> Slug</th>
-                                    <th> Status</th>
+                                    <th> Plan name</th>
+                                    <th> Plan Details</th>
+                                    <th> Plan actual price($)</th>
+                                    <th> Plan offer price($)</th>
                                     <th> Action</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBodyContents">
-                                @if (count($menus) == 0)
+                                @if (count($plans) == 0)
                                     <tr>
-                                        <td colspan="4" class="text-center">No Customer found</td>
+                                        <td colspan="5" class="text-center">No Customer found</td>
                                     </tr>
                                 @else
-                                    @foreach ($menus as $key => $menu)
-                                        <tr  class="tableRow" data-id="{{ $menu->id }}">
-                                            <td >{{ $menu->title }}</td>
-                                            <td >{{ $menu->slug }}</td>
-                                            <td >{{ $menu->status }}</td>
+                                    @foreach ($plans as $key => $plan)
+                                        <tr  class="tableRow" data-id="{{ $plan->id }}">
+                                            <td >{{ $plan->plan_name }}</td>
+                                            <td >{{ $plan->plan_details }}</td>
+                                            <td >{{ $plan->plan_actual_price }}</td>
+                                            <td >{{ $plan->plan_offer_price }}</td>
                                             <td>
-                                                <a title="Delete Customer"
-                                                    data-route="{{ route('delete.menu-managemnt', $menu->id) }}"  class="delete_acma"
+                                                <a title="Delete Plan"
+                                                    data-route="{{ route('delete.plan', $plan->id) }}"  class="delete_acma"
                                                     href="javascipt:void(0);" id="delete"><i
                                                         class="fas fa-trash"></i></a>
 
-                                                <a href="{{ route('menu-management.edit', $menu->id) }}"> <i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('plan.edit', $plan->id) }}"> <i class="fas fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -93,11 +98,13 @@
 
 
 @push('scripts')
+
+
     <script>
         $(document).on('click', '#delete', function(e) {
             swal({
                     title: "Are you sure?",
-                    text: "To delete this menu.",
+                    text: "To delete this plan.",
                     type: "warning",
                     confirmButtonText: "Yes",
                     showCancelButton: true
@@ -118,7 +125,7 @@
 
     
 
-{{-- <script>
+<script>
    $(document).ready(function() {
     // Initialize DataTable
     var table = $('#myTable').DataTable({
@@ -134,7 +141,7 @@
         ]
     });
 });
-</script> --}}
+</script>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -161,7 +168,7 @@
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "{{ route('admin.menu-management.reorder') }}", // Assuming you're using named routes in Laravel
+            url: "{{ route('admin.plan.reorder') }}", // Assuming you're using named routes in Laravel
             data: {
                 order: order,
                 _token: token

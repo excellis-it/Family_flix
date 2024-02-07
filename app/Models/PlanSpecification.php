@@ -5,11 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class PlanSpecification extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'title',
-        'order'
+        'plan_id',
+        'specification_name',
     ];
+
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
 }

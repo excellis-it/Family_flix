@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenusTable extends Migration
+class CreatePlanSpecificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('plan_specifications', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('parent_id')->nullable();
-            $table->string('slug')->nullable();
-            $table->integer('order')->default(0);
-            $table->enum('status', [0, 1])->default(1);
+            $table->foreignId('plan_id')->references('id')->on('plans')->onDelete('cascade')->nullable();
+            $table->string('specification_name')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('plan_specifications');
     }
 }
