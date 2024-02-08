@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="robots" content="noindex, nofollow">
-    <!-- provide the csrf token -->
+    <!--  Title -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>@yield('title')</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/material.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/morris/morris.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap-datetimepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
+    <title>{{ env('APP_NAME') }} | @yield('title')</title>
+    <!--  Required Meta Tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="handheldfriendly" content="true">
+    <meta name="MobileOptimized" content="width">
+    <meta name="description" content="Mordenize">
+    <meta name="author" content="">
+    <meta name="keywords" content="Mordenize">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--  Favicon -->
+    <link rel="shortcut icon" type="{{ asset('admin_assets/image/png') }}" href="favicon.ico">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/owl.carousel.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Core Css -->
+    <link id="themeColors" rel="stylesheet" href="{{ asset('admin_assets/css/style.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <link rel="stylesheet" href="path/to/select2.min.css">
 
-        
     @stack('styles')
     <style>
         .error {
@@ -35,55 +34,157 @@
         }
     </style>
 </head>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <div id="show-sidebar">
+        @include('admin.includes.sidebar')
+    </div>
 
-<body>
-    <!--header-->
-    @include('admin.includes.header')
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+        <!--  Header Start -->
+        @include('admin.includes.header')
+        <!--  Header End -->
+        @yield('content')
 
-    <!--end header-->
-    <!--sidebar-wrapper-->
-    @include('admin.includes.sidebar')
-    <!--end sidebar-wrapper-->
+    </div>
+    <div class="dark-transparent sidebartoggler"></div>
+    <div class="dark-transparent sidebartoggler"></div>
+</div>
 
-    <!--page-wrapper-->
-    @yield('content')
+<!--  Search Bar -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content rounded-1">
+            <div class="modal-header border-bottom">
+                <input type="search" class="form-control fs-3" placeholder="Search here" id="search">
+                <span data-bs-dismiss="modal" class="lh-1 cursor-pointer">
+                    <i class="ti ti-x fs-5 ms-3"></i>
+                </span>
+            </div>
+            <div class="modal-body message-body" data-simplebar="">
+                <h5 class="mb-0 fs-5 p-1">Quick Page Links</h5>
+                <ul class="list mb-0 py-2">
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Modern</span>
+                            <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Dashboard</span>
+                            <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Contacts</span>
+                            <span class="fs-3 text-muted d-block">/apps/contacts</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Posts</span>
+                            <span class="fs-3 text-muted d-block">/apps/blog/posts</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Detail</span>
+                            <span
+                                class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Shop</span>
+                            <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Modern</span>
+                            <span class="fs-3 text-muted d-block">/dashboards/dashboard1</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Dashboard</span>
+                            <span class="fs-3 text-muted d-block">/dashboards/dashboard2</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Contacts</span>
+                            <span class="fs-3 text-muted d-block">/apps/contacts</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Posts</span>
+                            <span class="fs-3 text-muted d-block">/apps/blog/posts</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Detail</span>
+                            <span
+                                class="fs-3 text-muted d-block">/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow</span>
+                        </a>
+                    </li>
+                    <li class="p-1 mb-1 bg-hover-light-black">
+                        <a href="#">
+                            <span class="fs-3 text-black fw-normal d-block">Shop</span>
+                            <span class="fs-3 text-muted d-block">/apps/ecommerce/shop</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!--end page-wrapper-->
+@include('admin.includes.footer')
 
-    <!--footer -->
-    {{-- @include('admin.includes.footer') --}}
-
-    <!-- end footer -->
-
-</body>
-<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="{{ asset('admin_assets/js/jquery-3.6.0.min.js') }}"></script>
-
+<!--  Import Js Files -->
+<script src="{{ asset('admin_assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/simplebar.min.js') }}"></script>
 <script src="{{ asset('admin_assets/js/bootstrap.bundle.min.js') }}"></script>
-
-<script src="{{ asset('admin_assets/js/jquery.slimscroll.min.js') }}"></script>
-
-<script src="{{ asset('admin_assets/plugins/morris/morris.min.js') }}"></script>
-<script src="{{ asset('admin_assets/plugins/raphael/raphael.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/chart.js') }}"></script>
-<script src="{{ asset('admin_assets/js/Chart.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/greedynav.js') }}"></script>
-<script src="{{ asset('admin_assets/js/select2.min.js') }}"></script>
-<script src="{{ asset('admin_assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-
-<script src="{{ asset('admin_assets/js/layout.js') }}"></script>
-{{-- <script src="{{ asset('admin_assets/js/theme-settings.js') }}"></script> --}}
-<script src="{{ asset('admin_assets/js/app.js') }}"></script>
+<!--  core files -->
+<script src="{{ asset('admin_assets/js/app.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/app.init.js') }}"></script>
+<script src="{{ asset('admin_assets/js/app-style-switcher.js') }}"></script>
+<script src="{{ asset('admin_assets/js/sidebarmenu.js') }}"></script>
+<script src="{{ asset('admin_assets/js/custom.js') }}"></script>
+<!--  current page js files -->
+<script src="{{ asset('admin_assets/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/apexcharts.min.js') }}"></script>
+<script src="{{ asset('admin_assets/js/dashboard.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
-<script src="path/to/select2.min.js"></script>
+<script src="http://parsleyjs.org/dist/parsley.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 
 
+
+<script src="{{ asset('js/custom.js') }}"></script>
+<script>
+    window.addEventListener('load', () => {
+    $('.select23').select2();
+});
+</script>
 <script>
     @if (Session::has('message'))
         toastr.options = {
@@ -117,19 +218,10 @@
         toastr.warning("{{ session('warning') }}");
     @endif
 </script>
-
-<script src="https://unpkg.com/popper.js@1"></script>
-    <script src="https://unpkg.com/tippy.js@5"></script>
-    {{-- trippy --}}
-    <script>
-        tippy('[data-tippy-content]', {
-            allowHTML: true,
-            placement: 'bottom',
-            theme: 'light-theme',
-        });
-    </script>
-
-
+<script>
+   
+</script>
 @stack('scripts')
+</body>
 
 </html>

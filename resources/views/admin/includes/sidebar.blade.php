@@ -1,53 +1,64 @@
-<div class="sidebar" id="sidebar">
-    <div class="sidebar-inner slimscroll">
-        <div id="sidebar-menu" class="sidebar-menu">
-            <ul class="sidebar-vertical">
-                <li class="{{ Request::is('admin/dashboard*') ? 'active' : ' ' }}">
-                    <a href="{{ route('admin.dashboard') }}"><i class="la la-dashboard"></i> <span>Dashboard</span></a>
-                </li>
-                <li class="submenu">
-                    <a href="#"
-                        class="{{ Request::is('admin/profile*') || Request::is('admin/password*') || Request::is('admin/detail*') ? 'active' : ' ' }}"><i
-                            class="la la-user-cog"></i> <span>Manage Account </span> <span
-                            class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li class="{{ Request::is('admin/profile*') ? 'active' : ' ' }}">
-                            <a href="{{ route('admin.profile') }}">My Profile</a>
-                        </li>
-                        <li class="{{ Request::is('admin/password*') ? 'active' : ' ' }}">
-                            <a href="{{ route('admin.password') }}">Change Password</a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li class="menu-title">
-                    <span>Website Management</span>
-                </li>
-                <li class="submenu">
-                    <a href="#" class="{{ Request::is('admin/menu-management*') ? 'active' : ' ' }}"><i class="la la-users"></i> <span>
-                            Site Setting</span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li class="{{ Request::is('admin/menu-management*') ? 'active' : ' ' }}">
-                                <a href="{{ route('menu-management.index') }}">Menu Management</a>
-                            </li>
-                            <li class="{{ Request::is('admin/privacy-policy*') ? 'active' : ' ' }}">
-                                <a href="{{ route('content-management.privacy-policy') }}">Privacy Policy</a>
-                            </li>
-                            {{-- <li class="{{ Request::is('admin/password*') ? 'active' : ' ' }}">
-                                <a href="{{ route('admin.password') }}">Change Password</a>
-                            </li> --}}
-    
-                        </ul>
-                </li>
-                <li class="menu-title">
-                    <span>Plan Management</span>
-                </li>
-                <li class="{{ Request::is('admin/plan*') ? 'active' : ' ' }}">
-                    <a href="{{ route('plan.index') }}"><i class="la la-plan"></i> <span>
-                            Plan</span></a>
-                </li>
-            </ul>
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+            <a href="index.html" class="text-nowrap logo-img">
+                <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" alt="">
+            </a>
+            <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                <i class="ti ti-x fs-8 text-muted"></i>
+            </div>
         </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+            <ul id="sidebarnav">
+                <!-- =================== -->
+                <!-- Dashboard -->
+                <!-- =================== -->
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    {{-- --}}
+                    <a class="sidebar-link" href="{{ route('menu-management.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-shopping-cart"></i>
+                        </span>
+                        <span class="hide-menu">Menu Management</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('plan.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Plan Management</span>
+                    </a>
+                </li>
+              
+            </ul>
+        </nav>
+        <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">
+            <div class="hstack gap-3">
+                <div class="john-img">
+                    <img src="images/user-1.jpg" class="rounded-circle" width="40" height="40" alt="">
+                </div>
+                <div class="john-title">
+                    <h6 class="mb-0 fs-4 fw-semibold">Mathew</h6>
+                    <span class="fs-2 text-dark">Designer</span>
+                </div>
+                <button class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button"
+                    aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout">
+                    <i class="ti ti-power fs-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- End Sidebar navigation -->
     </div>
-</div>
+    <!-- End Sidebar scroll-->
+</aside>

@@ -1,7 +1,4 @@
-@php
-use App\Helpers\Pricing;
-use App\Helpers\Subscribing;
-@endphp 
+
 
     <!-- preloader - start -->
     <!--<div class="preloader">
@@ -39,7 +36,7 @@ use App\Helpers\Subscribing;
                         </div>
                         <ul class="parent">
                             <li>
-                                <a href="{{ route('home') }}" class="link-underline link-underline-1">
+                                <a href="" class="link-underline link-underline-1">
                                     <span>Home</span>
                                 </a>
                             </li>
