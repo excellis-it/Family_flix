@@ -58,11 +58,17 @@
                                                 <td>{{ $menu->title }}</td>
                                                 <td>{{ $menu->slug }}</td>
                                                 <td>
-                                                    @if ($menu->status == 1)
+                                                    {{-- @if ($menu->status == 1)
                                                         <span class="badge bg-success">Active</span>
                                                     @else
                                                         <span class="badge bg-danger">Inactive</span>
-                                                    @endif
+                                                    @endif --}}
+
+                                                    <label class="switch">
+                                                        <input type="checkbox" class="toggle-class"
+                                                            data-id="{{ $menu->id }}" {{ $menu->status == 1 ? 'checked' : '' }}>
+                                                        <span class="slider round"></span>
+                                                    </label>
                                                 </td>
                                                 <td>
                                                     <a title="Delete Customer"
@@ -178,4 +184,28 @@
             });
         });
     </script>
+
+<script>
+    $('.toggle-class').change(function() {
+
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var menu_id = $(this).data('id');
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{{ route('menu-management.changeStatus') }}",
+            data: {
+                'status': status,
+                'menu_id': menu_id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(resp) {
+                console.log(resp.success)
+            }
+        });
+    });
+</script>
 @endpush

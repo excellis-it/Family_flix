@@ -1,160 +1,130 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
-    data-sidebar-image="none">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description" content="Smarthr - Bootstrap Admin Template">
-    <meta name="keywords"
-        content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
-    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Login - {{env('APP_NAME')}}</title>
+    <!--  Title -->
+    <title>{{env('APP_NAME')}} | Login</title>
+    <!--  Required Meta Tag -->
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="handheldfriendly" content="true">
+    <meta name="MobileOptimized" content="width">
+    <meta name="description" content="Mordenize">
+    <meta name="author" content="">
+    <meta name="keywords" content="Mordenize">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--  Favicon -->
+    <link rel="shortcut icon" type="{{ asset('admin_assets/image/png') }}" href="favicon.ico">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/owl.carousel.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/all.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/material.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Core Css -->
+    <link id="themeColors" rel="stylesheet" href="{{ asset('admin_assets/css/style.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
-<body class="account-page">
+<body>
 
-    <div class="main-wrapper">
-        <div class="account-content">
-            <div class="container">
+    <!--  Body Wrapper -->
+    <div class="login_bg">
 
-                
-
-                <div class="account-box">
-                    <div class="account-wrapper">
-                        <div class="account-logo">
-                            <a href="admin-dashboard.html"><img src="{{ asset('admin_assets/img/logopns.png') }}" alt="Dreamguy's Technologies"></a>
-                        </div>
-                        <h3 class="account-title">Login</h3>
-                        <!--<p class="account-subtitle">Access to our dashboard</p>-->
-
-                        <form action="{{ route('admin.login.check') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <!--<label>Email Address</label>-->
-                                <input type="email" class="form-control" name="email" id="inputEmailAddress"
-                                    placeholder="E-mail Address">
-                                @if ($errors->has('email'))
-                                    <div class="error" style="color:red;">{{ $errors->first('email') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group">
+        <!--  Main wrapper -->
+        <div class="container">
+            <!--  Row 1 -->
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <a href="index.html" class="text-nowrap d-block text-center mx-auto logo-img mb-4">
+                                <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" alt="">
+                            </a>
+                            <form action="{{ route('admin.login.check') }}" method="POST">
+                                @csrf
                                 <div class="row">
-                                    <div class="col">
-                                        <!--<label>Password</label>-->
+                                    <div class="form-group col-md-12 mb-3">
+                                        <label>Email/Username</label>
+                                        <input type="email" class="form-control" name="email" id="inputEmailAddress" placeholder="E-mail Address">
+                                        @if ($errors->has('email'))
+                                            <div class="error" style="color:red;">{{ $errors->first('email') }}</div>
+                                        @endif
                                     </div>
-                                    {{-- <div class="col-auto">
-                                        <a class="text-muted" href="forgot-password.html">
-                                            Forgot password?
-                                        </a>
+                                    <div class="form-group col-md-12 mb-3">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" name="password" id="inputChoosePassword" placeholder="Password">
+                                        
+                                    @if ($errors->has('password'))
+                                        <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
+                                    @endif
+                                    </div>
+                                    {{-- <div class="account-footer">
+                                        <p><a href="{{ route('admin.forget.password.show') }}">Forgot Password?</a></p>
                                     </div> --}}
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="print_btn w-100">Login</button>
+                                    </div>
                                 </div>
-                                <div class="position-relative" id="show_hide_password">
-                                    <input type="password" class="form-control" name="password"
-                                        id="inputChoosePassword" placeholder="Password">
-                                    <a href="javascript:;" class=""><span class="fa fa-eye-slash" id="toggle-password"></span></a>
-                                </div>
-                                @if ($errors->has('password'))
-                                    <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group text-center">
-                                <button class="btn btn-primary account-btn" type="submit">Login</button>
-                            </div>
-                            <div class="account-footer">
-                                <p><a href="{{ route('admin.forget.password.show') }}">Forgot Password?</a></p>
-                            </div>
-                        </form>
-
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 
-</body>
 
-<script src="{{ asset('admin_assets/js/jquery-3.6.0.min.js') }}"></script>
-
-<script src="{{ asset('admin_assets/js/bootstrap.bundle.min.js') }}"></script>
-
-<script src="{{ asset('admin_assets/js/layout.js') }}"></script>
-<script src="{{ asset('admin_assets/js/theme-settings.js') }}"></script>
-<script src="{{ asset('admin_assets/js/greedynav.js') }}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script>
-    @if(Session::has('message'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.success("{{ session('message') }}");
-    @endif
-
-    @if(Session::has('error'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.error("{{ session('error') }}");
-    @endif
-
-    @if(Session::has('info'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.info("{{ session('info') }}");
-    @endif
-
-    @if(Session::has('warning'))
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    toastr.warning("{{ session('warning') }}");
-    @endif
-</script>
-
-<script src="{{ asset('admin_assets/js/app.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $("#show_hide_password a").on('click', function(event) {
-            event.preventDefault();
-            if ($('#show_hide_password input').attr("type") == "text") {
-                $('#show_hide_password input').attr('type', 'password');
-                $('#show_hide_password i').addClass("bx-hide");
-                $('#show_hide_password i').removeClass("bx-show");
-            } else if ($('#show_hide_password input').attr("type") == "password") {
-                $('#show_hide_password input').attr('type', 'text');
-                $('#show_hide_password i').removeClass("bx-hide");
-                $('#show_hide_password i').addClass("bx-show");
+    <!--  Import Js Files -->
+    <script src="{{ asset('admin_assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/bootstrap.bundle.min.js') }}"></script>
+    <!--  core files -->
+    <script src="{{ asset('admin_assets/js/app.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/app.init.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/app-style-switcher.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/custom.js') }}"></script>
+    <!--  current page js files -->
+    <script src="{{ asset('admin_assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/dashboard.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
             }
-        });
-    });
-</script>
+            toastr.success("{{ session('message') }}");
+        @endif
+
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
+</body>
 
 </html>

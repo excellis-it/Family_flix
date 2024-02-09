@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    Plan Create
+    Menu Create
 @endsection
 @push('styles')
 @endpush
@@ -10,12 +10,12 @@
             <div class="d-flex">
                 <div class="arrow_left"><a href="{{ route('menu-management.index') }}" class="text-white"><i class="ti ti-arrow-left"></i></a></div>
                 <div class="">
-                    <h3>Add New Plan</h3>
+                    <h3>Add New Menu</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod"><a href="{{ route('plan.index') }}">Plan</a></span><span
+                        <li><span class="bread-blod"><a href="{{ route('menu-management.index') }}">Menu</a></span><span
                                 class="bread-slash">/</span></li>
-                        <li><span class="bread-blod">Create New Plan</span></li>
+                        <li><span class="bread-blod">Create New Menu</span></li>
                     </ul>
                 </div>
             </div>
@@ -25,90 +25,50 @@
             <div class="col-lg-12">
                 <div class="card w-100">
                     <div class="card-body">
-                        <form action="{{ route('plan.store') }}" method="POST" id="project-create-form" enctype="multipart/form-data">
+                        <form action="{{ route('menu-management.store') }}" method="POST" id="project-create-form" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Plan name</label>
-                                    <input type="text" name="plan_name" id=""
-                                        class="form-control" value="{{ old('plan_name') }}"
-                                        placeholder="Enter Plan Name">
-                                    @if ($errors->has('plan_name'))
+                                    <label>Plan name<span
+                                        style="color: red;">*</span></label>
+                                        <select name="parent_id"  class="form-control">
+                                            <option value="">Select a Parent Menu</option>
+                                            @foreach ($parent_menus as $parent_menu)
+                                                <option value="{{ $parent_menu->id }}">{{ $parent_menu->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('parent_id'))
+                                            <div class="error" style="color:red;">
+                                                {{ $errors->first('parent_id') }}</div>
+                                        @endif
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Plan actual price($)<span
+                                        style="color: red;">*</span></label>
+                                        <input type="text" name="title" id=""
+                                        class="form-control" value="{{ old('title') }}"
+                                        placeholder="Enter Menu Name">
+                                    @if ($errors->has('title'))
                                         <div class="error" style="color:red;">
-                                            {{ $errors->first('plan_name') }}</div>
+                                            {{ $errors->first('title') }}</div>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Plan actual price($)</label>
-                                    <input type="text" name="plan_actual_price" id=""
-                                        class="form-control" value="{{ old('plan_actual_price') }}"
-                                        placeholder="Enter Plan Actual Price">
-                                    @if ($errors->has('plan_actual_price'))
-                                        <div class="error" style="color:red;">
-                                            {{ $errors->first('plan_actual_price') }}</div>
-                                    @endif
+                                    <label>Plan offer price($)<span
+                                        style="color: red;">*</span></label>
+                                        <select name="status" id="" class="form-control">
+                                            <option value="">Select a Status</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                        @if ($errors->has('status'))
+                                            <div class="error" style="color:red;">
+                                                {{ $errors->first('status') }}</div>
+                                        @endif
                                 </div>
-                                <div class="form-group col-md-6 mb-3">
-                                    <label>Plan offer price($)</label>
-                                    <input type="text" name="plan_offer_price" id=""
-                                        class="form-control" value="{{ old('plan_offer_price') }}"
-                                        placeholder="Enter Plan Offer Price">
-                                    @if ($errors->has('plan_offer_price'))
-                                        <div class="error" style="color:red;">
-                                            {{ $errors->first('plan_offer_price') }}</div>
-                                    @endif
-                                </div>
-
-                                <div class="form-group col-md-6 mb-3">
-                                    <label>Plan button text</label>
-                                    <input type="text" name="button_text" id=""
-                                        class="form-control" value="{{ old('button_text') }}"
-                                        placeholder="Enter Plan Actual Price">
-                                    @if ($errors->has('button_text'))
-                                        <div class="error" style="color:red;">
-                                            {{ $errors->first('button_text') }}</div>
-                                    @endif
-                                </div>
-
-                                <div class="form-group col-md-6 mb-3">
-                                    <label>Plan details</label>
-                                    <textarea name="plan_details" id="" class="form-control"
-                                        placeholder="Enter Plan Details">{{ old('plan_details') }}</textarea>
-                                    @if ($errors->has('plan_details'))
-                                        <div class="error" style="color:red;">
-                                            {{ $errors->first('plan_details') }}</div>
-                                    @endif
-                                </div>
-
-                                <div class="form-group col-md-6 mb-3">
-                                    <label>Plan Specifications</label>
-                                </div>
-
-                                <div class="add-name">                     
-                                    <div class="row">
-                                        <div class="col-md-6 pb-3">
-                                            <div style="display: flex">
-                                                <input type="text" name="plan_specification[]"
-                                                    class="form-control"
-                                                    value=""
-                                                    placeholder="Enter Plan Specification" id="" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button type="button"
-                                                class="btn btn-success add good-button"><i
-                                                    class="fas fa-plus"></i> Add More
-                                                Specification</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                               
-                                <div class="row" style="margin-top: 20px; float: left;">
-                                    <div class="col-sm-9">
-                                        <button type="submit"
-                                            class="btn px-5 submit-btn">Create</button>
-                                    </div>
+                                <div class="w-100 text-end">
+                                    <button type="submit" class="print_btn">Create</button>
                                 </div>
                         </form>
                     </div>
@@ -121,21 +81,5 @@
 @endsection
 
 @push('scripts')
-
-<script>
-    $(document).ready(function() {
-        $(".add").click(function() {
-
-            $(".add-name").append(
-                '<div class="row"><div class="col-md-6 pb-3"><div style="display: flex"><input type="text" name="plan_specification[]" required class="form-control"  placeholder="Enter Plan Specification"></div> </div> <div class="col-md-6"><button type="button" class="btn btn-danger cross good-button"> <i class="fas fa-close"></i> Remove</button></div>'
-            );
-        });
-    });
-
-    $(document).on('click', '.cross', function() {
-        // remove pareent div
-        $(this).parent().parent().remove();
-    });
-</script>
   
 @endpush

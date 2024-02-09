@@ -16,11 +16,11 @@
         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
             
             <li class="nav-item">
-                <a class="fw-semibold text-decoration-none d-none d-md-block add_new_project" href="">New Project
+                <a class="fw-semibold text-decoration-none d-none d-md-block add_new_project" href="">New Product
                 </a>
             </li>
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <i class="ti ti-bell-ringing"></i>
@@ -97,7 +97,7 @@
                         <button class="btn btn-outline-primary w-100"> See All Notifications </button>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown">
                 <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -149,7 +149,7 @@
                             </a>
                         </div>
                         <div class="d-grid py-4 px-7 pt-8">
-                            <a href="" class="btn btn-outline-primary">Log Out</a>
+                            <a href="{{ route('admin.logout') }}" class="btn btn-outline-primary">Log Out</a>
                         </div>
                     </div>
                 </div>

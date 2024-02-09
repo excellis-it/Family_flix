@@ -31,7 +31,8 @@
                             <input type="text" name="id" value="{{ $menu->id }}" hidden>
                             <div class="row">
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Parent Menu</label>
+                                    <label>Parent Menu<span
+                                        style="color: red;">*</span></label>
                                     <select name="parent_id"  class="form-control">
                                         <option value="">Select a Parent Menu</option>
                                         @foreach ($parent_menus as $parent_menu)
@@ -44,7 +45,8 @@
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Menu name</label>
+                                    <label>Menu name<span
+                                        style="color: red;">*</span></label>
                                     <input type="text" name="title" id=""
                                     class="form-control" value="{{ $menu->title }}"
                                     placeholder="Enter Menu Name">
@@ -54,7 +56,8 @@
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Status</label>
+                                    <label>Status<span
+                                        style="color: red;">*</span></label>
                                     <select name="status" id="" class="form-control">
                     
                                         <option value="1" {{ $menu->status== '1' ? 'selected':'' }}>Active</option>

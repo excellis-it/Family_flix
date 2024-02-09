@@ -114,7 +114,6 @@ class PlanController extends Controller
     {
         
         $plans = Plan::all();
-        
         foreach ($plans as $plan) {
             foreach ($request->order as $order) {
                 if ($order['id'] == $plan->id) {
@@ -128,7 +127,7 @@ class PlanController extends Controller
 
     public function planUpdate(Request $request)
     {
-
+         
         $request->validate([
             'plan_name'     => 'required',
             'plan_details'    => 'required',

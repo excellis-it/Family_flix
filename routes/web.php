@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SiteManagementController;
 use App\Http\Controllers\Admin\MenuManagementController;
 use App\Http\Controllers\Admin\ContentManagementController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -72,15 +73,22 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/privacy-policy', [ContentManagementController::class, 'privacyPolicy'])->name('content-management.privacy-policy');
         });
 
-
-        Route::post('/menuUpdate', [MenuManagementController::class, 'menuUpdate'])->name('admin.menu-management.update'); // menu update
-        Route::post('/menuReorder', [MenuManagementController::class, 'menuReorder'])->name('admin.menu-management.reorder'); // menu reorder
-        Route::get('/menuDelete/{id}', [MenuManagementController::class, 'menuDelete'])->name('delete.menu-managemnt'); // menu delete
+        Route::post('/menu-management/update-menu', [MenuManagementController::class, 'menuUpdate'])->name('admin.menu-management.update'); // menu update
+        Route::post('/menu-management/reorder-menu', [MenuManagementController::class, 'menuReorder'])->name('admin.menu-management.reorder'); // menu reorder
+        Route::get('/menu-management/delete-menu/{id}', [MenuManagementController::class, 'menuDelete'])->name('delete.menu-managemnt'); // menu delete
+        Route::post('/menu-management/status-change', [MenuManagementController::class, 'menuStatus'])->name('menu-management.changeStatus'); // menu status
 
 
         Route::get('/planDelete/{id}',[PlanController::class, 'planDelete'])->name('delete.plan'); // plan delete
         Route::post('/planReorder', [PlanController::class, 'planReorder'])->name('admin.plan.reorder'); // plan reorder
         Route::post('/planUpdate', [PlanController::class, 'planUpdate'])->name('update.plan'); // plan update
+
+
+        Route::group(['prefix'=>'cms'], function(){
+            //home cms
+            Route::get('/home-cms', [CmsController::class, 'homeCms'])->name('home.cms');
+            Route::post('/homeCms/update', [CmsController::class, 'homeCmsUpdate'])->name('home.cms.update');
+        });
         
     });
 });

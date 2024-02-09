@@ -1,4 +1,5 @@
 <aside class="left-sidebar">
+
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
@@ -23,24 +24,38 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+
+                
+                
+                <li class="sidebar-item {{ Request::is('admin/menu-management*') ? 'active' : '' }}">
                     {{-- --}}
                     <a class="sidebar-link" href="{{ route('menu-management.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-shopping-cart"></i>
                         </span>
-                        <span class="hide-menu">Menu Management</span>
+                        <span class="hide-menu">Menu</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                
+                <li class="sidebar-item {{ Request::is('admin/plan*') ? 'active' : ' ' }}">
                     <a class="sidebar-link" href="{{ route('plan.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-tag"></i>
                         </span>
-                        <span class="hide-menu">Plan Management</span>
+                        <span class="hide-menu">Plan</span>
                     </a>
                 </li>
-              
+
+                {{-- <li class="sidebar-item {{ Request::is('admin/cms*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('cms.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Cms</span>
+                    </a>
+                </li> --}}
+
+                
             </ul>
         </nav>
         <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">

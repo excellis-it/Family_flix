@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             assignAdminSeeder::class,
             menuSeeder::class,
             AddPlanSeeder::class,
+            homeCmsSeeder::class,
            
         ]);
     }

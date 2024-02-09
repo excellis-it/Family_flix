@@ -123,6 +123,15 @@ class MenuManagementController extends Controller
         return redirect()->route('menu-management.index')->with('message','Menu deleted successfully');
     }
 
+    public function menuStatus(Request $request)
+    {
+        $menu_status = Menu::findOrFail($request->menu_id);
+        $menu_status->status = $request->status;
+        $menu_status->update();
+
+        return response()->json(['message' => 'Status change successfully.']);
+    }
+
     /**
      * Update the specified resource in storage.
      *
