@@ -79,9 +79,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/menu-management/status-change', [MenuManagementController::class, 'menuStatus'])->name('menu-management.changeStatus'); // menu status
 
 
-        Route::get('/planDelete/{id}',[PlanController::class, 'planDelete'])->name('delete.plan'); // plan delete
-        Route::post('/planReorder', [PlanController::class, 'planReorder'])->name('admin.plan.reorder'); // plan reorder
-        Route::post('/planUpdate', [PlanController::class, 'planUpdate'])->name('update.plan'); // plan update
+        Route::get('/plan/delete/{id}',[PlanController::class, 'planDelete'])->name('delete.plan'); // plan delete
+        Route::post('/plan/reorder', [PlanController::class, 'planReorder'])->name('admin.plan.reorder'); // plan reorder
+        Route::post('/plan/update', [PlanController::class, 'planUpdate'])->name('update.plan'); // plan update
 
 
         Route::group(['prefix'=>'cms'], function(){

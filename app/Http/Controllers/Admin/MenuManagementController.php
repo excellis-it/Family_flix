@@ -85,6 +85,11 @@ class MenuManagementController extends Controller
 
     public function menuUpdate(Request $request)
     {
+        $request->validate([
+            'title'     => 'required',
+            'status'    => 'required|in:0,1',
+        ]);
+
         $menu_add = Menu::where('id', $request->id)->first();
         $menu_add->title = $request->title;
         $menu_add->slug = Str::slug($request->title);

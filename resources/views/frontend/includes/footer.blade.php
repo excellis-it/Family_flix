@@ -1,168 +1,113 @@
-@php 
-$email_us = \App\Models\EmailUs::first();
-use App\Helpers\Pricing;
-use App\Helpers\General;
-@endphp
-
-<footer class="footer position-relative">
-    <div class="footer-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 offset-lg-0 col-md-8 offset-md-2 col-10 offset-1">
-                    <div class="footer-row">
-                        <div class="footer-detail">
-                            <a href="#">
-                                <img src="{{ asset('frontend_assets/assets/images/logo.png')}}" alt="footer-logo">
-                            </a>
-                            <p>&nbsp;</p>
-                            <ul class="social">
-                                @php
-                                $socials = \App\Models\FooterCms::all();
-                                @endphp
-
-                                @foreach($socials  as $social)
-                                <li>
-                                    <a class="button button-blue" href="{{ $social->social_link }}" target="_blank" >
-                                        <span>
-                                            <i class="{{ $social->social_icon }}"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                                @endforeach
-                                {{-- <li>
-                                    <a class="button button-blue" href="#">
-                                        <span>
-                                            <i class="fab fa-twitter"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="button button-green" href="#">
-                                        <span>
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="button button-red" href="#">
-                                        <span>
-                                            <i class="fab fa-youtube"></i>
-                                        </span>
-                                    </a>
-                                </li> --}}
-                            </ul>
-                        </div>
-                        <div class="footer-list">
-                            <h6>COMPANY</h6>
-                            <ul>
-                                <li>
-                                    <a href="{{ route('about') }}" class="link-underline">
-                                        <span>About Us</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('career') }}" class="link-underline">
-                                        <span>Careers</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('our.work') }}" class="link-underline">
-                                        <span>Our Work</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('pricing') }}" class="link-underline">
-                                        <span>Pricing</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('help-center') }}" class="link-underline">
-                                        <span>Help Center</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('privacy') }}" class="link-underline">
-                                        <span>Privacy Policy</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);" id="news-letter" class="link-underline">
-                                        <span>Newsletter</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer-list">
-                            <h6>RESOURCES</h6>
-                            <ul>
-                                <li>
-                                    <a href="{{ route('free-illustration') }}" class="link-underline">
-                                        <span>Free Illustrations</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('free-icons') }}" class="link-underline">
-                                        <span>Free Icons</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('guides') }}" class="link-underline">
-                                        <span>Guides</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('blogs') }}" class="link-underline">
-                                        <span>Blog</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('case-studies') }}" class="link-underline">
-                                        <span>Case Studies</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('terms') }}" class="link-underline">
-                                        <span>Term & Condition</span>
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                        <div class="footer-list">
-                            <h6>EMAIL US</h6>
-                            <ul>
-                                <li>
-                                    <a href="mailto:{{ $email_us->email}}" class="link-underline">
-                                        <span>{{ $email_us->email }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 offset-lg-0 col-md-8 offset-md-2 col-10 offset-1">
-                    <div class="footer-copyright c-grey">
-                        <h6>{{ General::GeneralCmsContent()->copyright_title }}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
+<footer class="ftr-sec">
+    <div class="ftr-bg">
+      <img src="{{ asset('frontend_assets/images/ftr-bg.png')}}" alt="" />
     </div>
-    <div class="footer-bottom">
-        <div class="box-1 bg-yellow">
-            <div class="box-2">
-                <a href="#" class="button button-blue button-top">
-                    <span>
-                        <i class="fas fa-arrow-up"></i>
-                    </span>
-                </a>
+    <div class="ftr-top">
+      <div class="container">
+        <div class="ftr-top-wrap">
+          <div class="row justify-content-between">
+            <div class="col-xl-3 col-md-6 col-12">
+              <div class="footer-logo">
+                <a href=""><img src="{{ asset('frontend_assets/images/ftr.png')}}" alt="" /></a>
+              </div>
             </div>
+
+            <div class="col-xl-3 col-md-6 col-12">
+              <div class="find-us">
+                <h4>Quick Links</h4>
+                <div class="ftr-link ftr-link-1">
+                  <ul>
+                    <li class="">
+                      <a href="index.html"> Home </a>
+                    </li>
+                    <li>
+                      <a href="show.html">Shows</a>
+                    </li>
+                    <li>
+                      <a href="movies.html">Movies</a>
+                    </li>
+                    <li>
+                      <a href="kids.html">Kids</a>
+                    </li>
+                    <li>
+                      <a href="pricing.html">Pricing</a>
+                    </li>
+                    <li>
+                      <a href="about.html">About Us</a>
+                    </li>
+                    <li>
+                      <a href="contact.html"> contact</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 col-12">
+              <div class="find-us">
+                <h4>Customer Support</h4>
+                <div class="ftr-link ftr-link-1">
+                  <ul>
+                    <li><a href="">FAQ</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="#">Terms of service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 col-12">
+              <div class="find-us">
+                <h4>Contact Us</h4>
+                <div class="add d-flex">
+                  <div class="add-icon">
+                    <span><i class="fa-solid fa-phone"></i></span>
+                  </div>
+                  <div class="add-text">
+                    <h4>Call Us</h4>
+                    <a href="">+18453297101</a>
+                  </div>
+                </div>
+                <div class="add d-flex">
+                  <div class="add-icon">
+                    <span><i class="fa-solid fa-envelope"></i></span>
+                  </div>
+                  <div class="add-text">
+                    <h4>Email Us</h4>
+                    <a href="">support@thefamilyflix.com</a>
+                  </div>
+                </div>
+                <div class="add d-flex">
+                  <div class="add-icon">
+                    <span><i class="fa-solid fa-location-dot"></i></span>
+                  </div>
+                  <div class="add-text">
+                    <h4>Location</h4>
+                    <p>Orlando Florida</p>
+                  </div>
+                </div>
+                <div class="add d-flex">
+                  <div class="add-icon">
+                    <span><i class="fa-regular fa-clock"></i></span>
+                  </div>
+                  <div class="add-text">
+                    <h4>Office Hours (Closed Saturday)</h4>
+                    <p>9am-11pm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-xl-12">
+                <div class="ftr-link ftr-btm-img text-center">
+                  <img
+                    src="{{ asset('frontend_assets/images/poweredbywhite-1024x124.png')}}"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</footer>
-
-
-<!-- footer - end -->
-
+  </footer>

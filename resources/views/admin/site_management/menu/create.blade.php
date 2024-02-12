@@ -29,8 +29,7 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Plan name<span
-                                        style="color: red;">*</span></label>
+                                    <label>Plan name</label>
                                         <select name="parent_id"  class="form-control">
                                             <option value="">Select a Parent Menu</option>
                                             @foreach ($parent_menus as $parent_menu)
@@ -43,28 +42,28 @@
                                         @endif
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Plan actual price($)<span
+                                    <label>Menu name<span
                                         style="color: red;">*</span></label>
-                                        <input type="text" name="title" id=""
-                                        class="form-control" value="{{ old('title') }}"
-                                        placeholder="Enter Menu Name">
+                                    <input type="text" name="title" id=""
+                                    class="form-control" 
+                                    placeholder="Enter Menu Name">
                                     @if ($errors->has('title'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('title') }}</div>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Plan offer price($)<span
+                                    <label>Status<span
                                         style="color: red;">*</span></label>
-                                        <select name="status" id="" class="form-control">
-                                            <option value="">Select a Status</option>
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </select>
-                                        @if ($errors->has('status'))
-                                            <div class="error" style="color:red;">
-                                                {{ $errors->first('status') }}</div>
-                                        @endif
+                                    <select name="status" id="" class="form-control">
+                                        <option value="">Select Status</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    @if ($errors->has('status'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('status') }}</div>
+                                    @endif
                                 </div>
                               
                                 <div class="w-100 text-end">

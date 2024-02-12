@@ -22,6 +22,7 @@ class AddPlanSeeder extends Seeder
                 'plan_actual_price' => '30',
                 'plan_offer_price' => '25',
                 'button_text' => 'Subscribe',
+                'plan_order' => 1,
                 'specification' => [
                     [
                         'specification_name' => '1-2 Device Limit',
@@ -46,6 +47,7 @@ class AddPlanSeeder extends Seeder
                 'plan_actual_price' => '40',
                 'plan_offer_price' => '30',
                 'button_text' => 'Subscribe',
+                'plan_order' => 2,
                 'specification' => [
                     [
                         'specification_name' => '1-3 Device Limit',
@@ -70,6 +72,7 @@ class AddPlanSeeder extends Seeder
                 'plan_actual_price' => '50',
                 'plan_offer_price' => '42',
                 'button_text' => 'Subscribe',
+                'plan_order' => 3,
                 'specification' => [
                     [
                         'specification_name' => '1-5 Device Limit',
@@ -98,6 +101,7 @@ class AddPlanSeeder extends Seeder
             $planModel->plan_actual_price = $plan['plan_actual_price'];
             $planModel->plan_offer_price = $plan['plan_offer_price'];
             $planModel->button_text = $plan['button_text'];
+            $planModel->plan_order = $plan['plan_order'];
             $planModel->save();
 
             foreach ($plan['specification'] as $specification) {
