@@ -51,9 +51,18 @@
                         <span>
                             <i class="ti ti-tag"></i>
                         </span>
-                        <span class="hide-menu">Cms</span>
+                        <span class="hide-menu">Home Cms</span>
                     </a>
                 </li>
+                {{-- <li class="sidebar-item {{ Request::is('admin/cms*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('entertainment.cms') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Entertainment Cms</span>
+                    </a>
+                    
+                </li> --}}
             </ul>
         </nav>
         <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">

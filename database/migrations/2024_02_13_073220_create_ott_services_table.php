@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMiddleGridsTable extends Migration
+class CreateOttServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateMiddleGridsTable extends Migration
      */
     public function up()
     {
-        Schema::create('middle_grids', function (Blueprint $table) {
+        Schema::create('ott_services', function (Blueprint $table) {
             $table->id();
             $table->string('icon')->nullable();
-            $table->string('title')->nullable();
-            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateMiddleGridsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('middle_grids');
+        Schema::dropIfExists('ott_services');
     }
 }

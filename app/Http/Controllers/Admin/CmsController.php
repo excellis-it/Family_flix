@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\PrivacyPolicy;
 use App\Models\AboutUs;
 use App\Models\HomeCms;
+use App\Models\TopGrid;
+use App\Models\OttService;
+use App\Models\EntertainmentCms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,11 +18,15 @@ class CmsController extends Controller
     public function homeCms()
     {
         $home_cms = HomeCms::first();
-        return view('admin.cms.home', compact('home_cms'));
+        $top_grids = TopGrid::orderBy('id', 'desc')->get();
+        $ott_icons = OttService::orderBy('id', 'desc')->get();
+        $entertainments = EntertainmentCms::orderBy('id', 'desc')->get();
+        return view('admin.cms.home', compact('home_cms','top_grids','ott_icons','entertainments'));
     }
    
     public function homeCmsUpdate(Request $request)
     {
+       
         
         $request->validate([
             'top_short_title' => 'required',
@@ -35,6 +42,9 @@ class CmsController extends Controller
             'section5_main_title' => 'required',
             'section5_main_description' => 'required',
             'plan_section_title' => 'required',
+            'entertainment_title' => 'required',
+            'entertainment_description' => 'required',
+
         ]);
 
         $home_cms = HomeCms::where('id', $request->id)->first();
@@ -51,6 +61,8 @@ class CmsController extends Controller
         $home_cms->section5_main_title = $request->section5_main_title;
         $home_cms->section5_main_description = $request->section5_main_description;
         $home_cms->plan_section_title = $request->plan_section_title;
+        $home_cms->entertainment_title = $request->entertainment_title;
+        $home_cms->entertainment_description = $request->entertainment_description;
         
         //top back image upload
 
@@ -127,103 +139,51 @@ class CmsController extends Controller
             $home_cms->section2_main_icon = $image_path5;
         }
 
-        //section2_icon1 upload
-        if ($request->hasFile('section2_icon1')) {
-            $request->validate([
-                'section2_icon1' => 'required',
-            ]);
+
+        //multiple grid icon upload
+        if ($request->hasFile('grid_icon')) {
             
-            $file6= $request->file('section2_icon1');
-            $filename6= date('YmdHi').$file6->getClientOriginalName();
-            $image_path6 = $request->file('section2_icon1')->store('home', 'public');
-            $home_cms->section2_icon1 = $image_path6;
+            foreach ($request->file('grid_icon') as $key => $file) {
+                if ($file->isValid()) {
+                    $file_path = $file->store('grid', 'public'); 
+        
+                    $top_grid = new TopGrid();
+                    $top_grid->icon = $file_path; 
+                    $top_grid->title = $request->grid_title[$key];
+                    $top_grid->description = $request->grid_description[$key];
+                    $top_grid->save();
+                } 
+            }
+        }
+        
+        //multiple ott icon upload
+        if ($request->hasFile('ott_icon')) {
+            
+            foreach ($request->file('ott_icon') as $key => $file) {
+                if ($file->isValid()) {
+                    $file_path = $file->store('ott_icon', 'public'); 
+        
+                    $ott_service = new OttService();
+                    $ott_service->icon = $file_path; 
+                    $ott_service->save();
+                } 
+            }
         }
 
 
-        //section2_icon2 upload
-        if ($request->hasFile('section2_icon2')) {
-            $request->validate([
-                'section2_icon2' => 'required',
-            ]);
+        // multiple entertainment imge and image name upload
+        if ($request->hasFile('entern_image')) {
             
-            $file7= $request->file('section2_icon2');
-            $filename7= date('YmdHi').$file7->getClientOriginalName();
-            $image_path7 = $request->file('section2_icon2')->store('home', 'public');
-            $home_cms->section2_icon2 = $image_path7;
-        }
-
-        //section2_icon3 upload
-        if ($request->hasFile('section2_icon3')) {
-            $request->validate([
-                'section2_icon3' => 'required',
-            ]);
-            
-            $file8= $request->file('section2_icon3');
-            $filename8= date('YmdHi').$file8->getClientOriginalName();
-            $image_path8 = $request->file('section2_icon3')->store('home', 'public');
-            $home_cms->section2_icon3 = $image_path8;
-        }
-
-        //section2_icon4 upload
-        if ($request->hasFile('section2_icon4')) {
-            $request->validate([
-                'section2_icon4' => 'required',
-            ]);
-            
-            $file9= $request->file('section2_icon4');
-            $filename9= date('YmdHi').$file9->getClientOriginalName();
-            $image_path9 = $request->file('section2_icon4')->store('home', 'public');
-            $home_cms->section2_icon4 = $image_path9;
-        }
-
-        //section2_icon5 upload
-        if ($request->hasFile('section2_icon5')) {
-            $request->validate([
-                'section2_icon5' => 'required',
-            ]);
-            
-            $file10= $request->file('section2_icon5');
-            $filename10= date('YmdHi').$file10->getClientOriginalName();
-            $image_path10 = $request->file('section2_icon5')->store('home', 'public');
-            $home_cms->section2_icon5 = $image_path10;
-        }
-
-
-        //section2_icon6 upload
-        if ($request->hasFile('section2_icon6')) {
-            $request->validate([
-                'section2_icon6' => 'required',
-            ]);
-            
-            $file11= $request->file('section2_icon6');
-            $filename11= date('YmdHi').$file11->getClientOriginalName();
-            $image_path11 = $request->file('section2_icon6')->store('home', 'public');
-            $home_cms->section2_icon6 = $image_path11;
-        }
-
-        //section2_icon7 upload
-        if ($request->hasFile('section2_icon7')) {
-            $request->validate([
-                'section2_icon7' => 'required',
-            ]);
-            
-            $file12= $request->file('section2_icon7');
-            $filename12= date('YmdHi').$file12->getClientOriginalName();
-            $image_path12 = $request->file('section2_icon7')->store('home', 'public');
-            $home_cms->section2_icon7 = $image_path12;
-        }
-
-        //section2_icon8 upload
-
-        if ($request->hasFile('section2_icon8')) {
-            $request->validate([
-                'section2_icon8' => 'required',
-            ]);
-            
-            $file13= $request->file('section2_icon8');
-            $filename13= date('YmdHi').$file13->getClientOriginalName();
-            $image_path13 = $request->file('section2_icon8')->store('home', 'public');
-            $home_cms->section2_icon8 = $image_path13;
+            foreach ($request->file('entern_image') as $key => $file1) {
+                if ($file1->isValid()) {
+                    $file_path1 = $file1->store('entertainment', 'public'); 
+        
+                    $entertainment_add = new EntertainmentCms();
+                    $entertainment_add->image = $file_path1; 
+                    $entertainment_add->image_name = $request->image_name[$key];
+                    $entertainment_add->save();
+                } 
+            }
         }
 
         //section3_back_image upload
@@ -305,6 +265,14 @@ class CmsController extends Controller
         $home_cms->update();
         return redirect()->back()->with('message', 'Home Created Successfully');
     }
+
+    public function entertainmentCms()
+    {
+        $entertainment_cms = EntertainmentCms::first();
+        $entertainments = EntertainmentCms::orderBy('id', 'desc')->get();
+        return view('admin.cms.entertainment',compact('entertainment_cms','entertainments'));
+    }
+
 
    
 }

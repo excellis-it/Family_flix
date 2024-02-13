@@ -42,52 +42,12 @@
             <div class="access-div">
                 <div class="access-div-wrap">
                     <div class="row justify-content-center">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="access-div-img-wrap">
-                                <div class="access-div-img">
-                                    <img src="{{ asset('frontend_assets/images/access.png') }}" alt="" />
-                                </div>
-                                <div class="access-div-text">
-                                    <h4>Unlimited Access</h4>
-                                    <p>
-                                        Dive into a vast library of movies, TV series, and
-                                        exclusive content.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="access-div-img-wrap">
-                                <div class="access-div-img">
-                                    <img src="{{ asset('frontend_assets/images/savings.png') }}" alt="" />
-                                </div>
-                                <div class="access-div-text">
-                                    <h4>Savings Simplified</h4>
-                                    <p>
-                                        Affordable plans that eliminate the need for multiple
-                                        subscriptions.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="access-div-img-wrap">
-                                <div class="access-div-img">
-                                    <img src="{{ asset('frontend_assets/images/watch.png') }}" alt="" />
-                                </div>
-                                <div class="access-div-text">
-                                    <h4>Watch Anywhere, Anytime</h4>
-                                    <p>
-                                        Enjoy your favorites on your terms - mobile, desktop, or
-                                        TV.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    @include('frontend.includes.top_grid')
                     </div>
                 </div>
             </div>
         </div>
+        
     </section>
     <section class="one-place">
         <div class="one-place-img text-end">
@@ -131,198 +91,32 @@
                                                         data-animation="eael-interactive-circle-animation-3"
                                                         data-autoplay="0" data-autoplay-interval="2000">
                                                         <div class="eael-circle-info" data-items="8">
+
+                                                            <div class="eael-circle-btn-content">
+                                                                <div class="eael-circle-content">
+                                                                    <img decoding="async" style="width: 200px"
+                                                                        src="{{ asset('frontend_assets/images/circle-center.png') }}"
+                                                                        alt="Logo" />
+                                                                </div>
+                                                            </div>
+                                                            @foreach($ott_icons as $index => $ott_icon)
                                                             <div class="eael-circle-inner">
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-c5a3e9d">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-1">
+                                                                <div class="eael-circle-item elementor-repeater-item-c5a3e9d">
+                                                                    <div class="eael-circle-btn" id="eael-circle-item-{{ $ott_icon->id }}">
                                                                         <div class="eael-circle-icon-shapes classic">
                                                                             <div class="eael-shape-1"></div>
                                                                             <div class="eael-shape-2"></div>
                                                                         </div>
-                                                                        <div class="eael-circle-btn-icon classic">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-1.png') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="eael-circle-btn-content eael-circle-item-1">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-4538903">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-2">
-                                                                        <div class="eael-circle-icon-shapes">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
                                                                         <div class="eael-circle-btn-icon">
                                                                             <div class="eael-circle-icon-inner">
                                                                                 <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-2.png') }}" />
+                                                                                    src="{{ Storage::url($ott_icon->icon) }}" />
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="eael-circle-btn-content eael-circle-item-2">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
+                                                                    </div>                                                             
                                                                 </div>
 
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-717273e">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-3">
-                                                                        <div class="eael-circle-icon-shapes">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
-                                                                        <div class="eael-circle-btn-icon">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-3.png') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="eael-circle-btn-content eael-circle-item-3">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-d3c427c">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-4">
-                                                                        <div class="eael-circle-icon-shapes">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
-                                                                        <div class="eael-circle-btn-icon">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-4.png') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="eael-circle-btn-content eael-circle-item-4">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-219c450">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-5">
-                                                                        <div class="eael-circle-icon-shapes">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
-                                                                        <div class="eael-circle-btn-icon">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-5.png') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="eael-circle-btn-content eael-circle-item-5">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-a8a43b0">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-6">
-                                                                        <div class="eael-circle-icon-shapes">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
-                                                                        <div class="eael-circle-btn-icon">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-6.png') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="eael-circle-btn-content eael-circle-item-6">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-986bd8f">
-                                                                    <div class="eael-circle-btn active"
-                                                                        id="eael-circle-item-7">
-                                                                        <div class="eael-circle-icon-shapes">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
-                                                                        <div class="eael-circle-btn-icon">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-7.png') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="eael-circle-btn-content eael-circle-item-7 active">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div
-                                                                    class="eael-circle-item elementor-repeater-item-840bcb6">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-8">
-                                                                        <div class="eael-circle-icon-shapes">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
-                                                                        <div class="eael-circle-btn-icon">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ asset('frontend_assets/images/circle-8.png') }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="eael-circle-btn-content eael-circle-item-8">
-                                                                        <div class="eael-circle-content">
-                                                                            <img decoding="async" style="width: 200px"
-                                                                                src="{{ asset('frontend_assets/images/circle-center.png') }}"
-                                                                                alt="Logo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
@@ -343,77 +137,13 @@
             <img src="{{ Storage::url($home_cms->section2_back_image) }}" alt="" />
         </div>
         <div class="entertainment-div">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="entertainment-head">
-                            <div class="heading-1 text-center">
-                                <h2>Entertainment Everywhere<span class="dot">.</span></h2>
-                                <p>
-                                    Enjoy The Family Flix app on your TV, mobile, and tablet.
-                                    Our platform supports all your devices. Anywhere, Any
-                                    Device: The Family Flix Advantage
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="entertainment-img-div">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="entertainment-img-wrap">
-                                <div class="entertainment-img">
-                                    <img src="{{ asset('frontend_assets/images/en-1.png') }}" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="entertainment-img-wrap">
-                                <div class="entertainment-img">
-                                    <img src="{{ asset('frontend_assets/images/en-2.png') }}" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="entertainment-img-wrap">
-                                <div class="entertainment-img">
-                                    <img src="{{ asset('frontend_assets/images/en-3.png') }}" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="entertainment-img-div entertainment-img-div-text">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="entertainment-img-wrap">
-                                <div class="entertainment-img-text">
-                                    <h4>On Your TV</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="entertainment-img-wrap">
-                                <div class="entertainment-img-text">
-                                    <h4>Mobiles & Tablets</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="entertainment-img-wrap">
-                                <div class="entertainment-img-text">
-                                    <h4>On Firestick & Firecube</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('frontend.includes.entertainment');
+           
         </div>
     </section>
     <section class="works-sec">
         <div class="works-sec-bg">
-            <img src="{{ asset('frontend_assets/images/work-bg.png') }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section3_back_image) }}" alt="" />
         </div>
         <div class="works-div-wrap">
             <div class="container">
@@ -427,7 +157,7 @@
                             </div>
                             <img src="{{ Storage::url($home_cms->section3_main_image) }}" alt="" />
                             <div class="play-btn">
-                                <a href="{{ $home_cms->section3_video_link }}"><i class="fa-solid fa-play"></i></a>
+                                <button type="button" class="play-btn" data-bs-toggle="modal" data-src="https://excellis.co.in/demo/five-star-chem-dry/dev/wp-content/uploads/2023/07/Carpet_upholstery_30_06-2.mp4" data-bs-target="#myModal"><span><i class="fa-solid fa-play"></i></span></button>
                             </div>
                         </div>
                     </div>
@@ -456,14 +186,16 @@
             </div>
         </div>
         <div class="unbeatable-slider">
+            @foreach($ott_icons as $ott_icon)
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
-                        <img src="{{ asset('frontend_assets/images/unbeatable-1.png') }}" alt="" />
+                        <img src="{{ Storage::url($ott_icon->icon) }}" alt="" />
                     </div>
                 </div>
             </div>
-            <div class="unbeatable-slider-wrap">
+            @endforeach
+            {{-- <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
                         <img src="{{ asset('frontend_assets/images/unbeatable-2.png') }}" alt="" />
@@ -504,7 +236,7 @@
                         <img src="{{ asset('frontend_assets/images/unbeatable-7.png') }}" alt="" />
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
     <section class="kids-sec">
@@ -584,80 +316,7 @@
                                 </div>
                             </div>
                             @endforeach
-                            {{-- <div class="col-lg-3 col-md-6">
-                                <div class="pricing-div-box">
-                                    <h4>Professional</h4>
-                                    <p>
-                                        Our Professional pack is perfect for families to enjoy
-                                        the best entertainment there is
-                                    </p>
-                                    <div class="pricing-rate d-flex justify-content-center mb-md-4">
-                                        <h4>$23.00</h4>
-                                        <h3>$18.99</h3>
-                                    </div>
-                                    <div class="sub-btn">
-                                        <a href="">Subscribe</a>
-                                    </div>
-                                    <div class="pricing-list">
-                                        <ul>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>1 - 2
-                                                Device Limit
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Premium Server
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Full
-                                                HD Available
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Desktop, Mobile & TV App
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Unlimited Movies & TV Show
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="pricing-div-box">
-                                    <h4>Executive</h4>
-                                    <p>
-                                        Avail our executive plan for best value deals for
-                                        maximum number of devices
-                                    </p>
-                                    <div class="pricing-rate d-flex justify-content-center mb-md-4">
-                                        <h4>$23.00</h4>
-                                        <h3>$18.99</h3>
-                                    </div>
-                                    <div class="sub-btn">
-                                        <a href="">Subscribe</a>
-                                    </div>
-                                    <div class="pricing-list">
-                                        <ul>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>1 - 2
-                                                Device Limit
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Premium Server
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Full
-                                                HD Available
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Desktop, Mobile & TV App
-                                            </li>
-                                            <li>
-                                                <span><i class="fa-solid fa-check"></i></span>Unlimited Movies & TV Show
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> --}}
+                           
                         </div>
                     </div>
                 </div>
@@ -678,6 +337,19 @@
             </div>
         </div>
     </section>
+
+    {{-- modal open --}}
+    <div class="modal modal-1 fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"><iframe width="560" height="315" src="{{ $home_cms->section3_video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+          </div>
+        </div>
+      </div>
+      {{-- modal close --}}
 
     <div class="scroll-top">
         <a id="scroll-top-btn"></a>

@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             menuSeeder::class,
             AddPlanSeeder::class,
             homeCmsSeeder::class,
-           
+            topGridSeeeder::class,
+            ottIconseeder::class,
+            entertainmentCmsSeeder::class,
         ]);
     }
 }

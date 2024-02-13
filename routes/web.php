@@ -88,6 +88,10 @@ Route::group(['prefix' => 'admin'], function () {
             //home cms
             Route::get('/home-cms', [CmsController::class, 'homeCms'])->name('home.cms');
             Route::post('/homeCms/update', [CmsController::class, 'homeCmsUpdate'])->name('home.cms.update');
+
+            //entertainment cms
+            Route::get('/entertainment-cms', [CmsController::class, 'entertainmentCms'])->name('entertainment.cms');
+            Route::post('/entertainmentCms/update', [CmsController::class, 'entertainmentCmsUpdate'])->name('entertainment.cms.update');
         });
         
     });
