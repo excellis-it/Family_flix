@@ -136,11 +136,14 @@
                                 <div class="add-name">
                                     @foreach ($top_grids as $key => $vall)
                                         <div class="row">
+                                            
                                             <div class="col-md-2 pb-3">
                                                 <div style="display: flex">
+                                                   
                                                     <img src="{{ Storage::url($vall->icon) }}"
-                                                        id="grid-{{ $vall->id }}">
+                                                    id="grid-{{ $vall->id }}">
                                                 </div>
+                                                
                                             </div>
                                             <div class="col-md-3 pb-3">
                                                 <div style="display: flex">
@@ -155,7 +158,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <button type="button" class="btn btn-danger cross good-button"
+                                                <button type="button" class="btn btn-danger cross good-button remove-grid"
                                                     data-id="{{ $vall->id }}"> <i class="fas fa-close"></i>
                                                     Remove</button>
                                             </div>
@@ -165,7 +168,7 @@
                                     <button type="button" class="btn btn-success add good-button"><i
                                             class="fas fa-plus"></i> Add More Grid</button>
                                     <br>
-                                    <div class="add-grid"> </div>        
+                                    {{-- <div class="add-grid"> </div>         --}}
                                 </div>
                             </div>
                             <br>
@@ -267,12 +270,11 @@
                                     @endif
                                 </div>
 
-
+                                
                                 @foreach($ott_icons as $key => $ott_icon)
                                 <div class="form-group col-md-3 mb-3">
                                     <label>{{ $key +1 }}st Small Icon<span style="color: red;">*</span></label>
-                                    <input type="file" name="ott_icon[]" 
-                                        class="form-control">
+                                    
                                     @if ($errors->has('ott_icon'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('ott_icon') }}</div>
@@ -281,10 +283,12 @@
                                     @if ($ott_icon->icon != '')
                                         <img src="{{ Storage::url($ott_icon->icon) }}" alt="preview image"
                                             style="max-height: 180px;">
-                                   
+                                            <a class="remove-ott-icon" href="javascript:void(0);" data-id="{{$ott_icon->id}}" style="display: inline;">&#215;</a>
+                                
                                     @endif
                                 </div>
                                 @endforeach
+                                
 
                                 
                             </div>
@@ -340,7 +344,7 @@
                                             </div>
                                             
                                             <div class="col-md-2">
-                                                <button type="button" class="btn btn-danger cross good-button"
+                                                <button type="button" class="btn btn-danger cross good-button remove-ent"
                                                     data-id="{{ $vall->id }}"> <i class="fas fa-close"></i>
                                                     Remove</button>
                                             </div>
@@ -648,68 +652,7 @@
                 }
                 reader.readAsDataURL(this.files[0]);
             });
-            // section2_1st_icon preview
-            $('#section2_icon1').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-section2-icon1').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
-
-            //section2_icon2 preview
-            $('#section2_icon2').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-section2-icon2').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
-
-            // section2_icon4 preview
-            $('#section2_icon4').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-section2-icon4').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
-
-            //section2_icon5 preview
-            $('#section2_icon5').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-section2-icon5').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
-
-            //section2_icon6 preview
-            $('#section2_icon6').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-section2-icon6').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
-
-            //section2_icon7 preview
-            $('#section2_icon7').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-section2-icon7').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
-
-            // section2_icon8 preview
-            $('#section2_icon8').change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-section2-icon8').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
+            
 
             // section3_back_image preview
             $('#section3_back_image').change(function() {
@@ -814,4 +757,63 @@
         $(this).parent().parent().remove();
     });
 </script>
+
+
+<script>
+    $('.remove-grid').on('click', function() {
+        var result = confirm('Are you sure you want to delete?');
+
+        if (result) {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: '/admin/cms/deleteGridImage/' + id,
+                type: 'get',
+                success: function(response) {
+                    $('#'+id).hide();
+                }
+            });
+        }else{
+            return false;
+        }
+    });
+</script>
+
+<script>
+    $('.remove-ott-icon').on('click', function() {
+        var result = confirm('Are you sure you want to delete?');
+        
+        if (result) {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: '/admin/cms/deleteOttIcon/' + id,
+                type: 'get',
+                success: function(response) {
+                    $('#'+id).hide();
+                }
+            });
+        }else{
+            return false;
+        }
+    });
+
+    </script>
+
+    <script>
+        $('.remove-ent').on('click', function() {
+            var result = confirm('Are you sure you want to delete?');
+            
+            if (result) {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    url: '/admin/cms/deleteEntertainmentImage/' + id,
+                    type: 'get',
+                    success: function(response) {
+                        $('#'+id).hide();
+                    }
+                });
+            }else{
+                return false;
+            }
+        });
+        </script>
 @endpush

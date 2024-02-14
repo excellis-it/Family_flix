@@ -92,11 +92,16 @@ Route::group(['prefix' => 'admin'], function () {
             //entertainment cms
             Route::get('/entertainment-cms', [CmsController::class, 'entertainmentCms'])->name('entertainment.cms');
             Route::post('/entertainmentCms/update', [CmsController::class, 'entertainmentCmsUpdate'])->name('entertainment.cms.update');
+
+            //delete grid image
+            Route::get('/deleteGridImage/{id}', [CmsController::class, 'gridImageDelete'])->name('delete.grid-image');
+            Route::get('/deleteOttIcon/{id}', [CmsController::class, 'ottIconDelete'])->name('delete.ott-icon');
+            Route::get('/deleteEntertainmentImage/{id}', [CmsController::class, 'entImageDelete'])->name('delete.entertainment-image');
         });
         
     });
 });
-
+ 
 
 Route::get('/cronsStartToWorkEmailSend', function () {
     Artisan::call('send:mail');

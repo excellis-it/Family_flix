@@ -95,7 +95,7 @@
                                                             <div class="eael-circle-btn-content">
                                                                 <div class="eael-circle-content">
                                                                     <img decoding="async" style="width: 200px"
-                                                                        src="{{ asset('frontend_assets/images/circle-center.png') }}"
+                                                                        src="{{ Storage::url($home_cms->section2_main_icon) }}"
                                                                         alt="Logo" />
                                                                 </div>
                                                             </div>
@@ -186,57 +186,57 @@
             </div>
         </div>
         <div class="unbeatable-slider">
-            @foreach($ott_icons as $ott_icon)
+            <!--@foreach($ott_icons as $ott_icon)-->
+            <!--<div class="unbeatable-slider-wrap">-->
+            <!--    <div class="unbeatable-slider-div">-->
+            <!--        <div class="unbeatable-slider-img">-->
+            <!--            <img src="{{ Storage::url($ott_icon->icon) }}" alt="" />-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--</div>-->
+            <!--@endforeach-->
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
-                        <img src="{{ Storage::url($ott_icon->icon) }}" alt="" />
-                    </div>
-                </div>
-            </div>
-            @endforeach
-            {{-- <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="{{ asset('frontend_assets/images/unbeatable-2.png') }}" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="{{ asset('frontend_assets/images/unbeatable-3.png') }}" alt="" />
+                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-2.png" alt="" />
                     </div>
                 </div>
             </div>
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
-                        <img src="{{ asset('frontend_assets/images/unbeatable-4.png') }}" alt="" />
+                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-4.png" alt="" />
                     </div>
                 </div>
             </div>
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
-                        <img src="{{ asset('frontend_assets/images/unbeatable-5.png') }}" alt="" />
+                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-5.png" alt="" />
                     </div>
                 </div>
             </div>
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
-                        <img src="{{ asset('frontend_assets/images/unbeatable-6.png') }}" alt="" />
+                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-6.png" alt="" />
                     </div>
                 </div>
             </div>
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
-                        <img src="{{ asset('frontend_assets/images/unbeatable-7.png') }}" alt="" />
+                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-7.png" alt="" />
                     </div>
                 </div>
-            </div> --}}
+            </div>
+            <div class="unbeatable-slider-wrap">
+                <div class="unbeatable-slider-div">
+                    <div class="unbeatable-slider-img">
+                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-8.png" alt="" />
+                    </div>
+                </div>
+            </div> 
         </div>
     </section>
     <section class="kids-sec">

@@ -26,7 +26,6 @@ class CmsController extends Controller
    
     public function homeCmsUpdate(Request $request)
     {
-       
         
         $request->validate([
             'top_short_title' => 'required',
@@ -142,7 +141,6 @@ class CmsController extends Controller
 
         //multiple grid icon upload
         if ($request->hasFile('grid_icon')) {
-            
             foreach ($request->file('grid_icon') as $key => $file) {
                 if ($file->isValid()) {
                     $file_path = $file->store('grid', 'public'); 
@@ -155,6 +153,7 @@ class CmsController extends Controller
                 } 
             }
         }
+
         
         //multiple ott icon upload
         if ($request->hasFile('ott_icon')) {
@@ -170,17 +169,16 @@ class CmsController extends Controller
             }
         }
 
-
         // multiple entertainment imge and image name upload
         if ($request->hasFile('entern_image')) {
             
-            foreach ($request->file('entern_image') as $key => $file1) {
+            foreach ($request->file('entern_image') as $keys => $file1) {
                 if ($file1->isValid()) {
                     $file_path1 = $file1->store('entertainment', 'public'); 
         
                     $entertainment_add = new EntertainmentCms();
                     $entertainment_add->image = $file_path1; 
-                    $entertainment_add->image_name = $request->image_name[$key];
+                    $entertainment_add->image_name = $request->image_name[$keys];
                     $entertainment_add->save();
                 } 
             }
@@ -271,6 +269,27 @@ class CmsController extends Controller
         $entertainment_cms = EntertainmentCms::first();
         $entertainments = EntertainmentCms::orderBy('id', 'desc')->get();
         return view('admin.cms.entertainment',compact('entertainment_cms','entertainments'));
+    }
+
+    public function gridImageDelete($id)
+    {
+        $grid_image = TopGrid::find($id);
+        $grid_image->delete();
+        return redirect()->back()->with('message', 'Grid Image Deleted Successfully');
+    }
+
+    public function ottIconDelete($id)
+    {
+        $ott_icon = OttService::find($id);
+        $ott_icon->delete();
+        return redirect()->back()->with('message', 'Ott Icon Deleted Successfully');
+    }
+
+    public function entImageDelete($id)
+    {
+        $ent_image = EntertainmentCms::find($id);
+        $ent_image->delete();
+        return redirect()->back()->with('message', 'Entertainment Image Deleted Successfully');
     }
 
 
