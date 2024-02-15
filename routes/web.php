@@ -25,7 +25,7 @@ Route::get('clear', function () {
 
 /* ----------------- Frontend Routes -----------------*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/perks', [HomeController::class, 'perks'])->name('perks');
+
 Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -37,6 +37,16 @@ Route::post('forget-password', [ForgotPasswordController::class, 'forgetPassword
 Route::post('change-password', [ForgotPasswordController::class, 'changePassword'])->name('change.password');
 Route::get('forget-password/show', [ForgotPasswordController::class, 'forgetPasswordShow'])->name('forget.password.show');
 Route::get('reset-password/{id}/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
+
+Route::get('/about', [HomeController::class, 'aboutUs'])->name('about');
+Route::get('/movies', [HomeController::class, 'movies'])->name('movies');
+Route::get('/shows', [HomeController::class, 'shows'])->name('shows');
+Route::get('/kids', [HomeController::class, 'kids'])->name('kids');
+Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
+Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
+Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
+Route::get('/term-service', [HomeController::class, 'termService'])->name('term-service');
+Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
 
 

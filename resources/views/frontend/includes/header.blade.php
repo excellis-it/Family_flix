@@ -23,29 +23,29 @@
                       <div id="cssmenu">
                         <ul>
                           <li class="active">
-                            <a href="index.html"> Home </a>
+                            <a href="{{ route('home') }}"> Home </a>
                           </li>
                           <li>
-                            <a href="show.html">Shows</a>
+                            <a href="{{ route('shows') }}">Shows</a>
                             <!-- <ul>
                             <li class="sub-act"><a href="#">About Us </a></li>
                             <li><a href="#">About Us</a></li>
                           </ul> -->
                           </li>
                           <li>
-                            <a href="movies.html">Movies</a>
+                            <a href="{{ route('movies') }}">Movies</a>
                           </li>
                           <li>
-                            <a href="kids.html">Kids</a>
+                            <a href="{{ route('kids') }}">Kids</a>
                           </li>
                           <li>
-                            <a href="pricing.html">Pricing</a>
+                            <a href="{{ route('pricing') }}">Pricing</a>
                           </li>
                           <li>
-                            <a href="about.html">About Us</a>
+                            <a href="{{ route('about') }}">About Us</a>
                           </li>
                           <li>
-                            <a href="contact.html"> contact</a>
+                            <a href="{{ route('contact-us') }}"> contact</a>
                           </li>
                         </ul>
                       </div>

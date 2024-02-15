@@ -66,8 +66,22 @@
         width: 100px;
         height: 100px;
     }
-    .play-btn a {
+    .play-btn button {
         font-size: 30px;
+    }
+    .imdb-sec {
+        margin-top: -7%;
+    }
+    .abt-entertaiment {
+        margin: 0;
+        padding: 100px 0px 100px;
+    }
+    .abt-img {
+        width: 750px;
+        height: 530px;
+    }
+    .logo a {
+        width: 200px;
     }
 }
 
@@ -146,7 +160,24 @@
     .slider, .slide {
         height: 65vh;
     }
-   
+    .abt-entertaiment {
+        margin: 0;
+        padding: 100px 0px 100px;
+    }
+    .abt-img {
+        width: 680px;
+        height: 500px;
+    }
+    .commitment-sec::before {
+        height: 375px;
+    }
+    .abt-access .access-div {
+        padding: 50px 0px;
+    }
+    .imdb-slide-movie img {
+        width: 200px;
+        height: 100px;
+    }
 }
 
 @media (max-width:1366px) {
@@ -183,6 +214,23 @@
         text-align: center;
         padding: 10px;
     }
+    .imdb-content p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .show-num h2 {
+        font-size: 80px;
+        line-height: 84px;
+    }
+    .shows-watch-sec{
+        padding: 50px 0px;
+    }
+    .popular-movies {
+        padding: 50px 0px 0px;
+    }
+    .commitment-sec::before {
+        height: 350px;
+    }
 }
 
 @media (max-width:1280px) {
@@ -200,6 +248,26 @@
     }
     .one-place-img img {
         width: 820px;
+    }
+    #cssmenu>ul>li>a {
+        padding: 18px 10px;
+    }
+    .contact-sec {
+        padding: 100px 0px 100px;
+    }
+    .heading-white h2, .heading-white h3 {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .abt-img {
+        width: 600px;
+        height: 400px;
+    }
+    .commitment-sec::before {
+        height: 338px;
+    }
+    .sets-apart-sec {
+        margin-bottom: 30px;
     }
 }
 
@@ -221,7 +289,8 @@
         width: 700px;
     }
     .heading-white h2, .heading-white h3 {
-        font-size: 30px;
+        font-size: 26px;
+        line-height: 30px;
     }
     .heading-1 h2 {
         font-size: 30px;
@@ -249,7 +318,7 @@
         width: 70px;
         height: 70px;
     }
-    .play-btn a {
+    .play-btn button {
         font-size: 20px;
     }
     .unbeatable-sec {
@@ -307,7 +376,72 @@
         text-decoration: none;
         font-weight: 600;
         font-family: var(--text-font);
-        color: var(--white-color);
+        color: var(--blue-color);
+    }
+    .popular-movies{
+        padding: 50px 0px 0px;
+    }
+    .experience-sec {
+        padding: 50px 0px;
+    }
+    .experience-head .heading-white p {
+        font-size: 16px !important;
+        line-height: 20px !important;
+    }
+    .contact-sec {
+        margin-top: -8%;
+    }
+    .abt-img {
+        width: 450px;
+        height: 300px;
+    }
+    .commitment-sec::before {
+        height: 268px;
+    }
+    .abt-entertaiment {
+        margin: 0;
+        padding: 50px 0px 50px;
+    }
+    .about-sec {
+        padding: 50px 0px 50px;
+    }
+    .sets-apart-text h3 {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .sets-apart-text p {
+        font-size: 12px;
+    }
+    .pricing-page{
+        padding: 100px 0px 50px;
+    }
+    .offer-img {
+        position: absolute;
+        left: 22px;
+        top: -100px;
+        width: 204px;
+        height: 380px;
+    }
+    .offer-img-2 {
+        position: absolute;
+        right: 0px;
+        bottom: 4px;
+        width: 350px;
+        height: 200px;
+        z-index: 10;
+    }
+    .imdb-content p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .imdb-slide-movie img {
+        width: 150px;
+        height: 65px;
+    }
+    .imdb-img-text p {
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 5px;
     }
 }
 
@@ -383,6 +517,79 @@
         right: 0;
         transform: translate(-0%, -0%);
     }
+    .imdb-img-text p {
+        font-size: 16px;
+        line-height: 20px
+    }
+    .imdb-content p {
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .imdb-slide-movie img {
+        width: 200px;
+        height: 80px;
+    }
+    .imdb-img {
+        width: 70px;
+        height: 30px;
+        margin-bottom: 10px;
+    }
+    .imdb-slide-rate ul li a {
+        color: #ffde13;
+        font-size: 10px;
+    }
+    .sign-up-btn a {
+        padding: 8px 20px;
+    }
+    .imdb-sec {
+        margin-top: -9%;
+    }
+    .contact-sec {
+        margin-top: -10%;
+    }
+    .abt-img {
+        position: relative;
+    }
+    .about-sec::before{
+        display: none;
+    }
+    .abt-access {
+        padding: 50px 0px 0px;
+    }
+    .commitment-sec::before {
+        height: 100%;
+        width: 100%;
+        top: 0;
+    }
+    .commitment-sec {
+        padding: 50px 0px 0px;
+    }
+    .abt-entertaiment {
+        margin: 0;
+        padding: 50px 0px 50px;
+    }
+    .offer-div{
+        margin-bottom: 20px;
+    }
+    .offer-img-2 {
+        position: absolute;
+        right: 0px;
+        bottom: 4px;
+        width: 285px;
+        height: 168px;
+        z-index: 10;
+    }
+    .imdb-slide-text {
+        position: relative;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        width: 100%;
+        transform: translate(-0%, -0%);
+        text-align: right;
+        background: #000;
+        padding: 30px;
+    }
     
 }
 
@@ -394,9 +601,6 @@
     .one-place-div {
         width: 100%;
     }
-    /* .one-place-img img {
-        width: 500px;
-    } */
     .entertainment-sec {
         padding: 180px 0px 50px;
     }
@@ -411,7 +615,7 @@
         height: 30px;
         border: 2px solid #fff;
     }
-    .play-btn a {
+    .play-btn button {
         font-size: 10px;
     }
     .works-sec {
@@ -457,6 +661,59 @@
     .slider, .slide {
         height: 85vh;
     }
+    .popular-movies {
+        padding: 50px 0px 0px;
+    }
+
+    .inr-text {
+        margin-top: 20px;
+    }
+    .inr-text p {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .contact-sec {
+        margin-top: -22%;
+        padding: 50px 0px;
+    }
+    .contact-sec .sign-up-btn{
+        text-align: left;
+    }
+    .cont-right {
+        margin-top: 20px;
+    }
+    .abt-img {
+        width: 280px;
+        height: 170px;
+    }
+    .abt-entertaiment {
+        margin: 0;
+        padding: 50px 0px 50px !important;
+    }
+    .heading-1 h3 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .inner_banner_ontent h1 {
+        font-size: 34px;
+        line-height: 40px;
+    }
+    .offer-img {
+        position: absolute;
+        left: 22px;
+        top: -100px;
+        width: 160px;
+        height: 350px;
+    }
+    .abt-access {
+        padding: 0px 0px 0px;
+    }
+    .inner_banner_sec {
+        height: 80vh;
+    }
+    .container-fluid {
+        padding: 0px 5%;
+    }
 }
 
 @media (max-width:425px) {
@@ -479,12 +736,22 @@
     .pricing-div-box::before {
         height: 44%;
     }
+    .imdb-sec {
+        margin-top: -20%;
+    }
+    .contact-sec {
+        margin-top: -14%;
+    }
 }
 
 @media (max-width:375.98px) {
    .access-div {
         padding: 50px 0px 0px;
     }
+    .contact-sec {
+        margin-top: -20%;
+    }
+
 } 
 
 @media (max-width:325px) {

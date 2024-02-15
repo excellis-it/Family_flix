@@ -17,11 +17,11 @@ class CreateContactUsCmsTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('banner_img')->nullable();
-            $table->string('section_title')->nullable();
-            $table->longText('section_description')->nullable();
-            $table->text('visit_us')->nullable();
-            $table->string('call_us')->nullable();
-            $table->string('mail_us')->nullable();
+            $table->string('background_img')->nullable();
+            $table->string('main_title')->nullable();
+            $table->longText('short_title')->nullable();
+            $table->string('button_name')->nullable();
+            $table->string('map_link')->nullable();
             $table->timestamps();
         });
     }

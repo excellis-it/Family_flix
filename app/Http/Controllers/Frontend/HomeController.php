@@ -29,4 +29,52 @@ class HomeController extends Controller
         
         return view('frontend.home',compact('home_cms','plans','top_grids','ott_icons','entertainments'));
     }
+
+    public function contactUs()
+    {
+        return view('frontend.contact');
+    }
+
+    public function aboutUs()
+    {
+        return view('frontend.about');
+    }
+
+    public function movies()
+    {
+        return view('frontend.movies');
+    }
+
+    public function shows()
+    {
+        return view('frontend.shows');
+    }
+
+    public function kids()
+    {
+        return view('frontend.kids');
+    }
+
+    public function pricing()
+    {
+       
+        return view('frontend.pricing');
+    }
+
+    public function faqs()
+    {
+        return view('frontend.faqs');
+    }
+
+    public function termService()
+    {
+        return view('frontend.term-service');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('frontend.privacy-policy');
+    }
+
+
 }

@@ -508,6 +508,102 @@ $('.unbeatable-slider').slick({
     }
   ]
 });
+// imdb-slider
+$('.imdb-slider').slick({
+  autoplay: false,
+  autoplaySpeed: 2000,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true,
+  dots: true,
+  infinite: true,
+  prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+  nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+  responsive: [
+    {
+      breakpoint: 1367,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 1025,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 769,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false
+      }
+    }
+  ]
+});
+
+
+// shows-slider
+$('.shows-slider').slick({
+  autoplay: true,
+  autoplaySpeed: 1000,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  lazyLoad: 'progressive',
+  arrows: false,
+  dots: false,
+  infinite: true,
+  prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+  nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
+  responsive: [
+    {
+      breakpoint: 1367,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 1025,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 769,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false
+      }
+    }
+  ]
+});
+
 
 $('.slider-for').slick({
   slidesToShow: 2,

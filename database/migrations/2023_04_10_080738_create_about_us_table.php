@@ -17,17 +17,24 @@ class CreateAboutUsTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('banner_img')->nullable();
-
-            $table->string('section_1_name')->nullable();
-            $table->text('section_1_title')->nullable();
-            $table->longText('section_1_description')->nullable();
-            $table->string('section_1_img')->nullable();
-           
-            $table->string('section_2_title')->nullable();
-            $table->text('section_2_name')->nullable();
-            $table->longText('section_2_description')->nullable();
-            $table->string('section_2_img')->nullable();
-
+            $table->text('section1_title')->nullable();
+            $table->longText('section1_description')->nullable();
+            $table->string('section1_img')->nullable();
+            $table->string('section2_img1')->nullable();
+            $table->text('section2_title1')->nullable();
+            $table->longText('section2_description1')->nullable();
+            $table->string('section2_img2')->nullable();
+            $table->string('section3_title')->nullable();
+            $table->string('section3_back_img')->nullable();
+            $table->string('section3_title1')->nullable();
+            $table->string('section3_description1')->nullable();
+            $table->string('section3_image1')->nullable();
+            $table->string('section3_title2')->nullable();
+            $table->string('section3_description2')->nullable();
+            $table->string('section3_image2')->nullable();
+            $table->string('section3_title3')->nullable();
+            $table->string('section3_description3')->nullable();
+            $table->string('section3_image3')->nullable();
             $table->timestamps();
         });
     }

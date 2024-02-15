@@ -23,6 +23,15 @@ class DatabaseSeeder extends Seeder
             topGridSeeeder::class,
             ottIconseeder::class,
             entertainmentCmsSeeder::class,
+            contactCmsSeeder::class,
+            contactDetailsCms::class,
+            socialMediaCms::class,
+            planCmsSeeder::class,
+            showCmsSeeder::class,
+            movieCmsSeeder::class,
+            kidsCmsSeeder::class,
+            EntertainmentBannerSeeder::class,
+            subscriptionCmsSeeder::class,
         ]);
     }
 }

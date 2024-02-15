@@ -323,20 +323,7 @@
             </div>
         </div>
     </section>
-    <section class="subscribe-sec">
-        <div class="container">
-            <div class="subscribe-sec-wrap">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="subscribe-head">
-                            <h2>Subscribe For Updates.</h2>
-                        </div>
-                        <div class="subscribe-line"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     {{-- modal open --}}
     <div class="modal modal-1 fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
