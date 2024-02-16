@@ -17,22 +17,22 @@ class contactDetailsCms extends Seeder
         //
         $details = [
             [
-                'icon' => 'contact/cont-icon1.png',
+                'icon' => 'fa-solid fa-phone',
                 'title' => 'Call Us',
                 'details' => '+ 18453297101',
             ],
             [
-                'icon' => 'contact/cont-icon2.png',
+                'icon' => 'fa-solid fa-envelope',
                 'title' => 'Email Us',
                 'details' => 'support@thefamilyflix.com', 
             ],
             [
-                'icon' => 'contact/cont-icon3.png',
+                'icon' => 'fa-solid fa-location-dot',
                 'title' => 'Location',
                 'details' => 'Orlando Florida', 
             ],
             [
-                'icon' => 'contact/cont-icon4.png',
+                'icon' => 'fa-regular fa-clock',
                 'title' => 'Office Hours (Closed Saturday)',
                 'details' => '9am-11pm', 
             ],

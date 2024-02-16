@@ -22,30 +22,30 @@
                     <div class="right_btm">
                       <div id="cssmenu">
                         <ul>
-                          <li class="active">
+                          <li class="{{ request()->routeIs('home') ? 'active' : '' }}">
                             <a href="{{ route('home') }}"> Home </a>
                           </li>
-                          <li>
+                          <li class="{{ request()->routeIs('shows') ? 'active' : '' }}">
                             <a href="{{ route('shows') }}">Shows</a>
                             <!-- <ul>
                             <li class="sub-act"><a href="#">About Us </a></li>
                             <li><a href="#">About Us</a></li>
                           </ul> -->
                           </li>
-                          <li>
+                          <li class="{{ request()->routeIs('movies') ? 'active' : '' }}">
                             <a href="{{ route('movies') }}">Movies</a>
                           </li>
-                          <li>
+                          <li class="{{ request()->routeIs('kids') ? 'active' : '' }}">
                             <a href="{{ route('kids') }}">Kids</a>
                           </li>
-                          <li>
+                          <li class="{{ request()->routeIs('pricing') ? 'active' : '' }}">
                             <a href="{{ route('pricing') }}">Pricing</a>
                           </li>
-                          <li>
+                          <li class="{{ request()->routeIs('about') ? 'active' : '' }}">
                             <a href="{{ route('about') }}">About Us</a>
                           </li>
-                          <li>
-                            <a href="{{ route('contact-us') }}"> contact</a>
+                          <li class="{{ request()->routeIs('contact-us') ? 'active' : '' }}">
+                            <a href="{{ route('contact-us') }}"> Contact</a>
                           </li>
                         </ul>
                       </div>

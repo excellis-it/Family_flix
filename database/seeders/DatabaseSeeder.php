@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             kidsCmsSeeder::class,
             EntertainmentBannerSeeder::class,
             subscriptionCmsSeeder::class,
+            aboutCmsSeeder::class,
         ]);
     }
 }

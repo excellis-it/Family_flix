@@ -54,15 +54,16 @@
                         <span class="hide-menu">Home Cms</span>
                     </a>
                 </li>
-                {{-- <li class="sidebar-item {{ Request::is('admin/cms*') ? 'active' : ' ' }}">
-                    <a class="sidebar-link" href="{{ route('entertainment.cms') }}" aria-expanded="false">
+                
+
+                <li class="sidebar-item {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('contact-us.list') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-tag"></i>
                         </span>
-                        <span class="hide-menu">Entertainment Cms</span>
+                        <span class="hide-menu">Contact Us</span>
                     </a>
-                    
-                </li> --}}
+                </li>
             </ul>
         </nav>
         <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">

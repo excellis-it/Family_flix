@@ -19,6 +19,7 @@ class CreateShowCmsTable extends Migration
             $table->string('heading')->nullable();
             $table->longText('small_description')->nullable();
             $table->string('top_10_show_background')->nullable();
+            $table->string('popular_show_background')->nullable();
             $table->timestamps();
         });
     }

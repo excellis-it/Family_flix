@@ -19,6 +19,7 @@ class CreateMovieCmsTable extends Migration
             $table->longText('small_description')->nullable();
             $table->string('banner_img')->nullable();
             $table->string('top10_show_back_img')->nullable();
+            $table->string('popular_movie_background')->nullable();
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MenuManagementController;
 use App\Http\Controllers\Admin\ContentManagementController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\CmsController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -44,6 +45,8 @@ Route::get('/shows', [HomeController::class, 'shows'])->name('shows');
 Route::get('/kids', [HomeController::class, 'kids'])->name('kids');
 Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
+Route::post('/submit-Contact-us',[HomeController::class, 'contactSubmit'])->name('contact-us.submit');
+Route::post('/submit-subscription',[HomeController::class, 'subscriptionSubmit'])->name('subscribe.submit');
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/term-service', [HomeController::class, 'termService'])->name('term-service');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
@@ -108,6 +111,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/deleteOttIcon/{id}', [CmsController::class, 'ottIconDelete'])->name('delete.ott-icon');
             Route::get('/deleteEntertainmentImage/{id}', [CmsController::class, 'entImageDelete'])->name('delete.entertainment-image');
         });
+
+        Route::get('/contact-us',[ContactUsController::class, 'contactList'])->name('contact-us.list');
         
     });
 });

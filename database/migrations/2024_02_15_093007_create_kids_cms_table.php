@@ -19,6 +19,7 @@ class CreateKidsCmsTable extends Migration
             $table->longText('small_description')->nullable();
             $table->string('banner_img')->nullable();
             $table->string('top_10_show_background')->nullable();
+            $table->string('popular_kids_background')->nullable();
             $table->timestamps();
         });
     }

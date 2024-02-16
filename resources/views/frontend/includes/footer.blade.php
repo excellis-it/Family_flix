@@ -18,25 +18,25 @@
                 <div class="ftr-link ftr-link-1">
                   <ul>
                     <li class="">
-                      <a href="index.html"> Home </a>
+                      <a href="{{ route('home') }}"> Home </a>
                     </li>
                     <li>
-                      <a href="show.html">Shows</a>
+                      <a href="{{ route('shows') }}">Shows</a>
                     </li>
                     <li>
-                      <a href="movies.html">Movies</a>
+                      <a href="{{ route('movies') }}">Movies</a>
                     </li>
                     <li>
-                      <a href="kids.html">Kids</a>
+                      <a href="{{ route('kids') }}">Kids</a>
                     </li>
                     <li>
-                      <a href="pricing.html">Pricing</a>
+                      <a href="{{ route('pricing') }}">Pricing</a>
                     </li>
                     <li>
-                      <a href="about.html">About Us</a>
+                      <a href="{{ route('about') }}">About Us</a>
                     </li>
                     <li>
-                      <a href="contact.html"> contact</a>
+                      <a href="{{ route('contact-us') }}"> contact</a>
                     </li>
                   </ul>
                 </div>
@@ -47,8 +47,8 @@
                 <h4>Customer Support</h4>
                 <div class="ftr-link ftr-link-1">
                   <ul>
-                    <li><a href="">FAQ</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="{{ route('contact-us') }}">Contact</a></li>
                     <li><a href="#">Terms of service</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                   </ul>

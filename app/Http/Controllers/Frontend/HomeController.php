@@ -9,9 +9,22 @@ use App\Models\HomeCms;
 use App\Models\Plan;
 use App\Models\TopGrid;
 use App\Models\OttService;
+use App\Models\ShowCms;
+use App\Models\MovieCms;
 use App\Models\EntertainmentCms;
+use App\Models\EntertainmentBanner;
+use App\Models\SubscribeCms;
+use App\Models\KidsCms;
+use App\Models\PlanCms;
+use App\Models\AboutUs;
+use App\Models\ContactUsCms;
+use App\Models\ContactDetails;
+use App\Models\SocialMedia;
+use App\Models\ContactUs;
+use App\Models\SubscriptionUs;
 use Auth;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\View;
 
@@ -22,58 +35,104 @@ class HomeController extends Controller
     public function home()
     {
         $home_cms = HomeCms::first();
-        $plans = Plan::orderBy('plan_order','asc')->with('Specification')->get();
         $top_grids = TopGrid::orderBy('id','asc')->get();
         $ott_icons = OttService::orderBy('id','asc')->get();
         $entertainments = EntertainmentCms::orderBy('id','asc')->get();
+        $plan_list = Plan::orderBy('id','desc')->with('Specification')->get();
         
-        return view('frontend.home',compact('home_cms','plans','top_grids','ott_icons','entertainments'));
+        return view('frontend.pages.home',compact('home_cms','plan_list','top_grids','ott_icons','entertainments'));
     }
 
-    public function contactUs()
-    {
-        return view('frontend.contact');
-    }
 
     public function aboutUs()
     {
-        return view('frontend.about');
+        $about_cms = AboutUs::first();
+        $top_grids = TopGrid::orderBy('id','asc')->get();
+        return view('frontend.pages.about',compact('about_cms','top_grids'));
     }
 
     public function movies()
     {
-        return view('frontend.movies');
+        $movie_cms = MovieCms::first();
+        $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Movies')->get();
+        $subscriptions = SubscribeCms::first();
+        return view('frontend.pages.movies',compact('movie_cms','entertainments_banners','subscriptions'));
     }
 
     public function shows()
     {
-        return view('frontend.shows');
+        $show_cms = ShowCms::first();
+        $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Shows')->get();
+        $subscriptions = SubscribeCms::first();
+        return view('frontend.pages.shows',compact('show_cms','entertainments_banners','subscriptions'));
     }
 
     public function kids()
     {
-        return view('frontend.kids');
+        $kid_cms = KidsCms::first();
+        $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Kids')->get();
+        $subscriptions = SubscribeCms::first();
+        return view('frontend.pages.kids',compact('entertainments_banners','subscriptions','kid_cms'));
     }
 
     public function pricing()
     {
-       
-        return view('frontend.pricing');
+        $plan_cms = PlanCms::first();
+        $plan_list = Plan::orderBy('id','desc')->with('Specification')->get();
+        return view('frontend.pages.pricing',compact('plan_cms','plan_list'));
+    }
+
+    public function contactUs()
+    {
+        $contact_cms = ContactUsCms::first();
+        $contact_details = ContactDetails::get();
+        $social_icons = SocialMedia::orderBy('id','desc')->get();
+        return view('frontend.pages.contact',compact('contact_cms','contact_details','social_icons'));
+    }
+
+    public function contactSubmit(Request $request)
+    {
+        $contact_submit = new ContactUs();
+        $contact_submit->user_name = $request->user_name;
+        $contact_submit->user_email = $request->user_email;
+        $contact_submit->user_phone = $request->user_phone;
+        $contact_submit->message = $request->user_message;
+        $contact_submit->save();
+
+        return back()->with('message', 'Thank you for contacting us.');
+        
+    }
+
+    public function subscriptionSubmit(Request $request)
+    {
+        
+
+        $check_mail = SubscriptionUs::where('email',$request->email)->count();
+        if($check_mail > 0)
+        {
+            return back()->with('error','This email address is already subscribed.');
+        }
+        $subscription_submit = new SubscriptionUs();
+        $subscription_submit->email = $request->user_email;
+        $subscription_submit->save();
+
+        return back()->with('message','Thank you for subscribing us');
+
     }
 
     public function faqs()
     {
-        return view('frontend.faqs');
+        return view('frontend.pages.faqs');
     }
 
     public function termService()
     {
-        return view('frontend.term-service');
+        return view('frontend.pages.term-service');
     }
 
     public function privacyPolicy()
     {
-        return view('frontend.privacy-policy');
+        return view('frontend.pages.privacy-policy');
     }
 
 

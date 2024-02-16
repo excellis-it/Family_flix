@@ -20,6 +20,7 @@ class showCmsSeeder extends Seeder
         $showCms->small_description = 'Dive into captivating narratives and thrilling adventures with our curated selection of TV shows at The Family Flix – where every episode is a new journey waiting to unfold!';
         $showCms->banner_img = 'show/show-bnr.png';
         $showCms->top_10_show_background = "show/top10watch-bg.png";
+        $showCms->popular_show_background = "show/popular-show-bg.png";
         $showCms->save();
     }
 }

@@ -20,7 +20,6 @@ class CreateAboutUsTable extends Migration
             $table->text('section1_title')->nullable();
             $table->longText('section1_description')->nullable();
             $table->string('section1_img')->nullable();
-            $table->string('section2_img1')->nullable();
             $table->text('section2_title1')->nullable();
             $table->longText('section2_description1')->nullable();
             $table->string('section2_img2')->nullable();
