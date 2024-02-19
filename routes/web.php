@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\ContentManagementController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\GeneralCmsController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -67,7 +69,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/login-check', [AdminController::class, 'loginCheck'])->name('admin.login.check');
     Route::group(['middleware' => 'admin'], function () {
 
-        Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
         Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('admin.profile.update');
         Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout'); 
@@ -101,6 +103,25 @@ Route::group(['prefix' => 'admin'], function () {
             //home cms
             Route::get('/home-cms', [CmsController::class, 'homeCms'])->name('home.cms');
             Route::post('/homeCms/update', [CmsController::class, 'homeCmsUpdate'])->name('home.cms.update');
+            //plan cms
+            Route::get('/plan-cms', [GeneralCmsController::class, 'planCms'])->name('plan.cms');
+            Route::post('/planCms/update',[GeneralCmsController::class, 'planCmsUpdate'])->name('plan-cms.update');
+            //kids cms
+            Route::get('/kid-cms', [GeneralCmsController::class, 'kidCms'])->name('kid.cms');
+            Route::post('/kidCms/update',[GeneralCmsController::class, 'kidCmsUpdate'])->name('kid-cms.update');
+            //show cms
+            Route::get('/show-cms', [GeneralCmsController::class, 'showCms'])->name('show.cms');
+            Route::post('/showCms/update',[GeneralCmsController::class, 'showCmsUpdate'])->name('show-cms.update');
+            //movie cms
+            Route::get('/movie-cms', [GeneralCmsController::class, 'movieCms'])->name('movie.cms');
+            Route::post('/movieCms/update',[GeneralCmsController::class, 'movieCmsUpdate'])->name('movie-cms.update');
+            //movie cms
+            Route::get('/movie-cms', [GeneralCmsController::class, 'movieCms'])->name('movie.cms');
+            Route::post('/movieCms/update',[GeneralCmsController::class, 'movieCmsUpdate'])->name('movie-cms.update');
+
+            //contact-cms
+            Route::get('/contact-cms',[GeneralCmsController::class, 'contactUsCms'])->name('contact-us.cms');
+            Route::post('/contactCms/update',[GeneralCmsController::class, 'contactUsCmsUpdate'])->name('contact-us.update');
 
             //entertainment cms
             Route::get('/entertainment-cms', [CmsController::class, 'entertainmentCms'])->name('entertainment.cms');
@@ -112,7 +133,12 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/deleteEntertainmentImage/{id}', [CmsController::class, 'entImageDelete'])->name('delete.entertainment-image');
         });
 
+        //contact us list
         Route::get('/contact-us',[ContactUsController::class, 'contactList'])->name('contact-us.list');
+        Route::get('/contact-us-list',[ContactUsController::class, 'contactAjaxList'])->name('contact-us.ajax.list');
+        //subscriptions list
+        Route::get('/subscription',[SubscriptionController::class, 'subscriptionList'])->name('subscription.list');
+        Route::get('/subscription-list',[SubscriptionController::class, 'subscriptionAjaxList'])->name('subscription.ajax.list');
         
     });
 });

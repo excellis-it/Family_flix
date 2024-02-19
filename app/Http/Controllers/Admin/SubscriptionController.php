@@ -4,19 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ContactUs;
+use App\Models\SubscriptionUs;
 
-class ContactUsController extends Controller
+class SubscriptionController extends Controller
 {
     //
 
-    public function contactList()
-    { 
-        return view('admin.contact.list');
+    public function subscriptionList()
+    {
+        return view('admin.subscribers.list');
     }
 
-    public function contactAjaxList(Request $request)
-    {  
+    public function subscriptionAjaxList(Request $request)
+    {
+
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length"); // Rows display per page
@@ -32,12 +33,12 @@ class ContactUsController extends Controller
         $searchValue = $search_arr['value']; // Search value
 
         // Total records
-        $totalRecords = ContactUs::orderBy('id','desc')->count();
-        $totalRecordswithFilter = ContactUs::orderBy('id','desc')->count();
+        $totalRecords = SubscriptionUs::orderBy('id','desc')->count();
+        $totalRecordswithFilter = SubscriptionUs::orderBy('id','desc')->count();
 
         // Fetch records
-        $records = ContactUs::query();
-        $columns = ['user_name','user_email','user_phone','message'];
+        $records = SubscriptionUs::query();
+        $columns = ['email'];
         foreach($columns as $column){
             $records->where($column, 'like', '%' . $searchValue . '%');
         }
@@ -45,24 +46,14 @@ class ContactUsController extends Controller
         $records->skip($start);
         $records->take($rowperpage);
         $records = $records->get();
-
         $data_arr = array(); 
-
         foreach($records as $record){
-            $user_name = $record->user_name;
-            $user_email = $record->user_email;
-            $user_phone = $record->user_phone;
-            $message = $record->message;
-
+            $email = $record->email;
             $id = $record->id;
             
-           $data_arr[] = array(
-               "user_name" => $user_name,
-               "user_email" => $user_email,
-               "user_phone" => $user_phone,
-               "message" => $message
-               
-           );
+            $data_arr[] = array(
+               "email" => $email,
+            );
         }                                                                                                                                                   
                                                                                                                                                     
         $response = array(
@@ -72,10 +63,6 @@ class ContactUsController extends Controller
            "aaData" => $data_arr
         );
 
-        
-
         return response()->json($response); 
     }
-
-
 }

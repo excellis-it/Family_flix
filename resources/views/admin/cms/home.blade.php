@@ -12,10 +12,9 @@
                 <div class="">
                     <h3>Home Cms</h3>
                     <ul class="breadcome-menu mb-0">
-                        <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod"><a href="{{ route('plan.index') }}">Cms</a></span><span
-                                class="bread-slash">/</span></li>
-                        <li><span class="bread-blod">Home</span></li>
+                        <li><a href="{{ route('admin.dashboard') }}">Dashboard</a> <span class="bread-slash">/</span></li>
+                       
+                        <li><a href=""><span class="bread-blod">Home</span></a></li>
                     </ul>
                 </div>
             </div>

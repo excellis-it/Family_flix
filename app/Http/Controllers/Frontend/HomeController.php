@@ -9,12 +9,10 @@ use App\Models\HomeCms;
 use App\Models\Plan;
 use App\Models\TopGrid;
 use App\Models\OttService;
-use App\Models\ShowCms;
-use App\Models\MovieCms;
+use App\Models\ContentTypeCms;
 use App\Models\EntertainmentCms;
 use App\Models\EntertainmentBanner;
 use App\Models\SubscribeCms;
-use App\Models\KidsCms;
 use App\Models\PlanCms;
 use App\Models\AboutUs;
 use App\Models\ContactUsCms;
@@ -53,7 +51,7 @@ class HomeController extends Controller
 
     public function movies()
     {
-        $movie_cms = MovieCms::first();
+        $movie_cms = ContentTypeCms::where('type','movie')->first();
         $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Movies')->get();
         $subscriptions = SubscribeCms::first();
         return view('frontend.pages.movies',compact('movie_cms','entertainments_banners','subscriptions'));
@@ -61,7 +59,7 @@ class HomeController extends Controller
 
     public function shows()
     {
-        $show_cms = ShowCms::first();
+        $show_cms = ContentTypeCms::where('type','show')->first();
         $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Shows')->get();
         $subscriptions = SubscribeCms::first();
         return view('frontend.pages.shows',compact('show_cms','entertainments_banners','subscriptions'));
@@ -69,7 +67,7 @@ class HomeController extends Controller
 
     public function kids()
     {
-        $kid_cms = KidsCms::first();
+        $kid_cms = ContentTypeCms::where('type','kid')->first();
         $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Kids')->get();
         $subscriptions = SubscribeCms::first();
         return view('frontend.pages.kids',compact('entertainments_banners','subscriptions','kid_cms'));
@@ -95,7 +93,7 @@ class HomeController extends Controller
         $contact_submit = new ContactUs();
         $contact_submit->user_name = $request->user_name;
         $contact_submit->user_email = $request->user_email;
-        $contact_submit->user_phone = $request->user_phone;
+        $contact_submit->user_phone = $request->user_number;
         $contact_submit->message = $request->user_message;
         $contact_submit->save();
 

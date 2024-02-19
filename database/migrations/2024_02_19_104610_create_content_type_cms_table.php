@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKidsCmsTable extends Migration
+class CreateContentTypeCmsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateKidsCmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('kids_cms', function (Blueprint $table) {
+        Schema::create('content_type_cms', function (Blueprint $table) {
             $table->id();
+            $table->string('banner_img')->nullable();
             $table->string('heading')->nullable();
             $table->longText('small_description')->nullable();
-            $table->string('banner_img')->nullable();
             $table->string('top_10_show_background')->nullable();
-            $table->string('popular_kids_background')->nullable();
+            $table->string('popular_show_background')->nullable();
+            $table->enum('type', ['kid', 'show','movie'])->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateKidsCmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kids_cms');
+        Schema::dropIfExists('content_type_cms');
     }
 }

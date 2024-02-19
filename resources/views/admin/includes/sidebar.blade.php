@@ -11,11 +11,125 @@
             </div>
         </div>
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+
+        <nav class="sidebar sidebar-1 scroll-sidebar card mb-4">
+            <ul class="nav flex-column" id="nav_accordion">
+                <li class="nav-item has-submenu {{ Request::is('admin/dashboard*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}"> <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Dashboard<span class="arrow-down"></span></a>
+                </li>
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Menu management
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/menu-management*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/menu-management*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('menu-management.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : ' ' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Plan management
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/plan*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/plan*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('plan.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
+                    <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Plan management
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/plan*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/plan*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('plan.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li> --}}
+
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Cms
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/cms*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/home-cms*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('home.cms') }}">Home</a>
+                        </li>
+                        <li class="{{ Request::is('admin/cms/plan-cms*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('plan.cms') }}">Plan</a>
+                        </li>
+                        <li class="{{ Request::is('admin/cms/kid-cms*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('kid.cms') }}">Kids</a>
+                        </li>
+                        <li class="{{ Request::is('admin/cms/show-cms*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('show.cms') }}">Show</a>
+                        </li>
+                        <li class="{{ Request::is('admin/cms/movie-cms*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('movie.cms') }}">Movie</a>
+                        </li>
+                       
+                        <li class="{{ Request::is('admin/cms/contact-cms*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('contact-us.cms') }}">ContactUs</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Contact Us
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/contact-us*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/contact-us*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('contact-us.list') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Subscription Us
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/subscription*') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/subscription*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('subscription.list') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </nav>
+        
+
+
+
+
+        {{-- <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
             <ul id="sidebarnav">
-                <!-- =================== -->
-                <!-- Dashboard -->
-                <!-- =================== -->
+                
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                         <span>
@@ -25,10 +139,8 @@
                     </a>
                 </li>
 
-                
-                
                 <li class="sidebar-item {{ Request::is('admin/menu-management*') ? 'active' : '' }}">
-                    {{-- --}}
+                  
                     <a class="sidebar-link" href="{{ route('menu-management.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-shopping-cart"></i>
@@ -54,6 +166,39 @@
                         <span class="hide-menu">Home Cms</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item {{ Request::is('admin/cms/plan-cms*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('plan.cms') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Plan Cms</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('admin/cms/kid-cms*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('kid.cms') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Kid Cms</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('admin/cms/show-cms*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('show.cms') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Show Cms</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('admin/cms/movie-cms*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('movie.cms') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Movie Cms</span>
+                    </a>
+                </li>
                 
 
                 <li class="sidebar-item {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}">
@@ -64,8 +209,19 @@
                         <span class="hide-menu">Contact Us</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item {{ Request::is('admin/subscription*') ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('subscription.list') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-tag"></i>
+                        </span>
+                        <span class="hide-menu">Subscription</span>
+                    </a>
+                </li>
+
+                
             </ul>
-        </nav>
+        </nav> --}}
         <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">
             <div class="hstack gap-3">
                 <div class="john-img">
