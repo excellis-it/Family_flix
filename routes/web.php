@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\GeneralCmsController;
+use App\Http\Controllers\Admin\EntertainmentBannerController;
+use App\Http\Controllers\Admin\TopGridController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -82,7 +84,22 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resources([
             'menu-management' => MenuManagementController::class,
             'plan' => PlanController::class,
+            'entertainment-banner' => EntertainmentBannerController::class,
+            'top-grid' => TopGridController::class,
         ]);
+
+
+
+        Route::get('/entertainment-banner/delete/{id}',[EntertainmentBannerController::class, 'deleteEntertainmentBanner'])->name('delete.entertainment-banner');
+        Route::post('/entertainment-banner/update',[EntertainmentBannerController::class, 'updateEntertainmentBanner'])->name('update.entertainment-banner');
+        //entertainment banner ajax list
+        Route::get('/entertainment-banner-list',[EntertainmentBannerController::class, 'entertainmentBannerAjaxList'])->name('entertainment-banner.ajax.list');
+
+        //top grid ajax list
+        Route::get('/top-grid-list',[TopGridController::class, 'topGridAjaxList'])->name('top-grid.ajax.list');
+        Route::get('/top-grid/delete/{id}',[TopGridController::class, 'deleteTopGrid'])->name('delete.top-grid');
+        Route::post('/top-grid/update',[TopGridController::class, 'updateTopGrid'])->name('update.top-grid');
+       
 
         Route::prefix('content-management')->group(function () {
             Route::get('/privacy-policy', [ContentManagementController::class, 'privacyPolicy'])->name('content-management.privacy-policy');
@@ -115,17 +132,31 @@ Route::group(['prefix' => 'admin'], function () {
             //movie cms
             Route::get('/movie-cms', [GeneralCmsController::class, 'movieCms'])->name('movie.cms');
             Route::post('/movieCms/update',[GeneralCmsController::class, 'movieCmsUpdate'])->name('movie-cms.update');
-            //movie cms
-            Route::get('/movie-cms', [GeneralCmsController::class, 'movieCms'])->name('movie.cms');
-            Route::post('/movieCms/update',[GeneralCmsController::class, 'movieCmsUpdate'])->name('movie-cms.update');
+
 
             //contact-cms
-            Route::get('/contact-cms',[GeneralCmsController::class, 'contactUsCms'])->name('contact-us.cms');
-            Route::post('/contactCms/update',[GeneralCmsController::class, 'contactUsCmsUpdate'])->name('contact-us.update');
+            Route::get('/contact-cms',[GeneralCmsController::class, 'contactCms'])->name('contact.cms');
+            Route::post('/contactCms/update',[GeneralCmsController::class, 'contactCmsUpdate'])->name('update.contact-cms');
 
             //entertainment cms
             Route::get('/entertainment-cms', [CmsController::class, 'entertainmentCms'])->name('entertainment.cms');
             Route::post('/entertainmentCms/update', [CmsController::class, 'entertainmentCmsUpdate'])->name('entertainment.cms.update');
+
+            //about us cms
+            Route::get('/about-cms', [CmsController::class, 'aboutCms'])->name('about.cms');
+            Route::post('/aboutCms/update', [CmsController::class, 'aboutCmsUpdate'])->name('update.about-cms');
+
+            //follow us cms
+            Route::get('/follow-us', [CmsController::class, 'followCms'])->name('follow.cms');
+            Route::post('/followCms/update', [CmsController::class, 'followCmsUpdate'])->name('update.follow-cms');
+
+            //subscription cms
+            Route::get('/subscription-us',[CmsController::class, 'subcriptionCms'])->name('subscription-us.cms');
+            Route::post('/subscriptionCms/update', [CmsController::class, 'subscriptionCmsUpdate'])->name('update.subscription-us');
+
+            //contact details cms
+            Route::get('/contact-details',[CmsController::class, 'contactDetailsCms'])->name('contact-details.cms');
+            Route::post('/contactCms/update',[CmsController::class, 'contactDetailsCmsUpdate'])->name('update.contact-details.cms');
 
             //delete grid image
             Route::get('/deleteGridImage/{id}', [CmsController::class, 'gridImageDelete'])->name('delete.grid-image');

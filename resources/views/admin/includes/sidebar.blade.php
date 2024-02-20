@@ -62,6 +62,34 @@
                 </li> --}}
 
                 <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/entertainment-banner*') ? 'active' : ' ' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Entertainment banner
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/entertainment-banner*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/entertainment-banner*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('entertainment-banner.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/top-grid*') ? 'active' : ' ' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Top Grid
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/top-grid*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/top-grid*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('top-grid.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#"> 
                         <span>
                             <i class="ti ti-aperture"></i>
@@ -72,6 +100,7 @@
                         <li class="{{ Request::is('admin/home-cms*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home.cms') }}">Home</a>
                         </li>
+                        
                         <li class="{{ Request::is('admin/cms/plan-cms*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('plan.cms') }}">Plan</a>
                         </li>
@@ -84,10 +113,25 @@
                         <li class="{{ Request::is('admin/cms/movie-cms*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('movie.cms') }}">Movie</a>
                         </li>
+                        <li class="{{ Request::is('admin/cms/about.cms*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('about.cms') }}">About</a>
+                        </li>
                        
                         <li class="{{ Request::is('admin/cms/contact-cms*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('contact-us.cms') }}">ContactUs</a>
+                            <a class="nav-link" href="{{ route('contact.cms') }}">ContactUs</a>
                         </li>
+
+                        <li class="{{ Request::is('admin/cms/contact-details*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('contact-details.cms') }}">Contact Details</a>
+                        </li>
+                        <li class="{{ Request::is('admin/cms/follow-us*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('follow.cms') }}">Follow us</a>
+                        </li>
+                        <li class="{{ Request::is('admin/cms/subscription-us*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('subscription-us.cms') }}">Subscription Us</a>
+                        </li>
+
+
                         
                     </ul>
                 </li>

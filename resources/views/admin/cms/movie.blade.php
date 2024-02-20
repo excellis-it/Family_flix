@@ -51,6 +51,8 @@
                                     @endif
                                 </div>
 
+                                
+
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Banner Heading<span style="color: red;">*</span></label>
                                     <input type="text" name="heading" value="{{ $movie_cms->heading }}"

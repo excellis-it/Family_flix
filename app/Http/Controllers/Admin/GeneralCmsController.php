@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PlanCms;
 use App\Models\ContactUsCms;
 use App\Models\ContentTypeCms;
+use App\Models\TopGrid;
 
 class GeneralCmsController extends Controller
 {
@@ -283,13 +284,13 @@ class GeneralCmsController extends Controller
         return back()->with('message','Movie cms updated successfully');
     }
 
-    public function contactUsCms()
+    public function contactCms()
     {
         $contact_cms = ContactUsCms::first();
         return view('admin.cms.contact-us',compact('contact_cms'));
     }
 
-    public function contactUsCmsUpdate(Request $request)
+    public function contactCmsUpdate(Request $request)
     {
         $request->validate([
             'title' => 'required',
@@ -334,6 +335,5 @@ class GeneralCmsController extends Controller
 
         return back()->with('message','Contact cms updated successfully');
     }
-
     
 }

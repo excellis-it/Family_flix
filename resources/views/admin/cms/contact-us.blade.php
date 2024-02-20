@@ -23,7 +23,7 @@
             <div class="col-lg-12">
                 <div class="card w-100">
                     <div class="card-body">
-                        <form action="{{ route('contact-us.update') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('update.contact-cms') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <input type="hidden" value="{{ $contact_cms->id }}" name="id">

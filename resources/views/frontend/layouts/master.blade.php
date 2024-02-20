@@ -43,6 +43,10 @@
 <body>
     <main>
 
+        @php
+        $subscribe_cms = App\Models\SubscribeCms::first();  
+        @endphp
+
         @include('frontend.includes.header')
         @yield('content')
 
@@ -52,7 +56,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="subscribe-head">
-                                <h2>Subscribe For Updates.</h2>
+                                <h2>{{ $subscribe_cms->subscribe_title }}</h2>
                             </div>
                             <form action="{{ route('subscribe.submit') }}" method="post" id="subscription-form">
                                 @csrf
@@ -60,13 +64,13 @@
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="subscribe-form-wrap">
-                                                <input type="text" class="form-control" id="" name="user_email"
-                                                    placeholder="Enter Your Email">
+                                                <input type="text" class="form-control"  name="user_email"
+                                                    placeholder="{{ $subscribe_cms->subscription_placeholder }}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="sign-up-btn subscribe-btn mt-4">
-                                        <button type="submit">Subscribe</button>
+                                        <button type="submit">{{ $subscribe_cms->button_name }}</button>
                                     </div>
                                 </div>
                             </form>
