@@ -1,6 +1,13 @@
+
+@php
+$contact_details = App\Models\ContactDetails::get(); 
+$footer_cms =  App\Models\FooterCms::first(); 
+@endphp
+
+
 <footer class="ftr-sec">
     <div class="ftr-bg">
-      <img src="{{ asset('frontend_assets/images/ftr-bg.png')}}" alt="" />
+      <img src="{{ Storage::url($footer_cms->footer_background)}}" alt="" />
     </div>
     <div class="ftr-top">
       <div class="container">
@@ -8,7 +15,7 @@
           <div class="row justify-content-between">
             <div class="col-xl-3 col-md-6 col-12">
               <div class="footer-logo">
-                <a href=""><img src="{{ asset('frontend_assets/images/ftr.png')}}" alt="" /></a>
+                <a href=""><img src="{{ Storage::url($footer_cms->footer_logo)}}" alt="" /></a>
               </div>
             </div>
 
@@ -47,10 +54,10 @@
                 <h4>Customer Support</h4>
                 <div class="ftr-link ftr-link-1">
                   <ul>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="{{ route('faqs') }}">FAQ</a></li>
                     <li><a href="{{ route('contact-us') }}">Contact</a></li>
-                    <li><a href="#">Terms of service</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="{{ route('term-service') }}">Terms of service</a></li>
+                    <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
                   </ul>
                 </div>
               </div>
@@ -58,49 +65,24 @@
             <div class="col-xl-3 col-md-6 col-12">
               <div class="find-us">
                 <h4>Contact Us</h4>
+                @foreach($contact_details as $contact_detail)
                 <div class="add d-flex">
                   <div class="add-icon">
-                    <span><i class="fa-solid fa-phone"></i></span>
+                    <span><i class="{{ $contact_detail->icon }}"></i></span>
                   </div>
                   <div class="add-text">
-                    <h4>Call Us</h4>
-                    <a href="">+18453297101</a>
+                    <h4>{{ $contact_detail->title }}</h4>
+                    <a href="">{{ $contact_detail->details }}</a>
                   </div>
                 </div>
-                <div class="add d-flex">
-                  <div class="add-icon">
-                    <span><i class="fa-solid fa-envelope"></i></span>
-                  </div>
-                  <div class="add-text">
-                    <h4>Email Us</h4>
-                    <a href="">support@thefamilyflix.com</a>
-                  </div>
-                </div>
-                <div class="add d-flex">
-                  <div class="add-icon">
-                    <span><i class="fa-solid fa-location-dot"></i></span>
-                  </div>
-                  <div class="add-text">
-                    <h4>Location</h4>
-                    <p>Orlando Florida</p>
-                  </div>
-                </div>
-                <div class="add d-flex">
-                  <div class="add-icon">
-                    <span><i class="fa-regular fa-clock"></i></span>
-                  </div>
-                  <div class="add-text">
-                    <h4>Office Hours (Closed Saturday)</h4>
-                    <p>9am-11pm</p>
-                  </div>
-                </div>
+                @endforeach
               </div>
             </div>
             <div class="row justify-content-center">
               <div class="col-xl-12">
                 <div class="ftr-link ftr-btm-img text-center">
                   <img
-                    src="{{ asset('frontend_assets/images/poweredbywhite-1024x124.png')}}"
+                    src="{{ Storage::url($footer_cms->footer_image)}}"
                     alt=""
                   />
                 </div>

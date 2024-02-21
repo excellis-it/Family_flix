@@ -22,7 +22,7 @@
                         <h1>{{ $contact_cms->title }}</h1>
                         <div class="links-1">
                             <ul>
-                                <li><a href="">Home</a></li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
                                 <li><a href="">{{ $contact_cms->title }}</a></li>
                             </ul>
                         </div>

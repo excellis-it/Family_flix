@@ -124,24 +124,7 @@ class menuSeeder extends Seeder
                 'slug' => 'term-of-service',
                 
             ],
-            [
-                'title' => '+18453297101',
-                'parent_id' => 4,
-                'slug' => '',
-                
-            ],
-            [
-                'title' => 'support@thefamilyflix.com',
-                'parent_id' => 4,
-                'slug' => '',
-                
-            ],
-            [
-                'title' => 'Orlando Florida',
-                'parent_id' => 4,
-                'slug' => '',
-                
-            ]
+            
         ];
 
         foreach ($menus as $menu) {

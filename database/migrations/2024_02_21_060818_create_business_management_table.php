@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrivacyPoliciesTable extends Migration
+class CreateBusinessManagementTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePrivacyPoliciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('privacy_policies', function (Blueprint $table) {
+        Schema::create('business_management', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('banner_image')->nullable();
+            $table->string('banner_heading')->nullable();
             $table->longText('content')->nullable();
-            $table->string('banner_img')->nullable();
+            $table->enum('type', ['privacy-policy', 'term-condition','faq'])->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreatePrivacyPoliciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('privacy_policies');
+        Schema::dropIfExists('business_management');
     }
 }

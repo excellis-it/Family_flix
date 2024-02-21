@@ -30,7 +30,7 @@
                 <h1>{{ $kid_cms->heading }}</h1>
                 <div class="links-1">
                   <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="">{{ $kid_cms->heading }}</a></li>
                   </ul>
                 </div>

@@ -47,6 +47,20 @@
                     </ul>
                 </li>
 
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/products*') ? 'active' : ' ' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Product
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/products*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/products*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('products.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#"> 
                         <span>
@@ -130,9 +144,27 @@
                         <li class="{{ Request::is('admin/cms/subscription-us*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('subscription-us.cms') }}">Subscription Us</a>
                         </li>
+                       
+                    </ul>
+                </li>
 
-
-                        
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/business-management*') ? 'active' : '' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Business Management
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/business-management*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/faq-management*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('faq.management') }}">Faq</a>
+                        </li>
+                        <li class="{{ Request::is('admin/privacy-management*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('privacy.management') }}">Privacy Policy</a>
+                        </li>
+                        <li class="{{ Request::is('admin/terms-management*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('terms.management') }}">Term & Condition</a>
+                        </li>
                     </ul>
                 </li>
 

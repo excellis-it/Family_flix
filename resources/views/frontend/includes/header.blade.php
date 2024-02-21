@@ -8,7 +8,7 @@
               <div class="col-sm-3 p-0">
                 <div class="left_top">
                   <div class="logo">
-                    <a href="index.html" class="">
+                    <a href="{{ route('home') }}" class="">
                       <img src="{{ asset('frontend_assets/images/logo-white.png')}}" alt="" />
                     </a>
                   </div>

@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
             EntertainmentBannerSeeder::class,
             subscriptionCmsSeeder::class,
             aboutCmsSeeder::class,
+            businessManagementSeeder::class,
+            footerCmsSeeder::class,
         ]);
     }
 }

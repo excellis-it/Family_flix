@@ -148,7 +148,7 @@
     </div>
 </div>
 
-@include('admin.includes.footer')
+{{-- @include('admin.includes.footer') --}}
 
 <!--  Import Js Files -->
 <script src="{{ asset('admin_assets/js/jquery.min.js') }}"></script>

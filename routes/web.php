@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\GeneralCmsController;
 use App\Http\Controllers\Admin\EntertainmentBannerController;
 use App\Http\Controllers\Admin\TopGridController;
+use App\Http\Controllers\Admin\BusinessManagementController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -30,9 +32,7 @@ Route::get('clear', function () {
 
 /* ----------------- Frontend Routes -----------------*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
-
 Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
-
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -54,10 +54,6 @@ Route::post('/submit-subscription',[HomeController::class, 'subscriptionSubmit']
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/term-service', [HomeController::class, 'termService'])->name('term-service');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
-
-
-
-
 
 /* ----------------- Admin Routes -----------------*/
 
@@ -86,9 +82,15 @@ Route::group(['prefix' => 'admin'], function () {
             'plan' => PlanController::class,
             'entertainment-banner' => EntertainmentBannerController::class,
             'top-grid' => TopGridController::class,
+            'products' => ProductController::class,
         ]);
 
-
+        //products ajax list
+        Route::get('/products-ajax-list',[ProductController::class, 'productAjaxList'])->name('products.ajax.list');
+        Route::get('/deleteProducts/{id}',[ProductController::class, 'deleteProduct'])->name('delete.products');
+        Route::post('/topStatusProduct',[ProductController::class, 'changeProductTopStatus'])->name('product.top-status');
+        Route::post('/popularStatusProduct',[ProductController::class, 'changePopularStatus'])->name('product.popular-status');
+        Route::post('/updateProduct',[ProductController::class, 'updateProducts'])->name('update.products');
 
         Route::get('/entertainment-banner/delete/{id}',[EntertainmentBannerController::class, 'deleteEntertainmentBanner'])->name('delete.entertainment-banner');
         Route::post('/entertainment-banner/update',[EntertainmentBannerController::class, 'updateEntertainmentBanner'])->name('update.entertainment-banner');
@@ -162,6 +164,18 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/deleteGridImage/{id}', [CmsController::class, 'gridImageDelete'])->name('delete.grid-image');
             Route::get('/deleteOttIcon/{id}', [CmsController::class, 'ottIconDelete'])->name('delete.ott-icon');
             Route::get('/deleteEntertainmentImage/{id}', [CmsController::class, 'entImageDelete'])->name('delete.entertainment-image');
+        });
+
+        Route::group(['prefix'=>'business-management'], function(){
+            //faq management
+            Route::get('/faq', [BusinessManagementController::class, 'faq'])->name('faq.management');
+            Route::post('/faq/update', [BusinessManagementController::class, 'faqUpdate'])->name('faq.management.update');
+            //privacy management
+            Route::get('/privacy', [BusinessManagementController::class, 'privacy'])->name('privacy.management');
+            Route::post('/privacy/update', [BusinessManagementController::class, 'privacyUpdate'])->name('privacy.management.update');
+            //term management
+            Route::get('/terms', [BusinessManagementController::class, 'terms'])->name('terms.management');
+            Route::post('/terms/update', [BusinessManagementController::class, 'termsUpdate'])->name('terms.management.update');
         });
 
         //contact us list

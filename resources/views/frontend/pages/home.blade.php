@@ -186,15 +186,7 @@
             </div>
         </div>
         <div class="unbeatable-slider">
-            <!--@foreach($ott_icons as $ott_icon)-->
-            <!--<div class="unbeatable-slider-wrap">-->
-            <!--    <div class="unbeatable-slider-div">-->
-            <!--        <div class="unbeatable-slider-img">-->
-            <!--            <img src="{{ Storage::url($ott_icon->icon) }}" alt="" />-->
-            <!--        </div>-->
-            <!--    </div>-->
-            <!--</div>-->
-            <!--@endforeach-->
+            
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
@@ -241,7 +233,7 @@
     </section>
     <section class="kids-sec">
         <div class="kid-bg">
-            <img src="{{ asset('frontend_assets/images/kids-bg.png') }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section5_back_image) }}" alt="" />
         </div>
         <div class="kids-div">
             <div class="container">
@@ -260,7 +252,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="kid-tv-img">
-                                    <img src="{{ asset('frontend_assets/images/kids-tv.png') }}" alt="" />
+                                    <img src="{{ Storage::url($home_cms->section5_main_image) }}" alt="" />
                                 </div>
                             </div>
                         </div>

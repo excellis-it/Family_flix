@@ -15,10 +15,10 @@
 
         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
             
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="fw-semibold text-decoration-none d-none d-md-block add_new_project" href="">New Product
                 </a>
-            </li>
+            </li> --}}
 
             {{-- <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"

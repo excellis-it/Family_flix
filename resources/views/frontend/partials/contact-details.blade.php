@@ -5,7 +5,7 @@
         </div>
         <div class="add-text">
             <h4>{{ $contact_detail->title }}</h4>
-            <a href="">{{ $contact_detail->details }}</a>
+            <a href="mailTo:{{ $contact_detail->details }}">{{ $contact_detail->details }}</a>
         </div>
     </div>
 @endforeach

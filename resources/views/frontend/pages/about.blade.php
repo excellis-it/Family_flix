@@ -27,7 +27,7 @@
                 <h1>{{ $about_cms->title }}</h1>
                 <div class="links-1">
                   <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="">{{ $about_cms->title }}</a></li>
                   </ul>
                 </div>
@@ -163,57 +163,9 @@
           </div>
         </div>
         <div class="entertainment-div">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-lg-6">
-                <div class="entertainment-head">
-                  <div class="heading-1 text-center">
-                    <h2>Entertainment Everywhere<span class="dot">.</span></h2>
-                    <p>
-                      Enjoy The Family Flix app on your TV, mobile, and tablet.
-                      Our platform supports all your devices. Anywhere, Any
-                      Device: The Family Flix Advantage
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="entertainment-img-div">
-              <div class="row justify-content-center align-items-center">
-                <div class="col-lg-3 col-md-6">
-                  <div class="entertainment-img-wrap">
-                    <div class="entertainment-img">
-                      <img src="{{ asset('frontend_assets/images/en-1.png')}}" alt="" />
-                    </div>
-                    <div class="entertainment-img-text">
-                      <h4>On Your TV</h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                  <div class="entertainment-img-wrap">
-                    <div class="entertainment-img">
-                      <img src="{{ asset('frontend_assets/images/en-2.png')}}" alt="" />
-                    </div>
-                    <div class="entertainment-img-text">
-                      <h4>Mobiles & Tablets</h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                  <div class="entertainment-img-wrap">
-                    <div class="entertainment-img">
-                      <img src="{{ asset('frontend_assets/images/en-3.png')}}" alt="" />
-                    </div>
-                    <div class="entertainment-img-text">
-                      <h4>On Firestick & Firecube</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          @include('frontend.partials.entertainment');
+         
+      </div>
       </section>
 
       @endsection
