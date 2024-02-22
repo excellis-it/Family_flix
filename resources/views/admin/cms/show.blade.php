@@ -71,7 +71,7 @@
                                     @endif
                                 </div>
 
-                                <h4 class="text-left">Banner Section</h4>
+                                <h4 class="text-left">Top 10 Show Section</h4>
                                 <hr>
 
                                 <div class="form-group col-md-6 mb-3">
