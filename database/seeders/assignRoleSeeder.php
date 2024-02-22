@@ -23,7 +23,11 @@ class assignRoleSeeder extends Seeder
                 'name' => 'CUSTOMER',
                 'guard_name' => 'web',
             ],
-            
+            [
+                'name' => 'AFFLIATE MARKETER',
+                'guard_name' => 'web',
+            ],
+
         ];
 
         foreach ($roles as $key => $value) {

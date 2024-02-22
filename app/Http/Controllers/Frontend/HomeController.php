@@ -83,7 +83,7 @@ class HomeController extends Controller
         return view('frontend.pages.kids',compact('entertainments_banners','subscriptions','kid_cms','top_10_shows','popular_shows'));
     }
 
-    public function pricing()
+    public function pricing($id=null)
     {
         $plan_cms = PlanCms::first();
         $home_cms = HomeCms::first();
