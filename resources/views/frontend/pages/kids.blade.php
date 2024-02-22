@@ -56,56 +56,7 @@
                 <h3>Top 10 Shows To Watch</h3>
               </div>
               <div class="shows-slider">
-                <div class="shows-slider-wrap">
-                  <div class="shows-slider-box">
-                    <div class="shows-slider-img">
-                      <img src="{{ asset('frontend_assets/images/shows-1.png')}}" alt="" />
-                      <div class="show-num">
-                        <h2>1</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="shows-slider-wrap">
-                  <div class="shows-slider-box">
-                    <div class="shows-slider-img">
-                      <img src="{{ asset('frontend_assets/images/shows-2.png')}}" alt="" />
-                      <div class="show-num">
-                        <h2>2</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="shows-slider-wrap">
-                  <div class="shows-slider-box">
-                    <div class="shows-slider-img">
-                      <img src="{{ asset('frontend_assets/images/shows-3.png')}}" alt="" />
-                      <div class="show-num">
-                        <h2>3</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="shows-slider-wrap">
-                  <div class="shows-slider-box">
-                    <div class="shows-slider-img">
-                      <img src="{{ asset('frontend_assets/images/shows-4.png')}}" alt="" />
-                      <div class="show-num">
-                        <h2>4</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="shows-slider-wrap">
-                  <div class="shows-slider-box">
-                    <div class="shows-slider-img">
-                      <img src="{{ asset('frontend_assets/images/shows-1.png')}}" alt="" />
-                      <div class="show-num">
-                        <h2>1</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                @include('frontend.partials.top_10')
               </div>
             </div>
           </div>
@@ -113,7 +64,7 @@
       </section>
       <section class="unbeatable-sec popular-movies">
         <div class="unbeatable-bg">
-          <img src="{{ Storage::url($kid_cms->popular_kids_background) }}" alt="" />
+          <img src="{{ Storage::url($kid_cms->popular_show_background) }}" alt="" />
         </div>
         <div class="entertainment-div">
           <div class="container">
@@ -129,55 +80,7 @@
           </div>
         </div>
         <div class="unbeatable-slider">
-          <div class="unbeatable-slider-wrap">
-            <div class="unbeatable-slider-div">
-              <div class="unbeatable-slider-img">
-                <img src="{{ asset('frontend_assets/images/unbeatable-1.png')}}" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="unbeatable-slider-wrap">
-            <div class="unbeatable-slider-div">
-              <div class="unbeatable-slider-img">
-                <img src="{{ asset('frontend_assets/images/unbeatable-2.png')}}" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="unbeatable-slider-wrap">
-            <div class="unbeatable-slider-div">
-              <div class="unbeatable-slider-img">
-                <img src="{{ asset('frontend_assets/images/unbeatable-3.png')}}" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="unbeatable-slider-wrap">
-            <div class="unbeatable-slider-div">
-              <div class="unbeatable-slider-img">
-                <img src="{{ asset('frontend_assets/images/unbeatable-4.png')}}" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="unbeatable-slider-wrap">
-            <div class="unbeatable-slider-div">
-              <div class="unbeatable-slider-img">
-                <img src="{{ asset('frontend_assets/images/unbeatable-5.png')}}" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="unbeatable-slider-wrap">
-            <div class="unbeatable-slider-div">
-              <div class="unbeatable-slider-img">
-                <img src="{{ asset('frontend_assets/images/unbeatable-6.png')}} alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="unbeatable-slider-wrap">
-            <div class="unbeatable-slider-div">
-              <div class="unbeatable-slider-img">
-                <img src="{{ asset('frontend_assets/images/unbeatable-7.png')}}" alt="" />
-              </div>
-            </div>
-          </div>
+          @include('frontend.partials.popular')
         </div>
       </section>
       @include('frontend.partials.subscription')

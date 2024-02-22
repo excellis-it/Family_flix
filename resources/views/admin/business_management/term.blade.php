@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-   Term Management
+   Term & Condition Management
 @endsection
 @push('styles')
 @endpush
@@ -10,10 +10,9 @@
             <div class="d-flex">
 
                 <div class="">
-                    <h3>Term Management</h3>
+                    <h3>Term & Condition Management</h3>
                     <ul class="breadcome-menu mb-0">
-                        <li><a href="{{ route('admin.dashboard') }}"></a> Home<span class="bread-slash">/</span></li>
-                        
+                        <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                         <li><span class="bread-blod">Term Management</span></li>
                     </ul>
                 </div>
@@ -29,14 +28,13 @@
 
                            
                             <div class="row">
+                                <h4 class="text-left">Term & Condition Content</h4>
+                                <hr>
 
                                 <input type="hidden" name="id" value="{{ $terms->id }}">
-
-                                <h4 class="text-left">Banner Section</h4>
-                                <hr>
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Banner Image<span style="color: red;">*</span></label>
-                                    <input type="file" name="banner_image" id="banner_image" class="form-control">
+                                    <input type="file" name="banner_image" id="banner_image" class="form-control"  onchange="previewImage()">
                                     @if ($errors->has('banner_image'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('banner_image') }}</div>
@@ -44,14 +42,10 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
-
-                                    @if ($terms->banner_image != '')
-                                        <img src="{{ Storage::url($terms->banner_image) }}" alt="preview image"
-                                            style="max-height: 180px;">
+                                    @if($terms->banner_image != '')
+                                        <img id="preview-image" src="{{ Storage::url($terms->banner_image) }}" alt="preview image" style="max-height: 180px;">
                                     @else
-                                        <img id="preview-back-image"
-                                            src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
-                                            style="max-height: 180px;">
+                                        <img id="preview-image" src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image" style="max-height: 180px;">
                                     @endif
                                 </div>
 
@@ -106,5 +100,24 @@
             });
         });
     </script>
+
+<script>
+    function previewImage() {
+        var preview = document.getElementById('preview-image');
+        var fileInput = document.getElementById('banner_image');
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+        }
+    }
+</script>
     
     @endpush

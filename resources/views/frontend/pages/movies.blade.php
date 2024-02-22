@@ -46,7 +46,7 @@
       
       <section class="shows-watch-sec">
         <div class="shows-watch-bg">
-          <img src="{{ Storage::url($movie_cms->top10_show_back_img) }}" alt="" />
+          <img src="{{ Storage::url($movie_cms->top_10_show_background) }}" alt="" />
         </div>
         <div class="container">
           <div class="row justify-content-center align-items-center">
@@ -61,9 +61,10 @@
           </div>
         </div>
       </section>
+     
       <section class="unbeatable-sec popular-movies">
         <div class="unbeatable-bg">
-          <img src="{{ Storage::url($movie_cms->popular_movie_background) }}" alt="" />
+          <img src="{{ Storage::url($movie_cms->popular_show_background) }}" alt="" />
         </div>
         <div class="entertainment-div">
           <div class="container">

@@ -324,7 +324,7 @@ class CmsController extends Controller
         $aboutUs_update = AboutUs::where('id',$request->id)->first();
         $aboutUs_update->title = $request->title;
         $aboutUs_update->section1_title = $request->section1_title;
-        $aboutUs_update->section1_descriptiontle = $request->section1_description;
+        $aboutUs_update->section1_description = $request->section1_description;
         $aboutUs_update->section2_title1 = $request->section2_title1;
         $aboutUs_update->section2_description1 = $request->section2_description1;
         $aboutUs_update->section3_title = $request->section3_title;

@@ -135,15 +135,13 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/movie-cms', [GeneralCmsController::class, 'movieCms'])->name('movie.cms');
             Route::post('/movieCms/update',[GeneralCmsController::class, 'movieCmsUpdate'])->name('movie-cms.update');
 
-
             //contact-cms
             Route::get('/contact-cms',[GeneralCmsController::class, 'contactCms'])->name('contact.cms');
-            Route::post('/contactCms/update',[GeneralCmsController::class, 'contactCmsUpdate'])->name('update.contact-cms');
+            Route::post('/contactCms/update',[GeneralCmsController::class, 'contactCmsUpdate'])->name('update.contact-us.cms');
 
             //entertainment cms
             Route::get('/entertainment-cms', [CmsController::class, 'entertainmentCms'])->name('entertainment.cms');
             Route::post('/entertainmentCms/update', [CmsController::class, 'entertainmentCmsUpdate'])->name('entertainment.cms.update');
-
             //about us cms
             Route::get('/about-cms', [CmsController::class, 'aboutCms'])->name('about.cms');
             Route::post('/aboutCms/update', [CmsController::class, 'aboutCmsUpdate'])->name('update.about-cms');
@@ -158,7 +156,7 @@ Route::group(['prefix' => 'admin'], function () {
 
             //contact details cms
             Route::get('/contact-details',[CmsController::class, 'contactDetailsCms'])->name('contact-details.cms');
-            Route::post('/contactCms/update',[CmsController::class, 'contactDetailsCmsUpdate'])->name('update.contact-details.cms');
+            Route::post('/contactDetails/update',[CmsController::class, 'contactDetailsCmsUpdate'])->name('update.contact-details.cms');
 
             //delete grid image
             Route::get('/deleteGridImage/{id}', [CmsController::class, 'gridImageDelete'])->name('delete.grid-image');

@@ -22,7 +22,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-category"></i>
                         </span>Menu management
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -36,7 +36,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : ' ' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-box"></i>
                         </span>Plan management
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -50,7 +50,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/products*') ? 'active' : ' ' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-movie"></i>
                         </span>Product
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -78,7 +78,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/entertainment-banner*') ? 'active' : ' ' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-photo"></i>
                         </span>Entertainment banner
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -92,7 +92,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/top-grid*') ? 'active' : ' ' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-pencil"></i>
                         </span>Top Grid
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -106,7 +106,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-pencil"></i>
                         </span>Cms
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -171,7 +171,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-phone"></i>
                         </span>Contact Us
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -185,7 +185,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#"> 
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-chevron-right"></i>
                         </span>Subscription Us
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>

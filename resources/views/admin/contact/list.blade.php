@@ -31,13 +31,13 @@
 
                 <div class="card w-100">
                     <div class="card-body">
-                        <h4>List of ContactUs User</h4>
+                        <h4>List of User</h4>
                         <div class="table-responsive rounded-2 mb-4">
                             <table class="table table-hover customize-table mb-0 align-middle bg_tbody"
                                 id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
                                     <tr>
-                                        <th>User name</th>
+                                        <th> User name</th>
                                         <th> User Email</th>
                                         <th> User Phone</th>
                                         <th> Message</th>

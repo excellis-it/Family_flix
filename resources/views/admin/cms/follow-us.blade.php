@@ -29,7 +29,10 @@
                             @csrf
 
                             <div class="row">
-                                <div class="add-name">
+
+                                <h4 class="text-left">Follow Us Icon</h4>
+                                <hr>
+                                <div class="add-icon">
                                     @foreach($social_medias as $social_media)
                                         <div class="row">
                                             
@@ -53,10 +56,9 @@
                                     @endforeach
 
                                     <button type="button" class="btn btn-success add-social-details good-button"><i
-                                            class="fas fa-plus"></i> Add More Details</button>
-
-                                    <div class="add-entr-image"> </div>        
+                                            class="fas fa-plus"></i> Add More Details</button>       
                                 </div>
+                               
 
                                 <div class="w-100 text-end">
                                     <button type="submit" class="print_btn">Update</button>
@@ -76,8 +78,8 @@
         $(document).ready(function() {
             $(".add-social-details").click(function() {
             
-                $(".add-name").append(
-                    '<div class="row"><div class="col-md-5 pb-3"> <div style="display: flex"><input type="text" class="form-control" name="icon[]" placeholder="Enter icon" > </div></div><div class="col-md-5 pb-3"><div style="display: flex"><input type="text" class="form-control" name="link[]" placeholder="Enter link" ></div></div><div class="col-md-2"><button type="button" class="btn btn-danger cross good-button"> <i class="fas fa-close"></i>Remove</button></div></div>'
+                $(".add-icon").append(
+                    '<div class="row"><div class="col-md-5 pb-3"> <div style="display: flex"><input type="text" class="form-control" name="icon[]" placeholder="Enter icon" > </div></div><div class="col-md-5 pb-3"><div style="display: flex"><input type="text" class="form-control" name="link[]" placeholder="Enter link" ></div></div><div class="col-md-2"><button type="button" class="btn btn-danger cross good-button"> <i class="fas fa-close"></i> Remove</button></div></div>'
                 );
             });
         });
