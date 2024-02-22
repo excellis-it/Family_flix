@@ -28,8 +28,23 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                               
                                 <input type="hidden" name="coupon_id" value="{{ $coupon_edit->id }}">
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Plan<span style="color: red;">*</span></label>
+                                    <select name="plan_id" class="form-control">
+                                        @foreach($plans as $plan)
+                                            <option value="{{ $plan->id }}" {{ $coupon_edit->plan_id == $plan->id ? 'selected' : '' }}>
+                                                {{ $plan->plan_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('plan_id'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('plan_id') }}</div>
+                                    @endif
+                                </div>
+
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Coupon Code<span style="color: red;">*</span></label>
                                     <input type="text" name="code" value="{{ $coupon_edit->code }}" placeholder="Enter coupon code"
@@ -39,14 +54,28 @@
                                             {{ $errors->first('code') }}</div>
                                     @endif
                                 </div>
+
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Percentage<span style="color: red;">*</span></label>
-                                    <input type="text" name="percentage" value="{{ $coupon_edit->percentage }}" class="form-control" placeholder="Enter percentage">
-                                    @if ($errors->has('percentage'))
+                                    <label>Coupon Type<span style="color: red;">*</span></label>
+                                    <select name="coupon_type" class="form-control" id="coupon-type" onchange="toggleValueInput()">
+                                        <option value="percentage" {{ $coupon_edit->coupon_type == 'percentage' ? 'selected' : '' }}>Percentage</option>
+                                        <option value="amount" {{ $coupon_edit->coupon_type == 'amount' ? 'selected' : '' }}>Amount</option>
+                                    </select>
+                                    @if ($errors->has('coupon_type'))
                                         <div class="error" style="color:red;">
-                                            {{ $errors->first('percentage') }}</div>
+                                            {{ $errors->first('coupon_type') }}</div>
                                     @endif
                                 </div>
+
+                                <div class="form-group col-md-6 mb-3" id="value-input" >
+                                    <label>Value<span style="color: red;">*</span></label>
+                                    <input type="text" name="value" value="{{ $coupon_edit->value }}" class="form-control" placeholder="Enter value">
+                                    @if ($errors->has('value'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('value') }}</div>
+                                    @endif
+                                </div>
+                                
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Status<span style="color: red;">*</span></label>
@@ -91,5 +120,18 @@
             }
             reader.readAsDataURL(this.files[0]);
         });
+    </script>
+
+    <script>
+        function toggleValueInput() {
+            var couponType = document.getElementById('coupon-type').value;
+            var valueInput = document.getElementById('value-input');
+
+            if (couponType === 'percentage' || couponType == 'amount') {
+                valueInput.style.display = 'block';
+            } else {
+                valueInput.style.display = 'none';
+            }
+        }
     </script>
 @endpush

@@ -17,7 +17,7 @@ class CouponController extends Controller
     public function index()
     {
         //
-        $coupons = Coupon::orderBy('id','desc')->get();
+        $coupons = Coupon::orderBy('id','desc')->with('plan')->get();
         return view('admin.coupon.list',compact('coupons'));
     }
 
@@ -41,13 +41,18 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'plan_id' => 'required',
             'code' => 'required',
-            'percentage' => 'required',
+            'coupon_type' => 'required',
+            'value' => 'required',
             'status' => 'required',
         ]);
+
         $coupon_create = new Coupon();
+        $coupon_create->plan_id = $request->plan_id;
         $coupon_create->code = $request->code;
-        $coupon_create->percentage = $request->percentage;
+        $coupon_create->coupon_type = $request->coupon_type;
+        $coupon_create->value = $request->value;
         $coupon_create->status = $request->status;
         $coupon_create->save();
 
@@ -74,8 +79,9 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
+        $plans = Plan::orderBy('plan_order','asc')->get();
         $coupon_edit = Coupon::where('id',$id)->first();
-        return view('admin.coupon.edit',compact('coupon_edit'));
+        return view('admin.coupon.edit',compact('coupon_edit','plans'));
     }
 
     /**
@@ -94,15 +100,21 @@ class CouponController extends Controller
     public function updateCoupon(Request $request)
     {
         $request->validate([
+            'plan_id' => 'required',
             'code' => 'required',
-            'percentage' => 'required',
+            'coupon_type' => 'required',
+            'value' => 'required',
             'status' => 'required',
         ]);
+
         $coupon_edit = Coupon::where('id',$request->coupon_id)->first();
+        $coupon_edit->plan_id = $request->plan_id;
         $coupon_edit->code = $request->code;
-        $coupon_edit->percentage = $request->percentage;
+        $coupon_edit->coupon_type = $request->coupon_type;
+        $coupon_edit->value = $request->value;
         $coupon_edit->status = $request->status;
         $coupon_edit->update();
+
 
         return redirect()->route('coupons.index')->with('message','Coupon updated successfully');
         

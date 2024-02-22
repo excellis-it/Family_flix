@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Coupon extends Model
 {
     use HasFactory;
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
 }

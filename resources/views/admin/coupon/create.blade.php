@@ -69,23 +69,23 @@
                                 
                                 <div class="form-group col-md-6 mb-3" id="value-input" style="display: none;">
                                     <label>Value<span style="color: red;">*</span></label>
-                                    <input type="text" name="percentage" class="form-control" placeholder="Enter value">
-                                    @if ($errors->has('percentage'))
+                                    <input type="text" name="value" class="form-control" placeholder="Enter value">
+                                    @if ($errors->has('value'))
                                         <div class="error" style="color:red;">
-                                            {{ $errors->first('percentage') }}</div>
+                                            {{ $errors->first('value') }}</div>
                                     @endif
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Status<span style="color: red;">*</span></label>
                                     <select class="form-control" name="status" >
-                                        <option value="" >Select Status</option>
-                                        <option value="Active" >Active</option>
+                                        <option value="">Select Status</option>
+                                        <option value="Active">Active</option>
                                         <option value="Deactive">Deactive</option>
                                     </select>
-                                    @if ($errors->has('percentage'))
+                                    @if ($errors->has('status'))
                                         <div class="error" style="color:red;">
-                                            {{ $errors->first('percentage') }}</div>
+                                            {{ $errors->first('status') }}</div>
                                     @endif
                                 </div>
 

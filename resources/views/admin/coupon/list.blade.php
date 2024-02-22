@@ -40,8 +40,10 @@
                                 id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
                                     <tr>
+                                        <th>Plan name</th>
                                         <th>Coupon Code</th>
-                                        <th>Percentage</th>
+                                        <th>Coupon Type</th>
+                                        <th>value</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -54,8 +56,10 @@
                                     @else
                                         @foreach ($coupons as $key => $coupon)
                                             <tr class="tableRow" data-id="{{ $coupon->id }}">
+                                                <td>{{ $coupon->plan->plan_name }}
                                                 <td>{{ $coupon->code }}</td>
-                                                <td>{{ $coupon->percentage }}</td>
+                                                <td>{{ $coupon->coupon_type }}</td>
+                                                <td>{{ $coupon->value }}</td>
                                                 <td>
                                                     <label class="switch">
                                                         <input type="checkbox" class="toggle-class"
