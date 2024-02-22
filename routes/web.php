@@ -18,7 +18,8 @@ use App\Http\Controllers\Admin\EntertainmentBannerController;
 use App\Http\Controllers\Admin\TopGridController;
 use App\Http\Controllers\Admin\BusinessManagementController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
 
@@ -83,7 +84,12 @@ Route::group(['prefix' => 'admin'], function () {
             'entertainment-banner' => EntertainmentBannerController::class,
             'top-grid' => TopGridController::class,
             'products' => ProductController::class,
+            'coupons' => CouponController::class,
         ]);
+
+        //coupons route
+        Route::get('/coupons/delete/{id}',[CouponController::class, 'deleteCoupon'])->name('delete.coupons');
+        Route::post('/coupons/update',[CouponController::class, 'updateCoupon'])->name('update.coupons');
 
         //products ajax list
         Route::get('/products-ajax-list',[ProductController::class, 'productAjaxList'])->name('products.ajax.list');

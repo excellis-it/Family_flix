@@ -183,6 +183,20 @@
                 </li>
 
                 <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/coupons*') ? 'active' : ' ' }}" href="#"> 
+                        <span>
+                            <i class="ti ti-chevron-right"></i>
+                        </span>Coupons
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/coupons*') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/coupons*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('coupons.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#"> 
                         <span>
                             <i class="ti ti-chevron-right"></i>

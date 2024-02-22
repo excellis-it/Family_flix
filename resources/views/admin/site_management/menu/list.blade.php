@@ -58,12 +58,7 @@
                                                 <td>{{ $menu->title }}</td>
                                                 <td>{{ $menu->slug }}</td>
                                                 <td>
-                                                    {{-- @if ($menu->status == 1)
-                                                        <span class="badge bg-success">Active</span>
-                                                    @else
-                                                        <span class="badge bg-danger">Inactive</span>
-                                                    @endif --}}
-
+                                    
                                                     <label class="switch">
                                                         <input type="checkbox" class="toggle-class"
                                                             data-id="{{ $menu->id }}" {{ $menu->status == 1 ? 'checked' : '' }}>
