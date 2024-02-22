@@ -20,7 +20,20 @@
                         </span>Dashboard<span class="arrow-down"></span></a>
                 </li>
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
+                        <span>
+                            <i class="ti ti-users"></i>
+                        </span>User management
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/affliate-marketer*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('affliate-marketer.index') }}">Affiliate Marketer</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-category"></i>
                         </span>Menu management
@@ -34,7 +47,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-box"></i>
                         </span>Plan management
@@ -48,7 +61,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/products*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/products*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-movie"></i>
                         </span>Product
@@ -62,7 +75,7 @@
                 </li>
 
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
-                    <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-aperture"></i>
                         </span>Plan management
@@ -76,7 +89,7 @@
                 </li> --}}
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/entertainment-banner*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/entertainment-banner*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-photo"></i>
                         </span>Entertainment banner
@@ -90,7 +103,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/top-grid*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/top-grid*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-pencil"></i>
                         </span>Top Grid
@@ -104,7 +117,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-pencil"></i>
                         </span>Cms
@@ -114,7 +127,7 @@
                         <li class="{{ Request::is('admin/home-cms*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home.cms') }}">Home</a>
                         </li>
-                        
+
                         <li class="{{ Request::is('admin/cms/plan-cms*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('plan.cms') }}">Plan</a>
                         </li>
@@ -130,7 +143,7 @@
                         <li class="{{ Request::is('admin/cms/about.cms*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('about.cms') }}">About</a>
                         </li>
-                       
+
                         <li class="{{ Request::is('admin/cms/contact-cms*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('contact.cms') }}">ContactUs</a>
                         </li>
@@ -144,12 +157,12 @@
                         <li class="{{ Request::is('admin/cms/subscription-us*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('subscription-us.cms') }}">Subscription Us</a>
                         </li>
-                       
+
                     </ul>
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/business-management*') ? 'active' : '' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/business-management*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-aperture"></i>
                         </span>Business Management
@@ -169,7 +182,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-phone"></i>
                         </span>Contact Us
@@ -183,7 +196,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-chevron-right"></i>
                         </span>Subscription Us
@@ -195,17 +208,17 @@
                         </li>
                     </ul>
                 </li>
-                
+
             </ul>
         </nav>
-        
+
 
 
 
 
         {{-- <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
             <ul id="sidebarnav">
-                
+
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                         <span>
@@ -216,7 +229,7 @@
                 </li>
 
                 <li class="sidebar-item {{ Request::is('admin/menu-management*') ? 'active' : '' }}">
-                  
+
                     <a class="sidebar-link" href="{{ route('menu-management.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-shopping-cart"></i>
@@ -224,7 +237,7 @@
                         <span class="hide-menu">Menu</span>
                     </a>
                 </li>
-                
+
                 <li class="sidebar-item {{ Request::is('admin/plan*') ? 'active' : ' ' }}">
                     <a class="sidebar-link" href="{{ route('plan.index') }}" aria-expanded="false">
                         <span>
@@ -275,7 +288,7 @@
                         <span class="hide-menu">Movie Cms</span>
                     </a>
                 </li>
-                
+
 
                 <li class="sidebar-item {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}">
                     <a class="sidebar-link" href="{{ route('contact-us.list') }}" aria-expanded="false">
@@ -295,7 +308,7 @@
                     </a>
                 </li>
 
-                
+
             </ul>
         </nav> --}}
         <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">

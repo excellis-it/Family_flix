@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AffliateMarketerController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SiteManagementController;
 use App\Http\Controllers\Admin\MenuManagementController;
@@ -33,11 +34,14 @@ Route::get('clear', function () {
 /* ----------------- Frontend Routes -----------------*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+// affliate authentication
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register-store', [AuthController::class, 'registerStore'])->name('register.store');
 Route::post('/user-login-check', [AuthController::class, 'loginCheck'])->name('login.check');
+
 Route::post('forget-password', [ForgotPasswordController::class, 'forgetPassword'])->name('forget.password');
 Route::post('change-password', [ForgotPasswordController::class, 'changePassword'])->name('change.password');
 Route::get('forget-password/show', [ForgotPasswordController::class, 'forgetPasswordShow'])->name('forget.password.show');
@@ -47,7 +51,7 @@ Route::get('/about', [HomeController::class, 'aboutUs'])->name('about');
 Route::get('/movies', [HomeController::class, 'movies'])->name('movies');
 Route::get('/shows', [HomeController::class, 'shows'])->name('shows');
 Route::get('/kids', [HomeController::class, 'kids'])->name('kids');
-Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
+Route::get('/pricing/{?id}', [HomeController::class, 'pricing'])->name('pricing');
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::post('/submit-Contact-us',[HomeController::class, 'contactSubmit'])->name('contact-us.submit');
 Route::post('/submit-subscription',[HomeController::class, 'subscriptionSubmit'])->name('subscribe.submit');
@@ -55,13 +59,12 @@ Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/term-service', [HomeController::class, 'termService'])->name('term-service');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
+// affliate authentication
+
+
 /* ----------------- Admin Routes -----------------*/
 
-Route::post('forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('admin.forget.password');
-Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
-Route::get('forget-password/show', [ForgetPasswordController::class, 'forgetPasswordShow'])->name('admin.forget.password.show');
-Route::get('reset-password/{id}/{token}', [ForgetPasswordController::class, 'resetPassword'])->name('admin.reset.password');
-Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login-check', [AdminController::class, 'loginCheck'])->name('admin.login.check');
@@ -70,10 +73,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
         Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('admin.profile.update');
-        Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout'); 
+        Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
 
         Route::prefix('password')->group(function () {
-            Route::get('/', [ProfileController::class, 'password'])->name('admin.password'); 
+            Route::get('/', [ProfileController::class, 'password'])->name('admin.password');
             Route::post('/update', [ProfileController::class, 'passwordUpdate'])->name('admin.password.update'); // password update
         });
 
@@ -83,7 +86,14 @@ Route::group(['prefix' => 'admin'], function () {
             'entertainment-banner' => EntertainmentBannerController::class,
             'top-grid' => TopGridController::class,
             'products' => ProductController::class,
+            'affliate-marketer' => AffliateMarketerController::class
         ]);
+
+        Route::post('/affliate-marketer-list',[AffliateMarketerController::class, 'affliateMarketerAjaxList'])->name('affliate-marketer.ajax.list');
+        Route::get('/affliate-marketer-change-status', [AffliateMarketerController::class, 'changeStatus'])->name('affliate-marketer.change-status');
+        Route::prefix('affliate-marketer')->group(function () {
+            Route::get('/affliate-marketer-delete/{id}', [AffliateMarketerController::class, 'delete'])->name('affliate-marketer.delete');
+        });
 
         //products ajax list
         Route::get('/products-ajax-list',[ProductController::class, 'productAjaxList'])->name('products.ajax.list');
@@ -101,7 +111,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/top-grid-list',[TopGridController::class, 'topGridAjaxList'])->name('top-grid.ajax.list');
         Route::get('/top-grid/delete/{id}',[TopGridController::class, 'deleteTopGrid'])->name('delete.top-grid');
         Route::post('/top-grid/update',[TopGridController::class, 'updateTopGrid'])->name('update.top-grid');
-       
+
 
         Route::prefix('content-management')->group(function () {
             Route::get('/privacy-policy', [ContentManagementController::class, 'privacyPolicy'])->name('content-management.privacy-policy');
@@ -182,10 +192,10 @@ Route::group(['prefix' => 'admin'], function () {
         //subscriptions list
         Route::get('/subscription',[SubscriptionController::class, 'subscriptionList'])->name('subscription.list');
         Route::get('/subscription-list',[SubscriptionController::class, 'subscriptionAjaxList'])->name('subscription.ajax.list');
-        
+
     });
 });
- 
+
 
 Route::get('/cronsStartToWorkEmailSend', function () {
     Artisan::call('send:mail');
