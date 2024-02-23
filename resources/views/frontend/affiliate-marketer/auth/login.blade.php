@@ -3,7 +3,7 @@
 
 <head>
     <!--  Title -->
-    <title>{{env('APP_NAME')}} | Login</title>
+    <title>{{env('APP_NAME')}} | Sign In</title>
     <!--  Required Meta Tag -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,14 +36,14 @@
                 <div class="col-lg-6">
                     <div class="card w-100">
                         <div class="card-body">
-                            <a href="index.html" class="text-nowrap d-block text-center mx-auto logo-img mb-4">
+                            <a href="{{route('home')}}" class="text-nowrap d-block text-center mx-auto logo-img mb-4">
                                 <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" alt="">
                             </a>
-                            <form action="{{ route('admin.login.check') }}" method="POST">
+                            <form action="{{ route('affiliate-marketer.login.check') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-3">
-                                        <label>Email/Username</label>
+                                        <label>Email</label>
                                         <input type="email" class="form-control" name="email" id="inputEmailAddress" placeholder="E-mail Address">
                                         @if ($errors->has('email'))
                                             <div class="error" style="color:red;">{{ $errors->first('email') }}</div>
@@ -57,11 +57,11 @@
                                         <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
                                     @endif
                                     </div>
-                                    {{-- <div class="account-footer">
-                                        <p><a href="{{ route('admin.forget.password.show') }}">Forgot Password?</a></p>
-                                    </div> --}}
                                     <div class="col-md-12 mb-3">
                                         <button type="submit" class="print_btn w-100">Login</button>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <p class="text-center">Don't have an account? <a href="{{ route('affiliate-marketer.register') }}">Sign Up</a></p>
                                     </div>
                                 </div>
                             </form>

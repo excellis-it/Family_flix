@@ -8,13 +8,13 @@
                 </a>
             </li>
         </ul>
-        
+
         <div class="d-block d-lg-none">
             <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" width="" alt="">
         </div>
 
         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-            
+
             {{-- <li class="nav-item">
                 <a class="fw-semibold text-decoration-none d-none d-md-block add_new_project" href="">New Product
                 </a>
@@ -85,7 +85,7 @@
                         </a>
                         <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
                             <span class="me-3">
-                              
+
                             </span>
                             <div class="w-75 d-inline-block v-middle">
                                 <h6 class="mb-1 fw-semibold">Roman Joined the Team!</h6>
@@ -121,8 +121,8 @@
                             <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                         </div>
                         <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                          
-                            
+
+
                         </div>
                         <div class="message-body">
                             <a href="" class="py-8 px-7 mt-8 d-flex align-items-center">
@@ -149,7 +149,7 @@
                             </a>
                         </div>
                         <div class="d-grid py-4 px-7 pt-8">
-                            <a href="{{ route('admin.logout') }}" class="btn btn-outline-primary">Log Out</a>
+                            <a href="{{ route('affiliate-marketer.logout') }}" class="btn btn-outline-primary">Log Out</a>
                         </div>
                     </div>
                 </div>

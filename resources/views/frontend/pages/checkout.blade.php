@@ -281,7 +281,7 @@
 
                             <input type="hidden" name="plan_name" value="{{ $plan->plan_name }}">
                             <input type="hidden" name="plan_name" value="{{ $plan->plan_name }}">
-                            <input type=""
+                            <input type="">
                             
                             <div class="col-lg-4">
                               <button class="apply-btn" id="nextBtn" type="submit">Apply</button>

@@ -8,6 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Hugo 0.84.0" />
     <title>The family Flix</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +22,7 @@
         rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('frontend_assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-   
+
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
     <link rel="stylesheet" type="text/css"
@@ -44,7 +45,7 @@
     <main>
 
         @php
-        $subscribe_cms = App\Models\SubscribeCms::first();  
+        $subscribe_cms = App\Models\SubscribeCms::first();
         @endphp
 
         @include('frontend.includes.header')
