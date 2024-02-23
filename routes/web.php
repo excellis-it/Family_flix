@@ -64,6 +64,14 @@ Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('p
 //payments
 Route::get('/create-payments/{id}', [PaypalController::class, 'createPayments'])->name('create-payments');
 Route::post('/process-payments', [PaypalController::class, 'processPayments'])->name('process-payments');
+Route::get('/success-payment', [PaypalController::class, 'successPayment'])->name('success-payment');
+Route::get('/cancel-payments', [PaypalController::class, 'cancelPayments'])->name('cancel-payments');
+
+Route::get('/successPayment',[PaypalController::class, 'paymentSuccess'])->name('payment.successful');
+
+// coupon check
+Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
+
 
 // affliate authentication
 Route::name('affiliate-marketer.')
