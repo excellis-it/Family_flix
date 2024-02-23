@@ -104,7 +104,7 @@ class PaypalController extends Controller
                 $user_subscription->customer_details_id = $customer_details->id;
                 if (Session::has('affiliate_id')) {
                     $user_subscription->affiliate_id = Session::get('affiliate_id');
-                    $user_subscription->affiliate_commission = $total;
+                    $user_subscription->affiliate_commission = $commission_dis;
                 } else {
                     $user_subscription->affiliate_id = null;
                     $user_subscription->affiliate_commission = null;
@@ -116,7 +116,7 @@ class PaypalController extends Controller
                 $user_subscription->coupan_code = $data['coupan_code'];
                 $user_subscription->coupan_discount = $data['coupon_discount'];
                 $user_subscription->sub_total = $data['plan_price'];
-                $user_subscription->total = $total;
+                $user_subscription->total = $data['plan_price'];
                 $user_subscription->additional_information = $data['additional_information'];
                 $user_subscription->save();
 
