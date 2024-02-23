@@ -39,8 +39,9 @@ class HomeController extends Controller
         $ott_icons = OttService::orderBy('id','asc')->get();
         $entertainments = EntertainmentCms::orderBy('id','asc')->get();
         $plan_list = Plan::orderBy('plan_order','asc')->with('Specification')->get();
+        $products = Product::orderBy('id','desc')->get();
         
-        return view('frontend.pages.home',compact('home_cms','plan_list','top_grids','ott_icons','entertainments'));
+        return view('frontend.pages.home',compact('home_cms','plan_list','top_grids','ott_icons','entertainments','products'));
     }
 
 
@@ -85,11 +86,13 @@ class HomeController extends Controller
 
     public function pricing($id=null)
     {
+        
         $plan_cms = PlanCms::first();
         $home_cms = HomeCms::first();
+        $products = Product::orderBy('id','desc')->get();
         $plan_list = Plan::orderBy('plan_order','asc')->with('Specification')->get();
         $entertainments = EntertainmentCms::orderBy('id','asc')->get();
-        return view('frontend.pages.pricing',compact('plan_cms','plan_list','home_cms','entertainments'));
+        return view('frontend.pages.pricing',compact('plan_cms','plan_list','home_cms','entertainments','products'));
     }
 
     public function contactUs()
@@ -115,8 +118,6 @@ class HomeController extends Controller
 
     public function subscriptionSubmit(Request $request)
     {
-        
-
         $check_mail = SubscriptionUs::where('email',$request->email)->count();
         if($check_mail > 0)
         {
@@ -127,7 +128,6 @@ class HomeController extends Controller
         $subscription_submit->save();
 
         return back()->with('message','Thank you for subscribing us');
-
     }
 
     public function faqs()
@@ -147,6 +147,8 @@ class HomeController extends Controller
         $privacy = BusinessManagement::where('type','privacy-policy')->first();
         return view('frontend.pages.privacy-policy',compact('privacy'));
     }
+
+   
 
 
 }

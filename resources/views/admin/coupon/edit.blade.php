@@ -57,7 +57,7 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Coupon Type<span style="color: red;">*</span></label>
-                                    <select name="coupon_type" class="form-control" id="coupon-type" onchange="toggleValueInput()">
+                                    <select name="coupon_type" class="form-control" id="coupon-type" >
                                         <option value="percentage" {{ $coupon_edit->coupon_type == 'percentage' ? 'selected' : '' }}>Percentage</option>
                                         <option value="amount" {{ $coupon_edit->coupon_type == 'amount' ? 'selected' : '' }}>Amount</option>
                                     </select>
@@ -122,16 +122,4 @@
         });
     </script>
 
-    <script>
-        function toggleValueInput() {
-            var couponType = document.getElementById('coupon-type').value;
-            var valueInput = document.getElementById('value-input');
-
-            if (couponType === 'percentage' || couponType == 'amount') {
-                valueInput.style.display = 'block';
-            } else {
-                valueInput.style.display = 'none';
-            }
-        }
-    </script>
 @endpush

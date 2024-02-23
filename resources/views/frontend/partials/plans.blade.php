@@ -14,7 +14,8 @@
                             <h3>${{ $plan->plan_offer_price }}</h3>
                         </div>
                         <div class="sub-btn">
-                            <a href="">{{ $plan->button_text }}</a>
+                            <a href="{{ route('create-payments',['id' => encrypt($plan->id)] ) }}
+                                ">{{ $plan->button_text }}</a>
                         </div>
                         <div class="pricing-list">
                             <ul>

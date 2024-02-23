@@ -46,7 +46,7 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Coupon Code<span style="color: red;">*</span></label>
-                                    <input type="text" name="code" placeholder="Enter coupon code"
+                                    <input type="text" name="code" value="{{ old('code') }}" placeholder="Enter coupon code"
                                         class="form-control">
                                     @if ($errors->has('code'))
                                         <div class="error" style="color:red;">
@@ -56,7 +56,7 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Coupon Type<span style="color: red;">*</span></label>
-                                    <select name="coupon_type" class="form-control" id="coupon-type" onchange="toggleValueInput()">
+                                    <select name="coupon_type" class="form-control"  >
                                         <option value="">Select type</option>
                                         <option value="percentage">Percentage</option>
                                         <option value="amount">Amount</option>
@@ -67,9 +67,9 @@
                                     @endif
                                 </div>
                                 
-                                <div class="form-group col-md-6 mb-3" id="value-input" style="display: none;">
+                                <div class="form-group col-md-6 mb-3" id="value-input" >
                                     <label>Value<span style="color: red;">*</span></label>
-                                    <input type="text" name="value" class="form-control" placeholder="Enter value">
+                                    <input type="text" name="value" value="{{ old('value') }}" class="form-control" placeholder="Enter value">
                                     @if ($errors->has('value'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('value') }}</div>
@@ -122,18 +122,7 @@
         });
     </script>
 
-<script>
-    function toggleValueInput() {
-        var couponType = document.getElementById('coupon-type').value;
-        var valueInput = document.getElementById('value-input');
 
-        if (couponType === 'percentage' || couponType == 'amount') {
-            valueInput.style.display = 'block';
-        } else {
-            valueInput.style.display = 'none';
-        }
-    }
-</script>
 
     
 @endpush

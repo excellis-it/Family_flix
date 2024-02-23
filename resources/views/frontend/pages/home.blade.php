@@ -165,6 +165,7 @@
             </div>
         </div>
     </section>
+    @if(count($products) > 0)
     <section class="unbeatable-sec">
         <div class="unbeatable-bg">
             <img src="{{ Storage::url($home_cms->section4_back_image) }}" alt="" />
@@ -186,51 +187,10 @@
             </div>
         </div>
         <div class="unbeatable-slider">
-            
-            <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-2.png" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-4.png" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-5.png" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-6.png" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-7.png" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="unbeatable-slider-wrap">
-                <div class="unbeatable-slider-div">
-                    <div class="unbeatable-slider-img">
-                        <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-8.png" alt="" />
-                    </div>
-                </div>
-            </div> 
+            @include('frontend.partials.unbeatable-slider')
         </div>
     </section>
+    @endif
     <section class="kids-sec">
         <div class="kid-bg">
             <img src="{{ Storage::url($home_cms->section5_back_image) }}" alt="" />

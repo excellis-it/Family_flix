@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PaypalController;
 
 use Illuminate\Support\Facades\Artisan;
 
@@ -59,6 +60,11 @@ Route::post('/submit-subscription',[HomeController::class, 'subscriptionSubmit']
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/term-service', [HomeController::class, 'termService'])->name('term-service');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
+
+
+//payments
+Route::get('/create-payments/{id}', [PaypalController::class, 'createPayments'])->name('create-payments');
+Route::post('/process-payments', [PaypalController::class, 'processPayments'])->name('process-payments');
 
 // affliate authentication
 
