@@ -1,4 +1,4 @@
-@extends('frontend.affiliate-marketer.layouts.master')
+@extends('admin.layouts.master')
 @section('title')
     Commission History
 @endsection
@@ -19,7 +19,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <h3>Commission History</h3>
                     <ul class="breadcome-menu mb-0">
-                        <li><a href="{{ route('affiliate-marketer.dashboard') }}">Home</a> <span class="bread-slash">/</span>
+                        <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span>
                         </li>
                         <li><span class="bread-blod">Commission History</span></li>
                     </ul>
@@ -58,11 +58,14 @@
                                         <th><span class="fs-4 fw-semibold mb-0"> Customer Email</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0"> Plan Name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0"> Subscription Amount</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0"> Commission</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Affiliate Name</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0"> Affiliate Email</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Affiliate Commission</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">View</span></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyContents">
-                                    @include('frontend.affiliate-marketer.commission-history.filter')
+                                    @include('admin.commission-history.filter')
 
                                 </tbody>
                             </table>
@@ -82,7 +85,7 @@
         $(document).ready(function() {
             function fetch_data(page, query) {
                 $.ajax({
-                    url: "{{ route('affiliate-marketer.commission-history.fetch-data') }}",
+                    url: "{{ route('commission-history.fetch-data') }}",
                     data: {
                         page: page,
                         query: query
