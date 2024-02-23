@@ -27,10 +27,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
-                            <span>Products</span>
+                            <span>Total Commission</span>
                         </div>
 
-                        <span class="fw-600">2</span>
+                        <span class="fw-600">{{$count['total_commissions'] }}</span>
                     </div>
                 </div>
             </div>
@@ -41,9 +41,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
-                            <span>Subscription</span>
+                            <span>This Month Commssion Amount</span>
                         </div>
-                        <span class="fw-600">5</span>
+                        <span class="fw-600">{{$count['commision_amount_this_month'] ? '$'.$count['commision_amount_this_month'] : '$0'}}</span>
                     </div>
                 </div>
             </div>
@@ -54,9 +54,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
-                            <span>Plan</span>
+                            <span>This Week Commission Amount</span>
                         </div>
-                        <span class="fw-600">3</span>
+                        <span class="fw-600">{{$count['commision_amount_this_week'] ? '$'.$count['commision_amount_this_week'] : '$0'}}</span>
                     </div>
                 </div>
             </div>
@@ -67,9 +67,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
-                            <span>User</span>
+                            <span>Total Commission Amount</span>
                         </div>
-                        <span class="fw-600">10</span>
+                        <span class="fw-600">{{$count['total_commision_amount'] ? '$'.$count['total_commision_amount'] : '$0'}}</span>
                     </div>
                 </div>
             </div>

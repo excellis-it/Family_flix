@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\GeneralCmsController;
 use App\Http\Controllers\Admin\EntertainmentBannerController;
 use App\Http\Controllers\Admin\TopGridController;
 use App\Http\Controllers\Admin\BusinessManagementController;
+use App\Http\Controllers\Admin\CommissionHistoryController as AdminCommissionHistoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
@@ -39,7 +40,6 @@ Route::get('clear', function () {
 /* ----------------- Frontend Routes -----------------*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // affliate authentication
 
 
@@ -94,6 +94,8 @@ Route::name('affiliate-marketer.')
             Route::resources([
                 'commission-history' => CommissionHistoryController::class,
             ]);
+
+            Route::get('/commission-history-fetch-data', [CommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
         });
     });
 
@@ -122,9 +124,11 @@ Route::group(['prefix' => 'admin'], function () {
             'top-grid' => TopGridController::class,
             'products' => ProductController::class,
             'coupons' => CouponController::class,
-            'affliate-marketer' => AffliateMarketerController::class
+            'affliate-marketer' => AffliateMarketerController::class,
+            'commission-history' => AdminCommissionHistoryController::class,
         ]);
 
+        Route::get('/commission-history-fetch-data', [AdminCommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
 
         //coupons route
         Route::get('/coupons/delete/{id}', [CouponController::class, 'deleteCoupon'])->name('delete.coupons');

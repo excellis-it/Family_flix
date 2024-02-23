@@ -36,7 +36,7 @@
                 <div class="col-lg-6">
                     <div class="card w-100">
                         <div class="card-body">
-                            <a href="index.html" class="text-nowrap d-block text-center mx-auto logo-img mb-4">
+                            <a href="{{route('home')}}" class="text-nowrap d-block text-center mx-auto logo-img mb-4">
                                 <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" alt="">
                             </a>
                             <form action="{{ route('admin.login.check') }}" method="POST">

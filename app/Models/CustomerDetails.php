@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerDetails extends Model
 {
     use HasFactory;
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
 }

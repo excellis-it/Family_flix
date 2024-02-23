@@ -73,7 +73,19 @@
                         </li>
                     </ul>
                 </li>
-
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
+                        <span>
+                            <i class="ti ti-percentage"></i>
+                        </span>Affiliate Commission
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/commission-history*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/commission-history*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('commission-history.index') }}">Commission History</a>
+                        </li>
+                    </ul>
+                </li>
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#">
                         <span>

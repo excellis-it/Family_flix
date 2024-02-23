@@ -25,6 +25,7 @@ class CreateUserSubscriptionsTable extends Migration
             $table->string('coupan_discount_type')->nullable();
             $table->string('sub_total')->nullable();
             $table->string('total')->nullable();
+            $table->string('affiliate_commission')->nullable();
             $table->longText('additional_information')->nullable();
             $table->timestamps();
         });
