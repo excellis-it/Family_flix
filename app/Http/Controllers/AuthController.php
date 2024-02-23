@@ -63,7 +63,7 @@ class AuthController extends Controller
             'name' => $user->name,
             'email' => $user->email,
         ];
-        Mail::to($request->email)->send(new WelcomeMail($maildata));
+        // Mail::to($request->email)->send(new WelcomeMail($maildata));
 
         return redirect()->route('affiliate-marketer.login')->with('message', 'Your account has been created successfully.');
     }

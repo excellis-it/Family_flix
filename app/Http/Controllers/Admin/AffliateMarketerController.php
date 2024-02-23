@@ -125,7 +125,7 @@ class AffliateMarketerController extends Controller
             'type' => 'Affiliate Marketer',
         ];
 
-        Mail::to($request->email)->send(new RegistrationMail($maildata));
+        // Mail::to($request->email)->send(new RegistrationMail($maildata));
         return redirect()->route('affliate-marketer.index')->with('message', 'Affiliate Marketer created successfully.');
     }
 

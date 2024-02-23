@@ -97,13 +97,13 @@ class SendMail extends Command
                 $new_invoice->tax_amount = $invoice->tax_amount ?? '';
                 $new_invoice->image =  $invoice->image ?? '';
                 $new_invoice->save();
-    
+
                 foreach ($invoice['items'] as $key => $item) {
                     if ($item != null) {
                         $add_items = new Item();
                         $add_items->user_id = $invoice->user_id;
-                        $add_items->invoice_id = $new_invoice->id;   
-                        $add_items->item_description = $item->item_description;               
+                        $add_items->invoice_id = $new_invoice->id;
+                        $add_items->item_description = $item->item_description;
                         $add_items->item_additional_details = $item->item_additional_details;
                         $add_items->item_rate = $item->rate;
                         $add_items->item_quantity = $item->quantity;
@@ -111,14 +111,14 @@ class SendMail extends Command
                         $add_items->image = $item->image ?? '';
                         $add_items->save();
                     }
-        
+
                 }
                 $items = Item::where('invoice_id', $new_invoice->id)->get();
                 $data = [
                     'invoice_detail' => $new_invoice,
                     'items' => $items,
                 ];
-        
+
                 $pdf = PDF::loadView('pdf.invoice', [
                         'data' => $data,
                     ])->setOptions(['defaultFont' => 'sans-serif']);
@@ -130,39 +130,39 @@ class SendMail extends Command
                 $pdf_file->user_id = $invoice->user_id;
                 $pdf_file->invoice_id = $new_invoice->id;
                 $pdf_file->save();
-    
+
                 if ($invoice->send_id == 2) {
                     // Given date: 2023-08-11
                     $givenDate = $value['send_in'];
-    
+
                     // Convert the given date to a Carbon instance
                     $carbonDate = Carbon::parse($givenDate);
-    
+
                     // Add one week to the date
                     $dateAfterOneWeek = $carbonDate->addWeek();
-    
+
                     // Format the date as needed (optional)
                     $formattedDate = $dateAfterOneWeek->format('Y-m-d');
-    
+
                     $invoice->update(['send_in' =>  $formattedDate]);
                 } else {
                     // Given date: 2023-08-11
                     $givenDate = $value['send_in'];
-    
+
                     // Convert the given date to a Carbon instance
                     $carbonDate = Carbon::parse($givenDate);
-    
+
                     // Add one week to the date
                     $dateAfterOneWeek = $carbonDate->addMonth();
-    
+
                     // Format the date as needed (optional)
                     $formattedDate = $dateAfterOneWeek->format('Y-m-d');
-    
+
                     $invoice->update(['send_in' =>  $formattedDate]);
                 }
                 $items = Item::where('invoice_id', $invoice->id)->get();
                 $file = File::where('invoice_id', $invoice->id)->first();
-               
+
                 $maildata = [
                     'id' => $invoice->id,
                     'invoice_detail' => $new_invoice,
@@ -170,14 +170,14 @@ class SendMail extends Command
                     'pdf_file' => $file['file'] ?? '',
                     'invoice_id' => $invoice_number
                 ];
-    
-                Mail::to($invoice->bil_to_email)->send(new InvoiceMail($maildata));
+
+                // Mail::to($invoice->bil_to_email)->send(new InvoiceMail($maildata));
             }
            Log::info('Invoice send successfully.');
         } else {
             Log::info('Invoice not send.');
         }
-        
+
 
         $this->info('Invoice send successfully.');
     }
