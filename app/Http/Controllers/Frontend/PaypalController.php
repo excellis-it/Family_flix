@@ -10,6 +10,7 @@ use App\Models\UserSubscription;
 use App\Models\CustomerDetails;
 use App\Models\AffiliateCommission;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Session;
 use Omnipay\Omnipay;
 
 
@@ -17,7 +18,7 @@ class PaypalController extends Controller
 {
     //
     private $gateway;
-  
+
     public function __construct()
     {
         $this->gateway = Omnipay::create('PayPal_Rest');
@@ -32,7 +33,7 @@ class PaypalController extends Controller
         $plan = Plan::find($id);
         return view('frontend.pages.checkout',compact('plan'));
     }
-   
+
 
     public function processPayments(Request $request)
     {
@@ -46,7 +47,7 @@ class PaypalController extends Controller
                     'returnUrl' => route('success-payment'),
                     'cancelUrl' => route('cancel-payments'),
                 ))->send();
-           
+
                 if ($response->isRedirect()) {
                     session()->put('data', $data);
                     $response->redirect(); // this will automatically forward the customer
@@ -74,7 +75,7 @@ class PaypalController extends Controller
 
             $data = session()->get('data');
             // create a random unique order number
-           
+
             if ($response->isSuccessful())
             {
 
@@ -92,7 +93,7 @@ class PaypalController extends Controller
                 $customer_details->phone = $data['phone'];
                 $customer_details->save();
 
-                //commission 
+                //commission
                 $commission = AffiliateCommission::first();
                 $commission_dis = ($data['amount'] / 100) * $commission->percentage;
                 $total = $data['amount'] - $commission_dis;
@@ -101,14 +102,20 @@ class PaypalController extends Controller
                 //user subscription
                 $user_subscription = new UserSubscription();
                 $user_subscription->customer_details_id = $customer_details->id;
-                $user_subscription->affiliate_id = '';
+                if (Session::has('affiliate_id')) {
+                    $user_subscription->affiliate_id = Session::get('affiliate_id');
+                    $user_subscription->affiliate_commission = $total;
+                } else {
+                    $user_subscription->affiliate_id = null;
+                    $user_subscription->affiliate_commission = null;
+                }
+
                 $user_subscription->payment_type = 'paypal';
                 $user_subscription->plan_name = $data['plan_name'];
                 $user_subscription->plan_price = $data['plan_price'];
                 $user_subscription->coupan_code = $data['coupan_code'];
                 $user_subscription->coupan_discount = $data['coupon_discount'];
                 $user_subscription->sub_total = $data['plan_price'];
-                $user_subscription->affiliate_commission = '';
                 $user_subscription->total = $total;
                 $user_subscription->additional_information = $data['additional_information'];
                 $user_subscription->save();
@@ -125,8 +132,8 @@ class PaypalController extends Controller
                 $payment->payment_amount = $arr_body['transactions'][0]['amount']['total'];
                 $payment->payment_currency = env('PAYPAL_CURRENCY');
                 $payment->save();
-                
-                
+
+
                 return redirect()->route('payment.successful')->with('message','payment successful');
                 // return "Payment is successful. Your transaction id is: ". $arr_body['id'];
             } else {
@@ -144,7 +151,7 @@ class PaypalController extends Controller
 
     public function couponCheck(Request $request)
     {
-        
+
         $coupon = Coupon::where('code', $request->coupon_code)->first();
         if(!$coupon)
         {
@@ -153,12 +160,12 @@ class PaypalController extends Controller
         //calculate discount
         if($coupon->coupon_type == 'percentage')
         {
-        
+
             $discount = ($request->plan_price  / 100) * $coupon->value;
         }
         else
         {
-           
+
             $discount = $coupon->value;
         }
 
@@ -168,7 +175,7 @@ class PaypalController extends Controller
         {
             return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
         }
-        
+
     }
 
     public function paymentSuccess()

@@ -40,7 +40,7 @@ class HomeController extends Controller
         $entertainments = EntertainmentCms::orderBy('id','asc')->get();
         $plan_list = Plan::orderBy('plan_order','asc')->with('Specification')->get();
         $products = Product::orderBy('id','desc')->get();
-        
+
         return view('frontend.pages.home',compact('home_cms','plan_list','top_grids','ott_icons','entertainments','products'));
     }
 
@@ -86,12 +86,18 @@ class HomeController extends Controller
 
     public function pricing($id=null)
     {
-        
+
         $plan_cms = PlanCms::first();
         $home_cms = HomeCms::first();
         $products = Product::orderBy('id','desc')->get();
         $plan_list = Plan::orderBy('plan_order','asc')->with('Specification')->get();
         $entertainments = EntertainmentCms::orderBy('id','asc')->get();
+        
+        if ($id != null) {
+            $id = decrypt($id);
+            session()->put('affiliate_id', $id);
+        }
+
         return view('frontend.pages.pricing',compact('plan_cms','plan_list','home_cms','entertainments','products'));
     }
 
@@ -113,7 +119,7 @@ class HomeController extends Controller
         $contact_submit->save();
 
         return back()->with('message', 'Thank you for contacting us.');
-        
+
     }
 
     public function subscriptionSubmit(Request $request)
@@ -148,7 +154,7 @@ class HomeController extends Controller
         return view('frontend.pages.privacy-policy',compact('privacy'));
     }
 
-   
+
 
 
 }
