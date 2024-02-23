@@ -24,7 +24,7 @@
                             {{ $home_cms->top_main_title }}
                         </h2>
                         <div class="sign-up-btn mt-4">
-                            <a href="">{{ $home_cms->top_button_text }}</a>
+                            <a href="{{route('affiliate-marketer.register')}}">{{ $home_cms->top_button_text }}</a>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        
+
     </section>
     <section class="one-place">
         <div class="one-place-img text-end">
@@ -113,7 +113,7 @@
                                                                                     src="{{ Storage::url($ott_icon->icon) }}" />
                                                                             </div>
                                                                         </div>
-                                                                    </div>                                                             
+                                                                    </div>
                                                                 </div>
 
                                                                 @endforeach
@@ -138,7 +138,7 @@
         </div>
         <div class="entertainment-div">
             @include('frontend.partials.entertainment');
-           
+
         </div>
     </section>
     <section class="works-sec">
@@ -186,7 +186,7 @@
             </div>
         </div>
         <div class="unbeatable-slider">
-            
+
             <div class="unbeatable-slider-wrap">
                 <div class="unbeatable-slider-div">
                     <div class="unbeatable-slider-img">
@@ -228,7 +228,7 @@
                         <img src="https://www.excellis.co.in/demo/the_family_flix/html/assets/images/unbeatable-8.png" alt="" />
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </section>
     <section class="kids-sec">

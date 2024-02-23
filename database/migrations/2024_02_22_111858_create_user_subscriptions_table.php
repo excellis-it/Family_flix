@@ -15,14 +15,17 @@ class CreateUserSubscriptionsTable extends Migration
     {
         Schema::create('user_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->references('id')->on('customer_details')->onDelete('cascade')->nullable();
-            $table->foreignId('plan_id')->references('id')->on('plans')->onDelete('cascade')->nullable();
-            $table->string('sub_total')->nullable();
-            $table->foreignId('coupon_id')->references('id')->on('coupons')->onDelete('cascade')->nullable();
-            $table->string('total')->nullable();
-            $table->string('payment_type')->nullable();
-            $table->longText('additional_information')->nullable();
+            $table->bigInteger('customer_details_id')->nullable();
             $table->string('affiliate_id')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->string('plan_name')->nullable();
+            $table->string('plan_price')->nullable();
+            $table->string('coupan_code')->nullable();
+            $table->string('coupan_discount')->nullable();
+            $table->string('coupan_discount_type')->nullable();
+            $table->string('sub_total')->nullable();
+            $table->string('total')->nullable();
+            $table->longText('additional_information')->nullable();
             $table->timestamps();
         });
     }

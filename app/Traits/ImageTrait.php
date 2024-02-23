@@ -19,11 +19,11 @@ trait ImageTrait
 
             $fileName   = time(). '_' . rand(100,100000) .'_'. Str::uuid().'.'.$file->getClientOriginalExtension();
 
-            Storage::disk('local')->put($path.'/'.$fileName, File::get($file));
+            Storage::disk('local')->put('public/'.$path.'/'.$fileName, File::get($file));
             $file_name  = $file->getClientOriginalName();
             $file_type  = $file->getClientOriginalExtension();
             $filePath   = $path.'/'.$fileName;
-            
+
             return $file = [
                 'fileName' => $file_name,
                 'fileType' => $file_type,
@@ -34,7 +34,7 @@ trait ImageTrait
     }
 
     public function fileSize($file, $precision = 2)
-    {   
+    {
         $size = $file->getSize();
 
         if ( $size > 0 ) {

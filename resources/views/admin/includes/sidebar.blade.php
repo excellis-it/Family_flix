@@ -3,7 +3,7 @@
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="index.html" class="text-nowrap logo-img">
+            <a href="{{route('home')}}" class="text-nowrap logo-img">
                 <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" alt="">
             </a>
             <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -196,7 +196,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/coupons*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/coupons*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-chevron-right"></i>
                         </span>Coupons
@@ -210,7 +210,7 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#"> 
+                    <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-chevron-right"></i>
                         </span>Subscription Us

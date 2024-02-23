@@ -33,7 +33,7 @@ class AuthController extends Controller
     public function register()
     {
 
-        return view('frontend.auth.register');
+        return view('frontend.affiliate-marketer.auth.register');
     }
 
     public function registerStore(Request $request)
@@ -42,6 +42,7 @@ class AuthController extends Controller
         $request->validate([
             'full_name'     => 'required',
             'email'    => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+            'phone' => 'required|numeric',
             'password' => 'required|min:8',
             'confirm_password' => 'required|min:8|same:password',
         ], [
@@ -52,6 +53,7 @@ class AuthController extends Controller
         $user = new User;
         $user->name = $input['full_name'];
         $user->email = $input['email'];
+        $user->phone = $input['phone'];
         $user->password = bcrypt($input['password']);
         $user->status = 1;
         $user->save();
@@ -63,15 +65,15 @@ class AuthController extends Controller
         ];
         Mail::to($request->email)->send(new WelcomeMail($maildata));
 
-        return redirect()->route('login')->with('message', 'Your account has been created successfully.');
+        return redirect()->route('affiliate-marketer.login')->with('message', 'Your account has been created successfully.');
     }
 
     public function login()
     {
         if (Auth::check() && Auth::user()->hasRole('AFFLIATE MARKETER')) {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('affliate-marketer.dashboard');
         } else {
-            return view('frontend.auth.login');
+            return view('frontend.affiliate-marketer.auth.login');
         }
     }
 
@@ -87,7 +89,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = User::where('email', $request->email)->first();
             if ($user->hasRole('AFFLIATE MARKETER') && $user->status == 1) {
-                return "login";
+                return redirect()->route('affiliate-marketer.dashboard');
             } else {
                 Auth::logout();
                 return redirect()->back()->with('error', 'Your account is deactivate!');
@@ -103,5 +105,11 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect()->route('admin.login');
+    }
+
+    public function affliateLogout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
     }
 }
