@@ -18,47 +18,8 @@ class businessManagementSeeder extends Seeder
         $business = [
             [
                 'banner_image' => 'business_management/faq_banner.png',
-                'banner_heading' => 'Faq',
-                'content' => '1. What is The Family Flix?
-
-                The Family Flix is a comprehensive streaming service that offers a vast library of movies, TV series, and exclusive content from multiple platforms including Netflix, Amazon Prime, Hulu, Disney Plus, and more, all under one roof. Our service is designed to provide an affordable and convenient alternative to managing multiple subscriptions.
-                
-                2. How does The Family Flix offer content from different streaming platforms?
-                
-                We have agreements with various content providers and streaming platforms to legally host and stream their content on our platform. This allows our subscribers to enjoy a wide range of entertainment without the need for multiple subscriptions.
-                
-                3. What subscription plans are available?
-                
-                The Family Flix offers several subscription plans tailored to meet different needs and preferences. Our plans vary based on the number of screens that can be used simultaneously, video quality, and access to exclusive content. For detailed information on our plans, please visit our Subscription Plans page.
-                
-                4. Can I watch content on The Family Flix without an internet connection?
-                
-                Yes, The Family Flix offers a download feature for mobile and tablet devices, allowing you to download your favorite shows and movies to watch offline. This feature is perfect for keeping entertained while on the move without internet access.
-                
-                5. How can I watch The Family Flix on my TV?
-                
-                The Family Flix is compatible with various devices including smart TVs, streaming media players, gaming consoles, and more. You can also cast The Family Flix from your mobile device or computer to your TV using Chromecast or AirPlay.
-                
-                6. Are there any parental controls available?
-                
-                Yes, The Family Flix provides comprehensive parental controls allowing you to set viewing restrictions and create a safe viewing environment for children. You can customize profiles with age-appropriate content filters.
-                
-                7. Can I share my account with friends and family?
-                
-                Our subscription plans include options to create multiple user profiles and allow simultaneous streaming on multiple devices. You can share your account with friends and family according to the terms of your selected plan.
-                
-                8. Is there a free trial available?
-                
-                Yes, The Family Flix offers a 7-day free trial for new subscribers. You can explore our entire library and experience all the features of The Family Flix without any charges during the trial period.
-                
-                9. How do I cancel my subscription?
-                
-                You can cancel your subscription at any time through your account settings. There are no cancellation fees, and you can continue to enjoy The Family Flix until the end of your billing period.
-                
-                10. How often is new content added to The Family Flix?
-                
-                New content is added to The Family Flix regularly, including movies, TV series, and exclusive shows from various platforms. We strive to keep our library fresh and engaging by updating our content offerings frequently.
-                ',
+                'banner_heading' => 'Frequently Asked Questions',
+                'content' => '',
                 'type' => 'faq',
             ],
             [

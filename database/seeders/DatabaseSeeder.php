@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             businessManagementSeeder::class,
             footerCmsSeeder::class,
             afiliatedCommissionSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }

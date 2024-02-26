@@ -95,8 +95,8 @@ class PaypalController extends Controller
 
                 //commission
                 $commission = AffiliateCommission::first();
-                $commission_dis = ($data['amount'] / 100) * $commission->percentage;
-                $total = $data['amount'] - $commission_dis;
+                $commission_dis = round(($data['amount'] / 100) * $commission->percentage);
+                $after_commission_dis = $data['amount'] - $commission_dis;
 
 
                 //user subscription
@@ -116,7 +116,7 @@ class PaypalController extends Controller
                 $user_subscription->coupan_code = $data['coupan_code'];
                 $user_subscription->coupan_discount = $data['coupon_discount'];
                 $user_subscription->sub_total = $data['plan_price'];
-                $user_subscription->total = $data['plan_price'];
+                $user_subscription->total = $data['amount'];
                 $user_subscription->additional_information = $data['additional_information'];
                 $user_subscription->save();
 

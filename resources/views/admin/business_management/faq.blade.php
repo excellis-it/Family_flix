@@ -60,15 +60,17 @@
                                 </div>
 
                                 <div class="form-group col-md-12 mb-3">
-                                    <label>Main Content<span style="color: red;">*</span></label>
-                                    <textarea name="content" id="editor1"
-                                        class="form-control">{{ $faq->content }}</textarea>
-                                    @if ($errors->has('content'))
+                                    <label>Faq Type<span style="color: red;">*</span></label>
+                                    <select name="faq_type"  placeholder="Enter banner heading">
+                                    @if ($errors->has('banner_heading'))
                                         <div class="error" style="color:red;">
-                                            {{ $errors->first('content') }}</div>
+                                            {{ $errors->first('banner_heading') }}</div>
                                     @endif
                                 </div>
-                             
+
+
+
+                               
                              
                                 <div class="w-100 text-end">
                                     <button type="submit" class="print_btn">Update</button>

@@ -15,7 +15,7 @@ class CreateFaqsTable extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['general','subscription'])->nullable();
+            $table->enum('type', ['general','payment'])->nullable();
             $table->string('question')->nullable();
             $table->longText('answer')->nullable();
             $table->timestamps();

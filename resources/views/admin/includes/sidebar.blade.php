@@ -73,6 +73,14 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item has-submenu {{ Request::is('admin/commission-percentage*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('commission-percentage') }}"> <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Commission Percentage<span class="arrow-down"></span></a>
+                </li>
+
+
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
                         <span>
@@ -181,14 +189,34 @@
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
                     <ul class="submenu collapse {{ Request::is('admin/business-management*') ? 'show' : '' }}">
-                        <li class="{{ Request::is('admin/faq-management*') ? 'active' : '' }}">
+                        {{-- <li class="{{ Request::is('admin/faq-management*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('faq.management') }}">Faq</a>
-                        </li>
+                        </li> --}}
                         <li class="{{ Request::is('admin/privacy-management*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('privacy.management') }}">Privacy Policy</a>
                         </li>
                         <li class="{{ Request::is('admin/terms-management*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('terms.management') }}">Term & Condition</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/faq*') ? 'active' : '' }}" href="#">
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Faq Management
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/faq*') ? 'show' : '' }}">
+                        {{-- <li class="{{ Request::is('admin/faq-management*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('faq.management') }}">Faq</a>
+                        </li> --}}
+                        <li class="{{ Request::is('admin/faq-payment*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('faq.payment') }}">Payment Page</a>
+                        </li>
+                        <li class="{{ Request::is('admin/faq-general*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('faq.general') }}">General Page</a>
                         </li>
                     </ul>
                 </li>
@@ -222,14 +250,14 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : ' ' }}" href="#">
+                    <a class="nav-link {{ Request::is('admin/subscription-list*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="ti ti-chevron-right"></i>
                         </span>Subscription Us
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
-                    <ul class="submenu collapse {{ Request::is('admin/subscription*') ? 'active' : ' ' }}">
-                        <li class="{{ Request::is('admin/subscription*') ? 'active' : ' ' }}">
+                    <ul class="submenu collapse {{ Request::is('admin/subscription-list*') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/subscription-list*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('subscription.list') }}">List</a>
                         </li>
                     </ul>

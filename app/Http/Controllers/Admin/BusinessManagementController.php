@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BusinessManagement;
+use App\Models\AffiliateCommission;
 
 class BusinessManagementController extends Controller
 {
@@ -109,5 +110,24 @@ class BusinessManagementController extends Controller
         $terms_update->update();
 
         return back()->with('message','Terms updated successfully');
+    }
+
+    public function commissionPercentage()
+    {
+        $commission = AffiliateCommission::first();
+        return view('admin.affiliate_commission.view',compact('commission'));
+    }
+
+    public function updateCommissionPercentage(Request $request)
+    {
+        $request->validate([
+            'percentage' => 'required',
+        ]);
+
+        $commission = AffiliateCommission::where('id',$request->id)->first();
+        $commission->percentage = $request->percentage;
+        $commission->update();
+
+        return back()->with('message','Commission updated successfully');
     }
 }

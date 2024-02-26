@@ -8,6 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Hugo 0.84.0" />
     <title>CheckOut</title>
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,6 +29,8 @@
     <link href="{{ asset('frontend_assets/css/responsive.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend_assets/css/circle.css') }}" rel="stylesheet" />
     <!-- Custom styles for this template -->
+ 
+ 
 </head>
 
 <body>
@@ -39,7 +42,7 @@
                     <div class="col-lg-7">
                         <div class="ck-header-wrap">
                             <div class="logo1 text-center">
-                                <img src="{{ asset('frontend_assets/images/logo.png') }}" alt="">
+                                <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}" alt=""></a>
                             </div>
                             <div class="ck-text text-center">
                                 <h2>You are almost there</h2>
@@ -90,7 +93,6 @@
                                 @csrf
                                 <!-- start step indicators -->
                                 <div class="form-header d-flex mb-4">
-                                    <!-- <span class="stepIndicator">Account Setup</span> -->
                                     <span class="stepIndicator">Information</span>
                                     <span class="stepIndicator">Finish</span>
                                 </div>
@@ -105,8 +107,8 @@
                                                     <h3>Customer information</h3>
                                                     <div class="form-floating mb-3">
                                                         <input type="text" class="form-control" name="email_address"
-                                                            id="floatingInput" placeholder="">
-                                                        <label for="floatingInput">Email Address *</label>
+                                                            id="floatingInput1" placeholder="">
+                                                        <label for="floatingInput1">Email Address  <span>*</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="step-div">
@@ -115,15 +117,16 @@
                                                         <div class="col-lg-6">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    name="first_name" id="floatingInput" placeholder="">
-                                                                <label for="floatingInput">First Name</label>
+                                                                    name="first_name" id="floatingInput2" placeholder="">
+                                                                <label for="floatingInput2">First Name <span>*</span></label>
                                                             </div>
                                                         </div>
+                                                        
                                                         <div class="col-lg-6">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="last_name" name="last_name" placeholder="">
-                                                                <label for="floatingInput">Last Name</label>
+                                                                     name="last_name" id="floatingInput3" placeholder="">
+                                                                <label for="floatingInput3">Last Name <span>*</span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -131,8 +134,8 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput" name="country" placeholder="">
-                                                                <label for="floatingSelect">Country/Region
+                                                                    id="floatingSelect1" name="country" placeholder="">
+                                                                <label for="floatingSelect1">Country/Region
                                                                     <span>*</span></label>
                                                             </div>
                                                         </div>
@@ -141,19 +144,19 @@
                                                         <div class="col-lg-6">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput" name="house_name"
+                                                                    id="floatingInput4" name="house_name"
                                                                     placeholder="">
-                                                                <label for="floatingInput">House number and street
-                                                                    name</label>
+                                                                <label for="floatingInput4">House number and street
+                                                                    name <span>*</span></label>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput" name="detail_address"
+                                                                    id="floatingInput5" name="detail_address"
                                                                     placeholder="">
-                                                                <label for="floatingInput">Apartment, suite, unit, etc.
-                                                                    (optional)</label>
+                                                                <label for="floatingInput5">Apartment, suite, unit, etc.
+                                                                    (optional) <span>*</span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -161,24 +164,24 @@
                                                         <div class="col-lg-4">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput" name="city" placeholder="">
-                                                                <label for="floatingInput">Town/City</label>
+                                                                    id="floatingInput6" name="city" placeholder="">
+                                                                <label for="floatingInput6">Town/City <span>*</span></label>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput" name="state" placeholder="">
-                                                                <label for="floatingSelect">Country/Region
+                                                                    id="floatingInput7" name="state" placeholder="">
+                                                                <label for="floatingInput7">State/Country
                                                                     <span>*</span></label>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput" name="post_code"
+                                                                    id="floatingInput8" name="post_code"
                                                                     placeholder="">
-                                                                <label for="floatingInput">Post code</label>
+                                                                <label for="floatingInput8">Post code <span>*</span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -186,8 +189,8 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    name="phone" id="floatingInput" placeholder="">
-                                                                <label for="floatingInput">Phone</label>
+                                                                    name="phone" id="floatingInput9" placeholder="">
+                                                                <label for="floatingInput9">Phone <span>*</span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -195,13 +198,14 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
                                                                 <select class="form-select" name="payment_type"
-                                                                    id="floatingSelect"
+                                                                    id="floatingSelect2"
                                                                     aria-label="Floating label select example">
+                                                                    
                                                                     <option value="New Subsription">New Subsription
                                                                     </option>
                                                                     <option value="Renewal">Renewal</option>
                                                                 </select>
-                                                                <label for="floatingSelect">payment Type
+                                                                <label for="floatingSelect2">payment Type
                                                                     <span>*</span></label>
                                                             </div>
                                                         </div>
@@ -274,13 +278,13 @@
                                                     <div class="table-responsive">
                                                         <thead>
                                                             <tr>
-                                                                <th class="product-name">{{ $plan->plan_name }}</th>
-                                                                <th class="product-total text-end">Subtotal</th>
+                                                                <th class="product-name">Plan</th>
+                                                                <th class="product-total text-end"></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Professional</td>
+                                                                <td>{{ $plan->plan_name }}</td>
                                                                 <td class="text-end">x 1 &nbsp;
                                                                     ${{ $plan->plan_offer_price }} / month</td>
                                                             </tr>
@@ -290,10 +294,10 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="coupon-dis">
-                                                              <td>Coupon Discount</td>
-                                                              <td class="text-end "> $0.00
-                                                              </td>
-                                                          </tr>
+                                                                <td>Coupon Discount</td>
+                                                                <td class="text-end "> $0.00
+                                                                </td>
+                                                            </tr>
                                                             <tr class="total-order">
                                                                 <th>Total</th>
                                                                 <th class="text-end">${{ $plan->plan_offer_price }}
@@ -315,13 +319,9 @@
                                             <input type="hidden" name="plan_price"
                                                 value="{{ $plan->plan_offer_price }}">
                                             <input type="hidden" name="amount"
-                                                value="{{ $plan->plan_offer_price }}" id="total_amount">
-                                                <input type="hidden" id="coupan_code" name="coupan_code">
-                                               <input type="hidden" id="coupon_discount" name="coupon_discount">
-                                               
-                                            
-                                                <input type="hidden" name="affiliated_id" value="">
-
+                                                value="" id="total_amount">
+                                            <input type="hidden" id="coupan_code" name="coupan_code">
+                                            <input type="hidden" id="coupon_discount" name="coupon_discount">
 
 
                                             <div class="cupon-div-main">
@@ -336,7 +336,8 @@
                                                     </div>
 
                                                     <div class="col-lg-4">
-                                                        <button class="apply-btn" type="button" id="nextBtn">Apply</button>
+                                                        <button class="apply-btn" type="button"
+                                                            id="nextBtn">Apply</button>
                                                     </div>
                                                     <span id="coupon_error" class="text-danger"></span>
                                                 </div>
@@ -352,118 +353,147 @@
             </div>
         </section>
 
-        <footer class="ftr-sec">
-            <div class="ftr-bg">
-                <img src="{{ asset('frontend_assets/images/ftr-bg.png') }}" alt="" />
-            </div>
-            <div class="ftr-top">
-                <div class="container">
-                    <div class="ftr-top-wrap">
-                        <div class="row justify-content-between">
-                            <div class="col-xl-3 col-md-6 col-12">
-                                <div class="footer-logo">
-                                    <a href=""><img src="{{ asset('frontend_assets/images/ftr.png') }}"
-                                            alt="" /></a>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6 col-12">
-                                <div class="find-us">
-                                    <h4>Quick Links</h4>
-                                    <div class="ftr-link ftr-link-1">
-                                        <ul>
-                                            <li class="">
-                                                <a href="index.html"> Home </a>
-                                            </li>
-                                            <li>
-                                                <a href="show.html">Shows</a>
-                                            </li>
-                                            <li>
-                                                <a href="movies.html">Movies</a>
-                                            </li>
-                                            <li>
-                                                <a href="kids.html">Kids</a>
-                                            </li>
-                                            <li>
-                                                <a href="pricing.html">Pricing</a>
-                                            </li>
-                                            <li>
-                                                <a href="about.html">About Us</a>
-                                            </li>
-                                            <li>
-                                                <a href="contact.html"> contact</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 col-12">
-                                <div class="find-us">
-                                    <h4>Customer Support</h4>
-                                    <div class="ftr-link ftr-link-1">
-                                        <ul>
-                                            <li><a href="">FAQ</a></li>
-                                            <li><a href="">Contact</a></li>
-                                            <li><a href="#">Terms of service</a></li>
-                                            <li><a href="#">Privacy Policy</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 col-12">
-                                <div class="find-us">
-                                    <h4>Contact Us</h4>
-                                    <div class="add d-flex">
-                                        <div class="add-icon">
-                                            <span><i class="fa-solid fa-phone"></i></span>
-                                        </div>
-                                        <div class="add-text">
-                                            <h4>Call Us</h4>
-                                            <a href="">+18453297101</a>
-                                        </div>
-                                    </div>
-                                    <div class="add d-flex">
-                                        <div class="add-icon">
-                                            <span><i class="fa-solid fa-envelope"></i></span>
-                                        </div>
-                                        <div class="add-text">
-                                            <h4>Email Us</h4>
-                                            <a href="">support@thefamilyflix.com</a>
-                                        </div>
-                                    </div>
-                                    <div class="add d-flex">
-                                        <div class="add-icon">
-                                            <span><i class="fa-solid fa-location-dot"></i></span>
-                                        </div>
-                                        <div class="add-text">
-                                            <h4>Location</h4>
-                                            <p>Orlando Florida</p>
-                                        </div>
-                                    </div>
-                                    <div class="add d-flex">
-                                        <div class="add-icon">
-                                            <span><i class="fa-regular fa-clock"></i></span>
-                                        </div>
-                                        <div class="add-text">
-                                            <h4>Office Hours (Closed Saturday)</h4>
-                                            <p>9am-11pm</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col-xl-12">
-                                    <div class="ftr-link ftr-btm-img text-center">
-                                        <img src="{{ asset('frontend_assets/images/poweredbywhite-1024x124.png') }}"
-                                            alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <section class="faq_sec">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-10">
+                  <div class="text-center">
+                    <div class="faq-head mb-5">
+                      <h2>Frequently <span>Asked Questions</span></h2>
                     </div>
+                  </div>
+                  <div class="faq_project">
+                    <div class="accordion" id="accordionExample">
+                      <div class="row justify-content-between">
+                        <div class="col-xl-6">
+                          <div class="faq-left">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  How do I sign up for The Family Flix?
+                                </button>
+                              </h2>
+                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                  <p>Visit our website and click on the “Sign Up” button. Follow the simple steps to create
+                                    your account, and you’ll be ready to enjoy our vast content library.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  What devices can I use to access The Family Flix?
+                                </button>
+                              </h2>
+                              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                 <p> The Family Flix is compatible with all major platforms, including mobile devices, tablets, and smart TVs. Download our app for a seamless viewing experience.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                  Is there a free trial available?
+                                </button>
+                              </h2>
+                              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                 <p>Yes, we offer a free trial period for new subscribers. Explore our content and features risk-free before committing to a subscription.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-6">
+                          <div class="faq-left">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                How can I cancel my subscription?
+                              </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                              data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                <p>You can easily manage your subscription in the account settings on our website. If you need assistance, our customer support team is available 24/7 to guide you through the process.</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFive">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Can I switch plans or upgrade my subscription?
+                              </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                              data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                               <p>Absolutely! You can upgrade or switch plans at any time. Visit your account settings to make the changes that suit your entertainment needs.</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingSix">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                Are there any hidden fees or contracts?
+                              </button>
+                            </h2>
+                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                              data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                               <p>No hidden fees or long-term contracts. The Family Flix believes in transparency and providing you with a straightforward, hassle-free entertainment experience.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </footer>
+          </section>
+
+          <footer class="ck-ftr">
+            <div class="container">
+             <div class="ck-ftr-wrap">
+              <div class="ck-ftr-top">
+                <div class="row justify-content-center align-items-center">
+                  <div class="col-lg-12">
+                   <div class="ck-ftr-menu">
+                      <ul>
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('privacy-policy') }}">Privacy policy</a></li>
+                        <li><a href="{{ route('term-service') }}">Terms of service</a></li>
+                      </ul>
+                   </div> 
+                  </div>
+                </div>
+              </div>
+              <div class="ck-ftr-btm">
+                <div class="row justify-content-center">
+                  <div class="col-lg-12">
+                    <div class="ck-ftr-btm-img">
+                      <img src="{{ asset('frontend_assets/images/poweredbyblack.png')}}" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+            </div>
+          </footer>
         <div class="scroll-top">
             <a id="scroll-top-btn"></a>
         </div>
@@ -475,6 +505,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ asset('frontend_assets/js/custom.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox-plus-jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
     <script>
@@ -483,34 +514,134 @@
             $('#nextBtn').click(function() {
                 var coupon_code = $('#coupon_code').val();
                 var plan_price = {{ $plan->plan_offer_price }};
-                
+
                 $.ajax({
-                        url: "{{ route('coupon-check') }}",
-                        type: "POST",
-                        data: {
-                            coupon_code: coupon_code,
-                            plan_price: plan_price,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            if (response.status == 'success') {
-                                var total = response.discount;
-                                var discount = response.coupon_discount;
-                                $('#total_amount').val(total);
-                                $('#coupan_code').val(coupon_code);
-                                $('#coupon_discount').val(discount);
-                                $('.coupon-dis').html('<th>Coupon Discount</th><th class="text-end">-$' + discount + '</th>');
-                               
-                                $('.total-order').html('<th>Total</th><th class="text-end">$' + total + '</th>');
-                                $('.recurring').html('<th>Recurring totals</th><div class="text-end"><td class="text-end">$' + total + '/ month<br><span>(ex. VAT)</span></td></div>');
-                                $('#coupon_error').text('');
-                              } else {
-                              //show message invlid coupon
-                              $('#coupon_error').text('Invalid Coupon Code');
-                               
-                            }
-                          }
-                    });
+                    url: "{{ route('coupon-check') }}",
+                    type: "POST",
+                    data: {
+                        coupon_code: coupon_code,
+                        plan_price: plan_price,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            var total = response.discount;
+                            var discount = response.coupon_discount;
+                            $('#total_amount').val(total);
+                            $('#coupan_code').val(coupon_code);
+                            $('#coupon_discount').val(discount);
+                            $('.coupon-dis').html(
+                                '<th>Coupon Discount</th><th class="text-end">-$' +
+                                discount + '</th>');
+
+                            $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                total + '</th>');
+                            $('.recurring').html(
+                                '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                total + '/ month<br><span>(ex. VAT)</span></td></div>');
+                            $('#coupon_error').text('');
+                        } else {
+                            //show message invlid coupon
+                            $('#coupon_error').text('Invalid Coupon Code');
+                            $('#total_amount').val(plan_price);
+                            $('#coupan_code').val('');
+                            $('#coupon_discount').val('0.00');
+                            $('.coupon-dis').html(
+                                '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>');
+
+                            $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                plan_price + '</th>');
+                            $('.recurring').html(
+                                '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                    plan_price + '/ month<br><span>(ex. VAT)</span></td></div>');
+
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- form validation --}}
+    <script>
+        $(document).ready(function() {
+
+            $('#signUpForm').validate({
+                rules: {
+                    email_address: {
+                        required: true,
+                        email: true
+                    },
+                    first_name: {
+                        required: true
+                    },
+                    last_name: {
+                        required: true
+                    },
+                    country: {
+                        required: true
+                    },
+                    house_name: {
+                        required: true
+                    },
+                    detail_address: {
+                        required: true
+                    },
+                    city: {
+                        required: true
+                    },
+                    state: {
+                        required: true
+                    },
+                    post_code: {
+                        required: true
+                    },
+                    phone: {
+                        required: true
+                    },
+                    payment_type: {
+                        required: true
+                    }
+                },
+                messages: {
+                    email_address: {
+                        required: "Email is required",
+                        email: "Please enter a valid email address"
+                    },
+                    first_name: {
+                        required: "First Name is required"
+                    },
+                    last_name: {
+                        required: "Last Name is required"
+                    },
+                    country: {
+                        required: "Country is required"
+                    },
+                    house_name: {
+                        required: "House Name is required"
+                    },
+                    detail_address: {
+                        required: "Detail Address is required"
+                    },
+                    city: {
+                        required: "City is required"
+                    },
+                    state: {
+                        required: "State is required"
+                    },
+                    post_code: {
+                        required: "Post Code is required"
+                    },
+                    phone: {
+                        required: "Phone is required"
+                    },
+                    payment_type: {
+                        required: "Payment Type is required"
+                    }
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
             });
         });
     </script>

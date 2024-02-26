@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\GeneralCmsController;
 use App\Http\Controllers\Admin\EntertainmentBannerController;
 use App\Http\Controllers\Admin\TopGridController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\BusinessManagementController;
 use App\Http\Controllers\Admin\CommissionHistoryController as AdminCommissionHistoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -101,8 +102,6 @@ Route::name('affiliate-marketer.')
 
 /* ----------------- Admin Routes -----------------*/
 
-
-
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login-check', [AdminController::class, 'loginCheck'])->name('admin.login.check');
     Route::group(['middleware' => 'admin'], function () {
@@ -129,6 +128,10 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
 
         Route::get('/commission-history-fetch-data', [AdminCommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
+
+        //commission percentage
+        Route::get('/commission-percentage', [BusinessManagementController::class, 'commissionPercentage'])->name('commission-percentage');
+        Route::post('/update-commission-percentage', [BusinessManagementController::class, 'updateCommissionPercentage'])->name('update.commission-percentage');
 
         //coupons route
         Route::get('/coupons/delete/{id}', [CouponController::class, 'deleteCoupon'])->name('delete.coupons');
@@ -206,7 +209,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/followCms/update', [CmsController::class, 'followCmsUpdate'])->name('update.follow-cms');
 
             //subscription cms
-            Route::get('/subscription-us', [CmsController::class, 'subcriptionCms'])->name('subscription-us.cms');
+            Route::get('/subscriptionCms', [CmsController::class, 'subcriptionCms'])->name('subscription-us.cms');
             Route::post('/subscriptionCms/update', [CmsController::class, 'subscriptionCmsUpdate'])->name('update.subscription-us');
 
             //contact details cms
@@ -218,6 +221,17 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/deleteOttIcon/{id}', [CmsController::class, 'ottIconDelete'])->name('delete.ott-icon');
             Route::get('/deleteEntertainmentImage/{id}', [CmsController::class, 'entImageDelete'])->name('delete.entertainment-image');
         });
+
+        Route::group(['prefix' => 'faq'], function () {
+            Route::get('/faq-payment', [FaqController::class, 'faqPayment'])->name('faq.payment');
+            Route::post('/faqPayment/update', [FaqController::class, 'faqPaymentUpdate'])->name('faq.payment.update');
+
+            Route::get('/faq-general', [FaqController::class, 'faqGeneral'])->name('faq.general');
+            Route::post('/faqGeneral/update', [FaqController::class, 'faqGeneralUpdate'])->name('faq.general.update');
+
+        });
+
+
 
         Route::group(['prefix' => 'business-management'], function () {
             //faq management
@@ -235,8 +249,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/contact-us', [ContactUsController::class, 'contactList'])->name('contact-us.list');
         Route::get('/contact-us-list', [ContactUsController::class, 'contactAjaxList'])->name('contact-us.ajax.list');
         //subscriptions list
-        Route::get('/subscription', [SubscriptionController::class, 'subscriptionList'])->name('subscription.list');
-        Route::get('/subscription-list', [SubscriptionController::class, 'subscriptionAjaxList'])->name('subscription.ajax.list');
+        Route::get('/subscription-list', [SubscriptionController::class, 'subscriptionList'])->name('subscription.list');
+        Route::get('/subscription-list/ajax', [SubscriptionController::class, 'subscriptionAjaxList'])->name('subscription.ajax.list');
     });
 });
 
