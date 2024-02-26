@@ -22,6 +22,7 @@ use App\Models\ContactUs;
 use App\Models\SubscriptionUs;
 use App\Models\BusinessManagement;
 use App\Models\Product;
+use App\Models\Faq;
 use Auth;
 use Session;
 use Illuminate\Support\Facades\Validator;
@@ -139,7 +140,8 @@ class HomeController extends Controller
     public function faqs()
     {
         $faq = BusinessManagement::where('type','faq')->first();
-        return view('frontend.pages.faqs',compact('faq'));
+        $faq_qstn_ansrs = Faq::where('type','general')->orderBy('id','asc')->get();
+        return view('frontend.pages.faqs',compact('faq','faq_qstn_ansrs'));
     }
 
     public function termService()

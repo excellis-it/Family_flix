@@ -45,9 +45,11 @@
           <div class="row">
             <div class="col-md-12">
               <div class="pricing-text-1-para text-left">
-                <p>
-                  {!! $faq->content   !!}
-                </p>
+                @foreach($faq_qstn_ansrs as $faq_qstn_ansr)
+                <h2>{{ $faq_qstn_ansr->question }}</h2>
+                <p>{{ $faq_qstn_ansr->answer }}</p>
+                @endforeach
+               
               </div>
             </div>
           </div>

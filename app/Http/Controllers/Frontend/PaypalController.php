@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Coupon;
+use App\Models\Faq;
 use App\Models\UserSubscription;
 use App\Models\CustomerDetails;
 use App\Models\AffiliateCommission;
@@ -31,7 +32,8 @@ class PaypalController extends Controller
     {
         $id = decrypt($id);
         $plan = Plan::find($id);
-        return view('frontend.pages.checkout',compact('plan'));
+        $faq_qstn_ansrs = Faq::where('type','payment')->orderBy('id','asc')->get();
+        return view('frontend.pages.checkout',compact('plan','faq_qstn_ansrs'));
     }
 
 

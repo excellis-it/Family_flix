@@ -365,24 +365,26 @@
                   <div class="faq_project">
                     <div class="accordion" id="accordionExample">
                       <div class="row justify-content-between">
-                        <div class="col-xl-6">
+                        <div class="col-xl-12">
                           <div class="faq-left">
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                  How do I sign up for The Family Flix?
-                                </button>
-                              </h2>
-                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                  <p>Visit our website and click on the “Sign Up” button. Follow the simple steps to create
-                                    your account, and you’ll be ready to enjoy our vast content library.</p>
+                            @foreach($faq_qstn_ansrs as $index => $faq_qstn_ansr)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading{{ $index }}">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapse{{ $index }}" aria-expanded="true" aria-controls="collapse{{ $index }}">
+                                            {{ $faq_qstn_ansr->question }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index }}"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>{{ $faq_qstn_ansr->answer }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
-                            <div class="accordion-item">
+                            @endforeach
+
+                            {{-- <div class="accordion-item">
                               <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                   data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -409,10 +411,10 @@
                                  <p>Yes, we offer a free trial period for new subscribers. Explore our content and features risk-free before committing to a subscription.</p>
                                 </div>
                               </div>
-                            </div>
+                            </div> --}}
                           </div>
                         </div>
-                        <div class="col-xl-6">
+                        {{-- <div class="col-xl-6">
                           <div class="faq-left">
                           <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFour">
@@ -456,7 +458,7 @@
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> --}}
                         </div>
                       </div>
                     </div>
