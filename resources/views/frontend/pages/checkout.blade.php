@@ -322,6 +322,7 @@
                                                 value="" id="total_amount">
                                             <input type="hidden" id="coupan_code" name="coupan_code">
                                             <input type="hidden" id="coupon_discount" name="coupon_discount">
+                                            
 
 
                                             <div class="cupon-div-main">
@@ -515,6 +516,7 @@
         $(document).ready(function() {
             $('#nextBtn').click(function() {
                 var coupon_code = $('#coupon_code').val();
+                var plan_id = {{ $plan->id }};
                 var plan_price = {{ $plan->plan_offer_price }};
 
                 $.ajax({
@@ -523,6 +525,7 @@
                     data: {
                         coupon_code: coupon_code,
                         plan_price: plan_price,
+                        plan_id:plan_id,
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {

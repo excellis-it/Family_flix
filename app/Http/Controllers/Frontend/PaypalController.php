@@ -154,7 +154,7 @@ class PaypalController extends Controller
     public function couponCheck(Request $request)
     {
 
-        $coupon = Coupon::where('code', $request->coupon_code)->first();
+        $coupon = Coupon::where('code', $request->coupon_code)->where('plan_id',$request->plan_id)->first();
         if(!$coupon)
         {
             return response()->json(['status' => 'error', 'message' => 'Invalid coupon code']);
@@ -163,7 +163,7 @@ class PaypalController extends Controller
         if($coupon->coupon_type == 'percentage')
         {
 
-            $discount = ($request->plan_price  / 100) * $coupon->value;
+            $discount = round(($request->plan_price  / 100) * $coupon->value);
         }
         else
         {
@@ -171,7 +171,7 @@ class PaypalController extends Controller
             $discount = $coupon->value;
         }
 
-        $discount_amount = $request->plan_price - $discount;
+        $discount_amount = round($request->plan_price - $discount);
 
         if($discount_amount)
         {

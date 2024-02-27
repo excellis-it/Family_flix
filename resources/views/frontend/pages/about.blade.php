@@ -68,7 +68,7 @@
             </div>
           </div>
         </div>
-        <div class="abt-img" data-aos="fade-right">
+        <div class="abt-img">
           <img src="{{ Storage::url($about_cms->section1_img)}}" alt="" />
         </div>
       </section>

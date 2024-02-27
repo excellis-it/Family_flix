@@ -33,7 +33,7 @@ class homeCmsSeeder extends Seeder
         $homeCms->section3_back_image = 'home/section3_back.png';
         $homeCms->section3_main_image = 'home/section3_main.png';
         $homeCms->section3_title = 'How It Works';
-        $homeCms->section3_video_link = 'https://www.youtube.com/embed/72eQ0seOP1k?si=j5ADIHgdgsnCXyaQ';
+        $homeCms->section3_video_link = 'https://thefamilyflix.com/wp-content/uploads/2024/01/TFF2.mp4';
         $homeCms->section4_title = 'Unbeatable Variety';
         $homeCms->section4_description = 'Blockbuster hits, binge-worthy series, and hidden gems at your fingertips. A universe of entertainment curated for you.';
         $homeCms->section4_back_image = 'home/section4_back.png';
