@@ -275,24 +275,23 @@ class CmsController extends Controller
         return view('admin.cms.entertainment',compact('entertainment_cms','entertainments'));
     }
 
-    public function gridImageDelete($id)
+    public function gridImageDelete(Request $request)
     {
-        $grid_image = TopGrid::find($id);
+        $grid_image = TopGrid::find($request->id);
         $grid_image->delete();
         return redirect()->back()->with('message', 'Grid Image Deleted Successfully');
     }
 
-    public function ottIconDelete($id)
+    public function ottIconDelete(Request $request)
     {
-        $ott_icon = OttService::find($id);
+        $ott_icon = OttService::find($request->id);
         $ott_icon->delete();
         return redirect()->back()->with('message', 'Ott Icon Deleted Successfully');
     }
 
-    public function entImageDelete($id)
+    public function entImageDelete(Request $request)
     {
-       
-        $ent_image = EntertainmentCms::find($id);
+        $ent_image = EntertainmentCms::find($request->id);
         $ent_image->delete();
         return redirect()->back()->with('message', 'Entertainment Image Deleted Successfully');
     }

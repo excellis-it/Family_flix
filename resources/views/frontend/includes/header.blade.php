@@ -1,5 +1,5 @@
 <div class="main_menu_hdr">
-    <div class="container-fluid">
+    <div class="container">
         <div class="main_menu">
             <div class="navigation navbar">
                 <div class="hdr-top">
@@ -25,10 +25,10 @@
                                                 </li>
                                                 <li class="{{ request()->routeIs('shows') ? 'active' : '' }}">
                                                     <a href="{{ route('shows') }}">Shows</a>
-                                                    <!-- <ul>
-                            <li class="sub-act"><a href="#">About Us </a></li>
-                            <li><a href="#">About Us</a></li>
-                          </ul> -->
+                                                        <!-- <ul>
+                                <li class="sub-act"><a href="#">About Us </a></li>
+                                <li><a href="#">About Us</a></li>
+                            </ul> -->
                                                 </li>
                                                 <li class="{{ request()->routeIs('movies') ? 'active' : '' }}">
                                                     <a href="{{ route('movies') }}">Movies</a>

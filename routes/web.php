@@ -218,9 +218,9 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/contactDetails/update', [CmsController::class, 'contactDetailsCmsUpdate'])->name('update.contact-details.cms');
 
             //delete grid image
-            Route::get('/deleteGridImage/{id}', [CmsController::class, 'gridImageDelete'])->name('delete.grid-image');
-            Route::get('/deleteOttIcon/{id}', [CmsController::class, 'ottIconDelete'])->name('delete.ott-icon');
-            Route::get('/deleteEntertainmentImage/{id}', [CmsController::class, 'entImageDelete'])->name('delete.entertainment-image');
+            Route::post('/deleteGridImage', [CmsController::class, 'gridImageDelete'])->name('delete.grid-image');
+            Route::post('/deleteOttIcon', [CmsController::class, 'ottIconDelete'])->name('delete.ott-icon');
+            Route::post('/deleteEntertainmentImage', [CmsController::class, 'entImageDelete'])->name('delete.entertainment-image');
         });
 
         Route::group(['prefix' => 'faq'], function () {

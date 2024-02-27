@@ -8,7 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Hugo 0.84.0" />
     <title>CheckOut</title>
-   
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,8 +29,8 @@
     <link href="{{ asset('frontend_assets/css/responsive.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend_assets/css/circle.css') }}" rel="stylesheet" />
     <!-- Custom styles for this template -->
- 
- 
+
+
 </head>
 
 <body>
@@ -42,7 +42,8 @@
                     <div class="col-lg-7">
                         <div class="ck-header-wrap">
                             <div class="logo1 text-center">
-                                <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}" alt=""></a>
+                                <a href="{{ route('home') }}"><img src="{{ asset('frontend_assets/images/logo.png') }}"
+                                        alt=""></a>
                             </div>
                             <div class="ck-text text-center">
                                 <h2>You are almost there</h2>
@@ -108,7 +109,7 @@
                                                     <div class="form-floating mb-3">
                                                         <input type="text" class="form-control" name="email_address"
                                                             id="floatingInput1" placeholder="">
-                                                        <label for="floatingInput1">Email Address  <span>*</span></label>
+                                                        <label for="floatingInput1">Email Address <span>*</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="step-div">
@@ -117,16 +118,20 @@
                                                         <div class="col-lg-6">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    name="first_name" id="floatingInput2" placeholder="">
-                                                                <label for="floatingInput2">First Name <span>*</span></label>
+                                                                    name="first_name" id="floatingInput2"
+                                                                    placeholder="">
+                                                                <label for="floatingInput2">First Name
+                                                                    <span>*</span></label>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="col-lg-6">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                     name="last_name" id="floatingInput3" placeholder="">
-                                                                <label for="floatingInput3">Last Name <span>*</span></label>
+                                                                    name="last_name" id="floatingInput3"
+                                                                    placeholder="">
+                                                                <label for="floatingInput3">Last Name
+                                                                    <span>*</span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -134,7 +139,8 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingSelect1" name="country" placeholder="">
+                                                                    id="floatingSelect1" name="country"
+                                                                    placeholder="">
                                                                 <label for="floatingSelect1">Country/Region
                                                                     <span>*</span></label>
                                                             </div>
@@ -155,7 +161,8 @@
                                                                 <input type="text" class="form-control"
                                                                     id="floatingInput5" name="detail_address"
                                                                     placeholder="">
-                                                                <label for="floatingInput5">Apartment, suite, unit, etc.
+                                                                <label for="floatingInput5">Apartment, suite, unit,
+                                                                    etc.
                                                                     (optional) <span>*</span></label>
                                                             </div>
                                                         </div>
@@ -164,14 +171,17 @@
                                                         <div class="col-lg-4">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput6" name="city" placeholder="">
-                                                                <label for="floatingInput6">Town/City <span>*</span></label>
+                                                                    id="floatingInput6" name="city"
+                                                                    placeholder="">
+                                                                <label for="floatingInput6">Town/City
+                                                                    <span>*</span></label>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    id="floatingInput7" name="state" placeholder="">
+                                                                    id="floatingInput7" name="state"
+                                                                    placeholder="">
                                                                 <label for="floatingInput7">State/Country
                                                                     <span>*</span></label>
                                                             </div>
@@ -181,7 +191,8 @@
                                                                 <input type="text" class="form-control"
                                                                     id="floatingInput8" name="post_code"
                                                                     placeholder="">
-                                                                <label for="floatingInput8">Post code <span>*</span></label>
+                                                                <label for="floatingInput8">Post code
+                                                                    <span>*</span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -189,8 +200,10 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    name="phone" id="floatingInput9" placeholder="">
-                                                                <label for="floatingInput9">Phone <span>*</span></label>
+                                                                    name="phone" id="floatingInput9"
+                                                                    placeholder="">
+                                                                <label for="floatingInput9">Phone
+                                                                    <span>*</span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -200,7 +213,7 @@
                                                                 <select class="form-select" name="payment_type"
                                                                     id="floatingSelect2"
                                                                     aria-label="Floating label select example">
-                                                                    
+
                                                                     <option value="New Subsription">New Subsription
                                                                     </option>
                                                                     <option value="Renewal">Renewal</option>
@@ -318,11 +331,10 @@
                                             <input type="hidden" name="plan_name" value="{{ $plan->plan_name }}">
                                             <input type="hidden" name="plan_price"
                                                 value="{{ $plan->plan_offer_price }}">
-                                            <input type="hidden" name="amount"
-                                                value="" id="total_amount">
+                                            <input type="hidden" name="amount" value="" id="total_amount">
                                             <input type="hidden" id="coupan_code" name="coupan_code">
                                             <input type="hidden" id="coupon_discount" name="coupon_discount">
-                                            
+
 
 
                                             <div class="cupon-div-main">
@@ -356,36 +368,41 @@
 
         <section class="faq_sec">
             <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-lg-10">
-                  <div class="text-center">
-                    <div class="faq-head mb-5">
-                      <h2>Frequently <span>Asked Questions</span></h2>
-                    </div>
-                  </div>
-                  <div class="faq_project">
-                    <div class="accordion" id="accordionExample">
-                      <div class="row justify-content-between">
-                        <div class="col-xl-12">
-                          <div class="faq-left">
-                            @foreach($faq_qstn_ansrs as $index => $faq_qstn_ansr)
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading{{ $index }}">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapse{{ $index }}" aria-expanded="true" aria-controls="collapse{{ $index }}">
-                                            {{ $faq_qstn_ansr->question }}
-                                        </button>
-                                    </h2>
-                                    <div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index }}"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p>{{ $faq_qstn_ansr->answer }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="text-center">
+                            <div class="faq-head mb-5">
+                                <h2>Frequently <span>Asked Questions</span></h2>
+                            </div>
+                        </div>
+                        <div class="faq_project">
+                            <div class="accordion" id="accordionExample">
+                                <div class="row justify-content-between">
+                                    <div class="col-xl-12">
+                                        <div class="faq-left">
+                                            @foreach ($faq_qstn_ansrs as $index => $faq_qstn_ansr)
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="heading{{ $index }}">
+                                                        <button class="accordion-button" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#collapse{{ $index }}"
+                                                            aria-expanded="true"
+                                                            aria-controls="collapse{{ $index }}">
+                                                            {{ $faq_qstn_ansr->question }}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapse{{ $index }}"
+                                                        class="accordion-collapse collapse"
+                                                        aria-labelledby="heading{{ $index }}"
+                                                        data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <p>{{ $faq_qstn_ansr->answer }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
 
-                            {{-- <div class="accordion-item">
+                                            {{-- <div class="accordion-item">
                               <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                   data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -413,9 +430,9 @@
                                 </div>
                               </div>
                             </div> --}}
-                          </div>
-                        </div>
-                        {{-- <div class="col-xl-6">
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-xl-6">
                           <div class="faq-left">
                           <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFour">
@@ -460,43 +477,44 @@
                             </div>
                           </div>
                         </div> --}}
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </section>
+            </div>
+        </section>
 
-          <footer class="ck-ftr">
+        <footer class="ck-ftr">
             <div class="container">
-             <div class="ck-ftr-wrap">
-              <div class="ck-ftr-top">
-                <div class="row justify-content-center align-items-center">
-                  <div class="col-lg-12">
-                   <div class="ck-ftr-menu">
-                      <ul>
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('privacy-policy') }}">Privacy policy</a></li>
-                        <li><a href="{{ route('term-service') }}">Terms of service</a></li>
-                      </ul>
-                   </div> 
-                  </div>
-                </div>
-              </div>
-              <div class="ck-ftr-btm">
-                <div class="row justify-content-center">
-                  <div class="col-lg-12">
-                    <div class="ck-ftr-btm-img">
-                      <img src="{{ asset('frontend_assets/images/poweredbyblack.png')}}" alt="">
+                <div class="ck-ftr-wrap">
+                    <div class="ck-ftr-top">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-lg-12">
+                                <div class="ck-ftr-menu">
+                                    <ul>
+                                        <li><a href="{{ route('home') }}">Home</a></li>
+                                        <li><a href="{{ route('privacy-policy') }}">Privacy policy</a></li>
+                                        <li><a href="{{ route('term-service') }}">Terms of service</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                    <div class="ck-ftr-btm">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="ck-ftr-btm-img">
+                                    <img src="{{ asset('frontend_assets/images/poweredbyblack.png') }}"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-             </div>
             </div>
-          </footer>
+        </footer>
         <div class="scroll-top">
             <a id="scroll-top-btn"></a>
         </div>
@@ -525,7 +543,7 @@
                     data: {
                         coupon_code: coupon_code,
                         plan_price: plan_price,
-                        plan_id:plan_id,
+                        plan_id: plan_id,
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
@@ -558,7 +576,7 @@
                                 plan_price + '</th>');
                             $('.recurring').html(
                                 '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                    plan_price + '/ month<br><span>(ex. VAT)</span></td></div>');
+                                plan_price + '/ month<br><span>(ex. VAT)</span></td></div>');
 
                         }
                     }

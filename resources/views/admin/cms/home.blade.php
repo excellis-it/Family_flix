@@ -784,8 +784,12 @@
         if (result) {
             var id = $(this).attr('data-id');
             $.ajax({
-                url: '/admin/cms/deleteGridImage/' + id,
-                type: 'get',
+                    url: "{{ route('delete.grid-image') }}",
+                    type: "POST",
+                    data: {
+                        id: id,
+                        _token: "{{ csrf_token() }}"
+                    },
                 success: function(response) {
                     $('#'+id).hide();
                 }
@@ -803,8 +807,12 @@
         if (result) {
             var id = $(this).attr('data-id');
             $.ajax({
-                url: '/admin/cms/deleteOttIcon/' + id,
-                type: 'get',
+                    url: "{{ route('delete.ott-icon') }}",
+                    type: "POST",
+                    data: {
+                        id: id,
+                        _token: "{{ csrf_token() }}"
+                    },
                 success: function(response) {
                     $('#'+id).hide();
                 }
@@ -823,8 +831,12 @@
             if (result) {
                 var id = $(this).attr('data-id');
                 $.ajax({
-                    route: '/admin/cms/deleteEntertainmentImage/' + id,
-                    type: 'get',
+                    url: "{{ route('delete.entertainment-image') }}",
+                    type: "POST",
+                    data: {
+                        id: id,
+                        _token: "{{ csrf_token() }}"
+                    },
                     success: function(response) {
                         $('#'+id).hide();
                     }
@@ -833,5 +845,7 @@
                 return false;
             }
         });
+
+        
         </script>
 @endpush
