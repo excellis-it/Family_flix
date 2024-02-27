@@ -40,7 +40,7 @@ class HomeController extends Controller
         $ott_icons = OttService::orderBy('id','asc')->get();
         $entertainments = EntertainmentCms::orderBy('id','asc')->get();
         $plan_list = Plan::orderBy('plan_order','asc')->with('Specification')->get();
-        $products = Product::orderBy('id','desc')->get();
+        $products = Product::orderBy('id','asc')->where('unbeatable_status',1)->get();
 
         return view('frontend.pages.home',compact('home_cms','plan_list','top_grids','ott_icons','entertainments','products'));
     }
@@ -60,7 +60,7 @@ class HomeController extends Controller
         $top_10_shows = Product::where('top_10_status',1)->where('type','movie')->get();
         $popular_shows = Product::where('popular_status',1)->where('type','movie')->get();
         $movie_cms = ContentTypeCms::where('type','movie')->first();
-        $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Movies')->get();
+        $entertainments_banners = EntertainmentBanner::where('banner_type','Movies')->get();
         $subscriptions = SubscribeCms::first();
         return view('frontend.pages.movies',compact('movie_cms','entertainments_banners','subscriptions','top_10_shows','popular_shows'));
     }
@@ -70,7 +70,7 @@ class HomeController extends Controller
         $top_10_shows = Product::where('top_10_status',1)->where('type','shows')->get();
         $popular_shows = Product::where('popular_status',1)->where('type','shows')->get();
         $show_cms = ContentTypeCms::where('type','show')->first();
-        $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Shows')->get();
+        $entertainments_banners = EntertainmentBanner::where('banner_type','Shows')->get();
         $subscriptions = SubscribeCms::first();
         return view('frontend.pages.shows',compact('show_cms','entertainments_banners','subscriptions','top_10_shows','popular_shows'));
     }
@@ -80,7 +80,7 @@ class HomeController extends Controller
         $top_10_shows = Product::where('top_10_status',1)->where('type','kids')->get();
         $popular_shows = Product::where('popular_status',1)->where('type','kids')->get();
         $kid_cms = ContentTypeCms::where('type','kid')->first();
-        $entertainments_banners = EntertainmentBanner::orderBy('id','desc')->where('banner_type','Kids')->get();
+        $entertainments_banners = EntertainmentBanner::where('banner_type','Kids')->get();
         $subscriptions = SubscribeCms::first();
         return view('frontend.pages.kids',compact('entertainments_banners','subscriptions','kid_cms','top_10_shows','popular_shows'));
     }
@@ -90,7 +90,7 @@ class HomeController extends Controller
 
         $plan_cms = PlanCms::first();
         $home_cms = HomeCms::first();
-        $products = Product::orderBy('id','desc')->get();
+        $products = Product::orderBy('id','desc')->where('unbeatable_status',1)->get();
         $plan_list = Plan::orderBy('plan_order','asc')->with('Specification')->get();
         $entertainments = EntertainmentCms::orderBy('id','asc')->get();
         

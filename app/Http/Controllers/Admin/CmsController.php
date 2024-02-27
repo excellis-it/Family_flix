@@ -291,6 +291,7 @@ class CmsController extends Controller
 
     public function entImageDelete($id)
     {
+       
         $ent_image = EntertainmentCms::find($id);
         $ent_image->delete();
         return redirect()->back()->with('message', 'Entertainment Image Deleted Successfully');

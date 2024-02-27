@@ -525,7 +525,7 @@
                                     <label>Title<span style="color: red;">*</span></label>
                                     <input type="text" name="section5_main_title"
                                         value="{{ $home_cms->section5_main_title }}" class="form-control"
-                                        placeholder="Enter Section5 Title">
+                                        placeholder="Enter Section5 Title" >
                                     @if ($errors->has('section5_main_title'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('section5_main_title') }}</div>
@@ -534,7 +534,7 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Description<span style="color: red;">*</span></label>
-                                    <textarea name="section5_main_description" id="" class="form-control" rows="6" cols="8"
+                                    <textarea name="section5_main_description" id="editor1" class="form-control" 
                                         placeholder="Enter Section5 Description">{{ $home_cms->section5_main_description }}</textarea>
                                     @if ($errors->has('section5_main_description'))
                                         <div class="error" style="color:red;">
@@ -598,6 +598,25 @@
         @endsection
 
     @push('scripts')
+
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor1');
+        CKEDITOR.on('instanceReady', function(evt) {
+            var editor = evt.editor;
+
+            editor.on('change', function(e) {
+                var contentSpace = editor.ui.space('contents');
+                var ckeditorFrameCollection = contentSpace.$.getElementsByTagName('iframe');
+                var ckeditorFrame = ckeditorFrameCollection[0];
+                var innerDoc = ckeditorFrame.contentDocument;
+                var innerDocTextAreaHeight = $(innerDoc.body).height();
+                console.log(innerDocTextAreaHeight);
+            });
+        });
+    </script>
+
+
     <script type="text/javascript">
         $(document).ready(function(e) {
             // top image preview
@@ -804,7 +823,7 @@
             if (result) {
                 var id = $(this).attr('data-id');
                 $.ajax({
-                    url: '/admin/cms/deleteEntertainmentImage/' + id,
+                    route: '/admin/cms/deleteEntertainmentImage/' + id,
                     type: 'get',
                     success: function(response) {
                         $('#'+id).hide();

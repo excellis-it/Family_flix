@@ -54,15 +54,15 @@
         <section class="subscribe-sec">
             <div class="container">
                 <div class="subscribe-sec-wrap">
-                    <div class="row">
-                        <div class="col-xl-12">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-10">
                             <div class="subscribe-head">
                                 <h2>{{ $subscribe_cms->subscribe_title }}</h2>
                             </div>
                             <form action="{{ route('subscribe.submit') }}" method="post" id="subscription-form">
                                 @csrf
                                 <div class="subscribe-form">
-                                    <div class="row">
+                                    <div class="row ">
                                         <div class="col-xl-12">
                                             <div class="subscribe-form-wrap">
                                                 <input type="text" class="form-control"  name="user_email"

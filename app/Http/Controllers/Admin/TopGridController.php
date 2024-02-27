@@ -109,7 +109,7 @@ class TopGridController extends Controller
 
         if ($request->hasFile('icon')) {
             $request->validate([
-                'icon' => 'required',
+                'icon' => 'required|mimes:jpeg,jpg,png,gif',
             ]);
             
             $file15 = $request->file('icon');

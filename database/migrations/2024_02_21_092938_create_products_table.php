@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->enum('type', ['shows','kids','movie'])->nullable();
             $table->string('top_10_status')->default(false);
             $table->string('popular_status')->default(false);
+            $table->string('unbeatable_status')->default(true);
             $table->timestamps();
         });
     }

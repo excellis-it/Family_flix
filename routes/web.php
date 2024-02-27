@@ -148,6 +148,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/deleteProducts/{id}', [ProductController::class, 'deleteProduct'])->name('delete.products');
         Route::post('/topStatusProduct', [ProductController::class, 'changeProductTopStatus'])->name('product.top-status');
         Route::post('/popularStatusProduct', [ProductController::class, 'changePopularStatus'])->name('product.popular-status');
+        Route::post('/unbeatableStatusProduct', [ProductController::class, 'changeUnbeatableStatus'])->name('product.unbeatable-status');
         Route::post('/updateProduct', [ProductController::class, 'updateProducts'])->name('update.products');
 
         Route::get('/entertainment-banner/delete/{id}', [EntertainmentBannerController::class, 'deleteEntertainmentBanner'])->name('delete.entertainment-banner');

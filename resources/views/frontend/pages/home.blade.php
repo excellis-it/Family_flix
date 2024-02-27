@@ -58,9 +58,9 @@
                         <div class="one-place-div">
                             <div class="one-place-text">
                                 <div class="heading-white">
-                                    <h2>
+                                    <h3>
                                         {{ $home_cms->section2_title }}
-                                    </h2>
+                                    </h3>
                                     <p>
                                         {{ $home_cms->section2_description }}
                                     </p>
@@ -176,7 +176,7 @@
                     <div class="col-lg-6">
                         <div class="entertainment-head">
                             <div class="heading-1 text-center">
-                                <h2>{{ $home_cms->section4_title }}<span class="dot">.</span></h2>
+                                <h3>{{ $home_cms->section4_title }}<span class="dot">.</span></h3>
                                 <p>
                                     {{ $home_cms->section4_description }}
                                 </p>
@@ -203,9 +203,9 @@
                             <div class="col-lg-6">
                                 <div class="entertainment-head">
                                     <div class="heading-1">
-                                        <h2>{{ $home_cms->section5_main_title }}<span class="dot">.</span></h2>
+                                        <h3>{{ $home_cms->section5_main_title }}<span class="dot">.</span></h3>
                                         <p>
-                                            {{ $home_cms->section5_main_description }}
+                                            {!! $home_cms->section5_main_description !!}
                                         </p>
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                     <div class="col-lg-8">
                         <div class="entertainment-head">
                             <div class="heading-1 heading-white text-center">
-                                <h2>{{ $home_cms->plan_section_title }}<span class="dot">.</span></h2>
+                                <h3>{{ $home_cms->plan_section_title }}<span class="dot">.</span></h3>
                             </div>
                         </div>
                     </div>

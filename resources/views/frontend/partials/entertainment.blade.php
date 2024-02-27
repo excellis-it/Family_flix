@@ -3,7 +3,7 @@
         <div class="col-lg-6">
             <div class="entertainment-head">
                 <div class="heading-1 text-center">
-                    <h2>{{ $home_cms->entertainment_title }}</span></h2>
+                    <h2>{{ $home_cms->entertainment_title }}<span class="dot">.</span></span></h2>
                     <p>
                         {{ $home_cms->entertainment_description }}
                     </p>

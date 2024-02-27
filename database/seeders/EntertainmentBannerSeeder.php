@@ -21,13 +21,13 @@ class EntertainmentBannerSeeder extends Seeder
                 'banner_logo' => 'entertainment_banner/show-bnr-logo1.png',
                 'rating' => 4,
                 'small_text' => '6 Seasons / 22 mins / 1990-1996',
-                'long_description' => 'The affluent Banks family finds their lives turned upside down when street-smart Will, a Philadelphia relative, moves into    their Bel-Air mansion.',
+                'long_description' => 'The affluent Banks family finds their lives turned upside down when street-smart Will, a Philadelphia relative, moves into their Bel-Air mansion',
                 'button_name' => 'Subscribe',
                 'banner_type' => 'Shows',
             ],
             [
                 'banner_image' => 'entertainment_banner/show-banner2.png',
-                'banner_logo' => 'entertainment_banner/show-bnr-logo2.png',
+                'banner_logo' => 'entertainment_banner/show-bnr-logo3.png',
                 'rating' => 4,
                 'small_text' => '1hr : 42mins / January 2024',
                 'long_description' => 'Based on Caroline Kepnes best-selling novel of the same name, YOU is a 21st century love story that asks, "What would you do for love?" When a brilliant bookstore manager crosses paths with an aspiring writer, his answer becomes clear: anything. Using the internet and social media as his tools to gather the most intimate of details and get close to her, a charming and awkward crush quickly becomes obsession as he quietly and strategically removes every obstacle - and person - in his way.',
@@ -36,7 +36,7 @@ class EntertainmentBannerSeeder extends Seeder
             ],
             [
                 'banner_image' => 'entertainment_banner/show-banner3.png',
-                'banner_logo' => 'entertainment_banner/show-bnr-logo3.png',
+                'banner_logo' => 'entertainment_banner/show-bnr-logo2.png',
                 'rating' => 5,
                 'small_text' => '1hr : 42mins / January 2024',
                 'long_description' => 'Thomas Shelby and his brothers return to Birmingham after serving in the British Army during WWI. Shelby and his gang, the Peaky Blinders, control the city of Birmingham. However, Shelbys ambitions extend beyond Birmingham, as he plans to build on the business empire he is created, and dispatch anyone who gets in his way.',
@@ -53,7 +53,7 @@ class EntertainmentBannerSeeder extends Seeder
                 'banner_type' => 'Movies',
             ],
             [
-                'banner_image' => 'entertainment_banner/movie-bnr2.png',
+                'banner_image' => 'entertainment_banner/movie-bnr1.png',
                 'banner_logo' => 'entertainment_banner/movie-bnr-logo1.png',
                 'rating' => 4,
                 'small_text' => '1hr : 42mins / January 2024',
@@ -62,7 +62,7 @@ class EntertainmentBannerSeeder extends Seeder
                 'banner_type' => 'Movies',
             ],
             [
-                'banner_image' => 'entertainment_banner/movie-bnr3.png',
+                'banner_image' => 'entertainment_banner/movie-bnr1.png',
                 'banner_logo' => 'entertainment_banner/movie-bnr-logo1.png',
                 'rating' => 4,
                 'small_text' => '1hr : 42mins / January 2024',

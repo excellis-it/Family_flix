@@ -65,6 +65,7 @@ class ProductController extends Controller
                "type" => $type,
                "top_10_status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="'.$record->id.'"'.($record->top_10_status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
                "popular_status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class-popular" data-id="'.$record->id.'"'.($record->popular_status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
+               "unbeatable_status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class-unbeatable" data-id="'.$record->id.'"'.($record->unbeatable_status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
                "action" => '<a href="'.route('products.edit',$id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a href="'.route('delete.products',$id).'" onclick="return confirm(`Are you sure you want to delete this product?`)"><i class="fas fa-trash"></i></a>',
            );
         }                                                                                                                                   
@@ -92,6 +93,16 @@ class ProductController extends Controller
         $change_popular_status = Product::where('id',$request->pro_id)->first();
         $change_popular_status->popular_status = $request->status;
         $change_popular_status->update();
+
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
+    public function changeUnbeatableStatus(Request $request)
+    {
+       
+        $change_unbeatable_status = Product::where('id',$request->pro_id)->first();
+        $change_unbeatable_status->unbeatable_status = $request->status;
+        $change_unbeatable_status->update();
 
         return response()->json(['success'=>'Status change successfully.']);
     }
