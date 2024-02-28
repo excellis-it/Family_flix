@@ -5,6 +5,16 @@
     Home
 @endsection
 @push('styles')
+<style>
+ .video-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 69vh;
+    width: 70%;
+    margin: 0 auto;
+}
+</style>
 @endpush
 
 @section('content')
@@ -157,7 +167,7 @@
                             </div>
                             <img src="{{ Storage::url($home_cms->section3_main_image) }}" alt="" />
                             <div class="play-btn">
-                                <button type="button" class="play-btn" data-bs-toggle="modal" data-src="https://excellis.co.in/demo/five-star-chem-dry/dev/wp-content/uploads/2023/07/Carpet_upholstery_30_06-2.mp4" data-bs-target="#myModal"><span><i class="fa-solid fa-play"></i></span></button>
+                                <button type="button" class="play-btn" data-bs-toggle="modal" data-src="" data-bs-target="#myModal"><span><i class="fa-solid fa-play"></i></span></button>
                             </div>
                         </div>
                     </div>
@@ -244,15 +254,19 @@
 
     {{-- modal open --}}
     <div class="modal modal-1 fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Adjust width and height attributes for the iframe -->
+                    <iframe width="1280" height="720" src="{{ $home_cms->section3_video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
             </div>
-            <div class="modal-body"><iframe width="560" height="315" src="{{ $home_cms->section3_video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-          </div>
         </div>
-      </div>
+    </div>
+    
       {{-- modal close --}}
 
     <div class="scroll-top">

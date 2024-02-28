@@ -153,6 +153,11 @@ class PaypalController extends Controller
 
     public function couponCheck(Request $request)
     {
+        $check_user = CustomerDetails::where('email_address', $request->emailId)->first();
+        if(count($check_user) > 0)
+        {
+            return response()->json(['status' => 'coupon-error', 'message' => 'Email already exist. Please login to continue.']);
+        }
 
         $coupon = Coupon::where('code', $request->coupon_code)->where('plan_id',$request->plan_id)->first();
         if(!$coupon)

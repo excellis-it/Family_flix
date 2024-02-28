@@ -43,7 +43,7 @@
                                         <th><span class="fs-4 fw-semibold mb-0"> Plan name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0"> Plan Details</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0"> Plan actual price($)</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">  Plan offer price($)</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0"> Plan offer price($)</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0"> Action</span></th>
                                     </tr>
                                 </thead>
@@ -70,10 +70,8 @@
                                             </tr>
                                         @endforeach
                                     @endif
-
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>

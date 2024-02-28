@@ -35,7 +35,7 @@ class ottIconseeder extends Seeder
                 'icon' => 'ott_icon/icon6.png',
             ],
             [
-                'icon' => 'ott_icon/icon7.png',
+                'icon' => 'ott_icon/icon11.png',
             ],
             [
                 'icon' => 'ott_icon/icon8.png',

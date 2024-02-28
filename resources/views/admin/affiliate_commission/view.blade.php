@@ -28,6 +28,22 @@
                             @csrf
 
                             <input type="hidden" value="{{ $commission->id }}" name="id">
+
+                            <div class="row">
+                                <div class="form-group col-md-12 mb-3">
+                                    <label for="inputEnterYourName" class="col-form-label"> Percentage <span
+                                            style="color: red;">*</span></label>
+                                            <select name="email[]" id="field2" multiple multiselect-search="true"  multiselect-select-all="true" multiselect-max-items="3"
+                                            onchange="console.log(this.selectedOptions)">
+                                            @foreach($subscriptions as $subscription)
+                                                <option value="{{ $subscription->email }}">{{ $subscription->name }}</option>
+                                            @endforeach
+                                            </select>
+                                </div>
+                            </div>
+                            
+                            
+                            
                             <div class="row">
                                 <div class="form-group col-md-12 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Percentage <span

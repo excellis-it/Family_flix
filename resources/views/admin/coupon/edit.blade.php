@@ -75,13 +75,25 @@
                                             {{ $errors->first('value') }}</div>
                                     @endif
                                 </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>User Type<span style="color: red;">*</span></label>
+                                    <select name="user_type" class="form-control">
+                                        <option value="new_user" {{ $coupon_edit->user_type == 'new_user' ? 'selected' : '' }}>New User</option>
+                                        <option value="existing_user" {{ $coupon_edit->user_type == 'existing_user' ? 'selected' : '' }}>Existing User</option>
+                                    </select>
+                                    @if ($errors->has('user_type'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('user_type') }}</div>
+                                    @endif
+                                </div>
                                 
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Status<span style="color: red;">*</span></label>
                                     <select class="form-control" name="status" >
-                                        <option value="Active" {{ $coupon_edit->status == 'Active' ? 'selected': '' }}>Active</option>
-                                        <option value="Deactive" {{ $coupon_edit->status == 'Deactive' ? 'selected': '' }}>Deactive</option>
+                                        <option value="1" {{ $coupon_edit->status == '1' ? 'selected': '' }}>Active</option>
+                                        <option value="0" {{ $coupon_edit->status == '0' ? 'selected': '' }}>Deactive</option>
                                     </select>
                                     @if ($errors->has('percentage'))
                                         <div class="error" style="color:red;">

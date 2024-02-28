@@ -74,11 +74,25 @@
                     </ul>
                 </li>
 
-                <li class="nav-item has-submenu {{ Request::is('admin/commission-percentage*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('commission-percentage') }}"> <span>
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/commission-percentage*') ? 'active' : ' ' }}" href="#">
+                        <span>
+                            <i class="ti ti-movie"></i>
+                        </span>Commission Percentage
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/commission-percentage*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/commission-percentage*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('commission-percentage.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                {{-- <li class="nav-item has-submenu {{ Request::is('admin/commission-percentage*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('') }}"> <span>
                             <i class="ti ti-aperture"></i>
                         </span>Commission Percentage<span class="arrow-down"></span></a>
-                </li>
+                </li> --}}
 
 
                 <li class="nav-item has-submenu">

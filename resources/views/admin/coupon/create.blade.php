@@ -77,11 +77,24 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
+                                    <label>User Type<span style="color: red;">*</span></label>
+                                    <select name="user_type" class="form-control">
+                                        <option value="">Select type</option>
+                                        <option value="new_user">New User</option>
+                                        <option value="existing_user">Existing User</option>
+                                    </select>
+                                    @if ($errors->has('user_type'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('user_type') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
                                     <label>Status<span style="color: red;">*</span></label>
                                     <select class="form-control" name="status" >
                                         <option value="">Select Status</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Deactive">Deactive</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <div class="error" style="color:red;">

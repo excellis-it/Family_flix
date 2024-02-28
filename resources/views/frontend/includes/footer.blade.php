@@ -63,7 +63,7 @@ $footer_cms =  App\Models\FooterCms::first();
               </div>
             </div>
             <div class="col-xl-3 col-md-6 col-12">
-              <div class="find-us">
+              <div class="find-us contact-footer">
                 <h4>Contact Us</h4>
                 @foreach($contact_details as $contact_detail)
                 <div class="add d-flex">

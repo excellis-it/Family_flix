@@ -44,6 +44,7 @@ class CouponController extends Controller
             'plan_id' => 'required',
             'code' => 'required',
             'coupon_type' => 'required',
+            'user_type' => 'required',
             'value' => 'required',
             'status' => 'required',
         ]);
@@ -52,6 +53,7 @@ class CouponController extends Controller
         $coupon_create->plan_id = $request->plan_id;
         $coupon_create->code = $request->code;
         $coupon_create->coupon_type = $request->coupon_type;
+        $coupon_create->user_type = $request->user_type;
         $coupon_create->value = $request->value;
         $coupon_create->status = $request->status;
         $coupon_create->save();
@@ -104,6 +106,7 @@ class CouponController extends Controller
             'code' => 'required',
             'coupon_type' => 'required',
             'value' => 'required',
+            'user_type' => 'required',
             'status' => 'required',
         ]);
 
@@ -111,6 +114,7 @@ class CouponController extends Controller
         $coupon_edit->plan_id = $request->plan_id;
         $coupon_edit->code = $request->code;
         $coupon_edit->coupon_type = $request->coupon_type;
+        $coupon_edit->user_type = $request->user_type;
         $coupon_edit->value = $request->value;
         $coupon_edit->status = $request->status;
         $coupon_edit->update();
@@ -118,6 +122,14 @@ class CouponController extends Controller
 
         return redirect()->route('coupons.index')->with('message','Coupon updated successfully');
         
+    }
+
+    public function couponStatus(Request $request)
+    {
+        $coupon_status = Coupon::where('id',$request->coupon_id)->first();
+        $coupon_status->status = $request->status;
+        $coupon_status->update();
+        return response()->json(['message' => 'Status updated successfully']);
     }
 
     public function deleteCoupon($id)

@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\BusinessManagementController;
 use App\Http\Controllers\Admin\CommissionHistoryController as AdminCommissionHistoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\CommissionPercentageController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
 use App\Http\Controllers\AffiliateMarketer\DashboardController as AffiliateMarketerDashboardController;
@@ -125,17 +126,22 @@ Route::group(['prefix' => 'admin'], function () {
             'coupons' => CouponController::class,
             'affliate-marketer' => AffliateMarketerController::class,
             'commission-history' => AdminCommissionHistoryController::class,
+            'commission-percentage' => CommissionPercentageController::class,
         ]);
 
         Route::get('/commission-history-fetch-data', [AdminCommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
+        Route::get('/commission-percentage-delete/{id}', [CommissionPercentageController::class, 'deletePercentage'])->name('delete.commission-percentage');
+        Route::post('/commission-percentage-update', [CommissionPercentageController::class, 'updatePercentage'])->name('update.commission-percentage');
 
         //commission percentage
-        Route::get('/commission-percentage', [BusinessManagementController::class, 'commissionPercentage'])->name('commission-percentage');
-        Route::post('/update-commission-percentage', [BusinessManagementController::class, 'updateCommissionPercentage'])->name('update.commission-percentage');
+        
 
         //coupons route
         Route::get('/coupons/delete/{id}', [CouponController::class, 'deleteCoupon'])->name('delete.coupons');
         Route::post('/coupons/update', [CouponController::class, 'updateCoupon'])->name('update.coupons');
+
+        //coupon status change
+        Route::post('/coupons/status-change', [CouponController::class, 'couponStatus'])->name('coupon.changeStatus');
 
         Route::post('/affliate-marketer-list', [AffliateMarketerController::class, 'affliateMarketerAjaxList'])->name('affliate-marketer.ajax.list');
         Route::get('/affliate-marketer-change-status', [AffliateMarketerController::class, 'changeStatus'])->name('affliate-marketer.change-status');

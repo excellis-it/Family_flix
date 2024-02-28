@@ -15,6 +15,7 @@ class CreateAffiliateCommissionsTable extends Migration
     {
         Schema::create('affiliate_commissions', function (Blueprint $table) {
             $table->id();
+            $table->string('affiliate_id')->nullable();
             $table->string('percentage')->nullable();
             $table->timestamps();
         });

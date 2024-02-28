@@ -22,62 +22,26 @@ class AffliateMarketerController extends Controller
      */
     public function index()
     {
-        return view('admin.affliate-marketer.list');
+        $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->paginate(15);
+        return view('admin.affliate-marketer.list',compact('affiliaters'));
     }
 
     public function affliateMarketerAjaxList(Request $request)
     {
-        $draw = $request->get('draw');
-        $start = $request->get("start");
-        $rowperpage = $request->get("length"); // Rows display per page
+       
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $affiliaters = User::role('AFFLIATE MARKETER')->where('id', 'like', '%' . $query . '%')
+                ->orWhere('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%')
+                ->orWhere('phone', 'like', '%' . $query . '%')
+                ->orderBy('id', 'desc')
+                ->paginate(15);
 
-        $columnIndex_arr = $request->get('order');
-        $columnName_arr = $request->get('columns');
-        $order_arr = $request->get('order');
-        $search_arr = $request->get('search');
-
-        $columnIndex = $columnIndex_arr[0]['column']; // Column index
-        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-        $searchValue = $search_arr['value']; // Search value
-
-        // Total records
-        $totalRecords = User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->count();
-        $totalRecordswithFilter = User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->count();
-
-        // Fetch records
-        $records = User::query();
-        $columns = ['name', 'email', 'phone', 'status'];
-        foreach ($columns as $column) {
-            $records->orWhere($column, 'like', '%' . $searchValue . '%');
+            return response()->json(['data' => view('admin.ffliate-marketer.filter', compact('affiliaters'))->render()]);
         }
-        $records->orderBy($columnName, $columnSortOrder);
-        $records->skip($start);
-        $records->take($rowperpage);
-
-        $records = $records->orderBy('id', 'desc')->role('AFFLIATE MARKETER')->get();
-
-        $data_arr = array();
-
-        foreach ($records as $record) {
-            $data_arr[] = array(
-                "name" => $record->name,
-                "email" => $record->email,
-                "phone" => $record->phone,
-                "affiliate_url" => '<div class="affiliate-url" onclick="copyText(this)">'.route('pricing', Crypt::encrypt($record->id)).'<i class="fa fa-copy"></i></div>',
-                "status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="' . $record->id . '"' . ($record->status ? 'checked' : '') . '/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
-                "action" => '<a href="' . route('affliate-marketer.edit', $record->id) . '"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Affiliate Marketer"  data-route="' . route('affliate-marketer.delete', $record->id) . '" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>'
-            );
-        }
-
-        $response = array(
-            "draw" => intval($draw),
-            "iTotalRecords" => $totalRecords,
-            "iTotalDisplayRecords" => $totalRecordswithFilter,
-            "aaData" => $data_arr
-        );
-
-        return response()->json($response);
+       
     }
 
     /**

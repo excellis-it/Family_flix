@@ -19,6 +19,7 @@ class CreateCouponsTable extends Migration
             $table->string('code')->nullable();
             $table->enum('coupon_type', ['percentage','amount'])->nullable();
             $table->string('value')->nullable();
+            $table->enum('user_type', ['new_user','existing_user'])->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });
