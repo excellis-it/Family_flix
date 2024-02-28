@@ -105,8 +105,8 @@ class PaypalController extends Controller
 
                     //affiliate commission calculation
                     $affiliate_id = Session::get('affiliate_id');
-                    $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->first();
-                    $commission_dis = round(($data['amount'] / 100) * $commission->percentage);
+                    $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
+                    $commission_dis = ($data['amount'] / 100) * $commission->percentage;
                     $after_commission_dis = $data['amount'] - $commission_dis;
 
                     $user_subscription->affiliate_id = Session::get('affiliate_id');
