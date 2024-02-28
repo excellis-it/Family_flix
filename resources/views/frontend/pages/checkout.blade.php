@@ -574,23 +574,7 @@
                                 '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
                                 total + '/ month<br><span>(ex. VAT)</span></td></div>');
                             $('#coupon_error').text('');
-                        } 
-                        else if(response.status == 'coupon-error'){
-                            $('#coupon_error').text('Coupon has been expired');
-                            $('#total_amount').val(plan_price);
-                            $('#coupan_code').val('');
-                            $('#coupon_discount').val('0.00');
-                            $('.coupon-dis').html(
-                                '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>');
-
-                            $('.total-order').html('<th>Total</th><th class="text-end">$' +
-                                plan_price + '</th>');
-                            $('.recurring').html(
-                                '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                plan_price + '/ month<br><span>(ex. VAT)</span></td></div>');
-                        }
-                        
-                        else {
+                        }else {
                             //show message invlid coupon
                             $('#coupon_error').text('Invalid Coupon Code');
                             $('#total_amount').val(plan_price);

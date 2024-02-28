@@ -95,16 +95,20 @@ class PaypalController extends Controller
                 $customer_details->phone = $data['phone'];
                 $customer_details->save();
 
-                //commission
-                $commission = AffiliateCommission::first();
-                $commission_dis = round(($data['amount'] / 100) * $commission->percentage);
-                $after_commission_dis = $data['amount'] - $commission_dis;
+                
 
 
                 //user subscription
                 $user_subscription = new UserSubscription();
                 $user_subscription->customer_details_id = $customer_details->id;
                 if (Session::has('affiliate_id')) {
+
+                    //affiliate commission calculation
+                    $affiliate_id = Session::get('affiliate_id');
+                    $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->first();
+                    $commission_dis = round(($data['amount'] / 100) * $commission->percentage);
+                    $after_commission_dis = $data['amount'] - $commission_dis;
+
                     $user_subscription->affiliate_id = Session::get('affiliate_id');
                     $user_subscription->affiliate_commission = $commission_dis;
                 } else {
@@ -153,35 +157,61 @@ class PaypalController extends Controller
 
     public function couponCheck(Request $request)
     {
-        $check_user = CustomerDetails::where('email_address', $request->emailId)->first();
-        if(count($check_user) > 0)
-        {
-            return response()->json(['status' => 'coupon-error', 'message' => 'Email already exist. Please login to continue.']);
-        }
-
+        $check_user = CustomerDetails::where('email_address', $request->emailId)->orWhere('phone',$request->phone)->first();
         $coupon = Coupon::where('code', $request->coupon_code)->where('plan_id',$request->plan_id)->first();
         if(!$coupon)
         {
             return response()->json(['status' => 'error', 'message' => 'Invalid coupon code']);
         }
-        //calculate discount
-        if($coupon->coupon_type == 'percentage')
+        $check_coupon_user_type = $coupon->user_type;
+        if(!$check_user && $check_coupon_user_type == 'new_user')
         {
+            //calculate discount
+            if($coupon->coupon_type == 'percentage')
+            {
+                $discount = round(($request->plan_price  / 100) * $coupon->value);
+            }
+            else
+            {
+                $discount = $coupon->value;
+            }
 
-            $discount = round(($request->plan_price  / 100) * $coupon->value);
+            $discount_amount = round($request->plan_price - $discount);
+
+            if($discount_amount)
+            {
+                return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
+            }
+            
+            
+        } elseif($check_user && $check_coupon_user_type == 'existing_user') {
+
+            //calculate discount
+            if($coupon->coupon_type == 'percentage')
+            {
+
+                $discount = round(($request->plan_price  / 100) * $coupon->value);
+            }
+            else
+            {
+
+                $discount = $coupon->value;
+            }
+
+            $discount_amount = round($request->plan_price - $discount);
+
+            if($discount_amount)
+            {
+                return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
+            }
+            
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'Coupon code is not valid for you']);
         }
-        else
-        {
 
-            $discount = $coupon->value;
-        }
-
-        $discount_amount = round($request->plan_price - $discount);
-
-        if($discount_amount)
-        {
-            return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
-        }
+        
+        
+        
 
     }
 
