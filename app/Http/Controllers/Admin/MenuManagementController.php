@@ -18,8 +18,24 @@ class MenuManagementController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('order','asc')->get();
+        $menus = Menu::orderBy('order','asc')->paginate(15);
         return view('admin.site_management.menu.list',compact('menus'));
+    }
+
+    public function fetchDataMenu(Request $request)
+    {
+       
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $menus = Menu::where('id', 'like', '%' . $query . '%')
+                    ->orWhere('title', 'like', '%' . $query . '%')
+                    ->orWhere('slug', 'like', '%' . $query . '%')
+                    ->orderBy('order', 'asc')
+                    ->paginate(15);
+
+            return response()->json(['data' => view('admin.site_management.menu.filter', compact('menus'))->render()]);
+        }
     }
 
     /**

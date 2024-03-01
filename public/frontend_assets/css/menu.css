@@ -542,7 +542,7 @@ only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
 
 
 #cssmenu>ul>li>a {
-  padding: 18px 18px;
+  padding: 18px 11px;
   font-size: 12px;
   text-decoration: none;
   font-weight: 600;

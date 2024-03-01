@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\CommissionPercentageController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
+use App\Http\Controllers\Admin\OttServiceController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
 use App\Http\Controllers\AffiliateMarketer\DashboardController as AffiliateMarketerDashboardController;
 use App\Http\Controllers\AffiliateMarketer\ProfileController as AffiliateMarketerProfileController;
@@ -127,9 +128,24 @@ Route::group(['prefix' => 'admin'], function () {
             'affliate-marketer' => AffliateMarketerController::class,
             'commission-history' => AdminCommissionHistoryController::class,
             'commission-percentage' => CommissionPercentageController::class,
+            'ott-service' => OttServiceController::class,
         ]);
 
-        Route::get('/commission-history-fetch-data', [AdminCommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
+        //menu management route
+        Route::get('/menu-management-fetch-data', [MenuManagementController::class, 'fetchDataMenu'])->name('menu-management.ajax.list');
+        Route::post('/menu-management/update-menu', [MenuManagementController::class, 'menuUpdate'])->name('admin.menu-management.update'); // menu update
+        Route::post('/menu-management/reorder-menu', [MenuManagementController::class, 'menuReorder'])->name('admin.menu-management.reorder'); // menu reorder
+        Route::get('/menu-management/delete-menu/{id}', [MenuManagementController::class, 'menuDelete'])->name('delete.menu-managemnt'); // menu delete
+        Route::post('/menu-management/status-change', [MenuManagementController::class, 'menuStatus'])->name('menu-management.changeStatus'); // menu status
+
+        //ott service route
+        Route::get('/delete-ott-service', [OttServiceController::class, 'deleteOttService'])->name('delete.ott-service');
+
+
+        //plan management route
+        Route::get('/plan-fetch-data', [PlanController::class, 'fetchPlanData'])->name('plan.ajax.list');
+
+        Route::get('/commission-history-fetch-data', [AdminCommissionHistoryController::class, 'fetchData'])->name('commission-history.ajax-fetch-data');
         Route::get('/commission-percentage-delete/{id}', [CommissionPercentageController::class, 'deletePercentage'])->name('delete.commission-percentage');
         Route::post('/commission-percentage-update', [CommissionPercentageController::class, 'updatePercentage'])->name('update.commission-percentage');
 
@@ -143,7 +159,7 @@ Route::group(['prefix' => 'admin'], function () {
         //coupon status change
         Route::post('/coupons/status-change', [CouponController::class, 'couponStatus'])->name('coupon.changeStatus');
 
-        Route::post('/affliate-marketer-list', [AffliateMarketerController::class, 'affliateMarketerAjaxList'])->name('affliate-marketer.ajax.list');
+        Route::get('/affliate-marketer-list', [AffliateMarketerController::class, 'affliateMarketerAjaxList'])->name('affliate-marketer.ajax.list');
         Route::get('/affliate-marketer-change-status', [AffliateMarketerController::class, 'changeStatus'])->name('affliate-marketer.change-status');
         Route::prefix('affliate-marketer')->group(function () {
             Route::get('/affliate-marketer-delete/{id}', [AffliateMarketerController::class, 'delete'])->name('affliate-marketer.delete');
@@ -172,10 +188,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/privacy-policy', [ContentManagementController::class, 'privacyPolicy'])->name('content-management.privacy-policy');
         });
 
-        Route::post('/menu-management/update-menu', [MenuManagementController::class, 'menuUpdate'])->name('admin.menu-management.update'); // menu update
-        Route::post('/menu-management/reorder-menu', [MenuManagementController::class, 'menuReorder'])->name('admin.menu-management.reorder'); // menu reorder
-        Route::get('/menu-management/delete-menu/{id}', [MenuManagementController::class, 'menuDelete'])->name('delete.menu-managemnt'); // menu delete
-        Route::post('/menu-management/status-change', [MenuManagementController::class, 'menuStatus'])->name('menu-management.changeStatus'); // menu status
+        
 
 
         Route::get('/plan/delete/{id}', [PlanController::class, 'planDelete'])->name('delete.plan'); // plan delete

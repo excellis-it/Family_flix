@@ -32,14 +32,17 @@ class AffliateMarketerController extends Controller
         if ($request->ajax()) {
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
-            $affiliaters = User::role('AFFLIATE MARKETER')->where('id', 'like', '%' . $query . '%')
-                ->orWhere('name', 'like', '%' . $query . '%')
-                ->orWhere('email', 'like', '%' . $query . '%')
-                ->orWhere('phone', 'like', '%' . $query . '%')
-                ->orderBy('id', 'desc')
-                ->paginate(15);
+            $affiliaters = User::role('AFFLIATE MARKETER')
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('id', 'like', '%' . $query . '%')
+                    ->orWhere('name', 'like', '%' . $query . '%')
+                    ->orWhere('email', 'like', '%' . $query . '%')
+                    ->orWhere('phone', 'like', '%' . $query . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(15);
 
-            return response()->json(['data' => view('admin.ffliate-marketer.filter', compact('affiliaters'))->render()]);
+            return response()->json(['data' => view('admin.affliate-marketer.filter', compact('affiliaters'))->render()]);
         }
        
     }
@@ -78,7 +81,9 @@ class AffliateMarketerController extends Controller
         $data->password = bcrypt($request->password);
         $data->phone = $request->phone;
         $data->status = $request->status;
-        $data->image = $this->imageUpload($request->file('profile_picture'), 'Affiliate Marketer')['filePath'];
+        if($request->hasFile('profile_picture')){
+            $data->image = $this->imageUpload($request->file('profile_picture'), 'Affiliate Marketer')['filePath'];
+        }
         $data->save();
 
         $data->assignRole('AFFLIATE MARKETER');

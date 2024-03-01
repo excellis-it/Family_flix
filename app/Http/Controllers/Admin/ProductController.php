@@ -15,68 +15,23 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.product.list');
+        $products = Product::orderBy('id','desc')->paginate(15);
+        return view('admin.product.list',compact('products'));
 
     }
 
     public function productAjaxList(Request $request)
     {
-        $draw = $request->get('draw');
-        $start = $request->get("start");
-        $rowperpage = $request->get("length"); // Rows display per page
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $products = Product::where('id', 'like', '%' . $query . '%')
+                    ->orWhere('type', 'like', '%' . $query . '%')
+                    ->orderBy('id', 'desc')
+                    ->paginate(15);
 
-        $columnIndex_arr = $request->get('order');
-        $columnName_arr = $request->get('columns');
-        $order_arr = $request->get('order');
-        $search_arr = $request->get('search');
-
-        $columnIndex = $columnIndex_arr[0]['column']; // Column index
-        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-        $searchValue = $search_arr['value']; // Search value
-
-        // Total records
-        $totalRecords = Product::orderBy('id','desc')->count();
-        $totalRecordswithFilter = Product::orderBy('id','desc')->count();
-
-        // Fetch records
-        $records = Product::query();
-        $columns = ['type','product_image','top_10_status','popular_status'];
-        foreach($columns as $column){
-            $records->where($column, 'like', '%' . $searchValue . '%');
+            return response()->json(['data' => view('admin.product.filter', compact('products'))->render()]);
         }
-        $records->orderBy($columnName,$columnSortOrder);
-        $records->skip($start);
-        $records->take($rowperpage);
-        $records = $records->get();
-
-        $data_arr = array(); 
-
-        foreach($records as $record){
-            $type = $record->type;
-            $product_image = $record->product_image;
-            $top_10_status = $record->top_10_status;
-            $popular_status = $record->popular_status;
-            $id = $record->id;
-
-            
-           $data_arr[] = array(
-               "product_image" => $product_image,
-               "type" => $type,
-               "top_10_status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="'.$record->id.'"'.($record->top_10_status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
-               "popular_status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class-popular" data-id="'.$record->id.'"'.($record->popular_status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
-               "unbeatable_status" => '<div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class-unbeatable" data-id="'.$record->id.'"'.($record->unbeatable_status ? 'checked' : '').'/><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>',
-               "action" => '<a href="'.route('products.edit',$id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a href="'.route('delete.products',$id).'" onclick="return confirm(`Are you sure you want to delete this product?`)"><i class="fas fa-trash"></i></a>',
-           );
-        }                                                                                                                                   
-        $response = array(
-           "draw" => intval($draw),
-           "iTotalRecords" => $totalRecords,
-           "iTotalDisplayRecords" => $totalRecordswithFilter,
-           "aaData" => $data_arr
-        );
-
-        return response()->json($response); 
     }
 
     public function changeProductTopStatus(Request $request)

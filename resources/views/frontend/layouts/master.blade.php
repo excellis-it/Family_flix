@@ -8,7 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Hugo 0.84.0" />
     <title>The family Flix</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend_assets/images/logo.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,6 +39,7 @@
     {{-- toastr cdn --}}
     <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
 </head>
 
 <body>
@@ -50,12 +51,30 @@
 
         @include('frontend.includes.header')
         @yield('content')
+<style>
+    @media (max-width:1280px) {
 
+    .vdo-img {
+        height: 250px;
+        margin-top: -9%;
+    }
+   
+}
+
+@media (max-width:1600px) {
+    
+    .imdb-sec {
+        margin-top: -6.2%;
+    }
+    
+ 
+}
+</style>
         <section class="subscribe-sec">
             <div class="container">
                 <div class="subscribe-sec-wrap">
                     <div class="row justify-content-center">
-                        <div class="col-xl-10">
+                        <div class="col-xl-11">
                             <div class="subscribe-head">
                                 <h2>{{ $subscribe_cms->subscribe_title }}</h2>
                             </div>

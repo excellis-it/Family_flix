@@ -26,12 +26,6 @@ a {
   padding: 0px 10%;
 }
 
-@media (min-width: 1450px) {
-  .container {
-    max-width: 1500px;
-  }
-}
-
 h1,
 h2,
 h3,
@@ -84,7 +78,7 @@ p {
 .logo a {
   position: relative;
   z-index: 1;
-  width: 250px;
+  width: 230px;
   display: inline-block;
 }
 
@@ -259,13 +253,10 @@ p {
   background: rgb(0 0 0 / 40%);
 } */
 
-@media (min-width: 992px) {
-
   .slider,
   .slide {
-    height: 100vh;
+    height: 550px;
   }
-}
 
 .slide {
   position: relative;
@@ -994,10 +985,6 @@ p {
   object-fit: cover;
 }
 
-.slider,
-.slide {
-  height: 60vh;
-}
 
 /*-------- button Effect-------*/
 .red_btn {
@@ -1310,7 +1297,7 @@ font-weight: 600;
 
 /* access-sec */
 .access-sec {
-  padding: 200px 0px 100px;
+  padding: 200px 0px 50px;
   position: relative;
   margin-top: -7%;
 }
@@ -1325,18 +1312,19 @@ font-weight: 600;
 
 .access-bg-img img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+    /* height: auto; */
+    object-fit: cover;
+    vertical-align: top;
 }
 
 .vdo-img {
    height: 285px;
-   margin-top: -9%;
+   margin-top: -150px;
   position: relative;
   z-index: 10;
 }
 .unbeatable-slider-img{
-    height: 446px;
+    height: 380px;
 }
 .shows-slider-img{
     height: 346px;
@@ -2243,9 +2231,8 @@ video:-webkit-full-page-media{
 .inner_banner_sec {
   padding: 150px 0;
   position: relative;
-  height: 80vh;
+  height: 550px;
   z-index: 10;
-  margin-top: -12%;
 }
 
 .inner_banner_sec::before {

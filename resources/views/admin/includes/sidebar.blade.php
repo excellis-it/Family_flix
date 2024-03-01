@@ -32,7 +32,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-submenu">
+                {{-- <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-category"></i>
@@ -44,7 +44,7 @@
                             <a class="nav-link" href="{{ route('menu-management.index') }}">List</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : ' ' }}" href="#">
@@ -149,6 +149,20 @@
                         </li>
                     </ul>
                 </li>
+
+                {{-- <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/ott-service*') ? 'active' : ' ' }}" href="#">
+                        <span>
+                            <i class="ti ti-pencil"></i>
+                        </span>OTT Icon
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/ott-service*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/ott-service*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('ott-service.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li> --}}
 
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#">

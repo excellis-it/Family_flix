@@ -13,7 +13,7 @@
                     <h3>Home Cms</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a> <span class="bread-slash">/</span></li>
-                       
+
                         <li><a href=""><span class="bread-blod">Home</span></a></li>
                     </ul>
                 </div>
@@ -129,46 +129,7 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group col-md-6 mb-3">
-                                    <label>Top Grid<span style="color: red;">*</span></label>
-                                </div>
-                                <div class="add-name">
-                                    @foreach ($top_grids as $key => $vall)
-                                        <div class="row">
-                                            
-                                            <div class="col-md-2 pb-3">
-                                                <div style="display: flex">
-                                                   
-                                                    <img src="{{ Storage::url($vall->icon) }}"
-                                                    id="grid-{{ $vall->id }}">
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-3 pb-3">
-                                                <div style="display: flex">
-                                                    <input type="text" name="grid_title[]"
-                                                        value="{{ $vall->title }}" class="form-control"
-                                                        id="grid-{{ $vall->id }}" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5 pb-3">
-                                                <div style="display: flex">
-                                                    <textarea name="grid_description[]" class="form-control" id="grid-{{ $vall->id }}" readonly>{{ $vall->description }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" class="btn btn-danger cross good-button remove-grid"
-                                                    data-id="{{ $vall->id }}"> <i class="fas fa-close"></i>
-                                                    Remove</button>
-                                            </div>
-                                        </div>
-                                    @endforeach
 
-                                    <button type="button" class="btn btn-success add good-button"><i
-                                            class="fas fa-plus"></i> Add More Grid</button>
-                                    <br>
-                                    {{-- <div class="add-grid"> </div>         --}}
-                                </div>
                             </div>
                             <br>
 
@@ -269,33 +230,33 @@
                                     @endif
                                 </div>
 
-                                
-                                @foreach($ott_icons as $key => $ott_icon)
-                                <div class="form-group col-md-3 mb-3">
-                                    <label>{{ $key +1 }}st Small Icon<span style="color: red;">*</span></label>
-                                    
-                                    @if ($errors->has('ott_icon'))
-                                        <div class="error" style="color:red;">
-                                            {{ $errors->first('ott_icon') }}</div>
-                                    @endif
-                                    <br>
-                                    @if ($ott_icon->icon != '')
-                                        <img src="{{ Storage::url($ott_icon->icon) }}" alt="preview image"
-                                            style="max-height: 180px;">
-                                            <a class="remove-ott-icon" href="javascript:void(0);" data-id="{{$ott_icon->id}}" style="display: inline;">&#215;</a>
-                                
-                                    @endif
-                                </div>
-                                @endforeach
-                                
 
-                                
+                                @foreach ($ott_icons as $key => $ott_icon)
+                                    <div class="form-group col-md-3 mb-3">
+                                        <label>{{ $key + 1 }}st Small Icon<span style="color: red;">*</span></label>
+
+                                        @if ($errors->has('ott_icon'))
+                                            <div class="error" style="color:red;">
+                                                {{ $errors->first('ott_icon') }}</div>
+                                        @endif
+                                        <br>
+                                        @if ($ott_icon->icon != '')
+                                            <img src="{{ Storage::url($ott_icon->icon) }}" alt="preview image"
+                                                style="max-height: 180px;">
+                                            <a class="remove-ott-icon" href="javascript:void(0);"
+                                                data-id="{{ $ott_icon->id }}" style="display: inline;">&#215;</a>
+                                        @endif
+                                    </div>
+                                @endforeach
+
+
+
                             </div>
                             <button type="button" class="btn btn-success add-ott good-button "><i
-                                class="fas fa-plus"></i> Add More OTT Icon</button>
-                                <br>
+                                    class="fas fa-plus"></i> Add More OTT Icon</button>
+                            <br>
 
-                                <div class="add-ott-icon pb-3"> </div>        
+                            <div class="add-ott-icon pb-3"> </div>
                             <br>
 
                             <div class="row">
@@ -304,7 +265,8 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Title<span style="color: red;">*</span></label>
-                                    <input type="text" name="entertainment_title" value="{{ $home_cms->entertainment_title }}" class="form-control">
+                                    <input type="text" name="entertainment_title"
+                                        value="{{ $home_cms->entertainment_title }}" class="form-control">
                                     @if ($errors->has('entertainment_title'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('entertainment_title') }}</div>
@@ -326,7 +288,7 @@
                                 <div class="add-ent">
                                     @foreach ($entertainments as $key => $vall)
                                         <div class="row">
-                                            
+
                                             <div class="col-md-5 pb-3">
                                                 <div style="display: flex">
                                                     <img src="{{ Storage::url($vall->image) }}"
@@ -334,14 +296,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-5 pb-3">
-                                                
+
                                                 <div style="display: flex">
                                                     <input type="text" name="image_name[]"
                                                         value="{{ $vall->image_name }}" class="form-control"
-                                                        id="en-{{ $vall->id }}" placeholder="Enter Image Name" readonly>
+                                                        id="en-{{ $vall->id }}" placeholder="Enter Image Name"
+                                                        readonly>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-md-2">
                                                 <button type="button" class="btn btn-danger cross good-button remove-ent"
                                                     data-id="{{ $vall->id }}"> <i class="fas fa-close"></i>
@@ -353,7 +316,7 @@
                                     <button type="button" class="btn btn-success ent-image good-button"><i
                                             class="fas fa-plus"></i> Add More Image</button>
 
-                                    <div class="entr-image-add"> </div>        
+                                    <div class="entr-image-add"> </div>
                                 </div>
                             </div>
 
@@ -414,10 +377,10 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Video Link<span style="color: red;">*</span></label>
-                                    <input type="text" name="section3_video_link"
-                                        value="{{ $home_cms->section3_video_link }}" class="form-control"
-                                        placeholder="Enter Video link">
+                                    <label>Video upload<span style="color: red;">*</span></label>
+                                    <input type="file" name="section3_video_link"
+                                         class="form-control"
+                                        >
                                     @if ($errors->has('section3_video_link'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('section3_video_link') }}</div>
@@ -525,7 +488,7 @@
                                     <label>Title<span style="color: red;">*</span></label>
                                     <input type="text" name="section5_main_title"
                                         value="{{ $home_cms->section5_main_title }}" class="form-control"
-                                        placeholder="Enter Section5 Title" >
+                                        placeholder="Enter Section5 Title">
                                     @if ($errors->has('section5_main_title'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('section5_main_title') }}</div>
@@ -534,7 +497,7 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Description<span style="color: red;">*</span></label>
-                                    <textarea name="section5_main_description" id="editor1" class="form-control" 
+                                    <textarea name="section5_main_description" id="editor1" class="form-control"
                                         placeholder="Enter Section5 Description">{{ $home_cms->section5_main_description }}</textarea>
                                     @if ($errors->has('section5_main_description'))
                                         <div class="error" style="color:red;">
@@ -595,10 +558,9 @@
             </div>
         </div>
     </div>
-        @endsection
+@endsection
 
-    @push('scripts')
-
+@push('scripts')
     <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
@@ -670,7 +632,7 @@
                 }
                 reader.readAsDataURL(this.files[0]);
             });
-            
+
 
             // section3_back_image preview
             $('#section3_back_image').change(function() {
@@ -728,106 +690,105 @@
         });
     </script>
 
-<script>
-    $(document).ready(function() {
-        $(".add").click(function() {
+    <script>
+        $(document).ready(function() {
+            $(".add").click(function() {
 
-            $(".add-name").append(
-                '<div class="row"><div class="col-md-2 pb-3"><div style="display: flex"> <input type="file" name="grid_icon[]" class="form-control"></div> </div> <div class="col-md-3 pb-3"><div style = "display: flex"><input type = "text" name="grid_title[]"  class="form-control" ></div></div> <div class="col-md-5 pb-3"><div style="display: flex"><textarea name="grid_description[]" class="form-control"></textarea> </div></div><div class="col-md-2" ><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i> Remove</button></div></div>'
-            );
+                $(".add-name").append(
+                    '<div class="row"><div class="col-md-2 pb-3"><div style="display: flex"> <input type="file" name="grid_icon[]" class="form-control"></div> </div> <div class="col-md-3 pb-3"><div style = "display: flex"><input type = "text" name="grid_title[]"  class="form-control" ></div></div> <div class="col-md-5 pb-3"><div style="display: flex"><textarea name="grid_description[]" class="form-control"></textarea> </div></div><div class="col-md-2" ><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i> Remove</button></div></div>'
+                );
+            });
         });
-    });
 
-    $(document).on('click', '.cross', function() {
-        // remove pareent div
-        $(this).parent().parent().remove();
-    });
-</script>
-{{-- ott icon --}}
-<script>
-    $(document).ready(function() {
-        $(".add-ott").click(function() {
-
-            $(".add-ott-icon").append(
-                '<div class="row"><div class="col-md-6 pb-3"><div style="display: flex"> <input type="file" name="ott_icon[]" class="form-control"></div> </div> <div class="col-md-2" ><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i> Remove</button></div></div>'
-            );
+        $(document).on('click', '.cross', function() {
+            // remove pareent div
+            $(this).parent().parent().remove();
         });
-    });
+    </script>
+    {{-- ott icon --}}
+    <script>
+        $(document).ready(function() {
+            $(".add-ott").click(function() {
 
-    $(document).on('click', '.cross', function() {
-        // remove pareent div
-        $(this).parent().parent().remove();
-    });
-</script>
-{{-- entertainment --}}
-<script>
-    $(document).ready(function() {
-        $(".ent-image").click(function() {
-
-            $(".entr-image-add").append(
-                '<div class="row"><div class="col-md-5 pb-3"><div style="display: flex"><input type="file" name="entern_image[]" class="form-control"></div></div><div class="col-md-5 pb-3"><div style="display: flex"><input type="text" name="image_name[]" placeholder="Enter Image name" class="form-control"></div></div><div class="col-md-2"><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i>Remove</button></div></div>'
-            );
+                $(".add-ott-icon").append(
+                    '<div class="row"><div class="col-md-6 pb-3"><div style="display: flex"> <input type="file" name="ott_icon[]" class="form-control"></div> </div> <div class="col-md-2" ><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i> Remove</button></div></div>'
+                );
+            });
         });
-    });
 
-    $(document).on('click', '.cross', function() {
-        // remove pareent div
-        $(this).parent().parent().remove();
-    });
-</script>
+        $(document).on('click', '.cross', function() {
+            // remove pareent div
+            $(this).parent().parent().remove();
+        });
+    </script>
+    {{-- entertainment --}}
+    <script>
+        $(document).ready(function() {
+            $(".ent-image").click(function() {
+
+                $(".entr-image-add").append(
+                    '<div class="row"><div class="col-md-5 pb-3"><div style="display: flex"><input type="file" name="entern_image[]" class="form-control"></div></div><div class="col-md-5 pb-3"><div style="display: flex"><input type="text" name="image_name[]" placeholder="Enter Image name" class="form-control"></div></div><div class="col-md-2"><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i>Remove</button></div></div>'
+                );
+            });
+        });
+
+        $(document).on('click', '.cross', function() {
+            // remove pareent div
+            $(this).parent().parent().remove();
+        });
+    </script>
 
 
-<script>
-    $('.remove-grid').on('click', function() {
-        var result = confirm('Are you sure you want to delete?');
+    <script>
+        $('.remove-grid').on('click', function() {
+            var result = confirm('Are you sure you want to delete?');
 
-        if (result) {
-            var id = $(this).attr('data-id');
-            $.ajax({
+            if (result) {
+                var id = $(this).attr('data-id');
+                $.ajax({
                     url: "{{ route('delete.grid-image') }}",
                     type: "POST",
                     data: {
                         id: id,
                         _token: "{{ csrf_token() }}"
                     },
-                success: function(response) {
-                    $('#'+id).hide();
-                }
-            });
-        }else{
-            return false;
-        }
-    });
-</script>
+                    success: function(response) {
+                        $('#' + id).hide();
+                    }
+                });
+            } else {
+                return false;
+            }
+        });
+    </script>
 
-<script>
-    $('.remove-ott-icon').on('click', function() {
-        var result = confirm('Are you sure you want to delete?');
-        
-        if (result) {
-            var id = $(this).attr('data-id');
-            $.ajax({
+    <script>
+        $('.remove-ott-icon').on('click', function() {
+            var result = confirm('Are you sure you want to delete?');
+
+            if (result) {
+                var id = $(this).attr('data-id');
+                $.ajax({
                     url: "{{ route('delete.ott-icon') }}",
                     type: "POST",
                     data: {
                         id: id,
                         _token: "{{ csrf_token() }}"
                     },
-                success: function(response) {
-                    $('#'+id).hide();
-                }
-            });
-        }else{
-            return false;
-        }
-    });
-
+                    success: function(response) {
+                        $('#' + id).hide();
+                    }
+                });
+            } else {
+                return false;
+            }
+        });
     </script>
 
     <script>
         $('.remove-ent').on('click', function() {
             var result = confirm('Are you sure you want to delete?');
-            
+
             if (result) {
                 var id = $(this).attr('data-id');
                 $.ajax({
@@ -838,14 +799,12 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
-                        $('#'+id).hide();
+                        $('#' + id).hide();
                     }
                 });
-            }else{
+            } else {
                 return false;
             }
         });
-
-        
-        </script>
+    </script>
 @endpush

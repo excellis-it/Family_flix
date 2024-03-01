@@ -29,7 +29,7 @@ class CreateAboutUsTable extends Migration
             $table->string('section3_description1')->nullable();
             $table->string('section3_image1')->nullable();
             $table->string('section3_title2')->nullable();
-            $table->string('section3_description2')->nullable();
+            $table->longText('section3_description2')->nullable();
             $table->string('section3_image2')->nullable();
             $table->string('section3_title3')->nullable();
             $table->string('section3_description3')->nullable();

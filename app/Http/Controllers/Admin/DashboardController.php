@@ -4,13 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Plan;
+use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $count['products'] = Product::count();
+        $count['affiliators'] = User::role('AFFLIATE MARKETER')->count();
+        $count['plans'] = Plan::count();
+        $count['subscriptions'] = UserSubscription::count();
+
+        return view('admin.dashboard',compact('count'));
     }
 
 }

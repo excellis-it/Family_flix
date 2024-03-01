@@ -17,8 +17,25 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans = Plan::orderBy('plan_order','asc')->get();
+        $plans = Plan::orderBy('plan_order','asc')->paginate(15);
         return view('admin.plan.list', compact('plans'));
+    }
+
+    public function fetchPlanData(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $plans = Plan::where('id', 'like', '%' . $query . '%')
+                    ->orWhere('plan_name', 'like', '%' . $query . '%')
+                    ->orWhere('plan_details', 'like', '%' . $query . '%')
+                    ->orWhere('plan_actual_price', 'like', '%' . $query . '%')
+                    ->orWhere('plan_offer_price', 'like', '%' . $query . '%')
+                    ->orderBy('plan_order', 'asc')
+                    ->paginate(15);
+
+            return response()->json(['data' => view('admin.plan.filter', compact('plans'))->render()]);
+        }
     }
 
     /**
@@ -42,8 +59,8 @@ class PlanController extends Controller
         $request->validate([
             'plan_name'     => 'required',
             'plan_details'    => 'required',
-            'plan_actual_price'    => 'required',
-            'plan_offer_price'    => 'required',
+            'plan_actual_price'    => 'required|numeric',
+            'plan_offer_price'    => 'required|numeric',
             'button_text'    => 'required',
         ]);
 
@@ -131,8 +148,8 @@ class PlanController extends Controller
         $request->validate([
             'plan_name'     => 'required',
             'plan_details'    => 'required',
-            'plan_actual_price'    => 'required',
-            'plan_offer_price'    => 'required',
+            'plan_actual_price'    => 'required|numeric',
+            'plan_offer_price'    => 'required|numeric',
             'button_text'    => 'required',
         ]);
         

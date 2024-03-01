@@ -15,7 +15,7 @@
     <meta name="keywords" content="Mordenize">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--  Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend_assets/images/logo.ico') }}">
     <!-- Owl Carousel  -->
     <link rel="stylesheet" href="{{ asset('admin_assets/css/owl.carousel.min.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

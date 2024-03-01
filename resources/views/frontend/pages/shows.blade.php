@@ -11,7 +11,7 @@
     <section class="inner_banner_sec"
         style="
           background-image: url({{ Storage::url($show_cms->banner_img) }});
-          background-position: center;
+          background-position: center bottom;
           background-repeat: no-repeat;
           background-size: cover;
         ">

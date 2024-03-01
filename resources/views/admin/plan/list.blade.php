@@ -34,7 +34,22 @@
                 </div>
                 <div class="card w-100">
                     <div class="card-body">
-                        <h4>List of Plan</h4>
+                        <div class="row justify-content-between align-items-center mb-2">
+                            <div class="col-md-6">
+                                <div><h4>List of Plans</h4></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-1 justify-content-end">
+                                    <div class="col-md-8 pr-0">
+                                        <div class="search-field prod-search">
+                                            <input type="text" name="search" id="search" placeholder="search..." required
+                                                class="form-control">
+                                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive rounded-2 mb-4">
                             <table class="table table-hover customize-table mb-0 align-middle bg_tbody cusrsor-pointer"
                                 id="myTable">
@@ -48,28 +63,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyContents">
-                                    @if (count($plans) == 0)
-                                        <tr>
-                                            <td colspan="5" class="text-center">No Plan found</td>
-                                        </tr>
-                                    @else
-                                        @foreach ($plans as $key => $plan)
-                                            <tr  class="tableRow" data-id="{{ $plan->id }}">
-                                                <td >{{ $plan->plan_name }}</td>
-                                                <td >{{ $plan->plan_details }}</td>
-                                                <td >{{ $plan->plan_actual_price }}</td>
-                                                <td >{{ $plan->plan_offer_price }}</td>
-                                                <td>
-                                                    <a title="Delete Plan"
-                                                        data-route="{{ route('delete.plan', $plan->id) }}"  class="delete_acma"
-                                                        href="javascipt:void(0);" id="delete"><i
-                                                            class="fas fa-trash"></i></a>
-
-                                                    <a href="{{ route('plan.edit', $plan->id) }}"> <i class="fas fa-edit"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
+                                    @include('admin.plan.filter')
                                 </tbody>
                             </table>
                         </div>
@@ -105,23 +99,6 @@
     });
 </script>
 
-<script>
-$(document).ready(function() {
-// Initialize DataTable
-var table = $('#myTable').DataTable({
-    "aaSorting": [],
-    "columnDefs": [{
-            "orderable": false,
-            "targets": [3]
-        },
-        {
-            "orderable": true,
-            "targets": [0, 1, 2]
-        }
-    ]
-});
-});
-</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -167,5 +144,40 @@ function sendOrderToServer() {
 }
 });
 
+</script>
+
+<script>
+    $(document).ready(function() {
+        function fetch_data(page, query) {
+            $.ajax({
+                url: "{{ route('plan.ajax.list') }}",
+                data: {
+                    page: page,
+                    query: query
+                },
+                success: function(data) {
+                    $('tbody').html(data.data);
+                }
+            });
+        }
+
+        $(document).on('keyup', '#search', function() {
+            var query = $('#search').val();
+            var page = $('#hidden_page').val();
+            fetch_data(page, query);
+        });
+        $(document).on('click', '.close-pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            $('#hidden_page').val(page);
+
+            var query = $('#search').val();
+
+            $('li').removeClass('active');
+            $(this).parent().addClass('active');
+            fetch_data(page, query);
+        });
+
+    });
 </script>
 @endpush

@@ -30,7 +30,7 @@
                             <span>Products</span>
                         </div>
 
-                        <span class="fw-600">2</span>
+                        <span class="fw-600">{{ $count['products'] }}</span>
                     </div>
                 </div>
             </div>
@@ -41,9 +41,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
-                            <span>Subscription</span>
+                            <span>Affiliators</span>
                         </div>
-                        <span class="fw-600">5</span>
+                        <span class="fw-600">{{ $count['affiliators'] }}</span>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <div class="d-flex align-items-center">
                             <span>Plan</span>
                         </div>
-                        <span class="fw-600">3</span>
+                        <span class="fw-600">{{ $count['plans'] }}</span>
                     </div>
                 </div>
             </div>
@@ -67,9 +67,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
-                            <span>User</span>
+                            <span>Subscriptions</span>
                         </div>
-                        <span class="fw-600">10</span>
+                        <span class="fw-600">{{ $count['subscriptions'] }}</span>
                     </div>
                 </div>
             </div>

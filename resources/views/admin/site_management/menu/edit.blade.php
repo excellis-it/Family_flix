@@ -31,8 +31,7 @@
                             <input type="text" name="id" value="{{ $menu->id }}" hidden>
                             <div class="row">
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Parent Menu<span
-                                        style="color: red;">*</span></label>
+                                    <label>Parent Menu</label>
                                     <select name="parent_id"  class="form-control">
                                         <option value="">Select a Parent Menu</option>
                                         @foreach ($parent_menus as $parent_menu)

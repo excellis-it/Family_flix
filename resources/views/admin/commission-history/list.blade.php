@@ -85,7 +85,7 @@
         $(document).ready(function() {
             function fetch_data(page, query) {
                 $.ajax({
-                    url: "{{ route('commission-history.fetch-data') }}",
+                    url: "{{ route('commission-history.ajax-fetch-data') }}",
                     data: {
                         page: page,
                         query: query

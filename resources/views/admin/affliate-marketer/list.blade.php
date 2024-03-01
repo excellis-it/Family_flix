@@ -77,25 +77,34 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-end mb-2">
-            <div class="col-md-6">
-                <div class="row g-1 justify-content-end">
-                    <div class="col-md-8 pr-0">
-                        <div class="search-field prod-search">
-                            <input type="text" name="search" id="search" placeholder="search..." required
-                                class="form-control">
-                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!--  Row 1 -->
         <div class="row">
             <div class="col-lg-12">
+                <div class="w-100 text-end mb-3">
+                    <a class="print_btn" href="{{ route('affliate-marketer.create') }}" >+ Add
+                        New Affiliator</a>
+                </div>
                 <div class="card w-100">
                     <div class="card-body">
+
+                        <div class="row justify-content-between align-items-center mb-2">
+                            <div class="col-md-6">
+                                <div><h4>List of Affiliator Marketers</h4></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-1 justify-content-end">
+                                    <div class="col-md-8 pr-0">
+                                        <div class="search-field prod-search">
+                                            <input type="text" name="search" id="search" placeholder="search..." required
+                                                class="form-control">
+                                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="table-responsive rounded-2 mb-4">
                             <table class="table table-hover customize-table mb-0 align-middle bg_tbody cusrsor-pointer"
                                 id="myTable">

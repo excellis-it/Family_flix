@@ -28,3 +28,4 @@
         <td colspan="8" class="text-center">No data found</td>
     </tr>
 @endif
+

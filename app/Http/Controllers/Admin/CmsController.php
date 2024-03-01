@@ -39,7 +39,6 @@ class CmsController extends Controller
             'section2_description' => 'required',
             'section2_short_title' => 'required',
             'section3_title' => 'required',
-            'section3_video_link' => 'required',
             'section4_title' => 'required',
             'section4_description' => 'required',
             'section5_main_title' => 'required',
@@ -58,7 +57,7 @@ class CmsController extends Controller
         $home_cms->section2_description = $request->section2_description;
         $home_cms->section2_short_title = $request->section2_short_title;
         $home_cms->section3_title = $request->section3_title;
-        $home_cms->section3_video_link = $request->section3_video_link;
+        // $home_cms->section3_video_link = $request->section3_video_link;
         $home_cms->section4_title = $request->section4_title;
         $home_cms->section4_description = $request->section4_description;
         $home_cms->section5_main_title = $request->section5_main_title;
@@ -66,6 +65,19 @@ class CmsController extends Controller
         $home_cms->plan_section_title = $request->plan_section_title;
         $home_cms->entertainment_title = $request->entertainment_title;
         $home_cms->entertainment_description = $request->entertainment_description;
+
+
+        //video upload
+        if ($request->hasFile('section3_video_link')) {
+            $request->validate([
+                'section3_video_link' => 'required',
+            ]);
+            
+            $file6= $request->file('section3_video_link');
+            $filename6= date('YmdHi').$file6->getClientOriginalName();
+            $video_path = $request->file('section3_video_link')->store('home', 'public');
+            $home_cms->section3_video_link = $video_path;
+        }
         
         //top back image upload
 
@@ -143,20 +155,20 @@ class CmsController extends Controller
         }
 
 
-        //multiple grid icon upload
-        if ($request->hasFile('grid_icon')) {
-            foreach ($request->file('grid_icon') as $key => $file) {
-                if ($file->isValid()) {
-                    $file_path = $file->store('grid', 'public'); 
+        // //multiple grid icon upload
+        // if ($request->hasFile('grid_icon')) {
+        //     foreach ($request->file('grid_icon') as $key => $file) {
+        //         if ($file->isValid()) {
+        //             $file_path = $file->store('grid', 'public'); 
         
-                    $top_grid = new TopGrid();
-                    $top_grid->icon = $file_path; 
-                    $top_grid->title = $request->grid_title[$key];
-                    $top_grid->description = $request->grid_description[$key];
-                    $top_grid->save();
-                } 
-            }
-        }
+        //             $top_grid = new TopGrid();
+        //             $top_grid->icon = $file_path; 
+        //             $top_grid->title = $request->grid_title[$key];
+        //             $top_grid->description = $request->grid_description[$key];
+        //             $top_grid->save();
+        //         } 
+        //     }
+        // }
 
         
         //multiple ott icon upload

@@ -13,13 +13,13 @@ $footer_cms =  App\Models\FooterCms::first();
       <div class="container">
         <div class="ftr-top-wrap">
           <div class="row justify-content-between">
-            <div class="col-xl-3 col-md-6 col-12">
+            <div class="col-lg-3 col-md-6 col-12">
               <div class="footer-logo">
                 <a href=""><img src="{{ Storage::url($footer_cms->footer_logo)}}" alt="" /></a>
               </div>
             </div>
 
-            <div class="col-xl-3 col-md-6 col-12">
+            <div class="col-lg-3 col-md-6 col-12">
               <div class="find-us">
                 <h4>Quick Links</h4>
                 <div class="ftr-link ftr-link-1">
@@ -49,7 +49,7 @@ $footer_cms =  App\Models\FooterCms::first();
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-md-6 col-12">
+            <div class="col-lg-3 col-md-6 col-12">
               <div class="find-us">
                 <h4>Customer Support</h4>
                 <div class="ftr-link ftr-link-1">
@@ -62,7 +62,7 @@ $footer_cms =  App\Models\FooterCms::first();
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-md-6 col-12">
+            <div class="col-lg-3 col-md-6 col-12">
               <div class="find-us contact-footer">
                 <h4>Contact Us</h4>
                 @foreach($contact_details as $contact_detail)

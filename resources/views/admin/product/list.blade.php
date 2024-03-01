@@ -34,7 +34,22 @@
                 </div>
                 <div class="card w-100">
                     <div class="card-body">
-                        <h4>List of Product</h4>
+                        <div class="row justify-content-between align-items-center mb-2">
+                            <div class="col-md-6">
+                                <div><h4>List of Products</h4></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-1 justify-content-end">
+                                    <div class="col-md-8 pr-0">
+                                        <div class="search-field prod-search">
+                                            <input type="text" name="search" id="search" placeholder="search..." required
+                                                class="form-control">
+                                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive rounded-2 mb-4">
                             <table class="table table-hover customize-table mb-0 align-middle bg_tbody" id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
@@ -47,6 +62,9 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                <tbody id="tableBodyContents">
+                                    @include('admin.product.filter')
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -57,52 +75,42 @@
 @endsection
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            // Define your storage URL
-            var storageUrl = "{{ Storage::url('') }}"; // Assuming you're using Laravel's Storage facade
 
-            var table = $('#myTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('products.ajax.list') }}",
-                columns: [{
-                        data: 'type',
-                        name: 'type'
-                    },
-                    {
-                        data: 'product_image',
-                        name: 'product_image',
-                        render: function(data, type, full, meta) {
-                            // Assuming data contains the relative path of the image
-                            // Concatenate storage URL with the image path
-                            var imageUrl = storageUrl + data;
-                            return '<img src="' + imageUrl +
-                                '" style="max-width:100px; max-height:100px;"/>';
-                        }
-                    },
-                    {
-                        data: 'top_10_status',
-                        name: 'top_10_status',
-                    },
-                    {
-                        data: 'popular_status',
-                        data: 'popular_status',
-                    },
-                    {
-                        data: 'unbeatable_status',
-                        data: 'unbeatable_status',
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
+<script>
+    $(document).ready(function() {
+        function fetch_data(page, query) {
+            $.ajax({
+                url: "{{ route('products.ajax.list') }}",
+                data: {
+                    page: page,
+                    query: query
+                },
+                success: function(data) {
+                    $('tbody').html(data.data);
+                }
             });
+        }
+
+        $(document).on('keyup', '#search', function() {
+            var query = $('#search').val();
+            var page = $('#hidden_page').val();
+            fetch_data(page, query);
         });
-    </script>
+        $(document).on('click', '.close-pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            $('#hidden_page').val(page);
+
+            var query = $('#search').val();
+
+            $('li').removeClass('active');
+            $(this).parent().addClass('active');
+            fetch_data(page, query);
+        });
+
+    });
+</script>
+
     <script>
         $(document).on('change', '.toggle-class', function() {
             var status = $(this).prop('checked') == true ? 1 : 0;
@@ -171,4 +179,28 @@
             });
         });
     </script>
+
+
+<script>
+    $(document).on('click', '#delete', function(e) {
+        swal({
+                title: "Are you sure?",
+                text: "To delete this Product.",
+                type: "warning",
+                confirmButtonText: "Yes",
+                showCancelButton: true
+            })
+            .then((result) => {
+                if (result.value) {
+                    window.location = $(this).data('route');
+                } else if (result.dismiss === 'cancel') {
+                    swal(
+                        'Cancelled',
+                        'Your stay here :)',
+                        'error'
+                    )
+                }
+            })
+    });
+</script>
 @endpush

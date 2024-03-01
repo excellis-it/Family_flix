@@ -78,7 +78,7 @@
                                 <div class="form-group col-md-12 mb-3">
                                     <label>Plan details<span
                                         style="color: red;">*</span></label>
-                                    <textarea name="plan_details" id="" class="form-control"
+                                    <textarea name="plan_details" id="" rows="4" cols="5" class="form-control"
                                         placeholder="Enter Plan Details">{{ $plan->plan_details }}</textarea>
                                     @if ($errors->has('plan_details'))
                                         <div class="error" style="color:red;">

@@ -18,12 +18,10 @@
 @endpush
 
 @section('content')
-    <section class="banner__slider banner_sec">
+    <section class="banner__slider banner_sec" style="background: url({{ Storage::url($home_cms->top_back_image) }});background-size: cover; background-position: center bottom;">
         <div class="slider stick-dots">
             <div class="slide">
-                <div class="slide__img">
-                    <img src="{{ Storage::url($home_cms->top_back_image) }}" alt="" data-lazy="" class="full-image" />
-                </div>
+                
                 <div class="slide__content slide__content__left">
                     <div class="slide__content--headings text-left">
                         <div class="bnr-text-p">
@@ -147,7 +145,7 @@
             <img src="{{ Storage::url($home_cms->section2_back_image) }}" alt="" />
         </div>
         <div class="entertainment-div">
-            @include('frontend.partials.entertainment');
+            @include('frontend.partials.entertainment')
 
         </div>
     </section>
@@ -261,7 +259,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Adjust width and height attributes for the iframe -->
-                    <iframe width="1280" height="720" src="{{ $home_cms->section3_video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="1280" height="720" src="{{ Storage::url($home_cms->section3_video_link) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
