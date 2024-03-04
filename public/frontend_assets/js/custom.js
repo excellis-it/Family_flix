@@ -464,13 +464,16 @@ $('.feature-slide').slick({
 // unbeatable-slider
 $('.unbeatable-slider').slick({
   autoplay: true,
-  autoplaySpeed: 2000,
   slidesToShow: 6,
   slidesToScroll: 1,
-  lazyLoad: 'progressive',
   arrows: false,
   dots: false,
   infinite: true,
+  autoplaySpeed: 0,
+  speed: 5000,
+  pauseOnHover: false,
+  cssEase: 'linear',
+  variableWidth: true,
   prevArrow: '<div class="slick-nav prev-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
   nextArrow: '<div class="slick-nav next-arrow"><i></i><svg><use xlink:href="#circle"></svg></div>',
   responsive: [
@@ -572,7 +575,7 @@ $('.shows-slider').slick({
     {
       breakpoint: 1367,
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         dots: false
       }
@@ -580,7 +583,7 @@ $('.shows-slider').slick({
     {
       breakpoint: 1025,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
         dots: false
       }
@@ -588,7 +591,7 @@ $('.shows-slider').slick({
     {
       breakpoint: 769,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 3,
         slidesToScroll: 1,
         dots: false
       }
@@ -596,7 +599,7 @@ $('.shows-slider').slick({
     {
       breakpoint: 768,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         dots: false
       }

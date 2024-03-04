@@ -69,9 +69,7 @@
     .inr-text {
      margin-top: 20px;
    }
-   .inner_banner_sec {
-    height: 85vh;
-   }
+
    .offer-img-2 {
     right: 8px;
     bottom: 4px;
@@ -257,9 +255,6 @@
 .links-1 ul li a {
     font-size: 14px;
 }
-.inner_banner_sec {
-    height: 95vh;
-}
     
 }
 
@@ -299,9 +294,22 @@
       top: -214px;
       width: 220px;
     }
+    .unbeatable-slider-img {
+        height: 250px;
+    }
+    .access-div-text {
+        padding: 0 0px;
+    }
+    .add-text p, .add-text a {
+        font-size: 14px !important;
+    }
+    .shows-slider-img {
+        height: 300px;
+    }
 }
 
 @media (max-width:1199.98px) {
+    
 }
 
 @media (max-width:1024px) {
@@ -478,7 +486,7 @@
     display: none;
 }
 .shows-slider-img {
-    height: 450px;
+    height: 300px;
 }
 .left_top {
     display: flex;
@@ -659,7 +667,7 @@
     visibility: hidden;  
   }
   .shows-slider-img{
-    height: 610px;  
+    height: 250px;  
   }
   .shows-slider-box {
     margin: 0px 20px 30px;
