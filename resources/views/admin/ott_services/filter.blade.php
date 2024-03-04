@@ -5,12 +5,15 @@
 @else
     @foreach ($ott_services as $key => $ott_service)
         <tr class="tableRow" data-id="{{ $ott_service->id }}">
-            <td><img src="{{ Storage::url($ott_service->icon) }}"></td>
+            <td><a href="{{ Storage::url($ott_service->icon) }}" target="_blank"> 
+                <img src="{{ Storage::url($ott_service->icon) }}" height="50px;" width="70px;" style="background:black;">
+                </a>
+            </td>
             <td>
                 <a title="Delete Plan" data-route="{{ route('delete.ott-service', $ott_service->id) }}" class="delete_acma"
                     href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
 
-                <a href="{{ route('plan.edit', $ott_service->id) }}"> <i class="fas fa-edit"></i></a>
+                <a href="{{ route('ott-service.edit', $ott_service->id) }}"> <i class="fas fa-edit"></i></a>
             </td>
         </tr>
     @endforeach

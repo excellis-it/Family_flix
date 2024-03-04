@@ -2237,11 +2237,12 @@ video:-webkit-full-page-media{
 
 .inner_banner_sec::before {
   content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 83%;
+    width: 100%;
+    background: linear-gradient(180deg, rgb(0 0 0 / 75%), transparent);
 }
 
 .inner_banner_ontent {

@@ -230,34 +230,8 @@
                                     @endif
                                 </div>
 
-
-                                @foreach ($ott_icons as $key => $ott_icon)
-                                    <div class="form-group col-md-3 mb-3">
-                                        <label>{{ $key + 1 }}st Small Icon<span style="color: red;">*</span></label>
-
-                                        @if ($errors->has('ott_icon'))
-                                            <div class="error" style="color:red;">
-                                                {{ $errors->first('ott_icon') }}</div>
-                                        @endif
-                                        <br>
-                                        @if ($ott_icon->icon != '')
-                                            <img src="{{ Storage::url($ott_icon->icon) }}" alt="preview image"
-                                                style="max-height: 180px;">
-                                            <a class="remove-ott-icon" href="javascript:void(0);"
-                                                data-id="{{ $ott_icon->id }}" style="display: inline;">&#215;</a>
-                                        @endif
-                                    </div>
-                                @endforeach
-
-
-
                             </div>
-                            <button type="button" class="btn btn-success add-ott good-button "><i
-                                    class="fas fa-plus"></i> Add More OTT Icon</button>
-                            <br>
-
-                            <div class="add-ott-icon pb-3"> </div>
-                            <br>
+                           
 
                             <div class="row">
                                 <h4 class="text-left">Entertainment section</h4>
@@ -706,21 +680,7 @@
         });
     </script>
     {{-- ott icon --}}
-    <script>
-        $(document).ready(function() {
-            $(".add-ott").click(function() {
-
-                $(".add-ott-icon").append(
-                    '<div class="row"><div class="col-md-6 pb-3"><div style="display: flex"> <input type="file" name="ott_icon[]" class="form-control"></div> </div> <div class="col-md-2" ><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i> Remove</button></div></div>'
-                );
-            });
-        });
-
-        $(document).on('click', '.cross', function() {
-            // remove pareent div
-            $(this).parent().parent().remove();
-        });
-    </script>
+    
     {{-- entertainment --}}
     <script>
         $(document).ready(function() {

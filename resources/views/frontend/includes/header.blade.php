@@ -45,14 +45,14 @@
                                                 <li class="{{ request()->routeIs('contact-us') ? 'active' : '' }}">
                                                     <a href="{{ route('contact-us') }}"> Contact</a>
                                                 </li>
-                                                @if (Auth::check() && Auth::user()->hasRole('AFFLIATE MARKETER'))
+                                                {{-- @if (Auth::check() && Auth::user()->hasRole('AFFLIATE MARKETER'))
                                                 <li class="{{ request()->routeIs('affiliate-marketer') ? 'active' : '' }}">
                                                     <a href="{{ route('affiliate-marketer.dashboard') }}"> Affiliate Dashboard</a>
                                                 @else
                                                 <li class="{{ request()->routeIs('affiliate-marketer') ? 'active' : '' }}">
                                                     <a href="{{ route('affiliate-marketer.login') }}"> Affiliate Login</a>
                                                 </li>
-                                                @endif
+                                                @endif --}}
                                             </ul>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                 @if (Auth::check() && Auth::user()->hasRole('AFFLIATE MARKETER'))
                                     <a href="{{ route('affiliate-marketer.dashboard') }}">Dashboard</a>
                                 @else
-                                    <a href="{{ route('affiliate-marketer.login') }}">Sign In</a>
+                                    <a href="{{ route('affiliate-marketer.login') }}">Affiliate Login</a>
                                 @endif
 
                             </div>

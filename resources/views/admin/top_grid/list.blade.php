@@ -34,7 +34,22 @@
                 </div>
                 <div class="card w-100">
                     <div class="card-body">
-                        <h4>List of Top grid</h4>
+                        <div class="row justify-content-between align-items-center mb-2">
+                            <div class="col-md-6">
+                                <div><h4>List of top grids</h4></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-1 justify-content-end">
+                                    <div class="col-md-8 pr-0">
+                                        <div class="search-field prod-search">
+                                            <input type="text" name="search" id="search" placeholder="search..." required
+                                                class="form-control">
+                                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive rounded-2 mb-4">
                             <table class="table table-hover customize-table mb-0 align-middle bg_tbody"
                                 id="myTable">
@@ -45,6 +60,9 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+                                <tbody id="tableBodyContents">
+                                    @include('admin.top_grid.filter')
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -55,39 +73,38 @@
 @endsection
 
 @push('scripts')
-   
-
-    <script>
+<script>
     $(document).ready(function() {
-    // Define your storage URL
-    var storageUrl = "{{ Storage::url('') }}"; // Assuming you're using Laravel's Storage facade
-    
-    var table = $('#myTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('top-grid.ajax.list') }}",
-        columns: [
-            {
-                data: 'title',
-                name: 'title'
-            },
-            {
-                data: 'icon',
-                name: 'icon',
-                render: function(data, type, full, meta) {
-                    var imageUrl = storageUrl + data;
-                    return '<img src="' + imageUrl + '" style="max-width:100px; max-height:100px;"/>';
+        function fetch_data(page, query) {
+            $.ajax({
+                url: "{{ route('top-grid.ajax.list') }}",
+                data: {
+                    page: page,
+                    query: query
+                },
+                success: function(data) {
+                    $('tbody').html(data.data);
                 }
-            },
-           
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false
-            },
-        ]
+            });
+        }
+
+        $(document).on('keyup', '#search', function() {
+            var query = $('#search').val();
+            var page = $('#hidden_page').val();
+            fetch_data(page, query);
         });
+        $(document).on('click', '.close-pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            $('#hidden_page').val(page);
+
+            var query = $('#search').val();
+
+            $('li').removeClass('active');
+            $(this).parent().addClass('active');
+            fetch_data(page, query);
+        });
+
     });
-    </script>
+</script>
 @endpush

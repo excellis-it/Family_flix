@@ -77,7 +77,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/commission-percentage*') ? 'active' : ' ' }}" href="#">
                         <span>
-                            <i class="ti ti-movie"></i>
+                            <i class="ti ti-arrow-right"></i>
                         </span>Commission Percentage
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -139,7 +139,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/top-grid*') ? 'active' : ' ' }}" href="#">
                         <span>
-                            <i class="ti ti-pencil"></i>
+                            <i class="ti ti-category"></i>
                         </span>Top Grid
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -150,10 +150,10 @@
                     </ul>
                 </li>
 
-                {{-- <li class="nav-item has-submenu">
+                <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/ott-service*') ? 'active' : ' ' }}" href="#">
                         <span>
-                            <i class="ti ti-pencil"></i>
+                            <i class="ti ti-box"></i>
                         </span>OTT Icon
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -162,7 +162,7 @@
                             <a class="nav-link" href="{{ route('ott-service.index') }}">List</a>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
 
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#">
@@ -232,7 +232,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/faq*') ? 'active' : '' }}" href="#">
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-table"></i>
                         </span>Faq Management
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -266,7 +266,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/coupons*') ? 'active' : ' ' }}" href="#">
                         <span>
-                            <i class="ti ti-chevron-right"></i>
+                            <i class="ti ti-gift"></i>
                         </span>Coupons
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>

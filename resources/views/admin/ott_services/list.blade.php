@@ -39,17 +39,7 @@
                             <div class="col-md-6">
                                 <div><h4>List of OTT Icon</h4></div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row g-1 justify-content-end">
-                                    <div class="col-md-8 pr-0">
-                                        <div class="search-field prod-search">
-                                            <input type="text" name="search" id="search" placeholder="search..." required
-                                                class="form-control">
-                                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="table-responsive rounded-2 mb-4">
                             <table class="table table-hover customize-table mb-0 align-middle bg_tbody"
@@ -64,6 +54,7 @@
                                     @include('admin.ott_services.filter')
                                 </tbody>
                             </table>
+                           
                         </div>
                     </div>
                 </div>
@@ -73,6 +64,30 @@
 @endsection
 
 @push('scripts')
-   
 
+<script>
+    $(document).on('click', '#delete', function(e) {
+        swal({
+                title: "Are you sure?",
+                text: "To delete this OTT Icon.",
+                type: "warning",
+                confirmButtonText: "Yes",
+                showCancelButton: true
+            })
+            .then((result) => {
+                if (result.value) {
+                    window.location = $(this).data('route');
+                } else if (result.dismiss === 'cancel') {
+                    swal(
+                        'Cancelled',
+                        'Your stay here :)',
+                        'error'
+                    )
+                }
+            })
+    });
+</script>
+
+
+   
 @endpush

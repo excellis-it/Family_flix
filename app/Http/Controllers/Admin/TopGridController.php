@@ -16,65 +16,23 @@ class TopGridController extends Controller
     public function index()
     {
         //
-        $top_grids = TopGrid::orderBy('id','desc')->get();
+        $top_grids = TopGrid::orderBy('id','desc')->paginate(15);
         return view('admin.top_grid.list',compact('top_grids'));
     }
 
     public function topGridAjaxList(Request $request)
     {
-        $draw = $request->get('draw');
-        $start = $request->get("start");
-        $rowperpage = $request->get("length"); // Rows display per page
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $top_grids = TopGrid::where('id', 'like', '%' . $query . '%')
+                    ->orWhere('title', 'like', '%' . $query . '%')
+                    ->orderBy('id', 'desc')
+                    ->paginate(15);
 
-        $columnIndex_arr = $request->get('order');
-        $columnName_arr = $request->get('columns');
-        $order_arr = $request->get('order');
-        $search_arr = $request->get('search');
-
-        $columnIndex = $columnIndex_arr[0]['column']; // Column index
-        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-        $searchValue = $search_arr['value']; // Search value
-
-        // Total records
-        $totalRecords = TopGrid::orderBy('id','desc')->count();
-        $totalRecordswithFilter = TopGrid::orderBy('id','desc')->count();
-
-        // Fetch records
-        $records = TopGrid::query();
-        $columns = ['icon','title'];
-        foreach($columns as $column){
-            $records->where($column, 'like', '%' . $searchValue . '%');
+            return response()->json(['data' => view('admin.top_grid.filter', compact('top_grids'))->render()]);
         }
-        $records->orderBy($columnName,$columnSortOrder);
-        $records->skip($start);
-        $records->take($rowperpage);
-        $records = $records->get();
-
-        $data_arr = array(); 
-
-        foreach($records as $record){
-            $icon = $record->icon;
-            $title = $record->title;
-            $id = $record->id;
-            
-           $data_arr[] = array(
-               "icon" => $icon,
-               "title" => $title,
-               "action" => '<a href="'.route('top-grid.edit',$id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a href="'.route('delete.top-grid',$id).'" onclick="return confirm(`Are you sure you want to delete this topgrid?`)"><i class="fas fa-trash"></i></a>',
-           );
-        }                                                                                                                                                   
-                                                                                                                                                    
-        $response = array(
-           "draw" => intval($draw),
-           "iTotalRecords" => $totalRecords,
-           "iTotalDisplayRecords" => $totalRecordswithFilter,
-           "aaData" => $data_arr
-        );
-
-        
-
-        return response()->json($response); 
+       
     }
 
     /**

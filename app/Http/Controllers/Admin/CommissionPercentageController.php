@@ -17,9 +17,34 @@ class CommissionPercentageController extends Controller
     public function index()
     {
           
-        $commission_percentages = AffiliateCommission::all();
-        $commission_percentages = $commission_percentages->unique('percentage');
-        return view('admin.commission_percentage.list',compact('commission_percentages'));
+        $commission_percentages = AffiliateCommission::paginate(15);
+        $distinct_percentage_count = AffiliateCommission::select('percentage')
+        ->distinct('percentage')
+        ->count();
+    
+        return view('admin.commission_percentage.list',compact('commission_percentages','distinct_percentage_count'));
+    }
+
+    public function fetchCommissionPercentage(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            
+            // Retrieve unique count of percentage values
+            $distinct_percentage_count = AffiliateCommission::select('percentage')
+                ->where('id', 'like', '%' . $query . '%')
+                ->orWhere('percentage', 'like', '%' . $query . '%')
+                ->distinct('percentage')
+                ->count();
+        
+            $commission_percentages = AffiliateCommission::where('id', 'like', '%' . $query . '%')
+                ->orWhere('percentage', 'like', '%' . $query . '%')
+                ->paginate(15);
+
+
+            return response()->json(['data' => view('admin.commission_percentage.filter', compact('commission_percentages','distinct_percentage_count'))->render()]);    
+        }  
     }
 
     /**

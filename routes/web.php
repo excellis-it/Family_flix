@@ -139,17 +139,24 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/menu-management/status-change', [MenuManagementController::class, 'menuStatus'])->name('menu-management.changeStatus'); // menu status
 
         //ott service route
-        Route::get('/delete-ott-service', [OttServiceController::class, 'deleteOttService'])->name('delete.ott-service');
+        Route::get('/delete-ott-service/{id}', [OttServiceController::class, 'deleteOttService'])->name('delete.ott-service');
+        Route::get('/ott-service-fetch-data', [OttServiceController::class, 'fetchOttServiceData'])->name('ott-service.ajax.list');
+
+        Route::post('/ott-service-update', [OttServiceController::class, 'updateOttService'])->name('update.ott-service');
+
 
 
         //plan management route
         Route::get('/plan-fetch-data', [PlanController::class, 'fetchPlanData'])->name('plan.ajax.list');
 
         Route::get('/commission-history-fetch-data', [AdminCommissionHistoryController::class, 'fetchData'])->name('commission-history.ajax-fetch-data');
+
+        //commission percentage route
         Route::get('/commission-percentage-delete/{id}', [CommissionPercentageController::class, 'deletePercentage'])->name('delete.commission-percentage');
         Route::post('/commission-percentage-update', [CommissionPercentageController::class, 'updatePercentage'])->name('update.commission-percentage');
+        Route::get('/commission-percentage-fetch-data', [CommissionPercentageController::class, 'fetchCommissionPercentage'])->name('commission-percentage.ajax.list');
 
-        //commission percentage
+        
         
 
         //coupons route

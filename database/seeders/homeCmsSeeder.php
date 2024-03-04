@@ -28,7 +28,7 @@ class homeCmsSeeder extends Seeder
         $homeCms->section2_description = 'Our platform seamlessly integrates content from top streaming platforms like Netflix, Hulu, Disney, and more. Imagine having access to all your favorite shows and movies in one place, without the hassle of switching between multiple apps.';
         $homeCms->section2_short_title = 'View Our Plans And Pricing';
         $homeCms->section2_main_icon = 'home/main_icon.png';
-        $homeCms->entertainment_title = 'Entertainment Everywhere.';
+        $homeCms->entertainment_title = 'Entertainment Everywhere';
         $homeCms->entertainment_description = 'Enjoy The Family Flix app on your TV, mobile, and tablet. Our platform supports all your devices. Anywhere, Any Device: The Family Flix Advantage';
         $homeCms->section3_back_image = 'home/section3_back.png';
         $homeCms->section3_main_image = 'home/section3_main.png';

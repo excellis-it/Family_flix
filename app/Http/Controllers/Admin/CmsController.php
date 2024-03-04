@@ -172,18 +172,18 @@ class CmsController extends Controller
 
         
         //multiple ott icon upload
-        if ($request->hasFile('ott_icon')) {
+        // if ($request->hasFile('ott_icon')) {
             
-            foreach ($request->file('ott_icon') as $key => $file) {
-                if ($file->isValid()) {
-                    $file_path = $file->store('ott_icon', 'public'); 
+        //     foreach ($request->file('ott_icon') as $key => $file) {
+        //         if ($file->isValid()) {
+        //             $file_path = $file->store('ott_icon', 'public'); 
         
-                    $ott_service = new OttService();
-                    $ott_service->icon = $file_path; 
-                    $ott_service->save();
-                } 
-            }
-        }
+        //             $ott_service = new OttService();
+        //             $ott_service->icon = $file_path; 
+        //             $ott_service->save();
+        //         } 
+        //     }
+        // }
 
         // multiple entertainment imge and image name upload
         if ($request->hasFile('entern_image')) {

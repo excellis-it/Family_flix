@@ -10,4 +10,9 @@ class AffiliateCommission extends Model
     use HasFactory;
 
     protected $fillable = ['percentage'];
+
+    public function affiliators()
+    {
+        return $this->hasMany(User::class , 'id');
+    }
 }

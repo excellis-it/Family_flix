@@ -66,6 +66,8 @@
                                     @include('admin.product.filter')
                                 </tbody>
                             </table>
+                            <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
+                            <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
                         </div>
                     </div>
                 </div>

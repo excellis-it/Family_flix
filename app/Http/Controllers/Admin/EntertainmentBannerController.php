@@ -15,67 +15,22 @@ class EntertainmentBannerController extends Controller
      */
     public function index()
     {
-        //
-        return View('admin.entertainment_banner.list');
+        $entertainment_banners = EntertainmentBanner::orderBy('id','desc')->paginate(15);
+        return View('admin.entertainment_banner.list',compact('entertainment_banners'));
     }
 
     public function entertainmentBannerAjaxList(Request $request)
     {
-        $draw = $request->get('draw');
-        $start = $request->get("start");
-        $rowperpage = $request->get("length"); // Rows display per page
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $entertainment_banners = EntertainmentBanner::where('id', 'like', '%' . $query . '%')
+                    ->orWhere('banner_type', 'like', '%' . $query . '%')
+                    ->orderBy('id', 'desc')
+                    ->paginate(15);
 
-        $columnIndex_arr = $request->get('order');
-        $columnName_arr = $request->get('columns');
-        $order_arr = $request->get('order');
-        $search_arr = $request->get('search');
-
-        $columnIndex = $columnIndex_arr[0]['column']; // Column index
-        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-        $searchValue = $search_arr['value']; // Search value
-
-        // Total records
-        $totalRecords = EntertainmentBanner::orderBy('id','desc')->count();
-        $totalRecordswithFilter = EntertainmentBanner::orderBy('id','desc')->count();
-
-        // Fetch records
-        $records = EntertainmentBanner::query();
-        $columns = ['banner_image','small_text','banner_type'];
-        foreach($columns as $column){
-            $records->where($column, 'like', '%' . $searchValue . '%');
+            return response()->json(['data' => view('admin.entertainment_banner.filter', compact('entertainment_banners'))->render()]);
         }
-        $records->orderBy($columnName,$columnSortOrder);
-        $records->skip($start);
-        $records->take($rowperpage);
-        $records = $records->get();
-
-        $data_arr = array(); 
-
-        foreach($records as $record){
-            $banner_image = $record->banner_image;
-            $small_text = $record->small_text;
-            $banner_type = $record->banner_type;
-            $id = $record->id;
-            
-           $data_arr[] = array(
-               "banner_image" => $banner_image,
-               "small_text" => $small_text,
-               "banner_type" => $banner_type,
-               "action" => '<a href="'.route('entertainment-banner.edit',$id).'"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a href="'.route('delete.entertainment-banner',$id).'" onclick="return confirm(`Are you sure you want to delete this banner?`)"><i class="fas fa-trash"></i></a>',
-           );
-        }                                                                                                                                                   
-                                                                                                                                                    
-        $response = array(
-           "draw" => intval($draw),
-           "iTotalRecords" => $totalRecords,
-           "iTotalDisplayRecords" => $totalRecordswithFilter,
-           "aaData" => $data_arr
-        );
-
-        
-
-        return response()->json($response); 
     }
     /**
      * Show the form for creating a new resource.

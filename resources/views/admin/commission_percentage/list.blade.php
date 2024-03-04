@@ -34,7 +34,22 @@
                 </div>
                 <div class="card w-100">
                     <div class="card-body">
-                        <h4>List of Affiliate Commission</h4>
+                        <div class="row justify-content-between align-items-center mb-2">
+                            <div class="col-md-6">
+                                <div><h4>List of Affiliate Commission</h4></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-1 justify-content-end">
+                                    <div class="col-md-8 pr-0">
+                                        <div class="search-field prod-search">
+                                            <input type="text" name="search" id="search" placeholder="search..." required
+                                                class="form-control">
+                                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive rounded-2 mb-4">
                             <table class="table table-hover customize-table mb-0 align-middle bg_tbody"
                                 id="myTable">
@@ -44,30 +59,12 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @if (count($commission_percentages) == 0)
-                                        <tr>
-                                            <td colspan="4" class="text-center">No commission Percentage found</td>
-                                        </tr>
-                                    @else
-                                        @foreach ($commission_percentages as $key => $commission_percentage)
-                                            <tr class="tableRow" data-id="{{ $commission_percentage->id }}">
-                                                <td>{{ $commission_percentage->percentage }}%</td>
-                                                
-                                                <td>
-                                                    <a title="Delete Coupon"
-                                                        data-route="{{ route('delete.commission-percentage', $commission_percentage->id) }}"
-                                                        class="delete_acma" href="javascipt:void(0);" id="delete"><i
-                                                            class="fas fa-trash"></i></a>
-
-                                                    <a href="{{ route('commission-percentage.edit', $commission_percentage->id) }}"> <i
-                                                            class="fas fa-edit"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
+                                <tbody  id="tableBodyContents">
+                                    @include('admin.commission_percentage.filter') 
                                 </tbody>
                             </table>
+                            <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
+                            <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
                         </div>
                     </div>
                 </div>
@@ -77,6 +74,42 @@
 @endsection
 
 @push('scripts')
+
+
+<script>
+    $(document).ready(function() {
+        function fetch_data(page, query) {
+            $.ajax({
+                url: "{{ route('commission-percentage.ajax.list') }}",
+                data: {
+                    page: page,
+                    query: query
+                },
+                success: function(data) {
+                    $('tbody').html(data.data);
+                }
+            });
+        }
+
+        $(document).on('keyup', '#search', function() {
+            var query = $('#search').val();
+            var page = $('#hidden_page').val();
+            fetch_data(page, query);
+        });
+        $(document).on('click', '.close-pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            $('#hidden_page').val(page);
+
+            var query = $('#search').val();
+
+            $('li').removeClass('active');
+            $(this).parent().addClass('active');
+            fetch_data(page, query);
+        });
+
+    });
+</script>
 
 <script>
     $(document).on('click', '#delete', function(e) {
@@ -101,29 +134,6 @@
     });
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('.toggle-class').on('change', function() {
-            var status = $(this).prop('checked') == true ? 1 : 0;
-            var coupon_id = $(this).data('id');
-            
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: "{{ route('coupon.changeStatus') }}",
-                data: {
-                    'status': status,
-                    'coupon_id': coupon_id
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    console.log(data.success)
-                }
-            });
-        });
-    });
-    </script>
+
    
 @endpush
