@@ -11,9 +11,7 @@
                 </a>
             </td>
             <td>
-                <a title="Delete Plan" data-route="{{ route('delete.top-grid', $top_grid->id) }}" class="delete_acma"
-                    href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
-
+                <a title="Delete Banner" data-route="{{ route('delete.top-grid', $top_grid->id)}}" id="delete" class="delete_acma" href="javascipt:void(0);"  ><i class="fas fa-trash"></i></a>
                 <a href="{{ route('top-grid.edit', $top_grid->id) }}"> <i class="fas fa-edit"></i></a>
             </td>
         </tr>

@@ -78,7 +78,7 @@ class TopGridController extends Controller
         
         $top_grid->save();
 
-        return back()->with('message','Top grid added successfully');
+        return redirect()->route('top-grid.index')->with('message','top grid added successfully');
 
 
     }
@@ -133,7 +133,7 @@ class TopGridController extends Controller
             $description->icon = $image_path1;
         }
 
-        return back()->with('message','Update Top Grid successfully');
+        return redirect()->route('top-grid.index')->with('message','top grid updated successfully');
 
      }
 

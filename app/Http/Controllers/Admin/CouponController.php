@@ -17,8 +17,28 @@ class CouponController extends Controller
     public function index()
     {
         //
-        $coupons = Coupon::orderBy('id','desc')->with('plan')->get();
+        $coupons = Coupon::orderBy('id','desc')->with('plan')->paginate(15);
         return view('admin.coupon.list',compact('coupons'));
+    }
+
+    public function fetchCouponData(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $coupons = Coupon::where('id', 'like', '%' . $query . '%')
+                    ->orWhere('code', 'like', '%' . $query . '%')
+                    ->orWhere('coupon_type', 'like', '%' . $query . '%')
+                    ->orWhere('value', 'like', '%' . $query . '%')
+                    ->orWhere('user_type', 'like', '%' . $query . '%')
+                    ->orWhereHas('plan', function ($q) use ($query) {
+                        $q->where('plan_name', 'like', '%' . $query . '%');
+                    })
+                    ->orderBy('id', 'desc')
+                    ->paginate(15);
+
+            return response()->json(['data' => view('admin.coupon.filter', compact('coupons'))->render()]);
+        }
     }
 
     /**

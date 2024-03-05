@@ -57,6 +57,7 @@ class OttServiceController extends Controller
         }
 
         $ott_icon->save();
+        
         return redirect()->route('ott-service.index')->with('message','Ott Service Icon Added Successfully');
     }
 

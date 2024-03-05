@@ -41,9 +41,9 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     @if($subscription_cms->section1_background_img != '')
-                                        <img id="preview-image" src="{{ Storage::url($subscription_cms->section1_background_img) }}" alt="preview image" style="max-height: 180px;">
+                                        <img id="preview-image" src="{{ Storage::url($subscription_cms->section1_background_img) }}" alt="preview image" style="max-height: 150px;">
                                     @else
-                                        <img id="preview-image" src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image" style="max-height: 180px;">
+                                        <img id="preview-image" src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image" style="max-height: 150px;">
                                     @endif
                                 </div>
 

@@ -4,5 +4,5 @@ function toggleTheme(a){$(".preloader").show(),document.getElementById("themeCol
 
 
 $( ".sidebartoggler" ).click(function() {
-$( ".scroll-sidebar" ).toggleClass( "make_me_blue" );
+$( ".sidebar-1" ).toggleClass( "make_me_blue" );
 });

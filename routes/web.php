@@ -157,9 +157,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/commission-percentage-fetch-data', [CommissionPercentageController::class, 'fetchCommissionPercentage'])->name('commission-percentage.ajax.list');
 
         
-        
-
         //coupons route
+        Route::get('/coupons-fetch-data', [CouponController::class, 'fetchCouponData'])->name('coupons.ajax.list');
         Route::get('/coupons/delete/{id}', [CouponController::class, 'deleteCoupon'])->name('delete.coupons');
         Route::post('/coupons/update', [CouponController::class, 'updateCoupon'])->name('update.coupons');
 
@@ -276,8 +275,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/contact-us', [ContactUsController::class, 'contactList'])->name('contact-us.list');
         Route::get('/contact-us-list', [ContactUsController::class, 'contactAjaxList'])->name('contact-us.ajax.list');
         //subscriptions list
-        Route::get('/subscription-list', [SubscriptionController::class, 'subscriptionList'])->name('subscription.list');
-        Route::get('/subscription-list/ajax', [SubscriptionController::class, 'subscriptionAjaxList'])->name('subscription.ajax.list');
+        Route::get('/subscriber-list', [SubscriptionController::class, 'subscriptionList'])->name('subscriber.list');
+        Route::get('/subscriber-list/ajax', [SubscriptionController::class, 'subscriptionAjaxList'])->name('subscriber.ajax.list');
     });
 });
 

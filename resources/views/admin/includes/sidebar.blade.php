@@ -12,7 +12,8 @@
         </div>
         <!-- Sidebar navigation-->
 
-        <nav class="sidebar sidebar-1 scroll-sidebar card mb-4">
+        <nav class="sidebar sidebar-1 card mb-4">
+            <div class="scroll-sidebar">
             <ul class="nav flex-column" id="nav_accordion">
                 <li class="nav-item has-submenu {{ Request::is('admin/dashboard*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.dashboard') }}"> <span>
@@ -278,24 +279,22 @@
                 </li>
 
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/subscription-list*') ? 'active' : ' ' }}" href="#">
+                    <a class="nav-link {{ Request::is('admin/subscriber-list*') ? 'active' : ' ' }}" href="#">
                         <span>
-                            <i class="ti ti-chevron-right"></i>
+                            <i class="ti ti-arrow-right"></i>
                         </span>Subscription Us
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
-                    <ul class="submenu collapse {{ Request::is('admin/subscription-list*') ? 'active' : ' ' }}">
-                        <li class="{{ Request::is('admin/subscription-list*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('subscription.list') }}">List</a>
+                    <ul class="submenu collapse {{ Request::is('admin/subscriber-list*') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/subscriber-list*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('subscriber.list') }}">List</a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
+            </div>
         </nav>
-
-
-
 
 
         {{-- <nav class="sidebar-nav scroll-sidebar" data-simplebar="">

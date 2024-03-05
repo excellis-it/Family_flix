@@ -92,7 +92,8 @@ class EntertainmentBannerController extends Controller
 
         $entertainment_banner->save();
 
-        return back()->with('message','Entertainment banner created successfully');
+        return redirect()->route('entertainment-banner.index')->with('message','Entertainment banner created successfully');
+
     }
 
     /**
@@ -152,7 +153,7 @@ class EntertainmentBannerController extends Controller
 
         $update_ent_banner->update();
 
-        return back()->with('message','Entertainment banner updated successfully');
+        return redirect()->route('entertainment-banner.index')->with('message','Entertainment banner updated successfully');
     }
 
     public function deleteEntertainmentBanner($id)

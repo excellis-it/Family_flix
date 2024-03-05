@@ -21,7 +21,7 @@ class CreatePlanCmsTable extends Migration
             $table->string('main_title')->nullable();
             $table->string('background_img')->nullable();
             $table->string('middle_back_img')->nullable();
-            $table->string('middle_content')->nullable();
+            $table->longText('middle_content')->nullable();
             $table->string('anime1_img')->nullable();
             $table->string('anime2_img')->nullable();
             $table->string('title1')->nullable();

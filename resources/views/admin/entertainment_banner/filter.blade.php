@@ -4,7 +4,8 @@
             <td>{{ $entertainment_banner->banner_type ?? 'N/A' }}</td>
             <td><img src="{{ Storage::url($entertainment_banner->banner_image) }}" style="hight:200px;width:100px;"></td>
             <td>
-                <a href="{{  route('entertainment-banner.edit',$entertainment_banner->id)}}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a href="{{ route('delete.entertainment-banner',$entertainment_banner->id)}}" onclick="return confirm(`Are you sure you want to delete this banner?`)"><i class="fas fa-trash"></i></a>
+                <a href="{{  route('entertainment-banner.edit',$entertainment_banner->id)}}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                <a title="Delete Banner" data-route="{{ route('delete.entertainment-banner',$entertainment_banner->id)}}" id="delete" class="delete_acma" href="javascipt:void(0);" ><i class="fas fa-trash"></i></a>
             </td>
         </tr>
     @endforeach

@@ -145,7 +145,7 @@ class ProductController extends Controller
         }
         $product_update->update();
 
-        return back()->with('message','product updated successfully');
+        return redirect()->route('products.index')->with('message','Product updated successfully');
     }
 
     /**
