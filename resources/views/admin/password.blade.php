@@ -1,29 +1,25 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{ env('APP_NAME') }} | Profile
+    {{ env('APP_NAME') }} | Password
 @endsection
 @push('styles')
 @endpush
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="container-fluid">
         <!--page-content-wrapper-->
-        <div class="content container-fluid">
+        <div class="breadcome-list">
+            <div class="d-flex">
 
-            <div class="page-header">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <h3 class="page-title">Change Password</h3>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.profile') }}">Profile</a></li>
-                            <li class="breadcrumb-item active">Password</li>
-                        </ul>
-                    </div>
-
+                <div class="">
+                    <h3>Admin Password</h3>
+                    <ul class="breadcome-menu mb-0">
+                        <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
+                        <li><span class="bread-blod"><a href="">Password</a></span></li>
+                    </ul>
                 </div>
             </div>
-
+        </div>
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
@@ -59,8 +55,8 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-6">
-                                        <button type="submit" class="btn px-5 submit-btn">Update</button>
+                                    <div class="w-100 text-end">
+                                        <button type="submit" class="print_btn">Update</button>
                                     </div>
 
                                 </form>

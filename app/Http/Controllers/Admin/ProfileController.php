@@ -35,7 +35,7 @@ class ProfileController extends Controller
             $file= $request->file('profile_picture');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $image_path = $request->file('profile_picture')->store('admin', 'public');
-            $data->profile_picture = $image_path;
+            $data->image = $image_path;
         }
         $data->save();
         return redirect()->back()->with('message', 'Profile updated successfully.');
