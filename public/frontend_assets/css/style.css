@@ -1576,13 +1576,14 @@ font-weight: 600;
   border: none;
 }
 
-.modal-1 .modal-body iframe {
+.modal-1 .modal-body video {
   width: 100%;
   height: 800px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #000;
 }
 video:-webkit-full-page-media{
     height: 800px;  

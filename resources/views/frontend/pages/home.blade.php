@@ -259,7 +259,10 @@
                 </div>
                 <div class="modal-body">
                     <!-- Adjust width and height attributes for the iframe -->
-                    <iframe width="1280" height="720" src="{{ Storage::url($home_cms->section3_video_link) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <!--<iframe width="1280" height="720" src="{{ Storage::url($home_cms->section3_video_link) }}" title="YouTube video player" frameborder="0"   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+                    <video width="100%" height="720" controls>
+                       <source src="{{ Storage::url($home_cms->section3_video_link) }}" type="video/mp4">
+                     </video>
                 </div>
             </div>
         </div>

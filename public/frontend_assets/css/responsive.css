@@ -495,6 +495,9 @@
     display: flex;
     justify-content: start;
 }
+.modal-1 .modal-body video {
+    height: 500px;
+}
 }
 
 @media (max-width:991px) {
@@ -678,6 +681,9 @@
  .modal-1 .modal-body iframe {
     height: 400px;
  }
+ .modal-1 .modal-body video {
+    height: 300px;
+}
 }
 
 
