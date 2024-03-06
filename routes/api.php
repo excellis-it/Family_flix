@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CmsController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,7 +15,17 @@
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::prefix('v1')->group(function () {
+        // Grouping CMS routes
+        Route::prefix('cms')->group(function () {
+            // Defining route for CMS home
+            Route::post('home', [CmsController::class, 'homeCms']);  
+            Route::post('about', [CmsController::class, 'aboutCms']);
+            Route::post('contact', [CmsController::class, 'contactCms']);
+        });
 });
 
