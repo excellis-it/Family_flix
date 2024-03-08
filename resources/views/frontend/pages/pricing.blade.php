@@ -2,9 +2,7 @@
 @extends('frontend.layouts.master')
 @section('meta_title')
 @endsection
-@section('title')
-    Pricing
-@endsection
+@section('title', 'Pricing - Family Flix')
 @push('styles')
 @endpush
 

@@ -2,9 +2,7 @@
 @extends('frontend.layouts.master')
 @section('meta_title')
 @endsection
-@section('title')
-    Term & Conditions
-@endsection
+@section('title', 'Term-Service - Family Flix')
 @push('styles')
 @endpush
 

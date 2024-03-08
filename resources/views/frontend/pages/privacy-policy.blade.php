@@ -2,9 +2,7 @@
 @extends('frontend.layouts.master')
 @section('meta_title')
 @endsection
-@section('title')
-    Privacy Policy
-@endsection
+@section('title', 'Privacy-Policy - Family Flix')
 @push('styles')
 @endpush
 

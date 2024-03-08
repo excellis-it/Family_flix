@@ -1,9 +1,7 @@
 @extends('frontend.layouts.master')
 @section('meta_title')
 @endsection
-@section('title')
-    Contact
-@endsection
+@section('title', 'Contact-Us - Family Flix')
 @push('styles')
 @endpush
 

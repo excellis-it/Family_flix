@@ -269,16 +269,13 @@
                                                 </div>
                                             </div>
 
-                                            {{-- <button class="paypal-btn" type="submit"><img
+                                            <button class="paypal-btn" type="submit"><img
                                                     src="{{ asset('frontend_assets/images/paypal.png') }}"></button>
 
                                                     
-                                                    <button class="paypal-btn paypal-btn-2 mt-2" ><span><i class="fa-solid fa-credit-card"></i></span>Debit or Credit Card</button> --}}
+                                                    <button class="paypal-btn paypal-btn-2 mt-2" ><span><i class="fa-solid fa-credit-card"></i></span>Debit or Credit Card</button>
 
-
-                                            <div id="paypal-button-container"></div>
-
-
+                                                    
 
                                             <!-- start previous / next buttons -->
                                             <!-- <div class="form-footer d-flex">
@@ -338,8 +335,7 @@
                                             <input type="hidden" name="plan_name" value="{{ $plan->plan_name }}">
                                             <input type="hidden" name="plan_price"
                                                 value="{{ $plan->plan_offer_price }}">
-                                            <input type="hidden" name="amount"
-                                                value="{{ $plan->plan_offer_price }}" id="total_amount">
+                                            <input type="hidden" name="amount" value="{{ $plan->plan_offer_price }}"  id="total_amount">
                                             <input type="hidden" id="coupan_code" name="coupan_code">
                                             <input type="hidden" id="coupon_discount" name="coupon_discount">
 
@@ -536,11 +532,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox-plus-jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-    {{-- paypal smart button --}}
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AbyqRlB9OF-FaHT602Cy_3ty7UqWWSUrzSIqNGsC2S72vh2RZFzQBCr5r6pt5l1pxbZwiMlgU-yxEP_N">
-        // Required.
-    </script>
+    {{-- paypal credit --}}
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
 
 
     <script>
@@ -553,63 +546,61 @@
                 var emailId = $('#floatingInput1').val();
                 var phone = $('#floatingInput9').val();
 
-                if (emailId == '') {
+                if(emailId == ''){
                     alert('Please enter email address');
                     return false;
-                } else if (phone == '') {
+                }else if(phone == ''){
                     alert('Please enter phone number');
                     return false;
-                } else {
+                }else{
                     $.ajax({
-                        url: "{{ route('coupon-check') }}",
-                        type: "POST",
-                        data: {
-                            coupon_code: coupon_code,
-                            plan_price: plan_price,
-                            plan_id: plan_id,
-                            emailId: emailId,
-                            phone: phone,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            if (response.status == 'success') {
-                                var total = response.discount;
-                                var discount = response.coupon_discount;
-                                $('#total_amount').val(total);
-                                $('#coupan_code').val(coupon_code);
-                                $('#coupon_discount').val(discount);
-                                $('.coupon-dis').html(
-                                    '<th>Coupon Discount</th><th class="text-end">-$' +
-                                    discount + '</th>');
+                    url: "{{ route('coupon-check') }}",
+                    type: "POST",
+                    data: {
+                        coupon_code: coupon_code,
+                        plan_price: plan_price,
+                        plan_id: plan_id,
+                        emailId: emailId,
+                        phone: phone,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            var total = response.discount;
+                            var discount = response.coupon_discount;
+                            $('#total_amount').val(total);
+                            $('#coupan_code').val(coupon_code);
+                            $('#coupon_discount').val(discount);
+                            $('.coupon-dis').html(
+                                '<th>Coupon Discount</th><th class="text-end">-$' +
+                                discount + '</th>');
 
-                                $('.total-order').html('<th>Total</th><th class="text-end">$' +
-                                    total + '</th>');
-                                $('.recurring').html(
-                                    '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                    total + '/ month<br><span>(ex. VAT)</span></td></div>');
-                                $('#coupon_error').text('');
-                            } else {
-                                //show message invlid coupon
-                                $('#coupon_error').text('Invalid Coupon Code');
-                                $('#total_amount').val(plan_price);
-                                $('#coupan_code').val('');
-                                $('#coupon_discount').val('0.00');
-                                $('.coupon-dis').html(
-                                    '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>'
-                                    );
+                            $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                total + '</th>');
+                            $('.recurring').html(
+                                '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                total + '/ month<br><span>(ex. VAT)</span></td></div>');
+                            $('#coupon_error').text('');
+                        }else {
+                            //show message invlid coupon
+                            $('#coupon_error').text('Invalid Coupon Code');
+                            $('#total_amount').val(plan_price);
+                            $('#coupan_code').val('');
+                            $('#coupon_discount').val('0.00');
+                            $('.coupon-dis').html(
+                                '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>');
 
-                                $('.total-order').html('<th>Total</th><th class="text-end">$' +
-                                    plan_price + '</th>');
-                                $('.recurring').html(
-                                    '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                    plan_price +
-                                    '/ month<br><span>(ex. VAT)</span></td></div>');
+                            $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                plan_price + '</th>');
+                            $('.recurring').html(
+                                '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                plan_price + '/ month<br><span>(ex. VAT)</span></td></div>');
 
-                            }
                         }
-                    });
+                    }
+                });
                 }
-
+                
             });
         });
     </script>
@@ -697,51 +688,6 @@
             });
         });
     </script>
-
-
-    <script>
-
-
-// Set up PayPal smart buttons
-paypal.Buttons({
-    // Set up the transaction
-    createOrder: function(data, actions) {
-        var amount = $('#total_amount').val();
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: amount
-                }
-            }]
-        });
-    },
-
-    // Finalize the transaction
-    onApprove: function(data, actions) {
-        return actions.order.capture().then(function(orderData) {
-            // Successful capture! For demo purposes:
-            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-            var transaction = orderData.purchase_units[0].payments.captures[0];
-            alert('Transaction ' + transaction.status + ': ' + transaction.id +
-                '\n\nSee console for all available details');
-
-            // Replace the above to show a success message within this page, e.g.
-            // const element = document.getElementById('paypal-button-container');
-            // element.innerHTML = '';
-            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-            // Or go to another URL:  actions.redirect('thank_you.html');
-        });
-    }
-}).render('#paypal-button-container');
-
-// Add onclick event to custom button
-document.getElementById('customPayPalButton').onclick = function() {
-    // Manually trigger PayPal checkout flow
-    paypal.Buttons().render('#paypal-button-container');
-};
-
-
-        </script>
 </body>
 
 </html>

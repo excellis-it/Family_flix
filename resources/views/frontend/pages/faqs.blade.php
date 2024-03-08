@@ -2,9 +2,7 @@
 @extends('frontend.layouts.master')
 @section('meta_title')
 @endsection
-@section('title')
-    Faq
-@endsection
+@section('title', 'Faq - Family Flix')
 @push('styles')
 @endpush
 

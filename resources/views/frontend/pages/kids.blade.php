@@ -5,9 +5,7 @@
 @extends('frontend.layouts.master')
 @section('meta_title')
 @endsection
-@section('title')
-    kids
-@endsection
+@section('title', 'Kids - Family Flix')
 @push('styles')
 @endpush
 
