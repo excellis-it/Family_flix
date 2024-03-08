@@ -3310,7 +3310,18 @@ opacity: 0.8;
 .ck-ftr-btm{
   margin-top: 50px;
 }
+.paypal-btn-2{
+  background: #000 !important;
+  color: #fff !important;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
+}
 
+.paypal-btn-2 span{
+  color: #fff !important;
+  margin-right: 10px;
+}
 
 /* Check-Out-Page-End */
 

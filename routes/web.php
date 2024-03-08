@@ -238,6 +238,10 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/subscriptionCms', [CmsController::class, 'subcriptionCms'])->name('subscription-us.cms');
             Route::post('/subscriptionCms/update', [CmsController::class, 'subscriptionCmsUpdate'])->name('update.subscription-us');
 
+            //footer cms
+            Route::get('/footerCms', [CmsController::class, 'footerCms'])->name('footer.cms');
+            Route::post('/footerCms/update', [CmsController::class, 'footerCmsUpdate'])->name('update.footer.cms');
+
             //contact details cms
             Route::get('/contact-details', [CmsController::class, 'contactDetailsCms'])->name('contact-details.cms');
             Route::post('/contactDetails/update', [CmsController::class, 'contactDetailsCmsUpdate'])->name('update.contact-details.cms');

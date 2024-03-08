@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Models\HomeCms;
 use App\Models\AboutUs;
 use App\Models\ContactUsCms;
+use App\Models\TopGrid;
+use App\Models\EntertainmentCms;
+use App\Models\OttService;
 
 
 class CmsController extends Controller
@@ -63,12 +66,25 @@ class CmsController extends Controller
     {
         try{
             $home_cms = HomeCms::first();
-            return response()->json([
-                'status' => true,
-                'statusCode' => 200,
-                'data' => $home_cms,
-                'message' => 'Home CMS data fetched successfully'
-            ]);
+            $ott_icons = OttService::select('id','icon')->get();
+            if(!$home_cms){
+
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 401,
+                    'message' => 'No Data Found'
+                ]);
+
+            }else{
+           
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'content' => $home_cms,
+                    'ott_icons' => $ott_icons,
+                    'message' => 'Home CMS data fetched successfully'
+                ]);
+            }
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
@@ -121,12 +137,21 @@ class CmsController extends Controller
     {
         try{
             $about_us = AboutUs::first();
-            return response()->json([
-                'status' => true,
-                'statusCode' => 200,
-                'data' => $about_us,
-                'message' => 'About CMS data fetched successfully'
-            ]);
+            if(!$about_us){
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 401,
+                    'message' => 'No Data Found'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => $about_us,
+                    'message' => 'About CMS data fetched successfully'
+                ]);
+            }
+           
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
@@ -167,12 +192,21 @@ class CmsController extends Controller
     {
         try{
             $contact_cms = ContactUsCms::first();
-            return response()->json([
-                'status' => true,
-                'statusCode' => 200,
-                'data' => $contact_cms,
-                'message' => 'Contact CMS data fetched successfully'
-            ]);
+            if(!$contact_cms){
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 401,
+                    'message' => 'No Data Found'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => $contact_cms,
+                    'message' => 'Contact CMS data fetched successfully'
+                ]);
+            }
+            
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
@@ -181,5 +215,72 @@ class CmsController extends Controller
             ]);
 
         } 
+    }
+
+    /** 
+     * Grid Section Api
+     * @response 200{
+     *   "status": true,
+     *   "statusCode": 200,
+     *   "top_grid": [
+     *       {
+     *           "id": 1,
+     *           "icon": "grid/grid_icon1.png",
+     *           "title": "Unlimited Access",
+     *           "description": "Dive into a vast library of movies, TV series, and exclusive content."
+     *       },
+     *       {
+     *           "id": 2,
+     *           "icon": "grid/grid_icon2.png",
+     *           "title": "Savings Simplified",
+     *           "description": "Affordable plans that eliminate the need for multiple subscriptions."
+     *       },
+     *       {
+     *           "id": 3,
+     *           "icon": "grid/grid_icon3.png",
+     *           "title": "Watch Anywhere, Anytime",
+     *           "description": "Enjoy your favorites on your terms - mobile, desktop, or TV."
+     *       }
+     *   ],
+     *   "entertainment_cms": [
+     *       {
+     *           "id": 1,
+     *           "image": "entertainment/en-1.png",
+     *           "image_name": "On Your TV"
+     *       },
+     *       {
+     *           "id": 2,
+     *           "image": "entertainment/en-2.png",
+     *           "image_name": "Mobiles & Tablets"
+     *       },
+     *       {
+     *           "id": 3,
+     *           "image": "entertainment/en-3.png",
+     *           "image_name": "On Firestick & Firecube"
+     *       }
+     *   ],
+     *   "message": "Grid Section CMS data fetched successfully"
+     */
+
+    public function gridSectionCms()
+    {
+        try{
+            $grid_section = TopGrid::select('id','icon','title','description')->get();
+            $entertainment_cms = EntertainmentCms::select('id','image','image_name')->get();
+
+            return response()->json([
+                'status' => true,
+                'statusCode' => 200,
+                'top_grid' => $grid_section,
+                'entertainment_cms' => $entertainment_cms,
+                'message' => 'Grid Section CMS data fetched successfully'
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'statusCode' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

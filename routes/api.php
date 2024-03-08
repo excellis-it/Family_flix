@@ -24,8 +24,10 @@ Route::prefix('v1')->group(function () {
         Route::prefix('cms')->group(function () {
             // Defining route for CMS home
             Route::post('home', [CmsController::class, 'homeCms']);  
+            Route::post('grid-section', [CmsController::class, 'gridSectionCms']);
             Route::post('about', [CmsController::class, 'aboutCms']);
             Route::post('contact', [CmsController::class, 'contactCms']);
+
         });
 });
 

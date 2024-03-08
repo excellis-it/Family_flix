@@ -12,6 +12,7 @@ use App\Models\EntertainmentCms;
 use App\Models\ContactDetails;
 use App\Models\SocialMedia;
 use App\Models\SubscribeCms;
+use App\Models\FooterCms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -548,5 +549,55 @@ class CmsController extends Controller
 
         return back()->with('message','subscription cms updated successfully');
 
+    }
+
+    public function footerCms()
+    {
+        $footer_cms = FooterCms::first();
+        return view('admin.cms.footer',compact('footer_cms'));
+    }
+
+    public function footerCmsUpdate(Request $request)
+    {
+        $footer_cms_update = FooterCms::where('id',$request->id)->first();
+        //footer logo upload
+        if ($request->hasFile('footer_logo')) {
+            $request->validate([
+                'footer_logo' => 'required',
+            ]);
+            
+            $file04= $request->file('footer_logo');
+            $filename04= date('YmdHi').$file04->getClientOriginalName();
+            $image_path04 = $request->file('footer_logo')->store('footer', 'public');
+            $footer_cms_update->footer_logo = $image_path04;
+        }
+
+        //footer image upload
+        if ($request->hasFile('footer_image')) {
+            $request->validate([
+                'footer_image' => 'required',
+            ]);
+            
+            $file05= $request->file('footer_image');
+            $filename05= date('YmdHi').$file05->getClientOriginalName();
+            $image_path05 = $request->file('footer_image')->store('footer', 'public');
+            $footer_cms_update->footer_image = $image_path05;
+        }
+
+        //footer background image
+        if ($request->hasFile('footer_background')) {
+            $request->validate([
+                'footer_background' => 'required',
+            ]);
+            
+            $file06= $request->file('footer_background');
+            $filename06= date('YmdHi').$file06->getClientOriginalName();
+            $image_path06 = $request->file('footer_background')->store('footer', 'public');
+            $footer_cms_update->footer_background = $image_path06;
+        }
+
+        $footer_cms_update->update();
+
+        return back()->with('message','Footer cms updated successfully');
     }
 }

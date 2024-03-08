@@ -206,6 +206,9 @@
                         <li class="{{ Request::is('admin/cms/subscription-us*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('subscription-us.cms') }}">Subscription Us</a>
                         </li>
+                        <li class="{{ Request::is('admin/cms/footerCms*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('footer.cms') }}">Footer cms</a>
+                        </li>
 
                     </ul>
                 </li>
