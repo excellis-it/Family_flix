@@ -110,6 +110,7 @@
                                                         <input type="text" class="form-control" name="email_address"
                                                             id="floatingInput1" placeholder="">
                                                         <label for="floatingInput1">Email Address <span>*</span></label>
+                                                        <span id="email_error" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                                 <div class="step-div">
@@ -122,6 +123,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput2">First Name
                                                                     <span>*</span></label>
+                                                                <span id="fname_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
 
@@ -132,6 +134,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput3">Last Name
                                                                     <span>*</span></label>
+                                                                <span id="lname_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -143,6 +146,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingSelect1">Country/Region
                                                                     <span>*</span></label>
+                                                                    <span id="country_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -154,6 +158,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput4">House number and street
                                                                     name <span>*</span></label>
+                                                                <span id="houseNo_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -164,6 +169,8 @@
                                                                 <label for="floatingInput5">Apartment, suite, unit,
                                                                     etc.
                                                                     (optional) <span>*</span></label>
+                                                                    <span id="addr_error" class="text-danger"></span>
+                                                                    
                                                             </div>
                                                         </div>
                                                     </div>
@@ -175,6 +182,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput6">Town/City
                                                                     <span>*</span></label>
+                                                                    <span id="city_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
@@ -184,6 +192,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput7">State/Country
                                                                     <span>*</span></label>
+                                                                    <span id="state_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
@@ -193,6 +202,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput8">Post code
                                                                     <span>*</span></label>
+                                                                    <span id="postCode_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -204,6 +214,8 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput9">Phone
                                                                     <span>*</span></label>
+                                                                    
+                                                                    <span id="phone_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -269,20 +281,16 @@
                                                 </div>
                                             </div>
 
-                                            <button class="paypal-btn" type="submit"><img
+                                            {{-- <button class="paypal-btn" type="submit"><img
                                                     src="{{ asset('frontend_assets/images/paypal.png') }}"></button>
 
-                                                    
-                                                    <button class="paypal-btn paypal-btn-2 mt-2" ><span><i class="fa-solid fa-credit-card"></i></span>Debit or Credit Card</button>
 
-                                                    
+                                            <button class="paypal-btn paypal-btn-2 mt-2"><span><i
+                                                        class="fa-solid fa-credit-card"></i></span>Debit or Credit
+                                                Card</button> --}}
 
-                                            <!-- start previous / next buttons -->
-                                            <!-- <div class="form-footer d-flex">
-                            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                            <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                          </div> -->
-                                            <!-- end previous / next buttons -->
+                                            <div id="paypal-button-container"></div>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -335,7 +343,8 @@
                                             <input type="hidden" name="plan_name" value="{{ $plan->plan_name }}">
                                             <input type="hidden" name="plan_price"
                                                 value="{{ $plan->plan_offer_price }}">
-                                            <input type="hidden" name="amount" value="{{ $plan->plan_offer_price }}"  id="total_amount">
+                                            <input type="hidden" name="amount"
+                                                value="{{ $plan->plan_offer_price }}" id="total_amount">
                                             <input type="hidden" id="coupan_code" name="coupan_code">
                                             <input type="hidden" id="coupon_discount" name="coupon_discount">
 
@@ -533,7 +542,9 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
     {{-- paypal credit --}}
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AbyqRlB9OF-FaHT602Cy_3ty7UqWWSUrzSIqNGsC2S72vh2RZFzQBCr5r6pt5l1pxbZwiMlgU-yxEP_N">
+    </script>
 
 
     <script>
@@ -546,67 +557,69 @@
                 var emailId = $('#floatingInput1').val();
                 var phone = $('#floatingInput9').val();
 
-                if(emailId == ''){
+                if (emailId == '') {
                     alert('Please enter email address');
                     return false;
-                }else if(phone == ''){
+                } else if (phone == '') {
                     alert('Please enter phone number');
                     return false;
-                }else{
+                } else {
                     $.ajax({
-                    url: "{{ route('coupon-check') }}",
-                    type: "POST",
-                    data: {
-                        coupon_code: coupon_code,
-                        plan_price: plan_price,
-                        plan_id: plan_id,
-                        emailId: emailId,
-                        phone: phone,
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        if (response.status == 'success') {
-                            var total = response.discount;
-                            var discount = response.coupon_discount;
-                            $('#total_amount').val(total);
-                            $('#coupan_code').val(coupon_code);
-                            $('#coupon_discount').val(discount);
-                            $('.coupon-dis').html(
-                                '<th>Coupon Discount</th><th class="text-end">-$' +
-                                discount + '</th>');
+                        url: "{{ route('coupon-check') }}",
+                        type: "POST",
+                        data: {
+                            coupon_code: coupon_code,
+                            plan_price: plan_price,
+                            plan_id: plan_id,
+                            emailId: emailId,
+                            phone: phone,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            if (response.status == 'success') {
+                                var total = response.discount;
+                                var discount = response.coupon_discount;
+                                $('#total_amount').val(total);
+                                $('#coupan_code').val(coupon_code);
+                                $('#coupon_discount').val(discount);
+                                $('.coupon-dis').html(
+                                    '<th>Coupon Discount</th><th class="text-end">-$' +
+                                    discount + '</th>');
 
-                            $('.total-order').html('<th>Total</th><th class="text-end">$' +
-                                total + '</th>');
-                            $('.recurring').html(
-                                '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                total + '/ month<br><span>(ex. VAT)</span></td></div>');
-                            $('#coupon_error').text('');
-                        }else {
-                            //show message invlid coupon
-                            $('#coupon_error').text('Invalid Coupon Code');
-                            $('#total_amount').val(plan_price);
-                            $('#coupan_code').val('');
-                            $('#coupon_discount').val('0.00');
-                            $('.coupon-dis').html(
-                                '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>');
+                                $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                    total + '</th>');
+                                $('.recurring').html(
+                                    '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                    total + '/ month<br><span>(ex. VAT)</span></td></div>');
+                                $('#coupon_error').text('');
+                            } else {
+                                //show message invlid coupon
+                                $('#coupon_error').text('Invalid Coupon Code');
+                                $('#total_amount').val(plan_price);
+                                $('#coupan_code').val('');
+                                $('#coupon_discount').val('0.00');
+                                $('.coupon-dis').html(
+                                    '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>'
+                                    );
 
-                            $('.total-order').html('<th>Total</th><th class="text-end">$' +
-                                plan_price + '</th>');
-                            $('.recurring').html(
-                                '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                plan_price + '/ month<br><span>(ex. VAT)</span></td></div>');
+                                $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                    plan_price + '</th>');
+                                $('.recurring').html(
+                                    '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                    plan_price +
+                                    '/ month<br><span>(ex. VAT)</span></td></div>');
 
+                            }
                         }
-                    }
-                });
+                    });
                 }
-                
+
             });
         });
     </script>
 
     {{-- form validation --}}
-    <script>
+    {{-- <script>
         $(document).ready(function() {
 
             $('#signUpForm').validate({
@@ -687,7 +700,145 @@
                 }
             });
         });
-    </script>
-</body>
+    </script> --}}
 
+<script>
+paypal.Buttons({
+    onClick: function() {
+    var emailId = $('#floatingInput1').val();
+    var first_name = $('#floatingInput2').val();
+    var last_name = $('#floatingInput3').val();
+    var country = $('#floatingSelect1').val();
+    var house_name = $('#floatingInput4').val();
+    var detail_address = $('#floatingInput5').val();
+    var city = $('#floatingInput6').val();
+    var state = $('#floatingInput7').val();
+    var post_code = $('#floatingInput8').val();
+    var phone = $('#floatingInput9').val();
+    var payment_type = $('#floatingSelect2').val();
+
+    
+    
+    // Check if any field is empty
+    if (emailId == '' || first_name == '' || last_name == '' || country == '' || house_name == '' || detail_address == '' || city == '' || state == '' || post_code == '' || phone == '' || payment_type == '') {
+        // Display error messages for empty fields
+        if (emailId == '') {
+            $('#email_error').text('Please enter email address');
+        }else{
+            $('#email_error').text('');
+        }
+        if (first_name == '') {
+            $('#fname_error').text('Please enter first name');
+        }else{
+            $('#fname_error').text('');
+        }
+
+        if (last_name == '') {
+            $('#lname_error').text('Please enter last name');
+        }else{
+            $('#lname_error').text('');
+        }
+        if (country == '') {
+            $('#country_error').text('Please enter country');
+        }else{
+            $('#country_error').text('');
+        }
+        if (house_name == '') {
+            $('#houseNo_error').text('Please enter house number and street name');
+        }else{
+            $('#houseNo_error').text('');
+        }
+        if (detail_address == '') {
+            $('#addr_error').text('Please enter apartment, suite, unit, etc.');
+        }else{
+            $('#addr_error').text('');
+        }
+        if (city == '') {
+            $('#city_error').text('Please enter town/city');
+        }else{
+            $('#city_error').text('');
+        }
+        if (state == '') {
+            $('#state_error').text('Please enter state/country');   
+        }else{
+            $('#state_error').text('');
+        }
+        if (post_code == '') {
+            $('#postCode_error').text('Please enter post code');
+        }else{
+            $('#postCode_error').text('');
+        }
+        if (phone == '') {
+            $('#phone_error').text('Please enter phone');
+        }else{
+            $('#phone_error').text('');
+        }
+        if (payment_type == '') {
+            $('#paymentType_error').text('Please select payment type');
+        }else{
+            $('#paymentType_error').text('');
+        }
+        
+        return false; // Prevent the form submission
+    } else {
+        $('#email_error').text('');
+        $('#fname_error').text('');
+        $('#lname_error').text('');
+        $('#country_error').text('');
+        $('#houseNo_error').text('');
+        $('#addr_error').text('');
+        $('#city_error').text('');
+        $('#state_error').text('');
+        $('#postCode_error').text('');
+        $('#phone_error').text('');
+        $('#paymentType_error').text('');
+
+        // All fields are filled, allow form submission
+        return true;
+    }
+},
+
+    createOrder: function(data, actions) {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: $('#total_amount').val()
+                }
+            }]
+        });
+    },
+
+    
+    onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+           
+            // Make AJAX call to your server to save the transaction
+            $.ajax({
+                url: "{{ route('process-payments') }}",
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    'emailId': emailId,
+                    'payment_type': payment_type
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function() {
+                    // Redirect to a success page
+                    
+                },
+               
+            });
+        });
+    }
+
+
+}).render('#paypal-button-container');
+
+
+
+</script>
+
+</body>
 </html>

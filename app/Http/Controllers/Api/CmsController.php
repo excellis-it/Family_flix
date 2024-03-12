@@ -71,7 +71,7 @@ class CmsController extends Controller
 
                 return response()->json([
                     'status' => false,
-                    'statusCode' => 401,
+                    'statusCode' => 200,
                     'message' => 'No Data Found'
                 ]);
 
@@ -140,7 +140,7 @@ class CmsController extends Controller
             if(!$about_us){
                 return response()->json([
                     'status' => false,
-                    'statusCode' => 401,
+                    'statusCode' => 200,
                     'message' => 'No Data Found'
                 ]);
             }else{
@@ -195,7 +195,7 @@ class CmsController extends Controller
             if(!$contact_cms){
                 return response()->json([
                     'status' => false,
-                    'statusCode' => 401,
+                    'statusCode' => 200,
                     'message' => 'No Data Found'
                 ]);
             }else{
