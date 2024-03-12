@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CmsController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\PlanController;
+use App\Http\Controllers\Api\GeneralController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,11 @@ Route::prefix('v1')->group(function () {
             Route::post('grid-section', [CmsController::class, 'gridSectionCms']);
             Route::post('about', [CmsController::class, 'aboutCms']);
             Route::post('contact', [CmsController::class, 'contactCms']);
+            Route::post('pricing',[CmsController::class, 'pricingCms']);
+        });
+
+        Route::prefix('product')->group(function () {
+            Route::post('unbeatable-variety', [ProductController::class, 'unbeatableVariety']);
         });
         
         Route::prefix('plans')->group(function () {
@@ -44,6 +50,8 @@ Route::prefix('v1')->group(function () {
         Route::prefix('kid')->group(function () {
             Route::post('detail', [ProductController::class, 'kidDetail']);
         });
+
+        Route::post('contact-us', [GeneralController::class, 'contactUs']);
         
 });
 

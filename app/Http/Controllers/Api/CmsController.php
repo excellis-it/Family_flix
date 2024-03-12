@@ -10,7 +10,10 @@ use App\Models\AboutUs;
 use App\Models\ContactUsCms;
 use App\Models\TopGrid;
 use App\Models\EntertainmentCms;
+use App\Models\PlanCms;
 use App\Models\OttService;
+use App\Models\SocialMedia;
+use App\Models\ContactDetails;
 
 
 class CmsController extends Controller
@@ -192,6 +195,8 @@ class CmsController extends Controller
     {
         try{
             $contact_cms = ContactUsCms::first();
+            $follow_us = SocialMedia::select('id','icon','link')->get();
+            $contact_details = ContactDetails::select('id','icon','title','details')->get();
             if(!$contact_cms){
                 return response()->json([
                     'status' => false,
@@ -203,6 +208,8 @@ class CmsController extends Controller
                     'status' => true,
                     'statusCode' => 200,
                     'data' => $contact_cms,
+                    'follow_us' => $follow_us,
+                    'contact_details' => $contact_details,
                     'message' => 'Contact CMS data fetched successfully'
                 ]);
             }
@@ -275,6 +282,34 @@ class CmsController extends Controller
                 'entertainment_cms' => $entertainment_cms,
                 'message' => 'Grid Section CMS data fetched successfully'
             ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'statusCode' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function pricingCms(Request $request)
+    {
+        try{
+            $plan_cms = PlanCms::first();
+            if($plan_cms){
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'plan_cms' => $plan_cms,
+                    'message' => 'Pricing CMS data fetched successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 200,
+                    'message' => 'No Data Found'
+                ]);
+            }
+            
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,

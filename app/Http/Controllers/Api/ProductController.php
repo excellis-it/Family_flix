@@ -93,25 +93,19 @@ class ProductController extends Controller
             $show_banner = EntertainmentBanner::where('banner_type','Shows')->orderBy('id','asc')->get();
             $top_10_shows = Product::where('top_10_status', 1)->where('type','shows')->get();
             $popular_shows = Product::where('popular_status', 1)->where('type','shows')->get();
-            if($show){
-                return response()->json([
-                    'status' => true,
-                    'statusCode' => 200,
-                    'message' => 'Show details found successfully',
-                    'data' => [
-                        'content' => $show,
-                        'banner' => $show_banner,
-                        'top_10_shows' => $top_10_shows,
-                        'popular_shows' => $popular_shows 
-                    ]
-                ]);
-            }else{
-                return response()->json([
-                    'status' => false,
-                    'statusCode' => 200,
-                    'message' => 'No show found',
-                ]);
-            }
+            
+            return response()->json([
+                'status' => true,
+                'statusCode' => 200,
+                'message' => 'Show details found successfully',
+                'data' => [
+                    'content' => $show,
+                    'banner' => $show_banner,
+                    'top_10_shows' => $top_10_shows,
+                    'popular_shows' => $popular_shows 
+                ]
+            ]);
+            
         }
         catch(\Exception $e){
             return response()->json([
@@ -204,25 +198,19 @@ class ProductController extends Controller
             $movie_banner = EntertainmentBanner::where('banner_type','Movies')->orderBy('id','asc')->get();
             $top_10_movies = Product::where('top_10_status', 1)->where('type','movie')->get();
             $popular_movies = Product::where('popular_status', 1)->where('type','movie')->get();
-            if($movie){
-                return response()->json([
-                    'status' => true,
-                    'statusCode' => 200,
-                    'message' => 'Movie details found successfully',
-                    'data' => [
-                        'content' => $movie,
-                        'banner' => $movie_banner,
-                        'top_10_movies' => $top_10_movies,
-                        'popular_movies' => $popular_movies 
-                    ]
-                ]);
-            }else{
-                return response()->json([
-                    'status' => false,
-                    'statusCode' => 200,
-                    'message' => 'No movie found',
-                ]);
-            }
+            
+            return response()->json([
+                'status' => true,
+                'statusCode' => 200,
+                'message' => 'Movie details found successfully',
+                'data' => [
+                    'content' => $movie,
+                    'banner' => $movie_banner,
+                    'top_10_movies' => $top_10_movies,
+                    'popular_movies' => $popular_movies 
+                ]
+            ]);
+           
         }
         catch(\Exception $e){
             return response()->json([
@@ -316,25 +304,48 @@ class ProductController extends Controller
             $kid_banner = EntertainmentBanner::where('banner_type','Kids')->orderBy('id','asc')->get();
             $top_10_kids = Product::where('top_10_status', 1)->where('type','kid')->get();
             $popular_kids = Product::where('popular_status', 1)->where('type','kid')->get();
-            if($kid){
-                return response()->json([
-                    'status' => true,
-                    'statusCode' => 200,
-                    'message' => 'Kid details found successfully',
-                    'data' => [
-                        'content' => $kid,
-                        'banner' => $kid_banner,
-                        'top_10_kids' => $top_10_kids,
-                        'popular_kids' => $popular_kids 
-                    ]
-                ]);
-            }else{
+           
+            return response()->json([
+                'status' => true,
+                'statusCode' => 200,
+                'message' => 'Kid details found successfully',
+                'data' => [
+                    'content' => $kid,
+                    'banner' => $kid_banner,
+                    'top_10_kids' => $top_10_kids,
+                    'popular_kids' => $popular_kids 
+                ]
+            ]);
+            
+        }
+        catch(\Exception $e){
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function unbeatableVariety(Request $request)
+    {
+        try{
+            $unbeatable_variety = Product::where('unbeatable_status', 1)->get();
+            if($unbeatable_variety->isEmpty()){
                 return response()->json([
                     'status' => false,
                     'statusCode' => 200,
-                    'message' => 'No kid found',
+                    'message' => 'No unbeatable variety found',
                 ]);
             }
+            return response()->json([
+                'status' => true,
+                'statusCode' => 200,
+                'message' => 'Unbeatable variety details found successfully',
+                'data' => [
+                    'content' => $unbeatable_variety
+                ]
+            ]);
         }
         catch(\Exception $e){
             return response()->json([
