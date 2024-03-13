@@ -209,14 +209,32 @@ class PaypalController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Coupon code is not valid for you']);
         }
 
-        
-        
-        
-
     }
 
     public function paymentSuccess()
     {
         return view('frontend.pages.thankyou');
+    }
+
+    public function paymentcapture(Request $request)
+    {
+        return $request;
+        
+        // $transaction = $this->gateway->capture(array(
+        //     'amount' => '10.00',
+        //     'transactionReference' => '123',
+        // ));
+        // $response = $transaction->send();
+
+        // if ($response->isSuccessful()) {
+        //     return $response->getData();
+        // } else {
+        //     return $response->getMessage();
+        // }
+    }
+
+    public function paypalSuccessPayment($res)
+    {
+        return $res;
     }
 }

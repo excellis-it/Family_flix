@@ -146,7 +146,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingSelect1">Country/Region
                                                                     <span>*</span></label>
-                                                                    <span id="country_error" class="text-danger"></span>
+                                                                <span id="country_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,8 +169,8 @@
                                                                 <label for="floatingInput5">Apartment, suite, unit,
                                                                     etc.
                                                                     (optional) <span>*</span></label>
-                                                                    <span id="addr_error" class="text-danger"></span>
-                                                                    
+                                                                <span id="addr_error" class="text-danger"></span>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -182,7 +182,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput6">Town/City
                                                                     <span>*</span></label>
-                                                                    <span id="city_error" class="text-danger"></span>
+                                                                <span id="city_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
@@ -192,7 +192,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput7">State/Country
                                                                     <span>*</span></label>
-                                                                    <span id="state_error" class="text-danger"></span>
+                                                                <span id="state_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
@@ -202,7 +202,7 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput8">Post code
                                                                     <span>*</span></label>
-                                                                    <span id="postCode_error" class="text-danger"></span>
+                                                                <span id="postCode_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -214,8 +214,8 @@
                                                                     placeholder="">
                                                                 <label for="floatingInput9">Phone
                                                                     <span>*</span></label>
-                                                                    
-                                                                    <span id="phone_error" class="text-danger"></span>
+
+                                                                <span id="phone_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -600,7 +600,7 @@
                                 $('#coupon_discount').val('0.00');
                                 $('.coupon-dis').html(
                                     '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>'
-                                    );
+                                );
 
                                 $('.total-order').html('<th>Total</th><th class="text-end">$' +
                                     plan_price + '</th>');
@@ -702,143 +702,166 @@
         });
     </script> --}}
 
-<script>
-paypal.Buttons({
-    onClick: function() {
-    var emailId = $('#floatingInput1').val();
-    var first_name = $('#floatingInput2').val();
-    var last_name = $('#floatingInput3').val();
-    var country = $('#floatingSelect1').val();
-    var house_name = $('#floatingInput4').val();
-    var detail_address = $('#floatingInput5').val();
-    var city = $('#floatingInput6').val();
-    var state = $('#floatingInput7').val();
-    var post_code = $('#floatingInput8').val();
-    var phone = $('#floatingInput9').val();
-    var payment_type = $('#floatingSelect2').val();
+    <script>
+        paypal.Buttons({
+            onClick: function() {
+                var emailId = $('#floatingInput1').val();
+                var first_name = $('#floatingInput2').val();
+                var last_name = $('#floatingInput3').val();
+                var country = $('#floatingSelect1').val();
+                var house_name = $('#floatingInput4').val();
+                var detail_address = $('#floatingInput5').val();
+                var city = $('#floatingInput6').val();
+                var state = $('#floatingInput7').val();
+                var post_code = $('#floatingInput8').val();
+                var phone = $('#floatingInput9').val();
+                var payment_type = $('#floatingSelect2').val();
 
-    
-    
-    // Check if any field is empty
-    if (emailId == '' || first_name == '' || last_name == '' || country == '' || house_name == '' || detail_address == '' || city == '' || state == '' || post_code == '' || phone == '' || payment_type == '') {
-        // Display error messages for empty fields
-        if (emailId == '') {
-            $('#email_error').text('Please enter email address');
-        }else{
-            $('#email_error').text('');
-        }
-        if (first_name == '') {
-            $('#fname_error').text('Please enter first name');
-        }else{
-            $('#fname_error').text('');
-        }
 
-        if (last_name == '') {
-            $('#lname_error').text('Please enter last name');
-        }else{
-            $('#lname_error').text('');
-        }
-        if (country == '') {
-            $('#country_error').text('Please enter country');
-        }else{
-            $('#country_error').text('');
-        }
-        if (house_name == '') {
-            $('#houseNo_error').text('Please enter house number and street name');
-        }else{
-            $('#houseNo_error').text('');
-        }
-        if (detail_address == '') {
-            $('#addr_error').text('Please enter apartment, suite, unit, etc.');
-        }else{
-            $('#addr_error').text('');
-        }
-        if (city == '') {
-            $('#city_error').text('Please enter town/city');
-        }else{
-            $('#city_error').text('');
-        }
-        if (state == '') {
-            $('#state_error').text('Please enter state/country');   
-        }else{
-            $('#state_error').text('');
-        }
-        if (post_code == '') {
-            $('#postCode_error').text('Please enter post code');
-        }else{
-            $('#postCode_error').text('');
-        }
-        if (phone == '') {
-            $('#phone_error').text('Please enter phone');
-        }else{
-            $('#phone_error').text('');
-        }
-        if (payment_type == '') {
-            $('#paymentType_error').text('Please select payment type');
-        }else{
-            $('#paymentType_error').text('');
-        }
-        
-        return false; // Prevent the form submission
-    } else {
-        $('#email_error').text('');
-        $('#fname_error').text('');
-        $('#lname_error').text('');
-        $('#country_error').text('');
-        $('#houseNo_error').text('');
-        $('#addr_error').text('');
-        $('#city_error').text('');
-        $('#state_error').text('');
-        $('#postCode_error').text('');
-        $('#phone_error').text('');
-        $('#paymentType_error').text('');
 
-        // All fields are filled, allow form submission
-        return true;
-    }
+                // Check if any field is empty
+                if (emailId == '' || first_name == '' || last_name == '' || country == '' || house_name == '' ||
+                    detail_address == '' || city == '' || state == '' || post_code == '' || phone == '' ||
+                    payment_type == '') {
+                    // Display error messages for empty fields
+                    if (emailId == '') {
+                        $('#email_error').text('Please enter email address');
+                    } else {
+                        $('#email_error').text('');
+                    }
+                    if (first_name == '') {
+                        $('#fname_error').text('Please enter first name');
+                    } else {
+                        $('#fname_error').text('');
+                    }
+
+                    if (last_name == '') {
+                        $('#lname_error').text('Please enter last name');
+                    } else {
+                        $('#lname_error').text('');
+                    }
+                    if (country == '') {
+                        $('#country_error').text('Please enter country');
+                    } else {
+                        $('#country_error').text('');
+                    }
+                    if (house_name == '') {
+                        $('#houseNo_error').text('Please enter house number and street name');
+                    } else {
+                        $('#houseNo_error').text('');
+                    }
+                    if (detail_address == '') {
+                        $('#addr_error').text('Please enter apartment, suite, unit, etc.');
+                    } else {
+                        $('#addr_error').text('');
+                    }
+                    if (city == '') {
+                        $('#city_error').text('Please enter town/city');
+                    } else {
+                        $('#city_error').text('');
+                    }
+                    if (state == '') {
+                        $('#state_error').text('Please enter state/country');
+                    } else {
+                        $('#state_error').text('');
+                    }
+                    if (post_code == '') {
+                        $('#postCode_error').text('Please enter post code');
+                    } else {
+                        $('#postCode_error').text('');
+                    }
+                    if (phone == '') {
+                        $('#phone_error').text('Please enter phone');
+                    } else {
+                        $('#phone_error').text('');
+                    }
+                    if (payment_type == '') {
+                        $('#paymentType_error').text('Please select payment type');
+                    } else {
+                        $('#paymentType_error').text('');
+                    }
+
+                    return false; // Prevent the form submission
+                } else {
+                    $('#email_error').text('');
+                    $('#fname_error').text('');
+                    $('#lname_error').text('');
+                    $('#country_error').text('');
+                    $('#houseNo_error').text('');
+                    $('#addr_error').text('');
+                    $('#city_error').text('');
+                    $('#state_error').text('');
+                    $('#postCode_error').text('');
+                    $('#phone_error').text('');
+                    $('#paymentType_error').text('');
+
+                    // All fields are filled, allow form submission
+                    return true;
+                }
+            },
+
+            createOrder: function(data, actions) {
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: $('#total_amount').val()
+                        }
+                    }]
+                });
+            },
+
+
+            onApprove: function(data, actions) {
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  
+    // This function captures the funds from the transaction.
+    return actions.order.capture().then(function(details) {
+        if (details.status == 'COMPLETED') {
+            var route = "{{ route('paypal-capture-payment') }}";
+            return fetch(route, {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json, text-plain, */*',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify({
+                    orderId: data.orderID,
+                    id: details.id,
+                    status: details.status,
+                    payerEmail: details.payer.email_address,
+                })
+            })
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse JSON response
+                return response.json();
+            })
+            .then(function(responseData) {
+                // Assuming responseData contains the response data you need
+                var res = responseData;
+                var url = "{{ route('paypal-success-payment', ['res' => ':res']) }}".replace(':res', res);
+                window.location.href = url;
+            })
+            .catch(function(error) {
+                // Redirect to failed page if internal error occurs
+                window.location.href = '/pay-failed?reason=internalFailure';
+            });
+        } else {
+            window.location.href = '/pay-failed?reason=failedToCapture';
+        }
+    });
 },
 
-    createOrder: function(data, actions) {
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: $('#total_amount').val()
-                }
-            }]
-        });
-    },
-
-    
-    onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-           
-            // Make AJAX call to your server to save the transaction
-            $.ajax({
-                url: "{{ route('process-payments') }}",
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    'emailId': emailId,
-                    'payment_type': payment_type
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function() {
-                    // Redirect to a success page
-                    
-                },
-               
-            });
-        });
-    }
 
 
-}).render('#paypal-button-container');
-
-
-
-</script>
+        }).render('#paypal-button-container');
+    </script>
 
 </body>
+
 </html>

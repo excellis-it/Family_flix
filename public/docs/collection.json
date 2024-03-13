@@ -1,0 +1,385 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Family-Flix",
+        "_postman_id": "2093a43b-48df-4c08-8814-29d831ada8da",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Home Page Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/home",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/home"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"status\": true,\n      \"message\": \"Home CMS data fetched successfully\",\n     \"statusCode\": \"200\",\n     \"data\": {\n         \"id\": 1,\n         \"top_back_image\": \"home\/top_back.png\",\n         \"top_short_title\": \"Your All-In-One Entertainment Hub\",\n         \"top_main_title\": \"Unlimited Entertainment.At Your Fingertips.\",\n         \"top_button_text\": \"Sign Up Today\",\n         \"section1_main_image\": \"home\/section1_main.png\",\n         \"section1_back_image\": \"home\/section1_back.png\",\n         \"section2_back_image\": \"home\/section2_back.png\",\n         \"section2_main_image\": \"home\/section2_main.png\",\n         \"section2_title\": \"Everything You Love.All In One Place.\",\n         \"section2_description\": \"Our platform seamlessly integrates content from top streaming platforms like Netflix, Hulu, Disney, and more. Imagine having access to all your favorite shows and movies in one place, without the hassle of switching between multiple apps.\",\n         \"section2_short_title\": \"View Our Plans And Pricing\",\n         \"section2_main_icon\": \"home\/main_icon.png\",\n         \"entertainment_title\": \"Entertainment Everywhere\",\n         \"entertainment_description\": \"Enjoy The Family Flix app on your TV, mobile, and tablet. Our platform supports all your devices. Anywhere, Any Device: The Family Flix Advantage\",\n         \"section3_back_image\": \"home\/section3_back.png\",\n         \"section3_main_image\": \"home\/section3_main.png\",\n         \"section3_title\": \"How It Works\",\n         \"section3_video_link\": \"home\/4YGx75Dq9sxjUK2dMWThhIVSrYjWo9ZPNkFieaHq.mp4\",\n         \"section4_title\": \"Unbeatable Variety\",\n         \"section4_description\": \"Blockbuster hits, binge-worthy series, and hidden gems at your fingertips. A universe of entertainment curated for you.\",\n         \"section4_back_image\": \"home\/section4_back.png\",\n         \"section5_back_image\": \"home\/section5_back.png\",\n         \"section5_main_title\": \"Kid's Corner\",\n         \"section5_main_description\": \"<p>A dedicated space filled with family-friendly movies and shows to keep the little ones entertained. From animated adventures to educational content, we&rsquo;ve got it all in one safe and fun place.Subscription to The Family Flix means entertainment for the whole family, so your kids can have a blast while you enjoy your favorites. Subscribe today and let the young ones embark on their own cinematic journeys!<\/p>\",\n         \"section5_main_image\": \"home\/section5_main.png\",\n         \"plan_section_title\": \"Pricing Plans & Options.\",\n         \"plan_section_back_image\": \"home\/plan_back.png\",\n         \"created_at\": \"2024-03-06T05:24:23.000000Z\",\n         \"updated_at\": \"2024-03-06T05:35:15.000000Z\"\n     },\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n     \"status\": false,\n    \"message\": \"No Data Found\",\n   \"statusCode\": \"401\",\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Grid Section Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/grid-section",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/grid-section"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"top_grid\": [\n      {\n          \"id\": 1,\n          \"icon\": \"grid\/grid_icon1.png\",\n          \"title\": \"Unlimited Access\",\n          \"description\": \"Dive into a vast library of movies, TV series, and exclusive content.\"\n      },\n      {\n          \"id\": 2,\n          \"icon\": \"grid\/grid_icon2.png\",\n          \"title\": \"Savings Simplified\",\n          \"description\": \"Affordable plans that eliminate the need for multiple subscriptions.\"\n      },\n      {\n          \"id\": 3,\n          \"icon\": \"grid\/grid_icon3.png\",\n          \"title\": \"Watch Anywhere, Anytime\",\n          \"description\": \"Enjoy your favorites on your terms - mobile, desktop, or TV.\"\n      }\n  ],\n  \"entertainment_cms\": [\n      {\n          \"id\": 1,\n          \"image\": \"entertainment\/en-1.png\",\n          \"image_name\": \"On Your TV\"\n      },\n      {\n          \"id\": 2,\n          \"image\": \"entertainment\/en-2.png\",\n          \"image_name\": \"Mobiles & Tablets\"\n      },\n      {\n          \"id\": 3,\n          \"image\": \"entertainment\/en-3.png\",\n          \"image_name\": \"On Firestick & Firecube\"\n      }\n  ],\n  \"message\": \"Grid Section CMS data fetched successfully\"",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "About Page Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/about",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/about"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n \"statusCode\": 200,\n \"data\": {\n      \"id\": 1,\n      \"title\": \"About Us\",\n      \"banner_img\": \"about\/abt-bg.png\",\n      \"section1_title\": \"Celebrating Your Entertainment\",\n      \"section1_description\": \"Welcome to The Family Flix, where our passion lies in\\r\\n        crafting an exceptional entertainment experience that is\\r\\n        both accessible and affordable, catering to your unique\\r\\n        tastes. Our journey began with a simple yet ambitious\\r\\n        vision \u2013 to create a platform that brings together the\\r\\n        fragmented world of streaming services, providing you with\\r\\n        an easier and more cost-effective way to enjoy your\\r\\n        favorite movies, TV series, and more.\",\n      \"section1_img\": \"about\/section1-img.png\",\n      \"section2_title1\": \"Our Commitment to You\",\n      \"section2_description1\": \"At The Family Flix, our commitment is unwavering. We strive to deliver the best possible entertainment experience, and our dedicated team is at your service with top-notch customer support 24\/7. We understand the value of your time and money, and our goal is to assist you in making the most of both.\",\n      \"section2_img2\": \"about\/section2_img2.png\",\n      \"section3_title\": \"What Sets Us Apart\",\n      \"section3_back_img\": \"about\/section3_back.png\",\n      \"section3_title1\": \"Vast Content Library\",\n      \"section3_description1\": \"The Family Flix takes pride in presenting an ever-expanding content library. We embrace diversity, offering a range that includes movies, TV series, anime, web series, Korean drama, and more. Whatever your interests, we have something for everyone.\",\n      \"section3_image1\": \"about\/section3_img1.png\",\n      \"section3_title2\": \"Platform Flexibility\",\n      \"section3_description2\": \"Enjoy the flexibility of watching your favorite shows and movies on your terms. The Family Flix supports all major platforms, whether you prefer streaming on your phone, tablet, or TV. Our user-friendly app ensures a seamless experience wherever you are.\",\n      \"section3_image2\": \"about\/section3_img2.png\",\n      \"section3_title3\": \"Savings & Simplicity\",\n      \"section3_description3\": \"Simplify your entertainment budget with The Family Flix\u2019s cost-effective solutions. Bid farewell to the hassles of managing multiple subscriptions and enjoy unbeatable value for a diverse range of content.\",\n      \"section3_image3\": \"about\/section3_img3.png\",\n      \"created_at\": \"2024-03-06T05:24:23.000000Z\",\n      \"updated_at\": \"2024-03-06T05:24:23.000000Z\"\n  },\n \"message\": \"About CMS data fetched successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 500,\n\"message\": \"No Data Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Contact Page Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/contact",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/contact"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n  \"data\": {\n      \"id\": 1,\n      \"title\": \"Contact\",\n      \"banner_img\": \"contact\/contact-banner.png\",\n      \"background_img\": \"contact\/contact-bg.png\",\n      \"main_title\": \"Connect With Us\",\n      \"short_title\": \"To learn more about how Streamit can help you, contact us.\",\n      \"button_name\": \"Contact Us\",\n      \"map_link\": \"https:\/\/maps.google.com\/maps?q=Orlando%2C%20Florida&t=m&z=15&output=embed&iwloc=near\",\n      \"created_at\": \"2024-03-06T05:24:23.000000Z\",\n      \"updated_at\": \"2024-03-06T05:24:23.000000Z\"\n   },\n \"message\": \"Contact CMS data fetched successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 500,\n\"message\": \"No Data Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "POST api\/v1\/cms\/pricing",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/pricing",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/pricing"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/product\/unbeatable-variety",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/product\/unbeatable-variety",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/product\/unbeatable-variety"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/plans\/show",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/plans\/show",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/plans\/show"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/show\/detail",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/show\/detail",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/show\/detail"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/movie\/detail",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movie\/detail",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movie\/detail"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/kid\/detail",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/kid\/detail",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/kid\/detail"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/contact-us",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/contact-us",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/contact-us"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_name\":\"impedit\",\"user_email\":\"maggio.delaney@example.com\",\"user_phone\":\"atque\",\"message\":\"amet\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

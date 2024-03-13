@@ -6,6 +6,10 @@ use App\Http\Controllers\Api\CmsController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\PlanController;
 use App\Http\Controllers\Api\GeneralController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Affiliater\ProfileController;
+use App\Http\Controllers\Api\Affiliater\CommissionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +26,29 @@ use App\Http\Controllers\Api\GeneralController;
 //     return $request->user();
 // });
 
-Route::prefix('v1')->group(function () {
+    Route::prefix('v1')->group(function () {
+
+        Route::post('login', [AuthController::class, 'login']);  // login api
+        Route::post('register', [AuthController::class, 'register']);  // register api
+
+        Route::group(['middleware' => 'auth:api'], function () {
+            Route::group(['prefix' => 'affiliater'], function () {
+                Route::post('profile-details', [ProfileController::class, 'profileDetails']);  // profile details api
+                Route::post('profile-update', [ProfileController::class, 'profileUpdate']);  // profile update api
+
+                Route::group(['prefix' => 'commission'], function () {
+                    Route::post('list', [CommissionController::class, 'commissionList']);  // commission details api
+                });
+
+                //affiliate link
+                Route::post('create-link', [ProfileController::class, 'affiliateLink']);  // commission details api
+          
+
+            });
+            
+
+        });
+
         // Grouping CMS routes
         Route::prefix('cms')->group(function () {
             // Defining route for CMS home
@@ -52,6 +78,7 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::post('contact-us', [GeneralController::class, 'contactUs']);
-        
-});
+        Route::post('subscribe-us', [GeneralController::class, 'subscribeUs']);
+
+    });
 

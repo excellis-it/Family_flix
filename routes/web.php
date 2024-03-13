@@ -64,6 +64,8 @@ Route::get('/term-service', [HomeController::class, 'termService'])->name('term-
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
 
+
+
 //payments
 Route::get('/create-payments/{id}', [PaypalController::class, 'createPayments'])->name('create-payments');
 Route::post('/process-payments', [PaypalController::class, 'processPayments'])->name('process-payments');
@@ -71,6 +73,10 @@ Route::get('/success-payment', [PaypalController::class, 'successPayment'])->nam
 Route::get('/cancel-payments', [PaypalController::class, 'cancelPayments'])->name('cancel-payments');
 
 Route::get('/successPayment',[PaypalController::class, 'paymentSuccess'])->name('payment.successful');
+
+
+Route::post('/capturePayment',[PaypalController::class, 'paymentcapture'])->name('paypal-capture-payment');
+Route::post('/paypal-success-payment/{res?}', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
