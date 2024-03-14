@@ -10,17 +10,111 @@
     ],
     "info": {
         "name": "Family-Flix",
-        "_postman_id": "2093a43b-48df-4c08-8814-29d831ada8da",
+        "_postman_id": "5270653c-d9bf-49b7-a49a-df2cd893846c",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "Endpoints",
-            "description": "",
+            "name": "Authentication",
+            "description": "\nAPIs for Authentication",
             "item": [
                 {
-                    "name": "Home Page Api",
+                    "name": "Login Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"john@yopmail.com\",\"password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"data\": {\n      \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks\",\n      \"user\": {\n          \"id\": 3,\n          \"name\": \"test2 affiliater2\",\n          \"email\": \"test1@yopmail.com\",\n          \"status\": \"1\"\n      }\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n \"status\": false,\n \"statusCode\": 401,\n \"error\": \"Invalid user & Password!\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Register Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"mskbhbhzyogurvdzrkxcv\",\"email\":\"kassulke.gabe@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n  \"statusCode\": 200,\n  \"data\": {\n  \"user\": {\n      \"name\": \"test affiliaters\",\n      \"email\": \"test123@yopmail.com\",\n      \"phone\": 8956237845,\n      \"status\": 1,\n      \"updated_at\": \"2024-03-14T05:57:00.000000Z\",\n      \"created_at\": \"2024-03-14T05:57:00.000000Z\",\n      \"id\": 4\n  }\n  },\n  \"message\": \"registered successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"message\": [\n      \"The email has already been taken.\",\n      \"The confirm password and password must match.\"\n  ]\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cms",
+            "description": "\nAPIs for Cms",
+            "item": [
+                {
+                    "name": "Home-Page Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -61,7 +155,7 @@
                     ]
                 },
                 {
-                    "name": "Grid Section Api",
+                    "name": "Grid-Section Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -96,7 +190,7 @@
                     ]
                 },
                 {
-                    "name": "About Page Api",
+                    "name": "About-Page Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -137,7 +231,7 @@
                     ]
                 },
                 {
-                    "name": "Contact Page Api",
+                    "name": "Contact-Page Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -178,7 +272,7 @@
                     ]
                 },
                 {
-                    "name": "POST api\/v1\/cms\/pricing",
+                    "name": "Pricing-Page Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -203,10 +297,167 @@
                             "type": "noauth"
                         }
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"plan_cms\": {\n      \"id\": 1,\n      \"title\": \"Pricing\",\n      \"banner_img\": \"pricing\/pricing-banner.png\",\n      \"background_img\": \"pricing\/pricing-bg.png\",\n      \"main_title\": \"Pricing Plans & Options\",\n      \"short_title\": \"Choose the plan that works best for you.\",\n      \"created_at\": \"2024-03-06T05:24:23.000000Z\",\n      \"updated_at\": \"2024-03-06T05:24:23.000000Z\"\n  },\n  \"message\": \"Pricing CMS data fetched successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 500,\n\"message\": \"No Data Found\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "General",
+            "description": "\nAPIs for General",
+            "item": [
+                {
+                    "name": "Contact Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/contact-us",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/contact-us"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"orn.kennith@example.org\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"message\": \"Contact us details added successfully.\",\n \"success\": {\n      \"user_name\": \"John\",\n      \"user_email\": \"\n      \"user_phone\": \"1234567890\",\n      \"message\": \"This is a test message\",\n      \"id\": 1\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"error\": \"The user email field is required.\"\n}",
+                            "name": ""
+                        }
+                    ]
                 },
                 {
-                    "name": "POST api\/v1\/product\/unbeatable-variety",
+                    "name": "Subscribe Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/subscribe-us",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/subscribe-us"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"mkonopelski@example.com\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"message\": \"You have been subscribed successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"error\": \"The email has already been taken.\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Listing APIs",
+            "description": "\nAPIs for Commission Listing",
+            "item": [
+                {
+                    "name": "Commission Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/affiliater\/commission\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/commission\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"data\": [\n     {\n         \"id\": 1,\n         \"affiliate_id\": 3,\n         \"customer_id\": 1,\n         \"subscription_id\": 1,\n         \"commission\": \"5.00\",\n         \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n         \"updated_at\": \"2021-05-27T06:50:50.000000Z\",\n         \"customer_details\": {\n             \"id\": 1,\n             \"name\": \"John Doe\",\n             \"email\": \"\n        }\n   }\n]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 200,\n\"message\": \"No commission found!\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Unbeatable-Variety  Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -231,10 +482,23 @@
                             "type": "noauth"
                         }
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": false,\n  \"statusCode\": 200,\n  \"message\": \"No unbeatable variety found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 500,
+                            "body": "{\n  \"status\": 500,\n  \"message\": \"Something went wrong\",\n  \"error\": \"Error message\"\n}",
+                            "name": ""
+                        }
+                    ]
                 },
                 {
-                    "name": "POST api\/v1\/plans\/show",
+                    "name": "Plan-List Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -259,10 +523,23 @@
                             "type": "noauth"
                         }
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"message\": \"Plan details found successfully\",\n  \"data\": {\n      \"plan\": [\n      {\n          \"id\": 1,\n          \"plan_name\": \"Starter\",\n          \"plan_details\": \"Welcome to our starter pack where 2 people can enjoy unlimited movies and shows.\",\n          \"plan_actual_price\": \"30\",\n          \"plan_offer_price\": \"25\",\n          \"button_text\": \"Subscribe\",\n          \"specification\": [\n              {\n                  \"id\": 1,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"1-2 Device Limit\"\n              },\n              {\n                  \"id\": 2,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Preminum Server\"\n              },\n              {\n                  \"id\": 3,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Full HD Available\"\n              },\n              {\n                  \"id\": 4,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Desktop, Mobile and TV App\"\n              },\n              {\n                  \"id\": 5,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Unlimited Movies and TV Shows\"\n              }\n          ]\n      },\n  ]\n }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"message\": [\n     \"No detail found!\"\n ]\n}\n}",
+                            "name": ""
+                        }
+                    ]
                 },
                 {
-                    "name": "POST api\/v1\/show\/detail",
+                    "name": "Show  Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -287,10 +564,23 @@
                             "type": "noauth"
                         }
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": false,\n  \"statusCode\": 200,\n  \"message\": \"No show found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 500,
+                            "body": "{\n  \"status\": 500,\n  \"message\": \"Something went wrong\",\n  \"error\": \"Error message\"\n}",
+                            "name": ""
+                        }
+                    ]
                 },
                 {
-                    "name": "POST api\/v1\/movie\/detail",
+                    "name": "Movie  Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -315,10 +605,23 @@
                             "type": "noauth"
                         }
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": false,\n  \"statusCode\": 200,\n  \"message\": \"No movie found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 500,
+                            "body": "{\n  \"status\": 500,\n  \"message\": \"Something went wrong\",\n  \"error\": \"Error message\"\n}",
+                            "name": ""
+                        }
+                    ]
                 },
                 {
-                    "name": "POST api\/v1\/kid\/detail",
+                    "name": "Kid  Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -343,16 +646,73 @@
                             "type": "noauth"
                         }
                     },
-                    "response": []
-                },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": false,\n  \"statusCode\": 200,\n  \"message\": \"No kid found\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 500,
+                            "body": "{\n  \"status\": 500,\n  \"message\": \"Something went wrong\",\n  \"error\": \"Error message\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Profile",
+            "description": "",
+            "item": [
                 {
-                    "name": "POST api\/v1\/contact-us",
+                    "name": "Details Api",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/v1\/contact-us",
+                            "path": "api\/v1\/affiliater\/profile-details",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/contact-us"
+                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/profile-details"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"success\": {\n         \"id\": 1,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n       \"email_verified_at\": null,\n      \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n    \"updated_at\": \"2021-05-27T06:50:50.000000Z\"\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n   \"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update-Profile Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/affiliater\/profile-update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/profile-update"
                         },
                         "method": "POST",
                         "header": [
@@ -367,14 +727,50 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"impedit\",\"user_email\":\"maggio.delaney@example.com\",\"user_phone\":\"atque\",\"message\":\"amet\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"+1 1234 567 890\",\"email\":\"whiteglovecomics@gmail.com\",\"address\":\"USA,678\",\"pincode\":\"659865\"}"
                         },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
-                    "response": []
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Affiliater details updated successfully.\",\n  \"data\": {\n      \"id\": 3,\n      \"name\": \"test2 affiliater2\",\n      \"email\": \"test1@yopmail.com\",\n      \"phone\": \"1231231231\",\n      \"email_verified_at\": null,\n      \"image\": \"Affiliate Marketer\/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png\",\n      \"status\": \"1\",\n      \"created_at\": \"2024-03-13T12:57:34.000000Z\",\n      \"updated_at\": \"2024-03-14T06:16:19.000000Z\"\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "AffiliateLink Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/affiliater\/create-link",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/create-link"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"message\": \"Affiliate link created successfully.\",\n \"data\": \"http:\/\/127.0.0.1:8001\/pricing\/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9\",\n \"status\": true\n}",
+                            "name": ""
+                        }
+                    ]
                 }
             ]
         }

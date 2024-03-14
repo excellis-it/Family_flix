@@ -14,13 +14,23 @@ use App\Models\PlanCms;
 use App\Models\OttService;
 use App\Models\SocialMedia;
 use App\Models\ContactDetails;
+use App\Models\Faq;
+use App\Models\BusinessManagement;
+
+use Illuminate\Support\Facades\Validator;
+
+/**
+    * @group Cms
+    *
+    * APIs for Cms
+*/
 
 
 class CmsController extends Controller
 {
 
     /**
-     * Home Page Api
+     * Home-Page Api
      * @response 200{
      *      "status": true,
      *       "message": "Home CMS data fetched successfully",
@@ -98,7 +108,7 @@ class CmsController extends Controller
     }
 
     /**
-     * About Page Api
+     * About-Page Api
      * @response 200{
      *  "status": true,
      *  "statusCode": 200,
@@ -166,7 +176,7 @@ class CmsController extends Controller
     }
 
     /**
-     * Contact Page Api
+     * Contact-Page Api
      * @response 200{
      * "status": true,
      * "statusCode": 200,
@@ -225,7 +235,7 @@ class CmsController extends Controller
     }
 
     /** 
-     * Grid Section Api
+     * Grid-Section Api
      * @response 200{
      *   "status": true,
      *   "statusCode": 200,
@@ -291,6 +301,31 @@ class CmsController extends Controller
         }
     }
 
+    /** 
+    * Pricing-Page Api
+    * @response 200{
+    *   "status": true,
+    *   "statusCode": 200,
+    *   "plan_cms": {
+    *       "id": 1,
+    *       "title": "Pricing",
+    *       "banner_img": "pricing/pricing-banner.png",
+    *       "background_img": "pricing/pricing-bg.png",
+    *       "main_title": "Pricing Plans & Options",
+    *       "short_title": "Choose the plan that works best for you.",
+    *       "created_at": "2024-03-06T05:24:23.000000Z",
+    *       "updated_at": "2024-03-06T05:24:23.000000Z"
+    *   },
+    *   "message": "Pricing CMS data fetched successfully"
+    * }
+    * @response 201{
+    * "status": false,
+    * "statusCode": 500,
+    * "message": "No Data Found"
+    * }
+
+    */
+
     public function pricingCms(Request $request)
     {
         try{
@@ -317,5 +352,230 @@ class CmsController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
+    }
+
+    /**
+     * Contact details Api
+     *  @response 200
+     * "status": true,
+     *   "statusCode": 200,
+     *   "data": [
+     *       {
+     *           "id": 1,
+     *           "icon": "fa-solid fa-phone",
+     *           "title": "Call Us",
+     *           "details": "+ 18453297101"
+     *       },
+     *       {
+     *           "id": 2,
+     *           "icon": "fa-solid fa-envelope",
+     *           "title": "Email Us",
+     *           "details": "support@thefamilyflix.com"
+     *       },
+     *       {
+     *           "id": 3,
+     *           "icon": "fa-solid fa-location-dot",
+     *           "title": "Location",
+     *           "details": "Orlando Florida"
+     *       },
+     *       {
+     *           "id": 4,
+     *           "icon": "fa-regular fa-clock",
+     *           "title": "Office Hours (Closed Saturday)",
+     *           "details": "9am-11pm"
+     *       }
+     *   ],
+     *   "message": "Contact Details data fetched successfully" 
+     * 
+     */
+
+    public function contactDetail(Request $request)
+    {
+        try{
+            $contact_details = ContactDetails::select('id','icon','title','details')->get();
+            if(!$contact_details){
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 200,
+                    'message' => 'No Data Found'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => $contact_details,
+                    'message' => 'Contact Details data fetched successfully'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'statusCode' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * Faq-Details Api
+     * @bodyParam type string required 
+     * @response 200{
+     * "status": true,
+     *   "statusCode": 200,
+     *   "data": [
+     *       {
+     *           "id": 8,
+     *           "type": "payment",
+     *           "question": "How do I sign up for The Family Flix?",
+     *           "answer": "Visit our website and click on the “Sign Up” button. Follow the simple steps to create your account, and you’ll be ready to enjoy our vast content library.",
+     *           "created_at": "2024-03-12T10:44:52.000000Z",
+     *           "updated_at": "2024-03-12T10:44:52.000000Z"
+     *       },
+     *       {
+     *           "id": 9,
+     *           "type": "payment",
+     *           "question": "What devices can I use to access The Family Flix?",
+     *           "answer": "The Family Flix is compatible with all major platforms, including mobile devices, tablets, and smart TVs. Download our app for a seamless viewing experience.",
+     *           "created_at": "2024-03-12T10:44:52.000000Z",
+     *           "updated_at": "2024-03-12T10:44:52.000000Z"
+     *       },
+     * ]
+     * }
+
+    */
+
+    public function faqCms(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|in:general,payment'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 201);
+        }
+        try{
+            $faqs = Faq::where('type',$request->type)->get();
+            if(!$faqs){
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 200,
+                    'message' => 'No Data Found'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => $faqs,
+                    'message' => 'Faq Details fetched successfully'
+                ]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'statusCode' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+        
+    }
+
+    /** 
+     *   Privacy Api
+     *   @response 200{
+     *   "status": true,
+     *   "statusCode": 200,
+     *   "data": [
+     *       {
+     *           "id": 2,
+     *           "banner_image": "business_management/privacy_banner.png",
+     *           "banner_heading": "Privacy Policy",
+     *           "content": "Welcome to The Family Flix! Your privacy is important to us....",
+     *           "type": "privacy-policy",
+     *           "created_at": "2024-03-12T10:44:52.000000Z",
+     *           "updated_at": "2024-03-12T10:44:52.000000Z"
+     *       }
+     *   ],
+     *   "message": "Privacy Details fetched successfully"
+     * }
+     * 
+     */
+
+    public function privacyCms(Request $request)
+    {
+        try{
+            $privacy = BusinessManagement::orderBy('id','desc')->where('type','privacy-policy')->get();
+            if(!$privacy){
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 200,
+                    'message' => 'No Data Found'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => $privacy,
+                    'message' => 'Privacy Details fetched successfully'
+                ]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'statusCode' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+     /** 
+     *   Term-condition Api
+     *   @response 200{
+     *   "status": true,
+     *   "statusCode": 200,
+     *   "data": [
+     *       {
+     *           "id": 2,
+     *           "banner_image": "business_management/term_banner.png",
+     *           "banner_heading": "Term & Conditions",
+     *           "content": "Welcome to Family Flix! By accessing our website or using our services, you agree to be bound by the following terms and conditions (the \"Terms\"). Please read them carefully. If you do not agree with these Terms, you must not use our services...",
+     *           "type": "term-condition",
+     *           "created_at": "2024-03-12T10:44:52.000000Z",
+     *           "updated_at": "2024-03-12T10:44:52.000000Z"
+     *       }
+     *   ],
+     *   "message": "Privacy Details fetched successfully"
+     * }
+     * 
+     */
+
+    public function termConditions(Request $request)
+    {
+        try{
+            $terms = BusinessManagement::orderBy('id','desc')->where('type','term-condition')->get();
+            if(!$terms){
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 200,
+                    'message' => 'No Data Found'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => $terms,
+                    'message' => 'Term Details fetched successfully'
+                ]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'statusCode' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+
     }
 }

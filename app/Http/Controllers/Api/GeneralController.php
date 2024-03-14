@@ -9,10 +9,38 @@ use App\Models\SubscriptionUs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+    * @group General
+    *
+    * APIs for General
+*/
 
 class GeneralController extends Controller
 {
     public $successStatus = 200;
+
+    /**
+    * Contact Api
+    * @bodyParam user_name string required The name of the user. Example: John
+    * @bodyParam user_email string required The email of the user. Example:
+    * @bodyParam user_phone string required The phone of the user. Example: 1234567890
+    * @bodyParam message string required The message of the user. Example: This is a test message
+    * @response 200{
+    * "status": true,
+    *  "message": "Contact us details added successfully.",
+    *  "success": {
+    *       "user_name": "John",
+    *       "user_email": "
+    *       "user_phone": "1234567890",
+    *       "message": "This is a test message",
+    *       "id": 1
+    *   }
+    * }
+    * @response 201{
+    *  "error": "The user email field is required."
+    * }
+
+    */
     public function contactUs(Request $request)
     {
 
@@ -40,9 +68,21 @@ class GeneralController extends Controller
         }
     }
 
+    /** 
+    * Subscribe Api
+    * @bodyParam email string required The email of the user. Example:
+    * @response 200{
+    * "status": true,
+    *  "message": "You have been subscribed successfully"
+    * }
+    * @response 201{
+    *  "error": "The email has already been taken."
+    * } 
+    */
+
     public function subscribeUs(Request $request)
     {
-        //validation 
+        
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:subscription_us,email'
         ]);

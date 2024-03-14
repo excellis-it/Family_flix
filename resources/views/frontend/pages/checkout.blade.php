@@ -543,7 +543,7 @@
 
     {{-- paypal credit --}}
     <script
-        src="https://www.paypal.com/sdk/js?client-id=AbyqRlB9OF-FaHT602Cy_3ty7UqWWSUrzSIqNGsC2S72vh2RZFzQBCr5r6pt5l1pxbZwiMlgU-yxEP_N">
+        src="https://www.paypal.com/sdk/js?client-id=AXFn8uJibaY8ZJa34cDwwkLgTFi355f1oQXlTz9EHszfjJIQ9ywf4RO6zOXzrzuUbvF3w18lmVAdEvhC">
     </script>
 
 
@@ -718,7 +718,6 @@
                 var payment_type = $('#floatingSelect2').val();
 
 
-
                 // Check if any field is empty
                 if (emailId == '' || first_name == '' || last_name == '' || country == '' || house_name == '' ||
                     detail_address == '' || city == '' || state == '' || post_code == '' || phone == '' ||
@@ -734,7 +733,6 @@
                     } else {
                         $('#fname_error').text('');
                     }
-
                     if (last_name == '') {
                         $('#lname_error').text('Please enter last name');
                     } else {
@@ -800,66 +798,71 @@
                 }
             },
 
-            createOrder: function(data, actions) {
-
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: $('#total_amount').val()
-                        }
-                    }]
-                });
-            },
-
-
-            onApprove: function(data, actions) {
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  
-    // This function captures the funds from the transaction.
-    return actions.order.capture().then(function(details) {
-        if (details.status == 'COMPLETED') {
-            var route = "{{ route('paypal-capture-payment') }}";
-            return fetch(route, {
-                method: 'post',
-                headers: {
-                    'content-type': 'application/json',
-                    'Accept': 'application/json, text-plain, */*',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': token
-                },
-                body: JSON.stringify({
-                    orderId: data.orderID,
-                    id: details.id,
-                    status: details.status,
-                    payerEmail: details.payer.email_address,
-                })
-            })
-            .then(function(response) {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+    createOrder: function(data, actions) {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: $('#total_amount').val()
                 }
-                // Parse JSON response
-                return response.json();
-            })
-            .then(function(responseData) {
-                // Assuming responseData contains the response data you need
-                var res = responseData;
-                var url = "{{ route('paypal-success-payment', ['res' => ':res']) }}".replace(':res', res);
-                window.location.href = url;
-            })
-            .catch(function(error) {
-                // Redirect to failed page if internal error occurs
-                window.location.href = '/pay-failed?reason=internalFailure';
-            });
-        } else {
-            window.location.href = '/pay-failed?reason=failedToCapture';
+            }]
+        });
+    }, 
+    onApprove: function(data, actions) {
+    // Displaying actions object for debugging
+    console.log(actions);
+
+    // Define the route and CSRF token
+    var route = "{{ route('paypal-capture-payment') }}";
+    var csrfToken = '{{ csrf_token() }}';
+
+    // Fetch to capture payment
+    return fetch(route, {
+        method: 'post',
+        headers: {
+            'content-type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+            paymentID: data.paymentID,
+            payerID: data.payerID
+        })
+    })
+    .then(function(response) {
+        // Displaying response for debugging
+        console.log(response);
+        alert(response);
+
+        // Check if response is okay
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        
+        // Parse response as JSON
+        return response.json();
+    })
+    .then(function(data) {
+        // Assuming responseData contains the response data you need
+        console.log('Capture Payment Success:', data);
+        // Redirect to success page
+        window.location.href = "{{ route('paypal-success-payment') }}";
+    })
+    .catch(function(error) {
+        // Handle errors
+        console.error('Error capturing payment:', error);
+        // Redirect to failure page
+        window.location.href = "/paypal-pay-failed/"+ error ;
     });
 },
 
+}).render('#paypal-button-container');
 
 
-        }).render('#paypal-button-container');
+    function status(res) {
+    if (!res.ok) {
+        throw new Error(res.statusText);
+    }
+        return res;
+    }
     </script>
 
 </body>

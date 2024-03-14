@@ -70,8 +70,6 @@
  
 }
 </style>
-
-
         <section class="subscribe-sec">
             <div class="container">
                 <div class="subscribe-sec-wrap">

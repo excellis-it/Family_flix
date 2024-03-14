@@ -8,11 +8,16 @@ use App\Models\ContentTypeCms;
 use App\Models\EntertainmentBanner;
 use App\Models\Product;
 
+/**
+ * @group Listing APIs
+ *
+ * APIs for Prduct Listing
+ */
+
 class ProductController extends Controller
 {
-    //
-    /* 
-    * Show details
+    /**
+    * Show  Api
     * @param Request $request
     * @return \Illuminate\Http\JsonResponse
     *   @response 200{
@@ -116,8 +121,8 @@ class ProductController extends Controller
         }
     }
 
-    /* 
-    * Movie details
+    /**
+    * Movie  Api
     * @param Request $request
     * @return \Illuminate\Http\JsonResponse
     *   @response 200{
@@ -221,8 +226,8 @@ class ProductController extends Controller
         }
     }
 
-    /* 
-    * Kid details
+    /**
+    * Kid  Api
     * @param Request $request
     * @return \Illuminate\Http\JsonResponse
     *   @response 200{
@@ -326,6 +331,42 @@ class ProductController extends Controller
             ]);
         }
     }
+
+    /**
+    * Unbeatable-Variety  Api
+    * @param Request $request
+    * @return \Illuminate\Http\JsonResponse
+    *   @response 200{
+    *   "status": true,
+    *   "statusCode": 200,
+    *   "message": "Unbeatable variety details found successfully",
+    *   "data": {
+    *       "content": [
+    *           {
+    *               "id": 1,
+    *               "type": "unbeatable",
+    *               "title": "Unbeatable",
+    *               "description": "Unbeatable description",
+    *               "image": "unbeatable.jpg",
+    *               "unbeatable_status": 1,
+    *               "created_at": "2021-08-25T06:00:00.000000Z",
+    *               "updated_at": "2021-08-25T06:00:00.000000Z"
+    *           }
+    *       ]
+    *   }
+    * }
+    * @response 200{
+    *   "status": false,
+    *   "statusCode": 200,
+    *   "message": "No unbeatable variety found"
+    * }
+    * @response 500{
+    *   "status": 500,
+    *   "message": "Something went wrong",
+    *   "error": "Error message"
+    * }
+
+    */
 
     public function unbeatableVariety(Request $request)
     {

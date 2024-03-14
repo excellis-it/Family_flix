@@ -1,497 +1,20 @@
-name: Endpoints
-description: ''
+name: Authentication
+description: |-
+
+  APIs for Authentication
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/cms/home
+    uri: api/v1/login
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Authentication
+      groupDescription: |-
+
+        APIs for Authentication
       subgroup: ''
       subgroupDescription: ''
-      title: 'Home Page Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-               "status": true,
-                "message": "Home CMS data fetched successfully",
-               "statusCode": "200",
-               "data": {
-                   "id": 1,
-                   "top_back_image": "home/top_back.png",
-                   "top_short_title": "Your All-In-One Entertainment Hub",
-                   "top_main_title": "Unlimited Entertainment.At Your Fingertips.",
-                   "top_button_text": "Sign Up Today",
-                   "section1_main_image": "home/section1_main.png",
-                   "section1_back_image": "home/section1_back.png",
-                   "section2_back_image": "home/section2_back.png",
-                   "section2_main_image": "home/section2_main.png",
-                   "section2_title": "Everything You Love.All In One Place.",
-                   "section2_description": "Our platform seamlessly integrates content from top streaming platforms like Netflix, Hulu, Disney, and more. Imagine having access to all your favorite shows and movies in one place, without the hassle of switching between multiple apps.",
-                   "section2_short_title": "View Our Plans And Pricing",
-                   "section2_main_icon": "home/main_icon.png",
-                   "entertainment_title": "Entertainment Everywhere",
-                   "entertainment_description": "Enjoy The Family Flix app on your TV, mobile, and tablet. Our platform supports all your devices. Anywhere, Any Device: The Family Flix Advantage",
-                   "section3_back_image": "home/section3_back.png",
-                   "section3_main_image": "home/section3_main.png",
-                   "section3_title": "How It Works",
-                   "section3_video_link": "home/4YGx75Dq9sxjUK2dMWThhIVSrYjWo9ZPNkFieaHq.mp4",
-                   "section4_title": "Unbeatable Variety",
-                   "section4_description": "Blockbuster hits, binge-worthy series, and hidden gems at your fingertips. A universe of entertainment curated for you.",
-                   "section4_back_image": "home/section4_back.png",
-                   "section5_back_image": "home/section5_back.png",
-                   "section5_main_title": "Kid's Corner",
-                   "section5_main_description": "<p>A dedicated space filled with family-friendly movies and shows to keep the little ones entertained. From animated adventures to educational content, we&rsquo;ve got it all in one safe and fun place.Subscription to The Family Flix means entertainment for the whole family, so your kids can have a blast while you enjoy your favorites. Subscribe today and let the young ones embark on their own cinematic journeys!</p>",
-                   "section5_main_image": "home/section5_main.png",
-                   "plan_section_title": "Pricing Plans & Options.",
-                   "plan_section_back_image": "home/plan_back.png",
-                   "created_at": "2024-03-06T05:24:23.000000Z",
-                   "updated_at": "2024-03-06T05:35:15.000000Z"
-               },
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 201
-        content: |-
-          {
-               "status": false,
-              "message": "No Data Found",
-             "statusCode": "401",
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/cms/grid-section
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Grid Section Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "status": true,
-            "statusCode": 200,
-            "top_grid": [
-                {
-                    "id": 1,
-                    "icon": "grid/grid_icon1.png",
-                    "title": "Unlimited Access",
-                    "description": "Dive into a vast library of movies, TV series, and exclusive content."
-                },
-                {
-                    "id": 2,
-                    "icon": "grid/grid_icon2.png",
-                    "title": "Savings Simplified",
-                    "description": "Affordable plans that eliminate the need for multiple subscriptions."
-                },
-                {
-                    "id": 3,
-                    "icon": "grid/grid_icon3.png",
-                    "title": "Watch Anywhere, Anytime",
-                    "description": "Enjoy your favorites on your terms - mobile, desktop, or TV."
-                }
-            ],
-            "entertainment_cms": [
-                {
-                    "id": 1,
-                    "image": "entertainment/en-1.png",
-                    "image_name": "On Your TV"
-                },
-                {
-                    "id": 2,
-                    "image": "entertainment/en-2.png",
-                    "image_name": "Mobiles & Tablets"
-                },
-                {
-                    "id": 3,
-                    "image": "entertainment/en-3.png",
-                    "image_name": "On Firestick & Firecube"
-                }
-            ],
-            "message": "Grid Section CMS data fetched successfully"
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/cms/about
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'About Page Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-           "status": true,
-           "statusCode": 200,
-           "data": {
-                "id": 1,
-                "title": "About Us",
-                "banner_img": "about/abt-bg.png",
-                "section1_title": "Celebrating Your Entertainment",
-                "section1_description": "Welcome to The Family Flix, where our passion lies in\r\n        crafting an exceptional entertainment experience that is\r\n        both accessible and affordable, catering to your unique\r\n        tastes. Our journey began with a simple yet ambitious\r\n        vision – to create a platform that brings together the\r\n        fragmented world of streaming services, providing you with\r\n        an easier and more cost-effective way to enjoy your\r\n        favorite movies, TV series, and more.",
-                "section1_img": "about/section1-img.png",
-                "section2_title1": "Our Commitment to You",
-                "section2_description1": "At The Family Flix, our commitment is unwavering. We strive to deliver the best possible entertainment experience, and our dedicated team is at your service with top-notch customer support 24/7. We understand the value of your time and money, and our goal is to assist you in making the most of both.",
-                "section2_img2": "about/section2_img2.png",
-                "section3_title": "What Sets Us Apart",
-                "section3_back_img": "about/section3_back.png",
-                "section3_title1": "Vast Content Library",
-                "section3_description1": "The Family Flix takes pride in presenting an ever-expanding content library. We embrace diversity, offering a range that includes movies, TV series, anime, web series, Korean drama, and more. Whatever your interests, we have something for everyone.",
-                "section3_image1": "about/section3_img1.png",
-                "section3_title2": "Platform Flexibility",
-                "section3_description2": "Enjoy the flexibility of watching your favorite shows and movies on your terms. The Family Flix supports all major platforms, whether you prefer streaming on your phone, tablet, or TV. Our user-friendly app ensures a seamless experience wherever you are.",
-                "section3_image2": "about/section3_img2.png",
-                "section3_title3": "Savings & Simplicity",
-                "section3_description3": "Simplify your entertainment budget with The Family Flix’s cost-effective solutions. Bid farewell to the hassles of managing multiple subscriptions and enjoy unbeatable value for a diverse range of content.",
-                "section3_image3": "about/section3_img3.png",
-                "created_at": "2024-03-06T05:24:23.000000Z",
-                "updated_at": "2024-03-06T05:24:23.000000Z"
-            },
-           "message": "About CMS data fetched successfully"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 201
-        content: |-
-          {
-          "status": false,
-          "statusCode": 500,
-          "message": "No Data Found"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/cms/contact
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Contact Page Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-          "status": true,
-          "statusCode": 200,
-            "data": {
-                "id": 1,
-                "title": "Contact",
-                "banner_img": "contact/contact-banner.png",
-                "background_img": "contact/contact-bg.png",
-                "main_title": "Connect With Us",
-                "short_title": "To learn more about how Streamit can help you, contact us.",
-                "button_name": "Contact Us",
-                "map_link": "https://maps.google.com/maps?q=Orlando%2C%20Florida&t=m&z=15&output=embed&iwloc=near",
-                "created_at": "2024-03-06T05:24:23.000000Z",
-                "updated_at": "2024-03-06T05:24:23.000000Z"
-             },
-           "message": "Contact CMS data fetched successfully"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 201
-        content: |-
-          {
-          "status": false,
-          "statusCode": 500,
-          "message": "No Data Found"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/cms/pricing
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/product/unbeatable-variety
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/plans/show
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/show/detail
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/movie/detail
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/kid/detail
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/contact-us
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
+      title: 'Login Api'
       description: ''
       authenticated: false
       custom: []
@@ -503,49 +26,179 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      user_name:
-        name: user_name
-        description: ''
+      email:
+        name: email
+        description: 'The email of the user.'
         required: true
-        example: impedit
+        example: john@yopmail.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         custom: []
-      user_email:
-        name: user_email
-        description: 'Must be a valid email address.'
+      password:
+        name: password
+        description: 'The password of the user.'
         required: true
-        example: maggio.delaney@example.com
+        example: '12345678'
         type: string
         enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      user_phone:
-        name: user_phone
-        description: ''
-        required: true
-        example: atque
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      message:
-        name: message
-        description: ''
-        required: true
-        example: amet
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         custom: []
     cleanBodyParameters:
-      user_name: impedit
-      user_email: maggio.delaney@example.com
-      user_phone: atque
-      message: amet
+      email: john@yopmail.com
+      password: '12345678'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+           "statusCode": 200,
+           "data": {
+                "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks",
+                "user": {
+                    "id": 3,
+                    "name": "test2 affiliater2",
+                    "email": "test1@yopmail.com",
+                    "status": "1"
+                }
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+           "status": false,
+           "statusCode": 401,
+           "error": "Invalid user & Password!"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/register
+    metadata:
+      groupName: Authentication
+      groupDescription: |-
+
+        APIs for Authentication
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Register Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the user.'
+        required: true
+        example: 'John Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      phone:
+        name: phone
+        description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
+        required: true
+        example: mskbhbhzyogurvdzrkxcv
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      email:
+        name: email
+        description: 'The email of the user. Example:'
+        required: true
+        example: kassulke.gabe@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      password:
+        name: password
+        description: 'The password of the user.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      confirm_password:
+        name: confirm_password
+        description: 'The confirm_password of the user.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      name: 'John Doe'
+      phone: mskbhbhzyogurvdzrkxcv
+      email: kassulke.gabe@example.net
+      password: '12345678'
+      confirm_password: '12345678'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "status": true,
+            "statusCode": 200,
+            "data": {
+            "user": {
+                "name": "test affiliaters",
+                "email": "test123@yopmail.com",
+                "phone": 8956237845,
+                "status": 1,
+                "updated_at": "2024-03-14T05:57:00.000000Z",
+                "created_at": "2024-03-14T05:57:00.000000Z",
+                "id": 4
+            }
+            },
+            "message": "registered successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+          "status": false,
+          "statusCode": 401,
+          "error": {
+          "message": [
+                "The email has already been taken.",
+                "The confirm password and password must match."
+            ]
+          }
+          }
+        headers: []
+        description: ''
+        custom: []
     responseFields: []
     auth: []
     controller: null

@@ -42,11 +42,7 @@ use App\Http\Controllers\Api\Affiliater\CommissionController;
 
                 //affiliate link
                 Route::post('create-link', [ProfileController::class, 'affiliateLink']);  // commission details api
-          
-
             });
-            
-
         });
 
         // Grouping CMS routes
@@ -57,6 +53,10 @@ use App\Http\Controllers\Api\Affiliater\CommissionController;
             Route::post('about', [CmsController::class, 'aboutCms']);
             Route::post('contact', [CmsController::class, 'contactCms']);
             Route::post('pricing',[CmsController::class, 'pricingCms']);
+            Route::post('faq',[CmsController::class, 'faqCms']);
+            Route::post('privacy',[CmsController::class, 'privacyCms']);
+            Route::post('terms',[CmsController::class, 'termConditions']);
+            Route::post('contact-details',[CmsController::class, 'contactDetail']);
         });
 
         Route::prefix('product')->group(function () {

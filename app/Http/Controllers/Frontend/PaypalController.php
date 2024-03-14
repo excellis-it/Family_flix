@@ -218,23 +218,24 @@ class PaypalController extends Controller
 
     public function paymentcapture(Request $request)
     {
-        return $request;
-        
-        // $transaction = $this->gateway->capture(array(
-        //     'amount' => '10.00',
-        //     'transactionReference' => '123',
-        // ));
-        // $response = $transaction->send();
+        // $order = Order::create(['orderId' => $request->get('orderId'),
+        //             'status' => $request->get('status'),
+        //             'payerEmail' => $request->get('payerEmail')]);
 
-        // if ($response->isSuccessful()) {
-        //     return $response->getData();
-        // } else {
-        //     return $response->getMessage();
-        // }
+        // //Code to Email Book To User
+
+        // return $order;
+            
+       
     }
 
     public function paypalSuccessPayment($res)
     {
-        return $res;
+        return 'success';
+    }
+
+    public function paypalPayFailed($err=null)
+    {
+        return $err;
     }
 }

@@ -77,6 +77,7 @@ Route::get('/successPayment',[PaypalController::class, 'paymentSuccess'])->name(
 
 Route::post('/capturePayment',[PaypalController::class, 'paymentcapture'])->name('paypal-capture-payment');
 Route::post('/paypal-success-payment/{res?}', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
+Route::get('/paypal-pay-failed/{err?}',[PaypalController::class, 'paypalPayFailed'])->name('paypal-pay-failed');
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
