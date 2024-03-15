@@ -39,7 +39,7 @@
                                 </p>
                             </div>
                             <div class="sign-up-btn mt-lg-5 mt-md-2 text-end">
-                                <a href="">{{ $banner->button_name }}</a>
+                                <a href="{{ route('pricing') }}">{{ $banner->button_name }}</a>
                             </div>
                         </div>
                     </div>

@@ -126,17 +126,14 @@ class PaypalController extends Controller
                 $user_subscription->additional_information = $data['additional_information'];
                 $user_subscription->save();
 
-
-                $arr_body = $response->getData();
-
                 $payment = new Payment();
                 $payment->user_subscription_id = $user_subscription->id;
-                $payment->transaction_id = $arr_body['id'];
+                $payment->transaction_id = $data['paymentID'];
                 $payment->payment_type = 'paypal';
                 $payment->payment_status = 'success';
                 $payment->payment_date = date('y-m-d');
-                $payment->payment_amount = $arr_body['transactions'][0]['amount']['total'];
-                $payment->payment_currency = env('PAYPAL_CURRENCY');
+                $payment->payment_amount = $data['amount'];
+                $payment->payment_currency = 'USD';
                 $payment->save();
 
 
@@ -218,24 +215,74 @@ class PaypalController extends Controller
 
     public function paymentcapture(Request $request)
     {
-        // $order = Order::create(['orderId' => $request->get('orderId'),
-        //             'status' => $request->get('status'),
-        //             'payerEmail' => $request->get('payerEmail')]);
+        $data = $request->all();
+        $customer_details = new CustomerDetails();
+        $customer_details->email_address = $data['emailId'];
+        $customer_details->first_name = $data['first_name'];
+        $customer_details->last_name = $data['last_name'];
+        $customer_details->country = $data['country'];
+        $customer_details->house_no_street_name = $data['house_name'];
+        $customer_details->apartment = $data['detail_address'];
+        $customer_details->town = $data['city'];
+        $customer_details->state = $data['state'];
+        $customer_details->post_code = $data['post_code'];
+        $customer_details->phone = $data['phone'];
+        $customer_details->save();
 
-        // //Code to Email Book To User
+        
 
-        // return $order;
-            
+
+        //user subscription
+        $user_subscription = new UserSubscription();
+        $user_subscription->customer_details_id = $customer_details->id;
+        if (Session::has('affiliate_id')) {
+
+            //affiliate commission calculation
+            $affiliate_id = Session::get('affiliate_id');
+            $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
+            $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+            $after_commission_dis = $data['amount'] - $commission_dis;
+
+            $user_subscription->affiliate_id = Session::get('affiliate_id');
+            $user_subscription->affiliate_commission = $commission_dis;
+        } else {
+            $user_subscription->affiliate_id = null;
+            $user_subscription->affiliate_commission = null;
+        }
+
+        $user_subscription->payment_type = 'paypal';
+        $user_subscription->plan_name = $data['plan_name'];
+        $user_subscription->plan_price = $data['plan_price'];
+        $user_subscription->coupan_code = $data['coupan_code'];
+        $user_subscription->coupan_discount = $data['coupon_discount'];
+        $user_subscription->sub_total = $data['plan_price'];
+        $user_subscription->total = $data['amount'];
+        $user_subscription->additional_information = $data['additional_information'];
+        $user_subscription->save();
+
+        $payment = new Payment();
+        $payment->user_subscription_id = $user_subscription->id;
+        $payment->transaction_id = $data['paymentID'];
+        $payment->payment_type = 'paypal';
+        $payment->payment_status = 'success';
+        $payment->payment_date = date('y-m-d');
+        $payment->payment_amount = $data['amount'];
+        $payment->payment_currency = 'USD';
+        $payment->save();
+
+        return 'success';
        
     }
 
-    public function paypalSuccessPayment($res)
+
+    public function paypalSuccessPayment($paymentId=null,$PayerID=null)
     {
-        return 'success';
+        return view('frontend.pages.thankyou'); 
     }
+   
 
     public function paypalPayFailed($err=null)
     {
-        return $err;
+        return 'failed';
     }
 }

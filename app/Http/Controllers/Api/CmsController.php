@@ -16,6 +16,8 @@ use App\Models\SocialMedia;
 use App\Models\ContactDetails;
 use App\Models\Faq;
 use App\Models\BusinessManagement;
+use App\Models\SubscribeCms;
+
 
 use Illuminate\Support\Facades\Validator;
 
@@ -577,5 +579,53 @@ class CmsController extends Controller
             ]);
         }
 
+    }
+
+    /**
+     * Subscription-cmas Api
+     * @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "data": {
+     *   "id": 1,
+     *   "section1_title": "Experience Cinematic Magic Today! Subscribe to The Family Flix.",
+     *   "section1_description": "Are you ready to embark on an unparalleled entertainment journey? Join The Family Flix community now and unlock a world of cinematic wonders!",
+     *   "section1_background_img": "subscription/subscription-bg.png",
+     *   "section1_button_name": "Sign Up Today",
+     *   "subscribe_title": "Subscribe For Updates.",
+     *   "subscription_placeholder": "Enter your Email",
+     *   "button_name": "Subscribe",
+     *   "created_at": "2024-03-15T10:11:44.000000Z",
+     *   "updated_at": "2024-03-15T10:11:44.000000Z"
+     * },
+     * 
+     */
+
+
+    public function subscription(Request $request)
+    {
+        try{
+            $subscription_cms = SubscribeCms::first();
+            if(!$subscription_cms){
+                return response()->json([
+                    'status' => false,
+                    'statusCode' => 200,
+                    'message' => 'No Data Found'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => true,
+                    'statusCode' => 200,
+                    'data' => $subscription_cms,
+                    'message' => 'Subscription CMS data fetched successfully'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'statusCode' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

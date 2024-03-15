@@ -376,3 +376,284 @@ endpoints:
     method: null
     route: null
     custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/faq
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Faq-Details Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      type:
+        name: type
+        description: ''
+        required: true
+        example: ullam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      type: ullam
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+            "statusCode": 200,
+            "data": [
+                {
+                    "id": 8,
+                    "type": "payment",
+                    "question": "How do I sign up for The Family Flix?",
+                    "answer": "Visit our website and click on the “Sign Up” button. Follow the simple steps to create your account, and you’ll be ready to enjoy our vast content library.",
+                    "created_at": "2024-03-12T10:44:52.000000Z",
+                    "updated_at": "2024-03-12T10:44:52.000000Z"
+                },
+                {
+                    "id": 9,
+                    "type": "payment",
+                    "question": "What devices can I use to access The Family Flix?",
+                    "answer": "The Family Flix is compatible with all major platforms, including mobile devices, tablets, and smart TVs. Download our app for a seamless viewing experience.",
+                    "created_at": "2024-03-12T10:44:52.000000Z",
+                    "updated_at": "2024-03-12T10:44:52.000000Z"
+                },
+          ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/privacy
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Privacy Api'
+      description: |-
+        @response 200{
+          "status": true,
+          "statusCode": 200,
+          "data": [
+              {
+                  "id": 2,
+                  "banner_image": "business_management/privacy_banner.png",
+                  "banner_heading": "Privacy Policy",
+                  "content": "Welcome to The Family Flix! Your privacy is important to us....",
+                  "type": "privacy-policy",
+                  "created_at": "2024-03-12T10:44:52.000000Z",
+                  "updated_at": "2024-03-12T10:44:52.000000Z"
+              }
+          ],
+          "message": "Privacy Details fetched successfully"
+        }
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/terms
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Term-condition Api'
+      description: |-
+        @response 200{
+          "status": true,
+          "statusCode": 200,
+          "data": [
+              {
+                  "id": 2,
+                  "banner_image": "business_management/term_banner.png",
+                  "banner_heading": "Term & Conditions",
+                  "content": "Welcome to Family Flix! By accessing our website or using our services, you agree to be bound by the following terms and conditions (the \"Terms\"). Please read them carefully. If you do not agree with these Terms, you must not use our services...",
+                  "type": "term-condition",
+                  "created_at": "2024-03-12T10:44:52.000000Z",
+                  "updated_at": "2024-03-12T10:44:52.000000Z"
+              }
+          ],
+          "message": "Privacy Details fetched successfully"
+        }
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/contact-details
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Contact details Api'
+      description: |-
+        @response 200
+        "status": true,
+          "statusCode": 200,
+          "data": [
+              {
+                  "id": 1,
+                  "icon": "fa-solid fa-phone",
+                  "title": "Call Us",
+                  "details": "+ 18453297101"
+              },
+              {
+                  "id": 2,
+                  "icon": "fa-solid fa-envelope",
+                  "title": "Email Us",
+                  "details": "support@thefamilyflix.com"
+              },
+              {
+                  "id": 3,
+                  "icon": "fa-solid fa-location-dot",
+                  "title": "Location",
+                  "details": "Orlando Florida"
+              },
+              {
+                  "id": 4,
+                  "icon": "fa-regular fa-clock",
+                  "title": "Office Hours (Closed Saturday)",
+                  "details": "9am-11pm"
+              }
+          ],
+          "message": "Contact Details data fetched successfully"
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/subscription
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Subscription-cmas Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "data": {
+            "id": 1,
+            "section1_title": "Experience Cinematic Magic Today! Subscribe to The Family Flix.",
+            "section1_description": "Are you ready to embark on an unparalleled entertainment journey? Join The Family Flix community now and unlock a world of cinematic wonders!",
+            "section1_background_img": "subscription/subscription-bg.png",
+            "section1_button_name": "Sign Up Today",
+            "subscribe_title": "Subscribe For Updates.",
+            "subscription_placeholder": "Enter your Email",
+            "button_name": "Subscribe",
+            "created_at": "2024-03-15T10:11:44.000000Z",
+            "updated_at": "2024-03-15T10:11:44.000000Z"
+          },
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

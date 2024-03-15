@@ -340,8 +340,8 @@
                                                     </div>
                                                 </table>
                                             </div>
-                                            <input type="hidden" name="plan_name" value="{{ $plan->plan_name }}">
-                                            <input type="hidden" name="plan_price"
+                                            <input type="hidden" name="plan_name" id="plan_name" value="{{ $plan->plan_name }}">
+                                            <input type="hidden" name="plan_price" id="plan_price"
                                                 value="{{ $plan->plan_offer_price }}">
                                             <input type="hidden" name="amount"
                                                 value="{{ $plan->plan_offer_price }}" id="total_amount">
@@ -542,9 +542,9 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
     {{-- paypal credit --}}
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AXFn8uJibaY8ZJa34cDwwkLgTFi355f1oQXlTz9EHszfjJIQ9ywf4RO6zOXzrzuUbvF3w18lmVAdEvhC">
-    </script>
+    {{-- <script
+        src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
+    </script> --}}
 
 
     <script>
@@ -702,6 +702,171 @@
         });
     </script> --}}
 
+    {{-- <script>
+        paypal.Buttons({
+            onClick: function() {
+                var emailId = $('#floatingInput1').val();
+                var first_name = $('#floatingInput2').val();
+                var last_name = $('#floatingInput3').val();
+                var country = $('#floatingSelect1').val();
+                var house_name = $('#floatingInput4').val();
+                var detail_address = $('#floatingInput5').val();
+                var city = $('#floatingInput6').val();
+                var state = $('#floatingInput7').val();
+                var post_code = $('#floatingInput8').val();
+                var phone = $('#floatingInput9').val();
+                var payment_type = $('#floatingSelect2').val();
+
+
+                // Check if any field is empty
+                if (emailId == '' || first_name == '' || last_name == '' || country == '' || house_name == '' ||
+                    detail_address == '' || city == '' || state == '' || post_code == '' || phone == '' ||
+                    payment_type == '') {
+                    // Display error messages for empty fields
+                    if (emailId == '') {
+                        $('#email_error').text('Please enter email address');
+                    } else {
+                        $('#email_error').text('');
+                    }
+                    if (first_name == '') {
+                        $('#fname_error').text('Please enter first name');
+                    } else {
+                        $('#fname_error').text('');
+                    }
+                    if (last_name == '') {
+                        $('#lname_error').text('Please enter last name');
+                    } else {
+                        $('#lname_error').text('');
+                    }
+                    if (country == '') {
+                        $('#country_error').text('Please enter country');
+                    } else {
+                        $('#country_error').text('');
+                    }
+                    if (house_name == '') {
+                        $('#houseNo_error').text('Please enter house number and street name');
+                    } else {
+                        $('#houseNo_error').text('');
+                    }
+                    if (detail_address == '') {
+                        $('#addr_error').text('Please enter apartment, suite, unit, etc.');
+                    } else {
+                        $('#addr_error').text('');
+                    }
+                    if (city == '') {
+                        $('#city_error').text('Please enter town/city');
+                    } else {
+                        $('#city_error').text('');
+                    }
+                    if (state == '') {
+                        $('#state_error').text('Please enter state/country');
+                    } else {
+                        $('#state_error').text('');
+                    }
+                    if (post_code == '') {
+                        $('#postCode_error').text('Please enter post code');
+                    } else {
+                        $('#postCode_error').text('');
+                    }
+                    if (phone == '') {
+                        $('#phone_error').text('Please enter phone');
+                    } else {
+                        $('#phone_error').text('');
+                    }
+                    if (payment_type == '') {
+                        $('#paymentType_error').text('Please select payment type');
+                    } else {
+                        $('#paymentType_error').text('');
+                    }
+
+                    return false; // Prevent the form submission
+                } else {
+                    $('#email_error').text('');
+                    $('#fname_error').text('');
+                    $('#lname_error').text('');
+                    $('#country_error').text('');
+                    $('#houseNo_error').text('');
+                    $('#addr_error').text('');
+                    $('#city_error').text('');
+                    $('#state_error').text('');
+                    $('#postCode_error').text('');
+                    $('#phone_error').text('');
+                    $('#paymentType_error').text('');
+
+                    // All fields are filled, allow form submission
+                    return true;
+                }
+            },
+
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: $('#total_amount').val()
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                // Displaying actions object for debugging
+                console.log(data);
+
+                // Define the route and CSRF token
+                var route = "{{ route('paypal-capture-payment') }}";
+                var csrfToken = '{{ csrf_token() }}';
+
+                // Fetch to capture payment
+                return fetch(route, {
+                        method: 'post',
+                        headers: {
+                            'content-type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({
+                            paymentID: data.paymentID,
+                            payerID: data.payerID
+                        })
+                    })
+                    .then(function(response) {
+                        // Check if response is okay
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        // Parse response as JSON
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        // Check if data is undefined
+                        if (typeof data === 'undefined') {
+                            throw new Error('Response data is undefined');
+                        }
+                        // Assuming responseData contains the response data you need
+                        console.log('Capture Payment Success:', data);
+                        // Redirect to success page
+                        window.location.href = "{{ route('paypal-success-payment') }}";
+                    })
+                    .catch(function(error) {
+                        // Handle errors
+                        console.error('Error capturing payment:', error);
+                        // Redirect to failure page
+                        window.location.href = "/paypal-pay-failed/" + error.message;
+                    });
+
+            },
+
+        }).render('#paypal-button-container');
+
+        function status(res) {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res;
+        }
+    </script> --}}
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
+    </script>
+
     <script>
         paypal.Buttons({
             onClick: function() {
@@ -798,73 +963,90 @@
                 }
             },
 
-    createOrder: function(data, actions) {
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: $('#total_amount').val()
-                }
-            }]
-        });
-    }, 
-    onApprove: function(data, actions) {
-    // Displaying actions object for debugging
-    console.log(actions);
+            createOrder: function(data, actions) {
+                // This function sets up the details of the transaction, including the amount and line item details.
+                return actions.order.create({
+                    application_context: {
+                        brand_name: 'Laravel Book Store Demo Paypal App',
+                        user_action: 'PAY_NOW',
+                    },
+                    purchase_units: [{
+                        amount: {
+                            value: $('#total_amount').val(),
+                        }
+                    }],
+                });
+            },
 
-    // Define the route and CSRF token
-    var route = "{{ route('paypal-capture-payment') }}";
-    var csrfToken = '{{ csrf_token() }}';
+            onApprove: function(data, actions) {
+                
+                // This function captures the funds from the transaction.
+                return actions.order.capture().then(function(details) {
+                    if (details.status == 'COMPLETED') {
+                        var route = "{{ route('paypal-capture-payment') }}";
+                        return fetch(route, {
+                                method: 'post',
+                                headers: {
+                                    'content-type': 'application/json',
+                                    "Accept": "application/json, text-plain, */*",
+                                    "X-Requested-With": "XMLHttpRequest",
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                },
+                                body: JSON.stringify({
+                                    paymentID: data.paymentID,
+                                    emailId: $('#floatingInput1').val(),
+                                    first_name: $('#floatingInput2').val(),
+                                    last_name: $('#floatingInput3').val(),
+                                    country: $('#floatingSelect1').val(),
+                                    house_name: $('#floatingInput4').val(),
+                                    detail_address: $('#floatingInput5').val(),
+                                    city: $('#floatingInput6').val(),
+                                    state: $('#floatingInput7').val(),
+                                    post_code: $('#floatingInput8').val(),
+                                    phone: $('#floatingInput9').val(),
 
-    // Fetch to capture payment
-    return fetch(route, {
-        method: 'post',
-        headers: {
-            'content-type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({
-            paymentID: data.paymentID,
-            payerID: data.payerID
-        })
-    })
-    .then(function(response) {
-        // Displaying response for debugging
-        console.log(response);
-        alert(response);
+                                    payment_type: $('#floatingSelect2').val(),
+                                    plan_name: $('#plan_name').val(),
+                                    plan_price: $('#plan_price').val(),
+                                    amount: $('#total_amount').val(),
+                                    coupan_code: $('#coupan_code').val(),
+                                    coupon_discount: $('#coupon_discount').val(),
+                                    additional_information: $('#floatingTextarea2').val()
+                                })
+                            })
+                            .then(status)
+                            .then(function(response) {
+                                console.log(response);
+                                // redirect to the completed page if paid
+                                window.location.href = '{{ route('paypal-success-payment') }}'
+                            })
+                            .catch(function(error) {
+                                console.log(error)
+                                // redirect to failed page if internal error occurs
+                                window.location.href = '{{ route('paypal-pay-failed') }}'
+                            });
+                    } else {
+                        window.location.href = '{{ route('paypal-pay-failed') }}';
+                    }
+                });
+            },
 
-        // Check if response is okay
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+            // onCancel: function(data) {
+            //     window.location.href = '{{ route('paypal-pay-failed') }}';
+            // }
+
+
+
+        }).render('#paypal-button-container');
+        // This function displays Smart Payment Buttons on your web page.
+
+        function status(res) {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res;
         }
-        
-        // Parse response as JSON
-        return response.json();
-    })
-    .then(function(data) {
-        // Assuming responseData contains the response data you need
-        console.log('Capture Payment Success:', data);
-        // Redirect to success page
-        window.location.href = "{{ route('paypal-success-payment') }}";
-    })
-    .catch(function(error) {
-        // Handle errors
-        console.error('Error capturing payment:', error);
-        // Redirect to failure page
-        window.location.href = "/paypal-pay-failed/"+ error ;
-    });
-},
-
-}).render('#paypal-button-container');
-
-
-    function status(res) {
-    if (!res.ok) {
-        throw new Error(res.statusText);
-    }
-        return res;
-    }
     </script>
-
 </body>
 
 </html>

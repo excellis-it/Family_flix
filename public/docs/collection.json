@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Family-Flix",
-        "_postman_id": "5270653c-d9bf-49b7-a49a-df2cd893846c",
+        "_postman_id": "76895d94-936e-44dc-905e-2882a03f0316",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -85,7 +85,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"mskbhbhzyogurvdzrkxcv\",\"email\":\"kassulke.gabe@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"rwnqssoldfzgqubsokllet\",\"email\":\"tillman.bridie@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -311,6 +311,163 @@
                             "name": ""
                         }
                     ]
+                },
+                {
+                    "name": "Faq-Details Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/faq",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/faq"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"type\":\"ullam\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 8,\n          \"type\": \"payment\",\n          \"question\": \"How do I sign up for The Family Flix?\",\n          \"answer\": \"Visit our website and click on the \u201cSign Up\u201d button. Follow the simple steps to create your account, and you\u2019ll be ready to enjoy our vast content library.\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      },\n      {\n          \"id\": 9,\n          \"type\": \"payment\",\n          \"question\": \"What devices can I use to access The Family Flix?\",\n          \"answer\": \"The Family Flix is compatible with all major platforms, including mobile devices, tablets, and smart TVs. Download our app for a seamless viewing experience.\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      },\n]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Privacy Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/privacy",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/privacy"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "@response 200{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 2,\n          \"banner_image\": \"business_management\/privacy_banner.png\",\n          \"banner_heading\": \"Privacy Policy\",\n          \"content\": \"Welcome to The Family Flix! Your privacy is important to us....\",\n          \"type\": \"privacy-policy\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      }\n  ],\n  \"message\": \"Privacy Details fetched successfully\"\n}",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Term-condition Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/terms",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/terms"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "@response 200{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 2,\n          \"banner_image\": \"business_management\/term_banner.png\",\n          \"banner_heading\": \"Term & Conditions\",\n          \"content\": \"Welcome to Family Flix! By accessing our website or using our services, you agree to be bound by the following terms and conditions (the \\\"Terms\\\"). Please read them carefully. If you do not agree with these Terms, you must not use our services...\",\n          \"type\": \"term-condition\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      }\n  ],\n  \"message\": \"Privacy Details fetched successfully\"\n}",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Contact details Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/contact-details",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/contact-details"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "@response 200\n\"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 1,\n          \"icon\": \"fa-solid fa-phone\",\n          \"title\": \"Call Us\",\n          \"details\": \"+ 18453297101\"\n      },\n      {\n          \"id\": 2,\n          \"icon\": \"fa-solid fa-envelope\",\n          \"title\": \"Email Us\",\n          \"details\": \"support@thefamilyflix.com\"\n      },\n      {\n          \"id\": 3,\n          \"icon\": \"fa-solid fa-location-dot\",\n          \"title\": \"Location\",\n          \"details\": \"Orlando Florida\"\n      },\n      {\n          \"id\": 4,\n          \"icon\": \"fa-regular fa-clock\",\n          \"title\": \"Office Hours (Closed Saturday)\",\n          \"details\": \"9am-11pm\"\n      }\n  ],\n  \"message\": \"Contact Details data fetched successfully\"",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Subscription-cmas Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/cms\/subscription",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/cms\/subscription"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": {\n  \"id\": 1,\n  \"section1_title\": \"Experience Cinematic Magic Today! Subscribe to The Family Flix.\",\n  \"section1_description\": \"Are you ready to embark on an unparalleled entertainment journey? Join The Family Flix community now and unlock a world of cinematic wonders!\",\n  \"section1_background_img\": \"subscription\/subscription-bg.png\",\n  \"section1_button_name\": \"Sign Up Today\",\n  \"subscribe_title\": \"Subscribe For Updates.\",\n  \"subscription_placeholder\": \"Enter your Email\",\n  \"button_name\": \"Subscribe\",\n  \"created_at\": \"2024-03-15T10:11:44.000000Z\",\n  \"updated_at\": \"2024-03-15T10:11:44.000000Z\"\n},",
+                            "name": ""
+                        }
+                    ]
                 }
             ]
         },
@@ -340,7 +497,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"orn.kennith@example.org\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"sheridan58@example.net\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -384,7 +541,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"mkonopelski@example.com\"}"
+                            "raw": "{\"email\":\"joanne.trantow@example.net\"}"
                         },
                         "description": "",
                         "auth": {

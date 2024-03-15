@@ -57,6 +57,7 @@ use App\Http\Controllers\Api\Affiliater\CommissionController;
             Route::post('privacy',[CmsController::class, 'privacyCms']);
             Route::post('terms',[CmsController::class, 'termConditions']);
             Route::post('contact-details',[CmsController::class, 'contactDetail']);
+            Route::post('subscription',[CmsController::class, 'subscription']);
         });
 
         Route::prefix('product')->group(function () {

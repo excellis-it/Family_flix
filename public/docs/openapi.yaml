@@ -208,11 +208,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: mskbhbhzyogurvdzrkxcv
+                  example: rwnqssoldfzgqubsokllet
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: kassulke.gabe@example.net
+                  example: tillman.bridie@example.com
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -591,6 +591,83 @@ paths:
       tags:
         - Cms
       security: []
+  /api/v1/cms/faq:
+    post:
+      summary: 'Faq-Details Api'
+      operationId: faqDetailsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 8,\n          \"type\": \"payment\",\n          \"question\": \"How do I sign up for The Family Flix?\",\n          \"answer\": \"Visit our website and click on the “Sign Up” button. Follow the simple steps to create your account, and you’ll be ready to enjoy our vast content library.\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      },\n      {\n          \"id\": 9,\n          \"type\": \"payment\",\n          \"question\": \"What devices can I use to access The Family Flix?\",\n          \"answer\": \"The Family Flix is compatible with all major platforms, including mobile devices, tablets, and smart TVs. Download our app for a seamless viewing experience.\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      },\n]\n}"
+      tags:
+        - Cms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: ''
+                  example: ullam
+              required:
+                - type
+      security: []
+  /api/v1/cms/privacy:
+    post:
+      summary: 'Privacy Api'
+      operationId: privacyApi
+      description: "@response 200{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 2,\n          \"banner_image\": \"business_management/privacy_banner.png\",\n          \"banner_heading\": \"Privacy Policy\",\n          \"content\": \"Welcome to The Family Flix! Your privacy is important to us....\",\n          \"type\": \"privacy-policy\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      }\n  ],\n  \"message\": \"Privacy Details fetched successfully\"\n}"
+      parameters: []
+      responses: {  }
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/terms:
+    post:
+      summary: 'Term-condition Api'
+      operationId: termConditionApi
+      description: "@response 200{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 2,\n          \"banner_image\": \"business_management/term_banner.png\",\n          \"banner_heading\": \"Term & Conditions\",\n          \"content\": \"Welcome to Family Flix! By accessing our website or using our services, you agree to be bound by the following terms and conditions (the \\\"Terms\\\"). Please read them carefully. If you do not agree with these Terms, you must not use our services...\",\n          \"type\": \"term-condition\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      }\n  ],\n  \"message\": \"Privacy Details fetched successfully\"\n}"
+      parameters: []
+      responses: {  }
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/contact-details:
+    post:
+      summary: 'Contact details Api'
+      operationId: contactDetailsApi
+      description: "@response 200\n\"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 1,\n          \"icon\": \"fa-solid fa-phone\",\n          \"title\": \"Call Us\",\n          \"details\": \"+ 18453297101\"\n      },\n      {\n          \"id\": 2,\n          \"icon\": \"fa-solid fa-envelope\",\n          \"title\": \"Email Us\",\n          \"details\": \"support@thefamilyflix.com\"\n      },\n      {\n          \"id\": 3,\n          \"icon\": \"fa-solid fa-location-dot\",\n          \"title\": \"Location\",\n          \"details\": \"Orlando Florida\"\n      },\n      {\n          \"id\": 4,\n          \"icon\": \"fa-regular fa-clock\",\n          \"title\": \"Office Hours (Closed Saturday)\",\n          \"details\": \"9am-11pm\"\n      }\n  ],\n  \"message\": \"Contact Details data fetched successfully\""
+      parameters: []
+      responses: {  }
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/subscription:
+    post:
+      summary: 'Subscription-cmas Api'
+      operationId: subscriptionCmasApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": {\n  \"id\": 1,\n  \"section1_title\": \"Experience Cinematic Magic Today! Subscribe to The Family Flix.\",\n  \"section1_description\": \"Are you ready to embark on an unparalleled entertainment journey? Join The Family Flix community now and unlock a world of cinematic wonders!\",\n  \"section1_background_img\": \"subscription/subscription-bg.png\",\n  \"section1_button_name\": \"Sign Up Today\",\n  \"subscribe_title\": \"Subscribe For Updates.\",\n  \"subscription_placeholder\": \"Enter your Email\",\n  \"button_name\": \"Subscribe\",\n  \"created_at\": \"2024-03-15T10:11:44.000000Z\",\n  \"updated_at\": \"2024-03-15T10:11:44.000000Z\"\n},"
+      tags:
+        - Cms
+      security: []
   /api/v1/contact-us:
     post:
       summary: 'Contact Api'
@@ -633,7 +710,7 @@ paths:
                 user_email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: orn.kennith@example.org
+                  example: sheridan58@example.net
                 user_phone:
                   type: string
                   description: 'The phone of the user.'
@@ -695,7 +772,7 @@ paths:
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: mkonopelski@example.com
+                  example: joanne.trantow@example.net
               required:
                 - email
       security: []
