@@ -864,7 +864,7 @@
         }
     </script> --}}
     <script
-        src="https://www.paypal.com/sdk/js?client-id=AbyqRlB9OF-FaHT602Cy_3ty7UqWWSUrzSIqNGsC2S72vh2RZFzQBCr5r6pt5l1pxbZwiMlgU-yxEP_N">
+        src="https://www.paypal.com/sdk/js?client-id=AQSfn6P9ONADPTG6ypeBF7gJVtGJGgCk6l3d6VIyTrwYrTbDqNqEGsALs8YsmjBEqNPrbiOZbD5zoTIt">
     </script>
 
     <script>
@@ -965,7 +965,10 @@
                 }
             },
 
+
+
             createOrder: function(data, actions) {
+                
                 // This function sets up the details of the transaction, including the amount and line item details.
                 return actions.order.create({
                     application_context: {
@@ -1031,13 +1034,16 @@
                         window.location.href = '{{ route('paypal-pay-failed') }}';
                     }
                 });
+                
             },
 
             // onCancel: function(data) {
             //     window.location.href = '{{ route('paypal-pay-failed') }}';
             // }
-
-
+        
+            // onShippingChange: function(data, actions) {
+            //     // Handle shipping changes here
+            // }
 
         }).render('#paypal-button-container');
         // This function displays Smart Payment Buttons on your web page.
