@@ -864,7 +864,7 @@
         }
     </script> --}}
     <script
-        src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
+        src="https://www.paypal.com/sdk/js?client-id=AbyqRlB9OF-FaHT602Cy_3ty7UqWWSUrzSIqNGsC2S72vh2RZFzQBCr5r6pt5l1pxbZwiMlgU-yxEP_N">
     </script>
 
     <script>
@@ -881,6 +881,8 @@
                 var post_code = $('#floatingInput8').val();
                 var phone = $('#floatingInput9').val();
                 var payment_type = $('#floatingSelect2').val();
+                
+                
 
 
                 // Check if any field is empty
