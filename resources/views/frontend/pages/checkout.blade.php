@@ -868,6 +868,7 @@
     </script>
 
     <script>
+        
         paypal.Buttons({
             onClick: function() {
                 var emailId = $('#floatingInput1').val();
