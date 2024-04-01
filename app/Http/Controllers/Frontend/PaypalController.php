@@ -67,6 +67,7 @@ class PaypalController extends Controller
 
     public function successPayment(Request $request)
     {
+        return session()->get('affiliate_id');
         if ($request->input('paymentId') && $request->input('PayerID'))
         {
             $transaction = $this->gateway->completePurchase(array(
@@ -95,7 +96,7 @@ class PaypalController extends Controller
                 $customer_details->phone = $data['phone'];
                 $customer_details->save();
 
-                
+
 
 
                 //user subscription
@@ -179,8 +180,8 @@ class PaypalController extends Controller
             {
                 return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
             }
-            
-            
+
+
         } elseif($check_user && $check_coupon_user_type == 'existing_user') {
 
             //calculate discount
@@ -201,7 +202,7 @@ class PaypalController extends Controller
             {
                 return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
             }
-            
+
         }else{
             return response()->json(['status' => 'error', 'message' => 'Coupon code is not valid for you']);
         }
@@ -229,8 +230,6 @@ class PaypalController extends Controller
         $customer_details->phone = $data['phone'];
         $customer_details->save();
 
-        
-
 
         //user subscription
         $user_subscription = new UserSubscription();
@@ -240,8 +239,12 @@ class PaypalController extends Controller
             //affiliate commission calculation
             $affiliate_id = Session::get('affiliate_id');
             $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
-            $commission_dis = ($data['amount'] / 100) * $commission->percentage;
-            $after_commission_dis = $data['amount'] - $commission_dis;
+            if ($commission) {
+                $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+            } else {
+                $commission_dis = 0;
+            }
+
 
             $user_subscription->affiliate_id = Session::get('affiliate_id');
             $user_subscription->affiliate_commission = $commission_dis;
@@ -271,15 +274,15 @@ class PaypalController extends Controller
         $payment->save();
 
         return 'success';
-       
+
     }
 
 
     public function paypalSuccessPayment($paymentId=null,$PayerID=null)
     {
-        return view('frontend.pages.thankyou'); 
+        return view('frontend.pages.thankyou');
     }
-   
+
 
     public function paypalPayFailed($err=null)
     {
