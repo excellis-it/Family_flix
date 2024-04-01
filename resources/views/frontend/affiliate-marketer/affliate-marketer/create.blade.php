@@ -4,6 +4,7 @@
 @endsection
 @push('styles')
 @endpush
+
 @section('content')
     <div class="container-fluid">
         <div class="breadcome-list">
