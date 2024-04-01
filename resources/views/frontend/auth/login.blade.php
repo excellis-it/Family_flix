@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- title tag -->
-    <title>Design Journey</title>
+    <title>Family Flix</title>
 
     <!-- favicon -->
     <!-- <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">

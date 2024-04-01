@@ -31,7 +31,11 @@ use App\Http\Controllers\AffiliateMarketer\ProfileController as AffiliateMarkete
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PaypalController;
-
+use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
+use App\Http\Controllers\Customer\DashboardController as CustomerDashboardController;
+use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
+use App\Http\Controllers\Customer\SubscriptionController as CustomerSubscriptionController;
+use App\Http\Controllers\Admin\ManagerController;
 use Illuminate\Support\Facades\Artisan;
 
 // Clear cache
@@ -63,18 +67,12 @@ Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/term-service', [HomeController::class, 'termService'])->name('term-service');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
-
-
-
 //payments
 Route::get('/create-payments/{id}', [PaypalController::class, 'createPayments'])->name('create-payments');
 Route::post('/process-payments', [PaypalController::class, 'processPayments'])->name('process-payments');
 Route::get('/success-payment', [PaypalController::class, 'successPayment'])->name('success-payment');
 Route::get('/cancel-payments', [PaypalController::class, 'cancelPayments'])->name('cancel-payments');
-
 Route::get('/successPayment',[PaypalController::class, 'paymentSuccess'])->name('payment.successful');
-
-
 Route::post('/capturePayment',[PaypalController::class, 'paymentcapture'])->name('paypal-capture-payment');
 Route::post('/paypal-payment/{ord?}', [PaypalController::class, 'paypalPayment'])->name('paypal-payment');
 Route::get('/paypal-success-payment/{pay?}/{pyr?}', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
@@ -82,8 +80,6 @@ Route::get('/paypal-pay-failed/{err?}',[PaypalController::class, 'paypalPayFaile
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
-
-
 // affliate authentication
 Route::name('affiliate-marketer.')
     ->prefix('affiliate-marketer')
@@ -137,7 +133,14 @@ Route::group(['prefix' => 'admin'], function () {
             'commission-history' => AdminCommissionHistoryController::class,
             'commission-percentage' => CommissionPercentageController::class,
             'ott-service' => OttServiceController::class,
+            'managers' =>ManagerController::class,
         ]);
+
+        Route::get('/managers-ajax-list', [ManagerController::class, 'managerAjaxList'])->name('managers.ajax.list');
+        //change status
+        Route::get('/manager-change-status', [ManagerController::class, 'changeStatus'])->name('managers.change-status');
+        //delete managers
+        Route::get('/manager-delete/{id}', [ManagerController::class, 'managerDelete'])->name('managers.delete');
 
         //menu management route
         Route::get('/menu-management-fetch-data', [MenuManagementController::class, 'fetchDataMenu'])->name('menu-management.ajax.list');
@@ -149,10 +152,7 @@ Route::group(['prefix' => 'admin'], function () {
         //ott service route
         Route::get('/delete-ott-service/{id}', [OttServiceController::class, 'deleteOttService'])->name('delete.ott-service');
         Route::get('/ott-service-fetch-data', [OttServiceController::class, 'fetchOttServiceData'])->name('ott-service.ajax.list');
-
         Route::post('/ott-service-update', [OttServiceController::class, 'updateOttService'])->name('update.ott-service');
-
-
 
         //plan management route
         Route::get('/plan-fetch-data', [PlanController::class, 'fetchPlanData'])->name('plan.ajax.list');
@@ -289,8 +289,34 @@ Route::group(['prefix' => 'admin'], function () {
         //subscriptions list
         Route::get('/subscriber-list', [SubscriptionController::class, 'subscriptionList'])->name('subscriber.list');
         Route::get('/subscriber-list/ajax', [SubscriptionController::class, 'subscriptionAjaxList'])->name('subscriber.ajax.list');
+        
     });
 });
+
+Route::name('customer.')
+    ->prefix('customer')
+    ->group(function () {
+        Route::get('/login', [CustomerAuthController::class, 'customerLogin'])->name('login');
+        Route::get('/register', [CustomerAuthController::class, 'register'])->name('register');
+        Route::post('/register-store', [CustomerAuthController::class, 'registerStore'])->name('register.store');
+        Route::post('/user-login-check', [CustomerAuthController::class, 'loginCheck'])->name('login.check');
+        Route::group(['middleware' => 'user'], function () {
+            Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
+            Route::get('/profile', [CustomerProfileController::class, 'customerProfile'])->name('profile');
+            Route::post('/profile/update', [CustomerProfileController::class, 'customerProfileUpdate'])->name('profile.update');
+            Route::get('/password', [CustomerProfileController::class, 'customerPassword'])->name('password');
+            Route::post('/password/update', [CustomerProfileController::class, 'customerPasswordUpdate'])->name('password.update');
+            Route::get('/logout', [CustomerAuthController::class, 'customerLogout'])->name('logout');
+
+            Route::get('/subscriptions', [CustomerSubscriptionController::class, 'customerSubscription'])->name('subscription');
+            Route::get('/subscriptions-fetch-data', [CustomerSubscriptionController::class, 'fetchSubscription'])->name('subscription.ajax-list');
+            Route::get('/subscriptions-details/{id}', [CustomerSubscriptionController::class, 'customerSubscriptionDetail'])->name('subscription.show');
+        });
+
+        // customer-subscription
+        
+    });
+
 
 
 Route::get('/cronsStartToWorkEmailSend', function () {

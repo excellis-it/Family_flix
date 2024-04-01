@@ -19,13 +19,9 @@ class Customer
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check() && Auth::user()->hasRole('CUSTOMER')) {
-            if(Pricing::SubscriptionCheck() == true){
-                return $next($request);
-                
-            }else{
-                return redirect()->route('pricing');
-            }
             
+            return $next($request);
+                
         } else {
             return redirect()->route('login');
         }

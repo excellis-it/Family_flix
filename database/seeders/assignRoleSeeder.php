@@ -27,6 +27,10 @@ class assignRoleSeeder extends Seeder
                 'name' => 'AFFLIATE MARKETER',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'MANAGER',
+                'guard_name' => 'web',
+            ],
 
         ];
 

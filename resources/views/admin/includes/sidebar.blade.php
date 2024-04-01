@@ -109,6 +109,22 @@
                         </li>
                     </ul>
                 </li>
+
+                
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/managers*') ? 'active' : '' }}" href="#">
+                        <span>
+                            <i class="ti ti-users"></i>
+                        </span>Manager
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/managers*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/managers*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('managers.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li> 
+
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#">
                         <span>
