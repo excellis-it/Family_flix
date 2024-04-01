@@ -34,6 +34,9 @@
 </head>
 
 <body>
+    @php
+        use App\Helpers\Helper;
+    @endphp
     <main>
 
         <section class="checkout-sec">
@@ -864,11 +867,11 @@
         }
     </script> --}}
     <script
-        src="https://www.paypal.com/sdk/js?client-id=AQSfn6P9ONADPTG6ypeBF7gJVtGJGgCk6l3d6VIyTrwYrTbDqNqEGsALs8YsmjBEqNPrbiOZbD5zoTIt">
+        src="https://www.paypal.com/sdk/js?client-id={{Helper::paypalCredential()['client_id'] ?? ''}}">
     </script>
 
     <script>
-        
+
         paypal.Buttons({
             onClick: function() {
                 var emailId = $('#floatingInput1').val();
@@ -882,8 +885,8 @@
                 var post_code = $('#floatingInput8').val();
                 var phone = $('#floatingInput9').val();
                 var payment_type = $('#floatingSelect2').val();
-                
-                
+
+
 
 
                 // Check if any field is empty
@@ -969,7 +972,7 @@
 
 
             createOrder: function(data, actions) {
-                
+
                 // This function sets up the details of the transaction, including the amount and line item details.
                 return actions.order.create({
                     application_context: {
@@ -985,7 +988,7 @@
             },
 
             onApprove: function(data, actions) {
-                
+
                 // This function captures the funds from the transaction.
                 return actions.order.capture().then(function(details) {
                     if (details.status == 'COMPLETED') {
@@ -1035,13 +1038,13 @@
                         window.location.href = '{{ route('paypal-pay-failed') }}';
                     }
                 });
-                
+
             },
 
             // onCancel: function(data) {
             //     window.location.href = '{{ route('paypal-pay-failed') }}';
             // }
-        
+
             // onShippingChange: function(data, actions) {
             //     // Handle shipping changes here
             // }
