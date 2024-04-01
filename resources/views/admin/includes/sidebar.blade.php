@@ -294,7 +294,19 @@
                         </li>
                     </ul>
                 </li>
-
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/site-settings*') ? 'active' : ' ' }}" href="#">
+                        <span>
+                            <i class="fa fa-cog"></i>
+                        </span>Site Setting
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/site-settings/credentials*') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/site-settings/credentials*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('credentials.index') }}">Paypal Credentials</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             </div>
         </nav>

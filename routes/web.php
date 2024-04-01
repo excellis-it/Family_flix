@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\CommissionPercentageController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\Admin\OttServiceController;
+use App\Http\Controllers\Admin\PaypalCredentialController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
 use App\Http\Controllers\AffiliateMarketer\DashboardController as AffiliateMarketerDashboardController;
 use App\Http\Controllers\AffiliateMarketer\ProfileController as AffiliateMarketerProfileController;
@@ -164,7 +165,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/commission-percentage-update', [CommissionPercentageController::class, 'updatePercentage'])->name('update.commission-percentage');
         Route::get('/commission-percentage-fetch-data', [CommissionPercentageController::class, 'fetchCommissionPercentage'])->name('commission-percentage.ajax.list');
 
-        
+
         //coupons route
         Route::get('/coupons-fetch-data', [CouponController::class, 'fetchCouponData'])->name('coupons.ajax.list');
         Route::get('/coupons/delete/{id}', [CouponController::class, 'deleteCoupon'])->name('delete.coupons');
@@ -202,7 +203,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/privacy-policy', [ContentManagementController::class, 'privacyPolicy'])->name('content-management.privacy-policy');
         });
 
-        
+
 
 
         Route::get('/plan/delete/{id}', [PlanController::class, 'planDelete'])->name('delete.plan'); // plan delete
@@ -289,6 +290,15 @@ Route::group(['prefix' => 'admin'], function () {
         //subscriptions list
         Route::get('/subscriber-list', [SubscriptionController::class, 'subscriptionList'])->name('subscriber.list');
         Route::get('/subscriber-list/ajax', [SubscriptionController::class, 'subscriptionAjaxList'])->name('subscriber.ajax.list');
+
+        Route::group(['prefix' => 'site-settings'], function () {
+            Route::resources([
+                'credentials' => PaypalCredentialController::class,
+            ]);
+
+            Route::get('/credentials-filter', [PaypalCredentialController::class, 'filter'])->name('credentials.filter');
+            Route::get('/paypal-change-status', [PaypalCredentialController::class, 'changeStatus'])->name('credentials.change-status');
+        });
     });
 });
 
