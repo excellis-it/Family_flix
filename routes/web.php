@@ -37,6 +37,7 @@ use App\Http\Controllers\Customer\DashboardController as CustomerDashboardContro
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\Customer\SubscriptionController as CustomerSubscriptionController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\ManagerPermissionController;
 use Illuminate\Support\Facades\Artisan;
 
 // Clear cache
@@ -98,7 +99,6 @@ Route::name('affiliate-marketer.')
             Route::get('/password', [AffiliateMarketerProfileController::class, 'password'])->name('password');
             Route::post('/password/update', [AffiliateMarketerProfileController::class, 'passwordUpdate'])->name('password.update');
             Route::get('/dashboard', [AffiliateMarketerDashboardController::class, 'index'])->name('dashboard');
-
             Route::resources([
                 'commission-history' => CommissionHistoryController::class,
             ]);
@@ -111,7 +111,7 @@ Route::name('affiliate-marketer.')
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login-check', [AdminController::class, 'loginCheck'])->name('admin.login.check');
-    Route::group(['middleware' => 'admin'], function () {
+    Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
@@ -136,6 +136,9 @@ Route::group(['prefix' => 'admin'], function () {
             'ott-service' => OttServiceController::class,
             'managers' =>ManagerController::class,
         ]);
+
+        Route::get('/manager-permission', [ManagerPermissionController::class, 'index'])->name('manager-permission.index');
+        Route::post('/manager-permission-update', [ManagerPermissionController::class, 'permissionUpdate'])->name('manager-permission.update');
 
         Route::get('/managers-ajax-list', [ManagerController::class, 'managerAjaxList'])->name('managers.ajax.list');
         //change status
@@ -324,7 +327,6 @@ Route::name('customer.')
         });
 
         // customer-subscription
-        
     });
 
 
@@ -333,3 +335,11 @@ Route::get('/cronsStartToWorkEmailSend', function () {
     Artisan::call('send:mail');
     return true;
 });
+
+//view page call
+Route::get('/user-panel', function()
+{
+    return view('user-panel');
+});
+
+

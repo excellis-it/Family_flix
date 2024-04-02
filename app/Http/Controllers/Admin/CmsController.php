@@ -22,11 +22,15 @@ class CmsController extends Controller
     
     public function homeCms()
     {
-        $home_cms = HomeCms::first();
-        $top_grids = TopGrid::orderBy('id', 'desc')->get();
-        $ott_icons = OttService::orderBy('id', 'desc')->get();
-        $entertainments = EntertainmentCms::orderBy('id', 'desc')->get();
-        return view('admin.cms.home', compact('home_cms','top_grids','ott_icons','entertainments'));
+        if (Auth::user()->can('Home Cms')) {
+            $home_cms = HomeCms::first();
+            $top_grids = TopGrid::orderBy('id', 'desc')->get();
+            $ott_icons = OttService::orderBy('id', 'desc')->get();
+            $entertainments = EntertainmentCms::orderBy('id', 'desc')->get();
+            return view('admin.cms.home', compact('home_cms','top_grids','ott_icons','entertainments'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
    
     public function homeCmsUpdate(Request $request)
@@ -311,8 +315,12 @@ class CmsController extends Controller
 
     public function aboutCms()
     {
-        $about_cms = AboutUs::first();
-        return view('admin.cms.about-us',compact('about_cms'));
+        if (Auth::user()->can('About Cms')) {
+            $about_cms = AboutUs::first();
+            return view('admin.cms.about-us',compact('about_cms'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function aboutCmsUpdate(Request $request)
@@ -439,8 +447,12 @@ class CmsController extends Controller
 
     public function contactDetailsCms()
     {
-        $contact_details = ContactDetails::all();
-        return view('admin.cms.contact-details',compact('contact_details'));
+        if (Auth::user()->can('Contact Detail Cms')) {
+            $contact_details = ContactDetails::all();
+            return view('admin.cms.contact-details',compact('contact_details'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function contactDetailsCmsUpdate(Request $request)
@@ -476,8 +488,12 @@ class CmsController extends Controller
 
     public function followCms()
     {
-        $social_medias = SocialMedia::all();
-        return view('admin.cms.follow-us',compact('social_medias'));
+        if (Auth::user()->can('Follow Us Cms')) {
+            $social_medias = SocialMedia::all();
+            return view('admin.cms.follow-us',compact('social_medias'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function followCmsUpdate(Request $request)
@@ -511,8 +527,12 @@ class CmsController extends Controller
 
     public function subcriptionCms()
     {
-        $subscription_cms = SubscribeCms::first();
-        return view('admin.cms.subscribe-us',compact('subscription_cms'));
+        if (Auth::user()->can('Subscription Us Cms')) {
+            $subscription_cms = SubscribeCms::first();
+            return view('admin.cms.subscribe-us',compact('subscription_cms'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function subscriptionCmsUpdate(Request $request)
@@ -553,8 +573,12 @@ class CmsController extends Controller
 
     public function footerCms()
     {
-        $footer_cms = FooterCms::first();
-        return view('admin.cms.footer',compact('footer_cms'));
+        if (Auth::user()->can('Footer Cms')) {
+            $footer_cms = FooterCms::first();
+            return view('admin.cms.footer',compact('footer_cms'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function footerCmsUpdate(Request $request)

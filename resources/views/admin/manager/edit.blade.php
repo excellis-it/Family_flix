@@ -31,7 +31,7 @@
                             @method('PUT')
                             @csrf
                             <div class="row">
-                                <div class="form-group col-md-12 mb-3">
+                                <div class="form-group col-md-6 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Name <span
                                             style="color: red;">*</span></label>
                                     <input type="text" name="name" id="" class="form-control"
@@ -53,8 +53,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
-                                    <label for="inputEnterYourName" class="col-form-label"> Phone <span
-                                            style="color: red;">*</span></label>
+                                    <label for="inputEnterYourName" class="col-form-label"> Phone </label>
                                     <input type="text" name="phone" id="" class="form-control"
                                         value="{{ $manager['phone'] }}" placeholder="Enter Phone Number">
                                     @if ($errors->has('phone'))
@@ -88,6 +87,15 @@
                                             {{ $errors->first('profile_picture') }}</div>
                                     @endif
                                 </div>
+
+                                @if ($manager->image != '')
+                                <img src="{{ Storage::url($manager->image) }}"
+                                    alt="preview image" style="height: 150px;width: 200px;" >
+                                @else
+                                    <img id="preview-back-image"
+                                        src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
+                                        style="height: 150px;width: 200px;">
+                                @endif
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Password</label>
                                     <input type="password" name="password" id="" class="form-control"

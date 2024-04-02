@@ -20,6 +20,7 @@
                             <i class="ti ti-aperture"></i>
                         </span>Dashboard<span class="arrow-down"></span></a>
                 </li>
+                @if (Gate::check('Manage Affiliater'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
                         <span>
@@ -33,6 +34,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
                 {{-- <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#">
                         <span>
@@ -47,6 +49,7 @@
                     </ul>
                 </li> --}}
 
+                @if (Gate::check('Manage Plan'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -60,7 +63,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if (Gate::check('Manage Product'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/products*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -74,7 +79,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if (Gate::check('Manage Commission'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/commission-percentage*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -88,6 +95,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/commission-percentage*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('') }}"> <span>
@@ -95,7 +103,7 @@
                         </span>Commission Percentage<span class="arrow-down"></span></a>
                 </li> --}}
 
-
+                @if (Gate::check('Commission History'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
                         <span>
@@ -109,8 +117,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
-                
+                @if (Gate::check('Manage Manager'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/managers*') ? 'active' : '' }}" href="#">
                         <span>
@@ -124,6 +133,15 @@
                         </li>
                     </ul>
                 </li> 
+                @endif
+
+                @if (Gate::check('Manage Permission'))
+                <li class="nav-item has-submenu {{ Request::is('admin/manager-permission*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('manager-permission.index') }}"> <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Manager Permission<span class="arrow-down"></span></a>
+                </li>
+                @endif
 
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#">
@@ -139,6 +157,7 @@
                     </ul>
                 </li> --}}
 
+                @if (Gate::check('Manage Entertainment Banner'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/entertainment-banner*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -152,7 +171,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if (Gate::check('Manage Top Grid'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/top-grid*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -166,7 +187,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if (Gate::check('Manage Ott Platform'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/ott-service*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -180,7 +203,13 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+               
+
+                
+
+                @if(Gate::check('Manage Cms'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#">
                         <span>
@@ -228,7 +257,9 @@
 
                     </ul>
                 </li>
+                @endif
 
+                @if(Gate::check('Business Management Cms'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/business-management*') ? 'active' : '' }}" href="#">
                         <span>
@@ -248,7 +279,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if(Gate::check('Faq Management'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/faq*') ? 'active' : '' }}" href="#">
                         <span>
@@ -268,7 +301,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if(Gate::check('View Contactus'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -282,7 +317,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if(Gate::check('Manage Coupon'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/coupons*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -296,7 +333,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if(Gate::check('View Subscribers'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/subscriber-list*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -310,6 +349,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                @if(Gate::check('Manage Payment Detail'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/site-settings*') ? 'active' : ' ' }}" href="#">
                         <span>
@@ -323,6 +364,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
             </div>
         </nav>

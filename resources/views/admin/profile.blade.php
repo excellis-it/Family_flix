@@ -12,7 +12,13 @@
             <div class="d-flex">
 
                 <div class="">
+                    @if (Auth::check() && Auth::user()->hasRole('ADMIN'))
                     <h3>Admin Profile</h3>
+                    @elseif(Auth::check() && Auth::user()->hasRole('MANAGER'))
+                    <h3>Manager Profile</h3>
+                    @else
+                    <h3>Profile</h3>
+                    @endif 
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                         <li><span class="bread-blod"><a href="">Profile</a></span></li>

@@ -33,7 +33,7 @@
                                 <div class="form-group col-md-12 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Name <span
                                             style="color: red;">*</span></label>
-                                    <input type="text" name="name" id="" class="form-control"
+                                    <input type="text" name="name" class="form-control"
                                         value="{{ old('name') }}" placeholder="Enter Name">
                                     @if ($errors->has('name'))
                                         <div class="error" style="color:red;">
@@ -43,7 +43,7 @@
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Email <span
                                             style="color: red;">*</span></label>
-                                    <input type="text" name="email" id="" class="form-control"
+                                    <input type="text" name="email" class="form-control"
                                         value="{{ old('email') }}" placeholder="Enter  Email">
                                     @if ($errors->has('email'))
                                         <div class="error" style="color:red;">
@@ -52,8 +52,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
-                                    <label for="inputEnterYourName" class="col-form-label"> Phone <span
-                                            style="color: red;">*</span></label>
+                                    <label for="inputEnterYourName" class="col-form-label"> Phone </label>
                                     <input type="text" name="phone" id="" class="form-control"
                                         value="{{ old('phone') }}" placeholder="Enter Phone Number">
                                     @if ($errors->has('phone'))

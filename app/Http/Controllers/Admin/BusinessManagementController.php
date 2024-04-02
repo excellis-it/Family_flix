@@ -11,10 +11,16 @@ class BusinessManagementController extends Controller
 {
     //
 
+
     public function faq()
     {
-        $faq = BusinessManagement::where('type','faq')->first();
-        return view('admin.business_management.faq',compact('faq'));
+        if (Auth::user()->can('Payment Faq')) {
+            $faq = BusinessManagement::where('type','faq')->first();
+            return view('admin.business_management.faq',compact('faq'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+        
     }
 
     public function faqUpdate(Request $request)
@@ -47,8 +53,12 @@ class BusinessManagementController extends Controller
 
     public function privacy()
     {
-        $privacy = BusinessManagement::where('type','privacy-policy')->first();
-        return view('admin.business_management.privacy',compact('privacy'));
+        if (Auth::user()->can('Privacy Cms')) {
+            $privacy = BusinessManagement::where('type','privacy-policy')->first();
+            return view('admin.business_management.privacy',compact('privacy'));
+        }else{
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function privacyUpdate(Request $request)
@@ -81,8 +91,12 @@ class BusinessManagementController extends Controller
 
     public function terms()
     {
-        $terms = BusinessManagement::where('type','term-condition')->first();
-        return view('admin.business_management.term',compact('terms'));
+        if (Auth::user()->can('Term Cms')) {
+            $terms = BusinessManagement::where('type','term-condition')->first();
+            return view('admin.business_management.term',compact('terms'));
+        }else{
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function termsUpdate(Request $request)

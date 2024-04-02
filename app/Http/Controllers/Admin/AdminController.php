@@ -23,6 +23,7 @@ class AdminController extends Controller
 
     public function loginCheck(Request $request)
     {
+        
         $request->validate([
             'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'password' => 'required|min:8'
@@ -34,7 +35,10 @@ class AdminController extends Controller
             
             if ($user->hasRole('ADMIN')) {
                 return redirect()->route('admin.dashboard');
-            }else{
+            }else if($user->hasRole('MANAGER')){
+                return redirect()->route('admin.dashboard');
+            }
+            else{
                
                 Auth::logout();
                 return redirect()->back()->with('error', 'Email id & password was invalid!');

@@ -44,7 +44,7 @@ class ManagerController extends Controller
 
     public function changeStatus(Request $request)
     {
-        return $request;
+        
         $manager = User::find($request->user_id);
         $manager->status = $request->status;
         $manager->save();
@@ -75,6 +75,7 @@ class ManagerController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password',
             'status' => 'required',
         ]);
 
@@ -93,7 +94,7 @@ class ManagerController extends Controller
         $manager->assignRole('MANAGER');
        
 
-        return redirect()->route('admin.manager.index')->with('success', 'Manager created successfully');
+        return redirect()->route('managers.index')->with('message', 'Manager created successfully');
     }
 
     /**
@@ -119,12 +120,12 @@ class ManagerController extends Controller
         return view('admin.manager.edit',compact('manager'));
     }
 
-    public function managerDelete(Request $request)
+    public function managerDelete($id)
     {
-        $manager = User::find($request->user_id);
+        $manager = User::find($id);
         $manager->delete();
         
-        return response()->json(['success' => 'Manager deleted successfully']);
+        return redirect()->route('managers.index')->with('message', 'Manager deleted successfully');
     }
 
     /**
@@ -136,7 +137,32 @@ class ManagerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validation
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'status' => 'required',
+        ]);
+
+        //store data
+        $manager = User::find($id);
+        $manager->name = $request->name;
+        $manager->email = $request->email;
+        $manager->phone = $request->phone;
+        $manager->status = $request->status;
+        if($request->hasFile('profile_picture')){
+            $manager->image = $this->imageUpload($request->file('profile_picture'), 'Manager')['filePath'];
+        }
+        if ($request->password != null) {
+            $request->validate([
+                'password' => 'min:8',
+                'confirm_password' => 'min:8|same:password',
+            ]);
+            $manager->password = bcrypt($request->password);
+        }
+        $manager->update();
+
+        return redirect()->route('managers.index')->with('message', 'Manager updated successfully');
     }
 
     /**

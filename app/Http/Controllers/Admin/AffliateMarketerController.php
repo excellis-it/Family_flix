@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AffliateMarketerController extends Controller
 {
@@ -22,8 +23,15 @@ class AffliateMarketerController extends Controller
      */
     public function index()
     {
-        $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->paginate(15);
-        return view('admin.affliate-marketer.list',compact('affiliaters'));
+
+        if (Auth::user()->can('Manage Affiliater')) {
+            $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->paginate(15);
+            return view('admin.affliate-marketer.list',compact('affiliaters'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+
+        
     }
 
     public function affliateMarketerAjaxList(Request $request)
@@ -43,8 +51,7 @@ class AffliateMarketerController extends Controller
             ->paginate(15);
 
             return response()->json(['data' => view('admin.affliate-marketer.filter', compact('affiliaters'))->render()]);
-        }
-       
+        } 
     }
 
     /**
@@ -54,7 +61,12 @@ class AffliateMarketerController extends Controller
      */
     public function create()
     {
-        return view('admin.affliate-marketer.create');
+        if (Auth::user()->can('Create Affiliater')) {
+            return view('admin.affliate-marketer.create');
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+        
     }
 
     /**

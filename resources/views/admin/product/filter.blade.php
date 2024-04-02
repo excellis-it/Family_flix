@@ -1,6 +1,6 @@
 @if (count($products) == 0)
     <tr>
-        <td colspan="5" class="text-center">No Plan found</td>
+        <td colspan="5" class="text-center">No Product found</td>
     </tr>
 @else
     @foreach ($products as $key => $product)

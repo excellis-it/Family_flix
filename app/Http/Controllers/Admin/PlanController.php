@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\PlanSpecification;
+use Illuminate\Support\Facades\Auth;
 
 
 class PlanController extends Controller
@@ -17,8 +18,15 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans = Plan::orderBy('plan_order','asc')->paginate(15);
-        return view('admin.plan.list', compact('plans'));
+
+        if (Auth::user()->can('Manage Plan')) {
+            $plans = Plan::orderBy('plan_order','asc')->paginate(15);
+            return view('admin.plan.list', compact('plans'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+
+        
     }
 
     public function fetchPlanData(Request $request)
@@ -45,7 +53,11 @@ class PlanController extends Controller
      */
     public function create()
     {
-        return view('admin.plan.create');
+        if (Auth::user()->can('Create Plan')) {
+            return view('admin.plan.create');
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     /**
