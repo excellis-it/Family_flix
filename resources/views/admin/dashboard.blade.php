@@ -23,56 +23,64 @@
 
     <div class="row">
         <div class="col-lg-3">
-            <div class="card mb-30">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <span>Products</span>
-                        </div>
+            <a href="{{ route('products.index') }}">
+                <div class="card mb-30">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <span>Products</span>
+                            </div>
 
-                        <span class="fw-600">{{ $count['products'] }}</span>
+                            <span class="fw-600">{{ $count['products'] }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="col-lg-3">
-            <div class="card mb-30">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <span>Affiliators</span>
+            <a href="{{ route('affliate-marketer.index') }}">
+                <div class="card mb-30">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <span>Affiliators</span>
+                            </div>
+                            <span class="fw-600">{{ $count['affiliators'] }}</span>
                         </div>
-                        <span class="fw-600">{{ $count['affiliators'] }}</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="col-lg-3">
-            <div class="card mb-30">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <span>Plan</span>
+            <a href="{{ route('plan.index') }}">
+                <div class="card mb-30">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <span>Plan</span>
+                            </div>
+                            <span class="fw-600">{{ $count['plans'] }}</span>
                         </div>
-                        <span class="fw-600">{{ $count['plans'] }}</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="col-lg-3">
-            <div class="card mb-30">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <span>Subscriptions</span>
+            <a href="{{ route('commission-history.index') }}">
+                <div class="card mb-30">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <span>Subscriptions</span>
+                            </div>
+                            <span class="fw-600">{{ $count['subscriptions'] }}</span>
                         </div>
-                        <span class="fw-600">{{ $count['subscriptions'] }}</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 

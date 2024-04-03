@@ -1,4 +1,4 @@
-<div class="main_menu_hdr">
+<div class="main_menu_hdr user-header">
     <div class="container">
         <div class="main_menu">
             <div class="navigation navbar">

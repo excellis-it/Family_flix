@@ -35,6 +35,12 @@
                     </ul>
                 </li>
                 @endif
+
+                <li class="nav-item has-submenu {{ Request::is('admin/customers*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('customers.index') }}"> <span>
+                            <i class="ti ti-users"></i>
+                        </span>Customers<span class="arrow-down"></span></a>
+                </li>
                 {{-- <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#">
                         <span>
@@ -103,7 +109,7 @@
                         </span>Commission Percentage<span class="arrow-down"></span></a>
                 </li> --}}
 
-                @if (Gate::check('Commission History'))
+                @if (Gate::check('Manage Commission History'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
                         <span>

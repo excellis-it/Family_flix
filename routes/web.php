@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\CommissionPercentageController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\Admin\OttServiceController;
 use App\Http\Controllers\Admin\PaypalCredentialController;
+use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
 use App\Http\Controllers\AffiliateMarketer\DashboardController as AffiliateMarketerDashboardController;
 use App\Http\Controllers\AffiliateMarketer\ProfileController as AffiliateMarketerProfileController;
@@ -137,6 +138,10 @@ Route::group(['prefix' => 'admin'], function () {
             'managers' =>ManagerController::class,
         ]);
 
+        Route::get('/customers',[AdminCustomerController::class, 'index'])->name('customers.index');
+        Route::get('/customers-ajax-list', [AdminCustomerController::class, 'customerAjaxList'])->name('customers.ajax.list');
+        Route::get('/customer-change-status', [AdminCustomerController::class, 'changeStatus'])->name('customers.change-status');
+
         Route::get('/manager-permission', [ManagerPermissionController::class, 'index'])->name('manager-permission.index');
         Route::post('/manager-permission-update/{id}', [ManagerPermissionController::class, 'permissionUpdate'])->name('manager-permission.update');
 
@@ -206,13 +211,9 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/privacy-policy', [ContentManagementController::class, 'privacyPolicy'])->name('content-management.privacy-policy');
         });
 
-
-
-
         Route::get('/plan/delete/{id}', [PlanController::class, 'planDelete'])->name('delete.plan'); // plan delete
         Route::post('/plan/reorder', [PlanController::class, 'planReorder'])->name('admin.plan.reorder'); // plan reorder
         Route::post('/plan/update', [PlanController::class, 'planUpdate'])->name('update.plan'); // plan update
-
 
         Route::group(['prefix' => 'cms'], function () {
             //home cms
