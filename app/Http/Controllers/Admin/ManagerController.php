@@ -19,8 +19,13 @@ class ManagerController extends Controller
     public function index()
     {
         //
-        $managers = User::role('MANAGER')->orderBy('id', 'desc')->paginate(15);
-        return view('admin.manager.list',compact('managers'));
+        if (Auth::user()->can('Manage Manager')) {
+            $managers = User::role('MANAGER')->orderBy('id', 'desc')->paginate(15);
+            return view('admin.manager.list',compact('managers'));
+        } else {
+            return redirect()->route('admin.dashboard')->with('error', 'Permission denied.');
+        }
+        
     }
 
     public function managerAjaxList(Request $request)

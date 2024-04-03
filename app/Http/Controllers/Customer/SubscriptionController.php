@@ -11,13 +11,12 @@ class SubscriptionController extends Controller
     //
     public function customerSubscription()
     {
-        $customer_subscriptions = UserSubscription::where('customer_details_id', auth()->user()->id)->orderBy('id', 'desc')->with('affiliate')->paginate(15);
+        $customer_subscriptions = UserSubscription::where('customer_id', auth()->user()->id)->orderBy('id', 'desc')->with('affiliate')->paginate(10);
         return view('customer.subscription.list', compact('customer_subscriptions'));
     }
 
     public function customerSubscriptionDetail($id)
     {
-       
         $customer_subscription = UserSubscription::where('id', $id)->with('affiliate')->first();
         return view('customer.subscription.view', compact('customer_subscription'));
     }

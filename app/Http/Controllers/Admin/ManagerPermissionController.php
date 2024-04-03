@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Crypt;
 
 
 class ManagerPermissionController extends Controller
@@ -19,12 +20,33 @@ class ManagerPermissionController extends Controller
         
     }
 
-    public function permissionUpdate(Request $request)
+    public function permissionUpdate(Request $request, $id)
     {
-        return $request->all();
-        $role = Role::findById(request('role_id'));
-        $role->syncPermissions(request('permissions'));
-        return redirect()->back()->with('success', 'Permission updated successfully');
+        
+        $id = Crypt::decrypt($id);
+        $request->validate([
+            'permissions' => 'required'
+        ]);
+
+        
+
+        $role = Role::findOrFail($id);
+        // $role->name = $request->name;
+        // $permissions = $request['permissions'];
+        // $role->save();
+        $permissions = $request['permissions'];
+        $p_all = Permission::all();
+
+        foreach ($p_all as $p) {
+            $role->revokePermissionTo($p);
+        }
+
+        foreach ($permissions as $permission) {
+            $p = Permission::where('id', '=', $permission)->firstOrFail();
+            $role->givePermissionTo($p);
+        }
+
+        return back()->with('message', 'Role permission updated successfully');
     }
    
 }

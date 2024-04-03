@@ -14,8 +14,12 @@
                             <h3>${{ $plan->plan_offer_price }}</h3>
                         </div>
                         <div class="sub-btn">
+                            @if (Auth::check() && Auth::user()->hasRole('CUSTOMER'))
                             <a href="{{ route('create-payments',['id' => encrypt($plan->id)] ) }}
                                 ">{{ $plan->button_text }}</a>
+                            @else
+                            <a href="{{ route('customer.login') }}">{{ $plan->button_text }}</a>
+                            @endif
                         </div>
                         <div class="pricing-list">
                             <ul>

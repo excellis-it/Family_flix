@@ -138,7 +138,7 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
 
         Route::get('/manager-permission', [ManagerPermissionController::class, 'index'])->name('manager-permission.index');
-        Route::post('/manager-permission-update', [ManagerPermissionController::class, 'permissionUpdate'])->name('manager-permission.update');
+        Route::post('/manager-permission-update/{id}', [ManagerPermissionController::class, 'permissionUpdate'])->name('manager-permission.update');
 
         Route::get('/managers-ajax-list', [ManagerController::class, 'managerAjaxList'])->name('managers.ajax.list');
         //change status

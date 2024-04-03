@@ -16,6 +16,7 @@ class CreateUserSubscriptionsTable extends Migration
         Schema::create('user_subscriptions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('customer_details_id')->nullable();
+            $table->bigInteger('customer_id')->nullable();
             $table->string('affiliate_id')->nullable();
             $table->string('payment_type')->nullable();
             $table->string('plan_name')->nullable();

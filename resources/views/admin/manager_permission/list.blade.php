@@ -27,8 +27,8 @@
             <div class="col-lg-12">
                 <div class="card w-100">
                     <div class="card-body">
-                        <form action="{{ route('manager-permission.update') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                        <form action="{{ route('manager-permission.update',Crypt::encrypt($role->id)) }}" method="POST" enctype="multipart/form-data">
+                            @csrf  
 
                             <input type="hidden" value="" name="id">
                             <div class="row">
@@ -81,7 +81,7 @@
                                                                         @if ($key = array_search('Create ' . $module, $permissions))
                                                                             <div class="toggle-check">
                                                                                 <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" class="switch toggle-class-unbeatable"  />
+                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif  />
                                                                                     <label for="switch-orange" class="lbl-off"></label>
                                                                                     <label for="switch-orange" class="lbl-on"></label>
                                                                                 </div>
@@ -95,7 +95,7 @@
                                                                         @if ($key = array_search('Edit ' . $module, $permissions))
                                                                             <div class="toggle-check">
                                                                                 <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" class="switch toggle-class-unbeatable"  />
+                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif  />
                                                                                     <label for="switch-orange" class="lbl-off"></label>
                                                                                     <label for="switch-orange" class="lbl-on"></label>
                                                                                 </div>
@@ -108,7 +108,7 @@
                                                                         @if ($key = array_search('Delete ' . $module, $permissions))
                                                                             <div class="toggle-check">
                                                                                 <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" class="switch toggle-class-unbeatable"  />
+                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif />
                                                                                     <label for="switch-orange" class="lbl-off"></label>
                                                                                     <label for="switch-orange" class="lbl-on"></label>
                                                                                 </div>
@@ -121,7 +121,7 @@
                                                                         @if ($key = array_search('View ' . $module, $permissions))
                                                                             <div class="toggle-check">
                                                                                 <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" class="switch toggle-class-unbeatable"  />
+                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif  />
                                                                                     <label for="switch-orange" class="lbl-off"></label>
                                                                                     <label for="switch-orange" class="lbl-on"></label>
                                                                                 </div>

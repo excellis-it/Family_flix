@@ -7,97 +7,166 @@
 @endpush
 
 @section('content')
-    <div class="container-fluid">
-        <div class="breadcome-list">
+    <section class="inner_banner_sec"
+        style="
+background-image: url({{ asset('frontend_assets/images/movie-bg.png') }});
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <h3>Profile</h3>
-                    <ul class="breadcome-menu mb-0">
-                        <li><a href="#">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod">Profile</span></li>
-                    </ul>
+                <div class="col-md-12">
+                    <div class="inner_banner_ontent">
+                        <h1>User Panel</h1>
+                        <!-- <div class="links-1">
+        <ul>
+          <li><a href="">Home</a></li>
+          <li><a href="">Movies</a></li>
+        </ul>
+      </div> -->
+                        <!-- <div class="inr-text">
+        <p>
+          Dive into a world of cinematic wonders with our extensive
+          collection of movies. The Family Flix Movie Section is your
+          gateway to a diverse range of films, spanning genres,
+          languages, and cultures. Whether you’re a fan of gripping
+          dramas, thrilling action, heartwarming comedies, or
+          captivating documentaries, we have something for every movie
+          enthusiast.
+        </p>
+      </div> -->
+                    </div>
                 </div>
             </div>
         </div>
-        <!--  Row 1 -->
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="profile-container">
-                    <form action="{{ route('customer.profile.update') }}" method="POST" enctype="multipart/form-data">
-                        <div class="row mb-4">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="d-block d-md-flex align-items-center">
-                                    <div class="left_img me-3 profile_img">
-                                        <span>
-                                            @if (Auth::user()->image)
-                                                <img src="{{ Storage::url(Auth::user()->image) }}"
-                                                    alt="" id="blah">
-                                            @else
-                                                <img src="{{ asset('admin_assets/images/user-1.jpg') }}" alt=""
-                                                    id="blah" />
-                                            @endif
-                                        </span>
-                                        <div class="profile_eidd">
-                                            <input type="file" id="edit_profile" onchange="readURL(this);" name="image"/>
-                                            <label for="edit_profile"><i class="ti ti-edit"></i></label>
+    </section>
+    <section class="user-panel">
+        <div class="container">
+            <div class="user-panel-wrap">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="user-list">
+                            <ul>
+                                {{-- <li class="active-1"><a href="">Dashboard</a></li> --}}
+                                <li class="{{ Request::is('customer/subscription*') ? 'active-1' : '' }}"><a href="{{ route('customer.subscription') }}">Subscribtions</a></li>
+                                <li class="{{ Request::is('customer/profile*') ? 'active-1' : '' }}"><a href="{{ route('customer.profile') }}">Account details</a></li>
+                                <li><a href="{{ route('customer.logout') }}">Log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <form action="{{ route('customer.profile.update') }}" method="post" enctype="multipart/form-data" id="customer-profile">
+                           @csrf
+                            <div class="user-form user-list">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="form-group-wrap">
+                                            <label for="" class="form-label">Full Name<span class="red">*</span>
+                                            </label>
+                                            <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" id="" placeholder="">
                                         </div>
                                     </div>
-                                    <div class="right_text profile-info">
-                                        <p>Hello!</p>
-                                        <h2>{{Auth::user()->name}}</h2>
-                                        <p>{{Auth::user()->email}}</p>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group-wrap">
+                                            <label for="" class="form-label">Email <span class="red">*</span>
+                                            </label>
+                                            <input type="text"  name="email" value="{{ Auth::user()->email }}" class="form-control" id="" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group-wrap">
+                                            <label for="" class="form-label">Phone 
+                                            </label>
+                                            <input type="text" name="phone"  value="{{ Auth::user()->phone }}" class="form-control" id="" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group-wrap">
+                                            <label for="" class="form-label">Password <span class="red">*</span>
+                                            </label>
+                                            <input type="text" name="password" class="form-control" id="" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group-wrap">
+                                            <label for="" class="form-label">Confirm Password <span class="red">*</span>
+                                            </label>
+                                            <input type="text"  name="password_confirmation" class="form-control" id="" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group-wrap">
+                                            <label for="" class="form-label">Profile Picture
+                                            </label>
+                                            <input type="file" class="form-control" name="image" id="" placeholder="">
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    <div class="col-xl-12 text-center">
+                                        <div class="sign-up-btn mt-4">
+                                            <button type="submit">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row  mb-0">
-                            <div class="col-lg-12">
-                                @csrf
-                                <div class="row">
-                                    <div class="form-group col-md-6 mb-3">
-                                        <label>Full Name</label>
-                                        <input type="text" class="form-control" value="{{ Auth::user()->name }}"
-                                            name="name" placeholder="">
-                                        @if ($errors->has('name'))
-                                            <span class="text-danger">{{ $errors->first('name') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group col-md-6 mb-3">
-                                        <label>Phone number</label>
-                                        <input type="text" class="form-control" value="{{ Auth::user()->phone }}"
-                                            name="phone" placeholder="">
-                                        @if ($errors->has('phone'))
-                                            <span class="text-danger">{{ $errors->first('phone') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="w-100 text-end">
-                                    <button class="print_btn" type="submit">Update</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    </section>
+    @endsection
 
-@push('scripts')
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+    @push('scripts')
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
-                reader.onload = function(e) {
-                    $('#blah')
-                        .attr('src', e.target.result);
-                };
+                    reader.onload = function(e) {
+                        $('#blah')
+                            .attr('src', e.target.result);
+                    };
 
-                reader.readAsDataURL(input.files[0]);
+                    reader.readAsDataURL(input.files[0]);
+                }
             }
-        }
-    </script>
-@endpush
+        </script>
+
+        <script>
+
+            $(document).ready(function() {
+                
+                $('#customer-profile').validate({
+                    rules: {
+                        name: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                        },
+                        
+                        
+                    },
+                    messages: {
+                        name: {
+                            required: "Please enter your name",
+                        },
+                        email: {
+                            required: "Please enter your email",
+                            email: "Please enter a valid email"
+                        },
+                       
+                    },
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
+            });
+
+
+        </script>
+    @endpush

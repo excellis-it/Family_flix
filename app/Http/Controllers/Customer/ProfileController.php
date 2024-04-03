@@ -25,13 +25,10 @@ class ProfileController extends Controller
     public function customerProfileUpdate(Request $request)
     {
         
+        
         $request->validate([
             'name' => 'required',
-            'phone' => 'required|numeric',
-        ],[
-            'phone.unique' => 'The phone has already been taken.',
-            'phone.numeric' => 'The phone must be a number.',
-            'name.required' => 'The full name field is required.',
+            'email' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -46,6 +43,7 @@ class ProfileController extends Controller
         $user = User::find(auth()->user()->id);
         $user->name = $request->name;
         $user->phone = $request->phone;
+        $user->email = $request->email;
         if ($request->hasFile('image')) {
             if ($user->image) {
                 $currentImageFilename = $user->image; // get current image name
@@ -53,7 +51,15 @@ class ProfileController extends Controller
             }
             $user->image = $this->imageUpload($request->file('image'), 'Customer')['filePath'];
         }
-        $user->save();
+
+        //password update
+        if ($request->password) {
+            $request->validate([
+                'password' => 'required|min:8|password_confirmation',
+            ]);
+            $user->password = Hash::make($request->password);
+        }
+        $user->update();
         return redirect()->back()->with('message', 'Profile updated successfully');
         
     }

@@ -13,6 +13,7 @@ use App\Models\AffiliateCommission;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Session;
 use Omnipay\Omnipay;
+use Auth;
 
 
 class PaypalController extends Controller
@@ -97,11 +98,10 @@ class PaypalController extends Controller
                 $customer_details->save();
 
 
-
-
                 //user subscription
                 $user_subscription = new UserSubscription();
                 $user_subscription->customer_details_id = $customer_details->id;
+                $user_subscription->customer_id = Auth::user()->id;
                 if (Session::has('affiliate_id')) {
 
                     //affiliate commission calculation
@@ -234,6 +234,7 @@ class PaypalController extends Controller
         //user subscription
         $user_subscription = new UserSubscription();
         $user_subscription->customer_details_id = $customer_details->id;
+        $user_subscription->customer_id = Auth::user()->id;
         if (Session::has('affiliate_id')) {
 
             //affiliate commission calculation
@@ -275,17 +276,20 @@ class PaypalController extends Controller
 
         return 'success';
 
+        
+
     }
 
 
     public function paypalSuccessPayment($paymentId=null,$PayerID=null)
     {
+        Session::flash('affiliate_id', null); 
         return view('frontend.pages.thankyou');
     }
 
 
     public function paypalPayFailed($err=null)
     {
-        return 'failed';
+        return view('frontend.pages.payment-failed');
     }
 }

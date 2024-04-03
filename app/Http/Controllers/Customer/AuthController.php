@@ -53,7 +53,7 @@ class AuthController extends Controller
     public function customerLogin()
     {
         if (Auth::check() && Auth::user()->hasRole('CUSTOMER')) {
-            return redirect()->route('customer.dashboard');
+            return redirect()->route('customer.subscription');
         } else {
             return view('customer.auth.login');
         }
@@ -71,7 +71,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = User::where('email', $request->email)->first();
             if ($user->hasRole('CUSTOMER') && $user->status == 1) {
-                return redirect()->route('customer.dashboard');
+                return redirect()->route('customer.subscription');
             } else {
                 Auth::logout();
                 return redirect()->back()->with('error', 'Your account is deactivate!');
