@@ -16,6 +16,7 @@ use App\Models\FooterCms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CmsController extends Controller
 {

@@ -8,6 +8,8 @@ use App\Models\PlanCms;
 use App\Models\ContactUsCms;
 use App\Models\ContentTypeCms;
 use App\Models\TopGrid;
+use Illuminate\Support\Facades\Auth;
+
 
 class GeneralCmsController extends Controller
 {

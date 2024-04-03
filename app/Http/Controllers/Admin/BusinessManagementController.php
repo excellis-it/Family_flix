@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BusinessManagement;
 use App\Models\AffiliateCommission;
+use Illuminate\Support\Facades\Auth;
 
 class BusinessManagementController extends Controller
 {

@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Plan;
 use App\Models\UserSubscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {

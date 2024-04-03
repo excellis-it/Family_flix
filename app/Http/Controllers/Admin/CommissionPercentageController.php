@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AffiliateCommission;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CommissionPercentageController extends Controller
 {
