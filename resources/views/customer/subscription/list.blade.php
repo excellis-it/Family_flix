@@ -38,6 +38,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if (count($customer_subscriptions) == 0)
+                                            <tr>
+                                                <td colspan="6" class="text-center">No Plan found</td>
+                                            </tr>
+                                        @else
                                         @foreach($customer_subscriptions as $key => $customer_subscription)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
@@ -50,13 +55,14 @@
                                                 {{-- <a href="{{ route('customer.subscription.show', $customer_subscription->id) }}" class="btn btn-primary btn-sm">Edit</a> --}}
                                             </td>
                                             <td>
-                                                <a href="" class="renewal-btn btn">Renewal</a>
+                                                <a href="{{ route('pricing') }}" class="renewal-btn btn">Renewal</a>
                                             </td>
                                         </tr>
                                         @endforeach
+                                        @endif
 
                                         <tr class="">
-                                            <td colspan="5" class="text-left">
+                                            <td colspan="6" class="text-left">
                                                 <div class="d-flex justify-content-between">
                                                     <div class="pg-ul">
                                                         {!! $customer_subscriptions->links() !!}

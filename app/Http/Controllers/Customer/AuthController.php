@@ -43,6 +43,7 @@ class AuthController extends Controller
         $maildata = [
             'name' => $user->name,
             'email' => $user->email,
+            'password' => $input['password'],
         ];
         // Mail::to($request->email)->send(new WelcomeMail($maildata));
 

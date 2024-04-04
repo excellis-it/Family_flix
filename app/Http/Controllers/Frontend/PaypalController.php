@@ -11,9 +11,12 @@ use App\Models\UserSubscription;
 use App\Models\CustomerDetails;
 use App\Models\AffiliateCommission;
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Omnipay\Omnipay;
 use Auth;
+use Mail;
+use App\Mail\WelcomeMail;
 
 
 class PaypalController extends Controller
@@ -66,9 +69,20 @@ class PaypalController extends Controller
 
     }
 
+    public function checkPaymentsEmail(Request $request)
+    {
+        $check_email_exists = User::where('email',$request->emailId)->count();
+        if($check_email_exists > 0)
+        {
+            return response()->json(['status' => 'error', 'message' => 'Email already exists','email' => $request->emailId]);
+        }else{
+            return response()->json(['status' => 'success', 'message' => 'Email is available','email' => $request->emailId]);
+        }
+    }
+
     public function successPayment(Request $request)
     {
-        return session()->get('affiliate_id');
+        
         if ($request->input('paymentId') && $request->input('PayerID'))
         {
             $transaction = $this->gateway->completePurchase(array(
@@ -216,6 +230,7 @@ class PaypalController extends Controller
 
     public function paymentcapture(Request $request)
     {
+       
         $data = $request->all();
         $customer_details = new CustomerDetails();
         $customer_details->email_address = $data['emailId'];
@@ -230,11 +245,28 @@ class PaypalController extends Controller
         $customer_details->phone = $data['phone'];
         $customer_details->save();
 
+        $check_user_exists = User::where('email',$data['emailId'])->count();
+        if($check_user_exists > 0)
+        {
+            $user_get = User::where('email',$data['emailId'])->first();
+            $user_id = $user_get->id; 
+        }else{
+            $user = new User();
+            $user->name = $data['first_name'].' '.$data['last_name'];
+            $user->email = $data['emailId'];
+            $user->password = bcrypt('12345678');
+            $user->status = 1;
+            $user->save();
+            $user->assignRole('CUSTOMER');
+
+            $user_id = $user->id;
+        }
+
 
         //user subscription
         $user_subscription = new UserSubscription();
         $user_subscription->customer_details_id = $customer_details->id;
-        $user_subscription->customer_id = Auth::user()->id;
+        $user_subscription->customer_id = $user_id;
         if (Session::has('affiliate_id')) {
 
             //affiliate commission calculation
@@ -275,9 +307,6 @@ class PaypalController extends Controller
         $payment->save();
 
         return 'success';
-
-        
-
     }
 
 

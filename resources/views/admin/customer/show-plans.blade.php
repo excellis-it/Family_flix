@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-   Customer List
+   Customer Plan List
 @endsection
 @push('styles')
     <style>
@@ -69,10 +69,10 @@
         <div class="breadcome-list">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <h3>Customer</h3>
+                    <h3>Customer Plan</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod"> List</span></li>
+                        <li><span class="bread-blod">Plan List</span></li>
                     </ul>
                 </div>
             </div>
@@ -90,9 +90,9 @@
 
                         <div class="row justify-content-between align-items-center mb-2">
                             <div class="col-md-6">
-                                <div><h4>List of Customers</h4></div>
+                                <div><h4>List of Customers Plan</h4></div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="row g-1 justify-content-end">
                                     <div class="col-md-8 pr-0">
                                         <div class="search-field prod-search">
@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="table-responsive rounded-2 mb-4">
@@ -110,16 +110,37 @@
                                 id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
                                     <tr>
-                                        <th><span class="fs-4 fw-semibold mb-0">Name</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Email</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Phone</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Plans</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Status</span></th>
-                                        
+                                        <th><span class="fs-4 fw-semibold mb-0">Plan Name</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Plan Price($)</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Date</span></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyContents">
-                                    @include('admin.customer.table')
+                                    @if (count($subscriptions) > 0)
+                                    @foreach ($subscriptions as $subscription)
+                                        <tr>
+                                            <td>{{ $subscription->plan_name ?? 'N/A' }}</td>
+                                            <td>{{ $subscription->plan_price ?? 'N/A' }}</td>
+                                            <td>{{ date($subscription->created_at) }}</td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                    <tr class="toxic">
+                                        <td colspan="5" class="text-left">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="">
+                                                    {!! $subscriptions->links() !!}
+                                                </div>
+                                                <div>(Showing {{ $subscriptions->firstItem() }} – {{ $subscriptions->lastItem() }} Subscriptions of
+                                                    {{ $subscriptions->total() }} Subscriptions)</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td colspan="8" class="text-center">No data found</td>
+                                    </tr>
+                                @endif
 
                                 </tbody>
                             </table>

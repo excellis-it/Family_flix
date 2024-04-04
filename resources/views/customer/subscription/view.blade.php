@@ -30,7 +30,7 @@ Dashboard
                           <h3>Subscribtion details</h3>   
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="subscibtion-list">
                                     <ul>
                                         <li><span class="fw-600">Plan Name:-</span> {{ $customer_subscription->plan_name ?? 'N/A' }}</li>
@@ -43,7 +43,7 @@ Dashboard
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <div class="subscibtion-list">
                                     <ul>
                                         <li><span class="fw-600">Plan Name:-</span> {{ $customer_subscription->plan_name ?? 'N/A' }}</li>
@@ -54,7 +54,7 @@ Dashboard
                                             {{ $customer_subscription->affiliate->name ?? 'N/A' }}
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

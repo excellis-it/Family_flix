@@ -64,7 +64,7 @@ class GeneralController extends Controller
 
             return response()->json(['status' =>true, 'message' => 'Contact us details added successfully.','success' => $contact_us], $this->successStatus);
         } catch (\Exception $e) {
-            return response()->json(['status' =>false, 'message' => 'Something went wrong, please try again.','error' => $e->getMessage()], 500);
+            return response()->json(['status' =>false, 'message' => 'Something went wrong, please try again.','error' => $e->getMessage()], 401);
         }
     }
 
@@ -88,7 +88,7 @@ class GeneralController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first(), 'status' => false], 201);
+            return response()->json(['error' => $validator->errors()->first(), 'status' => false], 200);
         }
         try{
             $subscription_us = new SubscriptionUs();
@@ -98,7 +98,7 @@ class GeneralController extends Controller
             return response()->json(['status' =>true, 'message' => 'You have been subscribed successfully'], $this->successStatus);
 
         } catch (\Exception $e) {
-            return response()->json(['status' =>false, 'message' => 'Something went wrong, please try again.','error' => $e->getMessage()], 500);
+            return response()->json(['status' =>false, 'message' => 'Something went wrong, please try again.','error' => $e->getMessage()], 401);
         }
     }
 }

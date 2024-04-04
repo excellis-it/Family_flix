@@ -47,7 +47,7 @@ class ProfileController extends Controller
             $user = User::where('id', Auth::user()->id)->select('id','name','email','phone')->first();
             if($user != '')
             {
-                return response()->json(['message' => 'User details found successfully.','success' => $user, 'statusCode' => 200], $this->successStatus);
+                return response()->json(['message' => 'User details found successfully.','data' => $user, 'statusCode' => 200, 'status' => true], $this->successStatus);
             }
             else
             {

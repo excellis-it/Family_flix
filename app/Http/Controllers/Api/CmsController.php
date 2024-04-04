@@ -103,7 +103,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -170,7 +170,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -229,7 +229,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
 
@@ -297,7 +297,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -350,7 +350,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -412,7 +412,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -475,7 +475,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -525,7 +525,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -574,7 +574,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }
@@ -623,7 +623,7 @@ class CmsController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'status' => false,
-                'statusCode' => 500,
+                'statusCode' => 401,
                 'message' => $e->getMessage()
             ]);
         }

@@ -99,7 +99,7 @@ class PlanController extends Controller
             ]);
         }catch(\Exception $e){
             return response()->json([
-                'status' => 500,
+                'status' => 401,
                 'message' => 'Something went wrong',
                 'error' => $e->getMessage()
             ]);

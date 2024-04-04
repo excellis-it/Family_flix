@@ -71,6 +71,7 @@ Route::get('/term-service', [HomeController::class, 'termService'])->name('term-
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
 //payments
+Route::post('/check-payments-email', [PaypalController::class, 'checkPaymentsEmail'])->name('payments.email-check');
 Route::get('/create-payments/{id}', [PaypalController::class, 'createPayments'])->name('create-payments');
 Route::post('/process-payments', [PaypalController::class, 'processPayments'])->name('process-payments');
 Route::get('/success-payment', [PaypalController::class, 'successPayment'])->name('success-payment');
@@ -139,6 +140,7 @@ Route::group(['prefix' => 'admin'], function () {
         ]);
 
         Route::get('/customers',[AdminCustomerController::class, 'index'])->name('customers.index');
+        Route::get('/customers-plans/{id}', [AdminCustomerController::class, 'showPlans'])->name('customers.plans.show');
         Route::get('/customers-ajax-list', [AdminCustomerController::class, 'customerAjaxList'])->name('customers.ajax.list');
         Route::get('/customer-change-status', [AdminCustomerController::class, 'changeStatus'])->name('customers.change-status');
 

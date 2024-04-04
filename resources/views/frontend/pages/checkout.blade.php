@@ -111,7 +111,8 @@
                                                     <h3>Customer information</h3>
                                                     <div class="form-floating mb-3">
                                                         <input type="text" class="form-control" name="email_address"
-                                                            id="floatingInput1" placeholder="">
+                                                            id="floatingInput1" placeholder=""
+                                                            value="{{ Auth::user()->email ?? '' }}">
                                                         <label for="floatingInput1">Email Address <span>*</span></label>
                                                         <span id="email_error" class="text-danger"></span>
                                                     </div>
@@ -122,8 +123,8 @@
                                                         <div class="col-lg-6">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    name="first_name" id="floatingInput2"
-                                                                    placeholder="">
+                                                                    name="first_name" id="floatingInput2" placeholder=""
+                                                                    value="">
                                                                 <label for="floatingInput2">First Name
                                                                     <span>*</span></label>
                                                                 <span id="fname_error" class="text-danger"></span>
@@ -213,8 +214,8 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
-                                                                    name="phone" id="floatingInput9"
-                                                                    placeholder="">
+                                                                    name="phone" id="floatingInput9" placeholder=""
+                                                                    value="{{ Auth::user()->phone ?? '' }}">
                                                                 <label for="floatingInput9">Phone
                                                                     <span>*</span></label>
 
@@ -343,7 +344,8 @@
                                                     </div>
                                                 </table>
                                             </div>
-                                            <input type="hidden" name="plan_name" id="plan_name" value="{{ $plan->plan_name }}">
+                                            <input type="hidden" name="plan_name" id="plan_name"
+                                                value="{{ $plan->plan_name }}">
                                             <input type="hidden" name="plan_price" id="plan_price"
                                                 value="{{ $plan->plan_offer_price }}">
                                             <input type="hidden" name="amount"
@@ -502,6 +504,32 @@
             </div>
         </section>
 
+        {{-- user exists modal --}}
+
+        <div class="modal fade" id="userExistsModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="userExistsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">User Exists</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>User already exists with this email address. Please login to continue.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ route('customer.login') }}"><button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Ok</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        {{-- user exists modal --}}
+
         <footer class="ck-ftr">
             <div class="container">
                 <div class="ck-ftr-wrap">
@@ -622,256 +650,11 @@
     </script>
 
     {{-- form validation --}}
-    {{-- <script>
-        $(document).ready(function() {
 
-            $('#signUpForm').validate({
-                rules: {
-                    email_address: {
-                        required: true,
-                        email: true
-                    },
-                    first_name: {
-                        required: true
-                    },
-                    last_name: {
-                        required: true
-                    },
-                    country: {
-                        required: true
-                    },
-                    house_name: {
-                        required: true
-                    },
-                    detail_address: {
-                        required: true
-                    },
-                    city: {
-                        required: true
-                    },
-                    state: {
-                        required: true
-                    },
-                    post_code: {
-                        required: true
-                    },
-                    phone: {
-                        required: true
-                    },
-                    payment_type: {
-                        required: true
-                    }
-                },
-                messages: {
-                    email_address: {
-                        required: "Email is required",
-                        email: "Please enter a valid email address"
-                    },
-                    first_name: {
-                        required: "First Name is required"
-                    },
-                    last_name: {
-                        required: "Last Name is required"
-                    },
-                    country: {
-                        required: "Country is required"
-                    },
-                    house_name: {
-                        required: "House Name is required"
-                    },
-                    detail_address: {
-                        required: "Detail Address is required"
-                    },
-                    city: {
-                        required: "City is required"
-                    },
-                    state: {
-                        required: "State is required"
-                    },
-                    post_code: {
-                        required: "Post Code is required"
-                    },
-                    phone: {
-                        required: "Phone is required"
-                    },
-                    payment_type: {
-                        required: "Payment Type is required"
-                    }
-                },
-                submitHandler: function(form) {
-                    form.submit();
-                }
-            });
-        });
-    </script> --}}
-
-    {{-- <script>
-        paypal.Buttons({
-            onClick: function() {
-                var emailId = $('#floatingInput1').val();
-                var first_name = $('#floatingInput2').val();
-                var last_name = $('#floatingInput3').val();
-                var country = $('#floatingSelect1').val();
-                var house_name = $('#floatingInput4').val();
-                var detail_address = $('#floatingInput5').val();
-                var city = $('#floatingInput6').val();
-                var state = $('#floatingInput7').val();
-                var post_code = $('#floatingInput8').val();
-                var phone = $('#floatingInput9').val();
-                var payment_type = $('#floatingSelect2').val();
-
-
-                // Check if any field is empty
-                if (emailId == '' || first_name == '' || last_name == '' || country == '' || house_name == '' ||
-                    detail_address == '' || city == '' || state == '' || post_code == '' || phone == '' ||
-                    payment_type == '') {
-                    // Display error messages for empty fields
-                    if (emailId == '') {
-                        $('#email_error').text('Please enter email address');
-                    } else {
-                        $('#email_error').text('');
-                    }
-                    if (first_name == '') {
-                        $('#fname_error').text('Please enter first name');
-                    } else {
-                        $('#fname_error').text('');
-                    }
-                    if (last_name == '') {
-                        $('#lname_error').text('Please enter last name');
-                    } else {
-                        $('#lname_error').text('');
-                    }
-                    if (country == '') {
-                        $('#country_error').text('Please enter country');
-                    } else {
-                        $('#country_error').text('');
-                    }
-                    if (house_name == '') {
-                        $('#houseNo_error').text('Please enter house number and street name');
-                    } else {
-                        $('#houseNo_error').text('');
-                    }
-                    if (detail_address == '') {
-                        $('#addr_error').text('Please enter apartment, suite, unit, etc.');
-                    } else {
-                        $('#addr_error').text('');
-                    }
-                    if (city == '') {
-                        $('#city_error').text('Please enter town/city');
-                    } else {
-                        $('#city_error').text('');
-                    }
-                    if (state == '') {
-                        $('#state_error').text('Please enter state/country');
-                    } else {
-                        $('#state_error').text('');
-                    }
-                    if (post_code == '') {
-                        $('#postCode_error').text('Please enter post code');
-                    } else {
-                        $('#postCode_error').text('');
-                    }
-                    if (phone == '') {
-                        $('#phone_error').text('Please enter phone');
-                    } else {
-                        $('#phone_error').text('');
-                    }
-                    if (payment_type == '') {
-                        $('#paymentType_error').text('Please select payment type');
-                    } else {
-                        $('#paymentType_error').text('');
-                    }
-
-                    return false; // Prevent the form submission
-                } else {
-                    $('#email_error').text('');
-                    $('#fname_error').text('');
-                    $('#lname_error').text('');
-                    $('#country_error').text('');
-                    $('#houseNo_error').text('');
-                    $('#addr_error').text('');
-                    $('#city_error').text('');
-                    $('#state_error').text('');
-                    $('#postCode_error').text('');
-                    $('#phone_error').text('');
-                    $('#paymentType_error').text('');
-
-                    // All fields are filled, allow form submission
-                    return true;
-                }
-            },
-
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: $('#total_amount').val()
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                // Displaying actions object for debugging
-                console.log(data);
-
-                // Define the route and CSRF token
-                var route = "{{ route('paypal-capture-payment') }}";
-                var csrfToken = '{{ csrf_token() }}';
-
-                // Fetch to capture payment
-                return fetch(route, {
-                        method: 'post',
-                        headers: {
-                            'content-type': 'application/json',
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        body: JSON.stringify({
-                            paymentID: data.paymentID,
-                            payerID: data.payerID
-                        })
-                    })
-                    .then(function(response) {
-                        // Check if response is okay
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        // Parse response as JSON
-                        return response.json();
-                    })
-                    .then(function(data) {
-                        // Check if data is undefined
-                        if (typeof data === 'undefined') {
-                            throw new Error('Response data is undefined');
-                        }
-                        // Assuming responseData contains the response data you need
-                        console.log('Capture Payment Success:', data);
-                        // Redirect to success page
-                        window.location.href = "{{ route('paypal-success-payment') }}";
-                    })
-                    .catch(function(error) {
-                        // Handle errors
-                        console.error('Error capturing payment:', error);
-                        // Redirect to failure page
-                        window.location.href = "/paypal-pay-failed/" + error.message;
-                    });
-
-            },
-
-        }).render('#paypal-button-container');
-
-        function status(res) {
-            if (!res.ok) {
-                throw new Error(res.statusText);
-            }
-            return res;
-        }
-    </script> --}}
-    <script
-        src="https://www.paypal.com/sdk/js?client-id={{Helper::paypalCredential()['client_id'] ?? ''}}">
-    </script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
 
     <script>
-
+        checkStatus = true;
         paypal.Buttons({
             onClick: function() {
                 var emailId = $('#floatingInput1').val();
@@ -885,9 +668,6 @@
                 var post_code = $('#floatingInput8').val();
                 var phone = $('#floatingInput9').val();
                 var payment_type = $('#floatingSelect2').val();
-
-
-
 
                 // Check if any field is empty
                 if (emailId == '' || first_name == '' || last_name == '' || country == '' || house_name == '' ||
@@ -967,9 +747,31 @@
                     // All fields are filled, allow form submission
                     return true;
                 }
+
+
+                $.ajax({
+                    url: "{{ route('payments.email-check') }}",
+                    type: "POST",
+                    data: {
+                        emailId: emailId,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            $('#email_error').text('');
+                        } else {
+                            $('#userExistsModal').modal('show');
+                            checkStatus = false;
+                        }
+                    }
+                });
+
+                if(checkStatus == true) {
+                    alert(11111);
+                } else {
+                    alert(22222);
+                }
             },
-
-
 
             createOrder: function(data, actions) {
 
@@ -1051,13 +853,36 @@
 
         }).render('#paypal-button-container');
         // This function displays Smart Payment Buttons on your web page.
-
         function status(res) {
             if (!res.ok) {
                 throw new Error(res.statusText);
             }
             return res;
         }
+    </script>
+
+    <script>
+        //onchange validation
+        $('#floatingInput1').on('change', function() {
+            var emailId = $('#floatingInput1').val();
+            
+            $.ajax({
+                url: "{{ route('payments.email-check') }}",
+                type: "POST",
+                data: {
+                    emailId: emailId,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        $('#email_error').text('');
+                    } else {
+                        $('#userExistsModal').modal('show');
+                        return true;
+                    }
+                }
+            });
+        });
     </script>
 </body>
 

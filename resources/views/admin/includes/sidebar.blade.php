@@ -39,7 +39,7 @@
                 @if(Gate::check('Manage Customer'))
                 <li class="nav-item has-submenu {{ Request::is('admin/customers*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('customers.index') }}"> <span>
-                            <i class="ti ti-users"></i>
+                            <i class="ti ti-user"></i>
                         </span>Customers<span class="arrow-down"></span></a>
                 </li>
                 @endif

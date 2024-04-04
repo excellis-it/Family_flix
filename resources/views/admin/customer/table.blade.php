@@ -4,6 +4,11 @@
             <td>{{ $customer->name ?? 'N/A' }}</td>
             <td>{{ $customer->email ?? 'N/A' }}</td>
             <td>{{ $customer->phone ?? 'N/A' }}</td>
+            <td>
+                <a href="{{ route('customers.plans.show', $customer->id) }}" class="btn btn-sm btn-primary" title="View Customer Plan">
+                    <i class="fa fa-eye"></i>
+                </a>
+            </td>
             <td><div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $customer->id }}" {{ $customer->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div></td>
            
         </tr>

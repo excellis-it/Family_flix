@@ -47,7 +47,7 @@
                                                 </li>
                                                 @if (Auth::check() && Auth::user()->hasRole('CUSTOMER'))
                                                 <li class="{{ request()->routeIs('customer') ? 'active' : '' }}">
-                                                    <a href="{{ route('customer.dashboard') }}"> Customer Dashboard</a>
+                                                    <a href="{{ route('customer.subscription') }}"> Customer Dashboard</a>
                                                 @else
                                                 <li class="{{ request()->routeIs('customer') ? 'active' : '' }}">
                                                     <a href="{{ route('customer.login') }}"> Customer Login</a>
