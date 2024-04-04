@@ -47,12 +47,12 @@ class GeneralController extends Controller
         $validator = Validator::make($request->all(), [
             'user_name' => 'required',
             'user_email' => 'required|email',
-            'user_phone' => 'required',
+            'user_phone' => 'required|numeric',
             'message' => 'required'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(), 'status' => false ], 200);
         }
         try{
             $contact_us = new ContactUs();
@@ -88,7 +88,7 @@ class GeneralController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(), 'status' => false], 201);
         }
         try{
             $subscription_us = new SubscriptionUs();

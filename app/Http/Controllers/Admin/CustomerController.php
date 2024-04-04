@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -13,8 +14,12 @@ class CustomerController extends Controller
     //
     public function index()
     {
-        $customers = User::role('CUSTOMER')->orderBy('id', 'desc')->paginate(15);
-        return view('admin.customer.list',compact('customers'));
+        if (Auth::user()->can('Manage Customer')) {
+            $customers = User::role('CUSTOMER')->orderBy('id', 'desc')->paginate(15);
+            return view('admin.customer.list',compact('customers'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
     }
 
     public function customerAjaxList(Request $request)

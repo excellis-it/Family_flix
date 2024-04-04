@@ -23,18 +23,12 @@ class ManagerPermissionController extends Controller
 
     public function permissionUpdate(Request $request, $id)
     {
-        
+       
         $id = Crypt::decrypt($id);
         $request->validate([
             'permissions' => 'required'
         ]);
-
-        
-
         $role = Role::findOrFail($id);
-        // $role->name = $request->name;
-        // $permissions = $request['permissions'];
-        // $role->save();
         $permissions = $request['permissions'];
         $p_all = Permission::all();
 

@@ -129,8 +129,13 @@ class AffliateMarketerController extends Controller
      */
     public function edit($id)
     {
-        $affiliate_marketer = User::findOrFail($id);
-        return view('admin.affliate-marketer.edit')->with(compact('affiliate_marketer'));
+        if (Auth::user()->can('Edit Affiliater')) {
+            $affiliate_marketer = User::findOrFail($id);
+            return view('admin.affliate-marketer.edit')->with(compact('affiliate_marketer'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+        
     }
 
     /**

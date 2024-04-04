@@ -453,7 +453,7 @@ class CmsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first()], 200);
         }
         try{
             $faqs = Faq::where('type',$request->type)->get();

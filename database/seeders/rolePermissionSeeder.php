@@ -50,6 +50,12 @@ class rolePermissionSeeder extends Seeder
                 "updated_at" => date('Y-m-d H:i:s'),
             ],
             [
+                "name" => "Manage Customer",
+                "guard_name" => "web",
+                "created_at" => date('Y-m-d H:i:s'),
+                "updated_at" => date('Y-m-d H:i:s'),
+            ],
+            [
                 'name' => 'Manage Plan',
                 'guard_name' => 'web',
                 'created_at' => date('Y-m-d H:i:s'),
@@ -426,6 +432,7 @@ class rolePermissionSeeder extends Seeder
             'Create Affiliater',
             'Edit Affiliater',
             'Delete Affiliater',
+            'Manage Customer',
             'Manage Commission',
             'Create Commission',
             'Edit Commission',

@@ -51,7 +51,7 @@ class ProfileController extends Controller
             }
             else
             {
-                return response()->json(['error' => 'User not found!', 'statusCode' => 200], $this->successStatus);
+                return response()->json(['error' => 'User not found!', 'statusCode' => 200, 'status' => false]);
             }
             
         } catch (\Throwable $th) {
@@ -91,7 +91,7 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 201);
+            return response()->json(['error' => $validator->errors()->first(), 'status' => false], 200);
         }
         try {
             $user = User::where('id', Auth::user()->id)->first();

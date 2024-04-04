@@ -36,11 +36,13 @@
                 </li>
                 @endif
 
+                @if(Gate::check('Manage Customer'))
                 <li class="nav-item has-submenu {{ Request::is('admin/customers*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('customers.index') }}"> <span>
                             <i class="ti ti-users"></i>
                         </span>Customers<span class="arrow-down"></span></a>
                 </li>
+                @endif
                 {{-- <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#">
                         <span>

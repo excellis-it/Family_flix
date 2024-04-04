@@ -60,7 +60,7 @@ class AuthController extends Controller
                  $ck = explode('"]', $dk[1]);
                  $errors['message'][$i] = $ck[0];
             }
-            return response()->json(['status' => false, 'statusCode' => 401,  'error' => $errors], 401);
+            return response()->json(['status' => false, 'statusCode' => 200,  'error' => $errors], 200);
         }
  
         try {
@@ -72,10 +72,10 @@ class AuthController extends Controller
                     $data['user'] = $user->makeHidden('roles');
                     return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
                 } else {
-                    return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Invalid user & Password!'], 401);
+                    return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'Invalid user & Password!'], 200);
                 }
             } else {
-                return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Invalid user & Password!'], 401);
+                return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'Invalid user & Password!'], 200);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
@@ -139,10 +139,8 @@ class AuthController extends Controller
                 $ck = explode('"]', $dk[1]);
                 $errors['message'][$i] = $ck[0];
             }
-            return response()->json([ 'status' => false ,'statusCode' => 401, 'error' => $errors], 401);
+            return response()->json(['status' => false ,'statusCode' => 200, 'error' => $errors], 200);
         }
-
-       
 
         try {
             $user = User::create([
