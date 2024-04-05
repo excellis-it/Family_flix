@@ -259,6 +259,14 @@ class PaypalController extends Controller
             $user->save();
             $user->assignRole('CUSTOMER');
 
+            //send welcome email
+            $maildata = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => 12345678,
+            ];
+            Mail::to($user->email)->send(new WelcomeMail($maildata));
+
             $user_id = $user->id;
         }
 

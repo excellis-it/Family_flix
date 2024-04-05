@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Mail\WelcomeMail;
+use App\Mail\AffiliaterWelcomeMail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
@@ -62,7 +62,7 @@ class AuthController extends Controller
             'name' => $user->name,
             'email' => $user->email,
         ];
-        // Mail::to($request->email)->send(new WelcomeMail($maildata));
+        Mail::to($request->email)->send(new AffiliaterWelcomeMail($maildata));
 
         return redirect()->route('affiliate-marketer.login')->with('message', 'Your account has been created successfully.');
     }

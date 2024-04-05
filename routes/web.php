@@ -39,6 +39,7 @@ use App\Http\Controllers\Customer\ProfileController as CustomerProfileController
 use App\Http\Controllers\Customer\SubscriptionController as CustomerSubscriptionController;
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\ManagerPermissionController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Artisan;
 
 // Clear cache
@@ -137,7 +138,11 @@ Route::group(['prefix' => 'admin'], function () {
             'commission-percentage' => CommissionPercentageController::class,
             'ott-service' => OttServiceController::class,
             'managers' =>ManagerController::class,
+            'users' => UserController::class,
         ]);
+
+        Route::get('/delete-users/{id}', [UserController::class, 'deleteUser'])->name('delete.user');
+        Route::post('/update-users', [UserController::class, 'updateUser'])->name('update.users');
 
         Route::get('/customers',[AdminCustomerController::class, 'index'])->name('customers.index');
         Route::get('/customers-plans/{id}', [AdminCustomerController::class, 'showPlans'])->name('customers.plans.show');
@@ -145,7 +150,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/customer-change-status', [AdminCustomerController::class, 'changeStatus'])->name('customers.change-status');
 
         Route::get('/manager-permission', [ManagerPermissionController::class, 'index'])->name('manager-permission.index');
+        Route::get('/manager-permission-create', [ManagerPermissionController::class, 'permissionCreate'])->name('manager-permission.create');
+        Route::post('/manager-permission-submit', [ManagerPermissionController::class, 'permissionSubmit'])->name('manager-permission.submit');
+        Route::get('/manager-permission-edit/{id}', [ManagerPermissionController::class, 'permissionEdit'])->name('manager-permission.edit');
         Route::post('/manager-permission-update/{id}', [ManagerPermissionController::class, 'permissionUpdate'])->name('manager-permission.update');
+        Route::get('/manager-permission-ajax-list', [ManagerPermissionController::class, 'permissionAjaxList'])->name('manager-permission.ajax.list');
 
         Route::get('/managers-ajax-list', [ManagerController::class, 'managerAjaxList'])->name('managers.ajax.list');
         //change status

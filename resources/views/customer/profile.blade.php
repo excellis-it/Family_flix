@@ -72,8 +72,8 @@
                                     
                                 
                                     <div class="col-xl-12 text-center">
-                                        <div class="sign-up-btn mt-4">
-                                            <button type="submit">Submit</button>
+                                        <div class="mt-4">
+                                            <button type="submit" class="log-btn">Submit</button>
                                         </div>
                                     </div>
                                 </div>

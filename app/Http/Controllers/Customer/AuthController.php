@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 class AuthController extends Controller
 {
@@ -45,7 +46,7 @@ class AuthController extends Controller
             'email' => $user->email,
             'password' => $input['password'],
         ];
-        // Mail::to($request->email)->send(new WelcomeMail($maildata));
+        Mail::to($request->email)->send(new WelcomeMail($maildata));
 
         return redirect()->route('customer.login')->with('message', 'Your account has been created successfully.');
     }
@@ -74,7 +75,7 @@ class AuthController extends Controller
                 return redirect()->route('customer.subscription');
             } else {
                 Auth::logout();
-                return redirect()->back()->with('error', 'Your account is deactivate!');
+                return redirect()->back()->with('error', 'Something went wrong!');
             }
         } else {
             return redirect()->back()->with('error', 'Email id & password was invalid!');

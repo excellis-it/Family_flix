@@ -29,23 +29,22 @@ class AdminController extends Controller
             'password' => 'required|min:8'
         ]);
         
-       
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password] )) {
-            $user = User::where('email', $request->email)->first();
-            
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user(); // Retrieve authenticated user
+            $userRoles = $user->getRoleNames();
+        
             if ($user->hasRole('ADMIN')) {
                 return redirect()->route('admin.dashboard');
-            }else if($user->hasRole('MANAGER')){
+            } else {
+                // Redirect to appropriate dashboard based on user role
                 return redirect()->route('admin.dashboard');
             }
-            else{
-               
-                Auth::logout();
-                return redirect()->back()->with('error', 'Email id & password was invalid!');
-            }
         } else {
-            return redirect()->back()->with('error', 'Email id & password was invalid!');
+            return redirect()->back()->with('error', 'Invalid email or password.');
         }
+        
     }
 
     public function store(Request $request)

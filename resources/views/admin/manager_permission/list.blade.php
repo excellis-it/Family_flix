@@ -1,175 +1,152 @@
 @extends('admin.layouts.master')
 @section('title')
-   Manager Permission
+    Manager Permission
 @endsection
 @push('styles')
 @endpush
 @section('content')
-
-@php
-    $modules = ['Profile','Affiliater','Customer','Plan', 'Product', 'Commission', 'Commission History', 'Manager',  'Entertainment Banner', 'Top Grid','Ott Platform', 'Cms','Business Management','Faq','Contactus','Coupon','Subscribers','Payment Detail'];
-@endphp
+    @php
+        $modules = [
+            'Profile',
+            'Affiliater',
+            'Customer',
+            'Plan',
+            'Product',
+            'Commission',
+            'Commission History',
+            'Manager',
+            'Entertainment Banner',
+            'Top Grid',
+            'Ott Platform',
+            'Cms',
+            'Business Management',
+            'Faq',
+            'Contactus',
+            'Coupon',
+            'Subscribers',
+            'Payment Detail',
+        ];
+    @endphp
+    <section id="loading">
+        <div id="loading-content"></div>
+    </section>
     <div class="container-fluid">
         <div class="breadcome-list">
-            <div class="d-flex">
-
-                <div class="">
-                    <h3>Manager Permission</h3>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <h3>Role & Permissions</h3>
                     <ul class="breadcome-menu mb-0">
-                        <li><a href="{{ route('admin.dashboard') }}">Dashboard</a> <span class="bread-slash">/</span></li>
-                        <li><a href=""><span class="bread-blod">Manager Permission</span></a></li>
+                        <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
+                        <li><span class="bread-blod"> List</span></li>
                     </ul>
                 </div>
             </div>
         </div>
+
         <!--  Row 1 -->
         <div class="row">
             <div class="col-lg-12">
+                <div class="w-100 text-end mb-3">
+                    <a class="print_btn" href="{{ route('manager-permission.create') }}">+ Add
+                        Role & Permission</a>
+                </div>
                 <div class="card w-100">
                     <div class="card-body">
-                        <form action="{{ route('manager-permission.update',Crypt::encrypt($role->id)) }}" method="POST" enctype="multipart/form-data">
-                            @csrf  
 
-                            <input type="hidden" value="" name="id">
-                            <div class="row">
-                                <div class="container-fluid page__container">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 p-0">
-                                            <div class="table-responsive border-bottom" data-toggle="lists">
-                                                @if (!empty($permissions))
-                                                <table class="table mb-0 table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 50px; text-align: center;">
-                                                                <div class="">
-                                                                    <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1">
-                                                                    <label for="styled-checkbox-1"></label>
-                                                                </div>
-                                                            </th>
-                                                            <th>Select All</th>
-                                                            <th>Manage</th>
-                                                            <th>Create</th>
-                                                            <th>Update</th>
-                                                            <th>Delete</th>
-                                                            <th>View</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="list">
-                                                        @foreach ($modules as $module)
-                                                            <tr>
-                                                                <td></td>
-                                                                <td>{{ ucfirst($module) }} </td>
-                                                                <td>
-                                                                    @if (in_array('Manage ' . $module, (array) $permissions))
-                                                                        @if ($key = array_search('Manage ' . $module, $permissions))
-                                                                            <div class="toggle-check">
-                                                                                <div class="form-check form-switch">
-                                                                                    {{--   {{ Form::checkbox('permissions[]', $key, $role->permission, ['class' => 'form-check-input isscheck isscheck_' . str_replace(' ', '', $module), 'id' => 'permission' . $key]) }} --}}
-                                                                                    <div class="button-switch">
-                                                                                        <input type="checkbox" name="permissions[]" id="switch-orange" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif />
-                                                                                        <label for="switch-orange" class="lbl-off"></label>
-                                                                                        <label for="switch-orange" class="lbl-on"></label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    @endif
-                                                                </td>
-                                                                <td>
-                                                                    @if (in_array('Create ' . $module, (array) $permissions))
-                                                                        @if ($key = array_search('Create ' . $module, $permissions))
-                                                                            <div class="toggle-check">
-                                                                                <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif  />
-                                                                                    <label for="switch-orange" class="lbl-off"></label>
-                                                                                    <label for="switch-orange" class="lbl-on"></label>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    @endif
-                                                                </td>
-        
-                                                                <td>
-                                                                    @if (in_array('Edit ' . $module, (array) $permissions))
-                                                                        @if ($key = array_search('Edit ' . $module, $permissions))
-                                                                            <div class="toggle-check">
-                                                                                <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif  />
-                                                                                    <label for="switch-orange" class="lbl-off"></label>
-                                                                                    <label for="switch-orange" class="lbl-on"></label>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    @endif
-                                                                </td>
-                                                                <td>
-                                                                    @if (in_array('Delete ' . $module, (array) $permissions))
-                                                                        @if ($key = array_search('Delete ' . $module, $permissions))
-                                                                            <div class="toggle-check">
-                                                                                <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif />
-                                                                                    <label for="switch-orange" class="lbl-off"></label>
-                                                                                    <label for="switch-orange" class="lbl-on"></label>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    @endif
-                                                                </td>
-                                                                <td>
-                                                                    @if (in_array('View ' . $module, (array) $permissions))
-                                                                        @if ($key = array_search('View ' . $module, $permissions))
-                                                                            <div class="toggle-check">
-                                                                                <div class="button-switch">
-                                                                                    <input type="checkbox" id="switch-orange" name="permissions[]" class="switch toggle-class-unbeatable" value="{{ $key }}" @if (in_array($key, $role->permissions()->pluck('id')->toArray())) checked  @endif  />
-                                                                                    <label for="switch-orange" class="lbl-off"></label>
-                                                                                    <label for="switch-orange" class="lbl-on"></label>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    @endif
-                                                                </td>
-                                                                
-                                                            </tr>
-                                                        @endforeach
-        
-                                                    </tbody>
-                                                </table>
-                                                @else
-                                                    <p>No permissions available</p>
-                                                @endif
-                                                <span class="text-danger" id="permissions_msg"></span>
-                                            </div>
+                        <div class="row justify-content-between align-items-center mb-2">
+                            <div class="col-md-6">
+                                <div>
+                                    <h4>List of Role & Permission</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-1 justify-content-end">
+                                    <div class="col-md-8 pr-0">
+                                        <div class="search-field prod-search">
+                                            <input type="text" name="search" id="search" placeholder="search..."
+                                                required class="form-control">
+                                            <a href="javascript:void(0)" class="prod-search-icon"><i
+                                                    class="ti ti-search"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <br>
+                        <div class="table-responsive rounded-2 mb-4">
+                            <table class="table table-hover customize-table mb-0 align-middle bg_tbody cusrsor-pointer"
+                                id="myTable">
+                                <thead class="text-white fs-4 bg_blue">
+                                    <tr>
+                                        <th><span class="fs-4 fw-semibold mb-0">Role</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Permission</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Action</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBodyContents">
+                                   @include('admin.manager_permission.table')
 
-                            <div class="w-100 text-end">
-                                <button type="submit" class="print_btn">Update</button>
-                            </div>
-                        </form>
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
+                            <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#styled-checkbox-1").click(function() {
+                $('input:checkbox').prop('checked', this.checked);
+            });
+
+            // Handle individual checkboxes
+            $('input:checkbox').not("#checkAll").click(function() {
+                if (!this.checked) {
+                    $("#checkAll").prop('checked', false);
+                }
+            });
+        });
+    </script>
+
 <script>
     $(document).ready(function() {
-        $("#styled-checkbox-1").click(function() {
-            $('input:checkbox').prop('checked', this.checked);
+        function fetch_data(page, query) {
+            $.ajax({
+                url: "{{ route('manager-permission.ajax.list') }}",
+                data: {
+                    page: page,
+                    query: query
+                },
+                success: function(data) {
+                    $('tbody').html(data.data);
+                }
+            });
+        }
+
+        $(document).on('keyup', '#search', function() {
+            var query = $('#search').val();
+            var page = $('#hidden_page').val();
+            fetch_data(page, query);
+        });
+        $(document).on('click', '.close-pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            $('#hidden_page').val(page);
+
+            var query = $('#search').val();
+
+            $('li').removeClass('active');
+            $(this).parent().addClass('active');
+            fetch_data(page, query);
         });
 
-        // Handle individual checkboxes
-        $('input:checkbox').not("#checkAll").click(function() {
-            if (!this.checked) {
-                $("#checkAll").prop('checked', false);
-            }
-        });
     });
 </script>
 @endpush

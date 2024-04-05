@@ -129,15 +129,15 @@
 
                 @if (Gate::check('Manage Manager'))
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/managers*') ? 'active' : '' }}" href="#">
+                    <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-users"></i>
-                        </span>Manager
+                        </span>Users
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
-                    <ul class="submenu collapse {{ Request::is('admin/managers*') ? 'show' : '' }}">
-                        <li class="{{ Request::is('admin/managers*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('managers.index') }}">List</a>
+                    <ul class="submenu collapse {{ Request::is('admin/users*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/users*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('users.index') }}">List</a>
                         </li>
                     </ul>
                 </li> 
