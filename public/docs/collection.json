@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Family-Flix",
-        "_postman_id": "76895d94-936e-44dc-905e-2882a03f0316",
+        "_postman_id": "309ca712-b273-4dfe-807f-fb65ec14e1d8",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -85,7 +85,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"rwnqssoldfzgqubsokllet\",\"email\":\"tillman.bridie@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"rnwteyxxfyfrbpclhktjwzlkdjgxsenyqjgwthqtxlqtmwvspk\",\"email\":\"neil45@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -334,7 +334,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"ullam\"}"
+                            "raw": "{\"type\":\"quis\"}"
                         },
                         "description": "",
                         "auth": {
@@ -472,6 +472,217 @@
             ]
         },
         {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Register Api for Customer",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"sckrbtqkkjsikidujyqlklqloihsbbzvwtluenexbkscpgqhecgafazwikrtcpmkox\",\"email\":\"malika80@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"status\": true,\n  \"statusCode\": 200,\n  \"data\": {\n  \"user\": {\n      \"name\": \"test customer\",\n      \"email\": \"testcustomer@yopmail.com\",\n      \"phone\": 8989898965,\n      \"status\": 1,\n      \"updated_at\": \"2024-03-14T05:57:00.000000Z\",\n      \"created_at\": \"2024-03-14T05:57:00.000000Z\",\n      \"id\": 4\n  }\n  },\n  \"message\": \"registered successfully\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"message\": [\n      \"The email has already been taken.\",\n      \"The confirm password and password must match.\"\n  ]\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Login Api for customer",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"john@yopmail.com\",\"password\":\"12345678\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"data\": {\n      \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks\",\n      \"user\": {\n          \"id\": 3,\n          \"name\": \"test2 affiliater2\",\n          \"email\": \"test1@yopmail.com\",\n          \"status\": \"1\"\n      }\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n \"status\": false,\n \"statusCode\": 401,\n \"error\": \"Invalid user & Password!\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Details Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/account-details",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/account-details"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     \"success\": {\n         \"id\": 1,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n       \"email_verified_at\": null,\n      \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n    \"updated_at\": \"2021-05-27T06:50:50.000000Z\"\n }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n   \"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update-Profile Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/account-update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/account-update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"whiteglovecomics@gmail.com\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Customer details updated successfully.\",\n  \"data\": {\n      \"id\": 3,\n      \"name\": \"test2 affiliater2\",\n      \"email\": \"test1@yopmail.com\",\n      \"phone\": \"1231231231\",\n      \"email_verified_at\": null,\n      \"image\": \"Customer\/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png\",\n      \"status\": \"1\",\n      \"created_at\": \"2024-03-13T12:57:34.000000Z\",\n      \"updated_at\": \"2024-03-14T06:16:19.000000Z\"\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Subscriptions Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/subscription\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/subscription\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n\"data\": [\n  {\n      \"id\": 14,\n      \"customer_details_id\": 17,\n      \"customer_id\": 30,\n      \"affiliate_id\": \"4\",\n      \"payment_type\": \"paypal\",\n      \"plan_name\": \"Starter\",\n      \"plan_price\": \"25\",\n      \"coupan_code\": null,\n      \"coupan_discount\": null,\n      \"coupan_discount_type\": null,\n      \"sub_total\": \"25\",\n      \"total\": \"25\",\n      \"affiliate_commission\": null,\n      \"additional_information\": \"dfgdf\",\n      \"created_at\": \"2024-04-05T12:58:16.000000Z\",\n      \"updated_at\": \"2024-04-05T12:58:16.000000Z\",\n      \"affiliate\": {\n          \"id\": 4,\n          \"name\": \"test affi\",\n          \"email\": \"affi@yopmail.com\",\n          \"phone\": \"7894561236\",\n          \"email_verified_at\": null,\n          \"image\": null,\n          \"status\": \"1\",\n          \"created_at\": \"2024-04-03T06:47:51.000000Z\",\n          \"updated_at\": \"2024-04-03T06:47:51.000000Z\"\n      }\n  }\n]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 200,\n\"message\": \"No commission found!\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "General",
             "description": "\nAPIs for General",
             "item": [
@@ -497,7 +708,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"sheridan58@example.net\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"lucinda94@example.net\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -541,7 +752,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"joanne.trantow@example.net\"}"
+                            "raw": "{\"email\":\"bert.gerlach@example.org\"}"
                         },
                         "description": "",
                         "auth": {
@@ -567,52 +778,8 @@
         },
         {
             "name": "Listing APIs",
-            "description": "\nAPIs for Commission Listing",
+            "description": "\nAPIs for Prduct Listing",
             "item": [
-                {
-                    "name": "Commission Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/affiliater\/commission\/list",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/commission\/list"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": ""
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n \"data\": [\n     {\n         \"id\": 1,\n         \"affiliate_id\": 3,\n         \"customer_id\": 1,\n         \"subscription_id\": 1,\n         \"commission\": \"5.00\",\n         \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n         \"updated_at\": \"2021-05-27T06:50:50.000000Z\",\n         \"customer_details\": {\n             \"id\": 1,\n             \"name\": \"John Doe\",\n             \"email\": \"\n        }\n   }\n]\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 200,\n\"message\": \"No commission found!\"\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"Unauthorised\"\n}",
-                            "name": ""
-                        }
-                    ]
-                },
                 {
                     "name": "Unbeatable-Variety  Api",
                     "request": {
@@ -814,117 +981,6 @@
                             "header": [],
                             "code": 500,
                             "body": "{\n  \"status\": 500,\n  \"message\": \"Something went wrong\",\n  \"error\": \"Error message\"\n}",
-                            "name": ""
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "Profile",
-            "description": "",
-            "item": [
-                {
-                    "name": "Details Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/affiliater\/profile-details",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/profile-details"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": ""
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n     \"success\": {\n         \"id\": 1,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n       \"email_verified_at\": null,\n      \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n    \"updated_at\": \"2021-05-27T06:50:50.000000Z\"\n }\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n   \"error\": \"Unauthorised\"\n}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Update-Profile Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/affiliater\/profile-update",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/profile-update"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"+1 1234 567 890\",\"email\":\"whiteglovecomics@gmail.com\",\"address\":\"USA,678\",\"pincode\":\"659865\"}"
-                        },
-                        "description": ""
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n  \"message\": \"Affiliater details updated successfully.\",\n  \"data\": {\n      \"id\": 3,\n      \"name\": \"test2 affiliater2\",\n      \"email\": \"test1@yopmail.com\",\n      \"phone\": \"1231231231\",\n      \"email_verified_at\": null,\n      \"image\": \"Affiliate Marketer\/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png\",\n      \"status\": \"1\",\n      \"created_at\": \"2024-03-13T12:57:34.000000Z\",\n      \"updated_at\": \"2024-03-14T06:16:19.000000Z\"\n  }\n}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "AffiliateLink Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/affiliater\/create-link",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/create-link"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": ""
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n \"message\": \"Affiliate link created successfully.\",\n \"data\": \"http:\/\/127.0.0.1:8001\/pricing\/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9\",\n \"status\": true\n}",
                             "name": ""
                         }
                     ]

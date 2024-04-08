@@ -4,15 +4,43 @@ namespace App\Http\Controllers\Api\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use App\Traits\ImageTrait;
+use Crypt;
+
+/**
+ * @Customer Profile Details APIs
+ *
+ * APIs for Profile Details
+ */
 
 class ProfileController extends Controller
 {
     //
-
+    use ImageTrait;
     public $successStatus = 200;
+
+     /**
+     * Details Api
+     * @authenticated
+     * @response 200{
+     *      "success": {
+     *          "id": 1,
+     *          "name": "John Doe",
+     *          "email": "john@yopmail.com",
+     *        "email_verified_at": null,
+     *       "created_at": "2021-05-27T06:50:50.000000Z",
+     *     "updated_at": "2021-05-27T06:50:50.000000Z"
+     *  }
+     * }
+     *  
+     * @response 401{
+     *    "error": "Unauthorised"
+     * }
+     */
 
     public function accountDetails(Request $request)
     {
@@ -31,6 +59,27 @@ class ProfileController extends Controller
             return response()->json(['error' => $th->getMessage()], 401);
         }
     }
+
+    /**
+     * Update-Profile Api
+     * @authenticated
+     * @bodyParam name string required The name of the user. Example: John Doe
+     * @bodyParam email string required The email of the user. Example: whiteglovecomics@gmail.com
+     * @response 200{
+     *   "message": "Customer details updated successfully.",
+     *   "data": {
+     *       "id": 3,
+     *       "name": "test2 affiliater2",
+     *       "email": "test1@yopmail.com",
+     *       "phone": "1231231231",
+     *       "email_verified_at": null,
+     *       "image": "Customer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png",
+     *       "status": "1",
+     *       "created_at": "2024-03-13T12:57:34.000000Z",
+     *       "updated_at": "2024-03-14T06:16:19.000000Z"
+     *   }
+     * }
+     */
 
     public function accountUpdate(Request $request)
     {

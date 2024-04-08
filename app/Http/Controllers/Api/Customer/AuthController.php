@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
+/**
+    * @Customer Authentication
+    *
+    * APIs for Authentication
+*/
 
 class AuthController extends Controller
 {
