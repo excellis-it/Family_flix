@@ -307,8 +307,8 @@ class ProductController extends Controller
         try{
             $kid = ContentTypeCms::where('type', 'kid')->first();
             $kid_banner = EntertainmentBanner::where('banner_type','Kids')->orderBy('id','asc')->get();
-            $top_10_kids = Product::where('top_10_status', 1)->where('type','kid')->get();
-            $popular_kids = Product::where('popular_status', 1)->where('type','kid')->get();
+            $top_10_kids = Product::where('top_10_status', 1)->where('type','kids')->get();
+            $popular_kids = Product::where('popular_status', 1)->where('type','kids')->get();
            
             return response()->json([
                 'status' => true,

@@ -4,7 +4,7 @@
             <td>{{ $role->name ?? 'N/A' }}</td>
             <td>
                 @foreach ($role->permissions as $permission)
-                    <span class="badge bg-primary rounded-pill">{{ $permission->name }}</span>
+                    <span class="badge rounded-pill manager-list">{{ $permission->name }}</span>
                 @endforeach
             </td>
             <td>

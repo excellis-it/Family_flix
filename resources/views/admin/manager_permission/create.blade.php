@@ -32,10 +32,23 @@
 
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="form-group row">
-                                        <label  for="inputEnterYourName" class="col-form-label">Role Name</label>
+                                    <div class="role-label">
+                                        <div class="row align-items-center">
+                                          <div class="col-md-3">
+                                             <label  for="inputEnterYourName" class="col-form-label">Role Name</label>
+                                          </div>
+                                          <div class="col-md-9">
                                             <input type="text" class="form-control" id="name" name="role_name" style="text-transform:uppercase" >
+                                          </div>
+                                        </div>
                                     </div>
+                            
+                                    <!--<div class="role-label">-->
+                                    <!--    <div class="form-group row">-->
+                                    <!--        <label  for="inputEnterYourName" class="col-form-label">Role Name</label>-->
+                                    <!--            <input type="text" class="form-control" id="name" name="role_name" style="text-transform:uppercase" >-->
+                                    <!--    </div>-->
+                                    <!-- </div>-->
                                     @if ($errors->has('role_name'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('role_name') }}</div>

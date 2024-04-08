@@ -50,14 +50,14 @@
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group-wrap">
-                                            <label for="" class="form-label">Password <span class="red">*</span>
+                                            <label for="" class="form-label">Password 
                                             </label>
                                             <input type="text" name="password" class="form-control" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group-wrap">
-                                            <label for="" class="form-label">Confirm Password <span class="red">*</span>
+                                            <label for="" class="form-label">Confirm Password 
                                             </label>
                                             <input type="text"  name="password_confirmation" class="form-control" id="" placeholder="">
                                         </div>

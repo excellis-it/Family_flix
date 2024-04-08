@@ -8,6 +8,9 @@ use App\Http\Controllers\Api\PlanController;
 use App\Http\Controllers\Api\GeneralController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Affiliater\ProfileController;
+use App\Http\Controllers\Api\Customer\AuthController as CustomerAuthController;
+use App\Http\Controllers\Api\Customer\ProfileController as CustomerProfileController; 
+use App\Http\Controllers\Api\Customer\SubscriptionController as CustomerSubscriptionController;
 use App\Http\Controllers\Api\Affiliater\CommissionController;
 
 
@@ -31,17 +34,33 @@ use App\Http\Controllers\Api\Affiliater\CommissionController;
         Route::post('login', [AuthController::class, 'login']);  // login api
         Route::post('register', [AuthController::class, 'register']);  // register api
 
-        Route::group(['middleware' => 'auth:api'], function () {
-            Route::group(['prefix' => 'affiliater'], function () {
-                Route::post('profile-details', [ProfileController::class, 'profileDetails']);  // profile details api
-                Route::post('profile-update', [ProfileController::class, 'profileUpdate']);  // profile update api
+        // Route::group(['middleware' => 'auth:api'], function () {
+        //     Route::group(['prefix' => 'affiliater'], function () {
+        //         Route::post('profile-details', [ProfileController::class, 'profileDetails']);  // profile details api
+        //         Route::post('profile-update', [ProfileController::class, 'profileUpdate']);  // profile update api
 
-                Route::group(['prefix' => 'commission'], function () {
-                    Route::post('list', [CommissionController::class, 'commissionList']);  // commission details api
+        //         Route::group(['prefix' => 'commission'], function () {
+        //             Route::post('list', [CommissionController::class, 'commissionList']);  // commission details api
+        //         });
+
+        //         //affiliate link
+        //         Route::post('create-link', [ProfileController::class, 'affiliateLink']);  // commission details api
+        //     });
+        // });
+
+        //user routes
+        
+        Route::group(['prefix' => 'customer'], function () {
+            Route::post('register', [CustomerAuthController::class, 'customerRegister']);  // register api
+            Route::post('login', [CustomerAuthController::class, 'customerLogin']);  // login api
+
+            Route::group(['middleware' => 'auth:api'], function () {
+                Route::post('account-details', [CustomerProfileController::class, 'accountDetails']);  // profile details api
+                Route::post('account-update', [CustomerProfileController::class, 'accountUpdate']);  // profile update api
+                Route::group(['prefix' => 'subscription'], function () {
+                    Route::post('list', [CustomerSubscriptionController::class, 'subscriptionList']);  // commission details api
                 });
-
-                //affiliate link
-                Route::post('create-link', [ProfileController::class, 'affiliateLink']);  // commission details api
+                
             });
         });
 
