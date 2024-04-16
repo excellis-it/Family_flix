@@ -286,7 +286,6 @@ class PaypalController extends Controller
                 $commission_dis = 0;
             }
 
-
             $user_subscription->affiliate_id = Session::get('affiliate_id');
             $user_subscription->affiliate_commission = $commission_dis;
         } else {
@@ -302,6 +301,9 @@ class PaypalController extends Controller
         $user_subscription->sub_total = $data['plan_price'];
         $user_subscription->total = $data['amount'];
         $user_subscription->additional_information = $data['additional_information'];
+        $today = date('Y-m-d');
+        $user_subscription->plan_start_date = $today;
+        $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
         $user_subscription->save();
 
         $payment = new Payment();

@@ -28,6 +28,8 @@ class CreateUserSubscriptionsTable extends Migration
             $table->string('total')->nullable();
             $table->string('affiliate_commission')->nullable();
             $table->longText('additional_information')->nullable();
+            $table->string('plan_start_date')->nullable();
+            $table->string('plan_expiry_date')->nullable();
             $table->timestamps();
         });
     }

@@ -58,7 +58,7 @@ use App\Http\Controllers\Api\Affiliater\CommissionController;
                 Route::post('account-details', [CustomerProfileController::class, 'accountDetails']);  // profile details api
                 Route::post('account-update', [CustomerProfileController::class, 'accountUpdate']);  // profile update api
                 Route::group(['prefix' => 'subscription'], function () {
-                    Route::post('list', [CustomerSubscriptionController::class, 'subscriptionList']);  // commission details api
+                    Route::post('list', [CustomerSubscriptionController::class, 'subscriptionList']);  // customer subscriptions api
                 });
                 
             });

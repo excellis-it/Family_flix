@@ -32,6 +32,8 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Plan name</th>
                                             <th scope="col">Plan Price($)</th>
+                                            <th scope="col">Start date</th>
+                                            <th scope="col">Expiry date</th>
                                             <th scope="col">Affiliate name</th>
                                             <th scope="col">Action</th>
                                             <th scope="col">Status</th>
@@ -40,7 +42,7 @@
                                     <tbody>
                                         @if (count($customer_subscriptions) == 0)
                                             <tr>
-                                                <td colspan="6" class="text-center">No Plan found</td>
+                                                <td colspan="8" class="text-center">No Plan found</td>
                                             </tr>
                                         @else
                                         @foreach($customer_subscriptions as $key => $customer_subscription)
@@ -48,6 +50,8 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $customer_subscription->plan_name ?? 'N/A'}}</td>
                                             <td>{{ $customer_subscription->total ?? 'N/A' }}</td>
+                                            <td>{{ date('d M,Y', strtotime($customer_subscription->plan_start_date)) ?? 'N/A' }}</td>
+                                            <td>{{ date('d M,Y', strtotime($customer_subscription->plan_expiry_date)) ?? 'N/A' }}</td>
                                             <td>{{ $customer_subscription->affiliate->name ?? 'N/A' }}</td>
                                             <td>
                                                 <a href="{{ route('customer.subscription.show', $customer_subscription->id) }}"
@@ -62,7 +66,7 @@
                                         @endif
 
                                         <tr class="">
-                                            <td colspan="6" class="text-left">
+                                            <td colspan="8" class="text-left">
                                                 <div class="d-flex justify-content-between">
                                                     <div class="pg-ul">
                                                         {!! $customer_subscriptions->links() !!}
