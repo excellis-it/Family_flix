@@ -1,0 +1,101 @@
+name: 'Plan Listing'
+description: |-
+
+  APIs for Plan Listing
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/plans/show
+    metadata:
+      groupName: 'Plan Listing'
+      groupDescription: |-
+
+        APIs for Plan Listing
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Plan-List Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+            "statusCode": 200,
+            "message": "Plan details found successfully",
+            "data": {
+                "plan": [
+                {
+                    "id": 1,
+                    "plan_name": "Starter",
+                    "plan_details": "Welcome to our starter pack where 2 people can enjoy unlimited movies and shows.",
+                    "plan_actual_price": "30",
+                    "plan_offer_price": "25",
+                    "button_text": "Subscribe",
+                    "specification": [
+                        {
+                            "id": 1,
+                            "plan_id": 1,
+                            "specification_name": "1-2 Device Limit"
+                        },
+                        {
+                            "id": 2,
+                            "plan_id": 1,
+                            "specification_name": "Preminum Server"
+                        },
+                        {
+                            "id": 3,
+                            "plan_id": 1,
+                            "specification_name": "Full HD Available"
+                        },
+                        {
+                            "id": 4,
+                            "plan_id": 1,
+                            "specification_name": "Desktop, Mobile and TV App"
+                        },
+                        {
+                            "id": 5,
+                            "plan_id": 1,
+                            "specification_name": "Unlimited Movies and TV Shows"
+                        }
+                    ]
+                },
+            ]
+           }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+          "status": false,
+          "statusCode": 401,
+          "error": {
+          "message": [
+               "No detail found!"
+           ]
+          }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

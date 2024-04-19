@@ -1,76 +1,22 @@
-name: 'Listing APIs'
+name: Subscription
 description: |-
 
-  APIs for Prduct Listing
+  APIs for Subscription List
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/product/unbeatable-variety
+    uri: api/v1/customer/subscription/list
     metadata:
-      groupName: 'Listing APIs'
+      groupName: Subscription
       groupDescription: |-
 
-        APIs for Prduct Listing
+        APIs for Subscription List
       subgroup: ''
       subgroupDescription: ''
-      title: 'Unbeatable-Variety  Api'
+      title: 'Subscriptions Api'
       description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "status": false,
-            "statusCode": 200,
-            "message": "No unbeatable variety found"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 500
-        content: |-
-          {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/plans/show
-    metadata:
-      groupName: 'Listing APIs'
-      groupDescription: |-
-
-        APIs for Plan Listing
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Plan-List Api'
-      description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -88,47 +34,50 @@ endpoints:
         content: |-
           {
           "status": true,
-            "statusCode": 200,
-            "message": "Plan details found successfully",
-            "data": {
-                "plan": [
-                {
-                    "id": 1,
-                    "plan_name": "Starter",
-                    "plan_details": "Welcome to our starter pack where 2 people can enjoy unlimited movies and shows.",
-                    "plan_actual_price": "30",
-                    "plan_offer_price": "25",
-                    "button_text": "Subscribe",
-                    "specification": [
-                        {
-                            "id": 1,
-                            "plan_id": 1,
-                            "specification_name": "1-2 Device Limit"
-                        },
-                        {
-                            "id": 2,
-                            "plan_id": 1,
-                            "specification_name": "Preminum Server"
-                        },
-                        {
-                            "id": 3,
-                            "plan_id": 1,
-                            "specification_name": "Full HD Available"
-                        },
-                        {
-                            "id": 4,
-                            "plan_id": 1,
-                            "specification_name": "Desktop, Mobile and TV App"
-                        },
-                        {
-                            "id": 5,
-                            "plan_id": 1,
-                            "specification_name": "Unlimited Movies and TV Shows"
-                        }
-                    ]
-                },
-            ]
-           }
+           "statusCode": 200,
+          "data": [
+            {
+                "id": 14,
+                "customer_details_id": 17,
+                "customer_id": 30,
+                "affiliate_id": "4",
+                "payment_type": "paypal",
+                "plan_name": "Starter",
+                "plan_price": "25",
+                "coupan_code": null,
+                "coupan_discount": null,
+                "coupan_discount_type": null,
+                "sub_total": "25",
+                "total": "25",
+                "affiliate_commission": null,
+                "additional_information": "dfgdf",
+                "created_at": "2024-04-05T12:58:16.000000Z",
+                "updated_at": "2024-04-05T12:58:16.000000Z",
+                "affiliate": {
+                    "id": 4,
+                    "name": "test affi",
+                    "email": "affi@yopmail.com",
+                    "phone": "7894561236",
+                    "email_verified_at": null,
+                    "image": null,
+                    "status": "1",
+                    "created_at": "2024-04-03T06:47:51.000000Z",
+                    "updated_at": "2024-04-03T06:47:51.000000Z"
+                }
+            }
+          ]
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+          "status": false,
+          "statusCode": 200,
+          "message": "No commission found!"
+          }
         headers: []
         description: ''
         custom: []
@@ -138,173 +87,7 @@ endpoints:
           {
           "status": false,
           "statusCode": 401,
-          "error": {
-          "message": [
-               "No detail found!"
-           ]
-          }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/show/detail
-    metadata:
-      groupName: 'Listing APIs'
-      groupDescription: |-
-
-        APIs for Prduct Listing
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Show  Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "status": false,
-            "statusCode": 200,
-            "message": "No show found"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 500
-        content: |-
-          {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/movie/detail
-    metadata:
-      groupName: 'Listing APIs'
-      groupDescription: |-
-
-        APIs for Prduct Listing
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Movie  Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "status": false,
-            "statusCode": 200,
-            "message": "No movie found"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 500
-        content: |-
-          {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/kid/detail
-    metadata:
-      groupName: 'Listing APIs'
-      groupDescription: |-
-
-        APIs for Prduct Listing
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Kid  Api'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "status": false,
-            "statusCode": 200,
-            "message": "No kid found"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 500
-        content: |-
-          {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
+          "error": "Unauthorised"
           }
         headers: []
         description: ''

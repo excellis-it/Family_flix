@@ -12,6 +12,8 @@ use App\Http\Controllers\Api\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Api\Customer\ProfileController as CustomerProfileController; 
 use App\Http\Controllers\Api\Customer\SubscriptionController as CustomerSubscriptionController;
 use App\Http\Controllers\Api\Affiliater\CommissionController;
+use App\Http\Controllers\Api\CouponCheckController;
+use App\Http\Controllers\Api\PaymentController;
 
 
 /*
@@ -99,6 +101,10 @@ use App\Http\Controllers\Api\Affiliater\CommissionController;
 
         Route::post('contact-us', [GeneralController::class, 'contactUs']);
         Route::post('subscribe-us', [GeneralController::class, 'subscribeUs']);
+
+        //payment gateway
+        Route::post('coupon-check', [CouponCheckController::class, 'checkCoupon']);
+        Route::post('payment-capture', [PaymentController::class, 'paymentCapture']);
 
     });
 

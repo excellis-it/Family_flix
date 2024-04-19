@@ -1,13 +1,17 @@
-name: Endpoints
-description: ''
+name: Customer
+description: |-
+
+  APIs for Authentication
 endpoints:
   -
     httpMethods:
       - POST
     uri: api/v1/customer/register
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Customer
+      groupDescription: |-
+
+        APIs for Authentication
       subgroup: ''
       subgroupDescription: ''
       title: 'Register Api for Customer'
@@ -35,7 +39,7 @@ endpoints:
         name: phone
         description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
         required: true
-        example: sckrbtqkkjsikidujyqlklqloihsbbzvwtluenexbkscpgqhecgafazwikrtcpmkox
+        example: zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -44,7 +48,7 @@ endpoints:
         name: email
         description: 'The email of the user. Example:'
         required: true
-        example: malika80@example.com
+        example: unikolaus@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -69,8 +73,8 @@ endpoints:
         custom: []
     cleanBodyParameters:
       name: 'John Doe'
-      phone: sckrbtqkkjsikidujyqlklqloihsbbzvwtluenexbkscpgqhecgafazwikrtcpmkox
-      email: malika80@example.com
+      phone: zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw
+      email: unikolaus@example.com
       password: '12345678'
       confirm_password: '12345678'
     fileParameters: []
@@ -124,8 +128,10 @@ endpoints:
       - POST
     uri: api/v1/customer/login
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Customer
+      groupDescription: |-
+
+        APIs for Authentication
       subgroup: ''
       subgroupDescription: ''
       title: 'Login Api for customer'
@@ -189,224 +195,6 @@ endpoints:
            "status": false,
            "statusCode": 401,
            "error": "Invalid user & Password!"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/customer/account-details
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Details Api'
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-               "success": {
-                   "id": 1,
-                   "name": "John Doe",
-                   "email": "john@yopmail.com",
-                 "email_verified_at": null,
-                "created_at": "2021-05-27T06:50:50.000000Z",
-              "updated_at": "2021-05-27T06:50:50.000000Z"
-           }
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 401
-        content: |-
-          {
-             "error": "Unauthorised"
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/customer/account-update
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update-Profile Api'
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the user.'
-        required: true
-        example: 'John Doe'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-      email:
-        name: email
-        description: 'The email of the user.'
-        required: true
-        example: whiteglovecomics@gmail.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-    cleanBodyParameters:
-      name: 'John Doe'
-      email: whiteglovecomics@gmail.com
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-            "message": "Customer details updated successfully.",
-            "data": {
-                "id": 3,
-                "name": "test2 affiliater2",
-                "email": "test1@yopmail.com",
-                "phone": "1231231231",
-                "email_verified_at": null,
-                "image": "Customer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png",
-                "status": "1",
-                "created_at": "2024-03-13T12:57:34.000000Z",
-                "updated_at": "2024-03-14T06:16:19.000000Z"
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/customer/subscription/list
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Subscriptions Api'
-      description: ''
-      authenticated: true
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-          "status": true,
-           "statusCode": 200,
-          "data": [
-            {
-                "id": 14,
-                "customer_details_id": 17,
-                "customer_id": 30,
-                "affiliate_id": "4",
-                "payment_type": "paypal",
-                "plan_name": "Starter",
-                "plan_price": "25",
-                "coupan_code": null,
-                "coupan_discount": null,
-                "coupan_discount_type": null,
-                "sub_total": "25",
-                "total": "25",
-                "affiliate_commission": null,
-                "additional_information": "dfgdf",
-                "created_at": "2024-04-05T12:58:16.000000Z",
-                "updated_at": "2024-04-05T12:58:16.000000Z",
-                "affiliate": {
-                    "id": 4,
-                    "name": "test affi",
-                    "email": "affi@yopmail.com",
-                    "phone": "7894561236",
-                    "email_verified_at": null,
-                    "image": null,
-                    "status": "1",
-                    "created_at": "2024-04-03T06:47:51.000000Z",
-                    "updated_at": "2024-04-03T06:47:51.000000Z"
-                }
-            }
-          ]
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 200
-        content: |-
-          {
-          "status": false,
-          "statusCode": 200,
-          "message": "No commission found!"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 401
-        content: |-
-          {
-          "status": false,
-          "statusCode": 401,
-          "error": "Unauthorised"
           }
         headers: []
         description: ''

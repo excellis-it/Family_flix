@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Family-Flix",
-        "_postman_id": "309ca712-b273-4dfe-807f-fb65ec14e1d8",
+        "_postman_id": "713ddbd0-8d6c-4c41-97cc-c08a0eb04e62",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -85,7 +85,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"rnwteyxxfyfrbpclhktjwzlkdjgxsenyqjgwthqtxlqtmwvspk\",\"email\":\"neil45@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb\",\"email\":\"arely72@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -334,7 +334,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"quis\"}"
+                            "raw": "{\"type\":\"sit\"}"
                         },
                         "description": "",
                         "auth": {
@@ -472,8 +472,64 @@
             ]
         },
         {
-            "name": "Endpoints",
-            "description": "",
+            "name": "Coupon Check",
+            "description": "\nAPIs for Coupon Check",
+            "item": [
+                {
+                    "name": "Coupon check Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/coupon-check",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/coupon-check"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"coupon_code\":\"ab\",\"plan_id\":\"officiis\",\"plan_price\":\"aliquid\",\"email\":\"ullrich.norwood@example.net\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"message\": \"Coupon code applied successfully\",\n\"discount\": 100,\n\"coupon_discount\": 100,\n\"coupon_discount_type\": \"fixed\",\n\"status_code\": 200\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"message\": \"Invalid coupon code\",\n\"status_code\": 200\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"message\": \"Coupon code is not valid for you\",\n\"status_code\": 200\n},",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Customer",
+            "description": "\nAPIs for Authentication",
             "item": [
                 {
                     "name": "Register Api for Customer",
@@ -497,7 +553,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"sckrbtqkkjsikidujyqlklqloihsbbzvwtluenexbkscpgqhecgafazwikrtcpmkox\",\"email\":\"malika80@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw\",\"email\":\"unikolaus@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -562,7 +618,13 @@
                             "name": ""
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "name": "Customer Profile ",
+            "description": "\nAPIs for Profile Details",
+            "item": [
                 {
                     "name": "Details Api",
                     "request": {
@@ -635,50 +697,6 @@
                             "name": ""
                         }
                     ]
-                },
-                {
-                    "name": "Subscriptions Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/customer\/subscription\/list",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/customer\/subscription\/list"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": ""
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n\"data\": [\n  {\n      \"id\": 14,\n      \"customer_details_id\": 17,\n      \"customer_id\": 30,\n      \"affiliate_id\": \"4\",\n      \"payment_type\": \"paypal\",\n      \"plan_name\": \"Starter\",\n      \"plan_price\": \"25\",\n      \"coupan_code\": null,\n      \"coupan_discount\": null,\n      \"coupan_discount_type\": null,\n      \"sub_total\": \"25\",\n      \"total\": \"25\",\n      \"affiliate_commission\": null,\n      \"additional_information\": \"dfgdf\",\n      \"created_at\": \"2024-04-05T12:58:16.000000Z\",\n      \"updated_at\": \"2024-04-05T12:58:16.000000Z\",\n      \"affiliate\": {\n          \"id\": 4,\n          \"name\": \"test affi\",\n          \"email\": \"affi@yopmail.com\",\n          \"phone\": \"7894561236\",\n          \"email_verified_at\": null,\n          \"image\": null,\n          \"status\": \"1\",\n          \"created_at\": \"2024-04-03T06:47:51.000000Z\",\n          \"updated_at\": \"2024-04-03T06:47:51.000000Z\"\n      }\n  }\n]\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 200,\n\"message\": \"No commission found!\"\n}",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"Unauthorised\"\n}",
-                            "name": ""
-                        }
-                    ]
                 }
             ]
         },
@@ -708,7 +726,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"lucinda94@example.net\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"metz.mike@example.org\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -752,7 +770,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"bert.gerlach@example.org\"}"
+                            "raw": "{\"email\":\"hannah.kutch@example.com\"}"
                         },
                         "description": "",
                         "auth": {
@@ -777,7 +795,104 @@
             ]
         },
         {
-            "name": "Listing APIs",
+            "name": "Payment Capture",
+            "description": "\nAPIs for Payment Capture",
+            "item": [
+                {
+                    "name": "Payment capture Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/payment-capture",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/payment-capture"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"emailId\":\"ab\",\"first_name\":\"voluptas\",\"last_name\":\"sed\",\"country\":\"accusamus\",\"house_name\":\"distinctio\",\"detail_address\":\"ea\",\"city\":\"deleniti\",\"state\":\"odio\",\"post_code\":\"natus\",\"phone\":\"possimus\",\"amount\":\"fugiat\",\"paymentID\":\"rerum\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"message\": \"Payment captured successfully\",\n\"status_code\": 200\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"message\": \"Something went wrong\",\n\"status_code\": 401\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Plan Listing",
+            "description": "\nAPIs for Plan Listing",
+            "item": [
+                {
+                    "name": "Plan-List Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/plans\/show",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/plans\/show"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"message\": \"Plan details found successfully\",\n  \"data\": {\n      \"plan\": [\n      {\n          \"id\": 1,\n          \"plan_name\": \"Starter\",\n          \"plan_details\": \"Welcome to our starter pack where 2 people can enjoy unlimited movies and shows.\",\n          \"plan_actual_price\": \"30\",\n          \"plan_offer_price\": \"25\",\n          \"button_text\": \"Subscribe\",\n          \"specification\": [\n              {\n                  \"id\": 1,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"1-2 Device Limit\"\n              },\n              {\n                  \"id\": 2,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Preminum Server\"\n              },\n              {\n                  \"id\": 3,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Full HD Available\"\n              },\n              {\n                  \"id\": 4,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Desktop, Mobile and TV App\"\n              },\n              {\n                  \"id\": 5,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Unlimited Movies and TV Shows\"\n              }\n          ]\n      },\n  ]\n }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"message\": [\n     \"No detail found!\"\n ]\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Product",
             "description": "\nAPIs for Prduct Listing",
             "item": [
                 {
@@ -817,47 +932,6 @@
                             "header": [],
                             "code": 500,
                             "body": "{\n  \"status\": 500,\n  \"message\": \"Something went wrong\",\n  \"error\": \"Error message\"\n}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Plan-List Api",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/plans\/show",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/plans\/show"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"message\": \"Plan details found successfully\",\n  \"data\": {\n      \"plan\": [\n      {\n          \"id\": 1,\n          \"plan_name\": \"Starter\",\n          \"plan_details\": \"Welcome to our starter pack where 2 people can enjoy unlimited movies and shows.\",\n          \"plan_actual_price\": \"30\",\n          \"plan_offer_price\": \"25\",\n          \"button_text\": \"Subscribe\",\n          \"specification\": [\n              {\n                  \"id\": 1,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"1-2 Device Limit\"\n              },\n              {\n                  \"id\": 2,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Preminum Server\"\n              },\n              {\n                  \"id\": 3,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Full HD Available\"\n              },\n              {\n                  \"id\": 4,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Desktop, Mobile and TV App\"\n              },\n              {\n                  \"id\": 5,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Unlimited Movies and TV Shows\"\n              }\n          ]\n      },\n  ]\n }",
-                            "name": ""
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": {\n\"message\": [\n     \"No detail found!\"\n ]\n}\n}",
                             "name": ""
                         }
                     ]
@@ -981,6 +1055,56 @@
                             "header": [],
                             "code": 500,
                             "body": "{\n  \"status\": 500,\n  \"message\": \"Something went wrong\",\n  \"error\": \"Error message\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Subscription",
+            "description": "\nAPIs for Subscription List",
+            "item": [
+                {
+                    "name": "Subscriptions Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer\/subscription\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer\/subscription\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n \"statusCode\": 200,\n\"data\": [\n  {\n      \"id\": 14,\n      \"customer_details_id\": 17,\n      \"customer_id\": 30,\n      \"affiliate_id\": \"4\",\n      \"payment_type\": \"paypal\",\n      \"plan_name\": \"Starter\",\n      \"plan_price\": \"25\",\n      \"coupan_code\": null,\n      \"coupan_discount\": null,\n      \"coupan_discount_type\": null,\n      \"sub_total\": \"25\",\n      \"total\": \"25\",\n      \"affiliate_commission\": null,\n      \"additional_information\": \"dfgdf\",\n      \"created_at\": \"2024-04-05T12:58:16.000000Z\",\n      \"updated_at\": \"2024-04-05T12:58:16.000000Z\",\n      \"affiliate\": {\n          \"id\": 4,\n          \"name\": \"test affi\",\n          \"email\": \"affi@yopmail.com\",\n          \"phone\": \"7894561236\",\n          \"email_verified_at\": null,\n          \"image\": null,\n          \"status\": \"1\",\n          \"created_at\": \"2024-04-03T06:47:51.000000Z\",\n          \"updated_at\": \"2024-04-03T06:47:51.000000Z\"\n      }\n  }\n]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 200,\n\"message\": \"No commission found!\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"Unauthorised\"\n}",
                             "name": ""
                         }
                     ]

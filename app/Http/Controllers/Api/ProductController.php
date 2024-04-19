@@ -9,7 +9,7 @@ use App\Models\EntertainmentBanner;
 use App\Models\Product;
 
 /**
- * @group Listing APIs
+ * @group Product
  *
  * APIs for Prduct Listing
  */

@@ -1,0 +1,122 @@
+name: 'Coupon Check'
+description: |-
+
+  APIs for Coupon Check
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/coupon-check
+    metadata:
+      groupName: 'Coupon Check'
+      groupDescription: |-
+
+        APIs for Coupon Check
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Coupon check Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      coupon_code:
+        name: coupon_code
+        description: ''
+        required: true
+        example: ab
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      plan_id:
+        name: plan_id
+        description: ''
+        required: true
+        example: officiis
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      plan_price:
+        name: plan_price
+        description: ''
+        required: true
+        example: aliquid
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      email:
+        name: email
+        description: 'This field is required when <code>phone</code> is not present.  Must be a valid email address.'
+        required: false
+        example: ullrich.norwood@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      phone:
+        name: phone
+        description: 'This field is required when <code>email</code> is not present.'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      coupon_code: ab
+      plan_id: officiis
+      plan_price: aliquid
+      email: ullrich.norwood@example.net
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "message": "Coupon code applied successfully",
+          "discount": 100,
+          "coupon_discount": 100,
+          "coupon_discount_type": "fixed",
+          "status_code": 200
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+          "status": false,
+          "message": "Invalid coupon code",
+          "status_code": 200
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+          "status": false,
+          "message": "Coupon code is not valid for you",
+          "status_code": 200
+          },
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

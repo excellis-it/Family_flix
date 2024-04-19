@@ -12,7 +12,7 @@ use App\Traits\ImageTrait;
 use Crypt;
 
 /**
- * @Customer Profile Details APIs
+ * @group Customer Profile 
  *
  * APIs for Profile Details
  */

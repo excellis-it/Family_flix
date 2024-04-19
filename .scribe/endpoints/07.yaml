@@ -1,0 +1,164 @@
+name: General
+description: |-
+
+  APIs for General
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/contact-us
+    metadata:
+      groupName: General
+      groupDescription: |-
+
+        APIs for General
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Contact Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      user_name:
+        name: user_name
+        description: 'The name of the user.'
+        required: true
+        example: John
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      user_email:
+        name: user_email
+        description: 'The email of the user. Example:'
+        required: true
+        example: metz.mike@example.org
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      user_phone:
+        name: user_phone
+        description: 'The phone of the user.'
+        required: true
+        example: '1234567890'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      message:
+        name: message
+        description: 'The message of the user.'
+        required: true
+        example: 'This is a test message'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      user_name: John
+      user_email: metz.mike@example.org
+      user_phone: '1234567890'
+      message: 'This is a test message'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+           "message": "Contact us details added successfully.",
+           "success": {
+                "user_name": "John",
+                "user_email": "
+                "user_phone": "1234567890",
+                "message": "This is a test message",
+                "id": 1
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+           "error": "The user email field is required."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/subscribe-us
+    metadata:
+      groupName: General
+      groupDescription: |-
+
+        APIs for General
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Subscribe Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'The email of the user. Example:'
+        required: true
+        example: hannah.kutch@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      email: hannah.kutch@example.com
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+           "message": "You have been subscribed successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+           "error": "The email has already been taken."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

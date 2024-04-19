@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * @Customer Subscription List APIs
+ * @group Subscription
  *
  * APIs for Subscription List
  */

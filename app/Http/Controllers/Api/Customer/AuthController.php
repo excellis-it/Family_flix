@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
 /**
-    * @Customer Authentication
+    * @group Customer
     *
     * APIs for Authentication
 */

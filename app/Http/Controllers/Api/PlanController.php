@@ -8,7 +8,7 @@ use App\Models\Plan;
 use App\Models\PlanSpecification;
 
 /**
- * @group Listing APIs
+ * @group Plan Listing
  *
  * APIs for Plan Listing
  */
