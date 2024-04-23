@@ -1,22 +1,73 @@
-name: Customer
-description: |-
-
-  APIs for Authentication
+name: 'Affiliater Profile'
+description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/customer/register
+    uri: api/v1/affiliater/profile-details
     metadata:
-      groupName: Customer
-      groupDescription: |-
-
-        APIs for Authentication
+      groupName: 'Affiliater Profile'
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Register Api for Customer'
+      title: 'Details Api'
       description: ''
-      authenticated: false
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+               "success": {
+                   "id": 1,
+                   "name": "John Doe",
+                   "email": "john@yopmail.com",
+                 "email_verified_at": null,
+                "created_at": "2021-05-27T06:50:50.000000Z",
+              "updated_at": "2021-05-27T06:50:50.000000Z"
+           }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+             "error": "Unauthorised"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/affiliater/profile-update
+    metadata:
+      groupName: 'Affiliater Profile'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Profile Api'
+      description: ''
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -37,82 +88,64 @@ endpoints:
         custom: []
       phone:
         name: phone
-        description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
+        description: 'The phone of the user.'
         required: true
-        example: zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      email:
-        name: email
-        description: 'The email of the user. Example:'
-        required: true
-        example: unikolaus@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      password:
-        name: password
-        description: 'The password of the user.'
-        required: true
-        example: '12345678'
+        example: '+1 1234 567 890'
         type: string
         enumValues: []
         exampleWasSpecified: true
         custom: []
-      confirm_password:
-        name: confirm_password
-        description: 'The confirm_password of the user.'
+      email:
+        name: email
+        description: 'The email of the user.'
         required: true
-        example: '12345678'
+        example: whiteglovecomics@gmail.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      address:
+        name: address
+        description: 'The address of the user.'
+        required: true
+        example: 'USA,678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      pincode:
+        name: pincode
+        description: 'The pincode of the user.'
+        required: true
+        example: '659865'
         type: string
         enumValues: []
         exampleWasSpecified: true
         custom: []
     cleanBodyParameters:
       name: 'John Doe'
-      phone: zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw
-      email: unikolaus@example.com
-      password: '12345678'
-      confirm_password: '12345678'
+      phone: '+1 1234 567 890'
+      email: whiteglovecomics@gmail.com
+      address: 'USA,678'
+      pincode: '659865'
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-           "status": true,
-            "statusCode": 200,
+            "message": "Affiliater details updated successfully.",
             "data": {
-            "user": {
-                "name": "test customer",
-                "email": "testcustomer@yopmail.com",
-                "phone": 8989898965,
-                "status": 1,
-                "updated_at": "2024-03-14T05:57:00.000000Z",
-                "created_at": "2024-03-14T05:57:00.000000Z",
-                "id": 4
+                "id": 3,
+                "name": "test2 affiliater2",
+                "email": "test1@yopmail.com",
+                "phone": "1231231231",
+                "email_verified_at": null,
+                "image": "Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png",
+                "status": "1",
+                "created_at": "2024-03-13T12:57:34.000000Z",
+                "updated_at": "2024-03-14T06:16:19.000000Z"
             }
-            },
-            "message": "registered successfully"
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 401
-        content: |-
-          {
-          "status": false,
-          "statusCode": 401,
-          "error": {
-          "message": [
-                "The email has already been taken.",
-                "The confirm password and password must match."
-            ]
-          }
           }
         headers: []
         description: ''
@@ -126,17 +159,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/customer/login
+    uri: api/v1/affiliater/create-link
     metadata:
-      groupName: Customer
-      groupDescription: |-
-
-        APIs for Authentication
+      groupName: 'Affiliater Profile'
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Login Api for customer'
+      title: 'AffiliateLink Api'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
@@ -145,56 +176,17 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      email:
-        name: email
-        description: 'The email of the user.'
-        required: true
-        example: john@yopmail.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-      password:
-        name: password
-        description: 'The password of the user.'
-        required: true
-        example: '12345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-    cleanBodyParameters:
-      email: john@yopmail.com
-      password: '12345678'
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-          "status": true,
-           "statusCode": 200,
-           "data": {
-                "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks",
-                "user": {
-                    "id": 3,
-                    "name": "test2 affiliater2",
-                    "email": "test1@yopmail.com",
-                    "status": "1"
-                }
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 401
-        content: |-
-          {
-           "status": false,
-           "statusCode": 401,
-           "error": "Invalid user & Password!"
+           "message": "Affiliate link created successfully.",
+           "data": "http://127.0.0.1:8001/pricing/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9",
+           "status": true
           }
         headers: []
         description: ''

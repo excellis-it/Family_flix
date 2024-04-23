@@ -66,6 +66,32 @@
                     <a href="#authenticating-requests">Authenticating requests</a>
                 </li>
                             </ul>
+                    <ul id="tocify-header-affiliater-commission" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="affiliater-commission">
+                    <a href="#affiliater-commission">Affiliater - Commission</a>
+                </li>
+                                    <ul id="tocify-subheader-affiliater-commission" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="affiliater-commission-POSTapi-v1-affiliater-commission-list">
+                                <a href="#affiliater-commission-POSTapi-v1-affiliater-commission-list">Commission Api</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-affiliater-profile" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="affiliater-profile">
+                    <a href="#affiliater-profile">Affiliater Profile</a>
+                </li>
+                                    <ul id="tocify-subheader-affiliater-profile" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="affiliater-profile-POSTapi-v1-affiliater-profile-details">
+                                <a href="#affiliater-profile-POSTapi-v1-affiliater-profile-details">Details Api</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="affiliater-profile-POSTapi-v1-affiliater-profile-update">
+                                <a href="#affiliater-profile-POSTapi-v1-affiliater-profile-update">Update Profile Api</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="affiliater-profile-POSTapi-v1-affiliater-create-link">
+                                <a href="#affiliater-profile-POSTapi-v1-affiliater-create-link">AffiliateLink Api</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-authentication" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="authentication">
                     <a href="#authentication">Authentication</a>
@@ -223,7 +249,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: April 19, 2024</li>
+        <li>Last updated: April 23, 2024</li>
     </ul>
 </div>
 
@@ -241,7 +267,646 @@ You can switch the language used with the tabs at the top right (or from the nav
         <h1 id="authenticating-requests">Authenticating requests</h1>
 <p>This API is not authenticated.</p>
 
-        <h1 id="authentication">Authentication</h1>
+        <h1 id="affiliater-commission">Affiliater - Commission</h1>
+
+    
+
+                                <h2 id="affiliater-commission-POSTapi-v1-affiliater-commission-list">Commission Api</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-affiliater-commission-list">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/affiliater/commission/list?search=John+Doe" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/affiliater/commission/list"
+);
+
+const params = {
+    "search": "John Doe",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-affiliater-commission-list">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+&quot;status&quot;: true,
+ &quot;statusCode&quot;: 200,
+ &quot;data&quot;: [
+     {
+         &quot;id&quot;: 1,
+         &quot;affiliate_id&quot;: 3,
+         &quot;customer_id&quot;: 1,
+         &quot;subscription_id&quot;: 1,
+         &quot;commission&quot;: &quot;5.00&quot;,
+         &quot;created_at&quot;: &quot;2021-05-27T06:50:50.000000Z&quot;,
+         &quot;updated_at&quot;: &quot;2021-05-27T06:50:50.000000Z&quot;,
+         &quot;customer_details&quot;: {
+             &quot;id&quot;: 1,
+             &quot;name&quot;: &quot;John Doe&quot;,
+             &quot;email&quot;: &quot;
+        }
+   }
+]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 200,
+    &quot;message&quot;: &quot;No commission found!&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 401,
+    &quot;error&quot;: &quot;Unauthorised&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-affiliater-commission-list" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-affiliater-commission-list"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-affiliater-commission-list"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-affiliater-commission-list" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-affiliater-commission-list">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-affiliater-commission-list" data-method="POST"
+      data-path="api/v1/affiliater/commission/list"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-affiliater-commission-list', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-affiliater-commission-list"
+                    onclick="tryItOut('POSTapi-v1-affiliater-commission-list');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-affiliater-commission-list"
+                    onclick="cancelTryOut('POSTapi-v1-affiliater-commission-list');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-affiliater-commission-list"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/affiliater/commission/list</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-affiliater-commission-list"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-affiliater-commission-list"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="POSTapi-v1-affiliater-commission-list"
+               value="John Doe"
+               data-component="query">
+    <br>
+<p>Search by customer name. Example: <code>John Doe</code></p>
+            </div>
+                </form>
+
+                <h1 id="affiliater-profile">Affiliater Profile</h1>
+
+    
+
+                                <h2 id="affiliater-profile-POSTapi-v1-affiliater-profile-details">Details Api</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-affiliater-profile-details">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/affiliater/profile-details" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/affiliater/profile-details"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-affiliater-profile-details">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;email&quot;: &quot;john@yopmail.com&quot;,
+        &quot;email_verified_at&quot;: null,
+        &quot;created_at&quot;: &quot;2021-05-27T06:50:50.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2021-05-27T06:50:50.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;error&quot;: &quot;Unauthorised&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-affiliater-profile-details" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-affiliater-profile-details"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-affiliater-profile-details"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-affiliater-profile-details" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-affiliater-profile-details">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-affiliater-profile-details" data-method="POST"
+      data-path="api/v1/affiliater/profile-details"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-affiliater-profile-details', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-affiliater-profile-details"
+                    onclick="tryItOut('POSTapi-v1-affiliater-profile-details');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-affiliater-profile-details"
+                    onclick="cancelTryOut('POSTapi-v1-affiliater-profile-details');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-affiliater-profile-details"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/affiliater/profile-details</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-affiliater-profile-details"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-affiliater-profile-details"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="affiliater-profile-POSTapi-v1-affiliater-profile-update">Update Profile Api</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-affiliater-profile-update">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/affiliater/profile-update" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"phone\": \"+1 1234 567 890\",
+    \"email\": \"whiteglovecomics@gmail.com\",
+    \"address\": \"USA,678\",
+    \"pincode\": \"659865\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/affiliater/profile-update"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "phone": "+1 1234 567 890",
+    "email": "whiteglovecomics@gmail.com",
+    "address": "USA,678",
+    "pincode": "659865"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-affiliater-profile-update">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Affiliater details updated successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;test2 affiliater2&quot;,
+        &quot;email&quot;: &quot;test1@yopmail.com&quot;,
+        &quot;phone&quot;: &quot;1231231231&quot;,
+        &quot;email_verified_at&quot;: null,
+        &quot;image&quot;: &quot;Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png&quot;,
+        &quot;status&quot;: &quot;1&quot;,
+        &quot;created_at&quot;: &quot;2024-03-13T12:57:34.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-03-14T06:16:19.000000Z&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-affiliater-profile-update" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-affiliater-profile-update"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-affiliater-profile-update"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-affiliater-profile-update" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-affiliater-profile-update">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-affiliater-profile-update" data-method="POST"
+      data-path="api/v1/affiliater/profile-update"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-affiliater-profile-update', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-affiliater-profile-update"
+                    onclick="tryItOut('POSTapi-v1-affiliater-profile-update');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-affiliater-profile-update"
+                    onclick="cancelTryOut('POSTapi-v1-affiliater-profile-update');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-affiliater-profile-update"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/affiliater/profile-update</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-affiliater-profile-update"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-affiliater-profile-update"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-affiliater-profile-update"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The name of the user. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-affiliater-profile-update"
+               value="+1 1234 567 890"
+               data-component="body">
+    <br>
+<p>The phone of the user. Example: <code>+1 1234 567 890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-affiliater-profile-update"
+               value="whiteglovecomics@gmail.com"
+               data-component="body">
+    <br>
+<p>The email of the user. Example: <code>whiteglovecomics@gmail.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="address"                data-endpoint="POSTapi-v1-affiliater-profile-update"
+               value="USA,678"
+               data-component="body">
+    <br>
+<p>The address of the user. Example: <code>USA,678</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>pincode</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="pincode"                data-endpoint="POSTapi-v1-affiliater-profile-update"
+               value="659865"
+               data-component="body">
+    <br>
+<p>The pincode of the user. Example: <code>659865</code></p>
+        </div>
+        </form>
+
+                    <h2 id="affiliater-profile-POSTapi-v1-affiliater-create-link">AffiliateLink Api</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-affiliater-create-link">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/affiliater/create-link" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/affiliater/create-link"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-affiliater-create-link">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Affiliate link created successfully.&quot;,
+    &quot;data&quot;: &quot;http://127.0.0.1:8001/pricing/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9&quot;,
+    &quot;status&quot;: true
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-affiliater-create-link" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-affiliater-create-link"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-affiliater-create-link"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-affiliater-create-link" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-affiliater-create-link">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-affiliater-create-link" data-method="POST"
+      data-path="api/v1/affiliater/create-link"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-affiliater-create-link', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-affiliater-create-link"
+                    onclick="tryItOut('POSTapi-v1-affiliater-create-link');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-affiliater-create-link"
+                    onclick="cancelTryOut('POSTapi-v1-affiliater-create-link');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-affiliater-create-link"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/affiliater/create-link</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-affiliater-create-link"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-affiliater-create-link"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                <h1 id="authentication">Authentication</h1>
 
     <p>APIs for Authentication</p>
 
@@ -435,8 +1100,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"name\": \"John Doe\",
-    \"phone\": \"zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb\",
-    \"email\": \"arely72@example.com\",
+    \"phone\": \"ylllzddijxd\",
+    \"email\": \"reagan.skiles@example.net\",
     \"password\": \"12345678\",
     \"confirm_password\": \"12345678\"
 }"
@@ -455,8 +1120,8 @@ const headers = {
 
 let body = {
     "name": "John Doe",
-    "phone": "zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb",
-    "email": "arely72@example.com",
+    "phone": "ylllzddijxd",
+    "email": "reagan.skiles@example.net",
     "password": "12345678",
     "confirm_password": "12345678"
 };
@@ -596,10 +1261,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-register"
-               value="zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb"
+               value="ylllzddijxd"
                data-component="body">
     <br>
-<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb</code></p>
+<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>ylllzddijxd</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -607,10 +1272,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-register"
-               value="arely72@example.com"
+               value="reagan.skiles@example.net"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>arely72@example.com</code></p>
+<p>The email of the user. Example: Example: <code>reagan.skiles@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -1410,7 +2075,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"sit\"
+    \"type\": \"et\"
 }"
 </code></pre></div>
 
@@ -1426,7 +2091,7 @@ const headers = {
 };
 
 let body = {
-    "type": "sit"
+    "type": "et"
 };
 
 fetch(url, {
@@ -1543,10 +2208,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-cms-faq"
-               value="sit"
+               value="et"
                data-component="body">
     <br>
-<p>Example: <code>sit</code></p>
+<p>Example: <code>et</code></p>
         </div>
         </form>
 
@@ -2083,10 +2748,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"coupon_code\": \"ab\",
-    \"plan_id\": \"officiis\",
-    \"plan_price\": \"aliquid\",
-    \"email\": \"ullrich.norwood@example.net\"
+    \"coupon_code\": \"enim\",
+    \"plan_id\": \"consectetur\",
+    \"plan_price\": \"sed\",
+    \"email\": \"robert28@example.net\"
 }"
 </code></pre></div>
 
@@ -2102,10 +2767,10 @@ const headers = {
 };
 
 let body = {
-    "coupon_code": "ab",
-    "plan_id": "officiis",
-    "plan_price": "aliquid",
-    "email": "ullrich.norwood@example.net"
+    "coupon_code": "enim",
+    "plan_id": "consectetur",
+    "plan_price": "sed",
+    "email": "robert28@example.net"
 };
 
 fetch(url, {
@@ -2230,10 +2895,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="coupon_code"                data-endpoint="POSTapi-v1-coupon-check"
-               value="ab"
+               value="enim"
                data-component="body">
     <br>
-<p>Example: <code>ab</code></p>
+<p>Example: <code>enim</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>plan_id</code></b>&nbsp;&nbsp;
@@ -2241,10 +2906,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="plan_id"                data-endpoint="POSTapi-v1-coupon-check"
-               value="officiis"
+               value="consectetur"
                data-component="body">
     <br>
-<p>Example: <code>officiis</code></p>
+<p>Example: <code>consectetur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>plan_price</code></b>&nbsp;&nbsp;
@@ -2252,10 +2917,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="plan_price"                data-endpoint="POSTapi-v1-coupon-check"
-               value="aliquid"
+               value="sed"
                data-component="body">
     <br>
-<p>Example: <code>aliquid</code></p>
+<p>Example: <code>sed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -2263,10 +2928,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-coupon-check"
-               value="ullrich.norwood@example.net"
+               value="robert28@example.net"
                data-component="body">
     <br>
-<p>This field is required when <code>phone</code> is not present.  Must be a valid email address. Example: <code>ullrich.norwood@example.net</code></p>
+<p>This field is required when <code>phone</code> is not present.  Must be a valid email address. Example: <code>robert28@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -2303,8 +2968,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"name\": \"John Doe\",
-    \"phone\": \"zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw\",
-    \"email\": \"unikolaus@example.com\",
+    \"phone\": \"zjtyxemaaoypmtvifbbezrgwfeockttakjsnuhdszwzuusugrpsqs\",
+    \"email\": \"hagenes.maud@example.com\",
     \"password\": \"12345678\",
     \"confirm_password\": \"12345678\"
 }"
@@ -2323,8 +2988,8 @@ const headers = {
 
 let body = {
     "name": "John Doe",
-    "phone": "zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw",
-    "email": "unikolaus@example.com",
+    "phone": "zjtyxemaaoypmtvifbbezrgwfeockttakjsnuhdszwzuusugrpsqs",
+    "email": "hagenes.maud@example.com",
     "password": "12345678",
     "confirm_password": "12345678"
 };
@@ -2464,10 +3129,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-customer-register"
-               value="zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw"
+               value="zjtyxemaaoypmtvifbbezrgwfeockttakjsnuhdszwzuusugrpsqs"
                data-component="body">
     <br>
-<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw</code></p>
+<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>zjtyxemaaoypmtvifbbezrgwfeockttakjsnuhdszwzuusugrpsqs</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -2475,10 +3140,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-customer-register"
-               value="unikolaus@example.com"
+               value="hagenes.maud@example.com"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>unikolaus@example.com</code></p>
+<p>The email of the user. Example: Example: <code>hagenes.maud@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -2999,7 +3664,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"user_name\": \"John\",
-    \"user_email\": \"metz.mike@example.org\",
+    \"user_email\": \"lera03@example.net\",
     \"user_phone\": \"1234567890\",
     \"message\": \"This is a test message\"
 }"
@@ -3018,7 +3683,7 @@ const headers = {
 
 let body = {
     "user_name": "John",
-    "user_email": "metz.mike@example.org",
+    "user_email": "lera03@example.net",
     "user_phone": "1234567890",
     "message": "This is a test message"
 };
@@ -3146,10 +3811,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="user_email"                data-endpoint="POSTapi-v1-contact-us"
-               value="metz.mike@example.org"
+               value="lera03@example.net"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>metz.mike@example.org</code></p>
+<p>The email of the user. Example: Example: <code>lera03@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>user_phone</code></b>&nbsp;&nbsp;
@@ -3192,7 +3857,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"hannah.kutch@example.com\"
+    \"email\": \"wmedhurst@example.com\"
 }"
 </code></pre></div>
 
@@ -3208,7 +3873,7 @@ const headers = {
 };
 
 let body = {
-    "email": "hannah.kutch@example.com"
+    "email": "wmedhurst@example.com"
 };
 
 fetch(url, {
@@ -3316,10 +3981,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-subscribe-us"
-               value="hannah.kutch@example.com"
+               value="wmedhurst@example.com"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>hannah.kutch@example.com</code></p>
+<p>The email of the user. Example: Example: <code>wmedhurst@example.com</code></p>
         </div>
         </form>
 
@@ -3344,18 +4009,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"emailId\": \"ab\",
-    \"first_name\": \"voluptas\",
+    \"emailId\": \"et\",
+    \"first_name\": \"eum\",
     \"last_name\": \"sed\",
-    \"country\": \"accusamus\",
-    \"house_name\": \"distinctio\",
-    \"detail_address\": \"ea\",
-    \"city\": \"deleniti\",
-    \"state\": \"odio\",
-    \"post_code\": \"natus\",
-    \"phone\": \"possimus\",
-    \"amount\": \"fugiat\",
-    \"paymentID\": \"rerum\"
+    \"country\": \"dolore\",
+    \"house_name\": \"ut\",
+    \"detail_address\": \"accusantium\",
+    \"city\": \"eius\",
+    \"state\": \"nam\",
+    \"post_code\": \"eum\",
+    \"phone\": \"nemo\",
+    \"amount\": \"nam\",
+    \"paymentID\": \"est\"
 }"
 </code></pre></div>
 
@@ -3371,18 +4036,18 @@ const headers = {
 };
 
 let body = {
-    "emailId": "ab",
-    "first_name": "voluptas",
+    "emailId": "et",
+    "first_name": "eum",
     "last_name": "sed",
-    "country": "accusamus",
-    "house_name": "distinctio",
-    "detail_address": "ea",
-    "city": "deleniti",
-    "state": "odio",
-    "post_code": "natus",
-    "phone": "possimus",
-    "amount": "fugiat",
-    "paymentID": "rerum"
+    "country": "dolore",
+    "house_name": "ut",
+    "detail_address": "accusantium",
+    "city": "eius",
+    "state": "nam",
+    "post_code": "eum",
+    "phone": "nemo",
+    "amount": "nam",
+    "paymentID": "est"
 };
 
 fetch(url, {
@@ -3493,10 +4158,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="emailId"                data-endpoint="POSTapi-v1-payment-capture"
-               value="ab"
+               value="et"
                data-component="body">
     <br>
-<p>Example: <code>ab</code></p>
+<p>Example: <code>et</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>first_name</code></b>&nbsp;&nbsp;
@@ -3504,10 +4169,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="first_name"                data-endpoint="POSTapi-v1-payment-capture"
-               value="voluptas"
+               value="eum"
                data-component="body">
     <br>
-<p>Example: <code>voluptas</code></p>
+<p>Example: <code>eum</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>last_name</code></b>&nbsp;&nbsp;
@@ -3526,10 +4191,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="country"                data-endpoint="POSTapi-v1-payment-capture"
-               value="accusamus"
+               value="dolore"
                data-component="body">
     <br>
-<p>Example: <code>accusamus</code></p>
+<p>Example: <code>dolore</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>house_name</code></b>&nbsp;&nbsp;
@@ -3537,10 +4202,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="house_name"                data-endpoint="POSTapi-v1-payment-capture"
-               value="distinctio"
+               value="ut"
                data-component="body">
     <br>
-<p>Example: <code>distinctio</code></p>
+<p>Example: <code>ut</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>detail_address</code></b>&nbsp;&nbsp;
@@ -3548,10 +4213,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="detail_address"                data-endpoint="POSTapi-v1-payment-capture"
-               value="ea"
+               value="accusantium"
                data-component="body">
     <br>
-<p>Example: <code>ea</code></p>
+<p>Example: <code>accusantium</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
@@ -3559,10 +4224,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="city"                data-endpoint="POSTapi-v1-payment-capture"
-               value="deleniti"
+               value="eius"
                data-component="body">
     <br>
-<p>Example: <code>deleniti</code></p>
+<p>Example: <code>eius</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>state</code></b>&nbsp;&nbsp;
@@ -3570,10 +4235,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="state"                data-endpoint="POSTapi-v1-payment-capture"
-               value="odio"
+               value="nam"
                data-component="body">
     <br>
-<p>Example: <code>odio</code></p>
+<p>Example: <code>nam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>post_code</code></b>&nbsp;&nbsp;
@@ -3581,10 +4246,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="post_code"                data-endpoint="POSTapi-v1-payment-capture"
-               value="natus"
+               value="eum"
                data-component="body">
     <br>
-<p>Example: <code>natus</code></p>
+<p>Example: <code>eum</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -3592,10 +4257,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-payment-capture"
-               value="possimus"
+               value="nemo"
                data-component="body">
     <br>
-<p>Example: <code>possimus</code></p>
+<p>Example: <code>nemo</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
@@ -3603,10 +4268,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="amount"                data-endpoint="POSTapi-v1-payment-capture"
-               value="fugiat"
+               value="nam"
                data-component="body">
     <br>
-<p>Example: <code>fugiat</code></p>
+<p>Example: <code>nam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>paymentID</code></b>&nbsp;&nbsp;
@@ -3614,10 +4279,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="paymentID"                data-endpoint="POSTapi-v1-payment-capture"
-               value="rerum"
+               value="est"
                data-component="body">
     <br>
-<p>Example: <code>rerum</code></p>
+<p>Example: <code>est</code></p>
         </div>
         </form>
 

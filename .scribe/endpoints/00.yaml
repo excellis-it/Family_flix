@@ -121,7 +121,7 @@ endpoints:
         name: phone
         description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
         required: true
-        example: zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb
+        example: ylllzddijxd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -130,7 +130,7 @@ endpoints:
         name: email
         description: 'The email of the user. Example:'
         required: true
-        example: arely72@example.com
+        example: reagan.skiles@example.net
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -155,8 +155,8 @@ endpoints:
         custom: []
     cleanBodyParameters:
       name: 'John Doe'
-      phone: zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb
-      email: arely72@example.com
+      phone: ylllzddijxd
+      email: reagan.skiles@example.net
       password: '12345678'
       confirm_password: '12345678'
     fileParameters: []

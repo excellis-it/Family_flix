@@ -13,7 +13,7 @@ use Crypt;
 
     
 /**
- * @group Profile
+ * @group Affiliater Profile
  */
 
 class ProfileController extends Controller
@@ -60,7 +60,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update-Profile Api
+     * Update Profile Api
      * @authenticated
      * @bodyParam name string required The name of the user. Example: John Doe
      * @bodyParam email string required The email of the user. Example: whiteglovecomics@gmail.com
@@ -93,6 +93,7 @@ class ProfileController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()->first(), 'status' => false], 200);
         }
+        
         try {
             $user = User::where('id', Auth::user()->id)->first();
             $user->name = $request->name;
@@ -119,7 +120,6 @@ class ProfileController extends Controller
     *  "data": "http://127.0.0.1:8001/pricing/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9",
     *  "status": true
     * }
-    
     */
 
     public function affiliateLink(Request $request)

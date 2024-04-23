@@ -7,6 +7,245 @@ servers:
   -
     url: 'http://localhost'
 paths:
+  /api/v1/affiliater/commission/list:
+    post:
+      summary: 'Commission Api'
+      operationId: commissionApi
+      description: ''
+      parameters:
+        -
+          in: query
+          name: search
+          description: 'Search by customer name.'
+          example: 'John Doe'
+          required: false
+          schema:
+            type: string
+            description: 'Search by customer name.'
+            example: 'John Doe'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No commission found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No commission found!'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: Unauthorised
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Affiliater - Commission'
+  /api/v1/affiliater/profile-details:
+    post:
+      summary: 'Details Api'
+      operationId: detailsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success:
+                    id: 1
+                    name: 'John Doe'
+                    email: john@yopmail.com
+                    email_verified_at: null
+                    created_at: '2021-05-27T06:50:50.000000Z'
+                    updated_at: '2021-05-27T06:50:50.000000Z'
+                properties:
+                  success:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: john@yopmail.com
+                      email_verified_at:
+                        type: string
+                        example: null
+                      created_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthorised
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Affiliater Profile'
+  /api/v1/affiliater/profile-update:
+    post:
+      summary: 'Update Profile Api'
+      operationId: updateProfileApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Affiliater details updated successfully.'
+                  data:
+                    id: 3
+                    name: 'test2 affiliater2'
+                    email: test1@yopmail.com
+                    phone: '1231231231'
+                    email_verified_at: null
+                    image: 'Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png'
+                    status: '1'
+                    created_at: '2024-03-13T12:57:34.000000Z'
+                    updated_at: '2024-03-14T06:16:19.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Affiliater details updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'test2 affiliater2'
+                      email:
+                        type: string
+                        example: test1@yopmail.com
+                      phone:
+                        type: string
+                        example: '1231231231'
+                      email_verified_at:
+                        type: string
+                        example: null
+                      image:
+                        type: string
+                        example: 'Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png'
+                      status:
+                        type: string
+                        example: '1'
+                      created_at:
+                        type: string
+                        example: '2024-03-13T12:57:34.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-03-14T06:16:19.000000Z'
+      tags:
+        - 'Affiliater Profile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                phone:
+                  type: string
+                  description: 'The phone of the user.'
+                  example: '+1 1234 567 890'
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: whiteglovecomics@gmail.com
+                address:
+                  type: string
+                  description: 'The address of the user.'
+                  example: 'USA,678'
+                pincode:
+                  type: string
+                  description: 'The pincode of the user.'
+                  example: '659865'
+              required:
+                - name
+                - phone
+                - email
+                - address
+                - pincode
+  /api/v1/affiliater/create-link:
+    post:
+      summary: 'AffiliateLink Api'
+      operationId: affiliateLinkApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Affiliate link created successfully.'
+                  data: 'http://127.0.0.1:8001/pricing/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9'
+                  status: true
+                properties:
+                  message:
+                    type: string
+                    example: 'Affiliate link created successfully.'
+                  data:
+                    type: string
+                    example: 'http://127.0.0.1:8001/pricing/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9'
+                  status:
+                    type: boolean
+                    example: true
+      tags:
+        - 'Affiliater Profile'
   /api/v1/login:
     post:
       summary: 'Login Api'
@@ -208,11 +447,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: zzzzjvirlielcpiyzzwhvyhovgxflqthzdizbdczizpujmltfqsvxzwtgdbsmb
+                  example: ylllzddijxd
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: arely72@example.com
+                  example: reagan.skiles@example.net
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -617,7 +856,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: sit
+                  example: et
               required:
                 - type
       security: []
@@ -694,19 +933,19 @@ paths:
                 coupon_code:
                   type: string
                   description: ''
-                  example: ab
+                  example: enim
                 plan_id:
                   type: string
                   description: ''
-                  example: officiis
+                  example: consectetur
                 plan_price:
                   type: string
                   description: ''
-                  example: aliquid
+                  example: sed
                 email:
                   type: string
                   description: 'This field is required when <code>phone</code> is not present.  Must be a valid email address.'
-                  example: ullrich.norwood@example.net
+                  example: robert28@example.net
                 phone:
                   type: string
                   description: 'This field is required when <code>email</code> is not present.'
@@ -825,11 +1064,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: zwtfrcqbhtctpqnzhzxjpnqpsetkhzckfiwwdbedgkmmnbizmoolpuehzwixtcerakw
+                  example: zjtyxemaaoypmtvifbbezrgwfeockttakjsnuhdszwzuusugrpsqs
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: unikolaus@example.com
+                  example: hagenes.maud@example.com
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -1115,7 +1354,7 @@ paths:
                 user_email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: metz.mike@example.org
+                  example: lera03@example.net
                 user_phone:
                   type: string
                   description: 'The phone of the user.'
@@ -1177,7 +1416,7 @@ paths:
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: hannah.kutch@example.com
+                  example: wmedhurst@example.com
               required:
                 - email
       security: []
@@ -1240,11 +1479,11 @@ paths:
                 emailId:
                   type: string
                   description: ''
-                  example: ab
+                  example: et
                 first_name:
                   type: string
                   description: ''
-                  example: voluptas
+                  example: eum
                 last_name:
                   type: string
                   description: ''
@@ -1252,39 +1491,39 @@ paths:
                 country:
                   type: string
                   description: ''
-                  example: accusamus
+                  example: dolore
                 house_name:
                   type: string
                   description: ''
-                  example: distinctio
+                  example: ut
                 detail_address:
                   type: string
                   description: ''
-                  example: ea
+                  example: accusantium
                 city:
                   type: string
                   description: ''
-                  example: deleniti
+                  example: eius
                 state:
                   type: string
                   description: ''
-                  example: odio
+                  example: nam
                 post_code:
                   type: string
                   description: ''
-                  example: natus
+                  example: eum
                 phone:
                   type: string
                   description: ''
-                  example: possimus
+                  example: nemo
                 amount:
                   type: string
                   description: ''
-                  example: fugiat
+                  example: nam
                 paymentID:
                   type: string
                   description: ''
-                  example: rerum
+                  example: est
               required:
                 - emailId
                 - first_name
@@ -1594,6 +1833,12 @@ paths:
       tags:
         - Subscription
 tags:
+  -
+    name: 'Affiliater - Commission'
+    description: ''
+  -
+    name: 'Affiliater Profile'
+    description: ''
   -
     name: Authentication
     description: "\nAPIs for Authentication"
