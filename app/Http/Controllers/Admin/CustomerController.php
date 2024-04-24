@@ -50,11 +50,12 @@ class CustomerController extends Controller
 
     public function changeStatus(Request $request)
     {
-       
+    //    return $request;
         $customer = User::find($request->user_id);
         $customer->status = $request->status;
         $customer->save();
+        // session()->flash('message', 'Status updated successfully');
         return response()->json(['status' => 'success', 'message' => 'Status updated successfully']);
     }
-    
+
 }

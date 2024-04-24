@@ -9,8 +9,13 @@
                     <i class="fa fa-eye"></i>
                 </a>
             </td>
-            <td><div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $customer->id }}" {{ $customer->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div></td>
-           
+            <td>
+                <select name="status_update" id="status_update" class="form-control" data-id="{{ $customer->id }}">
+                    <option value="1" {{ $customer->status == 1 ? 'selected' : '' }}>Active</option>
+                    <option value="0" {{ $customer->status == 0 ? 'selected' : '' }}>Inactive</option>
+                </select>
+            </td>
+
         </tr>
     @endforeach
     <tr class="toxic">
