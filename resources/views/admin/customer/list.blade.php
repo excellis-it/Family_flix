@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-   Customer List
+    Customer List
 @endsection
 @push('styles')
     <style>
@@ -90,15 +90,18 @@
 
                         <div class="row justify-content-between align-items-center mb-2">
                             <div class="col-md-6">
-                                <div><h4>List of Customers</h4></div>
+                                <div>
+                                    <h4>List of Customers</h4>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row g-1 justify-content-end">
                                     <div class="col-md-8 pr-0">
                                         <div class="search-field prod-search">
-                                            <input type="text" name="search" id="search" placeholder="search..." required
-                                                class="form-control">
-                                            <a href="javascript:void(0)" class="prod-search-icon"><i class="ti ti-search"></i></a>
+                                            <input type="text" name="search" id="search" placeholder="search..."
+                                                required class="form-control">
+                                            <a href="javascript:void(0)" class="prod-search-icon"><i
+                                                    class="ti ti-search"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +118,7 @@
                                         <th><span class="fs-4 fw-semibold mb-0">Phone</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Plans</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Status</span></th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyContents">
@@ -270,10 +273,9 @@
     </script>
 
     <script>
-        $(document).on('change', '.toggle-class', function(e) {
-            var status = $(this).prop('checked') == true ? 1 : 0;
+        $(document).on('change', '#status_update', function(e) {
+            var status = $(this).val();
             var user_id = $(this).data('id');
-
             $.ajax({
                 type: "GET",
                 dataType: "json",
@@ -283,7 +285,11 @@
                     'user_id': user_id
                 },
                 success: function(resp) {
-                    console.log(resp.success)
+                    if (resp.status == 'success') {
+                        toastr.success(resp.message); 
+                    } else {
+                        toastr.error('Something went wrong');
+                    }
                 }
             });
         });

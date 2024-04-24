@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Traits\ImageTrait;
 use Crypt;
 
-    
+
 /**
  * @group Affiliater Profile
  */
@@ -35,7 +35,7 @@ class ProfileController extends Controller
      *     "updated_at": "2021-05-27T06:50:50.000000Z"
      *  }
      * }
-     *  
+     *
      * @response 401{
      *    "error": "Unauthorised"
      * }
@@ -53,7 +53,7 @@ class ProfileController extends Controller
             {
                 return response()->json(['error' => 'User not found!', 'statusCode' => 200, 'status' => false]);
             }
-            
+
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 401);
         }
@@ -63,10 +63,8 @@ class ProfileController extends Controller
      * Update Profile Api
      * @authenticated
      * @bodyParam name string required The name of the user. Example: John Doe
-     * @bodyParam email string required The email of the user. Example: whiteglovecomics@gmail.com
      * @bodyParam phone string required The phone of the user. Example: +1 1234 567 890
      * @bodyParam address string required The address of the user. Example: USA,678
-     * @bodyParam pincode string required The pincode of the user. Example: 659865
      * @response 200{
      *   "message": "Affiliater details updated successfully.",
      *   "data": {
@@ -93,7 +91,7 @@ class ProfileController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()->first(), 'status' => false], 200);
         }
-        
+
         try {
             $user = User::where('id', Auth::user()->id)->first();
             $user->name = $request->name;
@@ -125,7 +123,7 @@ class ProfileController extends Controller
     public function affiliateLink(Request $request)
     {
         try{
-           
+
             $create_link = url('/pricing/'.Crypt::encrypt(Auth::user()->id));
             return response()->json(['message' => 'Affiliate link created successfully.','data' => $create_link, 'status'=>true], $this->successStatus);
         }catch (\Throwable $th) {
