@@ -20,7 +20,7 @@
                             <i class="ti ti-aperture"></i>
                         </span>Dashboard<span class="arrow-down"></span></a>
                 </li>
-                @if (Gate::check('Manage Affiliater'))
+                {{-- @if (Gate::check('Manage Affiliater'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
                         <span>
@@ -33,6 +33,14 @@
                             <a class="nav-link" href="{{ route('affliate-marketer.index') }}">Affiliate Marketer</a>
                         </li>
                     </ul>
+                </li>
+                @endif --}}
+
+                @if(Gate::check('Manage Affiliater'))
+                <li class="nav-item has-submenu {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('affliate-marketer.index') }}"> <span>
+                            <i class="ti ti-user"></i>
+                        </span>Affiliate Marketer<span class="arrow-down"></span></a>
                 </li>
                 @endif
 

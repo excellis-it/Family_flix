@@ -50,8 +50,10 @@
                                                     <a href="{{ route('customer.subscription') }}"> Customer Dashboard</a>
                                                 @else
                                                 <li class="{{ request()->routeIs('customer') ? 'active' : '' }}">
-                                                    <a href="{{ route('customer.login') }}"> Customer Login</a>
+                                                    <a class="cust-login" href="{{ route('customer.login') }}">Customer Login</a>
                                                 </li>
+                                                
+                                                
                                                 @endif
                                             </ul>
                                         </div>
@@ -64,7 +66,7 @@
                                 @if (Auth::check() && Auth::user()->hasRole('AFFLIATE MARKETER'))
                                     <a href="{{ route('affiliate-marketer.dashboard') }}">Dashboard</a>
                                 @else
-                                    <a href="{{ route('affiliate-marketer.login') }}">Affiliate Login</a>
+                                    <a class="affi-login" href="{{ route('affiliate-marketer.login') }}">Affiliate Login</a>
                                 @endif
 
                             </div>

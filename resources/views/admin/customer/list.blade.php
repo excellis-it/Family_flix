@@ -116,8 +116,10 @@
                                         <th><span class="fs-4 fw-semibold mb-0">Name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Email</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Phone</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Plans</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Status</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Plan Status</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Plans</span></th>
+                                        
 
                                     </tr>
                                 </thead>

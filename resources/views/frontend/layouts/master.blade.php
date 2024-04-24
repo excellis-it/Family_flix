@@ -72,36 +72,70 @@
  
 }
 </style>
-        <section class="subscribe-sec">
-            <div class="container">
-                <div class="subscribe-sec-wrap">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-11">
-                            <div class="subscribe-head">
-                                <h2>{{ $subscribe_cms->subscribe_title }}</h2>
-                            </div>
-                            <form action="{{ route('subscribe.submit') }}" method="post" id="subscription-form">
-                                @csrf
-                                <div class="subscribe-form">
-                                    <div class="row ">
-                                        <div class="col-xl-12">
-                                            <div class="subscribe-form-wrap">
-                                                <input type="text" class="form-control"  name="user_email"
-                                                    placeholder="{{ $subscribe_cms->subscription_placeholder }}">
-                                            </div>
+    <section class="subscribe-sec">
+        <div class="container">
+            <div class="subscribe-sec-wrap">
+                <div class="row justify-content-center">
+                    <div class="col-xl-11">
+                        <div class="subscribe-head">
+                            <h2>{{ $subscribe_cms->subscribe_title }}</h2>
+                        </div>
+                        <form action="{{ route('subscribe.submit') }}" method="post" id="subscription-form">
+                            @csrf
+                            <div class="subscribe-form">
+                                <div class="row ">
+                                    <div class="col-xl-12">
+                                        <div class="subscribe-form-wrap">
+                                            <input type="text" class="form-control"  name="user_email"
+                                                placeholder="{{ $subscribe_cms->subscription_placeholder }}">
                                         </div>
                                     </div>
-                                    <div class="sign-up-btn subscribe-btn mt-4">
-                                        <button type="submit">{{ $subscribe_cms->button_name }}</button>
-                                    </div>
                                 </div>
-                            </form>
-                            <!-- <div class="subscribe-line"></div> -->
-                        </div>
+                                <div class="sign-up-btn subscribe-btn mt-4">
+                                    <button type="submit">{{ $subscribe_cms->button_name }}</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <div class="subscribe-line"></div> -->
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
+    {{-- cust login modal design--}}
+    <div class="modal fade" id="cust-login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">You're currently logged in with another account, please log out of this one.</h5>
+                    <a href="{{ route('affiliate-marketer.logout') }}" class="btn btn-danger">Logout</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{-- login form --}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- cust login modal design--}}
+
+    {{-- affi login modal design--}}
+    <div class="modal fade" id="affi-login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">You're currently logged in with another account, please log out of this one.</h5>
+                    <a href="{{ route('customer.logout') }}" class="btn btn-danger">Logout</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{-- login form --}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- affi login modal design--}}
 
         @include('frontend.includes.footer')
 
@@ -121,6 +155,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
@@ -179,6 +214,78 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            // Function to check if user is authenticated
+            function checkAuthentication() {
+                @auth
+                    // If user is authenticated, open popup
+                    Swal.fire({
+                        
+                        text: "You're currently logged in as an affiliate. Please log out of this account.",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, log out!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If the user confirms, log out
+                            window.location.href = "{{ route('affiliate-marketer.logout') }}"; 
+                        }
+                    })
+                @else
+                    // If user is not authenticated, proceed to customer login
+                    var loginRoute = $('.cust-login').attr('href');
+                    window.location.href = loginRoute; // Redirect to customer login route
+                @endauth
+            }
+
+            // Call the function to check authentication when the customer login link is clicked
+            $('.cust-login').click(function(event) {
+                event.preventDefault(); // Prevent the default link behavior
+                checkAuthentication();
+            });
+        });
+
+    </script>
+
+<script>
+    $(document).ready(function() {
+        // Function to check if user is authenticated
+        function checkAuthenticationAffi() {
+            @auth
+            Swal.fire({
+                        
+                    text: "You're currently logged in as an customer. Please log out of this account.",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, log out!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If the user confirms, log out
+                        window.location.href = "{{ route('customer.logout') }}"; 
+                    }
+                })
+            @else
+                // If user is not authenticated, proceed to customer login
+                var loginRoute = $('.affi-login').attr('href');
+                window.location.href = loginRoute; // Redirect to customer login route
+            @endauth
+        }
+
+        // Call the function to check authentication when the customer login link is clicked
+        $('.affi-login').click(function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            checkAuthenticationAffi();
+        });
+    });
+
+</script>
+
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

@@ -11,7 +11,7 @@ class SubscriptionController extends Controller
     //
     public function customerSubscription()
     {
-        $customer_subscriptions = UserSubscription::where('customer_id', auth()->user()->id)->orderBy('id', 'desc')->with('affiliate')->paginate(10);
+        $customer_subscriptions = UserSubscription::where('customer_id', auth()->user()->id)->orderBy('id', 'desc')->with('affiliate')->paginate(5);
         return view('customer.subscription.list', compact('customer_subscriptions'));
     }
 
@@ -36,7 +36,7 @@ class SubscriptionController extends Controller
                         ->orWhere('total', 'like', '%' . $query . '%');
                 })
                 ->orderBy('id', 'desc')
-                ->paginate(15);
+                ->paginate(5);
 
             return response()->json(['data' => view('customer.subscription.table', compact('customer_subscriptions'))->render()]);
         }

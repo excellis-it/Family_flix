@@ -40,6 +40,7 @@ use App\Http\Controllers\Customer\SubscriptionController as CustomerSubscription
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\ManagerPermissionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use Illuminate\Support\Facades\Artisan;
 
 // Clear cache
@@ -120,6 +121,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
         Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('admin.profile.update');
         Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+        Route::post('cutomer-payment',[AdminPaymentController::class, 'customerPayment'])->name('customer.payment');
 
         Route::prefix('password')->group(function () {
             Route::get('/', [ProfileController::class, 'password'])->name('admin.password');

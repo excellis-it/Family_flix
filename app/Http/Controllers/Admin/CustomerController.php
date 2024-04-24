@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Plan;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,8 +45,9 @@ class CustomerController extends Controller
 
     public function showPlans($id)
     {
+        $plans = Plan::orderBy('plan_order', 'desc')->get();
         $subscriptions = UserSubscription::where('customer_id', $id)->orderBy('id', 'desc')->paginate(12);
-        return view('admin.customer.show-plans', compact('subscriptions'));
+        return view('admin.customer.show-plans', compact('subscriptions','plans','id'));
     }
 
     public function changeStatus(Request $request)

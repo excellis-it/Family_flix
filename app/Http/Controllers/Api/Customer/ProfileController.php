@@ -45,7 +45,7 @@ class ProfileController extends Controller
     public function accountDetails(Request $request)
     {
         try {
-            $user = User::where('id', Auth::user()->id)->select('id','name','email','phone')->first();
+            $user = User::where('id', Auth::user()->id)->first();
             if($user != '')
             {
                 return response()->json(['message' => 'User details found successfully.','data' => $user, 'statusCode' => 200, 'status' => true], $this->successStatus);

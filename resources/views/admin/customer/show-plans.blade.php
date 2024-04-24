@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="w-100 text-end mb-3">
-                    <a class="print_btn" href="" >+ Add New Plan</a>
+                    <a class="print_btn"  >+ Add New Plan</a>
                 </div>
                 <div class="card w-100">
                     <div class="card-body">
@@ -125,7 +125,7 @@
                                             <td>{{ $subscription->plan_name ?? 'N/A' }}</td>
                                             <td>{{ $subscription->plan_price ?? 'N/A' }}</td>
                                             <td>{{ $subscription->coupan_code ?? 'N/A' }}</td>
-                                            <td>{{ $subscription->coupan_discount . ($subscription->coupan_discount_type == 'amount' ? '($)' : '%') ?? 'N/A' }}</td>
+                                            <td>{{ $subscription->coupan_discount ? $subscription->coupan_discount . ($subscription->coupan_discount_type == 'amount' ? '($)' : '%') : 'N/A' }}</td>
                                             <td>{{ $subscription->total ?? 'N/A' }}</td>
                                             <td>{{ $subscription->plan_start_date ?? 'N/A' }}</td>
                                             <td>{{ $subscription->plan_expiry_date ?? 'N/A' }}</td> 
@@ -159,67 +159,55 @@
         </div>
 
     </div>
+
+
+    <!-- Add New Plan Modal -->
+    <div class="modal fade" id="newPlanModal" tabindex="-1" role="dialog" aria-labelledby="newPlanModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newPlanModalLabel">New Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="{{ route('customer.payment') }}" method="POST" id="customer-payment">
+                    @csrf
+
+                    <input type="hidden"  name="customer_id" value="{{ $id }}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Plan</label>
+                            <select name="plan_id" id="plan_id" class="form-control">
+                                <option value="">Select plan</option>
+                                @foreach($plans as $plan)
+                                <option value="{{ $plan->id }}">{{ $plan->plan_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="name">Transaction Id</label>
+                            <input type="text"  name="transaction_id" class="form-control" placeholder="Enter transaction id">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Message</label>
+                            <textarea  name="message" class="form-control" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- end new plan modal --}}
 @endsection
 
 @push('scripts')
-    {{-- <script>
-        $(document).ready(function() {
-
-            var table = $('#myTable').DataTable({
-                "columnDefs": [{
-                        "orderable": false,
-                        "targets": [3, 4, 5]
-                    },
-                    {
-                        "orderable": true,
-                        "targets": [0, 1, 2]
-                    }
-                ],
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: "{{ route('affliate-marketer.ajax.list') }}",
-                    type: "POST", // specifying the type of request
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                            'content') // include CSRF token if you are using Laravel
-                    }
-                },
-                columns: [{
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'affiliate_url',
-                        name: 'affiliate_url',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
-            });
-
-        });
-    </script> --}}
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -315,4 +303,34 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.print_btn').click(function() {
+                $('#newPlanModal').modal('show');
+            });
+        });
+        </script>
+
+      
+
+<script>
+    $(document).ready(function() {
+        $('#customer-payment').validate({
+            rules: {
+                plan_id: {
+                    required: true,
+                }
+            },
+            messages: {
+                plan_id: {
+                    required: "Please select your Plan Name",
+                }
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
+</script>
 @endpush
