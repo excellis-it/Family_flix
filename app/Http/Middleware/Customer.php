@@ -19,9 +19,7 @@ class Customer
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check() && Auth::user()->hasRole('CUSTOMER')) {
-            
             return $next($request);
-                
         } else {
             return redirect()->route('login');
         }

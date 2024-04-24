@@ -21,18 +21,10 @@
                         </span>Dashboard<span class="arrow-down"></span></a>
                 </li>
                 @if (Gate::check('Manage Affiliater'))
-                <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}" href="#">
-                        <span>
+                <li class="nav-item has-submenu {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('affliate-marketer.index') }}"> <span>
                             <i class="ti ti-users"></i>
-                        </span>User management
-                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
-                    </a>
-                    <ul class="submenu collapse {{ Request::is('admin/affliate-marketer*') ? 'show' : '' }}">
-                        <li class="{{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('affliate-marketer.index') }}">Affiliate Marketer</a>
-                        </li>
-                    </ul>
+                        </span>Affiliate Marketer<span class="arrow-down"></span></a>
                 </li>
                 @endif
 
@@ -43,6 +35,33 @@
                         </span>Customers<span class="arrow-down"></span></a>
                 </li>
                 @endif
+
+                @if (Gate::check('Manage Manager'))
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }} {{ Request::is('admin/manager-permission*') ? 'active' : '' }}" href="#">
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Manager Permission
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/users*') ? 'show' : '' }} {{ Request::is('admin/manager-permission*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/users*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+                        </li>
+                        <li class="{{ Request::is('admin/manager-permission*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('manager-permission.index') }}">Roles</a>
+                        </li>
+                    </ul>
+                </li> 
+                @endif
+
+                {{-- @if (Gate::check('Manage Permission'))
+                <li class="nav-item has-submenu {{ Request::is('admin/manager-permission*') ? 'active' : '' }} ">
+                    <a class="nav-link" href="{{ route('manager-permission.index') }}"> <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Manager Permission<span class="arrow-down"></span></a>
+                </li>
+                @endif --}}
                 {{-- <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/menu-management*') ? 'active' : '' }}" href="#">
                         <span>
@@ -127,29 +146,7 @@
                 </li>
                 @endif
 
-                @if (Gate::check('Manage Manager'))
-                <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}" href="#">
-                        <span>
-                            <i class="ti ti-users"></i>
-                        </span>Users
-                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
-                    </a>
-                    <ul class="submenu collapse {{ Request::is('admin/users*') ? 'show' : '' }}">
-                        <li class="{{ Request::is('admin/users*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('users.index') }}">List</a>
-                        </li>
-                    </ul>
-                </li> 
-                @endif
-
-                @if (Gate::check('Manage Permission'))
-                <li class="nav-item has-submenu {{ Request::is('admin/manager-permission*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('manager-permission.index') }}"> <span>
-                            <i class="ti ti-aperture"></i>
-                        </span>Manager Permission<span class="arrow-down"></span></a>
-                </li>
-                @endif
+               
 
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#">
