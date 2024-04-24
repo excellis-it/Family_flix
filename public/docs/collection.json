@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Family-Flix",
-        "_postman_id": "f167fb0c-c8a3-44ae-97ef-cc2f8a015f98",
+        "_postman_id": "8b8229e7-0135-4f99-88ce-13f4664d1216",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -103,7 +103,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n     \"success\": {\n         \"id\": 1,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n       \"email_verified_at\": null,\n      \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n    \"updated_at\": \"2021-05-27T06:50:50.000000Z\"\n }\n}",
+                            "body": "{\n     \"success\": {\n         \"id\": 1,\n         \"name\": \"John Doe\",\n         \"email\": \"john@yopmail.com\",\n         \"email_verified_at\": null,\n         \"phone\": \"1234567890\",\n         \"image\": \"Affiliate Marketer\/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png\",\n         \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n         \"updated_at\": \"2021-05-27T06:50:50.000000Z\"\n     }\n}",
                             "name": ""
                         },
                         {
@@ -136,7 +136,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"+1 1234 567 890\",\"email\":\"whiteglovecomics@gmail.com\",\"address\":\"USA,678\",\"pincode\":\"659865\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"+1 1234 567 890\",\"email\":\"whiteglovecomics@gmail.com\"}"
                         },
                         "description": ""
                     },
@@ -177,6 +177,50 @@
                             "header": [],
                             "code": 200,
                             "body": "{\n \"message\": \"Affiliate link created successfully.\",\n \"data\": \"http:\/\/127.0.0.1:8001\/pricing\/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9\",\n \"status\": true\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Affiliater dashboard",
+            "description": "",
+            "item": [
+                {
+                    "name": "Dashboard Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/affiliater\/dashboard",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/dashboard"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": {\n       \"total_commissions\": 1,\n      \"total_commision_amount\": 100,\n     \"commision_amount_this_month\": 100,\n    \"commision_amount_this_week\": 100\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"error\": \"Unauthorised\"\n}",
                             "name": ""
                         }
                     ]
@@ -253,7 +297,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"ylllzddijxd\",\"email\":\"reagan.skiles@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"qpsdsowxswglwkdixxjaojqrplqzridskkvvcouuymahijntbzw\",\"email\":\"bquigley@example.org\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -502,7 +546,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"et\"}"
+                            "raw": "{\"type\":\"voluptatem\"}"
                         },
                         "description": "",
                         "auth": {
@@ -665,7 +709,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"coupon_code\":\"enim\",\"plan_id\":\"consectetur\",\"plan_price\":\"sed\",\"email\":\"robert28@example.net\"}"
+                            "raw": "{\"coupon_code\":\"dolores\",\"plan_id\":\"consequuntur\",\"plan_price\":\"aut\",\"email\":\"goodwin.kendrick@example.org\"}"
                         },
                         "description": "",
                         "auth": {
@@ -721,7 +765,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"zjtyxemaaoypmtvifbbezrgwfeockttakjsnuhdszwzuusugrpsqs\",\"email\":\"hagenes.maud@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"vrjkbgzjjkgafzqcuqmsilgodhajhemtugrctihumkgdiyvbrixvkeutqwgadnyhtljhht\",\"email\":\"gbeatty@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -894,7 +938,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"lera03@example.net\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"cummerata.davin@example.com\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -938,7 +982,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"wmedhurst@example.com\"}"
+                            "raw": "{\"email\":\"carole.schaefer@example.com\"}"
                         },
                         "description": "",
                         "auth": {
@@ -988,7 +1032,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"et\",\"first_name\":\"eum\",\"last_name\":\"sed\",\"country\":\"dolore\",\"house_name\":\"ut\",\"detail_address\":\"accusantium\",\"city\":\"eius\",\"state\":\"nam\",\"post_code\":\"eum\",\"phone\":\"nemo\",\"amount\":\"nam\",\"paymentID\":\"est\"}"
+                            "raw": "{\"emailId\":\"et\",\"first_name\":\"consequuntur\",\"last_name\":\"error\",\"country\":\"quod\",\"house_name\":\"rerum\",\"detail_address\":\"doloremque\",\"city\":\"et\",\"state\":\"doloremque\",\"post_code\":\"totam\",\"phone\":\"unde\",\"amount\":\"consequuntur\",\"paymentID\":\"impedit\"}"
                         },
                         "description": "",
                         "auth": {

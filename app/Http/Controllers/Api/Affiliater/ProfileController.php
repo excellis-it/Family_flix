@@ -30,10 +30,12 @@ class ProfileController extends Controller
      *          "id": 1,
      *          "name": "John Doe",
      *          "email": "john@yopmail.com",
-     *        "email_verified_at": null,
-     *       "created_at": "2021-05-27T06:50:50.000000Z",
-     *     "updated_at": "2021-05-27T06:50:50.000000Z"
-     *  }
+     *          "email_verified_at": null,
+     *          "phone": "1234567890",
+     *          "image": "Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png",
+     *          "created_at": "2021-05-27T06:50:50.000000Z",
+     *          "updated_at": "2021-05-27T06:50:50.000000Z"
+     *      }
      * }
      *  
      * @response 401{
@@ -44,14 +46,14 @@ class ProfileController extends Controller
     public function profileDetails(Request $request)
     {
         try {
-            $user = User::where('id', Auth::user()->id)->select('id','name','email','phone')->first();
+            $user = User::where('id', Auth::user()->id)->first();
             if($user != '')
             {
-                return response()->json(['message' => 'User details found successfully.','data' => $user, 'statusCode' => 200, 'status' => true], $this->successStatus);
+                return response()->json(['message' => 'Affiliator details found successfully.','data' => $user, 'statusCode' => 200, 'status' => true], $this->successStatus);
             }
             else
             {
-                return response()->json(['error' => 'User not found!', 'statusCode' => 200, 'status' => false]);
+                return response()->json(['error' => 'Affiliator not found!', 'statusCode' => 200, 'status' => false]);
             }
             
         } catch (\Throwable $th) {
@@ -65,8 +67,6 @@ class ProfileController extends Controller
      * @bodyParam name string required The name of the user. Example: John Doe
      * @bodyParam email string required The email of the user. Example: whiteglovecomics@gmail.com
      * @bodyParam phone string required The phone of the user. Example: +1 1234 567 890
-     * @bodyParam address string required The address of the user. Example: USA,678
-     * @bodyParam pincode string required The pincode of the user. Example: 659865
      * @response 200{
      *   "message": "Affiliater details updated successfully.",
      *   "data": {

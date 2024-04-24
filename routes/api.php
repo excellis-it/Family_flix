@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Customer\SubscriptionController as CustomerSubscrip
 use App\Http\Controllers\Api\Affiliater\CommissionController;
 use App\Http\Controllers\Api\CouponCheckController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\Affiliater\DashboardController;
 
 
 /*
@@ -40,6 +41,8 @@ use App\Http\Controllers\Api\PaymentController;
             Route::group(['prefix' => 'affiliater'], function () {
                 Route::post('profile-details', [ProfileController::class, 'profileDetails']);  // profile details api
                 Route::post('profile-update', [ProfileController::class, 'profileUpdate']);  // profile update api
+                Route::post('dashboard', [DashboardController::class, 'dashboard']);  // dashboard api
+                
 
                 Route::group(['prefix' => 'commission'], function () {
                     Route::post('list', [CommissionController::class, 'commissionList']);  // commission details api

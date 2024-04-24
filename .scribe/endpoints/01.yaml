@@ -33,10 +33,12 @@ endpoints:
                    "id": 1,
                    "name": "John Doe",
                    "email": "john@yopmail.com",
-                 "email_verified_at": null,
-                "created_at": "2021-05-27T06:50:50.000000Z",
-              "updated_at": "2021-05-27T06:50:50.000000Z"
-           }
+                   "email_verified_at": null,
+                   "phone": "1234567890",
+                   "image": "Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png",
+                   "created_at": "2021-05-27T06:50:50.000000Z",
+                   "updated_at": "2021-05-27T06:50:50.000000Z"
+               }
           }
         headers: []
         description: ''
@@ -104,30 +106,10 @@ endpoints:
         enumValues: []
         exampleWasSpecified: true
         custom: []
-      address:
-        name: address
-        description: 'The address of the user.'
-        required: true
-        example: 'USA,678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-      pincode:
-        name: pincode
-        description: 'The pincode of the user.'
-        required: true
-        example: '659865'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
     cleanBodyParameters:
       name: 'John Doe'
       phone: '+1 1234 567 890'
       email: whiteglovecomics@gmail.com
-      address: 'USA,678'
-      pincode: '659865'
     fileParameters: []
     responses:
       -
