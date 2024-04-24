@@ -151,6 +151,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/customers-plans/{id}', [AdminCustomerController::class, 'showPlans'])->name('customers.plans.show');
         Route::get('/customers-ajax-list', [AdminCustomerController::class, 'customerAjaxList'])->name('customers.ajax.list');
         Route::get('/customer-change-status', [AdminCustomerController::class, 'changeStatus'])->name('customers.change-status');
+        Route::get('/customers/craete',[AdminCustomerController::class, 'create'])->name('customers.create');
+        Route::post('/customers/store',[AdminCustomerController::class, 'store'])->name('customers.store');
+
 
         Route::get('/manager-permission', [ManagerPermissionController::class, 'index'])->name('manager-permission.index');
         Route::get('/manager-permission-create', [ManagerPermissionController::class, 'permissionCreate'])->name('manager-permission.create');

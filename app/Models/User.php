@@ -50,7 +50,11 @@ class User extends Authenticatable
 
     public function subscriptions()
     {
-        
         return $this->hasMany(UserSubscription::class, 'customer_id', 'id');
     }
+
+    public function userLastSubscription()
+    {
+        return $this->hasOne(UserSubscription::class, 'customer_id', 'id')->latest();
+    } 
 }

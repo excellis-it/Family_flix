@@ -62,6 +62,7 @@
     </style>
 @endpush
 @section('content')
+
     <section id="loading">
         <div id="loading-content"></div>
     </section>
@@ -81,10 +82,10 @@
         <!--  Row 1 -->
         <div class="row">
             <div class="col-lg-12">
-                {{-- <div class="w-100 text-end mb-3">
-                    <a class="print_btn" href="" >+ Add
-                        New Affiliator</a>
-                </div> --}}
+                <div class="w-100 text-end mb-3">
+                    <a class="print_btn" href="{{route('customers.create')}}" >+ Add
+                        a Customer</a>
+                </div>
                 <div class="card w-100">
                     <div class="card-body">
 
@@ -116,11 +117,11 @@
                                         <th><span class="fs-4 fw-semibold mb-0">Name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Email</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Phone</span></th>
+                                        <th>
+                                            <span class="fs-4 fw-semibold mb-0">Plan Status</span>
+                                        </th>
                                         <th><span class="fs-4 fw-semibold mb-0">Status</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Plan Status</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Plans</span></th>
-                                        
-
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyContents">
@@ -288,7 +289,7 @@
                 },
                 success: function(resp) {
                     if (resp.status == 'success') {
-                        toastr.success(resp.message); 
+                        toastr.success(resp.message);
                     } else {
                         toastr.error('Something went wrong');
                     }

@@ -17,7 +17,8 @@ class CustomerController extends Controller
     public function index()
     {
         if (Auth::user()->can('Manage Customer')) {
-            $customers = User::role('CUSTOMER')->orderBy('id', 'desc')->paginate(15);
+            $customers = User::with('userLastSubscription')->role('CUSTOMER')->orderBy('id', 'desc')->paginate(15);
+            // dd($customers);
             return view('admin.customer.list',compact('customers'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -36,6 +37,7 @@ class CustomerController extends Controller
                     ->orWhere('email', 'like', '%' . $query . '%')
                     ->orWhere('phone', 'like', '%' . $query . '%');
             })
+            ->with('userLastSubscription')
             ->orderBy('id', 'desc')
             ->paginate(15);
 
@@ -58,6 +60,34 @@ class CustomerController extends Controller
         $customer->save();
         // session()->flash('message', 'Status updated successfully');
         return response()->json(['status' => 'success', 'message' => 'Status updated successfully']);
+    }
+
+    public function create()
+    {
+        return view('admin.customer.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required',
+            'status' => 'required',
+            'password' => 'required|min:8',
+            'confirm_password' => 'required|same:password',
+        ]);
+
+        $customer = new User();
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->status = $request->status;
+        $customer->password = bcrypt($request->password);
+        $customer->status = 1;
+        $customer->save();
+        $customer->assignRole('CUSTOMER');
+        return redirect()->route('customers.index')->with('message', 'Customer created successfully');
     }
 
 }
