@@ -12,6 +12,8 @@ use App\Models\AffiliateCommission;
 use Illuminate\Support\Facades\Session;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
 
 /**
     * @group Payment Capture
@@ -40,8 +42,8 @@ class PaymentController extends Controller
 
     public function paymentCapture(Request $request)
     {
-        // valiadtion 
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'emailId' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -54,7 +56,13 @@ class PaymentController extends Controller
             'phone' => 'required',
             'amount' => 'required',
             'paymentID' => 'required',
+            'plan_name' => 'required',
+            'plan_price' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 200,  'error' => $validator->errors()->first()], 200);
+        }
 
         try{
             $data = $request->all();

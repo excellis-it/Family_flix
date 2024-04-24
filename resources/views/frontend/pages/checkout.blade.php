@@ -171,8 +171,7 @@
                                                                     id="floatingInput5" name="detail_address"
                                                                     placeholder="">
                                                                 <label for="floatingInput5">Apartment, suite, unit,
-                                                                    etc.
-                                                                    (optional) <span>*</span></label>
+                                                                    etc.<span>*</span></label>
                                                                 <span id="addr_error" class="text-danger"></span>
 
                                                             </div>

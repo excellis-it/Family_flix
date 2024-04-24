@@ -9,7 +9,7 @@
 @endsection
 @section('content')
   
-    <section class="user-panel" style="height: 50vh;">
+    <section class="user-panel" >
         <div class="container">
             <div class="user-panel-wrap">
                 <div class="row">

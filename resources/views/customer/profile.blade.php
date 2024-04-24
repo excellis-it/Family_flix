@@ -29,6 +29,20 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <div class="form-group-wrap">
+                                            @if (!Auth::user()->image)
+                                                <a href="{{ asset('frontend_assets/images/user.jpg') }}" target="_blank">
+                                                    <img src="{{ asset('frontend_assets/images/user.jpg') }}"
+                                                        class="rounded-circle shadow" width="130px" height="130px"
+                                                        alt="" /></a>
+                                            @else
+                                                <a href="{{ Storage::url(Auth::user()->image) }}" target="_blank">
+                                                    <img src="{{ Storage::url(Auth::user()->image) }}" class="rounded-circle shadow"
+                                                        width="130px" height="130px" alt=""></a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="form-group-wrap">
                                             <label for="" class="form-label">Full Name<span class="red">*</span>
                                             </label>
                                             <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" id="" placeholder="">
