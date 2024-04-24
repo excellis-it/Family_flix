@@ -230,7 +230,7 @@ class PaypalController extends Controller
 
     public function paymentcapture(Request $request)
     {
-       
+        
         $data = $request->all();
         $customer_details = new CustomerDetails();
         $customer_details->email_address = $data['emailId'];
@@ -297,6 +297,7 @@ class PaypalController extends Controller
         $user_subscription->plan_name = $data['plan_name'];
         $user_subscription->plan_price = $data['plan_price'];
         $user_subscription->coupan_code = $data['coupan_code'];
+        $user_subscription->coupan_discount_type = $data['coupon_discount_type'];
         $user_subscription->coupan_discount = $data['coupon_discount'];
         $user_subscription->sub_total = $data['plan_price'];
         $user_subscription->total = $data['amount'];

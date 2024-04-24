@@ -352,6 +352,7 @@
                                                 value="{{ $plan->plan_offer_price }}" id="total_amount">
                                             <input type="hidden" id="coupan_code" name="coupan_code">
                                             <input type="hidden" id="coupon_discount" name="coupon_discount">
+                                            <input type="hidden" id="coupon_discount_type" name="coupon_discount_type">
 
 
 
@@ -610,9 +611,11 @@
                             if (response.status == 'success') {
                                 var total = response.discount;
                                 var discount = response.coupon_discount;
+                                var discpount_type = response.coupon_discount_type;
                                 $('#total_amount').val(total);
                                 $('#coupan_code').val(coupon_code);
                                 $('#coupon_discount').val(discount);
+                                $('#coupon_discount_type').val(discpount_type);
                                 $('.coupon-dis').html(
                                     '<th>Coupon Discount</th><th class="text-end">-$' +
                                     discount + '</th>');
@@ -629,6 +632,7 @@
                                 $('#total_amount').val(plan_price);
                                 $('#coupan_code').val('');
                                 $('#coupon_discount').val('0.00');
+                                $('#coupon_discount_type').val('');
                                 $('.coupon-dis').html(
                                     '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>'
                                 );
@@ -822,6 +826,7 @@
                                     amount: $('#total_amount').val(),
                                     coupan_code: $('#coupan_code').val(),
                                     coupon_discount: $('#coupon_discount').val(),
+                                    coupon_discount_type: $('#coupon_discount_type').val(),
                                     additional_information: $('#floatingTextarea2').val()
                                 })
                             })

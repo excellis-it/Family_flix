@@ -81,10 +81,9 @@
         <!--  Row 1 -->
         <div class="row">
             <div class="col-lg-12">
-                {{-- <div class="w-100 text-end mb-3">
-                    <a class="print_btn" href="" >+ Add
-                        New Affiliator</a>
-                </div> --}}
+                <div class="w-100 text-end mb-3">
+                    <a class="print_btn" href="" >+ Add New Plan</a>
+                </div>
                 <div class="card w-100">
                     <div class="card-body">
 
@@ -112,7 +111,11 @@
                                     <tr>
                                         <th><span class="fs-4 fw-semibold mb-0">Plan Name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Plan Price($)</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Date</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Coupon Code</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Coupon Discount</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Total($)</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Start Date</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Expiry Date</span></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyContents">
@@ -121,12 +124,15 @@
                                         <tr>
                                             <td>{{ $subscription->plan_name ?? 'N/A' }}</td>
                                             <td>{{ $subscription->plan_price ?? 'N/A' }}</td>
-                                            <td>{{ date($subscription->created_at) }}</td>
-                                            
+                                            <td>{{ $subscription->coupan_code ?? 'N/A' }}</td>
+                                            <td>{{ $subscription->coupan_discount . ($subscription->coupan_discount_type == 'amount' ? '($)' : '%') ?? 'N/A' }}</td>
+                                            <td>{{ $subscription->total ?? 'N/A' }}</td>
+                                            <td>{{ $subscription->plan_start_date ?? 'N/A' }}</td>
+                                            <td>{{ $subscription->plan_expiry_date ?? 'N/A' }}</td> 
                                         </tr>
                                     @endforeach
                                     <tr class="toxic">
-                                        <td colspan="5" class="text-left">
+                                        <td colspan="7" class="text-left">
                                             <div class="d-flex justify-content-between">
                                                 <div class="">
                                                     {!! $subscriptions->links() !!}
@@ -138,7 +144,7 @@
                                     </tr>
                                 @else
                                     <tr>
-                                        <td colspan="8" class="text-center">No data found</td>
+                                        <td colspan="7" class="text-center">No data found</td>
                                     </tr>
                                 @endif
 
