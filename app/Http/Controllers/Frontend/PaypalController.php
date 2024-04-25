@@ -337,6 +337,26 @@ class PaypalController extends Controller
             ->first();
             if($user_subscription)
             {
+
+                if (Session::has('affiliate_id')) {
+
+                    //affiliate commission calculation
+                    $affiliate_id = Session::get('affiliate_id');
+                    $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
+                    if ($commission) {
+                        $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                    } else {
+                        $commission_dis = 0;
+                    }
+    
+                    $user_subscription->affiliate_id = Session::get('affiliate_id');
+                    $user_subscription->affiliate_commission = $commission_dis;
+                } else {
+                    $user_subscription->affiliate_id = null;
+                    $user_subscription->affiliate_commission = null;
+                }
+
+                
                 $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($user_subscription->plan_expiry_date)));
                 $user_subscription->update(); 
             }

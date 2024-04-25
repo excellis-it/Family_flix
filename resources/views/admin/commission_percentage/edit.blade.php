@@ -48,7 +48,7 @@
                                                         }
                                                     @endphp
                                                     <option value="{{ $affiliater->id }}" {{ $selected ? 'selected' : '' }}>
-                                                        {{ $affiliater->name }}
+                                                        {{ $affiliater->name }} ({{ $affiliater->email }})
                                                     </option>
                                                 @endforeach
                                        

@@ -37,7 +37,7 @@
                                             onchange="console.log(this.selectedOptions)" >
                                             
                                             @foreach($affiliaters as $affiliater)
-                                                <option value="{{ $affiliater->id }}">{{ $affiliater->name }}</option>
+                                                <option value="{{ $affiliater->id }}">{{ $affiliater->name }} ({{ $affiliater->email }})</option>
                                             @endforeach
                                     </select>
                                     </div>
