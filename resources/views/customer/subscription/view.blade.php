@@ -32,7 +32,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <div class="subscibtion-list">
+                                    <div class="subscibtion-list remove-back">
                                         <ul>
                                             <li><span class="fw-600">Plan Name:-</span>
                                                 {{ $customer_subscription->plan_name ?? 'N/A' }}</li>
@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="subscibtion-list">
+                                    <div class="subscibtion-list remove-back">
                                         <ul>
                                             <li><span class="fw-600">Start date:-</span>{{ date('d M,Y', strtotime($customer_subscription->plan_start_date)) ?? 'N/A' }}</li>
                                             <li><span class="fw-600">Expiry date:-</span>{{ date('d M,Y', strtotime($customer_subscription->plan_expiry_date)) ?? 'N/A' }}</li>

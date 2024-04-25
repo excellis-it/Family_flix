@@ -1880,7 +1880,7 @@ video:-webkit-full-page-media{
 /* Footer */
 .ftr-sec {
   padding: 50px 0px;
-  position: relative;
+  /* position: relative; */
 }
 
 .ftr-bg {
@@ -2211,6 +2211,10 @@ video:-webkit-full-page-media{
 
 .ftr-sec {
   position: relative;
+  /* position: fixed; */
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 .ftr-img img {
@@ -3517,6 +3521,9 @@ margin-left:-15px;
 .renewal-btn:hover{
    color: #fff;      
 }
-
+.remove-back ul li:hover{
+  background: transparent !important;
+  color: #000 !important;
+}
 
 

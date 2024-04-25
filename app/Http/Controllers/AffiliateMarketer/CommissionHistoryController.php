@@ -26,19 +26,11 @@ class CommissionHistoryController extends Controller
             $sort_type = $request->get('sorttype');
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
-            $commissions = UserSubscription::where('id', 'like', '%' . $query . '%')
-                ->orWhere('plan_name', 'like', '%' . $query . '%')
-                ->orWhere('plan_price', 'like', '%' . $query . '%')
-                ->orWhere('affiliate_commission', 'like', '%' . $query . '%')
-                ->orWhere('total', 'like', '%' . $query . '%')
-                ->orWhereHas('customerDetails', function ($q) use ($query) {
-                    $q->whereRaw("CONCAT(first_name, ' ', last_name) like '%" . $query . "%'");
-                })
-                ->orWhereHas('customerDetails', function ($q) use ($query) {
-                    $q->where('email_address', 'like', '%' . $query . '%');
-                })
-                ->where('affiliate_id', auth()->user()->id)
-                ->orderBy('id', 'desc')
+            $commissions = UserSubscription::where('affiliate_id', auth()->user()->id)
+                ->orWhere('amount', 'like', '%' . $query . '%')
+                ->orWhere('commission', 'like', '%' . $query . '%')
+                ->orWhere('created_at', 'like', '%' . $query . '%')
+                ->orderBy($sort_by, $sort_type)
                 ->paginate(15);
 
             return response()->json(['data' => view('frontend.affiliate-marketer.commission-history.filter', compact('commissions'))->render()]);

@@ -36,8 +36,50 @@ class PaypalController extends Controller
     {
         $id = decrypt($id);
         $plan = Plan::find($id);
+        if(Auth::check())
+        {
+            $user = Auth::user();
+            $customer_details = CustomerDetails::where('email_address',$user->email)->first() ?? ''; 
+            $plan_exists = UserSubscription::where('customer_id', Auth::user()->id)->where('plan_name',$plan->plan_name)->where('plan_expiry_date', '>=', date('Y-m-d'))->count() ?? 0;
+        }else{
+            $customer_details = '';
+            $plan_exists = 0;
+        }
+
         $faq_qstn_ansrs = Faq::where('type','payment')->orderBy('id','asc')->get();
-        return view('frontend.pages.checkout',compact('plan','faq_qstn_ansrs'));
+        return view('frontend.pages.checkout',compact('plan','faq_qstn_ansrs','customer_details','plan_exists'));
+    }
+
+    public function renewalPayments($name)
+    {
+
+    }
+
+    public function paymentTypeCheck(Request $request)
+    {
+        
+        //check the request plan is already subscribed by the user and its not expired
+        $check_user_subscription = UserSubscription::where('customer_id', Auth::user()->id)
+            ->where('plan_expiry_date', '>=', date('Y-m-d'))
+            ->count();
+
+        if($check_user_subscription > 0)
+        {
+            $check_user_same_plan =  UserSubscription::where('customer_id', Auth::user()->id)
+                ->where('plan_name', $request->plan_name)
+                ->where('plan_expiry_date', '>=', date('Y-m-d'))
+                ->count();
+            if($check_user_same_plan > 0)
+            {
+                return response()->json(['status' => 'success', 'same_plan' => true, 'message' => 'You can proceed with the payment']);
+            }else{
+                return response()->json(['status' => 'error', 'message' => 'you have already subscribed a plan']);
+            }
+
+            // return response()->json(['status' => 'error', 'message' => 'You have already subscribed this plan']);
+        }else{
+            return response()->json(['status' => 'success',  'message' => 'You can proceed with the payment']);
+        }   
     }
 
 
@@ -93,10 +135,8 @@ class PaypalController extends Controller
 
             $data = session()->get('data');
             // create a random unique order number
-
             if ($response->isSuccessful())
             {
-
                 //customer details
                 $customer_details = new CustomerDetails();
                 $customer_details->email_address = $data['email_address'];
@@ -110,7 +150,6 @@ class PaypalController extends Controller
                 $customer_details->post_code = $data['post_code'];
                 $customer_details->phone = $data['phone'];
                 $customer_details->save();
-
 
                 //user subscription
                 $user_subscription = new UserSubscription();
@@ -132,6 +171,7 @@ class PaypalController extends Controller
                 }
 
                 $user_subscription->payment_type = 'paypal';
+                $user_subscription->plan_id = $data['plan_id'];
                 $user_subscription->plan_name = $data['plan_name'];
                 $user_subscription->plan_price = $data['plan_price'];
                 $user_subscription->coupan_code = $data['coupan_code'];
@@ -232,19 +272,37 @@ class PaypalController extends Controller
     {
         
         $data = $request->all();
-        $customer_details = new CustomerDetails();
-        $customer_details->email_address = $data['emailId'];
-        $customer_details->first_name = $data['first_name'];
-        $customer_details->last_name = $data['last_name'];
-        $customer_details->country = $data['country'];
-        $customer_details->house_no_street_name = $data['house_name'];
-        $customer_details->apartment = $data['detail_address'];
-        $customer_details->town = $data['city'];
-        $customer_details->state = $data['state'];
-        $customer_details->post_code = $data['post_code'];
-        $customer_details->phone = $data['phone'];
-        $customer_details->save();
 
+        $customer_details_count = CustomerDetails::where('email_address',$data['emailId'])->count();
+        if($customer_details_count > 0)
+        {
+            $customer_details = CustomerDetails::where('email_address',$data['emailId'])->first();
+            $customer_details->email_address = $data['emailId'];
+            $customer_details->first_name = $data['first_name'];
+            $customer_details->last_name = $data['last_name'];
+            $customer_details->country = $data['country'];
+            $customer_details->house_no_street_name = $data['house_name'];
+            $customer_details->apartment = $data['detail_address'];
+            $customer_details->town = $data['city'];
+            $customer_details->state = $data['state'];
+            $customer_details->post_code = $data['post_code'];
+            $customer_details->phone = $data['phone'];
+            $customer_details->update();
+        }else{
+            $customer_details = new CustomerDetails();
+            $customer_details->email_address = $data['emailId'];
+            $customer_details->first_name = $data['first_name'];
+            $customer_details->last_name = $data['last_name'];
+            $customer_details->country = $data['country'];
+            $customer_details->house_no_street_name = $data['house_name'];
+            $customer_details->apartment = $data['detail_address'];
+            $customer_details->town = $data['city'];
+            $customer_details->state = $data['state'];
+            $customer_details->post_code = $data['post_code'];
+            $customer_details->phone = $data['phone'];
+            $customer_details->save();
+        }
+    
         $check_user_exists = User::where('email',$data['emailId'])->count();
         if($check_user_exists > 0)
         {
@@ -270,42 +328,56 @@ class PaypalController extends Controller
             $user_id = $user->id;
         }
 
+       // for renewal plan 
+        if($data['payment_type'] == 'Renewal')
+        {
+            $user_subscription = UserSubscription::where('customer_id', $user_id)
+            ->where('plan_name', $data['plan_name'])
+            ->where('plan_expiry_date', '>=', date('Y-m-d'))
+            ->first();
+            if($user_subscription)
+            {
+                $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($user_subscription->plan_expiry_date)));
+                $user_subscription->update(); 
+            }
+        }else{
 
-        //user subscription
-        $user_subscription = new UserSubscription();
-        $user_subscription->customer_details_id = $customer_details->id;
-        $user_subscription->customer_id = $user_id;
-        if (Session::has('affiliate_id')) {
+            $user_subscription = new UserSubscription();
+            $user_subscription->customer_details_id = $customer_details->id;
+            $user_subscription->customer_id = $user_id;
+            if (Session::has('affiliate_id')) {
 
-            //affiliate commission calculation
-            $affiliate_id = Session::get('affiliate_id');
-            $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
-            if ($commission) {
-                $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                //affiliate commission calculation
+                $affiliate_id = Session::get('affiliate_id');
+                $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
+                if ($commission) {
+                    $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                } else {
+                    $commission_dis = 0;
+                }
+
+                $user_subscription->affiliate_id = Session::get('affiliate_id');
+                $user_subscription->affiliate_commission = $commission_dis;
             } else {
-                $commission_dis = 0;
+                $user_subscription->affiliate_id = null;
+                $user_subscription->affiliate_commission = null;
             }
 
-            $user_subscription->affiliate_id = Session::get('affiliate_id');
-            $user_subscription->affiliate_commission = $commission_dis;
-        } else {
-            $user_subscription->affiliate_id = null;
-            $user_subscription->affiliate_commission = null;
+            $user_subscription->payment_type = $data['payment_type'];
+            $user_subscription->plan_id = $data['plan_id'];
+            $user_subscription->plan_name = $data['plan_name'];
+            $user_subscription->plan_price = $data['plan_price'];
+            $user_subscription->coupan_code = $data['coupan_code'];
+            $user_subscription->coupan_discount_type = $data['coupon_discount_type'];
+            $user_subscription->coupan_discount = $data['coupon_discount'];
+            $user_subscription->sub_total = $data['plan_price'];
+            $user_subscription->total = $data['amount'];
+            $user_subscription->additional_information = $data['additional_information'];
+            $today = date('Y-m-d');
+            $user_subscription->plan_start_date = $today;
+            $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
+            $user_subscription->save();
         }
-
-        $user_subscription->payment_type = 'paypal';
-        $user_subscription->plan_name = $data['plan_name'];
-        $user_subscription->plan_price = $data['plan_price'];
-        $user_subscription->coupan_code = $data['coupan_code'];
-        $user_subscription->coupan_discount_type = $data['coupon_discount_type'];
-        $user_subscription->coupan_discount = $data['coupon_discount'];
-        $user_subscription->sub_total = $data['plan_price'];
-        $user_subscription->total = $data['amount'];
-        $user_subscription->additional_information = $data['additional_information'];
-        $today = date('Y-m-d');
-        $user_subscription->plan_start_date = $today;
-        $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
-        $user_subscription->save();
 
         $payment = new Payment();
         $payment->user_subscription_id = $user_subscription->id;

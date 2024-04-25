@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\CustomerDetails;
 
 /**
     * @group Customer
@@ -58,10 +59,11 @@ class AuthController extends Controller
         try {
             if(Auth::attempt(['email'=> $request->email, 'password' => $request->password]))
             {
-                $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
+                $user = User::where('email', $request->email)->first();
                 if ($user->status == 1 && $user->hasRole('CUSTOMER')) {
                     $data['auth_token'] = $user->createToken('accessToken')->accessToken;
                     $data['user'] = $user->makeHidden('roles');
+                    $data['billing_details'] = CustomerDetails::where('email_address', $user->email)->orderBy('id','desc')->first() ?? '';
                     return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
                 } else {
                     return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'Invalid user & Password!'], 200);

@@ -43,7 +43,6 @@ use App\Http\Controllers\Api\Affiliater\DashboardController;
                 Route::post('profile-update', [ProfileController::class, 'profileUpdate']);  // profile update api
                 Route::post('dashboard', [DashboardController::class, 'dashboard']);  // dashboard api
                 
-
                 Route::group(['prefix' => 'commission'], function () {
                     Route::post('list', [CommissionController::class, 'commissionList']);  // commission details api
                 });
@@ -108,6 +107,7 @@ use App\Http\Controllers\Api\Affiliater\DashboardController;
         //payment gateway
         Route::post('coupon-check', [CouponCheckController::class, 'checkCoupon']);
         Route::post('payment-capture', [PaymentController::class, 'paymentCapture']);
+        Route::post('billing-address', [PaymentController::class, 'billingAddress']);
 
     });
 

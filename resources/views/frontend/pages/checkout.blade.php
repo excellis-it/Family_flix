@@ -124,7 +124,7 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     name="first_name" id="floatingInput2" placeholder=""
-                                                                    value="">
+                                                                    value="{{ $customer_details->first_name ?? '' }}">
                                                                 <label for="floatingInput2">First Name
                                                                     <span>*</span></label>
                                                                 <span id="fname_error" class="text-danger"></span>
@@ -135,7 +135,7 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     name="last_name" id="floatingInput3"
-                                                                    placeholder="">
+                                                                    placeholder="" value="{{ $customer_details->last_name ?? '' }}">
                                                                 <label for="floatingInput3">Last Name
                                                                     <span>*</span></label>
                                                                 <span id="lname_error" class="text-danger"></span>
@@ -147,8 +147,8 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     id="floatingSelect1" name="country"
-                                                                    placeholder="">
-                                                                <label for="floatingSelect1">Country/Region
+                                                                    placeholder="" value="{{ $customer_details->country ?? '' }}">
+                                                                <label for="floatingSelect1">Country
                                                                     <span>*</span></label>
                                                                 <span id="country_error" class="text-danger"></span>
                                                             </div>
@@ -159,7 +159,7 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     id="floatingInput4" name="house_name"
-                                                                    placeholder="">
+                                                                    placeholder="" value="{{ $customer_details->house_no_street_name ?? '' }}">
                                                                 <label for="floatingInput4">House number and street
                                                                     name <span>*</span></label>
                                                                 <span id="houseNo_error" class="text-danger"></span>
@@ -169,7 +169,7 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     id="floatingInput5" name="detail_address"
-                                                                    placeholder="">
+                                                                    placeholder="" value="{{ $customer_details->apartment ?? '' }}">
                                                                 <label for="floatingInput5">Apartment, suite, unit,
                                                                     etc.<span>*</span></label>
                                                                 <span id="addr_error" class="text-danger"></span>
@@ -182,8 +182,8 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     id="floatingInput6" name="city"
-                                                                    placeholder="">
-                                                                <label for="floatingInput6">Town/City
+                                                                    placeholder="" value="{{ $customer_details->town ?? '' }}">
+                                                                <label for="floatingInput6">City
                                                                     <span>*</span></label>
                                                                 <span id="city_error" class="text-danger"></span>
                                                             </div>
@@ -192,8 +192,8 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     id="floatingInput7" name="state"
-                                                                    placeholder="">
-                                                                <label for="floatingInput7">State/Country
+                                                                    placeholder=""  value="{{ $customer_details->state ?? '' }}">
+                                                                <label for="floatingInput7">State
                                                                     <span>*</span></label>
                                                                 <span id="state_error" class="text-danger"></span>
                                                             </div>
@@ -202,7 +202,7 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     id="floatingInput8" name="post_code"
-                                                                    placeholder="">
+                                                                    placeholder=""  value="{{ $customer_details->post_code ?? '' }}">
                                                                 <label for="floatingInput8">Post code
                                                                     <span>*</span></label>
                                                                 <span id="postCode_error" class="text-danger"></span>
@@ -214,7 +214,7 @@
                                                             <div class="form-floating mb-3">
                                                                 <input type="text" class="form-control"
                                                                     name="phone" id="floatingInput9" placeholder=""
-                                                                    value="{{ Auth::user()->phone ?? '' }}">
+                                                                    value="{{ $customer_details->phone ?? '' }}">
                                                                 <label for="floatingInput9">Phone
                                                                     <span>*</span></label>
 
@@ -225,14 +225,16 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
-                                                                <select class="form-select" name="payment_type"
-                                                                    id="floatingSelect2"
-                                                                    aria-label="Floating label select example">
-
-                                                                    <option value="New Subsription">New Subsription
-                                                                    </option>
-                                                                    <option value="Renewal">Renewal</option>
+                                                                <select class="form-select" name="payment_type" id="floatingSelect2" aria-label="Floating label select example">
+                                                                    
+                                                                    
+                                                                    @if(Auth::check() && $plan_exists > 0)
+                                                                        <option value="Renewal">Renewal</option>
+                                                                    @else
+                                                                        <option value="New Subscription">New Subscription</option>
+                                                                    @endif
                                                                 </select>
+                                                                
                                                                 <label for="floatingSelect2">payment Type
                                                                     <span>*</span></label>
                                                             </div>
@@ -314,7 +316,7 @@
                                                             <tr>
                                                                 <td>{{ $plan->plan_name }}</td>
                                                                 <td class="text-end">x 1 &nbsp;
-                                                                    ${{ $plan->plan_offer_price }} / month</td>
+                                                                    ${{ $plan->plan_offer_price }} / month(30 days)</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Subtotal</td>
@@ -352,6 +354,8 @@
                                             <input type="hidden" id="coupan_code" name="coupan_code">
                                             <input type="hidden" id="coupon_discount" name="coupon_discount">
                                             <input type="hidden" id="coupon_discount_type" name="coupon_discount_type">
+                                            <input type="hidden" name="plan_id" id="plan_id"
+                                                value="{{ $plan->id }}">
 
 
 
@@ -370,7 +374,8 @@
                                                         <button class="apply-btn" type="button"
                                                             id="nextBtn">Apply</button>
                                                     </div>
-                                                    <span id="coupon_error" class="text-danger"></span>
+                                                    <span id="coupon_error"></span>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -505,9 +510,10 @@
         </section>
 
         {{-- user exists modal --}}
-
+        @auth
+        @else
         <div class="modal fade" id="userExistsModal" data-bs-backdrop="static" data-bs-keyboard="false"
-            tabindex="-1" aria-labelledby="userExistsModalLabel" aria-hidden="true">
+            tabindex="-1" aria-labelledby="userExistsModalLabel" aria-hidden="true" >
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -525,6 +531,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
 
 
@@ -571,6 +578,13 @@
     <script src="{{ asset('frontend_assets/js/custom.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox-plus-jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
     {{-- paypal credit --}}
     {{-- <script
@@ -624,10 +638,10 @@
                                 $('.recurring').html(
                                     '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
                                     total + '/ month<br><span>(ex. VAT)</span></td></div>');
-                                $('#coupon_error').text('');
+                                    $('#coupon_error').text('Coupon Applied').css('color', 'green');
                             } else {
                                 //show message invlid coupon
-                                $('#coupon_error').text('Invalid Coupon Code');
+                                $('#coupon_error').text('Invalid Coupon Code').css('color', 'red');
                                 $('#total_amount').val(plan_price);
                                 $('#coupan_code').val('');
                                 $('#coupon_discount').val('0.00');
@@ -751,7 +765,7 @@
                     return true;
                 }
 
-
+                
                 $.ajax({
                     url: "{{ route('payments.email-check') }}",
                     type: "POST",
@@ -760,6 +774,7 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
+                        alert(response.status);
                         if (response.status == 'success') {
                             $('#email_error').text('');
                         } else {
@@ -768,6 +783,8 @@
                         }
                     }
                 });
+              
+                
 
                 if(checkStatus == true) {
                     alert(11111);
@@ -820,6 +837,7 @@
                                     phone: $('#floatingInput9').val(),
 
                                     payment_type: $('#floatingSelect2').val(),
+                                    plan_id: $('#plan_id').val(),
                                     plan_name: $('#plan_name').val(),
                                     plan_price: $('#plan_price').val(),
                                     amount: $('#total_amount').val(),
@@ -888,6 +906,54 @@
             });
         });
     </script>
+    @auth
+    <script>
+       $(document).ready(function() {
+            
+            var payment_type = $('#floatingSelect2').val();
+            var plan_name = $('#plan_name').val();
+            
+            $.ajax({
+                url: "{{ route('payments.payment-type-check') }}",
+                type: "POST",
+                data: {
+                    payment_type: payment_type,
+                    plan_name: plan_name,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        if(response.same_plan == true)
+                        {
+                            return true;
+                        }
+                        
+                    } else {
+
+                        Swal.fire({
+                            title: 'You already have an active subscription',
+                            text: 'Do you want to renew your subscription? or would you prefer to wait until your current subscription expires before starting the new one?',
+                            icon: 'info',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Ok',
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{ route('customer.subscription') }}";
+                                // Code to execute when the user confirms
+                            } else {
+                                // Code to execute when the user cancels
+                            }
+                        });
+                        
+                        
+                    }
+                }
+            });
+        });
+        
+    </script>
+    @endauth
 </body>
 
 </html>

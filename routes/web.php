@@ -84,6 +84,8 @@ Route::post('/paypal-payment/{ord?}', [PaypalController::class, 'paypalPayment']
 Route::get('/paypal-success-payment/{pay?}/{pyr?}', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
 Route::get('/paypal-pay-failed/{err?}',[PaypalController::class, 'paypalPayFailed'])->name('paypal-pay-failed');
 
+Route::post('payment-type-check', [PaypalController::class, 'paymentTypeCheck'])->name('payments.payment-type-check');
+
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
 // affliate authentication

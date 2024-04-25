@@ -19,6 +19,7 @@ class CreateUserSubscriptionsTable extends Migration
             $table->bigInteger('customer_id')->nullable();
             $table->string('affiliate_id')->nullable();
             $table->string('payment_type')->nullable();
+            $table->foreignId('plan_id')->nullable();
             $table->string('plan_name')->nullable();
             $table->string('plan_price')->nullable();
             $table->string('coupan_code')->nullable();
