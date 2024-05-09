@@ -39,7 +39,7 @@
                             <a href="{{route('home')}}" class="text-nowrap d-block text-center mx-auto logo-img mb-4">
                                 <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" alt="">
                             </a>
-                            <form action="{{ route('customer.forget.password') }}" method="POST">
+                            <form action="{{ route('affiliate-marketer.forget.password') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-3">

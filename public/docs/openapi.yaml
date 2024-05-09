@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Family-Flix
+  title: Laravel
   description: ''
   version: 1.0.0
 servers:
@@ -206,15 +206,15 @@ paths:
                 phone:
                   type: string
                   description: 'The phone of the user.'
-                  example: '+1 1234 567 890'
-                email:
+                  example: "+1 1234 567 890\n<<<<<<< HEAD\n======="
+                address:
                   type: string
-                  description: 'The email of the user.'
-                  example: whiteglovecomics@gmail.com
+                  description: 'The address of the user.'
+                  example: "USA,678\n>>>>>>> c1785ddb5e90245089796b4a8046a3bd1939716d"
               required:
                 - name
                 - phone
-                - email
+                - address
   /api/v1/affiliater/create-link:
     post:
       summary: 'AffiliateLink Api'
@@ -494,11 +494,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: qpsdsowxswglwkdixxjaojqrplqzridskkvvcouuymahijntbzw
+                  example: fkyzoglqxqprplyvjwjjvdekshkjvzmhdnadsrpkhpymbdtymajskcgfxpwetlwhkjvneljiteafanbdc
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: bquigley@example.org
+                  example: jeanette.rice@example.com
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -903,7 +903,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: voluptatem
+                  example: nobis
               required:
                 - type
       security: []
@@ -980,19 +980,19 @@ paths:
                 coupon_code:
                   type: string
                   description: ''
-                  example: dolores
+                  example: alias
                 plan_id:
                   type: string
                   description: ''
-                  example: consequuntur
+                  example: dolore
                 plan_price:
                   type: string
                   description: ''
-                  example: aut
+                  example: eius
                 email:
                   type: string
                   description: 'This field is required when <code>phone</code> is not present.  Must be a valid email address.'
-                  example: goodwin.kendrick@example.org
+                  example: phomenick@example.com
                 phone:
                   type: string
                   description: 'This field is required when <code>email</code> is not present.'
@@ -1111,11 +1111,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: vrjkbgzjjkgafzqcuqmsilgodhajhemtugrctihumkgdiyvbrixvkeutqwgadnyhtljhht
+                  example: cwxktdqmvubyyrzivtvkybhgxxkeoavskymkdabduotcxnkhdzrnbbwavuu
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: gbeatty@example.net
+                  example: lakin.suzanne@example.net
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -1359,6 +1359,52 @@ paths:
               required:
                 - name
                 - email
+  /api/v1/affiliater-forgot-password:
+    post:
+      summary: ''
+      operationId: postApiV1AffiliaterForgotPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Forget Password '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
+                  example: p00.fv@p.n.5.b.2.rnzjrr$/ix
+              required:
+                - email
+      security: []
+  /api/v1/customer-forgot-password:
+    post:
+      summary: ''
+      operationId: postApiV1CustomerForgotPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Forget Password '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
+                  example: v9a.tsv3.5af-@2.ntznv$/ix
+              required:
+                - email
+      security: []
   /api/v1/contact-us:
     post:
       summary: 'Contact Api'
@@ -1401,7 +1447,7 @@ paths:
                 user_email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: cummerata.davin@example.com
+                  example: ecole@example.com
                 user_phone:
                   type: string
                   description: 'The phone of the user.'
@@ -1463,7 +1509,7 @@ paths:
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: carole.schaefer@example.com
+                  example: oblock@example.com
               required:
                 - email
       security: []
@@ -1526,51 +1572,59 @@ paths:
                 emailId:
                   type: string
                   description: ''
-                  example: et
+                  example: ut
                 first_name:
                   type: string
                   description: ''
-                  example: consequuntur
+                  example: commodi
                 last_name:
                   type: string
                   description: ''
-                  example: error
+                  example: adipisci
                 country:
                   type: string
                   description: ''
-                  example: quod
+                  example: ut
                 house_name:
                   type: string
                   description: ''
-                  example: rerum
+                  example: sunt
                 detail_address:
                   type: string
                   description: ''
-                  example: doloremque
+                  example: soluta
                 city:
                   type: string
                   description: ''
-                  example: et
+                  example: expedita
                 state:
                   type: string
                   description: ''
-                  example: doloremque
+                  example: et
                 post_code:
                   type: string
                   description: ''
-                  example: totam
+                  example: perspiciatis
                 phone:
                   type: string
                   description: ''
-                  example: unde
+                  example: qui
                 amount:
                   type: string
                   description: ''
-                  example: consequuntur
+                  example: sit
                 paymentID:
                   type: string
                   description: ''
-                  example: impedit
+                  example: illo
+                plan_name:
+                  type: string
+                  description: ''
+                  example: aspernatur
+                plan_price:
+                  type: string
+                  description: ''
+                  example: dolorum
               required:
                 - emailId
                 - first_name
@@ -1584,6 +1638,31 @@ paths:
                 - phone
                 - amount
                 - paymentID
+                - plan_name
+                - plan_price
+      security: []
+  /api/v1/billing-address:
+    post:
+      summary: ''
+      operationId: postApiV1BillingAddress
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Payment Capture'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emailId:
+                  type: string
+                  description: ''
+                  example: cupiditate
+              required:
+                - emailId
       security: []
   /api/v1/plans/show:
     post:
@@ -1904,6 +1983,9 @@ tags:
   -
     name: 'Customer Profile '
     description: "\nAPIs for Profile Details"
+  -
+    name: 'Forget Password '
+    description: "\nAPIs for Forget Password"
   -
     name: General
     description: "\nAPIs for General"

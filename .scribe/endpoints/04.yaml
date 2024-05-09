@@ -1,102 +1,73 @@
-name: Customer
-description: |-
-
-  APIs for Authentication
+name: 'Affiliater - Commission'
+description: ''
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/customer/register
+    uri: api/v1/affiliater/commission/list
     metadata:
-      groupName: Customer
-      groupDescription: |-
-
-        APIs for Authentication
+      groupName: 'Affiliater - Commission'
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Register Api for Customer'
+      title: 'Commission Api'
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the user.'
-        required: true
+    queryParameters:
+      search:
+        name: search
+        description: 'Search by customer name.'
+        required: false
         example: 'John Doe'
         type: string
         enumValues: []
         exampleWasSpecified: true
         custom: []
-      phone:
-        name: phone
-        description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-        required: true
-        example: vrjkbgzjjkgafzqcuqmsilgodhajhemtugrctihumkgdiyvbrixvkeutqwgadnyhtljhht
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      email:
-        name: email
-        description: 'The email of the user. Example:'
-        required: true
-        example: gbeatty@example.net
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        custom: []
-      password:
-        name: password
-        description: 'The password of the user.'
-        required: true
-        example: '12345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-      confirm_password:
-        name: confirm_password
-        description: 'The confirm_password of the user.'
-        required: true
-        example: '12345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-    cleanBodyParameters:
-      name: 'John Doe'
-      phone: vrjkbgzjjkgafzqcuqmsilgodhajhemtugrctihumkgdiyvbrixvkeutqwgadnyhtljhht
-      email: gbeatty@example.net
-      password: '12345678'
-      confirm_password: '12345678'
+    cleanQueryParameters:
+      search: 'John Doe'
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
         status: 200
         content: |-
           {
-           "status": true,
-            "statusCode": 200,
-            "data": {
-            "user": {
-                "name": "test customer",
-                "email": "testcustomer@yopmail.com",
-                "phone": 8989898965,
-                "status": 1,
-                "updated_at": "2024-03-14T05:57:00.000000Z",
-                "created_at": "2024-03-14T05:57:00.000000Z",
-                "id": 4
-            }
-            },
-            "message": "registered successfully"
+          "status": true,
+           "statusCode": 200,
+           "data": [
+               {
+                   "id": 1,
+                   "affiliate_id": 3,
+                   "customer_id": 1,
+                   "subscription_id": 1,
+                   "commission": "5.00",
+                   "created_at": "2021-05-27T06:50:50.000000Z",
+                   "updated_at": "2021-05-27T06:50:50.000000Z",
+                   "customer_details": {
+                       "id": 1,
+                       "name": "John Doe",
+                       "email": "
+                  }
+             }
+          ]
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+          "status": false,
+          "statusCode": 200,
+          "message": "No commission found!"
           }
         headers: []
         description: ''
@@ -107,94 +78,7 @@ endpoints:
           {
           "status": false,
           "statusCode": 401,
-          "error": {
-          "message": [
-                "The email has already been taken.",
-                "The confirm password and password must match."
-            ]
-          }
-          }
-        headers: []
-        description: ''
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/customer/login
-    metadata:
-      groupName: Customer
-      groupDescription: |-
-
-        APIs for Authentication
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Login Api for customer'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      email:
-        name: email
-        description: 'The email of the user.'
-        required: true
-        example: john@yopmail.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-      password:
-        name: password
-        description: 'The password of the user.'
-        required: true
-        example: '12345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        custom: []
-    cleanBodyParameters:
-      email: john@yopmail.com
-      password: '12345678'
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-          "status": true,
-           "statusCode": 200,
-           "data": {
-                "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks",
-                "user": {
-                    "id": 3,
-                    "name": "test2 affiliater2",
-                    "email": "test1@yopmail.com",
-                    "status": "1"
-                }
-            }
-          }
-        headers: []
-        description: ''
-        custom: []
-      -
-        status: 401
-        content: |-
-          {
-           "status": false,
-           "statusCode": 401,
-           "error": "Invalid user & Password!"
+          "error": "Unauthorised"
           }
         headers: []
         description: ''

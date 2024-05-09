@@ -15,12 +15,16 @@ class Admin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+   
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->hasRole('ADMIN')) {
-            return $next($request);
-        } else {
-            return redirect()->route('admin.login');
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user && !$user->hasRole('CUSTOMER') && !$user->hasRole('AFFILIATE MARKETER')) {
+                return $next($request);
+            }
         }
+        return redirect()->route('admin.login');
     }
+
 }

@@ -57,9 +57,7 @@
                                         <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
                                     @endif
                                     </div>
-                                    {{-- <div class="account-footer">
-                                        <p><a href="{{ route('admin.forget.password.show') }}">Forgot Password?</a></p>
-                                    </div> --}}
+                                    
                                     <div class="col-md-12 mb-3">
                                         <button type="submit" class="print_btn w-100">Login</button>
                                     </div>

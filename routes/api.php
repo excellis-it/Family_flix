@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Customer\SubscriptionController as CustomerSubscrip
 use App\Http\Controllers\Api\Affiliater\CommissionController;
 use App\Http\Controllers\Api\CouponCheckController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\Affiliater\DashboardController;
 
 
@@ -36,6 +37,8 @@ use App\Http\Controllers\Api\Affiliater\DashboardController;
 
         Route::post('login', [AuthController::class, 'login']);  // login api
         Route::post('register', [AuthController::class, 'register']);  // register api
+        Route::post('affiliater-forgot-password',[ForgotPasswordController::class, 'affiForgotPassword']);
+        Route::post('customer-forgot-password',[ForgotPasswordController::class, 'customerForgotPassword']);
 
         Route::group(['middleware' => 'auth:api'], function () {
             Route::group(['prefix' => 'affiliater'], function () {

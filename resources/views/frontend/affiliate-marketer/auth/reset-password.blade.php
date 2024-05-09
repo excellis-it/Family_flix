@@ -3,7 +3,7 @@
 
 <head>
     <!--  Title -->
-    <title>{{env('APP_NAME')}} | Forget Password</title>
+    <title>{{env('APP_NAME')}} | Reset password</title>
     <!--  Required Meta Tag -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,19 +39,33 @@
                             <a href="{{route('home')}}" class="text-nowrap d-block text-center mx-auto logo-img mb-4">
                                 <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" alt="">
                             </a>
-                            <form action="{{ route('customer.forget.password') }}" method="POST">
+                            <form action="{{ route('affiliate-marketer.change.password') }}" method="POST">
                                 @csrf
                                 <div class="row">
+
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                    <input type="hidden" name="token" value="{{ $token }}">
+                                    
                                     <div class="form-group col-md-12 mb-3">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" name="email" id="inputEmailAddress" placeholder="E-mail Address">
-                                        @if ($errors->has('email'))
-                                            <div class="error" style="color:red;">{{ $errors->first('email') }}</div>
-                                        @endif
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" name="password" id="inputChoosePassword" placeholder="Password">
+
+                                    @if ($errors->has('password'))
+                                        <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
+                                    @endif
                                     </div>
-                                   
+
+                                    <div class="form-group col-md-12 mb-3">
+                                        <label>Confirm Password</label>
+                                        <input type="password" class="form-control" name="confirm_password" id="inputChoosePassword" placeholder="Confirm Password">
+
+                                    @if ($errors->has('confirm_password'))
+                                        <div class="error" style="color:red;">{{ $errors->first('confirm_password') }}</div>
+                                    @endif
+                                    </div>
+                                    
                                     <div class="col-md-12 mb-3">
-                                        <button type="submit" class="print_btn w-100">Send</button>
+                                        <button type="submit" class="print_btn w-100">Submit</button>
                                     </div>
                                     
                                     

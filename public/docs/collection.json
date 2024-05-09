@@ -9,8 +9,8 @@
         }
     ],
     "info": {
-        "name": "Family-Flix",
-        "_postman_id": "8b8229e7-0135-4f99-88ce-13f4664d1216",
+        "name": "Laravel",
+        "_postman_id": "e31ef8ee-956d-4360-9b59-093bd9818903",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -136,7 +136,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"+1 1234 567 890\",\"email\":\"whiteglovecomics@gmail.com\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"+1 1234 567 890\\n<<<<<<< HEAD\\n=======\",\"address\":\"USA,678\\n>>>>>>> c1785ddb5e90245089796b4a8046a3bd1939716d\"}"
                         },
                         "description": ""
                     },
@@ -297,7 +297,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"qpsdsowxswglwkdixxjaojqrplqzridskkvvcouuymahijntbzw\",\"email\":\"bquigley@example.org\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"fkyzoglqxqprplyvjwjjvdekshkjvzmhdnadsrpkhpymbdtymajskcgfxpwetlwhkjvneljiteafanbdc\",\"email\":\"jeanette.rice@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -546,7 +546,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"voluptatem\"}"
+                            "raw": "{\"type\":\"nobis\"}"
                         },
                         "description": "",
                         "auth": {
@@ -709,7 +709,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"coupon_code\":\"dolores\",\"plan_id\":\"consequuntur\",\"plan_price\":\"aut\",\"email\":\"goodwin.kendrick@example.org\"}"
+                            "raw": "{\"coupon_code\":\"alias\",\"plan_id\":\"dolore\",\"plan_price\":\"eius\",\"email\":\"phomenick@example.com\"}"
                         },
                         "description": "",
                         "auth": {
@@ -765,7 +765,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"vrjkbgzjjkgafzqcuqmsilgodhajhemtugrctihumkgdiyvbrixvkeutqwgadnyhtljhht\",\"email\":\"gbeatty@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"cwxktdqmvubyyrzivtvkybhgxxkeoavskymkdabduotcxnkhdzrnbbwavuu\",\"email\":\"lakin.suzanne@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -913,6 +913,74 @@
             ]
         },
         {
+            "name": "Forget Password ",
+            "description": "\nAPIs for Forget Password",
+            "item": [
+                {
+                    "name": "POST api\/v1\/affiliater-forgot-password",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/affiliater-forgot-password",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/affiliater-forgot-password"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"p00.fv@p.n.5.b.2.rnzjrr$\\\/ix\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/customer-forgot-password",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/customer-forgot-password",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/customer-forgot-password"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"v9a.tsv3.5af-@2.ntznv$\\\/ix\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
             "name": "General",
             "description": "\nAPIs for General",
             "item": [
@@ -938,7 +1006,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"cummerata.davin@example.com\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"ecole@example.com\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -982,7 +1050,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"carole.schaefer@example.com\"}"
+                            "raw": "{\"email\":\"oblock@example.com\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1032,7 +1100,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"et\",\"first_name\":\"consequuntur\",\"last_name\":\"error\",\"country\":\"quod\",\"house_name\":\"rerum\",\"detail_address\":\"doloremque\",\"city\":\"et\",\"state\":\"doloremque\",\"post_code\":\"totam\",\"phone\":\"unde\",\"amount\":\"consequuntur\",\"paymentID\":\"impedit\"}"
+                            "raw": "{\"emailId\":\"ut\",\"first_name\":\"commodi\",\"last_name\":\"adipisci\",\"country\":\"ut\",\"house_name\":\"sunt\",\"detail_address\":\"soluta\",\"city\":\"expedita\",\"state\":\"et\",\"post_code\":\"perspiciatis\",\"phone\":\"qui\",\"amount\":\"sit\",\"paymentID\":\"illo\",\"plan_name\":\"aspernatur\",\"plan_price\":\"dolorum\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1053,6 +1121,37 @@
                             "name": ""
                         }
                     ]
+                },
+                {
+                    "name": "POST api\/v1\/billing-address",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/billing-address",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/billing-address"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"emailId\":\"cupiditate\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
                 }
             ]
         },

@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
 use App\Http\Controllers\AffiliateMarketer\DashboardController as AffiliateMarketerDashboardController;
 use App\Http\Controllers\AffiliateMarketer\ProfileController as AffiliateMarketerProfileController;
+use App\Http\Controllers\AffiliateMarketer\ForgotPasswordController as AffiliateMarketerForgotPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PaypalController;
@@ -37,6 +38,7 @@ use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Customer\DashboardController as CustomerDashboardController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\Customer\SubscriptionController as CustomerSubscriptionController;
+use App\Http\Controllers\Customer\ForgotPasswordController as CustomerForgotPasswordController;
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\ManagerPermissionController;
 use App\Http\Controllers\Admin\UserController;
@@ -59,6 +61,8 @@ Route::post('forget-password', [ForgotPasswordController::class, 'forgetPassword
 Route::post('change-password', [ForgotPasswordController::class, 'changePassword'])->name('change.password');
 Route::get('forget-password/show', [ForgotPasswordController::class, 'forgetPasswordShow'])->name('forget.password.show');
 Route::get('reset-password/{id}/{token}', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
+
+Route::get('/any-user/logout', [AuthController::class, 'anyUserLogout'])->name('any-user.logout');
 
 Route::get('/about', [HomeController::class, 'aboutUs'])->name('about');
 Route::get('/movies', [HomeController::class, 'movies'])->name('movies');
@@ -83,7 +87,6 @@ Route::post('/capturePayment',[PaypalController::class, 'paymentcapture'])->name
 Route::post('/paypal-payment/{ord?}', [PaypalController::class, 'paypalPayment'])->name('paypal-payment');
 Route::get('/paypal-success-payment/{pay?}/{pyr?}', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
 Route::get('/paypal-pay-failed/{err?}',[PaypalController::class, 'paypalPayFailed'])->name('paypal-pay-failed');
-
 Route::post('payment-type-check', [PaypalController::class, 'paymentTypeCheck'])->name('payments.payment-type-check');
 
 // coupon check
@@ -96,6 +99,10 @@ Route::name('affiliate-marketer.')
         Route::get('/register', [AuthController::class, 'register'])->name('register');
         Route::post('/register-store', [AuthController::class, 'registerStore'])->name('register.store');
         Route::post('/user-login-check', [AuthController::class, 'loginCheck'])->name('login.check');
+        Route::get('forget-password/show', [AffiliateMarketerForgotPasswordController::class, 'forgetPasswordShow'])->name('forget-password.show');
+        Route::post('forget-password', [AffiliateMarketerForgotPasswordController::class, 'forgetPassword'])->name('forget.password');
+        Route::get('reset-password/{id}/{token}', [AffiliateMarketerForgotPasswordController::class, 'resetPassword'])->name('reset.password');
+        Route::post('change-password', [AffiliateMarketerForgotPasswordController::class, 'changePassword'])->name('change.password');
 
         // middleware for affliate-marketer
         Route::group(['middleware' => 'AffiliateMarketer'], function () {
@@ -117,7 +124,7 @@ Route::name('affiliate-marketer.')
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login-check', [AdminController::class, 'loginCheck'])->name('admin.login.check');
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'admin'], function () {
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
@@ -333,6 +340,13 @@ Route::name('customer.')
         Route::get('/register', [CustomerAuthController::class, 'register'])->name('register');
         Route::post('/register-store', [CustomerAuthController::class, 'registerStore'])->name('register.store');
         Route::post('/user-login-check', [CustomerAuthController::class, 'loginCheck'])->name('login.check');
+
+        Route::get('forget-password/show', [CustomerForgotPasswordController::class, 'forgetPasswordShow'])->name('forget-password.show');
+        Route::post('forget-password', [CustomerForgotPasswordController::class, 'forgetPassword'])->name('forget.password');
+        Route::get('reset-password/{id}/{token}', [CustomerForgotPasswordController::class, 'resetPassword'])->name('reset.password');
+        Route::post('change-password', [CustomerForgotPasswordController::class, 'changePassword'])->name('change.password');
+
+
         Route::group(['middleware' => 'user'], function () {
             Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
             Route::get('/profile', [CustomerProfileController::class, 'customerProfile'])->name('profile');

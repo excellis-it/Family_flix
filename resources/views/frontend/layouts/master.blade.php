@@ -103,40 +103,7 @@
         </div>
     </section>
 
-    {{-- cust login modal design--}}
-    <div class="modal fade" id="cust-login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">You're currently logged in with another account, please log out of this one.</h5>
-                    <a href="{{ route('affiliate-marketer.logout') }}" class="btn btn-danger">Logout</a>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{-- login form --}}
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- cust login modal design--}}
-
-    {{-- affi login modal design--}}
-    <div class="modal fade" id="affi-login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">You're currently logged in with another account, please log out of this one.</h5>
-                    <a href="{{ route('customer.logout') }}" class="btn btn-danger">Logout</a>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{-- login form --}}
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- affi login modal design--}}
-
+   
         @include('frontend.includes.footer')
 
         <div class="scroll-top">
@@ -223,7 +190,7 @@
                     // If user is authenticated, open popup
                     Swal.fire({
                         
-                        text: "You're currently logged in as an affiliate. Please log out of this account.",
+                        text: "You're currently logged in another account. Please log out of this account.",
                         icon: 'question',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -232,7 +199,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // If the user confirms, log out
-                            window.location.href = "{{ route('affiliate-marketer.logout') }}"; 
+                            window.location.href = "{{ route('any-user.logout') }}"; 
                         }
                     })
                 @else
@@ -258,7 +225,7 @@
             @auth
             Swal.fire({
                         
-                    text: "You're currently logged in as an customer. Please log out of this account.",
+                    text: "You're currently logged in another account. Please log out of this account.",
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -267,7 +234,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // If the user confirms, log out
-                        window.location.href = "{{ route('customer.logout') }}"; 
+                        window.location.href = "{{ route('any-user.logout') }}"; 
                     }
                 })
             @else
