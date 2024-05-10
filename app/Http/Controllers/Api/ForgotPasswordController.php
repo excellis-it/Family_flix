@@ -134,6 +134,7 @@ class ForgotPasswordController extends Controller
                     'id' => $id,
                     'token' => $token
                 ];
+                
 
                 Mail::to($request->email)->send(new SendCustomerResetPasswordMail($details));
                 return response()->json(['message' => "Please! check your mail to reset your password.", 'status' => true], $this->successStatus);
