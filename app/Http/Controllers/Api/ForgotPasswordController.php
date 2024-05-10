@@ -54,7 +54,7 @@ class ForgotPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors(), 'status' => false], 201);
+            return response()->json(['status' => false, 'statusCode' => 200,  'error' => $validator->errors()->first()], 200);
         }
 
         try {
@@ -79,7 +79,7 @@ class ForgotPasswordController extends Controller
                 Mail::to($request->email)->send(new SendCodeResetPassword($details));
                 return response()->json(['message' => "Please! check your mail to reset your password.", 'status' => true], $this->successStatus);
             } else {
-                return response()->json(['error' => "Couldn't find your account!", 'status' => false], 201);
+                return response()->json(['error' => "Couldn't find your account!", 'status' => false], 200);
             }
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage(), 'status' => false], 401);
@@ -113,7 +113,7 @@ class ForgotPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors(), 'status' => false], 201);
+            return response()->json(['status' => false, 'statusCode' => 200,  'error' => $validator->errors()->first()], 200);
         }
 
         try {
@@ -138,7 +138,7 @@ class ForgotPasswordController extends Controller
                 Mail::to($request->email)->send(new SendCustomerResetPasswordMail($details));
                 return response()->json(['message' => "Please! check your mail to reset your password.", 'status' => true], $this->successStatus);
             } else {
-                return response()->json(['error' => "Couldn't find your account!", 'status' => false], 201);
+                return response()->json(['error' => "Couldn't find your account!", 'status' => false], 200);
             }
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage(), 'status' => false], 401);
