@@ -269,6 +269,14 @@ p {
   overflow: hidden;
 }
 
+/* 16-05-2024 */
+.toggle-password {
+  float: right;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: -25px;
+}
+
 @media (min-width: 992px) {
   .slide .slide__img {
     position: absolute;

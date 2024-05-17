@@ -71,10 +71,10 @@
                                         </a>
                                     </div> --}}
                                 </div>
-                                <div class="position-relative" id="show_hide_password">
+                                <div class="position-relative" >
                                     <input type="password" class="form-control border-end-0" name="password"
                                         id="inputChoosePassword" placeholder="Enter Password">
-                                    <a href="javascript:;" class=""><span class="fa fa-eye-slash" id="toggle-password"></span></a>
+                                        <i class="toggle-password fa fa-fw fa-eye-slash"></i>
                                 </div>
                                 @if ($errors->has('password'))
                                     <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
@@ -143,20 +143,15 @@
 
 <script src="{{ asset('admin_assets/js/app.js') }}"></script>
 <script>
-    $(document).ready(function() {
-        $("#show_hide_password a").on('click', function(event) {
-            event.preventDefault();
-            if ($('#show_hide_password input').attr("type") == "text") {
-                $('#show_hide_password input').attr('type', 'password');
-                $('#show_hide_password i').addClass("bx-hide");
-                $('#show_hide_password i').removeClass("bx-show");
-            } else if ($('#show_hide_password input').attr("type") == "password") {
-                $('#show_hide_password input').attr('type', 'text');
-                $('#show_hide_password i').removeClass("bx-hide");
-                $('#show_hide_password i').addClass("bx-show");
-            }
-        });
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        input = $(this).parent().find("input");
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
     });
-</script>
+    </script>
 
 </html>

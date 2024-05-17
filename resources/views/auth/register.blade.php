@@ -55,6 +55,7 @@
                                             col-md-12 mb-3">
                                             <label>Password</label>
                                             <input type="password" class="form-control" name="password" id="inputChoosePassword" placeholder="Password">
+                                            <i class="toggle-password fa fa-fw fa-eye-slash"></i>
                                             @if ($errors->has('password'))
                                                 <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
                                             @endif
@@ -62,6 +63,7 @@
                                         <div class="form-group col-md-12 mb-3">
                                             <label>Confirm Password</label>
                                             <input type="password" class="form-control" name="confirm_password" id="inputChoosePassword" placeholder="Password">
+                                            <i class="toggle-confirm-password fa fa-fw fa-eye-slash"></i>
         
                                         @if ($errors->has('confirm_password'))
                                             <div class="error" style="color:red;">{{ $errors->first('confirm_password') }}</div>
@@ -126,7 +128,29 @@
         @endif
     </script>
 
+    <script>
+        $(".toggle-password").click(function() {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            input = $(this).parent().find("input");
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
 
+    <script>
+        $(".toggle-confirm-password").click(function() {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            input = $(this).parent().find("input");
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
 
 
 
