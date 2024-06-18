@@ -45,7 +45,7 @@
         <div class="container">
             <!--  Row 1 -->
             <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-xxl-8 col-xl-8">
                     <div class="login-left">
                         <div class="login-head">
                             <h2>LOGIN</h2>
