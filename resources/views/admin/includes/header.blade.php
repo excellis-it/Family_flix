@@ -1,4 +1,9 @@
 
+
+@php
+use App\Helpers\Helper;
+@endphp
+
 <header class="app-header">
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav">
@@ -15,10 +20,12 @@
 
         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
 
-            {{-- <li class="nav-item">
-                <a class="fw-semibold text-decoration-none d-none d-md-block add_new_project" href="">New Product
+            <li class="nav-wallet">
+                <a href="#" class="nav-wallet-link">
+                  <i class="ti ti-wallet"></i>
+                  <span class="wallet-amount">${{ Helper::adminWallet() }}</span>
                 </a>
-            </li> --}}
+            </li>
 
             {{-- <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"

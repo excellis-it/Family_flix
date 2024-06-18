@@ -88,6 +88,10 @@
                                         <div class="subscribe-form-wrap">
                                             <input type="text" class="form-control"  name="user_email"
                                                 placeholder="{{ $subscribe_cms->subscription_placeholder }}">
+                                            @if ($errors->has('name'))
+                                                <div class="error" style="color:red;">
+                                                    {{ $errors->first('name') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

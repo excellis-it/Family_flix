@@ -1,4 +1,10 @@
 
+@php
+use App\Helpers\Helper;
+@endphp
+
+
+
 <header class="app-header">
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav">
@@ -13,7 +19,17 @@
             <img src="{{ asset('admin_assets/images/logo.png') }}" class="dark-logo" width="" alt="">
         </div>
 
+        
+
         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
+
+            <li class="nav-wallet">
+                <a href="#" class="nav-wallet-link" title="View Wallet">
+                  <i class="ti ti-wallet"></i>
+                  <span class="wallet-amount">${{Helper::affiliatorWallet(Auth::user()->id) }}</span>
+                </a>
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -30,6 +46,9 @@
                         </div>
                     </div>
                 </a>
+
+                
+        
                 <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up"
                     aria-labelledby="drop1">
                     <div class="profile-dropdown position-relative" data-simplebar="">

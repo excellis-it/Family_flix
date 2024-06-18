@@ -125,7 +125,8 @@ class HomeController extends Controller
 
     public function subscriptionSubmit(Request $request)
     {
-        $check_mail = SubscriptionUs::where('email',$request->email)->count();
+
+        $check_mail = SubscriptionUs::where('email',$request->user_email)->count();
         if($check_mail > 0)
         {
             return back()->with('error','This email address is already subscribed.');

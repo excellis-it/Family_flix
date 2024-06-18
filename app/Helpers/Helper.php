@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Models\PaypalCredential;
+use App\Models\Wallet;
 
 class Helper {
 
@@ -10,7 +11,7 @@ class Helper {
         return PaypalCredential::where('status', 1)->first();
      }
 
-     public static function expireTo($date)
+    public static function expireTo($date)
     {
         // how many day left to expire
         $now = time();
@@ -28,4 +29,18 @@ class Helper {
         //     return $days . ' days';
         // }
     }
+
+    public static function adminWallet()
+    {
+        $admin_wallet = Wallet::where('user_type','admin')->sum('balance');
+        return $admin_wallet ? $admin_wallet : 0;
+    }
+
+    public static function affiliatorWallet($id)
+    {
+        $affiliator_wallet = Wallet::where('user_id',$id)->sum('balance');
+        return $affiliator_wallet ? $affiliator_wallet : 0;
+    }
+
+
 }

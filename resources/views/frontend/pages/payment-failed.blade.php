@@ -30,8 +30,8 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="check-icon">
-                            <span><i class="fa-solid fa-check"></i></span>
+                        <div class="cross-icon">
+                            <span><i class="fa-solid fa-cross"></i></span>
                         </div>
                       <div class="thank-text">
                         <h1>Payment Failed</h1>

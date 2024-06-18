@@ -115,7 +115,6 @@ Route::name('affiliate-marketer.')
             Route::resources([
                 'commission-history' => CommissionHistoryController::class,
             ]);
-
             Route::get('/commission-history-fetch-data', [CommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
         });
     });

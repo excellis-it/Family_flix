@@ -12,6 +12,7 @@ use App\Models\CustomerDetails;
 use App\Models\AffiliateCommission;
 use App\Models\Payment;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Support\Facades\Session;
 use Omnipay\Omnipay;
 use Auth;
@@ -34,6 +35,7 @@ class PaypalController extends Controller
 
     public function createPayments($id)
     {
+       
         $id = decrypt($id);
         $plan = Plan::find($id);
         if(Auth::check())
@@ -167,7 +169,7 @@ class PaypalController extends Controller
                     $user_subscription->affiliate_commission = $commission_dis;
                 } else {
                     $user_subscription->affiliate_id = null;
-                    $user_subscription->affiliate_commission = null;
+                    $user_subscription->affiliate_commission = 0;
                 }
 
                 $user_subscription->payment_type = 'paypal';
@@ -345,20 +347,46 @@ class PaypalController extends Controller
                     $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
                     if ($commission) {
                         $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                        $admin_commission = $data['amount'] - $commission_dis;
                     } else {
                         $commission_dis = 0;
+                        $admin_commission = $data['amount'];
                     }
+
+                    
     
                     $user_subscription->affiliate_id = Session::get('affiliate_id');
                     $user_subscription->affiliate_commission = $commission_dis;
+
+                    
                 } else {
                     $user_subscription->affiliate_id = null;
-                    $user_subscription->affiliate_commission = null;
+                    $user_subscription->affiliate_commission = 0;
                 }
 
-                
+
                 $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($user_subscription->plan_expiry_date)));
                 $user_subscription->update(); 
+
+                // admin wallet
+                $wallet = new Wallet();
+                $unique_id = rand(1000, 9999) . time() . date('Ymd');
+                $wallet->wallet_id = $unique_id;
+                $wallet->user_subscription_id = $user_subscription->id;
+                $wallet->user_type = 'admin';
+                $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
+                $wallet->date = date('Y-m-d');
+                $wallet->save();
+    
+                //affiliator wallet add
+                $wallet = new Wallet();
+                $wallet->wallet_id = $unique_id;
+                $wallet->user_subscription_id = $user_subscription->id;
+                $wallet->user_type = 'affiliator';
+                $wallet->balance = $user_subscription->affiliate_commission;
+                $wallet->date = date('Y-m-d');
+                $wallet->save();
+
             }
         }else{
 
@@ -372,15 +400,17 @@ class PaypalController extends Controller
                 $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
                 if ($commission) {
                     $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                    $admin_commission = $data['amount'] - $commission_dis;
                 } else {
                     $commission_dis = 0;
+                    $admin_commission = $data['amount'];
                 }
 
                 $user_subscription->affiliate_id = Session::get('affiliate_id');
                 $user_subscription->affiliate_commission = $commission_dis;
             } else {
                 $user_subscription->affiliate_id = null;
-                $user_subscription->affiliate_commission = null;
+                $user_subscription->affiliate_commission = 0;
             }
 
             $user_subscription->payment_type = $data['payment_type'];
@@ -397,6 +427,26 @@ class PaypalController extends Controller
             $user_subscription->plan_start_date = $today;
             $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
             $user_subscription->save();
+
+            // admin wallet
+            $wallet = new Wallet();
+            $unique_id = rand(1000, 9999) . time() . date('Ymd');
+            $wallet->wallet_id = $unique_id;
+            $wallet->user_subscription_id = $user_subscription->id;
+            $wallet->user_type = 'admin';
+            $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
+            $wallet->date = date('Y-m-d');
+            $wallet->save();
+
+            //affiliator wallet add
+            $wallet = new Wallet();
+            $wallet->wallet_id = $unique_id;
+            $wallet->user_subscription_id = $user_subscription->id ?? null;
+            $wallet->user_type = 'affiliator';
+            $wallet->user_id = $user_subscription->affiliate_id ?? null;
+            $wallet->balance = $user_subscription->affiliate_commission ?? 0;
+            $wallet->date = date('Y-m-d');
+            $wallet->save();
         }
 
         $payment = new Payment();
