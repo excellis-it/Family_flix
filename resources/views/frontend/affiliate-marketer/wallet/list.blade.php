@@ -55,9 +55,10 @@
                                     <tr>
 
                                         <th><span class="fs-4 fw-semibold mb-0">Id</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">User Name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Plan Name</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Total Amount</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Wallet Amount</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Total Amount($)</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Wallet Amount($)</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Date</span></th>
                                     </tr>
                                 </thead>

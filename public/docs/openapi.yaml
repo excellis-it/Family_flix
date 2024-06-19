@@ -494,11 +494,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: fkyzoglqxqprplyvjwjjvdekshkjvzmhdnadsrpkhpymbdtymajskcgfxpwetlwhkjvneljiteafanbdc
+                  example: dcojvmfqpkthjias
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: jeanette.rice@example.com
+                  example: dana.rippin@example.net
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -903,7 +903,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: nobis
+                  example: ratione
               required:
                 - type
       security: []
@@ -980,19 +980,19 @@ paths:
                 coupon_code:
                   type: string
                   description: ''
-                  example: alias
+                  example: voluptatem
                 plan_id:
                   type: string
                   description: ''
-                  example: dolore
+                  example: et
                 plan_price:
                   type: string
                   description: ''
-                  example: eius
+                  example: mollitia
                 email:
                   type: string
                   description: 'This field is required when <code>phone</code> is not present.  Must be a valid email address.'
-                  example: phomenick@example.com
+                  example: mante.rhett@example.net
                 phone:
                   type: string
                   description: 'This field is required when <code>email</code> is not present.'
@@ -1111,11 +1111,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: cwxktdqmvubyyrzivtvkybhgxxkeoavskymkdabduotcxnkhdzrnbbwavuu
+                  example: jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: lakin.suzanne@example.net
+                  example: sturcotte@example.com
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -1378,7 +1378,7 @@ paths:
                 email:
                   type: string
                   description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
-                  example: p00.fv@p.n.5.b.2.rnzjrr$/ix
+                  example: t.smn.fif.4yv.vky@70.y8.yk.cubhl$/ix
               required:
                 - email
       security: []
@@ -1401,7 +1401,7 @@ paths:
                 email:
                   type: string
                   description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
-                  example: v9a.tsv3.5af-@2.ntznv$/ix
+                  example: ft@c.z.q.tnj$/ix
               required:
                 - email
       security: []
@@ -1447,7 +1447,7 @@ paths:
                 user_email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: ecole@example.com
+                  example: shaylee.bednar@example.com
                 user_phone:
                   type: string
                   description: 'The phone of the user.'
@@ -1509,7 +1509,7 @@ paths:
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: oblock@example.com
+                  example: king.brittany@example.org
               required:
                 - email
       security: []
@@ -1572,59 +1572,59 @@ paths:
                 emailId:
                   type: string
                   description: ''
-                  example: ut
+                  example: a
                 first_name:
                   type: string
                   description: ''
-                  example: commodi
+                  example: ut
                 last_name:
                   type: string
                   description: ''
-                  example: adipisci
+                  example: qui
                 country:
                   type: string
                   description: ''
-                  example: ut
+                  example: et
                 house_name:
                   type: string
                   description: ''
-                  example: sunt
+                  example: ab
                 detail_address:
                   type: string
                   description: ''
-                  example: soluta
+                  example: consequatur
                 city:
                   type: string
                   description: ''
-                  example: expedita
+                  example: vitae
                 state:
                   type: string
                   description: ''
-                  example: et
+                  example: nobis
                 post_code:
                   type: string
                   description: ''
-                  example: perspiciatis
+                  example: libero
                 phone:
                   type: string
                   description: ''
-                  example: qui
+                  example: modi
                 amount:
                   type: string
                   description: ''
-                  example: sit
+                  example: et
                 paymentID:
                   type: string
                   description: ''
-                  example: illo
+                  example: labore
                 plan_name:
                   type: string
                   description: ''
-                  example: aspernatur
+                  example: voluptatum
                 plan_price:
                   type: string
                   description: ''
-                  example: dolorum
+                  example: qui
               required:
                 - emailId
                 - first_name
@@ -1660,7 +1660,7 @@ paths:
                 emailId:
                   type: string
                   description: ''
-                  example: cupiditate
+                  example: omnis
               required:
                 - emailId
       security: []
@@ -1958,6 +1958,55 @@ paths:
                     example: Unauthorised
       tags:
         - Subscription
+  /api/v1/affiliater/wallet/list:
+    post:
+      summary: 'Wallet History Api'
+      operationId: walletHistoryApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No wallet history found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No wallet history found!'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: Unauthorised
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Wallet - History'
 tags:
   -
     name: 'Affiliater - Commission'
@@ -2001,3 +2050,6 @@ tags:
   -
     name: Subscription
     description: "\nAPIs for Subscription List"
+  -
+    name: 'Wallet - History'
+    description: ''

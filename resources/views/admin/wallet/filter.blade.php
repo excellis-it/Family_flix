@@ -2,11 +2,12 @@
     @foreach ($wallets as $wallet)
         <tr>
             <td>{{ $wallet->wallet_id ?? 'N/A' }}</td>
+            <td>{{ $wallet->subscription->customer->name ?? 'N/A' }}</td>
             <td>{{ $wallet->subscription->plan_name ?? 'N/A' }}</td>
             <td>{{ $wallet->subscription->total ?? 'N/A' }}</td>
             <td>{{ $wallet->balance ?? 'N/A' }}
             </td>
-            <td>{{ $wallet->created_at ? $wallet->created_at->format('Y-m-d H:i:s') : 'N/A' }}</td>
+            <td>{{ $wallet->created_at ? $wallet->created_at->format('Y-m-d, H.i A') : 'N/A' }}</td>
         </tr>
     @endforeach
     <tr class="toxic">

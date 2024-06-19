@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\CouponCheckController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\Affiliater\DashboardController;
+use App\Http\Controllers\Api\Affiliater\WalletController;
 
 
 /*
@@ -45,6 +46,11 @@ use App\Http\Controllers\Api\Affiliater\DashboardController;
                 Route::post('profile-details', [ProfileController::class, 'profileDetails']);  // profile details api
                 Route::post('profile-update', [ProfileController::class, 'profileUpdate']);  // profile update api
                 Route::post('dashboard', [DashboardController::class, 'dashboard']);  // dashboard api
+
+                Route::group(['prefix' => 'wallet'], function () {
+                    Route::post('list', [WalletController::class, 'walletList']);  // wallet details api
+                });
+               
                 
                 Route::group(['prefix' => 'commission'], function () {
                     Route::post('list', [CommissionController::class, 'commissionList']);  // commission details api

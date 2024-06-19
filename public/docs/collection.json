@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "e31ef8ee-956d-4360-9b59-093bd9818903",
+        "_postman_id": "621510a0-9eec-4e07-9916-dcf3523ede0e",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -297,7 +297,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"fkyzoglqxqprplyvjwjjvdekshkjvzmhdnadsrpkhpymbdtymajskcgfxpwetlwhkjvneljiteafanbdc\",\"email\":\"jeanette.rice@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"dcojvmfqpkthjias\",\"email\":\"dana.rippin@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -546,7 +546,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"nobis\"}"
+                            "raw": "{\"type\":\"ratione\"}"
                         },
                         "description": "",
                         "auth": {
@@ -709,7 +709,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"coupon_code\":\"alias\",\"plan_id\":\"dolore\",\"plan_price\":\"eius\",\"email\":\"phomenick@example.com\"}"
+                            "raw": "{\"coupon_code\":\"voluptatem\",\"plan_id\":\"et\",\"plan_price\":\"mollitia\",\"email\":\"mante.rhett@example.net\"}"
                         },
                         "description": "",
                         "auth": {
@@ -765,7 +765,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"cwxktdqmvubyyrzivtvkybhgxxkeoavskymkdabduotcxnkhdzrnbbwavuu\",\"email\":\"lakin.suzanne@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd\",\"email\":\"sturcotte@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -938,7 +938,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"p00.fv@p.n.5.b.2.rnzjrr$\\\/ix\"}"
+                            "raw": "{\"email\":\"t.smn.fif.4yv.vky@70.y8.yk.cubhl$\\\/ix\"}"
                         },
                         "description": "",
                         "auth": {
@@ -969,7 +969,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"v9a.tsv3.5af-@2.ntznv$\\\/ix\"}"
+                            "raw": "{\"email\":\"ft@c.z.q.tnj$\\\/ix\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1006,7 +1006,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"ecole@example.com\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"shaylee.bednar@example.com\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1050,7 +1050,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"oblock@example.com\"}"
+                            "raw": "{\"email\":\"king.brittany@example.org\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1100,7 +1100,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"ut\",\"first_name\":\"commodi\",\"last_name\":\"adipisci\",\"country\":\"ut\",\"house_name\":\"sunt\",\"detail_address\":\"soluta\",\"city\":\"expedita\",\"state\":\"et\",\"post_code\":\"perspiciatis\",\"phone\":\"qui\",\"amount\":\"sit\",\"paymentID\":\"illo\",\"plan_name\":\"aspernatur\",\"plan_price\":\"dolorum\"}"
+                            "raw": "{\"emailId\":\"a\",\"first_name\":\"ut\",\"last_name\":\"qui\",\"country\":\"et\",\"house_name\":\"ab\",\"detail_address\":\"consequatur\",\"city\":\"vitae\",\"state\":\"nobis\",\"post_code\":\"libero\",\"phone\":\"modi\",\"amount\":\"et\",\"paymentID\":\"labore\",\"plan_name\":\"voluptatum\",\"plan_price\":\"qui\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1144,7 +1144,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"cupiditate\"}"
+                            "raw": "{\"emailId\":\"omnis\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1410,6 +1410,56 @@
                             "header": [],
                             "code": 200,
                             "body": "{\n\"status\": false,\n\"statusCode\": 200,\n\"message\": \"No commission found!\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Wallet - History",
+            "description": "",
+            "item": [
+                {
+                    "name": "Wallet History Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/affiliater\/wallet\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/affiliater\/wallet\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"total_amount\": 100,\n\"wallet_history\": [\n   {\n      \"id\": 1,\n     \"user_id\": 1,\n    \"user_subscription_id\": 1,\n   \"balance\": \"100.00\",\n \"created_at\": \"2021-05-27T06:50:50.000000Z\",\n\"updated_at\": \"2021-05-27T06:50:50.000000Z\",\n\"subscription\": {\n  \"id\": 1,\n\"customer_details_id\": 1,\n\"affiliate_id\": 3,\n\"payment_type\": \"Stripe\",\n\"plan_name\": \"Basic\",\n\"plan_price\": \"100.00\",\n\"coupan_code\": \"ABC\",\n\"coupan_discount\": \"10.00\",\n\"coupan_discount_type\": \"Percentage\",\n\"sub_total\": \"90.00\",\n\"total\": \"90.00\",\n\"additional_information\": \"Test\"\n}\n}\n]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 200,\n\"message\": \"No wallet history found!\"\n}",
                             "name": ""
                         },
                         {

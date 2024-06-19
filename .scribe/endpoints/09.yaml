@@ -1,20 +1,20 @@
-name: Product
+name: Cms
 description: |-
 
-  APIs for Prduct Listing
+  APIs for Cms
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/product/unbeatable-variety
+    uri: api/v1/cms/home
     metadata:
-      groupName: Product
+      groupName: Cms
       groupDescription: |-
 
-        APIs for Prduct Listing
+        APIs for Cms
       subgroup: ''
       subgroupDescription: ''
-      title: 'Unbeatable-Variety  Api'
+      title: 'Home-Page Api'
       description: ''
       authenticated: false
       custom: []
@@ -33,20 +33,52 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": false,
-            "statusCode": 200,
-            "message": "No unbeatable variety found"
+               "status": true,
+                "message": "Home CMS data fetched successfully",
+               "statusCode": "200",
+               "data": {
+                   "id": 1,
+                   "top_back_image": "home/top_back.png",
+                   "top_short_title": "Your All-In-One Entertainment Hub",
+                   "top_main_title": "Unlimited Entertainment.At Your Fingertips.",
+                   "top_button_text": "Sign Up Today",
+                   "section1_main_image": "home/section1_main.png",
+                   "section1_back_image": "home/section1_back.png",
+                   "section2_back_image": "home/section2_back.png",
+                   "section2_main_image": "home/section2_main.png",
+                   "section2_title": "Everything You Love.All In One Place.",
+                   "section2_description": "Our platform seamlessly integrates content from top streaming platforms like Netflix, Hulu, Disney, and more. Imagine having access to all your favorite shows and movies in one place, without the hassle of switching between multiple apps.",
+                   "section2_short_title": "View Our Plans And Pricing",
+                   "section2_main_icon": "home/main_icon.png",
+                   "entertainment_title": "Entertainment Everywhere",
+                   "entertainment_description": "Enjoy The Family Flix app on your TV, mobile, and tablet. Our platform supports all your devices. Anywhere, Any Device: The Family Flix Advantage",
+                   "section3_back_image": "home/section3_back.png",
+                   "section3_main_image": "home/section3_main.png",
+                   "section3_title": "How It Works",
+                   "section3_video_link": "home/4YGx75Dq9sxjUK2dMWThhIVSrYjWo9ZPNkFieaHq.mp4",
+                   "section4_title": "Unbeatable Variety",
+                   "section4_description": "Blockbuster hits, binge-worthy series, and hidden gems at your fingertips. A universe of entertainment curated for you.",
+                   "section4_back_image": "home/section4_back.png",
+                   "section5_back_image": "home/section5_back.png",
+                   "section5_main_title": "Kid's Corner",
+                   "section5_main_description": "<p>A dedicated space filled with family-friendly movies and shows to keep the little ones entertained. From animated adventures to educational content, we&rsquo;ve got it all in one safe and fun place.Subscription to The Family Flix means entertainment for the whole family, so your kids can have a blast while you enjoy your favorites. Subscribe today and let the young ones embark on their own cinematic journeys!</p>",
+                   "section5_main_image": "home/section5_main.png",
+                   "plan_section_title": "Pricing Plans & Options.",
+                   "plan_section_back_image": "home/plan_back.png",
+                   "created_at": "2024-03-06T05:24:23.000000Z",
+                   "updated_at": "2024-03-06T05:35:15.000000Z"
+               },
           }
         headers: []
         description: ''
         custom: []
       -
-        status: 500
+        status: 201
         content: |-
           {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
+               "status": false,
+              "message": "No Data Found",
+             "statusCode": "401",
           }
         headers: []
         description: ''
@@ -60,15 +92,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/show/detail
+    uri: api/v1/cms/grid-section
     metadata:
-      groupName: Product
+      groupName: Cms
       groupDescription: |-
 
-        APIs for Prduct Listing
+        APIs for Cms
       subgroup: ''
       subgroupDescription: ''
-      title: 'Show  Api'
+      title: 'Grid-Section Api'
       description: ''
       authenticated: false
       custom: []
@@ -87,20 +119,123 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": false,
+            "status": true,
             "statusCode": 200,
-            "message": "No show found"
+            "top_grid": [
+                {
+                    "id": 1,
+                    "icon": "grid/grid_icon1.png",
+                    "title": "Unlimited Access",
+                    "description": "Dive into a vast library of movies, TV series, and exclusive content."
+                },
+                {
+                    "id": 2,
+                    "icon": "grid/grid_icon2.png",
+                    "title": "Savings Simplified",
+                    "description": "Affordable plans that eliminate the need for multiple subscriptions."
+                },
+                {
+                    "id": 3,
+                    "icon": "grid/grid_icon3.png",
+                    "title": "Watch Anywhere, Anytime",
+                    "description": "Enjoy your favorites on your terms - mobile, desktop, or TV."
+                }
+            ],
+            "entertainment_cms": [
+                {
+                    "id": 1,
+                    "image": "entertainment/en-1.png",
+                    "image_name": "On Your TV"
+                },
+                {
+                    "id": 2,
+                    "image": "entertainment/en-2.png",
+                    "image_name": "Mobiles & Tablets"
+                },
+                {
+                    "id": 3,
+                    "image": "entertainment/en-3.png",
+                    "image_name": "On Firestick & Firecube"
+                }
+            ],
+            "message": "Grid Section CMS data fetched successfully"
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/about
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'About-Page Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "status": true,
+           "statusCode": 200,
+           "data": {
+                "id": 1,
+                "title": "About Us",
+                "banner_img": "about/abt-bg.png",
+                "section1_title": "Celebrating Your Entertainment",
+                "section1_description": "Welcome to The Family Flix, where our passion lies in\r\n        crafting an exceptional entertainment experience that is\r\n        both accessible and affordable, catering to your unique\r\n        tastes. Our journey began with a simple yet ambitious\r\n        vision – to create a platform that brings together the\r\n        fragmented world of streaming services, providing you with\r\n        an easier and more cost-effective way to enjoy your\r\n        favorite movies, TV series, and more.",
+                "section1_img": "about/section1-img.png",
+                "section2_title1": "Our Commitment to You",
+                "section2_description1": "At The Family Flix, our commitment is unwavering. We strive to deliver the best possible entertainment experience, and our dedicated team is at your service with top-notch customer support 24/7. We understand the value of your time and money, and our goal is to assist you in making the most of both.",
+                "section2_img2": "about/section2_img2.png",
+                "section3_title": "What Sets Us Apart",
+                "section3_back_img": "about/section3_back.png",
+                "section3_title1": "Vast Content Library",
+                "section3_description1": "The Family Flix takes pride in presenting an ever-expanding content library. We embrace diversity, offering a range that includes movies, TV series, anime, web series, Korean drama, and more. Whatever your interests, we have something for everyone.",
+                "section3_image1": "about/section3_img1.png",
+                "section3_title2": "Platform Flexibility",
+                "section3_description2": "Enjoy the flexibility of watching your favorite shows and movies on your terms. The Family Flix supports all major platforms, whether you prefer streaming on your phone, tablet, or TV. Our user-friendly app ensures a seamless experience wherever you are.",
+                "section3_image2": "about/section3_img2.png",
+                "section3_title3": "Savings & Simplicity",
+                "section3_description3": "Simplify your entertainment budget with The Family Flix’s cost-effective solutions. Bid farewell to the hassles of managing multiple subscriptions and enjoy unbeatable value for a diverse range of content.",
+                "section3_image3": "about/section3_img3.png",
+                "created_at": "2024-03-06T05:24:23.000000Z",
+                "updated_at": "2024-03-06T05:24:23.000000Z"
+            },
+           "message": "About CMS data fetched successfully"
           }
         headers: []
         description: ''
         custom: []
       -
-        status: 500
+        status: 201
         content: |-
           {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
+          "status": false,
+          "statusCode": 500,
+          "message": "No Data Found"
           }
         headers: []
         description: ''
@@ -114,15 +249,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/movie/detail
+    uri: api/v1/cms/contact
     metadata:
-      groupName: Product
+      groupName: Cms
       groupDescription: |-
 
-        APIs for Prduct Listing
+        APIs for Cms
       subgroup: ''
       subgroupDescription: ''
-      title: 'Movie  Api'
+      title: 'Contact-Page Api'
       description: ''
       authenticated: false
       custom: []
@@ -141,20 +276,32 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": false,
-            "statusCode": 200,
-            "message": "No movie found"
+          "status": true,
+          "statusCode": 200,
+            "data": {
+                "id": 1,
+                "title": "Contact",
+                "banner_img": "contact/contact-banner.png",
+                "background_img": "contact/contact-bg.png",
+                "main_title": "Connect With Us",
+                "short_title": "To learn more about how Streamit can help you, contact us.",
+                "button_name": "Contact Us",
+                "map_link": "https://maps.google.com/maps?q=Orlando%2C%20Florida&t=m&z=15&output=embed&iwloc=near",
+                "created_at": "2024-03-06T05:24:23.000000Z",
+                "updated_at": "2024-03-06T05:24:23.000000Z"
+             },
+           "message": "Contact CMS data fetched successfully"
           }
         headers: []
         description: ''
         custom: []
       -
-        status: 500
+        status: 201
         content: |-
           {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
+          "status": false,
+          "statusCode": 500,
+          "message": "No Data Found"
           }
         headers: []
         description: ''
@@ -168,15 +315,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/kid/detail
+    uri: api/v1/cms/pricing
     metadata:
-      groupName: Product
+      groupName: Cms
       groupDescription: |-
 
-        APIs for Prduct Listing
+        APIs for Cms
       subgroup: ''
       subgroupDescription: ''
-      title: 'Kid  Api'
+      title: 'Pricing-Page Api'
       description: ''
       authenticated: false
       custom: []
@@ -195,21 +342,312 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": false,
+            "status": true,
             "statusCode": 200,
-            "message": "No kid found"
+            "plan_cms": {
+                "id": 1,
+                "title": "Pricing",
+                "banner_img": "pricing/pricing-banner.png",
+                "background_img": "pricing/pricing-bg.png",
+                "main_title": "Pricing Plans & Options",
+                "short_title": "Choose the plan that works best for you.",
+                "created_at": "2024-03-06T05:24:23.000000Z",
+                "updated_at": "2024-03-06T05:24:23.000000Z"
+            },
+            "message": "Pricing CMS data fetched successfully"
           }
         headers: []
         description: ''
         custom: []
       -
-        status: 500
+        status: 201
         content: |-
           {
-            "status": 500,
-            "message": "Something went wrong",
-            "error": "Error message"
+          "status": false,
+          "statusCode": 500,
+          "message": "No Data Found"
           }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/faq
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Faq-Details Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      type:
+        name: type
+        description: ''
+        required: true
+        example: ratione
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      type: ratione
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+            "statusCode": 200,
+            "data": [
+                {
+                    "id": 8,
+                    "type": "payment",
+                    "question": "How do I sign up for The Family Flix?",
+                    "answer": "Visit our website and click on the “Sign Up” button. Follow the simple steps to create your account, and you’ll be ready to enjoy our vast content library.",
+                    "created_at": "2024-03-12T10:44:52.000000Z",
+                    "updated_at": "2024-03-12T10:44:52.000000Z"
+                },
+                {
+                    "id": 9,
+                    "type": "payment",
+                    "question": "What devices can I use to access The Family Flix?",
+                    "answer": "The Family Flix is compatible with all major platforms, including mobile devices, tablets, and smart TVs. Download our app for a seamless viewing experience.",
+                    "created_at": "2024-03-12T10:44:52.000000Z",
+                    "updated_at": "2024-03-12T10:44:52.000000Z"
+                },
+          ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/privacy
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Privacy Api'
+      description: |-
+        @response 200{
+          "status": true,
+          "statusCode": 200,
+          "data": [
+              {
+                  "id": 2,
+                  "banner_image": "business_management/privacy_banner.png",
+                  "banner_heading": "Privacy Policy",
+                  "content": "Welcome to The Family Flix! Your privacy is important to us....",
+                  "type": "privacy-policy",
+                  "created_at": "2024-03-12T10:44:52.000000Z",
+                  "updated_at": "2024-03-12T10:44:52.000000Z"
+              }
+          ],
+          "message": "Privacy Details fetched successfully"
+        }
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/terms
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Term-condition Api'
+      description: |-
+        @response 200{
+          "status": true,
+          "statusCode": 200,
+          "data": [
+              {
+                  "id": 2,
+                  "banner_image": "business_management/term_banner.png",
+                  "banner_heading": "Term & Conditions",
+                  "content": "Welcome to Family Flix! By accessing our website or using our services, you agree to be bound by the following terms and conditions (the \"Terms\"). Please read them carefully. If you do not agree with these Terms, you must not use our services...",
+                  "type": "term-condition",
+                  "created_at": "2024-03-12T10:44:52.000000Z",
+                  "updated_at": "2024-03-12T10:44:52.000000Z"
+              }
+          ],
+          "message": "Privacy Details fetched successfully"
+        }
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/contact-details
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Contact details Api'
+      description: |-
+        @response 200
+        "status": true,
+          "statusCode": 200,
+          "data": [
+              {
+                  "id": 1,
+                  "icon": "fa-solid fa-phone",
+                  "title": "Call Us",
+                  "details": "+ 18453297101"
+              },
+              {
+                  "id": 2,
+                  "icon": "fa-solid fa-envelope",
+                  "title": "Email Us",
+                  "details": "support@thefamilyflix.com"
+              },
+              {
+                  "id": 3,
+                  "icon": "fa-solid fa-location-dot",
+                  "title": "Location",
+                  "details": "Orlando Florida"
+              },
+              {
+                  "id": 4,
+                  "icon": "fa-regular fa-clock",
+                  "title": "Office Hours (Closed Saturday)",
+                  "details": "9am-11pm"
+              }
+          ],
+          "message": "Contact Details data fetched successfully"
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/cms/subscription
+    metadata:
+      groupName: Cms
+      groupDescription: |-
+
+        APIs for Cms
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Subscription-cmas Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "data": {
+            "id": 1,
+            "section1_title": "Experience Cinematic Magic Today! Subscribe to The Family Flix.",
+            "section1_description": "Are you ready to embark on an unparalleled entertainment journey? Join The Family Flix community now and unlock a world of cinematic wonders!",
+            "section1_background_img": "subscription/subscription-bg.png",
+            "section1_button_name": "Sign Up Today",
+            "subscribe_title": "Subscribe For Updates.",
+            "subscription_placeholder": "Enter your Email",
+            "button_name": "Subscribe",
+            "created_at": "2024-03-15T10:11:44.000000Z",
+            "updated_at": "2024-03-15T10:11:44.000000Z"
+          },
         headers: []
         description: ''
         custom: []

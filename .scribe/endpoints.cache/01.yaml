@@ -32,13 +32,13 @@ endpoints:
         name: email
         description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
         required: true
-        example: p00.fv@p.n.5.b.2.rnzjrr$/ix
+        example: t.smn.fif.4yv.vky@70.y8.yk.cubhl$/ix
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      email: p00.fv@p.n.5.b.2.rnzjrr$/ix
+      email: t.smn.fif.4yv.vky@70.y8.yk.cubhl$/ix
     fileParameters: []
     responses: []
     responseFields: []
@@ -74,13 +74,13 @@ endpoints:
         name: email
         description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
         required: true
-        example: v9a.tsv3.5af-@2.ntznv$/ix
+        example: ft@c.z.q.tnj$/ix
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      email: v9a.tsv3.5af-@2.ntznv$/ix
+      email: ft@c.z.q.tnj$/ix
     fileParameters: []
     responses: []
     responseFields: []

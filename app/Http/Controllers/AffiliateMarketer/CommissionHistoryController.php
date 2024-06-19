@@ -20,17 +20,15 @@ class CommissionHistoryController extends Controller
     }
 
     public function fetchData(Request $request)
-    {
+    {   
+        
         if ($request->ajax()) {
-            $sort_by = $request->get('sortby');
-            $sort_type = $request->get('sorttype');
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
             $commissions = UserSubscription::where('affiliate_id', auth()->user()->id)
                 ->orWhere('amount', 'like', '%' . $query . '%')
                 ->orWhere('commission', 'like', '%' . $query . '%')
                 ->orWhere('created_at', 'like', '%' . $query . '%')
-                ->orderBy($sort_by, $sort_type)
                 ->paginate(15);
 
             return response()->json(['data' => view('frontend.affiliate-marketer.commission-history.filter', compact('commissions'))->render()]);

@@ -7,7 +7,7 @@
 @section('content')
 
 @php
-    $modules = ['Profile','Affiliater','Customer','Plan', 'Product', 'Commission', 'Commission History', 'Manager',  'Entertainment Banner', 'Top Grid','Ott Platform', 'Cms','Business Management','Faq','Contactus','Coupon','Subscribers','Payment Detail'];
+    $modules = ['Profile','Affiliater','Customer','Plan', 'Product', 'Commission', 'Commission History', 'Manager',  'Entertainment Banner', 'Top Grid','Ott Platform', 'Cms','Business Management','Faq','Contactus','Coupon','Subscribers','Payment Detail', 'Wallet'];
 @endphp
     <div class="container-fluid">
         <div class="breadcome-list">

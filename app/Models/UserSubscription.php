@@ -32,4 +32,9 @@ class UserSubscription extends Model
     {
         return $this->belongsTo(User::class, 'affiliate_id');
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
 }

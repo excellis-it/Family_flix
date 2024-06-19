@@ -18,6 +18,7 @@ use Omnipay\Omnipay;
 use Auth;
 use Mail;
 use App\Mail\WelcomeMail;
+use Illuminate\Support\Str;
 
 
 class PaypalController extends Controller
@@ -370,8 +371,8 @@ class PaypalController extends Controller
 
                 // admin wallet
                 $wallet = new Wallet();
-                $unique_id = rand(1000, 9999) . time() . date('Ymd');
-                $wallet->wallet_id = $unique_id;
+                $walletId = Str::random(12);
+                $wallet->wallet_id = $walletId;
                 $wallet->user_subscription_id = $user_subscription->id;
                 $wallet->user_type = 'admin';
                 $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
@@ -380,7 +381,7 @@ class PaypalController extends Controller
     
                 //affiliator wallet add
                 $wallet = new Wallet();
-                $wallet->wallet_id = $unique_id;
+                $wallet->wallet_id = $walletId;
                 $wallet->user_subscription_id = $user_subscription->id;
                 $wallet->user_type = 'affiliator';
                 $wallet->balance = $user_subscription->affiliate_commission;
@@ -430,8 +431,9 @@ class PaypalController extends Controller
 
             // admin wallet
             $wallet = new Wallet();
-            $unique_id = rand(1000, 9999) . time() . date('Ymd');
-            $wallet->wallet_id = $unique_id;
+            $walletId = Str::random(12);
+            // $unique_id = substr(uniqid(rand(10, 99), true), -8, 8);
+            $wallet->wallet_id = $walletId;
             $wallet->user_subscription_id = $user_subscription->id;
             $wallet->user_type = 'admin';
             $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
@@ -440,7 +442,7 @@ class PaypalController extends Controller
 
             //affiliator wallet add
             $wallet = new Wallet();
-            $wallet->wallet_id = $unique_id;
+            $wallet->wallet_id = $walletId;
             $wallet->user_subscription_id = $user_subscription->id ?? null;
             $wallet->user_type = 'affiliator';
             $wallet->user_id = $user_subscription->affiliate_id ?? null;

@@ -20,19 +20,28 @@ class WalletController extends Controller
 
     public function walletFetchData(Request $request)
     {
-       
+        
         if ($request->ajax()) {
-            $sort_by = $request->get('sortby');
-            $sort_type = $request->get('sorttype');
-            $query = $request->get('query');
-            $query = str_replace(" ", "%", $query);
-            $wallets = Wallet::where('user_id', Auth::user()->id)
-                ->orWhere('amount', 'like', '%' . $query . '%')
-                ->orWhere('transaction_id', 'like', '%' . $query . '%')
-                ->orWhere('created_at', 'like', '%' . $query . '%')
-                ->orderBy($sort_by, $sort_type)
+            $query = $request->get('query', ''); // Default to empty string if not set
+            $wallets = Wallet::query()
+                ->where('user_id', Auth::user()->id)
+                ->where(function ($q) use ($query) {
+                    $q->where('balance', 'like', '%' . $query . '%')
+                        ->orWhere('wallet_id', 'like', '%' . $query . '%')                  
+                            ->orWhereHas('subscription', function ($q) use ($query) {
+                            $q->where('plan_name', 'like', '%' . $query . '%');
+                        })
+                        ->orWhereHas('subscription', function ($q) use ($query) {
+                            $q->where('total', 'like', '%' . $query . '%');
+                        })
+                        ->orWhereHas('subscription', function ($q) use ($query) {
+                            $q->whereHas('customer', function ($q) use ($query) {
+                                $q->where('name', 'like', '%' . $query . '%');
+                            });
+                        });
+                    })
                 ->paginate(15);
-
+        
             return response()->json(['data' => view('frontend.affiliate-marketer.wallet.filter', compact('wallets'))->render()]);
         }
     }
