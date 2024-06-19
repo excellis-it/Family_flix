@@ -66,6 +66,7 @@
                                         <div class="col-lg-12 col-md-12 p-0">
                                             <div class="table-responsive border-bottom" data-toggle="lists">
                                                 @if (!empty($permissions))
+                                                
                                                 <table class="table mb-0 table-bordered">
                                                     <thead>
                                                         <tr>

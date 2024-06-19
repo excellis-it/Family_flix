@@ -379,6 +379,22 @@
                     </ul>
                 </li>
                 @endif
+
+                @if(Gate::check('Manage Wallet'))
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/wallets*') ? 'active' : ' ' }}" href="#">
+                        <span>
+                            <i class="fa fa-money"></i>
+                        </span>Wallet
+                        <span class="arrow-down"><i id="icon" class="ti ti-wallet"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/wallets*') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/wallets*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('wallets.list') }}">Details</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
             </ul>
             </div>
         </nav>

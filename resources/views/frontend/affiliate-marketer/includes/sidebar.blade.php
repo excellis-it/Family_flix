@@ -29,6 +29,7 @@
                             <i class="ti ti-link"></i>
                         </span>Affiliate Link<span class="arrow-down"></span></a>
                 </li>
+                
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('affiliate-marketer/affliate-marketer*') ? 'active' : '' }}" href="#">
                         <span>
@@ -41,6 +42,12 @@
                             <a class="nav-link" href="{{ route('affiliate-marketer.commission-history.index') }}">Commission History</a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="nav-item has-submenu {{ Request::is('affiliate-marketer/wallet*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('affiliate-marketer.wallet.list') }}"> <span>
+                            <i class="ti ti-wallet"></i>
+                        </span>Wallet<span class="arrow-down"></span></a>
                 </li>
 
 

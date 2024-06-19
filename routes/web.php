@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\OttServiceController;
 use App\Http\Controllers\Admin\PaypalCredentialController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
+use App\Http\Controllers\AffiliateMarketer\WalletController;
 use App\Http\Controllers\AffiliateMarketer\DashboardController as AffiliateMarketerDashboardController;
 use App\Http\Controllers\AffiliateMarketer\ProfileController as AffiliateMarketerProfileController;
 use App\Http\Controllers\AffiliateMarketer\ForgotPasswordController as AffiliateMarketerForgotPasswordController;
@@ -43,6 +44,7 @@ use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\ManagerPermissionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Admin\WalletController as AdminWalletcontroller;
 use Illuminate\Support\Facades\Artisan;
 
 // Clear cache
@@ -115,6 +117,8 @@ Route::name('affiliate-marketer.')
             Route::resources([
                 'commission-history' => CommissionHistoryController::class,
             ]);
+            Route::get('/wallet', [WalletController::class, 'walletList'])->name('wallet.list');
+            Route::get('/wallet-history-fetch-data', [WalletController::class, 'walletFetchData'])->name('wallet.fetch-data');
             Route::get('/commission-history-fetch-data', [CommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
         });
     });
@@ -239,6 +243,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/plan/delete/{id}', [PlanController::class, 'planDelete'])->name('delete.plan'); // plan delete
         Route::post('/plan/reorder', [PlanController::class, 'planReorder'])->name('admin.plan.reorder'); // plan reorder
         Route::post('/plan/update', [PlanController::class, 'planUpdate'])->name('update.plan'); // plan update
+
+        //wallet deatils routes
+        Route::get('/wallet-list', [AdminWalletcontroller::class, 'walletList'])->name('wallets.list');
+        Route::get('/wallet-fetch-data', [AdminWalletcontroller::class, 'walletFetchData'])->name('wallets.fetch-data');
 
         Route::group(['prefix' => 'cms'], function () {
             //home cms
