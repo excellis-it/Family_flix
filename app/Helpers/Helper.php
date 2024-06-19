@@ -33,13 +33,16 @@ class Helper {
     public static function adminWallet()
     {
         $admin_wallet = Wallet::where('user_type','admin')->sum('balance');
-        return $admin_wallet ? $admin_wallet : 0;
+        
+        $admin_wallet_formatted = $admin_wallet ? number_format($admin_wallet, 2, '.', '') : '0.00';
+        return $admin_wallet_formatted;
     }
 
     public static function affiliatorWallet($id)
     {
         $affiliator_wallet = Wallet::where('user_id',$id)->sum('balance');
-        return $affiliator_wallet ? $affiliator_wallet : 0;
+        $affiliate_wallet_formatted = $affiliator_wallet ? number_format($affiliator_wallet, 2, '.', '') : '0.00';
+        return $affiliate_wallet_formatted;
     }
 
 
