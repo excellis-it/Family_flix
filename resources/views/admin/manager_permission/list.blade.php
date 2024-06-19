@@ -25,6 +25,8 @@
             'Coupon',
             'Subscribers',
             'Payment Detail',
+            'Wallet'
+
         ];
     @endphp
     <section id="loading">
