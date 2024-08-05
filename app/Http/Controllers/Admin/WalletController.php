@@ -12,7 +12,7 @@ class WalletController extends Controller
 
     public function walletList()
     {
-        $wallets = Wallet::where('user_type', 'admin')->paginate(10);
+        $wallets = Wallet::where('user_type', 'admin')->orderBy('id','desc')->paginate(10);
         return view('admin.wallet.list')->with(compact('wallets'));
     }
 
@@ -37,7 +37,8 @@ class WalletController extends Controller
                             });
                         });
                     })
-                ->paginate(15);
+                    ->orderBy('id','desc')
+                ->paginate(10);
         
             return response()->json(['data' => view('admin.wallet.filter', compact('wallets'))->render()]);
         }

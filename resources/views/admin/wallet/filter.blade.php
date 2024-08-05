@@ -11,7 +11,7 @@
         </tr>
     @endforeach
     <tr class="toxic">
-        <td colspan="5" class="text-left">
+        <td colspan="6" class="text-left">
             <div class="d-flex justify-content-between">
                 <div class="">
                     {!! $wallets->links() !!}
