@@ -120,6 +120,16 @@ Route::name('affiliate-marketer.')
             Route::get('/wallet', [WalletController::class, 'walletList'])->name('wallet.list');
             Route::get('/wallet-history-fetch-data', [WalletController::class, 'walletFetchData'])->name('wallet.fetch-data');
             Route::get('/commission-history-fetch-data', [CommissionHistoryController::class, 'fetchData'])->name('commission-history.fetch-data');
+
+            // payment transfer
+            Route::get('/payment-transfer', [WalletController::class, 'paymentTransfer'])->name('payment.transfer');
+            // redirect
+            Route::get('/redirect', [WalletController::class, 'redirect'])->name('redirect');
+            // wallet-money-transfer
+            Route::get('/money-transfer-list', [WalletController::class, 'walletMoneyTransferList'])->name('wallet.money-transfer.list');
+            // money-transfer-fetch-data
+            Route::get('/money-transfer-fetch-data', [WalletController::class, 'walletMoneyTransferFetchData'])->name('wallet.money-transfer.fetch-data');
+            Route::post('/money-transfer', [WalletController::class, 'walletMoneyTransfer'])->name('wallet.money-transfer');
         });
     });
 
@@ -336,7 +346,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/credentials-filter', [PaypalCredentialController::class, 'filter'])->name('credentials.filter');
             Route::get('/paypal-change-status', [PaypalCredentialController::class, 'changeStatus'])->name('credentials.change-status');
         });
-        
+
     });
 });
 

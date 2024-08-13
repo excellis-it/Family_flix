@@ -7,6 +7,9 @@
 @endpush
 
 @section('content')
+    @php
+        use App\Http\Controllers\AffiliateMarketer\WalletController;
+    @endphp
     <div class="container-fluid">
         <div class="breadcome-list">
             <div class="row">
@@ -24,30 +27,42 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="profile-container">
-                    <form action="{{ route('affiliate-marketer.profile.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('affiliate-marketer.profile.update') }}" method="POST"
+                        enctype="multipart/form-data">
                         <div class="row mb-4">
-                            <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-12 col-md-12 d-flex justify-content-between align-items-center">
                                 <div class="d-block d-md-flex align-items-center">
                                     <div class="left_img me-3 profile_img">
                                         <span>
                                             @if (Auth::user()->image)
-                                                <img src="{{ Storage::url(Auth::user()->image) }}"
-                                                    alt="" id="blah">
+                                                <img src="{{ Storage::url(Auth::user()->image) }}" alt=""
+                                                    id="blah">
                                             @else
                                                 <img src="{{ asset('admin_assets/images/user-1.jpg') }}" alt=""
                                                     id="blah" />
                                             @endif
                                         </span>
                                         <div class="profile_eidd">
-                                            <input type="file" id="edit_profile" onchange="readURL(this);" name="image"/>
+                                            <input type="file" id="edit_profile" onchange="readURL(this);"
+                                                name="image" />
                                             <label for="edit_profile"><i class="ti ti-edit"></i></label>
                                         </div>
                                     </div>
                                     <div class="right_text profile-info">
                                         <p>Hello!</p>
-                                        <h2>{{Auth::user()->name}}</h2>
-                                        <p>{{Auth::user()->email}}</p>
+                                        <h2>{{ Auth::user()->name }}</h2>
+                                        <p>{{ Auth::user()->email }}</p>
                                     </div>
+                                </div>
+                                <div >
+                                    {{-- stripe connect button --}}
+                                    @if (Auth::user()->stripeConnect()->exists())
+                                        <a href="{{ WalletController::stripeUrl() }}" class="print_btn" target="_blank"><i
+                                                class="ti ti-link"></i> Recreate Your Stripe Account</a>
+                                    @else
+                                        <a href="{{ WalletController::stripeUrl() }}" class="print_btn" target="_blank"><i
+                                                class="ti ti-link"></i> Create Your Stripe Account</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

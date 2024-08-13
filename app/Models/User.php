@@ -56,5 +56,9 @@ class User extends Authenticatable
     public function userLastSubscription()
     {
         return $this->hasOne(UserSubscription::class, 'customer_id', 'id')->latest();
-    } 
+    }
+    public function stripeConnect()
+    {
+        return $this->hasOne(StripeConnect::class, 'user_id');
+    }
 }

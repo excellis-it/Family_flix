@@ -29,7 +29,7 @@
                             <i class="ti ti-link"></i>
                         </span>Affiliate Link<span class="arrow-down"></span></a>
                 </li>
-                
+
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('affiliate-marketer/affliate-marketer*') ? 'active' : '' }}" href="#">
                         <span>
@@ -50,6 +50,11 @@
                         </span>Wallet<span class="arrow-down"></span></a>
                 </li>
 
+                <li class="nav-item has-submenu {{ Request::is('affiliate-marketer/money-transfer-list*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('affiliate-marketer.wallet.money-transfer.list') }}"> <span>
+                            <i class="fa fa-cc-stripe"></i>
+                        </span>Transfer Wallet Money<span class="arrow-down"></span></a>
+                </li>
 
             </ul>
         </nav>
