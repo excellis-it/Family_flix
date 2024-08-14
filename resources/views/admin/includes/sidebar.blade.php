@@ -61,7 +61,7 @@
                             <a class="nav-link" href="{{ route('manager-permission.index') }}">Roles</a>
                         </li>
                     </ul>
-                </li> 
+                </li>
                 @endif
 
                 {{-- @if (Gate::check('Manage Permission'))
@@ -155,7 +155,7 @@
                 </li>
                 @endif
 
-               
+
 
                 {{-- <li class="nav-item has-submenu {{ Request::is('admin/plan*') ? 'active' : '' }}">
                     <a class="nav-link {{ Request::is('admin/plan*') ? 'active' : '' }}" href="#">
@@ -219,9 +219,9 @@
                 </li>
                 @endif
 
-               
 
-                
+
+
 
                 @if(Gate::check('Manage Cms'))
                 <li class="nav-item has-submenu">
@@ -391,6 +391,22 @@
                     <ul class="submenu collapse {{ Request::is('admin/wallets*') ? 'active' : ' ' }}">
                         <li class="{{ Request::is('admin/wallets*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('wallets.list') }}">Details</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if (Auth::user()->hasRole('ADMIN'))
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : ' ' }}" href="#">
+                        <span>
+                            <i class="ti ti-arrow-right"></i>
+                        </span>Wallet Transfer History
+                        <span class="arrow-down "><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : ' ' }}">
+                        <li class="{{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('wallet.money-transfer.list') }}">List</a>
                         </li>
                     </ul>
                 </li>
