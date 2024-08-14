@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wallet;
+use App\Models\WalletMoneyTransaction;
 
 class WalletController extends Controller
 {
@@ -24,7 +25,7 @@ class WalletController extends Controller
                 ->where('user_type', 'admin')
                 ->where(function ($q) use ($query) {
                     $q->where('balance', 'like', '%' . $query . '%')
-                        ->orWhere('wallet_id', 'like', '%' . $query . '%')                  
+                        ->orWhere('wallet_id', 'like', '%' . $query . '%')
                             ->orWhereHas('subscription', function ($q) use ($query) {
                             $q->where('plan_name', 'like', '%' . $query . '%');
                         })
@@ -39,8 +40,14 @@ class WalletController extends Controller
                     })
                     ->orderBy('id','desc')
                 ->paginate(10);
-        
+
             return response()->json(['data' => view('admin.wallet.filter', compact('wallets'))->render()]);
         }
+    }
+
+    public function adminWalletMoneyTransferList()
+    {
+        $wallet_money_transfer = WalletMoneyTransaction::orderBy('id', 'desc')->paginate(15);
+        return view('admin.wallet.money_transfer_list')->with(compact('wallet_money_transfer'));
     }
 }

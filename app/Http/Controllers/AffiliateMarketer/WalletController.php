@@ -99,7 +99,7 @@ class WalletController extends Controller
         if (!empty($account['error'])) {
             return redirect()->back()->with('error', $account['error']);
         }
-        return redirect()->back()->with('message', $message);
+        return redirect()->route('affiliate-marketer.profile')->with('message', $message);
     }
 
     private function getToken($code)
@@ -132,8 +132,12 @@ class WalletController extends Controller
 
     public function walletMoneyTransferList()
     {
+         if(auth()->user()->stripeConnect()->exists()){
         $wallet_money_transfer = WalletMoneyTransaction::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
         return view('frontend.affiliate-marketer.wallet.transfer')->with(compact('wallet_money_transfer'));
+         } else {
+             return redirect()->route('affiliate-marketer.profile')->with('error', 'Please create stripe account first');
+        }
     }
 
     public function walletMoneyTransferFetchData(Request $request)
@@ -166,9 +170,12 @@ class WalletController extends Controller
         ]);
 
         // $wallet = Wallet::where('user_id', Auth::user()->id)->sum('balance');
-
-        if (auth()->user()->wallet_balance < $request->amount) {
-            return redirect()->back()->with('error', 'Insufficient balance.');
+        if(auth()->user()->stripeConnect()->exists()){
+            if (auth()->user()->wallet_balance < $request->amount) {
+                return redirect()->back()->with('error', 'Insufficient balance.');
+            }
+        } else {
+             return redirect()->route('affiliate-marketer.profile')->with('error', 'Please create stripe account first');
         }
 
         try {

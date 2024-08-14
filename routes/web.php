@@ -151,6 +151,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', [ProfileController::class, 'passwordUpdate'])->name('admin.password.update'); // password update
         });
 
+
+
         Route::resources([
             'menu-management' => MenuManagementController::class,
             'plan' => PlanController::class,
@@ -258,6 +260,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/wallet-list', [AdminWalletcontroller::class, 'walletList'])->name('wallets.list');
         Route::get('/wallet-fetch-data', [AdminWalletcontroller::class, 'walletFetchData'])->name('wallets.fetch-data');
 
+        // admin wallet money transfer list
+        Route::get('/wallet-money-transfer-list', [AdminWalletcontroller::class, 'adminWalletMoneyTransferList'])->name('wallet.money-transfer.list');
+        // admin wallet money transfer fetch data
+        Route::get('/wallet-money-transfer-fetch-data', [AdminWalletcontroller::class, 'adminWalletMoneyTransferFetchData'])->name('wallet.money-transfer.fetch-data');
+        
         Route::group(['prefix' => 'cms'], function () {
             //home cms
             Route::get('/home-cms', [CmsController::class, 'homeCms'])->name('home.cms');
