@@ -136,6 +136,7 @@ class PlanController extends Controller
 
             // dd(json_encode($data));
             $response = $this->createPlan($data);
+            // return $response;
         } else {
             $response = null;
         }
@@ -248,7 +249,7 @@ class PlanController extends Controller
                             "billing_cycle_sequence" => 1,
                             "pricing_scheme" => [
                                 "fixed_price" => [
-                                    "value" => $plan_update->plan_offer_price,
+                                    "value" => $request->plan_offer_price,
                                     "currency_code" => "USD"
                                 ],
                                 "roll_out_strategy" => [
@@ -273,9 +274,9 @@ class PlanController extends Controller
                     ]
                 ];
             }
-            dd(json_encode($data));
+            // dd(json_encode($plan_update->paypal_plan_id));
             $update_response = $this->updatePricing($data, $plan_update->paypal_plan_id);
-            dd($update_response);
+            // dd($update_response);
             $response = null;
         } else {
             $paypal_item = PaypalProduct::orderBy('id', 'desc')->first();

@@ -226,15 +226,15 @@
                                                         <div class="col-lg-12">
                                                             <div class="form-floating mb-3">
                                                                 <select class="form-select" name="payment_type" id="floatingSelect2" aria-label="Floating label select example">
-                                                                    
-                                                                    
+
+
                                                                     @if(Auth::check() && $plan_exists > 0)
                                                                         <option value="Renewal">Renewal</option>
                                                                     @else
                                                                         <option value="New Subscription">New Subscription</option>
                                                                     @endif
                                                                 </select>
-                                                                
+
                                                                 <label for="floatingSelect2">payment Type
                                                                     <span>*</span></label>
                                                             </div>
@@ -375,7 +375,7 @@
                                                             id="nextBtn">Apply</button>
                                                     </div>
                                                     <span id="coupon_error"></span>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -765,7 +765,7 @@
                     return true;
                 }
 
-                
+
                 $.ajax({
                     url: "{{ route('payments.email-check') }}",
                     type: "POST",
@@ -783,8 +783,8 @@
                         }
                     }
                 });
-              
-                
+
+
 
                 if(checkStatus == true) {
                     alert(11111);
@@ -856,7 +856,7 @@
                             .catch(function(error) {
                                 console.log(error)
                                 // redirect to failed page if internal error occurs
-                                window.location.href = '{{ route('paypal-pay-failed') }}'
+                                // window.location.href = '{{ route('paypal-pay-failed') }}'
                             });
                     } else {
                         window.location.href = '{{ route('paypal-pay-failed') }}';
@@ -887,7 +887,7 @@
         //onchange validation
         $('#floatingInput1').on('change', function() {
             var emailId = $('#floatingInput1').val();
-            
+
             $.ajax({
                 url: "{{ route('payments.email-check') }}",
                 type: "POST",
@@ -909,10 +909,10 @@
     @auth
     <script>
        $(document).ready(function() {
-            
+
             var payment_type = $('#floatingSelect2').val();
             var plan_name = $('#plan_name').val();
-            
+
             $.ajax({
                 url: "{{ route('payments.payment-type-check') }}",
                 type: "POST",
@@ -927,7 +927,7 @@
                         {
                             return true;
                         }
-                        
+
                     } else {
 
                         Swal.fire({
@@ -945,13 +945,13 @@
                                 // Code to execute when the user cancels
                             }
                         });
-                        
-                        
+
+
                     }
                 }
             });
         });
-        
+
     </script>
     @endauth
 </body>

@@ -90,6 +90,10 @@ Route::post('/paypal-payment/{ord?}', [PaypalController::class, 'paypalPayment']
 Route::get('/paypal-success-payment/{pay?}/{pyr?}', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
 Route::get('/paypal-pay-failed/{err?}',[PaypalController::class, 'paypalPayFailed'])->name('paypal-pay-failed');
 Route::post('payment-type-check', [PaypalController::class, 'paymentTypeCheck'])->name('payments.payment-type-check');
+// paypal.success.payment
+Route::get('/paypal-success-payment', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal.success.payment');
+//paypal.pay.failed
+Route::get('/paypal-pay-failed', [PaypalController::class, 'paypalPayFailed'])->name('paypal.pay.failed');
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
@@ -264,7 +268,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/wallet-money-transfer-list', [AdminWalletcontroller::class, 'adminWalletMoneyTransferList'])->name('wallet.money-transfer.list');
         // admin wallet money transfer fetch data
         Route::get('/wallet-money-transfer-fetch-data', [AdminWalletcontroller::class, 'adminWalletMoneyTransferFetchData'])->name('wallet.money-transfer.fetch-data');
-        
+
         Route::group(['prefix' => 'cms'], function () {
             //home cms
             Route::get('/home-cms', [CmsController::class, 'homeCms'])->name('home.cms');

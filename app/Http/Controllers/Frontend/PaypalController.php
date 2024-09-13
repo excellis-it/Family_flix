@@ -18,11 +18,14 @@ use Omnipay\Omnipay;
 use Auth;
 use Mail;
 use App\Mail\WelcomeMail;
+use App\Traits\PayPalTrait;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 
 class PaypalController extends Controller
 {
+    use PayPalTrait;
     //
     private $gateway;
 
@@ -34,29 +37,27 @@ class PaypalController extends Controller
         $this->gateway->setTestMode(true); //set it to 'false' when go live
     }
 
+
+
     public function createPayments($id)
     {
 
         $id = decrypt($id);
         $plan = Plan::find($id);
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
-            $customer_details = CustomerDetails::where('email_address',$user->email)->first() ?? '';
-            $plan_exists = UserSubscription::where('customer_id', Auth::user()->id)->where('plan_name',$plan->plan_name)->where('plan_expiry_date', '>=', date('Y-m-d'))->count() ?? 0;
-        }else{
+            $customer_details = CustomerDetails::where('email_address', $user->email)->first() ?? '';
+            $plan_exists = UserSubscription::where('customer_id', Auth::user()->id)->where('plan_name', $plan->plan_name)->where('plan_expiry_date', '>=', date('Y-m-d'))->count() ?? 0;
+        } else {
             $customer_details = '';
             $plan_exists = 0;
         }
 
-        $faq_qstn_ansrs = Faq::where('type','payment')->orderBy('id','asc')->get();
-        return view('frontend.pages.checkout',compact('plan','faq_qstn_ansrs','customer_details','plan_exists'));
+        $faq_qstn_ansrs = Faq::where('type', 'payment')->orderBy('id', 'asc')->get();
+        return view('frontend.pages.checkout', compact('plan', 'faq_qstn_ansrs', 'customer_details', 'plan_exists'));
     }
 
-    public function renewalPayments($name)
-    {
-
-    }
+    public function renewalPayments($name) {}
 
     public function paymentTypeCheck(Request $request)
     {
@@ -66,21 +67,19 @@ class PaypalController extends Controller
             ->where('plan_expiry_date', '>=', date('Y-m-d'))
             ->count();
 
-        if($check_user_subscription > 0)
-        {
+        if ($check_user_subscription > 0) {
             $check_user_same_plan =  UserSubscription::where('customer_id', Auth::user()->id)
                 ->where('plan_name', $request->plan_name)
                 ->where('plan_expiry_date', '>=', date('Y-m-d'))
                 ->count();
-            if($check_user_same_plan > 0)
-            {
+            if ($check_user_same_plan > 0) {
                 return response()->json(['status' => 'success', 'same_plan' => true, 'message' => 'You can proceed with the payment']);
-            }else{
+            } else {
                 return response()->json(['status' => 'error', 'message' => 'you have already subscribed a plan']);
             }
 
             // return response()->json(['status' => 'error', 'message' => 'You have already subscribed this plan']);
-        }else{
+        } else {
             return response()->json(['status' => 'success',  'message' => 'You can proceed with the payment']);
         }
     }
@@ -89,8 +88,7 @@ class PaypalController extends Controller
     public function processPayments(Request $request)
     {
         $data = $request->all();
-        if($request->all())
-        {
+        if ($request->all()) {
             try {
                 $response = $this->gateway->purchase(array(
                     'amount' => $request->amount,
@@ -106,30 +104,26 @@ class PaypalController extends Controller
                     // not successful
                     return $response->getMessage();
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 return $e->getMessage();
             }
-
         }
-
     }
 
     public function checkPaymentsEmail(Request $request)
     {
-        $check_email_exists = User::where('email',$request->emailId)->count();
-        if($check_email_exists > 0)
-        {
-            return response()->json(['status' => 'error', 'message' => 'Email already exists','email' => $request->emailId]);
-        }else{
-            return response()->json(['status' => 'success', 'message' => 'Email is available','email' => $request->emailId]);
+        $check_email_exists = User::where('email', $request->emailId)->count();
+        if ($check_email_exists > 0) {
+            return response()->json(['status' => 'error', 'message' => 'Email already exists', 'email' => $request->emailId]);
+        } else {
+            return response()->json(['status' => 'success', 'message' => 'Email is available', 'email' => $request->emailId]);
         }
     }
 
     public function successPayment(Request $request)
     {
 
-        if ($request->input('paymentId') && $request->input('PayerID'))
-        {
+        if ($request->input('paymentId') && $request->input('PayerID')) {
             $transaction = $this->gateway->completePurchase(array(
                 'payer_id'             => $request->input('PayerID'),
                 'transactionReference' => $request->input('paymentId'),
@@ -138,8 +132,7 @@ class PaypalController extends Controller
 
             $data = session()->get('data');
             // create a random unique order number
-            if ($response->isSuccessful())
-            {
+            if ($response->isSuccessful()) {
                 //customer details
                 $customer_details = new CustomerDetails();
                 $customer_details->email_address = $data['email_address'];
@@ -162,7 +155,7 @@ class PaypalController extends Controller
 
                     //affiliate commission calculation
                     $affiliate_id = Session::get('affiliate_id');
-                    $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
+                    $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
                     $commission_dis = ($data['amount'] / 100) * $commission->percentage;
                     $after_commission_dis = $data['amount'] - $commission_dis;
 
@@ -195,7 +188,7 @@ class PaypalController extends Controller
                 $payment->save();
 
 
-                return redirect()->route('payment.successful')->with('message','payment successful');
+                return redirect()->route('payment.successful')->with('message', 'payment successful');
                 // return "Payment is successful. Your transaction id is: ". $arr_body['id'];
             } else {
                 return $response->getMessage();
@@ -207,63 +200,49 @@ class PaypalController extends Controller
 
     public function cancelPayments(Request $request)
     {
-        return redirect()->route('home')->with('error','Something went wrong');
+        return redirect()->route('home')->with('error', 'Something went wrong');
     }
 
     public function couponCheck(Request $request)
     {
-        $check_user = CustomerDetails::where('email_address', $request->emailId)->orWhere('phone',$request->phone)->first();
-        $coupon = Coupon::where('code', $request->coupon_code)->where('plan_id',$request->plan_id)->first();
-        if(!$coupon)
-        {
+        $check_user = CustomerDetails::where('email_address', $request->emailId)->orWhere('phone', $request->phone)->first();
+        $coupon = Coupon::where('code', $request->coupon_code)->where('plan_id', $request->plan_id)->first();
+        if (!$coupon) {
             return response()->json(['status' => 'error', 'message' => 'Invalid coupon code']);
         }
         $check_coupon_user_type = $coupon->user_type;
-        if(!$check_user && $check_coupon_user_type == 'new_user')
-        {
+        if (!$check_user && $check_coupon_user_type == 'new_user') {
             //calculate discount
-            if($coupon->coupon_type == 'percentage')
-            {
+            if ($coupon->coupon_type == 'percentage') {
                 $discount = round(($request->plan_price  / 100) * $coupon->value);
-            }
-            else
-            {
+            } else {
                 $discount = $coupon->value;
             }
 
             $discount_amount = round($request->plan_price - $discount);
 
-            if($discount_amount)
-            {
-                return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
+            if ($discount_amount) {
+                return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type,]);
             }
-
-
-        } elseif($check_user && $check_coupon_user_type == 'existing_user') {
+        } elseif ($check_user && $check_coupon_user_type == 'existing_user') {
 
             //calculate discount
-            if($coupon->coupon_type == 'percentage')
-            {
+            if ($coupon->coupon_type == 'percentage') {
 
                 $discount = round(($request->plan_price  / 100) * $coupon->value);
-            }
-            else
-            {
+            } else {
 
                 $discount = $coupon->value;
             }
 
             $discount_amount = round($request->plan_price - $discount);
 
-            if($discount_amount)
-            {
-                return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type, ]);
+            if ($discount_amount) {
+                return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type,]);
             }
-
-        }else{
+        } else {
             return response()->json(['status' => 'error', 'message' => 'Coupon code is not valid for you']);
         }
-
     }
 
     public function paymentSuccess()
@@ -276,10 +255,9 @@ class PaypalController extends Controller
 
         $data = $request->all();
 
-        $customer_details_count = CustomerDetails::where('email_address',$data['emailId'])->count();
-        if($customer_details_count > 0)
-        {
-            $customer_details = CustomerDetails::where('email_address',$data['emailId'])->first();
+        $customer_details_count = CustomerDetails::where('email_address', $data['emailId'])->count();
+        if ($customer_details_count > 0) {
+            $customer_details = CustomerDetails::where('email_address', $data['emailId'])->first();
             $customer_details->email_address = $data['emailId'];
             $customer_details->first_name = $data['first_name'];
             $customer_details->last_name = $data['last_name'];
@@ -291,7 +269,7 @@ class PaypalController extends Controller
             $customer_details->post_code = $data['post_code'];
             $customer_details->phone = $data['phone'];
             $customer_details->update();
-        }else{
+        } else {
             $customer_details = new CustomerDetails();
             $customer_details->email_address = $data['emailId'];
             $customer_details->first_name = $data['first_name'];
@@ -306,17 +284,17 @@ class PaypalController extends Controller
             $customer_details->save();
         }
 
-        $check_user_exists = User::where('email',$data['emailId'])->count();
-        if($check_user_exists > 0)
-        {
-            $user_get = User::where('email',$data['emailId'])->first();
+        $check_user_exists = User::where('email', $data['emailId'])->count();
+        if ($check_user_exists > 0) {
+            $user_get = User::where('email', $data['emailId'])->first();
             $user_id = $user_get->id;
-        }else{
+        } else {
             $user = new User();
-            $user->name = $data['first_name'].' '.$data['last_name'];
+            $user->name = $data['first_name'] . ' ' . $data['last_name'];
             $user->email = $data['emailId'];
             $user->password = bcrypt('12345678');
             $user->status = 1;
+            $user->wallet_balance = 0;
             $user->save();
             $user->assignRole('CUSTOMER');
 
@@ -331,21 +309,20 @@ class PaypalController extends Controller
             $user_id = $user->id;
         }
 
-       // for renewal plan
-        if($data['payment_type'] == 'Renewal')
-        {
+
+        // for renewal plan
+        if ($data['payment_type'] == 'Renewal') {
             $user_subscription = UserSubscription::where('customer_id', $user_id)
-            ->where('plan_name', $data['plan_name'])
-            ->where('plan_expiry_date', '>=', date('Y-m-d'))
-            ->first();
-            if($user_subscription)
-            {
+                ->where('plan_name', $data['plan_name'])
+                ->where('plan_expiry_date', '>=', date('Y-m-d'))
+                ->first();
+            if ($user_subscription) {
 
                 if (Session::has('affiliate_id')) {
 
                     //affiliate commission calculation
                     $affiliate_id = Session::get('affiliate_id');
-                    $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
+                    $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
                     if ($commission) {
                         $commission_dis = ($data['amount'] / 100) * $commission->percentage;
                         $admin_commission = $data['amount'] - $commission_dis;
@@ -358,8 +335,6 @@ class PaypalController extends Controller
 
                     $user_subscription->affiliate_id = Session::get('affiliate_id');
                     $user_subscription->affiliate_commission = $commission_dis;
-
-
                 } else {
                     $user_subscription->affiliate_id = null;
                     $user_subscription->affiliate_commission = 0;
@@ -391,13 +366,14 @@ class PaypalController extends Controller
                 $wallet->balance = $user_subscription->affiliate_commission;
                 $wallet->date = date('Y-m-d');
                 $wallet->save();
-
-                $affiliator_balance = User::find($user_subscription->affiliate_id);
-                $affiliator_balance->wallet_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
-                $affiliator_balance->update();
-
+                if ($user_subscription->affiliate_id) {
+                    $aff_bal = User::find($user_subscription->affiliate_id);
+                    $aff_bal->wallet_balance;
+                    $aff_bal->wallet_balance = $aff_bal->wallet_balance + $user_subscription->affiliate_commission;
+                    $aff_bal->update();
+                }
             }
-        }else{
+        } else {
 
             $user_subscription = new UserSubscription();
             $user_subscription->customer_details_id = $customer_details->id;
@@ -406,7 +382,7 @@ class PaypalController extends Controller
 
                 //affiliate commission calculation
                 $affiliate_id = Session::get('affiliate_id');
-                $commission = AffiliateCommission::where('affiliate_id',$affiliate_id)->orderBy('id','desc')->first();
+                $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
                 if ($commission) {
                     $commission_dis = ($data['amount'] / 100) * $commission->percentage;
                     $admin_commission = $data['amount'] - $commission_dis;
@@ -476,19 +452,73 @@ class PaypalController extends Controller
         $payment->payment_amount = $data['amount'];
         $payment->payment_currency = 'USD';
         $payment->save();
-
+        session()->put('user_subscription_id', $user_subscription->id);
+        session()->put('data', $data);
         return 'success';
     }
 
 
-    public function paypalSuccessPayment($paymentId=null,$PayerID=null)
+    public function paypalSuccessPayment($paymentId = null, $PayerID = null)
     {
+        $user_subscription_id = session()->get('user_subscription_id');
+        $user_subscription = UserSubscription::find($user_subscription_id);
+        $data = session()->get('data');
+        
+        $plan = Plan::find($user_subscription['plan_id']);
+        $reccuring = [
+            "plan_id" => $plan->paypal_plan_id,
+            "start_time" => Carbon::now()->addDays(30)->format('Y-m-d\TH:i:s\Z'),
+            "shipping_amount" => [
+                "currency_code" => "USD",
+                "value" => "0.00"
+            ],
+            "subscriber" => [
+                "name" => [
+                    "given_name" => $data['first_name'],
+                    "surname" => $data['last_name']
+                ],
+                "email_address" => $data['emailId'],
+                "shipping_address" => [
+                    "name" => [
+                        "full_name" => $data['first_name'] . ' ' . $data['last_name']
+                    ],
+                    "address" => [
+                        "address_line_1" => $data['house_name'],
+                        "address_line_2" => $data['detail_address'],
+                        "admin_area_2" => $data['city'],
+                        "admin_area_1" => $data['state'],
+                        "postal_code" => $data['post_code'],
+                        "country_code" => $data['country']
+                    ]
+                ]
+            ],
+            "application_context" => [
+                "brand_name" => "walmart",
+                "locale" => "en-US",
+                "shipping_preference" => "SET_PROVIDED_ADDRESS",
+                "user_action" => "SUBSCRIBE_NOW",
+                "payment_method" => [
+                    "payer_selected" => "PAYPAL",
+                    "payee_preferred" => "IMMEDIATE_PAYMENT_REQUIRED"
+                ],
+                "return_url" => route('paypal.success.payment'),
+                "cancel_url" => route('paypal.pay.failed')
+            ]
+        ];
+        $response = $this->subscribeUser($reccuring);
+        dd($response);
+        if ($response->id) {
+            return $response->id;
+        } else {
+            return 'error';
+        }
+        dd($response);
         Session::flash('affiliate_id', null);
         return view('frontend.pages.thankyou');
     }
 
 
-    public function paypalPayFailed($err=null)
+    public function paypalPayFailed($err = null)
     {
         return view('frontend.pages.payment-failed');
     }
