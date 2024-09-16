@@ -91,9 +91,9 @@ Route::get('/paypal-success-payment/{pay?}/{pyr?}', [PaypalController::class, 'p
 Route::get('/paypal-pay-failed/{err?}',[PaypalController::class, 'paypalPayFailed'])->name('paypal-pay-failed');
 Route::post('payment-type-check', [PaypalController::class, 'paymentTypeCheck'])->name('payments.payment-type-check');
 // paypal.success.payment
-Route::get('/paypal-success-payment', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal.success.payment');
+Route::get('/paypal-success-payment-recurring', [PaypalController::class, 'paypalSuccessPaymentRecurring'])->name('paypal.success.payment');
 //paypal.pay.failed
-Route::get('/paypal-pay-failed', [PaypalController::class, 'paypalPayFailed'])->name('paypal.pay.failed');
+Route::get('/paypal-pay-failed-recurring', [PaypalController::class, 'paypalPayRecurringFailed'])->name('paypal.pay.failed');
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');

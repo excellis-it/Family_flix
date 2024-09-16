@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Models\PaypalCredential;
+use App\Models\UserSubscriptionRecurring;
 use App\Models\Wallet;
 
 class Helper {
@@ -44,6 +45,7 @@ class Helper {
         $affiliate_wallet_formatted = $affiliator_wallet ? number_format($affiliator_wallet, 2, '.', '') : '0.00';
         return $affiliate_wallet_formatted;
     }
+
 
 
 }

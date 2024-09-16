@@ -37,4 +37,9 @@ class UserSubscription extends Model
     {
         return $this->belongsTo(User::class, 'customer_id');
     }
+
+    public function userSubscriptionRecurring()
+    {
+        return $this->hasOne(UserSubscriptionRecurring::class, 'user_subscription_id')->orderBy('id', 'desc');
+    }
 }

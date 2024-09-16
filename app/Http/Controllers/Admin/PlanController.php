@@ -113,7 +113,7 @@ class PlanController extends Controller
                         "total_cycles" => 12,
                         "pricing_scheme" => [
                             "fixed_price" => [
-                                "value" => $request->plan_actual_price,
+                                "value" => $request->plan_offer_price,
                                 "currency_code" => "USD"
                             ]
                         ]
@@ -122,14 +122,14 @@ class PlanController extends Controller
                 "payment_preferences" => [
                     "auto_bill_outstanding" => true,
                     "setup_fee" => [
-                        "value" => "10",
+                        "value" => "0",
                         "currency_code" => "USD"
                     ],
                     "setup_fee_failure_action" => "CONTINUE",
                     "payment_failure_threshold" => 3
                 ],
                 "taxes" => [
-                    "percentage" => "10",
+                    "percentage" => "0",
                     "inclusive" => false
                 ]
             ];
@@ -262,7 +262,7 @@ class PlanController extends Controller
                             "billing_cycle_sequence" => 2,
                             "pricing_scheme" => [
                                 "fixed_price" => [
-                                    "value" => $request->plan_actual_price,
+                                    "value" => $request->plan_offer_price,
                                     "currency_code" => "USD"
                                 ],
                                 "roll_out_strategy" => [
@@ -312,7 +312,7 @@ class PlanController extends Controller
                             "total_cycles" => 12,
                             "pricing_scheme" => [
                                 "fixed_price" => [
-                                    "value" => $request->plan_actual_price,
+                                    "value" => $request->plan_offer_price,
                                     "currency_code" => "USD"
                                 ]
                             ]
@@ -321,14 +321,14 @@ class PlanController extends Controller
                     "payment_preferences" => [
                         "auto_bill_outstanding" => true,
                         "setup_fee" => [
-                            "value" => "10",
+                            "value" => "0",
                             "currency_code" => "USD"
                         ],
                         "setup_fee_failure_action" => "CONTINUE",
                         "payment_failure_threshold" => 3
                     ],
                     "taxes" => [
-                        "percentage" => "10",
+                        "percentage" => "0",
                         "inclusive" => false
                     ]
                 ];

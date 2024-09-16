@@ -3,15 +3,20 @@
     Dashboard
 @endsection
 @push('styles')
+    <style>
+        #page-container {
+            height: 750px;
+            overflow-y: auto !important;
+        }
+    </style>
 @endpush
 @section('head')
     Dashboard
 @endsection
-@section('content')
-
-@php
-    use App\Helpers\Helper;
-@endphp
+@section('content') 
+    @php
+        use App\Helpers\Helper;
+    @endphp
 
     <section class="user-panel">
         <div class="container">
@@ -68,16 +73,25 @@
                                                         {{-- <a href="{{ route('customer.subscription.show', $customer_subscription->id) }}" class="btn btn-primary btn-sm">Edit</a> --}}
                                                     </td>
                                                     <td>
-                                                        @if($customer_subscription->plan_expiry_date < date('Y-m-d'))
+                                                        @if ($customer_subscription->plan_expiry_date < date('Y-m-d'))
                                                             <span class="text-danger">Expired</span>
-                                                            
                                                         @else
-                                                        <a title="Renewal plan"
-                                                            data-route="{{ route('create-payments', ['id' => encrypt($customer_subscription->plan_id)]) }}"
-                                                            class="renewal-btn btn" id="renewal-button">Renewal</a>
-                                                        
+                                                            @if ($customer_subscription->paypal_subscription_id == null)
+                                                                <a title="Renewal plan"
+                                                                    data-route="{{ route('create-payments', ['id' => encrypt($customer_subscription->plan_id)]) }}"
+                                                                    class="renewal-btn btn" id="renewal-button">Renewal</a>
+                                                            @else
+                                                                @if (isset($customer_subscription->userSubscriptionRecurring) &&
+                                                                        $customer_subscription->userSubscriptionRecurring->status == 'ACTIVE')
+                                                                    <span class="text-success">Active</span>
+                                                                @else
+                                                                    <a title="Renewal plan"
+                                                                        data-route="{{ route('create-payments', ['id' => encrypt($customer_subscription->plan_id)]) }}"
+                                                                        class="renewal-btn btn"
+                                                                        id="renewal-button">Renewal</a>
+                                                                @endif
+                                                            @endif
                                                         @endif
-
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -101,6 +115,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12 mt-4">
+                        <div style="height:1500px;">
+                            @php
+                                $url = 'https://myfamilycinema.com/en/download-my-family-cinema/';
+                                $content = file_get_contents($url);
+
+                                // Modify the content by removing header and footer (using regex, for example)
+                                $content = preg_replace('/<header.*?<\/header>/s', '', $content);
+                                $content = preg_replace('/<footer.*?<\/footer>/s', '', $content);
+
+                                echo $content;
+                            @endphp
+                            <iframe src="{{ $content }}" name="iframe_all" scrolling="yes" frameborder="0"
+                                height="100px" width="200px"></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,8 +138,14 @@
 @endsection
 
 @push('scripts')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        var frame = document.querySelector("iframe");
+        header = frame.contentDocument.querySelector("header");
+        header.remove();
+        footer = frame.contentDocument.querySelector("footer");
+        footer.remove();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         $(document).ready(function() {
             $('#renewal-button').click(function() {

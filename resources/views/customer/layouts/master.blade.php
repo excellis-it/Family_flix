@@ -24,12 +24,13 @@
   <link rel="stylesheet" type="text/css"
   href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css" rel="stylesheet" />
- 
+
 
   <link href="{{ asset('user_assets/css/menu.css') }}" rel="stylesheet" />
   <link href="{{ asset('user_assets/css/style.css') }}" rel="stylesheet" />
   <link href="{{ asset('user_assets/css/responsive.css') }}" rel="stylesheet" />
   <link href="{{ asset('user_assets/css/circle.css') }}" rel="stylesheet" />
+  @stack('styles')
   <!-- Custom styles for this template -->
 </head>
 
@@ -49,19 +50,19 @@
         height: 250px;
         margin-top: -9%;
     }
-   
+
 }
 
 @media (max-width:1600px) {
-    
+
     .imdb-sec {
         margin-top: -6.2%;
     }
-    
- 
+
+
 }
 </style>
-       
+
 
         @include('customer.includes.footer')
 
@@ -90,7 +91,7 @@
           }
           toastr.success("{{ session('message') }}");
       @endif
-  
+
       @if (Session::has('error'))
           toastr.options = {
               "closeButton": true,
@@ -98,7 +99,7 @@
           }
           toastr.error("{{ session('error') }}");
       @endif
-  
+
       @if (Session::has('info'))
           toastr.options = {
               "closeButton": true,
@@ -106,7 +107,7 @@
           }
           toastr.info("{{ session('info') }}");
       @endif
-  
+
       @if (Session::has('warning'))
           toastr.options = {
               "closeButton": true,

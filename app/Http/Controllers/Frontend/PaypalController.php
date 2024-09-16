@@ -18,6 +18,7 @@ use Omnipay\Omnipay;
 use Auth;
 use Mail;
 use App\Mail\WelcomeMail;
+use App\Models\UserSubscriptionRecurring;
 use App\Traits\PayPalTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -439,8 +440,11 @@ class PaypalController extends Controller
             $wallet->save();
 
             $affiliator_balance = User::find($user_subscription->affiliate_id);
-            $affiliator_balance->wallet_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
-            $affiliator_balance->update();
+            if ($affiliator_balance) {
+                $affiliator_balance->wallet_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
+                $affiliator_balance->update();
+            }
+
         }
 
         $payment = new Payment();
@@ -463,7 +467,7 @@ class PaypalController extends Controller
         $user_subscription_id = session()->get('user_subscription_id');
         $user_subscription = UserSubscription::find($user_subscription_id);
         $data = session()->get('data');
-        
+
         $plan = Plan::find($user_subscription['plan_id']);
         $reccuring = [
             "plan_id" => $plan->paypal_plan_id,
@@ -493,7 +497,7 @@ class PaypalController extends Controller
                 ]
             ],
             "application_context" => [
-                "brand_name" => "walmart",
+                "brand_name" => "The Family Flix",
                 "locale" => "en-US",
                 "shipping_preference" => "SET_PROVIDED_ADDRESS",
                 "user_action" => "SUBSCRIBE_NOW",
@@ -506,20 +510,56 @@ class PaypalController extends Controller
             ]
         ];
         $response = $this->subscribeUser($reccuring);
-        dd($response);
-        if ($response->id) {
-            return $response->id;
-        } else {
-            return 'error';
-        }
-        dd($response);
-        Session::flash('affiliate_id', null);
-        return view('frontend.pages.thankyou');
-    }
+        // dd($response);
+        if (isset($response) && $response['id']) {
+            $user_subscription->paypal_subscription_id = $response['id'];
+            $user_subscription->update();
+            $user_subscription_reccuring = new UserSubscriptionRecurring();
+            $user_subscription_reccuring->user_id = $user_subscription->customer_id;
+            $user_subscription_reccuring->user_subscription_id = $user_subscription->id;
+            $user_subscription_reccuring->paypal_subscription_id = $response['id'];
+            $user_subscription_reccuring->status = 'PENDING';
+            $user_subscription_reccuring->save();
 
+            session()->put('user_subscription_reccuring_id', $user_subscription_reccuring->id);
+
+            session()->forget('data');
+            session()->forget('user_subscription_id');
+            return redirect($response['links'][0]['href']);
+            // redirect($response['links'][0]['href']);
+        } else {
+            $user_subscription_reccuring = new UserSubscriptionRecurring();
+            $user_subscription_reccuring->user_id = $user_subscription->customer_id;
+            $user_subscription_reccuring->user_subscription_id = $user_subscription->id;
+            $user_subscription_reccuring->paypal_subscription_id = null;
+            $user_subscription_reccuring->status = 'CANCELLED';
+            $user_subscription_reccuring->save();
+            Session::flash('affiliate_id', null);
+
+            session()->forget('data');
+            session()->forget('user_subscription_id');
+            return view('frontend.pages.thankyou');
+        }
+    }
 
     public function paypalPayFailed($err = null)
     {
         return view('frontend.pages.payment-failed');
+    }
+
+    public function paypalSuccessPaymentRecurring(Request $request)
+    {
+        $user_subscription_reccuring_id = session()->get('user_subscription_reccuring_id');
+        UserSubscriptionRecurring::where('id', $user_subscription_reccuring_id)->update(['status' => 'ACTIVE']);
+        session()->forget('user_subscription_reccuring_id');
+        return view('frontend.pages.thankyou');
+    }
+
+    public function paypalPayRecurringFailed($err = null)
+    {
+        $user_subscription_reccuring_id = session()->get('user_subscription_reccuring_id');
+        UserSubscriptionRecurring::where('id', $user_subscription_reccuring_id)->update(['status' => 'CANCELLED']);
+        session()->forget('user_subscription_reccuring_id');
+        return view('frontend.pages.thankyou');
     }
 }
