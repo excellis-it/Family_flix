@@ -30,9 +30,6 @@
     <link href="{{ asset('frontend_assets/css/circle.css') }}" rel="stylesheet" />
     <!-- Custom styles for this template -->
 
-   
-
-
 
 </head>
 
@@ -96,9 +93,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <div class="checkout-form">
-                            {{-- <form id="signUpForm" action="{{ route('process-payments') }}" method="post"> --}}
-
-                                <form action="{{  route('create-subscription') }}" method="post" id="subscription-form">
+                            <form id="signUpForm" action="{{ route('process-payments') }}" method="post">
                                 @csrf
                                 <!-- start step indicators -->
                                 <div class="form-header d-flex mb-4">
@@ -106,7 +101,6 @@
                                     <span class="stepIndicator">Finish</span>
                                 </div>
                                 <!-- end step indicators -->
-
 
                                 <div class="row">
                                     <div class="col-lg-8">
@@ -300,10 +294,7 @@
                                                         class="fa-solid fa-credit-card"></i></span>Debit or Credit
                                                 Card</button> --}}
 
-                                            {{-- <div id="paypal-button-container"></div> --}}
-
-                                            <div id="card-element"></div>
-                                             <button id="submit-button">Subscribe</button>
+                                            <div id="paypal-button-container"></div>
 
                                         </div>
                                     </div>
@@ -390,11 +381,11 @@
                                         </div>
                                     </div>
                                 </div>
-                    
-                            </form>
                         </div>
+                        </form>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
 
@@ -579,10 +570,6 @@
             <a id="scroll-top-btn"></a>
         </div>
     </main>
-
-    
-
-    <script src="https://js.stripe.com/v3/"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
@@ -967,32 +954,6 @@
 
     </script>
     @endauth
-
-    <script>
-            var stripe = Stripe("{{ env('STRIPE_KEY') }}");
-            var elements = stripe.elements();
-            var cardElement = elements.create('card');
-            cardElement.mount('#card-element');
-
-            var form = document.getElementById('subscription-form');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                stripe.createPaymentMethod('card', cardElement).then(function (result) {
-                    if (result.error) {
-                        // Handle error
-                    } else {
-                        var hiddenInput = document.createElement('input');
-                        hiddenInput.setAttribute('type', 'hidden');
-                        hiddenInput.setAttribute('name', 'payment_method');
-                        hiddenInput.setAttribute('value', result.paymentMethod.id);
-                        form.appendChild(hiddenInput);
-
-                        form.submit();
-                    }
-                });
-            });
-    </script>
 </body>
 
 </html>

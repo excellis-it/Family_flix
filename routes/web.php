@@ -35,6 +35,7 @@ use App\Http\Controllers\AffiliateMarketer\ForgotPasswordController as Affiliate
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PaypalController;
+use App\Http\Controllers\Frontend\SubscriptionController as FrontendSubscriptionController;
 use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Customer\DashboardController as CustomerDashboardController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
@@ -94,6 +95,12 @@ Route::post('payment-type-check', [PaypalController::class, 'paymentTypeCheck'])
 Route::get('/paypal-success-payment-recurring', [PaypalController::class, 'paypalSuccessPaymentRecurring'])->name('paypal.success.payment');
 //paypal.pay.failed
 Route::get('/paypal-pay-failed-recurring', [PaypalController::class, 'paypalPayRecurringFailed'])->name('paypal.pay.failed');
+
+
+//stripe recurring payment
+// Route::post('/subscribe', [FrontendSubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::post('/create-subscription', [FrontendSubscriptionController::class, 'createSubscription'])->name('create-subscription');
+Route::post('/stripe/webhook', [FrontendSubscriptionController::class, 'webhook'])->name('stripe.webhook');
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
@@ -403,5 +410,8 @@ Route::get('/user-panel', function()
 {
     return view('user-panel');
 });
+
+
+// Route::stripeWebhooks('stripe/webhook');
 
 
