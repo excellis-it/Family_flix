@@ -20,21 +20,12 @@ class Helper {
         $datediff = $your_date - $now;
         $days = floor($datediff / (60 * 60 * 24));
         return $days;
-        // if ($days == 0) {
-        //     return 'Today';
-        // } else if ($days == 1) {
-        //     return 'Tomorrow';
-        // } else if ($days < 0) {
-        //     return false;
-        // } else {
-        //     return $days . ' days';
-        // }
+       
     }
 
     public static function adminWallet()
     {
         $admin_wallet = auth()->user()->wallet_balance;
-
         $admin_wallet_formatted = $admin_wallet ? number_format($admin_wallet, 2, '.', '') : '0.00';
         return $admin_wallet_formatted;
     }
@@ -45,7 +36,5 @@ class Helper {
         $affiliate_wallet_formatted = $affiliator_wallet ? number_format($affiliator_wallet, 2, '.', '') : '0.00';
         return $affiliate_wallet_formatted;
     }
-
-
 
 }

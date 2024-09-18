@@ -4,6 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Mail\SubscriptionExpiryMail;
+use App\Models\User;
+use App\Models\UserSubscription;
 
 class Kernel extends ConsoleKernel
 {
@@ -21,8 +24,23 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('send:mail')
-                 ->everyMinute();
+        // $schedule->call(function () {
+        //    $customer = UserSubscription::with('customer')->where('plan_expiry_date', now()->addDays(4))->get();
+        //     foreach ($customer as $key => $value) {
+        //         \Mail::to($value->customer->email)->send(new SubscriptionExpiryMail($value));
+        //     }
+        // })->daily();
+
+        // after 2 min of the schedule
+        $schedule->command('mail:send')->everyMinute()->after(function () {
+            // $customers = UserSubscription::orderBy('id','desc')->get();
+            // foreach ($customers as $key => $value) {
+            //     \Mail::to($value->customer->email)->send(new SubscriptionExpiryMail($value));
+            // }
+            \Mail::to('shreeja@yopmail.com')->send(new SubscriptionExpiryMail(UserSubscription::find(1)));
+
+        });
+        
     }
 
     /**
