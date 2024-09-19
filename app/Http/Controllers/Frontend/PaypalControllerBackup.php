@@ -123,8 +123,6 @@ class PaypalController extends Controller
 
     public function successPayment(Request $request)
     {
-        
-
         if ($request->input('paymentId') && $request->input('PayerID')) {
             $transaction = $this->gateway->completePurchase(array(
                 'payer_id'             => $request->input('PayerID'),

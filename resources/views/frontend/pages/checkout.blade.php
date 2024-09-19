@@ -37,7 +37,16 @@
     use App\Helpers\Helper;
     @endphp
     <main>
+
+    
         <section class="checkout-sec">
+
+            <div id="loading-spinner" style="display: none;">
+                <img src="path/to/spinner.gif" alt="Loading..."> <!-- Replace with your spinner image path -->
+            </div>
+
+
+            
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-lg-7">
@@ -91,9 +100,9 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <div class="checkout-form">
-                            {{-- <form id="signUpForm" action="{{ route('process-payments') }}" method="post"> --}}
+                            {{-- <form id="signUpForm" action="{{ route('create-subscription') }}" method="post"> --}}
 
-                                <form action="{{  route('create-subscription') }}" method="post" id="subscription-form">
+                                <form action="" method="post" id="signUpForm">
                                     @csrf
                                     <!-- start step indicators -->
                                     <div class="form-header d-flex mb-4">
@@ -112,7 +121,7 @@
                                                         <h3>Customer information</h3>
                                                         <div class="form-floating mb-3">
                                                             <input type="text" class="form-control" name="email_address"
-                                                                id="floatingInput1" placeholder=""
+                                                                id="email_address" placeholder=""
                                                                 value="{{ Auth::user()->email ?? '' }}">
                                                             <label for="floatingInput1">Email Address
                                                                 <span>*</span></label>
@@ -125,7 +134,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        name="first_name" id="floatingInput2"
+                                                                        name="first_name" id="first_name"
                                                                         placeholder=""
                                                                         value="{{ $customer_details->first_name ?? '' }}">
                                                                     <label for="floatingInput2">First Name
@@ -137,7 +146,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        name="last_name" id="floatingInput3"
+                                                                        name="last_name" id="last_name"
                                                                         placeholder=""
                                                                         value="{{ $customer_details->last_name ?? '' }}">
                                                                     <label for="floatingInput3">Last Name
@@ -150,7 +159,7 @@
                                                             <div class="col-lg-12">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="floatingSelect1" name="country"
+                                                                        id="country" name="country"
                                                                         placeholder=""
                                                                         value="{{ $customer_details->country ?? '' }}">
                                                                     <label for="floatingSelect1">Country
@@ -163,7 +172,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="floatingInput4" name="house_name"
+                                                                        id="house_name" name="house_name"
                                                                         placeholder=""
                                                                         value="{{ $customer_details->house_no_street_name ?? '' }}">
                                                                     <label for="floatingInput4">House number and street
@@ -174,7 +183,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="floatingInput5" name="detail_address"
+                                                                        id="detail_address" name="detail_address"
                                                                         placeholder=""
                                                                         value="{{ $customer_details->apartment ?? '' }}">
                                                                     <label for="floatingInput5">Apartment, suite, unit,
@@ -188,7 +197,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="floatingInput6" name="city" placeholder=""
+                                                                        id="city" name="city" placeholder=""
                                                                         value="{{ $customer_details->town ?? '' }}">
                                                                     <label for="floatingInput6">City
                                                                         <span>*</span></label>
@@ -198,7 +207,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="floatingInput7" name="state" placeholder=""
+                                                                        id="state" name="state" placeholder=""
                                                                         value="{{ $customer_details->state ?? '' }}">
                                                                     <label for="floatingInput7">State
                                                                         <span>*</span></label>
@@ -208,7 +217,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="floatingInput8" name="post_code"
+                                                                        id="post_code" name="post_code"
                                                                         placeholder=""
                                                                         value="{{ $customer_details->post_code ?? '' }}">
                                                                     <label for="floatingInput8">Post code
@@ -222,7 +231,7 @@
                                                             <div class="col-lg-12">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control" name="phone"
-                                                                        id="floatingInput9" placeholder=""
+                                                                        id="phone" placeholder=""
                                                                         value="{{ $customer_details->phone ?? '' }}">
                                                                     <label for="floatingInput9">Phone
                                                                         <span>*</span></label>
@@ -231,7 +240,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        {{-- <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="form-floating mb-3">
                                                                     <select class="form-select" name="payment_type"
@@ -250,7 +259,7 @@
                                                                     </label>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="step-div">
                                                             <h3>Additional information</h3>
                                                             <div class="row">
@@ -258,7 +267,7 @@
                                                                     <div class="form-floating">
                                                                         <textarea class="form-control"
                                                                             placeholder="Leave a comment here"
-                                                                            id="floatingTextarea2"
+                                                                            id="additional_information"
                                                                             name="additional_information"
                                                                             style="height: 100px"></textarea>
                                                                         <label for="floatingTextarea2">Notes about your
@@ -268,7 +277,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="step-div">
+                                                        {{-- <div class="step-div">
                                                             <h3>Payment</h3>
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -298,7 +307,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
 
@@ -311,9 +320,11 @@
                                                     Card</button> --}}
 
                                                 {{-- <div id="paypal-button-container"></div> --}}
-
-                                                <div id="card-element"></div>
+                                                <div class="step-div">
+                                                <h3> Pay Through  <i class="fa-brands fa-cc-stripe fa-2xl"></i></h3>
+                                                <div id="card-element" class="card-detail-structure"></div>
                                                 <button id="submit-button">Subscribe</button>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -380,7 +391,7 @@
 
 
 
-                                                <div class="cupon-div-main">
+                                                {{-- <div class="cupon-div-main">
                                                     <div class="row justify-content-center align-items-center">
                                                         <div class="col-lg-8">
                                                             <div class="cupon-div">
@@ -398,7 +409,7 @@
                                                         <span id="coupon_error"></span>
 
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -621,6 +632,84 @@
     {{-- <script
         src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
     </script> --}}
+
+
+    <script>
+       $(document).ready(function() {
+    var stripe = Stripe("{{ env('STRIPE_KEY') }}");
+    var elements = stripe.elements();
+    var cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+
+    var form = document.getElementById('signUpForm');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        let formData = {
+            email: document.getElementById('email_address').value,
+            first_name: document.getElementById('first_name').value,
+            last_name: document.getElementById('last_name').value,
+            country: document.getElementById('country').value,
+            house_name: document.getElementById('house_name').value,
+            detail_address: document.getElementById('detail_address').value,
+            city: document.getElementById('city').value,
+            state: document.getElementById('state').value,
+            post_code: document.getElementById('post_code').value,
+            phone: document.getElementById('phone').value,
+            additional_information: document.getElementById('additional_information').value,
+            plan_name: document.getElementById('plan_name').value,
+            plan_price: document.getElementById('plan_price').value,
+            amount: document.getElementById('total_amount').value,
+            coupon_code: document.getElementById('coupan_code').value,
+            coupon_discount: document.getElementById('coupon_discount').value,
+            coupon_discount_type: document.getElementById('coupon_discount_type').value,
+            plan_id: document.getElementById('plan_id').value
+        };
+
+        // Show the loading spinner
+        document.getElementById('loading-spinner').style.display = 'block';
+
+        // Create the Payment Method
+        const { paymentMethod, error } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: cardElement,
+        });
+
+        if (error) {
+            console.log(error);
+            document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner on error
+        } else {
+            formData.payment_method_id = paymentMethod.id;
+
+            const subscribeUrl = "{{ route('create-subscription') }}";
+            // Send paymentMethod.id and email to your backend to create subscription
+            fetch(subscribeUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner
+                if (data.success) {
+                    window.location.href = '/successPayment';
+                } else {
+                    alert('Subscription failed: ' + (data.message || 'An error occurred'));
+                    console.log('Subscription failed', data);
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner on error
+                console.error('Error:', error);
+            });
+        }
+    });
+});
+
+    </script>
 
 
     <script>
@@ -986,7 +1075,9 @@
     </script>
     @endauth
 
-    <script>
+   
+
+    {{-- <script>
         var stripe = Stripe("{{ env('STRIPE_KEY') }}");
             var elements = stripe.elements();
             var cardElement = elements.create('card');
@@ -1010,7 +1101,7 @@
                     }
                 });
             });
-    </script>
+    </script> --}}
 </body>
 
 </html>
