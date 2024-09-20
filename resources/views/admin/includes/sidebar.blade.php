@@ -32,8 +32,8 @@
                 @if(Gate::check('Manage Affiliater'))
                 <li class="nav-item has-submenu {{ Request::is('admin/affliate-marketer*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('affliate-marketer.index') }}"> <span>
-                            <i class="ti ti-user"></i>
-                        </span>Affiliate Marketer<span class="arrow-down"></span></a>
+                            <i class="ti ti-users"></i>
+                        </span>Affiliate Marketers<span class="arrow-down"></span></a>
                 </li>
                 @endif
 
@@ -374,7 +374,7 @@
                     </a>
                     <ul class="submenu collapse {{ Request::is('admin/site-settings/credentials*') ? 'active' : ' ' }}">
                         <li class="{{ Request::is('admin/site-settings/credentials*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('credentials.index') }}">Paypal Credentials</a>
+                            <a class="nav-link" href="{{ route('credentials.index') }}">Stripe Credentials</a>
                         </li>
                     </ul>
                 </li>

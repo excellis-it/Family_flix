@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\CommissionPercentageController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\Admin\OttServiceController;
 use App\Http\Controllers\Admin\PaypalCredentialController;
+use App\Http\Controllers\Admin\StripeCredentialController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
 use App\Http\Controllers\AffiliateMarketer\WalletController;
@@ -358,12 +359,14 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::group(['prefix' => 'site-settings'], function () {
             Route::resources([
-                'credentials' => PaypalCredentialController::class,
+                'credentials' => StripeCredentialController::class,
             ]);
 
-            Route::get('/credentials-filter', [PaypalCredentialController::class, 'filter'])->name('credentials.filter');
+           
             Route::get('/paypal-change-status', [PaypalCredentialController::class, 'changeStatus'])->name('credentials.change-status');
         });
+
+        Route::get('/credentials-filter', [StripeCredentialController::class, 'filter'])->name('credentials.filter');
 
     });
 });

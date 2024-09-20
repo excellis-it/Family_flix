@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    Paypal Credential List
+Stripe Credential List
 @endsection
 @push('styles')
 <style>
@@ -15,7 +15,7 @@
         <div class="breadcome-list">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <h3>Paypal Credential</h3>
+                    <h3>Stripe Credential</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                         <li><span class="bread-blod"> List</span></li>
@@ -56,8 +56,8 @@
                                 id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
                                     <tr>
-                                        <th><span class="fs-4 fw-semibold mb-0">Client ID</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Client Secret</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Stripe Key</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Stripe Secret</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Type</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Status</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Action</span></th>

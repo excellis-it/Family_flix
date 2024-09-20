@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            assignRoleSeeder::class,
+            // assignRoleSeeder::class,
             // assignAdminSeeder::class,
-            rolePermissionSeeder::class,
+            // rolePermissionSeeder::class,
             // menuSeeder::class,
             // AddPlanSeeder::class,
             // homeCmsSeeder::class,
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             // businessManagementSeeder::class,
             // footerCmsSeeder::class,
             // FaqSeeder::class,
-            // PaypalCredentialSeeder::class,
+             // PaypalCredentialSeeder::class,
 
         ]);
     }

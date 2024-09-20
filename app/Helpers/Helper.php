@@ -2,15 +2,21 @@
 
 namespace App\Helpers;
 use App\Models\PaypalCredential;
+use App\Models\StripeCredential;
 use App\Models\UserSubscriptionRecurring;
 use App\Models\Wallet;
 
 class Helper {
 
-     public static function paypalCredential()
-     {
+    public static function paypalCredential()
+    {
         return PaypalCredential::where('status', 1)->first();
-     }
+    }
+
+    public static function stripeCredential()
+    {
+        return StripeCredential::where('status', 1)->first();
+    }
 
     public static function expireTo($date)
     {
