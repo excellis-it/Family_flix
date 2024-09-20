@@ -312,6 +312,7 @@
                                                 <div class="step-div">
                                                     <h3> Pay Through <i class="fa-brands fa-cc-stripe fa-2xl"></i></h3>
                                                     <div id="card-element" class="card-detail-structure"></div>
+                                                    <span id="card_detail_error" class="text-danger"></span>
                                                     <button id="submit-button">Subscribe</button>
                                                 </div>
 
@@ -555,6 +556,38 @@
                 plan_id: document.getElementById('plan_id').value
             };
 
+            //rule validation for email, first name, last name, country, house name, detail address, city, state, post code, phone
+            function validateField(formData, errorElement, errorMessage) {
+                if (formData == '') {
+                    $(errorElement).text(errorMessage);
+                    return false;
+                } else {
+                    $(errorElement).text('');
+                    return true;
+                }
+            }
+            const isEmailValid = validateField(formData.email, '#email_error', 'Please enter email address');
+            const isFirstNameValid = validateField(formData.first_name, '#fname_error', 'Please enter first name');
+            const isLastNameValid = validateField(formData.last_name, '#lname_error', 'Please enter last name');
+            const isCountryValid = validateField(formData.country, '#country_error', 'Please enter country');
+            const isHouseNameValid = validateField(formData.house_name, '#houseNo_error', 'Please enter house number and street name');
+            const isDetailAddressValid = validateField(formData.detail_address, '#addr_error', 'Please enter apartment, suite, unit, etc.');
+            const isCityValid = validateField(formData.city, '#city_error', 'Please enter town/city');
+            const isStateValid = validateField(formData.state, '#state_error', 'Please enter state/country');
+            const isPostCodeValid = validateField(formData.post_code, '#postCode_error', 'Please enter post code');
+            const isPhoneValid = validateField(formData.phone, '#phone_error', 'Please enter phone');
+
+            // card detail validation
+            if (!cardElement._complete) {
+                $('#card_detail_error').text('Please enter card details');
+                return false;
+            }
+
+
+            if (!isEmailValid || !isFirstNameValid || !isLastNameValid || !isCountryValid || !isHouseNameValid || !isDetailAddressValid || !isCityValid || !isStateValid || !isPostCodeValid || !isPhoneValid) {
+                return false;
+            }
+            
             // Show the loading spinner
             $('#loading-content').show();
             $('#loading').addClass('loading');

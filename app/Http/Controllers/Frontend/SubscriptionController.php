@@ -58,7 +58,10 @@ class SubscriptionController extends Controller
         if (isset($arrayVal[$formattedPrice])) {
             $price_id = $arrayVal[$formattedPrice]['plan_id'];
         } else {
-            echo "Price not found";
+            return response()->json([
+                'error' => true,
+                'message' => 'Plan not found'
+            ]);
         }
 
         // payment process
