@@ -36,7 +36,7 @@
                       <div class="thank-text">
                         <h1>Payment received</h1>
                         <p>	Your transaction was successful!</p>
-                        <a href="{{ route('home') }}"><i class="fa-solid fa-home"></i> Go To Home</a>
+                        <div class="go-btn"><a href="{{ route('home') }}"><i class="fa-solid fa-home"></i> Go To Home</a></div>
                       </div>
                     </div>
                 </div>

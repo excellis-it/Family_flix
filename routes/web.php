@@ -98,9 +98,9 @@ Route::get('/paypal-pay-failed-recurring', [PaypalController::class, 'paypalPayR
 
 
 //stripe recurring payment
-// Route::post('/subscribe', [FrontendSubscriptionController::class, 'subscribe'])->name('subscribe');
 Route::post('/create-subscription', [FrontendSubscriptionController::class, 'createSubscription'])->name('create-subscription');
-Route::post('/stripe/webhook', [FrontendSubscriptionController::class, 'webhook'])->name('stripe.webhook');
+Route::get('/success-subscription',[FrontendSubscriptionController::class, 'successSubscription'])->name('success-subscription');
+Route::get('/failed-subscription',[FrontendSubscriptionController::class, 'failedSubscription'])->name('failed-subscription');
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');

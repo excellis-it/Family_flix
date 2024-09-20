@@ -29,7 +29,6 @@
     <link href="{{ asset('frontend_assets/css/responsive.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend_assets/css/circle.css') }}" rel="stylesheet" />
     <!-- Custom styles for this template -->
-
 </head>
 
 <body>
@@ -37,16 +36,13 @@
     use App\Helpers\Helper;
     @endphp
     <main>
-
-    
-        <section class="checkout-sec">
-
-            <div id="loading-spinner" style="display: none;">
-                <img src="path/to/spinner.gif" alt="Loading..."> <!-- Replace with your spinner image path -->
+        <section id="loading">
+            <div id="loading-content">
+                <img src="{{ asset('frontend_assets/images/loading.gif') }}">
             </div>
+        </section>
 
-
-            
+        <section class="checkout-sec">
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-lg-7">
@@ -134,8 +130,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        name="first_name" id="first_name"
-                                                                        placeholder=""
+                                                                        name="first_name" id="first_name" placeholder=""
                                                                         value="{{ $customer_details->first_name ?? '' }}">
                                                                     <label for="floatingInput2">First Name
                                                                         <span>*</span></label>
@@ -146,8 +141,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        name="last_name" id="last_name"
-                                                                        placeholder=""
+                                                                        name="last_name" id="last_name" placeholder=""
                                                                         value="{{ $customer_details->last_name ?? '' }}">
                                                                     <label for="floatingInput3">Last Name
                                                                         <span>*</span></label>
@@ -158,9 +152,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="country" name="country"
-                                                                        placeholder=""
+                                                                    <input type="text" class="form-control" id="country"
+                                                                        name="country" placeholder=""
                                                                         value="{{ $customer_details->country ?? '' }}">
                                                                     <label for="floatingSelect1">Country
                                                                         <span>*</span></label>
@@ -172,8 +165,7 @@
                                                             <div class="col-lg-6">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="house_name" name="house_name"
-                                                                        placeholder=""
+                                                                        id="house_name" name="house_name" placeholder=""
                                                                         value="{{ $customer_details->house_no_street_name ?? '' }}">
                                                                     <label for="floatingInput4">House number and street
                                                                         name <span>*</span></label>
@@ -196,8 +188,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-4">
                                                                 <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="city" name="city" placeholder=""
+                                                                    <input type="text" class="form-control" id="city"
+                                                                        name="city" placeholder=""
                                                                         value="{{ $customer_details->town ?? '' }}">
                                                                     <label for="floatingInput6">City
                                                                         <span>*</span></label>
@@ -206,8 +198,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="state" name="state" placeholder=""
+                                                                    <input type="text" class="form-control" id="state"
+                                                                        name="state" placeholder=""
                                                                         value="{{ $customer_details->state ?? '' }}">
                                                                     <label for="floatingInput7">State
                                                                         <span>*</span></label>
@@ -217,8 +209,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-floating mb-3">
                                                                     <input type="text" class="form-control"
-                                                                        id="post_code" name="post_code"
-                                                                        placeholder=""
+                                                                        id="post_code" name="post_code" placeholder=""
                                                                         value="{{ $customer_details->post_code ?? '' }}">
                                                                     <label for="floatingInput8">Post code
                                                                         <span>*</span></label>
@@ -313,17 +304,15 @@
 
                                                 {{-- <button class="paypal-btn" type="submit"><img
                                                         src="{{ asset('frontend_assets/images/paypal.png') }}"></button>
-
-
                                                 <button class="paypal-btn paypal-btn-2 mt-2"><span><i
                                                             class="fa-solid fa-credit-card"></i></span>Debit or Credit
                                                     Card</button> --}}
 
                                                 {{-- <div id="paypal-button-container"></div> --}}
                                                 <div class="step-div">
-                                                <h3> Pay Through  <i class="fa-brands fa-cc-stripe fa-2xl"></i></h3>
-                                                <div id="card-element" class="card-detail-structure"></div>
-                                                <button id="submit-button">Subscribe</button>
+                                                    <h3> Pay Through <i class="fa-brands fa-cc-stripe fa-2xl"></i></h3>
+                                                    <div id="card-element" class="card-detail-structure"></div>
+                                                    <button id="submit-button">Subscribe</button>
                                                 </div>
 
                                             </div>
@@ -389,8 +378,6 @@
                                                 <input type="hidden" name="plan_id" id="plan_id"
                                                     value="{{ $plan->id }}">
 
-
-
                                                 {{-- <div class="cupon-div-main">
                                                     <div class="row justify-content-center align-items-center">
                                                         <div class="col-lg-8">
@@ -413,7 +400,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
                         </div>
                     </div>
@@ -453,104 +439,15 @@
                                                 </div>
                                             </div>
                                             @endforeach
-
-                                            {{-- <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingTwo">
-                                                    <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                        aria-expanded="false" aria-controls="collapseTwo">
-                                                        What devices can I use to access The Family Flix?
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseTwo" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <p> The Family Flix is compatible with all major platforms,
-                                                            including mobile devices, tablets, and smart TVs. Download
-                                                            our app for a seamless viewing experience.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingThree">
-                                                    <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                        aria-expanded="false" aria-controls="collapseThree">
-                                                        Is there a free trial available?
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <p>Yes, we offer a free trial period for new subscribers.
-                                                            Explore our content and features risk-free before committing
-                                                            to a subscription.</p>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                         </div>
                                     </div>
-                                    {{-- <div class="col-xl-6">
-                                        <div class="faq-left">
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingFour">
-                                                    <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                                        aria-expanded="false" aria-controls="collapseFour">
-                                                        How can I cancel my subscription?
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseFour" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <p>You can easily manage your subscription in the account
-                                                            settings on our website. If you need assistance, our
-                                                            customer support team is available 24/7 to guide you through
-                                                            the process.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingFive">
-                                                    <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                                        aria-expanded="false" aria-controls="collapseFive">
-                                                        Can I switch plans or upgrade my subscription?
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseFive" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <p>Absolutely! You can upgrade or switch plans at any time.
-                                                            Visit your account settings to make the changes that suit
-                                                            your entertainment needs.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingSix">
-                                                    <button class="accordion-button collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseSix"
-                                                        aria-expanded="false" aria-controls="collapseSix">
-                                                        Are there any hidden fees or contracts?
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseSix" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingSix" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <p>No hidden fees or long-term contracts. The Family Flix
-                                                            believes in transparency and providing you with a
-                                                            straightforward, hassle-free entertainment experience.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
 
@@ -626,88 +523,80 @@
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-
-    {{-- paypal credit --}}
-    {{-- <script
-        src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
-    </script> --}}
-
-
     <script>
-       $(document).ready(function() {
-    var stripe = Stripe("{{ env('STRIPE_KEY') }}");
-    var elements = stripe.elements();
-    var cardElement = elements.create('card');
-    cardElement.mount('#card-element');
+        $(document).ready(function() {
+        var stripe = Stripe("{{ env('STRIPE_SUBSCRIPTION_KEY') }}");
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
 
-    var form = document.getElementById('signUpForm');
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        var form = document.getElementById('signUpForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        let formData = {
-            email: document.getElementById('email_address').value,
-            first_name: document.getElementById('first_name').value,
-            last_name: document.getElementById('last_name').value,
-            country: document.getElementById('country').value,
-            house_name: document.getElementById('house_name').value,
-            detail_address: document.getElementById('detail_address').value,
-            city: document.getElementById('city').value,
-            state: document.getElementById('state').value,
-            post_code: document.getElementById('post_code').value,
-            phone: document.getElementById('phone').value,
-            additional_information: document.getElementById('additional_information').value,
-            plan_name: document.getElementById('plan_name').value,
-            plan_price: document.getElementById('plan_price').value,
-            amount: document.getElementById('total_amount').value,
-            coupon_code: document.getElementById('coupan_code').value,
-            coupon_discount: document.getElementById('coupon_discount').value,
-            coupon_discount_type: document.getElementById('coupon_discount_type').value,
-            plan_id: document.getElementById('plan_id').value
-        };
+            let formData = {
+                email: document.getElementById('email_address').value,
+                first_name: document.getElementById('first_name').value,
+                last_name: document.getElementById('last_name').value,
+                country: document.getElementById('country').value,
+                house_name: document.getElementById('house_name').value,
+                detail_address: document.getElementById('detail_address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                post_code: document.getElementById('post_code').value,
+                phone: document.getElementById('phone').value,
+                additional_information: document.getElementById('additional_information').value,
+                plan_name: document.getElementById('plan_name').value,
+                plan_price: document.getElementById('plan_price').value,
+                amount: document.getElementById('total_amount').value,
+                coupon_code: document.getElementById('coupan_code').value,
+                coupon_discount: document.getElementById('coupon_discount').value,
+                coupon_discount_type: document.getElementById('coupon_discount_type').value,
+                plan_id: document.getElementById('plan_id').value
+            };
 
-        // Show the loading spinner
-        document.getElementById('loading-spinner').style.display = 'block';
+            // Show the loading spinner
+            $('#loading').addClass('loading');
+            $('#loading-content').addClass('loading-content');
 
-        // Create the Payment Method
-        const { paymentMethod, error } = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement,
-        });
-
-        if (error) {
-            console.log(error);
-            document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner on error
-        } else {
-            formData.payment_method_id = paymentMethod.id;
-
-            const subscribeUrl = "{{ route('create-subscription') }}";
-            // Send paymentMethod.id and email to your backend to create subscription
-            fetch(subscribeUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner
-                if (data.success) {
-                    window.location.href = '/successPayment';
-                } else {
-                    alert('Subscription failed: ' + (data.message || 'An error occurred'));
-                    console.log('Subscription failed', data);
-                }
-            })
-            .catch(error => {
-                document.getElementById('loading-spinner').style.display = 'none'; // Hide the spinner on error
-                console.error('Error:', error);
+            // Create the Payment Method
+            const { paymentMethod, error } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement,
             });
-        }
+
+            if (error) {
+                console.log(error);
+            } else {
+                formData.payment_method_id = paymentMethod.id;
+                const subscribeUrl = "{{ route('create-subscription') }}";
+                fetch(subscribeUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+
+                    $('#loading').removeClass('loading');
+                    $('#loading-content').removeClass('loading-content');
+
+                    if (data.success) {
+                        window.location.href = "{{ route('success-subscription') }}";
+                    } else {
+                        window.location.href = "{{ route('failed-subscription') }}";
+                        console.log('Subscription failed', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
     });
-});
 
     </script>
 
@@ -787,6 +676,11 @@
     </script>
 
     {{-- form validation --}}
+
+    {{-- paypal credit --}}
+    {{-- <script
+        src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
+    </script> --}}
 
     <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
 
@@ -1075,33 +969,6 @@
     </script>
     @endauth
 
-   
-
-    {{-- <script>
-        var stripe = Stripe("{{ env('STRIPE_KEY') }}");
-            var elements = stripe.elements();
-            var cardElement = elements.create('card');
-            cardElement.mount('#card-element');
-
-            var form = document.getElementById('subscription-form');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                stripe.createPaymentMethod('card', cardElement).then(function (result) {
-                    if (result.error) {
-                        // Handle error
-                    } else {
-                        var hiddenInput = document.createElement('input');
-                        hiddenInput.setAttribute('type', 'hidden');
-                        hiddenInput.setAttribute('name', 'payment_method');
-                        hiddenInput.setAttribute('value', result.paymentMethod.id);
-                        form.appendChild(hiddenInput);
-
-                        form.submit();
-                    }
-                });
-            });
-    </script> --}}
 </body>
 
 </html>

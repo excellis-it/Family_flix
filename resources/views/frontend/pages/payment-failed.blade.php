@@ -24,19 +24,19 @@
     <!-- Custom styles for this template -->
 </head>
 
-<body>
+<body >
     <section class="thankyou-sec">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="cross-icon">
-                            <span><i class="fa-solid fa-cross"></i></span>
+                            <span><i class="fa-solid fa-times"></i></span>
                         </div>
                       <div class="thank-text">
-                        <h1>Payment Failed</h1>
+                        <div class="failed-text"><h1>Payment Failed</h1></div>
                         <p>Something went wrong!</p>
-                        <a href="{{ route('home') }}"><i class="fa-solid fa-home"></i> Go To Home</a>
+                        <div class="go-btn"><a href="{{ route('home') }}"><i class="fa-solid fa-home"></i> Go To Home</a></div>
                       </div>
                     </div>
                 </div>
