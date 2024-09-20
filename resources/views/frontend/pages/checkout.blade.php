@@ -37,7 +37,7 @@
     @endphp
     <main>
         <section id="loading">
-            <div id="loading-content">
+            <div id="loading-content" style="display:none;">
                 <img src="{{ asset('frontend_assets/images/loading.gif') }}">
             </div>
         </section>
@@ -556,6 +556,7 @@
             };
 
             // Show the loading spinner
+            $('#loading-content').show();
             $('#loading').addClass('loading');
             $('#loading-content').addClass('loading-content');
 
@@ -580,7 +581,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-
+                    $('#loading-content').hide();
                     $('#loading').removeClass('loading');
                     $('#loading-content').removeClass('loading-content');
 
