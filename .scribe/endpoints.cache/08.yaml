@@ -100,3 +100,219 @@ endpoints:
     method: null
     route: null
     custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/subscription-payment/create
+    metadata:
+      groupName: Subscription
+      groupDescription: |-
+
+        APIs for Subscription List
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Subscriptions create Api'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      payment_method_id:
+        name: payment_method_id
+        description: ''
+        required: true
+        example: neque
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      email:
+        name: email
+        description: ''
+        required: true
+        example: quo
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      first_name:
+        name: first_name
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      last_name:
+        name: last_name
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      amount:
+        name: amount
+        description: ''
+        required: true
+        example: quam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      plan_id:
+        name: plan_id
+        description: ''
+        required: true
+        example: consectetur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      plan_name:
+        name: plan_name
+        description: ''
+        required: true
+        example: quisquam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      plan_price:
+        name: plan_price
+        description: ''
+        required: true
+        example: a
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      country:
+        name: country
+        description: ''
+        required: true
+        example: mollitia
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      state:
+        name: state
+        description: ''
+        required: true
+        example: ut
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      city:
+        name: city
+        description: ''
+        required: true
+        example: sint
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      house_name:
+        name: house_name
+        description: ''
+        required: true
+        example: dolores
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      post_code:
+        name: post_code
+        description: ''
+        required: true
+        example: quis
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      payment_method_id: neque
+      email: quo
+      amount: quam
+      plan_id: consectetur
+      plan_name: quisquam
+      plan_price: a
+      country: mollitia
+      state: ut
+      city: sint
+      house_name: dolores
+      post_code: quis
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "message": "Subscription created successfully!"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+          "status": false,
+          "statusCode": 422,
+          "error": {
+             "payment_method_id": [
+                "The payment method id field is required."
+           ],
+          "email": [
+            "The email field is required."
+          ],
+          "amount": [
+           "The amount field is required."
+          ],
+          "plan_id": [
+          "The plan id field is required."
+          ],
+          "plan_name": [
+          "The plan name field is required."
+          ],
+          "plan_price": [
+          "The plan price field is required."
+          ],
+          "country": [
+          "The country field is required."
+          ],
+          "state": [
+          "The state field is required."
+          ],
+          "city": [
+          "The city field is required."
+          ],
+          "house_name": [
+          "The house name field is required."
+          ],
+          "post_code": [
+          "The post code field is required."
+          ]
+          }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

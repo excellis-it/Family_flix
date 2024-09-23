@@ -264,6 +264,9 @@
                                                     <li class="tocify-item level-2" data-unique="subscription-POSTapi-v1-customer-subscription-list">
                                 <a href="#subscription-POSTapi-v1-customer-subscription-list">Subscriptions Api</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="subscription-POSTapi-v1-subscription-payment-create">
+                                <a href="#subscription-POSTapi-v1-subscription-payment-create">Subscriptions create Api</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-wallet-history" class="tocify-header">
@@ -285,7 +288,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: June 19, 2024</li>
+        <li>Last updated: September 23, 2024</li>
     </ul>
 </div>
 
@@ -1266,8 +1269,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"name\": \"John Doe\",
-    \"phone\": \"dcojvmfqpkthjias\",
-    \"email\": \"dana.rippin@example.net\",
+    \"phone\": \"cokpjofeieyyeotvlpoxvkcbhtbsbrizuzlueurw\",
+    \"email\": \"maximilian34@example.org\",
     \"password\": \"12345678\",
     \"confirm_password\": \"12345678\"
 }"
@@ -1286,8 +1289,8 @@ const headers = {
 
 let body = {
     "name": "John Doe",
-    "phone": "dcojvmfqpkthjias",
-    "email": "dana.rippin@example.net",
+    "phone": "cokpjofeieyyeotvlpoxvkcbhtbsbrizuzlueurw",
+    "email": "maximilian34@example.org",
     "password": "12345678",
     "confirm_password": "12345678"
 };
@@ -1427,10 +1430,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-register"
-               value="dcojvmfqpkthjias"
+               value="cokpjofeieyyeotvlpoxvkcbhtbsbrizuzlueurw"
                data-component="body">
     <br>
-<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>dcojvmfqpkthjias</code></p>
+<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>cokpjofeieyyeotvlpoxvkcbhtbsbrizuzlueurw</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -1438,10 +1441,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-register"
-               value="dana.rippin@example.net"
+               value="maximilian34@example.org"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>dana.rippin@example.net</code></p>
+<p>The email of the user. Example: Example: <code>maximilian34@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -2241,7 +2244,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"ratione\"
+    \"type\": \"consequatur\"
 }"
 </code></pre></div>
 
@@ -2257,7 +2260,7 @@ const headers = {
 };
 
 let body = {
-    "type": "ratione"
+    "type": "consequatur"
 };
 
 fetch(url, {
@@ -2374,10 +2377,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-cms-faq"
-               value="ratione"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>ratione</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -2914,10 +2917,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"coupon_code\": \"voluptatem\",
-    \"plan_id\": \"et\",
-    \"plan_price\": \"mollitia\",
-    \"email\": \"mante.rhett@example.net\"
+    \"coupon_code\": \"dolores\",
+    \"plan_id\": \"sed\",
+    \"plan_price\": \"et\",
+    \"email\": \"weldon86@example.org\"
 }"
 </code></pre></div>
 
@@ -2933,10 +2936,10 @@ const headers = {
 };
 
 let body = {
-    "coupon_code": "voluptatem",
-    "plan_id": "et",
-    "plan_price": "mollitia",
-    "email": "mante.rhett@example.net"
+    "coupon_code": "dolores",
+    "plan_id": "sed",
+    "plan_price": "et",
+    "email": "weldon86@example.org"
 };
 
 fetch(url, {
@@ -3061,10 +3064,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="coupon_code"                data-endpoint="POSTapi-v1-coupon-check"
-               value="voluptatem"
+               value="dolores"
                data-component="body">
     <br>
-<p>Example: <code>voluptatem</code></p>
+<p>Example: <code>dolores</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>plan_id</code></b>&nbsp;&nbsp;
@@ -3072,10 +3075,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="plan_id"                data-endpoint="POSTapi-v1-coupon-check"
-               value="et"
+               value="sed"
                data-component="body">
     <br>
-<p>Example: <code>et</code></p>
+<p>Example: <code>sed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>plan_price</code></b>&nbsp;&nbsp;
@@ -3083,10 +3086,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="plan_price"                data-endpoint="POSTapi-v1-coupon-check"
-               value="mollitia"
+               value="et"
                data-component="body">
     <br>
-<p>Example: <code>mollitia</code></p>
+<p>Example: <code>et</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -3094,10 +3097,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-coupon-check"
-               value="mante.rhett@example.net"
+               value="weldon86@example.org"
                data-component="body">
     <br>
-<p>This field is required when <code>phone</code> is not present.  Must be a valid email address. Example: <code>mante.rhett@example.net</code></p>
+<p>This field is required when <code>phone</code> is not present.  Must be a valid email address. Example: <code>weldon86@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -3134,8 +3137,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"name\": \"John Doe\",
-    \"phone\": \"jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd\",
-    \"email\": \"sturcotte@example.com\",
+    \"phone\": \"pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv\",
+    \"email\": \"bobby.wiza@example.org\",
     \"password\": \"12345678\",
     \"confirm_password\": \"12345678\"
 }"
@@ -3154,8 +3157,8 @@ const headers = {
 
 let body = {
     "name": "John Doe",
-    "phone": "jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd",
-    "email": "sturcotte@example.com",
+    "phone": "pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv",
+    "email": "bobby.wiza@example.org",
     "password": "12345678",
     "confirm_password": "12345678"
 };
@@ -3295,10 +3298,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-customer-register"
-               value="jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd"
+               value="pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv"
                data-component="body">
     <br>
-<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd</code></p>
+<p>Must match the regex /^([0-9\s-+()]*)$/. Must be at least 10 characters. Example: <code>pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -3306,10 +3309,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-customer-register"
-               value="sturcotte@example.com"
+               value="bobby.wiza@example.org"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>sturcotte@example.com</code></p>
+<p>The email of the user. Example: Example: <code>bobby.wiza@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -3829,7 +3832,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"t.smn.fif.4yv.vky@70.y8.yk.cubhl$\\/ix\"
+    \"email\": \"b3j4mqi15.w@a.t.s.j.a.-.7.s.1.ebead$\\/ix\"
 }"
 </code></pre></div>
 
@@ -3845,7 +3848,7 @@ const headers = {
 };
 
 let body = {
-    "email": "t.smn.fif.4yv.vky@70.y8.yk.cubhl$\/ix"
+    "email": "b3j4mqi15.w@a.t.s.j.a.-.7.s.1.ebead$\/ix"
 };
 
 fetch(url, {
@@ -3934,10 +3937,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-affiliater-forgot-password"
-               value="t.smn.fif.4yv.vky@70.y8.yk.cubhl$/ix"
+               value="b3j4mqi15.w@a.t.s.j.a.-.7.s.1.ebead$/ix"
                data-component="body">
     <br>
-<p>Must match the regex /^([a-z0-9+<em>-]+)(.[a-z0-9+</em>-]+)*@([a-z0-9-]+.)+[a-z]{2,6}$/ix. Example: <code>t.smn.fif.4yv.vky@70.y8.yk.cubhl$/ix</code></p>
+<p>Must match the regex /^([a-z0-9+<em>-]+)(.[a-z0-9+</em>-]+)*@([a-z0-9-]+.)+[a-z]{2,6}$/ix. Example: <code>b3j4mqi15.w@a.t.s.j.a.-.7.s.1.ebead$/ix</code></p>
         </div>
         </form>
 
@@ -3958,7 +3961,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"ft@c.z.q.tnj$\\/ix\"
+    \"email\": \"5ui.re.tk@dd.brb$\\/ix\"
 }"
 </code></pre></div>
 
@@ -3974,7 +3977,7 @@ const headers = {
 };
 
 let body = {
-    "email": "ft@c.z.q.tnj$\/ix"
+    "email": "5ui.re.tk@dd.brb$\/ix"
 };
 
 fetch(url, {
@@ -4063,10 +4066,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-customer-forgot-password"
-               value="ft@c.z.q.tnj$/ix"
+               value="5ui.re.tk@dd.brb$/ix"
                data-component="body">
     <br>
-<p>Must match the regex /^([a-z0-9+<em>-]+)(.[a-z0-9+</em>-]+)*@([a-z0-9-]+.)+[a-z]{2,6}$/ix. Example: <code>ft@c.z.q.tnj$/ix</code></p>
+<p>Must match the regex /^([a-z0-9+<em>-]+)(.[a-z0-9+</em>-]+)*@([a-z0-9-]+.)+[a-z]{2,6}$/ix. Example: <code>5ui.re.tk@dd.brb$/ix</code></p>
         </div>
         </form>
 
@@ -4092,7 +4095,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"user_name\": \"John\",
-    \"user_email\": \"shaylee.bednar@example.com\",
+    \"user_email\": \"hoyt43@example.com\",
     \"user_phone\": \"1234567890\",
     \"message\": \"This is a test message\"
 }"
@@ -4111,7 +4114,7 @@ const headers = {
 
 let body = {
     "user_name": "John",
-    "user_email": "shaylee.bednar@example.com",
+    "user_email": "hoyt43@example.com",
     "user_phone": "1234567890",
     "message": "This is a test message"
 };
@@ -4239,10 +4242,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="user_email"                data-endpoint="POSTapi-v1-contact-us"
-               value="shaylee.bednar@example.com"
+               value="hoyt43@example.com"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>shaylee.bednar@example.com</code></p>
+<p>The email of the user. Example: Example: <code>hoyt43@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>user_phone</code></b>&nbsp;&nbsp;
@@ -4285,7 +4288,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"king.brittany@example.org\"
+    \"email\": \"paolo07@example.org\"
 }"
 </code></pre></div>
 
@@ -4301,7 +4304,7 @@ const headers = {
 };
 
 let body = {
-    "email": "king.brittany@example.org"
+    "email": "paolo07@example.org"
 };
 
 fetch(url, {
@@ -4409,10 +4412,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-subscribe-us"
-               value="king.brittany@example.org"
+               value="paolo07@example.org"
                data-component="body">
     <br>
-<p>The email of the user. Example: Example: <code>king.brittany@example.org</code></p>
+<p>The email of the user. Example: Example: <code>paolo07@example.org</code></p>
         </div>
         </form>
 
@@ -4437,20 +4440,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"emailId\": \"a\",
-    \"first_name\": \"ut\",
-    \"last_name\": \"qui\",
-    \"country\": \"et\",
-    \"house_name\": \"ab\",
-    \"detail_address\": \"consequatur\",
-    \"city\": \"vitae\",
-    \"state\": \"nobis\",
-    \"post_code\": \"libero\",
-    \"phone\": \"modi\",
-    \"amount\": \"et\",
-    \"paymentID\": \"labore\",
-    \"plan_name\": \"voluptatum\",
-    \"plan_price\": \"qui\"
+    \"emailId\": \"veritatis\",
+    \"first_name\": \"sit\",
+    \"last_name\": \"id\",
+    \"country\": \"eligendi\",
+    \"house_name\": \"rem\",
+    \"detail_address\": \"magnam\",
+    \"city\": \"et\",
+    \"state\": \"veniam\",
+    \"post_code\": \"est\",
+    \"phone\": \"tenetur\",
+    \"amount\": \"similique\",
+    \"paymentID\": \"dolor\",
+    \"plan_name\": \"numquam\",
+    \"plan_price\": \"cumque\",
+    \"payment_type\": \"in\"
 }"
 </code></pre></div>
 
@@ -4466,20 +4470,21 @@ const headers = {
 };
 
 let body = {
-    "emailId": "a",
-    "first_name": "ut",
-    "last_name": "qui",
-    "country": "et",
-    "house_name": "ab",
-    "detail_address": "consequatur",
-    "city": "vitae",
-    "state": "nobis",
-    "post_code": "libero",
-    "phone": "modi",
-    "amount": "et",
-    "paymentID": "labore",
-    "plan_name": "voluptatum",
-    "plan_price": "qui"
+    "emailId": "veritatis",
+    "first_name": "sit",
+    "last_name": "id",
+    "country": "eligendi",
+    "house_name": "rem",
+    "detail_address": "magnam",
+    "city": "et",
+    "state": "veniam",
+    "post_code": "est",
+    "phone": "tenetur",
+    "amount": "similique",
+    "paymentID": "dolor",
+    "plan_name": "numquam",
+    "plan_price": "cumque",
+    "payment_type": "in"
 };
 
 fetch(url, {
@@ -4590,10 +4595,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="emailId"                data-endpoint="POSTapi-v1-payment-capture"
-               value="a"
+               value="veritatis"
                data-component="body">
     <br>
-<p>Example: <code>a</code></p>
+<p>Example: <code>veritatis</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>first_name</code></b>&nbsp;&nbsp;
@@ -4601,10 +4606,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="first_name"                data-endpoint="POSTapi-v1-payment-capture"
-               value="ut"
+               value="sit"
                data-component="body">
     <br>
-<p>Example: <code>ut</code></p>
+<p>Example: <code>sit</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>last_name</code></b>&nbsp;&nbsp;
@@ -4612,10 +4617,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="last_name"                data-endpoint="POSTapi-v1-payment-capture"
-               value="qui"
+               value="id"
                data-component="body">
     <br>
-<p>Example: <code>qui</code></p>
+<p>Example: <code>id</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
@@ -4623,10 +4628,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="country"                data-endpoint="POSTapi-v1-payment-capture"
-               value="et"
+               value="eligendi"
                data-component="body">
     <br>
-<p>Example: <code>et</code></p>
+<p>Example: <code>eligendi</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>house_name</code></b>&nbsp;&nbsp;
@@ -4634,10 +4639,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="house_name"                data-endpoint="POSTapi-v1-payment-capture"
-               value="ab"
+               value="rem"
                data-component="body">
     <br>
-<p>Example: <code>ab</code></p>
+<p>Example: <code>rem</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>detail_address</code></b>&nbsp;&nbsp;
@@ -4645,10 +4650,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="detail_address"                data-endpoint="POSTapi-v1-payment-capture"
-               value="consequatur"
+               value="magnam"
                data-component="body">
     <br>
-<p>Example: <code>consequatur</code></p>
+<p>Example: <code>magnam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
@@ -4656,10 +4661,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="city"                data-endpoint="POSTapi-v1-payment-capture"
-               value="vitae"
+               value="et"
                data-component="body">
     <br>
-<p>Example: <code>vitae</code></p>
+<p>Example: <code>et</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>state</code></b>&nbsp;&nbsp;
@@ -4667,10 +4672,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="state"                data-endpoint="POSTapi-v1-payment-capture"
-               value="nobis"
+               value="veniam"
                data-component="body">
     <br>
-<p>Example: <code>nobis</code></p>
+<p>Example: <code>veniam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>post_code</code></b>&nbsp;&nbsp;
@@ -4678,10 +4683,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="post_code"                data-endpoint="POSTapi-v1-payment-capture"
-               value="libero"
+               value="est"
                data-component="body">
     <br>
-<p>Example: <code>libero</code></p>
+<p>Example: <code>est</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -4689,10 +4694,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-payment-capture"
-               value="modi"
+               value="tenetur"
                data-component="body">
     <br>
-<p>Example: <code>modi</code></p>
+<p>Example: <code>tenetur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
@@ -4700,10 +4705,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="amount"                data-endpoint="POSTapi-v1-payment-capture"
-               value="et"
+               value="similique"
                data-component="body">
     <br>
-<p>Example: <code>et</code></p>
+<p>Example: <code>similique</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>paymentID</code></b>&nbsp;&nbsp;
@@ -4711,10 +4716,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="paymentID"                data-endpoint="POSTapi-v1-payment-capture"
-               value="labore"
+               value="dolor"
                data-component="body">
     <br>
-<p>Example: <code>labore</code></p>
+<p>Example: <code>dolor</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>plan_name</code></b>&nbsp;&nbsp;
@@ -4722,10 +4727,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="plan_name"                data-endpoint="POSTapi-v1-payment-capture"
-               value="voluptatum"
+               value="numquam"
                data-component="body">
     <br>
-<p>Example: <code>voluptatum</code></p>
+<p>Example: <code>numquam</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>plan_price</code></b>&nbsp;&nbsp;
@@ -4733,10 +4738,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="plan_price"                data-endpoint="POSTapi-v1-payment-capture"
-               value="qui"
+               value="cumque"
                data-component="body">
     <br>
-<p>Example: <code>qui</code></p>
+<p>Example: <code>cumque</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>payment_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="payment_type"                data-endpoint="POSTapi-v1-payment-capture"
+               value="in"
+               data-component="body">
+    <br>
+<p>Example: <code>in</code></p>
         </div>
         </form>
 
@@ -4757,7 +4773,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"emailId\": \"omnis\"
+    \"emailId\": \"fugit\"
 }"
 </code></pre></div>
 
@@ -4773,7 +4789,7 @@ const headers = {
 };
 
 let body = {
-    "emailId": "omnis"
+    "emailId": "fugit"
 };
 
 fetch(url, {
@@ -4862,10 +4878,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="emailId"                data-endpoint="POSTapi-v1-billing-address"
-               value="omnis"
+               value="fugit"
                data-component="body">
     <br>
-<p>Example: <code>omnis</code></p>
+<p>Example: <code>fugit</code></p>
         </div>
         </form>
 
@@ -5744,6 +5760,343 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                    <h2 id="subscription-POSTapi-v1-subscription-payment-create">Subscriptions create Api</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-subscription-payment-create">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/subscription-payment/create" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"payment_method_id\": \"neque\",
+    \"email\": \"quo\",
+    \"amount\": \"quam\",
+    \"plan_id\": \"consectetur\",
+    \"plan_name\": \"quisquam\",
+    \"plan_price\": \"a\",
+    \"country\": \"mollitia\",
+    \"state\": \"ut\",
+    \"city\": \"sint\",
+    \"house_name\": \"dolores\",
+    \"post_code\": \"quis\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/subscription-payment/create"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "payment_method_id": "neque",
+    "email": "quo",
+    "amount": "quam",
+    "plan_id": "consectetur",
+    "plan_name": "quisquam",
+    "plan_price": "a",
+    "country": "mollitia",
+    "state": "ut",
+    "city": "sint",
+    "house_name": "dolores",
+    "post_code": "quis"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-subscription-payment-create">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;statusCode&quot;: 200,
+    &quot;message&quot;: &quot;Subscription created successfully!&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;statusCode&quot;: 422,
+    &quot;error&quot;: {
+        &quot;payment_method_id&quot;: [
+            &quot;The payment method id field is required.&quot;
+        ],
+        &quot;email&quot;: [
+            &quot;The email field is required.&quot;
+        ],
+        &quot;amount&quot;: [
+            &quot;The amount field is required.&quot;
+        ],
+        &quot;plan_id&quot;: [
+            &quot;The plan id field is required.&quot;
+        ],
+        &quot;plan_name&quot;: [
+            &quot;The plan name field is required.&quot;
+        ],
+        &quot;plan_price&quot;: [
+            &quot;The plan price field is required.&quot;
+        ],
+        &quot;country&quot;: [
+            &quot;The country field is required.&quot;
+        ],
+        &quot;state&quot;: [
+            &quot;The state field is required.&quot;
+        ],
+        &quot;city&quot;: [
+            &quot;The city field is required.&quot;
+        ],
+        &quot;house_name&quot;: [
+            &quot;The house name field is required.&quot;
+        ],
+        &quot;post_code&quot;: [
+            &quot;The post code field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-subscription-payment-create" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-subscription-payment-create"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-subscription-payment-create"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-subscription-payment-create" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-subscription-payment-create">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-subscription-payment-create" data-method="POST"
+      data-path="api/v1/subscription-payment/create"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-subscription-payment-create', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-subscription-payment-create"
+                    onclick="tryItOut('POSTapi-v1-subscription-payment-create');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-subscription-payment-create"
+                    onclick="cancelTryOut('POSTapi-v1-subscription-payment-create');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-subscription-payment-create"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/subscription-payment/create</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>payment_method_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="payment_method_id"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="neque"
+               data-component="body">
+    <br>
+<p>Example: <code>neque</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="quo"
+               data-component="body">
+    <br>
+<p>Example: <code>quo</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>first_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="first_name"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>last_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="last_name"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="amount"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="quam"
+               data-component="body">
+    <br>
+<p>Example: <code>quam</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>plan_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="plan_id"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="consectetur"
+               data-component="body">
+    <br>
+<p>Example: <code>consectetur</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>plan_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="plan_name"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="quisquam"
+               data-component="body">
+    <br>
+<p>Example: <code>quisquam</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>plan_price</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="plan_price"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="a"
+               data-component="body">
+    <br>
+<p>Example: <code>a</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="country"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="mollitia"
+               data-component="body">
+    <br>
+<p>Example: <code>mollitia</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>state</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="state"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="ut"
+               data-component="body">
+    <br>
+<p>Example: <code>ut</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="city"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="sint"
+               data-component="body">
+    <br>
+<p>Example: <code>sint</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>house_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="house_name"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="dolores"
+               data-component="body">
+    <br>
+<p>Example: <code>dolores</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>post_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="post_code"                data-endpoint="POSTapi-v1-subscription-payment-create"
+               value="quis"
+               data-component="body">
+    <br>
+<p>Example: <code>quis</code></p>
+        </div>
+        </form>
 
                 <h1 id="wallet-history">Wallet - History</h1>
 

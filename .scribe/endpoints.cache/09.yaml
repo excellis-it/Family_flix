@@ -405,13 +405,13 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: ratione
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      type: ratione
+      type: consequatur
     fileParameters: []
     responses:
       -

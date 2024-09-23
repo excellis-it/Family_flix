@@ -494,11 +494,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: dcojvmfqpkthjias
+                  example: cokpjofeieyyeotvlpoxvkcbhtbsbrizuzlueurw
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: dana.rippin@example.net
+                  example: maximilian34@example.org
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -903,7 +903,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: ratione
+                  example: consequatur
               required:
                 - type
       security: []
@@ -980,19 +980,19 @@ paths:
                 coupon_code:
                   type: string
                   description: ''
-                  example: voluptatem
+                  example: dolores
                 plan_id:
                   type: string
                   description: ''
-                  example: et
+                  example: sed
                 plan_price:
                   type: string
                   description: ''
-                  example: mollitia
+                  example: et
                 email:
                   type: string
                   description: 'This field is required when <code>phone</code> is not present.  Must be a valid email address.'
-                  example: mante.rhett@example.net
+                  example: weldon86@example.org
                 phone:
                   type: string
                   description: 'This field is required when <code>email</code> is not present.'
@@ -1111,11 +1111,11 @@ paths:
                 phone:
                   type: string
                   description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
-                  example: jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd
+                  example: pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: sturcotte@example.com
+                  example: bobby.wiza@example.org
                 password:
                   type: string
                   description: 'The password of the user.'
@@ -1378,7 +1378,7 @@ paths:
                 email:
                   type: string
                   description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
-                  example: t.smn.fif.4yv.vky@70.y8.yk.cubhl$/ix
+                  example: b3j4mqi15.w@a.t.s.j.a.-.7.s.1.ebead$/ix
               required:
                 - email
       security: []
@@ -1401,7 +1401,7 @@ paths:
                 email:
                   type: string
                   description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
-                  example: ft@c.z.q.tnj$/ix
+                  example: 5ui.re.tk@dd.brb$/ix
               required:
                 - email
       security: []
@@ -1447,7 +1447,7 @@ paths:
                 user_email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: shaylee.bednar@example.com
+                  example: hoyt43@example.com
                 user_phone:
                   type: string
                   description: 'The phone of the user.'
@@ -1509,7 +1509,7 @@ paths:
                 email:
                   type: string
                   description: 'The email of the user. Example:'
-                  example: king.brittany@example.org
+                  example: paolo07@example.org
               required:
                 - email
       security: []
@@ -1572,59 +1572,63 @@ paths:
                 emailId:
                   type: string
                   description: ''
-                  example: a
+                  example: veritatis
                 first_name:
                   type: string
                   description: ''
-                  example: ut
+                  example: sit
                 last_name:
                   type: string
                   description: ''
-                  example: qui
+                  example: id
                 country:
                   type: string
                   description: ''
-                  example: et
+                  example: eligendi
                 house_name:
                   type: string
                   description: ''
-                  example: ab
+                  example: rem
                 detail_address:
                   type: string
                   description: ''
-                  example: consequatur
+                  example: magnam
                 city:
                   type: string
                   description: ''
-                  example: vitae
+                  example: et
                 state:
                   type: string
                   description: ''
-                  example: nobis
+                  example: veniam
                 post_code:
                   type: string
                   description: ''
-                  example: libero
+                  example: est
                 phone:
                   type: string
                   description: ''
-                  example: modi
+                  example: tenetur
                 amount:
                   type: string
                   description: ''
-                  example: et
+                  example: similique
                 paymentID:
                   type: string
                   description: ''
-                  example: labore
+                  example: dolor
                 plan_name:
                   type: string
                   description: ''
-                  example: voluptatum
+                  example: numquam
                 plan_price:
                   type: string
                   description: ''
-                  example: qui
+                  example: cumque
+                payment_type:
+                  type: string
+                  description: ''
+                  example: in
               required:
                 - emailId
                 - first_name
@@ -1640,6 +1644,7 @@ paths:
                 - paymentID
                 - plan_name
                 - plan_price
+                - payment_type
       security: []
   /api/v1/billing-address:
     post:
@@ -1660,7 +1665,7 @@ paths:
                 emailId:
                   type: string
                   description: ''
-                  example: omnis
+                  example: fugit
               required:
                 - emailId
       security: []
@@ -1958,6 +1963,215 @@ paths:
                     example: Unauthorised
       tags:
         - Subscription
+  /api/v1/subscription-payment/create:
+    post:
+      summary: 'Subscriptions create Api'
+      operationId: subscriptionsCreateApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Subscription created successfully!'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Subscription created successfully!'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 422
+                  error:
+                    payment_method_id:
+                      - 'The payment method id field is required.'
+                    email:
+                      - 'The email field is required.'
+                    amount:
+                      - 'The amount field is required.'
+                    plan_id:
+                      - 'The plan id field is required.'
+                    plan_name:
+                      - 'The plan name field is required.'
+                    plan_price:
+                      - 'The plan price field is required.'
+                    country:
+                      - 'The country field is required.'
+                    state:
+                      - 'The state field is required.'
+                    city:
+                      - 'The city field is required.'
+                    house_name:
+                      - 'The house name field is required.'
+                    post_code:
+                      - 'The post code field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 422
+                  error:
+                    type: object
+                    properties:
+                      payment_method_id:
+                        type: array
+                        example:
+                          - 'The payment method id field is required.'
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+                      amount:
+                        type: array
+                        example:
+                          - 'The amount field is required.'
+                        items:
+                          type: string
+                      plan_id:
+                        type: array
+                        example:
+                          - 'The plan id field is required.'
+                        items:
+                          type: string
+                      plan_name:
+                        type: array
+                        example:
+                          - 'The plan name field is required.'
+                        items:
+                          type: string
+                      plan_price:
+                        type: array
+                        example:
+                          - 'The plan price field is required.'
+                        items:
+                          type: string
+                      country:
+                        type: array
+                        example:
+                          - 'The country field is required.'
+                        items:
+                          type: string
+                      state:
+                        type: array
+                        example:
+                          - 'The state field is required.'
+                        items:
+                          type: string
+                      city:
+                        type: array
+                        example:
+                          - 'The city field is required.'
+                        items:
+                          type: string
+                      house_name:
+                        type: array
+                        example:
+                          - 'The house name field is required.'
+                        items:
+                          type: string
+                      post_code:
+                        type: array
+                        example:
+                          - 'The post code field is required.'
+                        items:
+                          type: string
+      tags:
+        - Subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment_method_id:
+                  type: string
+                  description: ''
+                  example: neque
+                email:
+                  type: string
+                  description: ''
+                  example: quo
+                first_name:
+                  type: string
+                  description: ''
+                  example: null
+                last_name:
+                  type: string
+                  description: ''
+                  example: null
+                amount:
+                  type: string
+                  description: ''
+                  example: quam
+                plan_id:
+                  type: string
+                  description: ''
+                  example: consectetur
+                plan_name:
+                  type: string
+                  description: ''
+                  example: quisquam
+                plan_price:
+                  type: string
+                  description: ''
+                  example: a
+                country:
+                  type: string
+                  description: ''
+                  example: mollitia
+                state:
+                  type: string
+                  description: ''
+                  example: ut
+                city:
+                  type: string
+                  description: ''
+                  example: sint
+                house_name:
+                  type: string
+                  description: ''
+                  example: dolores
+                post_code:
+                  type: string
+                  description: ''
+                  example: quis
+              required:
+                - payment_method_id
+                - email
+                - amount
+                - plan_id
+                - plan_name
+                - plan_price
+                - country
+                - state
+                - city
+                - house_name
+                - post_code
+      security: []
   /api/v1/affiliater/wallet/list:
     post:
       summary: 'Wallet History Api'

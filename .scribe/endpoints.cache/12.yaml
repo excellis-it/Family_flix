@@ -41,7 +41,7 @@ endpoints:
         name: user_email
         description: 'The email of the user. Example:'
         required: true
-        example: shaylee.bednar@example.com
+        example: hoyt43@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -66,7 +66,7 @@ endpoints:
         custom: []
     cleanBodyParameters:
       user_name: John
-      user_email: shaylee.bednar@example.com
+      user_email: hoyt43@example.com
       user_phone: '1234567890'
       message: 'This is a test message'
     fileParameters: []
@@ -130,13 +130,13 @@ endpoints:
         name: email
         description: 'The email of the user. Example:'
         required: true
-        example: king.brittany@example.org
+        example: paolo07@example.org
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      email: king.brittany@example.org
+      email: paolo07@example.org
     fileParameters: []
     responses:
       -

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "621510a0-9eec-4e07-9916-dcf3523ede0e",
+        "_postman_id": "6d8b8b6d-67f0-4856-8eb6-1261267b9e47",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -297,7 +297,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"dcojvmfqpkthjias\",\"email\":\"dana.rippin@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"cokpjofeieyyeotvlpoxvkcbhtbsbrizuzlueurw\",\"email\":\"maximilian34@example.org\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -546,7 +546,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"ratione\"}"
+                            "raw": "{\"type\":\"consequatur\"}"
                         },
                         "description": "",
                         "auth": {
@@ -709,7 +709,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"coupon_code\":\"voluptatem\",\"plan_id\":\"et\",\"plan_price\":\"mollitia\",\"email\":\"mante.rhett@example.net\"}"
+                            "raw": "{\"coupon_code\":\"dolores\",\"plan_id\":\"sed\",\"plan_price\":\"et\",\"email\":\"weldon86@example.org\"}"
                         },
                         "description": "",
                         "auth": {
@@ -765,7 +765,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"jkveigmccbofszjtlziruwdsfiyboscytexsracpqunvfhcpyamfhdcuqkryyjogbzzseepd\",\"email\":\"sturcotte@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv\",\"email\":\"bobby.wiza@example.org\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -938,7 +938,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"t.smn.fif.4yv.vky@70.y8.yk.cubhl$\\\/ix\"}"
+                            "raw": "{\"email\":\"b3j4mqi15.w@a.t.s.j.a.-.7.s.1.ebead$\\\/ix\"}"
                         },
                         "description": "",
                         "auth": {
@@ -969,7 +969,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"ft@c.z.q.tnj$\\\/ix\"}"
+                            "raw": "{\"email\":\"5ui.re.tk@dd.brb$\\\/ix\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1006,7 +1006,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"shaylee.bednar@example.com\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"hoyt43@example.com\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1050,7 +1050,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"king.brittany@example.org\"}"
+                            "raw": "{\"email\":\"paolo07@example.org\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1100,7 +1100,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"a\",\"first_name\":\"ut\",\"last_name\":\"qui\",\"country\":\"et\",\"house_name\":\"ab\",\"detail_address\":\"consequatur\",\"city\":\"vitae\",\"state\":\"nobis\",\"post_code\":\"libero\",\"phone\":\"modi\",\"amount\":\"et\",\"paymentID\":\"labore\",\"plan_name\":\"voluptatum\",\"plan_price\":\"qui\"}"
+                            "raw": "{\"emailId\":\"veritatis\",\"first_name\":\"sit\",\"last_name\":\"id\",\"country\":\"eligendi\",\"house_name\":\"rem\",\"detail_address\":\"magnam\",\"city\":\"et\",\"state\":\"veniam\",\"post_code\":\"est\",\"phone\":\"tenetur\",\"amount\":\"similique\",\"paymentID\":\"dolor\",\"plan_name\":\"numquam\",\"plan_price\":\"cumque\",\"payment_type\":\"in\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1144,7 +1144,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"omnis\"}"
+                            "raw": "{\"emailId\":\"fugit\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1416,6 +1416,50 @@
                             "header": [],
                             "code": 401,
                             "body": "{\n\"status\": false,\n\"statusCode\": 401,\n\"error\": \"Unauthorised\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Subscriptions create Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/subscription-payment\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/subscription-payment\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"payment_method_id\":\"neque\",\"email\":\"quo\",\"amount\":\"quam\",\"plan_id\":\"consectetur\",\"plan_name\":\"quisquam\",\"plan_price\":\"a\",\"country\":\"mollitia\",\"state\":\"ut\",\"city\":\"sint\",\"house_name\":\"dolores\",\"post_code\":\"quis\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"statusCode\": 200,\n\"message\": \"Subscription created successfully!\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n\"status\": false,\n\"statusCode\": 422,\n\"error\": {\n   \"payment_method_id\": [\n      \"The payment method id field is required.\"\n ],\n\"email\": [\n  \"The email field is required.\"\n],\n\"amount\": [\n \"The amount field is required.\"\n],\n\"plan_id\": [\n\"The plan id field is required.\"\n],\n\"plan_name\": [\n\"The plan name field is required.\"\n],\n\"plan_price\": [\n\"The plan price field is required.\"\n],\n\"country\": [\n\"The country field is required.\"\n],\n\"state\": [\n\"The state field is required.\"\n],\n\"city\": [\n\"The city field is required.\"\n],\n\"house_name\": [\n\"The house name field is required.\"\n],\n\"post_code\": [\n\"The post code field is required.\"\n]\n}\n}",
                             "name": ""
                         }
                     ]
