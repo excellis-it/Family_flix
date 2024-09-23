@@ -1,6 +1,6 @@
 <?php
 
-$url = 'https://excellis.co.in/bpm_pro/cronsStartToWorkEmailSend';
+$url = 'https://thefamilyflix.com/reminder-mail-for-plan-expiry';
 
 $curl = curl_init();
 
@@ -11,5 +11,5 @@ curl_setopt($curl, CURLOPT_HEADER, false);
 $data = curl_exec($curl);
 
 curl_close($curl);
-  
+
 ?>

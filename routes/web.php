@@ -55,6 +55,11 @@ Route::get('clear', function () {
     return "Optimize clear has been successfully";
 });
 
+Route::get('reminder-mail-for-plan-expiry', function () {
+    Artisan::call('reminder:mail');
+    return "Reminder mail has been successfully";
+});
+
 /* ----------------- Frontend Routes -----------------*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
