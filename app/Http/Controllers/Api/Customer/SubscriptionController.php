@@ -99,8 +99,9 @@ class SubscriptionController extends Controller
             'post_code' => 'required',
         ]);
 
+
         if ($validator->fails()) {
-            return response()->json(['status' => false, 'statusCode' => 422, 'error' => $validator->errors()], 422);
+            return response()->json(['status' => false, 'statusCode' => 200,  'error' => $validator->errors()->first()], 200);
         }
 
         Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
