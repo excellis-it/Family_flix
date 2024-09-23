@@ -71,6 +71,7 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
                 Route::post('account-details', [CustomerProfileController::class, 'accountDetails']);  // profile details api
                 Route::post('account-update', [CustomerProfileController::class, 'accountUpdate']);  // profile update api
                 Route::group(['prefix' => 'subscription'], function () {
+                    // Route::post('create', [CustomerSubscriptionController::class, 'stripePaymentCreate']);
                     Route::post('list', [CustomerSubscriptionController::class, 'subscriptionList']);  // customer subscriptions api
                 });
                 
@@ -117,6 +118,11 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
         Route::post('coupon-check', [CouponCheckController::class, 'checkCoupon']);
         Route::post('payment-capture', [PaymentController::class, 'paymentCapture']);
         Route::post('billing-address', [PaymentController::class, 'billingAddress']);
+
+       
+        Route::group(['prefix' => 'subscription-payment'], function () {
+            Route::post('create', [CustomerSubscriptionController::class, 'stripePaymentCreate']);
+        });
 
     });
 

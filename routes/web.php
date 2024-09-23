@@ -415,6 +415,4 @@ Route::get('/user-panel', function()
 });
 
 
-// Route::stripeWebhooks('stripe/webhook');
-
 

@@ -33,6 +33,7 @@ class SubscriptionController extends Controller
     //
     public function createSubscription(Request $request)
     {
+        
         Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
 
         $data = $request->all();
@@ -76,6 +77,12 @@ class SubscriptionController extends Controller
         $paymentMethod = PaymentMethod::retrieve($paymentMethodId);
         if ($paymentMethod->customer !== $customer->id) {
             $paymentMethod->attach(['customer' => $customer->id]);
+
+            // update card details in customer default payment method
+            $customer = Customer::update(
+                $customer->id,
+                ['invoice_settings' => ['default_payment_method' => $paymentMethodId]]
+            );
         }
 
         $subscription = Subscription::create([

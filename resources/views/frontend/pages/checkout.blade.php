@@ -603,6 +603,12 @@
                 console.log(error);
             } else {
                 formData.payment_method_id = paymentMethod.id;
+                // card details
+                formData.card_brand = paymentMethod.card.brand;
+                formData.card_last4 = paymentMethod.card.last4;
+                formData.card_exp_month = paymentMethod.card.exp_month;
+                formData.card_exp_year = paymentMethod.card.exp_year;
+
                 const subscribeUrl = "{{ route('create-subscription') }}";
                 fetch(subscribeUrl, {
                     method: 'POST',
@@ -621,7 +627,7 @@
                     if (data.success) {
                         window.location.href = "{{ route('success-subscription') }}";
                     } else {
-                        window.location.href = "{{ route('failed-subscription') }}";
+                         window.location.href = "{{ route('failed-subscription') }}";
                         console.log('Subscription failed', data);
                     }
                 })

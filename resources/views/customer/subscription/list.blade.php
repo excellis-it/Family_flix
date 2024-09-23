@@ -47,7 +47,7 @@
                                             <th scope="col">Expiry date</th>
                                             <th scope="col">Affiliate name</th>
                                             <th scope="col">Action</th>
-                                            <th scope="col">Status</th>
+                                            {{-- <th scope="col">Status</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +72,7 @@
                                                                 class="fa fa-eye"></i></a>
                                                         {{-- <a href="{{ route('customer.subscription.show', $customer_subscription->id) }}" class="btn btn-primary btn-sm">Edit</a> --}}
                                                     </td>
-                                                    <td>
+                                                    {{-- <td>
                                                         @if ($customer_subscription->plan_expiry_date < date('Y-m-d'))
                                                             <span class="text-danger">Expired</span>
                                                         @else
@@ -92,7 +92,7 @@
                                                                 @endif
                                                             @endif
                                                         @endif
-                                                    </td>
+                                                    </td> --}}
                                                 </tr>
                                             @endforeach
                                         @endif
