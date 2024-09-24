@@ -3,10 +3,10 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use App\Models\UserSubscription;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\View;
 
 class SubscriptionExpiryMail extends Mailable
 {
@@ -21,7 +21,9 @@ class SubscriptionExpiryMail extends Mailable
 
     public function build()
     {
-        return $this->view('mail.subscriptionExpiry')
+        return $this->view('frontend.mail.subscription-expiry') // Updated path
                     ->subject('Your subscription is expiring soon');
+                    
+                    
     }
 }

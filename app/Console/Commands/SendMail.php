@@ -17,6 +17,11 @@ use App\Models\UserSubscription;
 use PDF;
 class SendMail extends Command
 {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
     protected $signature = 'reminder:mail';
 
     /**
@@ -43,29 +48,40 @@ class SendMail extends Command
      */
     public function handle()
     {
-        // Retrieve customers whose plan expires in 4 days
         $customers = UserSubscription::with('customer')
-            ->where('plan_expiry_date', now()->addDays(4))
-            ->get();
+        ->where('plan_expiry_date', Carbon::today()->addDays(4)->toDateString())
+        ->get();
         
         Log::info('Customers found: ' . $customers->count());
-
+    
         if ($customers->isEmpty()) {
             Log::info('No customers found with plan expiring in 4 days.');
             return;
         }
-
+    
         // Send reminder emails
         foreach ($customers as $customer) {
+            Log::info('Preparing to send email to: ' . $customer->customer->email);
+            
             try {
                 Mail::to($customer->customer->email)->send(new SubscriptionExpiryMail($customer));
-                Log::info('Email sent to: ' . $customer->customer->email);
+                
+                Log::info('Email sent successfully to: ' . $customer->customer->email);
             } catch (\Exception $e) {
+                
                 Log::error('Failed to send email to: ' . $customer->customer->email . ' - Error: ' . $e->getMessage());
+    
+                // Test sending a plain text email
+                try {
+                    Mail::raw('This is a test email to verify sending functionality.', function ($message) use ($customer) {
+                        $message->to($customer->customer->email)
+                                ->subject('Test Email');
+                    });
+                    Log::info('Test email sent successfully to: ' . $customer->customer->email);
+                } catch (\Exception $testException) {
+                    Log::error('Failed to send test email to: ' . $customer->customer->email . ' - Error: ' . $testException->getMessage());
+                }
             }
         }
-
-        $this->info('Reminder emails have been sent successfully.');
-        return 0;
     }
 }
