@@ -47,22 +47,22 @@ class SubscriptionController extends Controller
      *       "The payment method id field is required."
      *  ],
      * "email": [
-     *      "The email field is required."
+     *   "The email field is required."
      * ],
      * "amount": [
-     *     "The amount field is required."
+     *  "The amount field is required."
      * ],
      * "plan_id": [
-     *    "The plan id field is required."
+     * "The plan id field is required."
      * ],
      * "plan_name": [
-     *   "The plan name field is required."
+     * "The plan name field is required."
      * ],
      * "plan_price": [
-     *  "The plan price field is required."
+     * "The plan price field is required."
      * ],
      * "country": [
-     *  "The country field is required."
+     * "The country field is required."
      * ],
      * "state": [
      * "The state field is required."
@@ -70,14 +70,12 @@ class SubscriptionController extends Controller
      * "city": [
      * "The city field is required."
      * ],
-     *  "house_name": [
+     * "house_name": [
      * "The house name field is required."
      * ],
      * "post_code": [
      * "The post code field is required."
      * ]
-     * }
-     
      * }
      * }
      */
@@ -189,7 +187,7 @@ class SubscriptionController extends Controller
                     'email' => $user->email,
                     'password' => 12345678,
                 ];
-                // Mail::to($user->email)->send(new WelcomeMail($maildata));
+               // Mail::to($user->email)->send(new WelcomeMail($maildata));
                 $user_id = $user->id;
             }
     
@@ -303,7 +301,7 @@ class SubscriptionController extends Controller
 
             return response()->json(['status' => true, 'statusCode' => 200, 'message' => 'Subscription created successfully!'], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
+            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()]);
         }
     }
 
