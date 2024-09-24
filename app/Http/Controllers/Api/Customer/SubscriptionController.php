@@ -189,7 +189,7 @@ class SubscriptionController extends Controller
                     'email' => $user->email,
                     'password' => 12345678,
                 ];
-                Mail::to($user->email)->send(new WelcomeMail($maildata));
+                // Mail::to($user->email)->send(new WelcomeMail($maildata));
                 $user_id = $user->id;
             }
     
