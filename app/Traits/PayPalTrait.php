@@ -12,10 +12,10 @@ trait PayPalTrait
 
     function __construct()
     {
-        $this->token = $this->getToken();
-        $this->paypal_url = $this->getPaypalCredentials()['credential_name'] == 'sandbox'
-            ? 'https://api-m.sandbox.paypal.com/v1/'
-            : 'https://api.paypal.com/v1/';
+        // $this->token = $this->getToken();
+        // $this->paypal_url = $this->getPaypalCredentials()['credential_name'] == 'sandbox'
+        //     ? 'https://api-m.sandbox.paypal.com/v1/'
+        //     : 'https://api.paypal.com/v1/';
     }
 
     // Get active PayPal credentials
@@ -134,22 +134,13 @@ trait PayPalTrait
             'Authorization: Bearer ' . $access_token
         ]);
 
-        // Add the recurring subscription data (plan_id, subscriber, etc.)
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($recurring));
-
-        // Execute the cURL request
         $response = curl_exec($curl);
-
-        // Check for errors
         if (curl_errno($curl)) {
             // If there is an error, return the error message
             return curl_error($curl);
         }
-
-        // Close the cURL session
         curl_close($curl);
-
-        // Return the response from PayPal (subscription details)
         return json_decode($response, true);
     }
 }
