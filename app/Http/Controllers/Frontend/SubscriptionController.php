@@ -23,7 +23,7 @@ use App\Models\Affiliate;
 use App\Models\Wallet;
 use App\Models\Payment;
 use Illuminate\Support\Str;
-
+use App\Helpers\Helper;
 use App\Models\CustomerDetails;
 use Illuminate\Support\Facades\Mail;
 
@@ -33,8 +33,17 @@ class SubscriptionController extends Controller
     //
     public function createSubscription(Request $request)
     {
-        
-        Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
+       // need Helper function stripeCredential 
+       $stripe = Helper::stripeCredential(); 
+
+       if (!empty($stripe->stripe_secret)) {
+           \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
+       } else {
+           // Handle missing secret key
+           throw new \Exception('Stripe secret key is missing');
+       }
+       
+        // Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
 
         $data = $request->all();
         $paymentMethodId = $data['payment_method_id'];
@@ -116,7 +125,7 @@ class SubscriptionController extends Controller
                 'email' => $user->email,
                 'password' => 12345678,
             ];
-            Mail::to($user->email)->send(new WelcomeMail($maildata));
+            // Mail::to($user->email)->send(new WelcomeMail($maildata));
             $user_id = $user->id;
         }
 

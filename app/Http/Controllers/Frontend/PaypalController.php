@@ -12,10 +12,11 @@ use App\Models\CustomerDetails;
 use App\Models\AffiliateCommission;
 use App\Models\Payment;
 use App\Models\User;
+use App\Models\StripeCredential;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Session;
 use Omnipay\Omnipay;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Mail;
 use App\Mail\WelcomeMail;
 use App\Models\UserSubscriptionRecurring;
@@ -45,6 +46,7 @@ class PaypalController extends Controller
 
         $id = decrypt($id);
         $plan = Plan::find($id);
+        $stripe_detail = StripeCredential::where('status', 1)->first();
         if (Auth::check()) {
             $user = Auth::user();
             $customer_details = CustomerDetails::where('email_address', $user->email)->first() ?? '';
@@ -55,7 +57,7 @@ class PaypalController extends Controller
         }
 
         $faq_qstn_ansrs = Faq::where('type', 'payment')->orderBy('id', 'asc')->get();
-        return view('frontend.pages.checkout', compact('plan', 'faq_qstn_ansrs', 'customer_details', 'plan_exists'));
+        return view('frontend.pages.checkout', compact('plan', 'faq_qstn_ansrs', 'customer_details', 'plan_exists','stripe_detail'));
     }
 
     public function renewalPayments($name) {}

@@ -526,7 +526,17 @@
 
     <script>
         $(document).ready(function() {
-        var stripe = Stripe("{{ env('STRIPE_SUBSCRIPTION_KEY') }}");
+            // $stripe_detail strpe credential
+        @php
+            $stripeKey = optional(Helper::stripeCredential())->stripe_key;
+        @endphp
+
+        var stripeKey = {!! json_encode($stripeKey) !!};
+        if (stripeKey) {
+            var stripe = Stripe(stripeKey);
+        } else {
+            console.log('Stripe key not found');
+        }
         var elements = stripe.elements();
         var cardElement = elements.create('card');
         cardElement.mount('#card-element');
