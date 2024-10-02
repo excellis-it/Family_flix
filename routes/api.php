@@ -121,6 +121,7 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
 
        
         Route::group(['prefix' => 'subscription-payment'], function () {
+            Route::post('credential', [CustomerSubscriptionController::class, 'stripePaymentCredential']);
             Route::post('create', [CustomerSubscriptionController::class, 'stripePaymentCreate']);
         });
 

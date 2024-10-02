@@ -83,6 +83,7 @@ class ProfileController extends Controller
 
     public function accountUpdate(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
@@ -93,23 +94,24 @@ class ProfileController extends Controller
         }
         try {
             $user = User::where('id', Auth::user()->id)->first();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            if ($request->password) {
-                $request->validate([
-                    'password' => 'required|min:8|password_confirmation',
-                ]);
-                $user->password = Hash::make($request->password);
+            $user->name = $request->name ?? '';
+            $user->email = $request->email ?? '';
+            $user->phone = $request->phone ?? '';
+            if ($request->passsword) {
+               
+                // $request->validate([
+                //     'password' => 'required|min:8|confirm_password',
+                // ]);
+                $user->password = bcrypt($request->passsword);
             }
             if ($request->hasFile('image')) {
                 if ($user->image) {
                     $currentImageFilename = $user->image; // get current image name
-                    Storage::delete('app/' . $currentImageFilename);
+                     Storage::delete('app/' . $currentImageFilename);
                 }
                 $user->image = $this->imageUpload($request->file('image'), 'Customer')['filePath'];
             }
-            $user->save();
+            $user->update();
             return response()->json(['message' => 'Customer details updated successfully.','data' => $user, 'status'=> true], $this->successStatus);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 401);

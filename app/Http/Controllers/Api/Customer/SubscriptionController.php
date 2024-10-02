@@ -18,6 +18,7 @@ use Stripe\Stripe;
 use Stripe\Customer;
 use Stripe\PaymentMethod;
 use Stripe\Subscription;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
 use Stripe\Plan;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,7 @@ class SubscriptionController extends Controller
     public function stripePaymentCreate(Request $request)
     {
 
+
         $validator = Validator::make($request->all(), [
             'payment_method_id' => 'required',
             'email' => 'required',
@@ -99,12 +101,33 @@ class SubscriptionController extends Controller
             'post_code' => 'required',
         ]);
 
+        $check_user_exists = User::where('email', $request->email)->count();
+        if($check_user_exists > 0)
+        {
+            $user_subscription = UserSubscription::where('customer_id', $check_user_exists->id)
+            ->where('plan_id', $request->plan_id)
+            ->where('plan_expiry_date', '>=', date('Y-m-d'))
+            ->first();
+            if($user_subscription)
+            {
+                return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'You already have an active subscription!'], 200);
+            }
+        }
+
 
         if ($validator->fails()) {
             return response()->json(['status' => false, 'statusCode' => 200,  'error' => $validator->errors()->first()], 200);
         }
 
-        Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
+        // Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
+        $stripe = Helper::stripeCredential(); 
+
+        if (!empty($stripe->stripe_secret)) {
+            \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
+        } else {
+            // Handle missing secret key
+            throw new \Exception('Stripe secret key is missing');
+        }
 
         try {
             $data = $request->all();
@@ -370,6 +393,46 @@ class SubscriptionController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
         }
+    }
+
+     /**
+     * Subscriptions Api
+     * @authenticated
+     * @response 200{
+     * "status": true,
+     * "statusCode": 200,
+     * "data": {
+     *  "stripe_key": "pk_test_51
+     * "stripe_secret": "sk_test_51"
+     * }
+     * }
+     * @response 200{
+     *  "status": false,
+     * "statusCode": 200,
+     * "error": "Stripe credential not found!"
+     * }
+     * @response 401{
+     * "status": false,
+     * "statusCode": 401,
+     * "error": "Unauthorised"
+     * }
+     */
+    
+    public function stripePaymentCredential()
+    {
+        try{
+            $stripe = Helper::stripeCredential();
+            if($stripe)
+            {
+                return response()->json(['status' => true, 'statusCode' => 200, 'data' => $stripe], 200);
+            }else{
+                return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'Stripe credential not found!'], 200);
+            }
+            
+        }catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
+        }
+        
     }
 
   
