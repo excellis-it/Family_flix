@@ -650,6 +650,29 @@
 
     </script>
 
+    <script>
+        //onchange validation
+        $('#email_address').on('change', function() {
+            var emailId = $('#email_address').val();
+
+            $.ajax({
+                url: "{{ route('payments.email-check') }}",
+                type: "POST",
+                data: {
+                    emailId: emailId,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        $('#email_error').text('');
+                    } else {
+                        $('#userExistsModal').modal('show');
+                        return true;
+                    }
+                }
+            });
+        });
+    </script>
 
     <script>
         // coupon check and total amount discount
@@ -734,7 +757,7 @@
 
     <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
 
-    <script>
+    {{-- <script>
         checkStatus = true;
         paypal.Buttons({
             onClick: function() {
@@ -945,31 +968,9 @@
             }
             return res;
         }
-    </script>
+    </script> --}}
 
-    <script>
-        //onchange validation
-        $('#floatingInput1').on('change', function() {
-            var emailId = $('#floatingInput1').val();
-
-            $.ajax({
-                url: "{{ route('payments.email-check') }}",
-                type: "POST",
-                data: {
-                    emailId: emailId,
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function(response) {
-                    if (response.status == 'success') {
-                        $('#email_error').text('');
-                    } else {
-                        $('#userExistsModal').modal('show');
-                        return true;
-                    }
-                }
-            });
-        });
-    </script>
+  
     @auth
     <script>
         $(document).ready(function() {

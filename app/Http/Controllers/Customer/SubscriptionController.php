@@ -41,4 +41,10 @@ class SubscriptionController extends Controller
             return response()->json(['data' => view('customer.subscription.table', compact('customer_subscriptions'))->render()]);
         }
     }
+
+
+    public function myFamilyCinema()
+    {
+        return view('customer.subscription.my-family-cinema');
+    }
 }

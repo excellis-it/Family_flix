@@ -112,7 +112,8 @@ class SubscriptionController extends Controller
             $user = new User();
             $user->name = $data['first_name'] . ' ' . $data['last_name'];
             $user->email = $data['email'];
-            $user->password = bcrypt('12345678');
+            $password = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 8);
+            $user->password = bcrypt($password);
             $user->phone = $data['phone'] ?? '';
             $user->status = 1;
             $user->wallet_balance = 0;
@@ -123,11 +124,14 @@ class SubscriptionController extends Controller
             $maildata = [
                 'name' => $user->name,
                 'email' => $user->email,
-                'password' => 12345678,
+                'password' => $password,
             ];
             // Mail::to($user->email)->send(new WelcomeMail($maildata));
             $user_id = $user->id;
         }
+
+        
+        
 
         //customer details add
         $customer_details_count = CustomerDetails::where('email_address', $data['email'])->count();
@@ -237,6 +241,8 @@ class SubscriptionController extends Controller
         $payment->payment_currency = 'USD';
         $payment->save();
 
+        Session::put('user_id', $user_id);
+
         return response()->json([
             'success' => true,
             'message' => 'Subscription created successfully'
@@ -246,7 +252,20 @@ class SubscriptionController extends Controller
 
     public function successSubscription()
     {
-        return view('frontend.pages.thankyou');
+        // get session user id
+        if(Auth::user()){
+            return redirect()->route('customer.myFamily-cinema');
+        }else{
+            $user_id = Session::get('user_id');
+            $user = User::find($user_id);
+            Auth::login($user);
+
+            return redirect()->route('customer.myFamily-cinema');
+        }
+
+
+        
+        // return view('frontend.pages.thankyou');
     }
 
     public function failedSubscription()

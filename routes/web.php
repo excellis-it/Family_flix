@@ -401,6 +401,8 @@ Route::name('customer.')
             Route::get('/subscriptions', [CustomerSubscriptionController::class, 'customerSubscription'])->name('subscription');
             Route::get('/subscriptions-fetch-data', [CustomerSubscriptionController::class, 'fetchSubscription'])->name('subscription.ajax-list');
             Route::get('/subscriptions-details/{id}', [CustomerSubscriptionController::class, 'customerSubscriptionDetail'])->name('subscription.show');
+
+            Route::get('/my-family-cinema', [CustomerSubscriptionController::class, 'myFamilyCinema'])->name('myFamily-cinema');
         });
 
         // customer-subscription
