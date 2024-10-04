@@ -25,6 +25,8 @@ use App\Models\Payment;
 use Illuminate\Support\Str;
 use App\Helpers\Helper;
 use App\Models\CustomerDetails;
+use App\Mail\UserSubscriptionMail;
+use App\Mail\AdminSubscriptionMail;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -131,8 +133,6 @@ class SubscriptionController extends Controller
         }
 
         
-        
-
         //customer details add
         $customer_details_count = CustomerDetails::where('email_address', $data['email'])->count();
         if ($customer_details_count > 0) {
@@ -240,8 +240,19 @@ class SubscriptionController extends Controller
         $payment->payment_amount = $data['amount'];
         $payment->payment_currency = 'USD';
         $payment->save();
-
         Session::put('user_id', $user_id);
+        // user subscription mail
+        $userSubscriptionMailData = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'plan_name' => $data['plan_name'],
+            'plan_price' => $data['plan_price'],
+            'plan_start_date' => $today,
+            'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
+        ];
+        // Mail::to($user->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
+
+        // Mail::to('shreeja@yopmail.com')->send(new AdminSubscriptionMail($userSubscriptionMailData));
 
         return response()->json([
             'success' => true,
