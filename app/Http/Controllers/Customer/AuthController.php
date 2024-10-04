@@ -27,8 +27,10 @@ class AuthController extends Controller
             'email'    => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'password' => 'required|min:8',
             'confirm_password' => 'required|min:8|same:password',
+            'captcha' => 'required|captcha'
         ], [
             'email.email' => 'The email format is invalid.',
+            'captcha.captcha'=>'Invalid captcha code.'
         ]);
 
         $input = $request->all();
@@ -65,8 +67,10 @@ class AuthController extends Controller
 
         $request->validate([
             'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
-            'password' => 'required|min:8'
-        ]);
+            'password' => 'required|min:8',
+            'captcha' => 'required|captcha'
+        ],
+        ['captcha.captcha'=>'Invalid captcha code.']);
 
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {

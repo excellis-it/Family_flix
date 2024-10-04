@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "league/omnipay": "^3.2",
+        "mews/captcha": "^3.4",
         "omnipay/paypal": "^3.0",
         "spatie/laravel-permission": "^6.3",
         "stripe/stripe-php": "^15.6"

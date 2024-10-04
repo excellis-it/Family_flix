@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             // businessManagementSeeder::class,
             // footerCmsSeeder::class,
             // FaqSeeder::class,
-             // PaypalCredentialSeeder::class,
+            PaypalCredentialSeeder::class,
 
         ]);
     }

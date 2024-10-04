@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\StripeCredential;
+use App\Models\PaymentDetailMail;
 use Illuminate\Database\Seeder;
 
 class PaypalCredentialSeeder extends Seeder
@@ -45,6 +46,18 @@ class PaypalCredentialSeeder extends Seeder
 
         foreach ($credintial_array as $key => $value) {
             StripeCredential::create($value);
+        }
+
+        // payment detail mail 
+        $payment_detail_mail = [
+            [
+                'email' => 'admin@yopmail.com',
+                'status' => 1
+            ]
+        ];
+
+        foreach ($payment_detail_mail as $key => $value) {
+            PaymentDetailMail::create($value);
         }
 
     }

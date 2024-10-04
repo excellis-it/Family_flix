@@ -43,10 +43,12 @@ use App\Http\Controllers\Customer\ProfileController as CustomerProfileController
 use App\Http\Controllers\Customer\SubscriptionController as CustomerSubscriptionController;
 use App\Http\Controllers\Customer\ForgotPasswordController as CustomerForgotPasswordController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\PaymentDetailMailController;
 use App\Http\Controllers\Admin\ManagerPermissionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\WalletController as AdminWalletcontroller;
+use App\Http\Controllers\Captcha\RefreshCaptchaController;
 use Illuminate\Support\Facades\Artisan;
 
 // Clear cache
@@ -63,6 +65,7 @@ Route::get('reminder-mail-for-plan-expiry', function () {
 /* ----------------- Frontend Routes -----------------*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
+Route::get('/refresh-captcha', [RefreshCaptchaController::class, 'refreshCaptcha'])->name('refresh.captcha');
 // affliate authentication
 
 
@@ -169,7 +172,6 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
 
-
         Route::resources([
             'menu-management' => MenuManagementController::class,
             'plan' => PlanController::class,
@@ -192,8 +194,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/customers-plans/{id}', [AdminCustomerController::class, 'showPlans'])->name('customers.plans.show');
         Route::get('/customers-ajax-list', [AdminCustomerController::class, 'customerAjaxList'])->name('customers.ajax.list');
         Route::get('/customer-change-status', [AdminCustomerController::class, 'changeStatus'])->name('customers.change-status');
-        Route::get('/customers/craete',[AdminCustomerController::class, 'create'])->name('customers.create');
+        Route::get('/customers/create',[AdminCustomerController::class, 'create'])->name('customers.create');
         Route::post('/customers/store',[AdminCustomerController::class, 'store'])->name('customers.store');
+        Route::get('/customers/edit/{id}',[AdminCustomerController::class, 'editDetail'])->name('customers.edit-detail');
+        Route::post('/customers/update',[AdminCustomerController::class, 'updateDetail'])->name('customers.update-deatil');
+        Route::get('/customers/recharge-code/{id}',[AdminCustomerController::class, 'rechargeMail'])->name('customers.recharge-code-mail');
+        Route::post('/customers/recharge-code',[AdminCustomerController::class, 'rechargeCodeMailSend'])->name('customers.recharge-code-send');
 
 
         Route::get('/manager-permission', [ManagerPermissionController::class, 'index'])->name('manager-permission.index');
@@ -365,7 +371,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'site-settings'], function () {
             Route::resources([
                 'credentials' => StripeCredentialController::class,
+                
             ]);
+            Route::get('/payment-details-mail', [PaymentDetailMailController::class, 'paymentDetailMail'])->name('payment-detail-mail.edit-detail');
+            Route::post('/payment-details-mail-update', [PaymentDetailMailController::class, 'paymentDetailMailUpdate'])->name('payment-detail-mail.update');
 
            
             Route::get('/paypal-change-status', [PaypalCredentialController::class, 'changeStatus'])->name('credentials.change-status');

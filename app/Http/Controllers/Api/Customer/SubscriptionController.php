@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use App\Models\UserSubscription;
 use Stripe\Stripe;
+use App\Models\PaymentDetailMail;
 use Stripe\Customer;
 use Stripe\PaymentMethod;
 use Stripe\Subscription;
@@ -321,6 +322,20 @@ class SubscriptionController extends Controller
             $payment->payment_amount = $data['amount'];
             $payment->payment_currency = 'USD';
             $payment->save();
+
+            // $userSubscriptionMailData = [
+            //     'name' => $user->name,
+            //     'email' => $user->email,
+            //     'plan_name' => $data['plan_name'],
+            //     'plan_price' => $data['plan_price'],
+            //     'plan_start_date' => $today,
+            //     'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
+            // ];
+    
+            // $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
+            // Mail::to($user->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
+    
+            // Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
 
             return response()->json(['status' => true, 'statusCode' => 200, 'message' => 'Subscription created successfully!'], 200);
         } catch (\Throwable $th) {

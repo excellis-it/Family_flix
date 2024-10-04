@@ -27,6 +27,8 @@ use App\Helpers\Helper;
 use App\Models\CustomerDetails;
 use App\Mail\UserSubscriptionMail;
 use App\Mail\AdminSubscriptionMail;
+use Illuminate\Support\Facades\DB;
+use App\Models\PaymentDetailMail;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -36,6 +38,7 @@ class SubscriptionController extends Controller
     public function createSubscription(Request $request)
     {
        // need Helper function stripeCredential 
+       
        $stripe = Helper::stripeCredential(); 
 
        if (!empty($stripe->stripe_secret)) {
@@ -250,9 +253,11 @@ class SubscriptionController extends Controller
             'plan_start_date' => $today,
             'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
         ];
+
+        $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
         // Mail::to($user->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
 
-        // Mail::to('shreeja@yopmail.com')->send(new AdminSubscriptionMail($userSubscriptionMailData));
+        // Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
 
         return response()->json([
             'success' => true,

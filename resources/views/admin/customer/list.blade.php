@@ -117,11 +117,10 @@
                                         <th><span class="fs-4 fw-semibold mb-0">Name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Email</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Phone</span></th>
-                                        <th>
-                                            <span class="fs-4 fw-semibold mb-0">Plan Status</span>
-                                        </th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Plan Status</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Status</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Plans</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Action</span></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyContents">
@@ -275,7 +274,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         $(document).on('change', '#status_update', function(e) {
             var status = $(this).val();
             var user_id = $(this).data('id');
@@ -296,5 +295,31 @@
                 }
             });
         });
+    </script> --}}
+
+    <script>
+        $(document).on('change', '.toggle-class', function(e) {
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var user_id = $(this).data('id');
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{{ route('customers.change-status') }}",
+                data: {
+                    'status': status,
+                    'user_id': user_id
+                },
+                success: function(resp) {
+                    console.log(resp.success)
+                }
+            });
+        });
     </script>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 @endpush

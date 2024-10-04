@@ -55,7 +55,7 @@ class CommissionPercentageController extends Controller
      */
     public function create()
     {
-        $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->get();
+        $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->where('status',1)->get();
         return view('admin.commission_percentage.create',compact('affiliaters'));
     }
 

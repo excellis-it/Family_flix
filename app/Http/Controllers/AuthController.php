@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Mail\AffiliaterWelcomeMail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthController extends Controller
 {
@@ -44,9 +46,17 @@ class AuthController extends Controller
             'phone' => 'required|numeric',
             'password' => 'required|min:8',
             'confirm_password' => 'required|min:8|same:password',
+            'captcha' => 'required|captcha'
         ], [
             'email.email' => 'The email format is invalid.',
+            'captcha.captcha'=>'Invalid captcha code.'
         ]);
+
+
+
+        if ($request->input('captcha') !== session('captcha')) {
+            return back()->withErrors(['captcha' => 'Invalid CAPTCHA. Please try again.']);
+        }
 
         $input = $request->all();
         $user = new User;
@@ -78,12 +88,13 @@ class AuthController extends Controller
 
     public function loginCheck(Request $request)
     {
-       
+        
         $request->validate([
             'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
-            'password' => 'required|min:8'
-        ]);
-
+            'password' => 'required|min:8',
+            'captcha' => 'required|captcha'
+        ],
+        ['captcha.captcha'=>'Invalid captcha code.']);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = User::where('email', $request->email)->first();
@@ -117,4 +128,6 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('home');
     }
+
+   
 }

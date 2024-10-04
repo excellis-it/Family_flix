@@ -13,23 +13,11 @@
     <title>Login - {{ env('APP_NAME') }} Admin Panel</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/all.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/material.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/line-awesome.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/font-awesome.min.css') }}">
-
+    
     <link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="account-page">
@@ -80,6 +68,20 @@
                                     <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
                                 @endif
                             </div>
+
+                            <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }} col-md-12 mb-3">
+                                <label for="captcha">Captcha</label>
+                                <div class="captcha">
+                                    <span>{!! captcha_img() !!}</span>
+                                    <button type="button" class="btn btn-success btn-refresh"><i class="fa fa-refresh"></i></button>
+                                </div>
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                                @if ($errors->has('captcha'))
+                                    <span class="help-block">
+                                        <div class="error" style="color:red;">{{ $errors->first('captcha') }}</div>
+                                    </span>
+                                @endif
+                            </div>
                             <div class="form-group text-center">
                                 <button class="btn btn-primary account-btn" type="submit">Login</button>
                             </div>
@@ -107,6 +109,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
 <script>
     @if(Session::has('message'))
     toastr.options = {
@@ -153,5 +156,18 @@
         }
     });
     </script>
+
+    
+<script type="text/javascript">
+    $(".btn-refresh").click(function(){
+        $.ajax({
+            type:'GET',
+            url:'/refresh-captcha',
+            success:function(data){
+                $(".captcha span").html(data.captcha);
+            }
+        });
+    });
+</script>
 
 </html>

@@ -23,11 +23,18 @@ class AdminController extends Controller
 
     public function loginCheck(Request $request)
     {
-        
         $request->validate([
             'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
-            'password' => 'required|min:8'
-        ]);
+            'password' => 'required|min:8',
+            'captcha' => 'required|captcha'
+        ],
+        
+        ['captcha.captcha'=>'Invalid captcha code.']);
+        // $request->validate([
+        //     'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+        //     'password' => 'required|min:8',
+        //     'captcha' => 'required|captcha'
+        // ]);
         
         $credentials = $request->only('email', 'password');
         

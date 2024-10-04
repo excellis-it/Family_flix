@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Models\Plan;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RechargeCodeMail;
+
 
 
 
@@ -88,6 +91,61 @@ class CustomerController extends Controller
         $customer->save();
         $customer->assignRole('CUSTOMER');
         return redirect()->route('customers.index')->with('message', 'Customer created successfully');
+    }
+
+    public function editDetail($id)
+    {
+        $customer = User::find($id);
+        return view('admin.customer.edit', compact('customer'));
+    }
+
+    public function updateDetail(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'status' => 'required',
+            'password' => 'nullable|min:8',
+            'confirm_password' => 'same:password',
+        ]);
+
+        $customer = User::find($request->id);
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->status = $request->status;
+        if($request->password){
+            $customer->password = bcrypt($request->password);
+        }
+        $customer->update();
+
+        return redirect()->route('customers.index')->with('message', 'Customer updated successfully');
+    }
+
+    public function rechargeMail($id)
+    {
+        $user = User::find($id);
+        return view('admin.customer.recharge-mail', compact('user'));
+    }
+
+    public function rechargeCodeMailSend(Request $request)
+    {
+        
+        $request->validate([
+            'mail_content' => 'required',
+        ]);
+
+        $user = User::find($request->user_id);
+        $maildata = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'mail_content' => $request->mail_content,
+        ];
+
+        // Mail::to($user->email)->send(new RechargeCodeMail($maildata));
+
+        return redirect()->route('customers.index')->with('message', 'Recharge code mail sent successfully');
     }
 
 }

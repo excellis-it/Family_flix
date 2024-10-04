@@ -29,14 +29,11 @@ class AffliateMarketerController extends Controller
             return view('admin.affliate-marketer.list',compact('affiliaters'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
-        }
-
-        
+        }  
     }
 
     public function affliateMarketerAjaxList(Request $request)
     {
-       
         if ($request->ajax()) {
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);

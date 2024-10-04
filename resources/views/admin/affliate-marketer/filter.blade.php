@@ -5,10 +5,12 @@
             <td>{{ $affiliater->email ?? 'N/A' }}</td>
             <td>{{ $affiliater->phone ?? 'N/A' }}</td>
             <td><div class="affiliate-url" onclick="copyText(this)">{{  route('pricing', Crypt::encrypt($affiliater->id)) }}<i class="fa fa-copy"></i></div></td>
-            <td><div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $affiliater->id }}" {{ $affiliater->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div></td>
             <td>
-                <a href="{{ route('affliate-marketer.edit', $affiliater->id) }}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Affiliate Marketer" data-route="{{ route('affliate-marketer.delete', $affiliater->id) }}" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
-                   
+                <div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $affiliater->id }}" {{ $affiliater->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>
+            </td>
+            <td>
+                <a href="{{ route('affliate-marketer.edit', $affiliater->id) }}" class="btn btn-sm" style="font-size: 18px;"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                <a title="Delete Affiliate Marketer" data-route="{{ route('affliate-marketer.delete', $affiliater->id) }}" href="javascipt:void(0);" id="delete" class="btn btn-sm" style="font-size: 18px;"><i class="fas fa-trash"></i></a>  
             </td>
         </tr>
     @endforeach
@@ -28,4 +30,6 @@
         <td colspan="8" class="text-center">No data found</td>
     </tr>
 @endif
+
+
 

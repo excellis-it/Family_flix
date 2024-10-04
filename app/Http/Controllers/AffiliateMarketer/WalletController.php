@@ -22,8 +22,6 @@ class WalletController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET'));
     }
 
-
-
     public function walletList()
     {
         $wallets = Wallet::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(15);

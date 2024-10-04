@@ -21,15 +21,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/bootstrap.min.css')}}">
-    <!-- <link rel="stylesheet" href="assets/css/glightbox.min.css"> -->
-    <link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/all.min.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/overlay-scrollbars.min.css"> -->
-    <link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/swiper-bundle.min.css')}}">
     <link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 </head>
 
 <body>
@@ -85,6 +81,20 @@
                                                     @endif
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }} col-md-12 mb-3">
+                                        <label for="captcha">Captcha</label>
+                                        <div class="captcha">
+                                            <span>{!! captcha_img() !!}</span>
+                                            <button type="button" class="btn btn-success btn-refresh"><i class="fa fa-refresh"></i></button>
+                                        </div>
+                                        <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                                        @if ($errors->has('captcha'))
+                                            <span class="help-block">
+                                                <div class="error" style="color:red;">{{ $errors->first('captcha') }}</div>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="reg-btn-div">
@@ -179,6 +189,19 @@
             toastr.warning("{{ session('warning') }}");
         @endif
     </script>
+
+        
+<script type="text/javascript">
+    $(".btn-refresh").click(function(){
+        $.ajax({
+            type:'GET',
+            url:'/refresh-captcha',
+            success:function(data){
+                $(".captcha span").html(data.captcha);
+            }
+        });
+    });
+</script>
 </body>
 
 </html>

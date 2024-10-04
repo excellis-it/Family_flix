@@ -1,23 +1,7 @@
-@extends('customer.layouts.master')
-@section('title')
-    Dashboard
-@endsection
-@push('styles')
-    <style>
-        #page-container {
-            height: 750px;
-            overflow-y: auto !important;
-        }
-    </style>
-@endpush
-@section('head')
-    Dashboard
-@endsection
-@section('content') 
+
 
 
 <div class="col-lg-12 mt-4">
-    <div style="height:1500px;">
         @php
             $url = 'https://myfamilycinema.com/en/download-my-family-cinema/';
             $content = file_get_contents($url);
@@ -29,11 +13,11 @@
             echo $content;
         @endphp
         <iframe src="{{ $content }}" name="iframe_all" scrolling="yes" frameborder="0"
-            height="100px" width="200px"></iframe>
-    </div>
+            height="0px" width="0px"></iframe>
+    
 </div>
 
-@endsection
+
 
 @push('scripts')
     <script>

@@ -29,21 +29,31 @@
                 @endif
             </td>
             <td>
-                <select name="status_update" id="status_update" class="form-control" data-id="{{ $customer->id }}">
+                {{-- <select name="status_update" id="status_update" class="form-select" data-id="{{ $customer->id }}">
                     <option value="1" {{ $customer->status == 1 ? 'selected' : '' }}>Active</option>
                     <option value="0" {{ $customer->status == 0 ? 'selected' : '' }}>Inactive</option>
-                </select>
+                </select> --}}
+
+                <div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $customer->id }}" {{ $customer->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>
             </td>
             <td>
-                <a href="{{ route('customers.plans.show', $customer->id) }}" class="btn btn-sm btn-primary"
-                    title="View Customer Plan">
-                    <i class="fa fa-eye"></i>
+                <a href="{{ route('customers.plans.show', $customer->id) }}" class="btn btn-sm" data-toggle="tooltip" data-placement="right" title="View Plan">
+                    <i class="fa fa-eye" style="font-size: 18px;"></i>
                 </a>
+            </td>
+            <td>
+                <a href="{{ route('customers.recharge-code-mail', $customer->id) }}" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Send Mail"
+                   ><i class="fa fa-send" style="font-size: 18px;"></i>
+                </a>
+
+                <a href="{{ route('customers.edit-detail', $customer->id) }}" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Customer"
+                    ><i class="fa fa-edit" style="font-size: 18px;"></i>
+                 </a>
             </td>
         </tr>
     @endforeach
     <tr class="toxic">
-        <td colspan="5" class="text-left">
+        <td colspan="7" class="text-left">
             <div class="d-flex justify-content-between">
                 <div class="">
                     {!! $customers->links() !!}
@@ -55,6 +65,6 @@
     </tr>
 @else
     <tr>
-        <td colspan="8" class="text-center">No data found</td>
+        <td colspan="7" class="text-center">No data found</td>
     </tr>
 @endif

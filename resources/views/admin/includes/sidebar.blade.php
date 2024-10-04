@@ -40,7 +40,7 @@
                 @if(Gate::check('Manage Customer'))
                 <li class="nav-item has-submenu {{ Request::is('admin/customers*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('customers.index') }}"> <span>
-                            <i class="ti ti-user"></i>
+                            <i class="ti ti-users"></i>
                         </span>Customers<span class="arrow-down"></span></a>
                 </li>
                 @endif
@@ -372,9 +372,13 @@
                         </span>Site Setting
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
-                    <ul class="submenu collapse {{ Request::is('admin/site-settings/credentials*') ? 'active' : ' ' }}">
+                    <ul class="submenu collapse">
                         <li class="{{ Request::is('admin/site-settings/credentials*') ? 'active' : ' ' }}">
                             <a class="nav-link" href="{{ route('credentials.index') }}">Stripe Credentials</a>
+                        </li>
+
+                        <li class="{{ Request::is('admin/site-settings/payment-details-mail*') ? 'active' : ' ' }}">
+                            <a class="nav-link" href="{{ route('payment-detail-mail.edit-detail') }}">Payment Detail Mail</a>
                         </li>
                     </ul>
                 </li>
