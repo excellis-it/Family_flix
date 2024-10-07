@@ -14,7 +14,8 @@
                     <h3>Edit Product</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod"><a href="{{ route('products.index') }}">Product</a></span><span class="bread-slash">/</span></li>
+                        <li><span class="bread-blod"><a href="{{ route('products.index') }}">
+                                    List</a></span><span class="bread-slash">/</span></li>
                         <li><span class="bread-blod">Edit Product</span></li>
                     </ul>
                 </div>
@@ -32,7 +33,8 @@
                             <input type="hidden"  name="product_id"  value="{{ $product_edit->id }}">
                             <div class="row">
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Product For</label>
+                                    <label>Product For<span
+                                        style="color: red;">*</span></label>
                                     <select name="type" class="form-control">
                                        
                                         <option value="shows" {{ $product_edit->type == 'shows' ? 'selected':'' }}>Shows</option>

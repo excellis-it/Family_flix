@@ -10,10 +10,9 @@
                 </a>
             </td>
             <td>
-                <a title="Delete Plan" data-route="{{ route('delete.ott-service', $ott_service->id) }}" class="delete_acma"
+                <a href="{{ route('ott-service.edit', $ott_service->id) }}" class="edit-btn"> <i class="fas fa-edit"></i></a>
+                <a title="Delete Plan" data-route="{{ route('delete.ott-service', $ott_service->id) }}" class="delete_acma edit-btn"
                     href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
-
-                <a href="{{ route('ott-service.edit', $ott_service->id) }}"> <i class="fas fa-edit"></i></a>
             </td>
         </tr>
     @endforeach

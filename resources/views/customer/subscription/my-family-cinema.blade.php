@@ -1,6 +1,17 @@
-
-
-
+<div class="" style="background:black; padding:15px 50px;">
+<div class="row">
+<div class="col-sm-3 p-0" style="background:black;">
+    <div class="left_top">
+        <div class="logo">
+            <a href="{{ route('home') }}" class="">
+                <img src="{{ asset('frontend_assets/images/logo-white.png') }}"
+                    alt="" />
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 <div class="col-lg-12 mt-4">
         @php
             $url = 'https://myfamilycinema.com/en/download-my-family-cinema/';

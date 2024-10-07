@@ -17,7 +17,9 @@
                     <h3>{{ ucfirst(strtolower($role->name)) }} Permission</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><a href=""><span class="bread-blod">List</span></a></li>
+                        <li><span class="bread-blod"><a href="{{ route('manager-permission.index') }}">
+                            List</a></span><span class="bread-slash">/</span></li>
+                        <li><span class="bread-blod">Manage Permission</span></li>
                     </ul>
                 </div>
             </div>

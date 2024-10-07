@@ -11,8 +11,8 @@
             <td>{{ $user->roles->first()->name ?? 'N/A' }}</td>
            <td>
 
-            <a href="{{  route('users.edit',$user->id)}}" class="btn btn-sm"><i class="fas fa-edit" style="font-size: 18px;"></i></a>
-            <a title="Delete User" data-route="{{ route('delete.user',$user->id)}}" id="delete" class="delete_acma btn btn-sm" href="javascipt:void(0);" style="font-size: 18px;"><i class="fas fa-trash"></i></a>
+            <a href="{{  route('users.edit',$user->id)}}" class="edit-btn" ><i class="fas fa-edit" ></i></a>&nbsp;
+            <a title="Delete User" data-route="{{ route('delete.user',$user->id)}}" id="delete" class="delete_acma edit-btn" href="javascipt:void(0);" ><i class="fas fa-trash"></i></a>
             </td>
         </tr>
     @endforeach

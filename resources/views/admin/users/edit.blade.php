@@ -13,8 +13,8 @@
                     <h3>Edit User</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod"><a href="{{ route('users.index') }}">User</a></span><span
-                                class="bread-slash">/</span></li>
+                        <li><span class="bread-blod"><a href="{{ route('users.index') }}">
+                            List</a></span><span class="bread-slash">/</span></li>
                         <li><span class="bread-blod">Edit User</span></li>
                     </ul>
                 </div>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Password
-                                        <span style="color: red;">*</span></label>
+                                        </label>
                                     <input type="password" name="password" id="" class="form-control"
                                         value="{{ old('password') }}" placeholder="Enter pasword">
                                     @if ($errors->has('password'))
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Confirm
-                                        Password <span style="color: red;">*</span></label>
+                                        Password</label>
                                     <input type="password" name="confirm_password" id="" class="form-control" placeholder="Confirm Password"
                                         value="{{ old('confirm_password') }}">
                                     @if ($errors->has('confirm_password'))

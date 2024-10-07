@@ -8,7 +8,7 @@
                 @endforeach
             </td>
             <td>
-                <a href="{{ route('manager-permission.edit', $role->id) }}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                <a href="{{ route('manager-permission.edit', $role->id) }}" class="edit-btn"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                    
             </td>
         </tr>

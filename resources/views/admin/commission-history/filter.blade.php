@@ -15,7 +15,7 @@
             <td>{{ $commissionHistory->affiliate_commission ? '$' . $commissionHistory->affiliate_commission : 'N/A' }} </td>
             <td>
                 <a href="{{ route('commission-history.show', $commissionHistory->id) }}"
-                    class="btn btn-primary btn-sm"><i class="ti ti-eye"></i></a>
+                    class="edit-btn"><i class="fas fa-eye"></i></a>
             </td>
         </tr>
     @endforeach

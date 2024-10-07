@@ -60,12 +60,12 @@
                                     <td>{{ $admin->email}}</td>
                                     <td>{{ date('d M Y',strtotime($admin->created_at)) }}</td>
                                     <td align="center">
-                                        <a class="edit-admins" href="#" data-bs-toggle="modal"
+                                        <a class="edit-admins edit-btn" href="#" data-bs-toggle="modal"
                                                 data-bs-target="#edit_admin" data-id="{{ $admin->id }}"
                                                 data-route="{{ route('admin.edit', $admin->id) }}"><i
                                                     class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
-                                        <a href="{{route('admin.delete', $admin->id)}}" onclick="return confirm('Are you sure to delete this admin?')"><i class="fas fa-trash"></i></a>
+                                        <a href="{{route('admin.delete', $admin->id)}}" onclick="return confirm('Are you sure to delete this admin?')" class="edit-btn"><i class="fas fa-trash"></i></a>
 
                                     </td>
                                 </tr>

@@ -208,7 +208,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/manager-permission-edit/{id}', [ManagerPermissionController::class, 'permissionEdit'])->name('manager-permission.edit');
         Route::post('/manager-permission-update/{id}', [ManagerPermissionController::class, 'permissionUpdate'])->name('manager-permission.update');
         Route::get('/manager-permission-ajax-list', [ManagerPermissionController::class, 'permissionAjaxList'])->name('manager-permission.ajax.list');
-
         Route::get('/managers-ajax-list', [ManagerController::class, 'managerAjaxList'])->name('managers.ajax.list');
         //change status
         Route::get('/manager-change-status', [ManagerController::class, 'changeStatus'])->name('managers.change-status');
@@ -229,7 +228,6 @@ Route::group(['prefix' => 'admin'], function () {
 
         //plan management route
         Route::get('/plan-fetch-data', [PlanController::class, 'fetchPlanData'])->name('plan.ajax.list');
-
         Route::get('/commission-history-fetch-data', [AdminCommissionHistoryController::class, 'fetchData'])->name('commission-history.ajax-fetch-data');
 
         //commission percentage route
@@ -375,8 +373,6 @@ Route::group(['prefix' => 'admin'], function () {
             ]);
             Route::get('/payment-details-mail', [PaymentDetailMailController::class, 'paymentDetailMail'])->name('payment-detail-mail.edit-detail');
             Route::post('/payment-details-mail-update', [PaymentDetailMailController::class, 'paymentDetailMailUpdate'])->name('payment-detail-mail.update');
-
-           
             Route::get('/paypal-change-status', [PaypalCredentialController::class, 'changeStatus'])->name('credentials.change-status');
         });
 
@@ -411,10 +407,9 @@ Route::name('customer.')
             Route::get('/subscriptions-fetch-data', [CustomerSubscriptionController::class, 'fetchSubscription'])->name('subscription.ajax-list');
             Route::get('/subscriptions-details/{id}', [CustomerSubscriptionController::class, 'customerSubscriptionDetail'])->name('subscription.show');
 
-            Route::get('/my-family-cinema', [CustomerSubscriptionController::class, 'myFamilyCinema'])->name('myFamily-cinema');
         });
 
-        // customer-subscription
+        Route::get('/my-family-cinema', [CustomerSubscriptionController::class, 'myFamilyCinema'])->name('myFamily-cinema');
     });
 
 

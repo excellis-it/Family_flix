@@ -26013,6 +26013,11 @@ textarea.form-control-lg {
     margin-right: 1rem
 }
 
+.edit-btn {
+    color:#1574aa;
+    font-size: 16px;
+}
+
 .btn-check {
     position: absolute;
     clip: rect(0, 0, 0, 0);

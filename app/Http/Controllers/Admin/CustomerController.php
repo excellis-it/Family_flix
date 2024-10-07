@@ -143,7 +143,7 @@ class CustomerController extends Controller
             'mail_content' => $request->mail_content,
         ];
 
-        // Mail::to($user->email)->send(new RechargeCodeMail($maildata));
+        Mail::to($user->email)->send(new RechargeCodeMail($maildata));
 
         return redirect()->route('customers.index')->with('message', 'Recharge code mail sent successfully');
     }

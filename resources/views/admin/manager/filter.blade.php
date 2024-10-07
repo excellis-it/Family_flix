@@ -6,7 +6,7 @@
             <td>{{ $manager->phone ?? 'N/A' }}</td>
             <td><div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $manager->id }}" {{ $manager->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div></td>
             <td>
-                <a href="{{ route('managers.edit', $manager->id) }}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Affiliate Marketer" data-route="{{ route('managers.delete', $manager->id) }}" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
+                <a href="{{ route('managers.edit', $manager->id) }}" class="edit-btn"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;<a title="Delete Affiliate Marketer" data-route="{{ route('managers.delete', $manager->id) }}" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                    
             </td>
         </tr>

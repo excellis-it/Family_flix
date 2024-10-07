@@ -14,7 +14,8 @@
                     <h3>Add New Product</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod"><a href="{{ route('products.index') }}">Product</a></span><span class="bread-slash">/</span></li>
+                        <li><span class="bread-blod"><a href="{{ route('products.index') }}">
+                                    List</a></span><span class="bread-slash">/</span></li>
                         <li><span class="bread-blod">Create Product</span></li>
                     </ul>
                 </div>
@@ -30,7 +31,8 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6 mb-3">
-                                    <label>Product For</label>
+                                    <label>Product For <span
+                                        style="color: red;">*</span></label>
                                     <select name="type" class="form-control">
                                         <option value="">Select Type</option>
                                         <option value="shows">Shows</option>

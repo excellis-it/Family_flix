@@ -49,7 +49,7 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }} {{ Request::is('admin/manager-permission*') ? 'active' : '' }}" href="#">
                         <span>
-                            <i class="ti ti-aperture"></i>
+                            <i class="ti ti-pencil"></i>
                         </span>Manager Permission
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
@@ -132,12 +132,6 @@
                     </ul>
                 </li>
                 @endif
-
-                {{-- <li class="nav-item has-submenu {{ Request::is('admin/commission-percentage*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('') }}"> <span>
-                            <i class="ti ti-aperture"></i>
-                        </span>Commission Percentage<span class="arrow-down"></span></a>
-                </li> --}}
 
                 @if (Gate::check('Manage Commission History'))
                 <li class="nav-item has-submenu">
@@ -227,8 +221,8 @@
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}" href="#">
                         <span>
-                            <i class="ti ti-pencil"></i>
-                        </span>Cms
+                            <i class="ti ti-aperture"></i>
+                        </span>Site Setting
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
                     <ul class="submenu collapse {{ Request::is('admin/cms*') ? 'show' : '' }}">
@@ -317,21 +311,30 @@
                 </li>
                 @endif
 
-                @if(Gate::check('View Contactus'))
+                @if(Gate::check('View Contactus') || Gate::check('View Subscribers'))
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/contact-us*') ? 'active' : ' ' }}" href="#">
+                    <a class="nav-link {{ Request::is('admin/contact-us*') || Request::is('admin/subscriber-list*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-phone"></i>
-                        </span>Contact Us
+                        </span>Communications
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
-                    <ul class="submenu collapse {{ Request::is('admin/contact-us*') ? 'show' : '' }}">
+                    <ul class="submenu collapse {{ Request::is('admin/contact-us*')  ? 'show' : '' }}">
+                        @if(Gate::check('View Contactus'))
                         <li class="{{ Request::is('admin/contact-us*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('contact-us.list') }}">List</a>
+                            <a class="nav-link" href="{{ route('contact-us.list') }}">Contact Us List</a>
                         </li>
+                        @endif
+
+                        @if(Gate::check('View Subscribers'))
+                        <li class="{{ Request::is('admin/subscriber-list*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('subscriber.list') }}">Subscribers List</a>
+                        </li>
+                        @endif
                     </ul>
                 </li>
                 @endif
+
 
                 @if(Gate::check('Manage Coupon'))
                 <li class="nav-item has-submenu">
@@ -349,27 +352,13 @@
                 </li>
                 @endif
 
-                @if(Gate::check('View Subscribers'))
-                <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/subscriber-list*') ? 'active' : ' ' }}" href="#">
-                        <span>
-                            <i class="ti ti-arrow-right"></i>
-                        </span>Subscription Us
-                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
-                    </a>
-                    <ul class="submenu collapse {{ Request::is('admin/subscriber-list*') ? 'active' : ' ' }}">
-                        <li class="{{ Request::is('admin/subscriber-list*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('subscriber.list') }}">List</a>
-                        </li>
-                    </ul>
-                </li>
-                @endif
+                
                 @if(Gate::check('Manage Payment Detail'))
                 <li class="nav-item has-submenu">
                     <a class="nav-link {{ Request::is('admin/site-settings*') ? 'active' : ' ' }}" href="#">
                         <span>
                             <i class="fa fa-cog"></i>
-                        </span>Site Setting
+                        </span>Payment Setting
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
                     <ul class="submenu collapse">

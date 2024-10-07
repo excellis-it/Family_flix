@@ -67,8 +67,10 @@
     </section>
     <div class="container-fluid">
         <div class="breadcome-list">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="d-flex">
+                <div class="arrow_left"><a href="{{ route('customers.index') }}" class="text-white"><i
+                            class="ti ti-arrow-left"></i></a></div>
+                <div class="">
                     <h3>Customer Plan</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>

@@ -12,10 +12,10 @@
         <td>
             <a title="Delete Coupon"
                 data-route="{{ route('delete.commission-percentage', $commission_percentage->id) }}"
-                class="delete_acma" href="javascipt:void(0);" id="delete"><i
+                class="delete_acma edit-btn" href="javascipt:void(0);" id="delete"><i
                     class="fas fa-trash"></i></a>
 
-            <a href="{{ route('commission-percentage.edit', $commission_percentage->id) }}"> <i
+            <a href="{{ route('commission-percentage.edit', $commission_percentage->id) }}" class="edit-btn"> <i
                     class="fas fa-edit"></i></a>
         </td>
     </tr>

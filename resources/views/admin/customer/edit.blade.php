@@ -15,7 +15,7 @@
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                         <li><span class="bread-blod"><a href="{{ route('customers.index') }}">
-                                    Customer</a></span><span class="bread-slash">/</span></li>
+                            List</a></span><span class="bread-slash">/</span></li>
                         <li><span class="bread-blod">Edit Customer</span></li>
                     </ul>
                 </div>

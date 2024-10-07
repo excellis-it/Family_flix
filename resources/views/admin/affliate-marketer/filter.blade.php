@@ -9,8 +9,8 @@
                 <div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $affiliater->id }}" {{ $affiliater->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>
             </td>
             <td>
-                <a href="{{ route('affliate-marketer.edit', $affiliater->id) }}" class="btn btn-sm" style="font-size: 18px;"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                <a title="Delete Affiliate Marketer" data-route="{{ route('affliate-marketer.delete', $affiliater->id) }}" href="javascipt:void(0);" id="delete" class="btn btn-sm" style="font-size: 18px;"><i class="fas fa-trash"></i></a>  
+                <a href="{{ route('affliate-marketer.edit', $affiliater->id) }}" class="edit-btn" data-toggle="tooltip" data-placement="top" title="Edit Affiliator"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                <a  data-route="{{ route('affliate-marketer.delete', $affiliater->id) }}" href="javascipt:void(0);" id="delete" class="edit-btn" data-toggle="tooltip" data-placement="top" title="Delete Affiliator"><i class="fas fa-trash"></i></a> 
             </td>
         </tr>
     @endforeach

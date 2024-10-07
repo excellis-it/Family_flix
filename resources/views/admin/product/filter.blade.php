@@ -33,8 +33,8 @@
             </td>
             
             <td>
-                <a href="{{ route('products.edit', $product->id) }}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                <a title="Delete Product" data-route="{{ route('delete.products', $product->id) }}" class="delete_acma"
+                <a href="{{ route('products.edit', $product->id) }}" class="edit-btn"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                <a title="Delete Product" data-route="{{ route('delete.products', $product->id) }}" class="delete_acma edit-btn"
                     href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
 
             </td>

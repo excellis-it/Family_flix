@@ -17,7 +17,7 @@
                 @endif
             </td>
             <td>
-                <a href="{{ route('credentials.edit', $credential->id) }}"><i class="fas fa-edit"></i></a>
+                <a href="{{ route('credentials.edit', $credential->id) }}" class="edit-btn"><i class="fas fa-edit"></i></a>
             </td>
         </tr>
     @endforeach

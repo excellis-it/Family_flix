@@ -18,13 +18,14 @@
             </label>
         </td>
         <td>
+            <a href="{{ route('coupons.edit', $coupon->id) }}" class="edit-btn"> <i
+                class="fas fa-edit"></i></a>
             <a title="Delete Coupon"
                 data-route="{{ route('delete.coupons', $coupon->id) }}"
-                class="delete_acma" href="javascipt:void(0);" id="delete"><i
+                class="delete_acma edit-btn" href="javascipt:void(0);" id="delete"><i
                     class="fas fa-trash"></i></a>
 
-            <a href="{{ route('coupons.edit', $coupon->id) }}"> <i
-                    class="fas fa-edit"></i></a>
+            
         </td>
     </tr>
 @endforeach

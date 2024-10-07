@@ -17,9 +17,9 @@
             </td>
             <td>
                 <a title="Delete Customer" data-route="{{ route('delete.menu-managemnt', $menu->id) }}"
-                    class="delete_acma" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
+                    class="delete_acma edit-btn" href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
 
-                <a href="{{ route('menu-management.edit', $menu->id) }}"> <i class="fas fa-edit"></i></a>
+                <a href="{{ route('menu-management.edit', $menu->id) }}" class="edit-btn"> <i class="fas fa-edit"></i></a>
             </td>
         </tr>
     @endforeach

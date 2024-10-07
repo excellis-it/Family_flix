@@ -16,7 +16,9 @@
                 <div class="">
                     <h3>Manager Permission</h3>
                     <ul class="breadcome-menu mb-0">
-                        <li><a href="{{ route('admin.dashboard') }}">Dashboard</a> <span class="bread-slash">/</span></li>
+                        <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
+                        <li><span class="bread-blod"><a href="{{ route('manager-permission.index') }}">
+                            List</a></span><span class="bread-slash">/</span></li>
                         <li><a href=""><span class="bread-blod">Manager Permission</span></a></li>
                     </ul>
                 </div>

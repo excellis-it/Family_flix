@@ -15,7 +15,7 @@
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                         <li><span class="bread-blod"><a href="{{ route('affliate-marketer.index') }}">
-                                    Affiliate Marketer</a></span><span class="bread-slash">/</span></li>
+                                    List</a></span><span class="bread-slash">/</span></li>
                         <li><span class="bread-blod">Update Affiliate Marketer</span></li>
                     </ul>
                 </div>

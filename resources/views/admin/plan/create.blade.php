@@ -13,8 +13,8 @@
                     <h3>Add New Plan</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod"><a href="{{ route('plan.index') }}">Plan</a></span><span
-                                class="bread-slash">/</span></li>
+                        <li><span class="bread-blod"><a href="{{ route('plan.index') }}">
+                            List</a></span><span class="bread-slash">/</span></li>
                         <li><span class="bread-blod">Create New Plan</span></li>
                     </ul>
                 </div>

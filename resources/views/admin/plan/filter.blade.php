@@ -12,10 +12,9 @@
             <td>{{ $plan->plan_actual_price }}</td>
             <td>{{ $plan->plan_offer_price }}</td>
             <td>
-                <a title="Delete Plan" data-route="{{ route('delete.plan', $plan->id) }}" class="delete_acma"
+                <a href="{{ route('plan.edit', $plan->id) }}" class="edit-btn"> <i class="fas fa-edit"></i></a>&nbsp;
+                <a title="Delete Plan" data-route="{{ route('delete.plan', $plan->id) }}" class="delete_acma edit-btn"
                     href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
-
-                <a href="{{ route('plan.edit', $plan->id) }}"> <i class="fas fa-edit"></i></a>
             </td>
         </tr>
     @endforeach

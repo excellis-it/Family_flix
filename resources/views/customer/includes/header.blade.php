@@ -14,7 +14,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxl-6 col-xl-6 col-sm-2 p-0 order-xl-2 order-3">
+                        <div class="col-xxl-9 col-xl-9 col-sm-2 p-0 order-xl-2 order-3">
                             <div class="hdr-btm">
                                 <div class="right_top order-xl-2 order-lg-3">
                                     <div class="right_btm">

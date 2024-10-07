@@ -37,18 +37,17 @@
                 <div class="button-switch"><input type="checkbox" id="switch-orange" class="switch toggle-class" data-id="{{ $customer->id }}" {{ $customer->status ? 'checked' : '' }} /><label for="switch-orange" class="lbl-off"></label><label for="switch-orange" class="lbl-on"></label></div>
             </td>
             <td>
-                <a href="{{ route('customers.plans.show', $customer->id) }}" class="btn btn-sm" data-toggle="tooltip" data-placement="right" title="View Plan">
-                    <i class="fa fa-eye" style="font-size: 18px;"></i>
+                <a href="{{ route('customers.plans.show', $customer->id) }}" class="edit-btn" data-toggle="tooltip" data-placement="right" title="View Plan">
+                    <i class="fa fa-eye" ></i>
                 </a>
             </td>
             <td>
-                <a href="{{ route('customers.recharge-code-mail', $customer->id) }}" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Send Mail"
-                   ><i class="fa fa-send" style="font-size: 18px;"></i>
+                <a href="{{ route('customers.edit-detail', $customer->id) }}" class="edit-btn" data-toggle="tooltip" data-placement="top" title="Edit Customer"
+                    ><i class="fas fa-edit" ></i>
                 </a>
-
-                <a href="{{ route('customers.edit-detail', $customer->id) }}" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Customer"
-                    ><i class="fa fa-edit" style="font-size: 18px;"></i>
-                 </a>
+                <a href="{{ route('customers.recharge-code-mail', $customer->id) }}" class="edit-btn" data-toggle="tooltip" data-placement="top" title="Send Mail"
+                   ><i class="fa fa-send" ></i>&nbsp;
+                </a>
             </td>
         </tr>
     @endforeach

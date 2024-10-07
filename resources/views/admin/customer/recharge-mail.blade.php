@@ -15,7 +15,7 @@ Customer Send mail
                 <ul class="breadcome-menu mb-0">
                     <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                     <li><span class="bread-blod"><a href="{{ route('customers.index') }}">
-                                Customer List</a></span><span class="bread-slash"></span></li>
+                                Customer Send Mail</a></span><span class="bread-slash"></span></li>
                 </ul>
             </div>
         </div>
@@ -30,10 +30,9 @@ Customer Send mail
                         @csrf
                         <div class="row">
                             <div class="form-group col-md-6 mb-3">
-                                <label for="inputEnterYourName" class="col-form-label"> Name <span
-                                        style="color: red;">*</span></label>
+                                <label for="inputEnterYourName" class="col-form-label"> Name </label>
                                 <input type="text" name="name" id="" class="form-control" value="{{ $user->name }}"
-                                    placeholder="Enter Name">
+                                    placeholder="Enter Name" readonly>
                                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                                 @if ($errors->has('name'))
                                 <div class="error" style="color:red;">
@@ -53,7 +52,7 @@ Customer Send mail
                                 @endif
                             </div>
                             <div class="w-100 text-end">
-                                <button type="submit" class="print_btn">Send Mail</button>
+                                <button type="submit" class="print_btn">Send</button>
                             </div>
                         </div>
                     </form>
