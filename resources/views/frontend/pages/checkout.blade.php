@@ -635,12 +635,10 @@
                     $('#loading-content').removeClass('loading-content');
 
                     if (data.success) {
-                        //swal alert
                         Swal.fire({
                             title: 'Success',
                             text: data.message,
-                            icon: 'success',
-                            confirmButtonText: 'Ok'
+                            icon: 'success'
                         });
                         
                         window.location.href = "{{ route('success-subscription') }}";

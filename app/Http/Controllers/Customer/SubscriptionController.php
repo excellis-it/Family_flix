@@ -42,6 +42,15 @@ class SubscriptionController extends Controller
         }
     }
 
+    public function subscriptionChangeStatus(Request $request)
+    {
+       
+        $subscription = UserSubscription::find($request->subscription_id);
+        $subscription->subscription_status = $request->status;
+        $subscription->save();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+
 
     public function myFamilyCinema()
     {

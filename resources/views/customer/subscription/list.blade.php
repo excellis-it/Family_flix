@@ -22,7 +22,7 @@
         <div class="container">
             <div class="user-panel-wrap">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="user-list">
                             <ul>
                                 {{-- <li class="active-1"><a href="">Dashboard</a></li> --}}
@@ -34,7 +34,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <div class="user-panel-table user-list">
                             <div class="table-responsive">
                                 <table class="table">
@@ -47,7 +47,7 @@
                                             <th scope="col">Expiry date</th>
                                             <th scope="col">Affiliate name</th>
                                             <th scope="col">Action</th>
-                                            {{-- <th scope="col">Status</th> --}}
+                                            <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,32 +67,29 @@
                                                     </td>
                                                     <td>{{ $customer_subscription->affiliate->name ?? 'N/A' }}</td>
                                                     <td>
-                                                        <a href="{{ route('customer.subscription.show', $customer_subscription->id) }}"
-                                                            class="btn btn-primary btn-sm v-btn"><i
-                                                                class="fa fa-eye"></i></a>
-                                                        {{-- <a href="{{ route('customer.subscription.show', $customer_subscription->id) }}" class="btn btn-primary btn-sm">Edit</a> --}}
+                                                        <a href="{{ route('customer.subscription.show', $customer_subscription->id) }}" style="font-size:17px;" ><i class="fas fa-eye"></i></a>
                                                     </td>
-                                                    {{-- <td>
-                                                        @if ($customer_subscription->plan_expiry_date < date('Y-m-d'))
-                                                            <span class="text-danger">Expired</span>
-                                                        @else
-                                                            @if ($customer_subscription->paypal_subscription_id == null)
-                                                                <a title="Renewal plan"
-                                                                    data-route="{{ route('create-payments', ['id' => encrypt($customer_subscription->plan_id)]) }}"
-                                                                    class="renewal-btn btn" id="renewal-button">Renewal</a>
-                                                            @else
-                                                                @if (isset($customer_subscription->userSubscriptionRecurring) &&
-                                                                        $customer_subscription->userSubscriptionRecurring->status == 'ACTIVE')
-                                                                    <span class="text-success">Active</span>
-                                                                @else
-                                                                    <a title="Renewal plan"
-                                                                        data-route="{{ route('create-payments', ['id' => encrypt($customer_subscription->plan_id)]) }}"
-                                                                        class="renewal-btn btn"
-                                                                        id="renewal-button">Renewal</a>
-                                                                @endif
-                                                            @endif
-                                                        @endif
-                                                    </td> --}}
+                                                    <td>
+                                                    @if ($customer_subscription->subscription_status == 1)
+                                                        <span class="text-success font-weight-bold" style="background-color: #63f384 !important; padding: 5px !important; border-radius: 5px !important; color: #fff !important;">
+                                                            Active
+                                                        </span>
+                                                    @elseif ($customer_subscription->subscription_status == 2)
+                                                        <span class="text-danger font-weight-bold" style="background-color: #f73e4e !important; padding: 5px !important; border-radius: 5px !important; color: #fff !important;">
+                                                            Cancel
+                                                        </span>
+                                                    @elseif ($customer_subscription->subscription_status == 3)
+                                                        <span class="text-secondary font-weight-bold" style="background-color: #9b3e08 !important; padding: 5px !important; border-radius: 5px !important; color: #fff !important;">
+                                                            Expired
+                                                        </span>
+                                                    @elseif ($customer_subscription->subscription_status == 4)
+                                                        <span class="text-warning font-weight-bold" style="background-color: #e7b425 !important; padding: 5px !important; border-radius: 5px !important; color: #fff !important;">
+                                                            Renewal
+                                                        </span>
+                                                    @endif
+                                                    
+                                                    
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -171,4 +168,41 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.subscription-status').change(function() {
+                var subscriptionId = $(this).data('id');
+                var newStatus = $(this).val();
+
+                // Make an AJAX request to update the status
+                $.ajax({
+                    url: "{{ route('customer.subscription.change-status')}}", // Update with your actual endpoint
+                    method: 'POST',
+                    data: {
+                        subscription_id: subscriptionId,
+                        status: newStatus,
+                        _token: '{{ csrf_token() }}' // Include CSRF token for security
+                    },
+                    success: function(response) {
+                        // Handle success response
+                        alert('Status updated successfully');
+                        location.reload(); // Reload the page to reflect changes
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        alert('Failed to update status');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+
 @endpush

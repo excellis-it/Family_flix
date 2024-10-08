@@ -108,6 +108,8 @@ class SubscriptionController extends Controller
             'expand' => ['latest_invoice.payment_intent'],
         ]);
 
+       
+
         // check user exists or not
         $check_user_exists = User::where('email', $data['email'])->count();
         if ($check_user_exists > 0) {
@@ -190,6 +192,7 @@ class SubscriptionController extends Controller
             $user_subscription->affiliate_commission = 0;
         }
 
+        $user_subscription->stripe_subscription_id = $subscription->id;
         // $user_subscription->payment_type = $data['payment_type'];
         $user_subscription->plan_id = $data['plan_id'] ?? '';
         $user_subscription->plan_name = $data['plan_name'] ?? '';
@@ -203,6 +206,7 @@ class SubscriptionController extends Controller
         $today = date('Y-m-d');
         $user_subscription->plan_start_date = $today ?? '';
         $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
+        $user_subscription->subscription_status = 1;
         $user_subscription->save();
 
         

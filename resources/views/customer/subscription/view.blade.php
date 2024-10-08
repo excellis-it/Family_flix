@@ -53,7 +53,8 @@
                                         <ul>
                                             <li><span class="fw-600">Start date:-</span>{{ date('d M,Y', strtotime($customer_subscription->plan_start_date)) ?? 'N/A' }}</li>
                                             <li><span class="fw-600">Expiry date:-</span>{{ date('d M,Y', strtotime($customer_subscription->plan_expiry_date)) ?? 'N/A' }}</li>
-                                            
+                                            <li>
+                                                
                                         </ul>
                                     </div>
                                 </div>
