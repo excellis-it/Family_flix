@@ -31,11 +31,11 @@
                             @method('PUT')
                             @csrf
                             <div class="row">
-                                <div class="form-group col-md-12 mb-3">
+                                <div class="form-group col-md-6 mb-3">
                                     <label for="inputEnterYourName" class="col-form-label"> Name <span
                                             style="color: red;">*</span></label>
                                     <input type="text" name="name" id="" class="form-control"
-                                        value="{{ $affiliate_marketer['name'] }}" placeholder="Enter Name">
+                                        value="{{ $affiliate_marketer['name'] ?? ''}}" placeholder="Enter Name">
                                     @if ($errors->has('name'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('name') }}</div>
@@ -45,7 +45,7 @@
                                     <label for="inputEnterYourName" class="col-form-label"> Email <span
                                             style="color: red;">*</span></label>
                                     <input type="text" name="email" id="" class="form-control"
-                                        value="{{ $affiliate_marketer['email'] }}" placeholder="Enter  Email">
+                                        value="{{ $affiliate_marketer['email'] ?? ''}}" placeholder="Enter  Email">
                                     @if ($errors->has('email'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('email') }}</div>
@@ -56,7 +56,7 @@
                                     <label for="inputEnterYourName" class="col-form-label"> Phone <span
                                             style="color: red;">*</span></label>
                                     <input type="text" name="phone" id="" class="form-control"
-                                        value="{{ $affiliate_marketer['phone'] }}" placeholder="Enter Phone Number">
+                                        value="{{ $affiliate_marketer['phone'] ?? ''}}" placeholder="Enter Phone Number">
                                     @if ($errors->has('phone'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('phone') }}</div>
@@ -104,6 +104,16 @@
                                     @if ($errors->has('confirm_password'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('confirm_password') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="inputEnterYourName" class="col-form-label"> Commission Percentage</label>
+                                    <input type="text" name="commission_percentage" id="" class="form-control" placeholder="Commission Percentage"
+                                    value="{{ $affiliate_commission['percentage'] ?? '' }}">
+                                    @if ($errors->has('commission_percentage'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('commission_percentage') }}</div>
                                     @endif
                                 </div>
 

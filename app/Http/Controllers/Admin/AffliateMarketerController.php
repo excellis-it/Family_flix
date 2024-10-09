@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\RegistrationMail;
 use App\Models\User;
+use App\Models\AffiliateCommission;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -81,7 +82,8 @@ class AffliateMarketerController extends Controller
             'confirm_password' => 'required|min:8|same:password',
             'phone' => 'required',
             'profile_picture' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
-            'status' => 'required'
+            'status' => 'required',
+            
         ]);
 
         $data = new User();
@@ -95,6 +97,11 @@ class AffliateMarketerController extends Controller
         }
         $data->save();
 
+        $affiliate_commission = new AffiliateCommission;
+        $affiliate_commission->affiliate_id = $data->id;
+        $affiliate_commission->percentage = $request->commission_percentage;
+        $affiliate_commission->save();
+
         $data->assignRole('AFFLIATE MARKETER');
         $maildata = [
             'name' => $request->name,
@@ -103,7 +110,7 @@ class AffliateMarketerController extends Controller
             'type' => 'Affiliate Marketer',
         ];
 
-        // Mail::to($request->email)->send(new RegistrationMail($maildata));
+        Mail::to($request->email)->send(new RegistrationMail($maildata));
         return redirect()->route('affliate-marketer.index')->with('message', 'Affiliate Marketer created successfully.');
     }
 
@@ -128,7 +135,8 @@ class AffliateMarketerController extends Controller
     {
         if (Auth::user()->can('Edit Affiliater')) {
             $affiliate_marketer = User::findOrFail($id);
-            return view('admin.affliate-marketer.edit')->with(compact('affiliate_marketer'));
+            $affiliate_commission = AffiliateCommission::where('affiliate_id',$id)->first() ?? '';
+            return view('admin.affliate-marketer.edit')->with(compact('affiliate_marketer','affiliate_commission'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -149,6 +157,7 @@ class AffliateMarketerController extends Controller
             'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|unique:users,email,'.$id,
             'phone' => 'required',
             'status' => 'required',
+        
         ]);
         $data = User::findOrFail($id);
         $data->name = $request->name;
@@ -173,6 +182,17 @@ class AffliateMarketerController extends Controller
             $data->image = $this->imageUpload($request->file('profile_picture'), 'Affiliate Marketer')['filePath'];
         }
         $data->save();
+
+        $update_commission = AffiliateCommission::where('affiliate_id', $data->id)->first();
+        if($update_commission) {
+            $update_commission->percentage = $request->commission_percentage;
+            $update_commission->update();
+        }else{
+            $add_commission = new AffiliateCommission;
+            $add_commission->affiliate_id = $data->id;
+            $add_commission->percentage = $request->commission_percentage;
+            $add_commission->save();
+        }
 
         return redirect()->route('affliate-marketer.index')->with('message', 'Affiliate Marketer updated successfully.');
     }

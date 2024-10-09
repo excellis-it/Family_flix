@@ -254,7 +254,8 @@ class SubscriptionController extends Controller
                 $affiliate_id = Session::get('affiliate_id');
                 $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
                 if ($commission) {
-                    $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                    // $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                    $commission_dis = number_format(($data['amount'] / 100) * $commission->percentage, 2);
                     $admin_commission = $data['amount'] - $commission_dis;
                 } else {
                     $commission_dis = 0;

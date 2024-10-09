@@ -178,7 +178,7 @@ class SubscriptionController extends Controller
             $affiliate_id = Session::get('affiliate_id');
             $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
             if ($commission) {
-                $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                $commission_dis = number_format(($data['amount'] / 100) * $commission->percentage, 2);
                 $admin_commission = $data['amount'] - $commission_dis;
             } else {
                 $commission_dis = 0;
@@ -242,7 +242,6 @@ class SubscriptionController extends Controller
         }
 
        
-
         $payment = new Payment();
         $payment->user_subscription_id = $user_subscription->id;
         $payment->transaction_id = $paymentMethodId;
@@ -265,10 +264,8 @@ class SubscriptionController extends Controller
         ];
 
        
-
         $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
         Mail::to($user_detail->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
-
         Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
 
         return response()->json([
