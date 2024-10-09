@@ -40,6 +40,9 @@
                                             {{ $errors->first('plan_name') }}</div>
                                     @endif
                                 </div>
+
+                                <input type="hidden"  name="stripe_product_id" value="{{ $plan->stripe_product_id }}">
+                                <input type="hidden"  name="stripe_price_id" value="{{ $plan->stripe_price_id }}">
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Plan actual price($)<span
                                         style="color: red;">*</span></label>

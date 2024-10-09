@@ -175,6 +175,7 @@ class AffliateMarketerController extends Controller
             $request->validate([
                 'profile_picture' => 'image|mimes:jpg,png,jpeg,gif,svg',
             ]);
+            
             if ($data->profile_picture) {
                 $currentImageFilename = $data->profile_picture; // get current image name
                 Storage::delete('app/'.$currentImageFilename);
