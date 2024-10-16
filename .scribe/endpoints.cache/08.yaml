@@ -103,6 +103,74 @@ endpoints:
   -
     httpMethods:
       - POST
+    uri: api/v1/subscription-payment/credential
+    metadata:
+      groupName: Subscription
+      groupDescription: |-
+
+        APIs for Subscription List
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Subscriptions Api'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "status": true,
+          "statusCode": 200,
+          "data": {
+           "stripe_key": "pk_test_51
+          "stripe_secret": "sk_test_51"
+          }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+           "status": false,
+          "statusCode": 200,
+          "error": "Stripe credential not found!"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+          "status": false,
+          "statusCode": 401,
+          "error": "Unauthorised"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
     uri: api/v1/subscription-payment/create
     metadata:
       groupName: Subscription
@@ -127,7 +195,7 @@ endpoints:
         name: payment_method_id
         description: ''
         required: true
-        example: neque
+        example: cumque
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -136,7 +204,7 @@ endpoints:
         name: email
         description: ''
         required: true
-        example: quo
+        example: quia
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -163,7 +231,7 @@ endpoints:
         name: amount
         description: ''
         required: true
-        example: quam
+        example: nesciunt
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -172,7 +240,7 @@ endpoints:
         name: plan_id
         description: ''
         required: true
-        example: consectetur
+        example: sit
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -181,7 +249,7 @@ endpoints:
         name: plan_name
         description: ''
         required: true
-        example: quisquam
+        example: expedita
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -190,7 +258,7 @@ endpoints:
         name: plan_price
         description: ''
         required: true
-        example: a
+        example: ea
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -199,7 +267,7 @@ endpoints:
         name: country
         description: ''
         required: true
-        example: mollitia
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -217,7 +285,7 @@ endpoints:
         name: city
         description: ''
         required: true
-        example: sint
+        example: culpa
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -226,7 +294,7 @@ endpoints:
         name: house_name
         description: ''
         required: true
-        example: dolores
+        example: sed
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -235,23 +303,23 @@ endpoints:
         name: post_code
         description: ''
         required: true
-        example: quis
+        example: eveniet
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      payment_method_id: neque
-      email: quo
-      amount: quam
-      plan_id: consectetur
-      plan_name: quisquam
-      plan_price: a
-      country: mollitia
+      payment_method_id: cumque
+      email: quia
+      amount: nesciunt
+      plan_id: sit
+      plan_name: expedita
+      plan_price: ea
+      country: et
       state: ut
-      city: sint
-      house_name: dolores
-      post_code: quis
+      city: culpa
+      house_name: sed
+      post_code: eveniet
     fileParameters: []
     responses:
       -

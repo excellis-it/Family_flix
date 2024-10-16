@@ -1,0 +1,2328 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/affiliater/commission/list:
+    post:
+      summary: 'Commission Api'
+      operationId: commissionApi
+      description: ''
+      parameters:
+        -
+          in: query
+          name: search
+          description: 'Search by customer name.'
+          example: 'John Doe'
+          required: false
+          schema:
+            type: string
+            description: 'Search by customer name.'
+            example: 'John Doe'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No commission found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No commission found!'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: Unauthorised
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Affiliater - Commission'
+  /api/v1/affiliater/profile-details:
+    post:
+      summary: 'Details Api'
+      operationId: detailsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success:
+                    id: 1
+                    name: 'John Doe'
+                    email: john@yopmail.com
+                    email_verified_at: null
+                    phone: '1234567890'
+                    image: 'Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png'
+                    created_at: '2021-05-27T06:50:50.000000Z'
+                    updated_at: '2021-05-27T06:50:50.000000Z'
+                properties:
+                  success:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: john@yopmail.com
+                      email_verified_at:
+                        type: string
+                        example: null
+                      phone:
+                        type: string
+                        example: '1234567890'
+                      image:
+                        type: string
+                        example: 'Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png'
+                      created_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthorised
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Affiliater Profile'
+  /api/v1/affiliater/profile-update:
+    post:
+      summary: 'Update Profile Api'
+      operationId: updateProfileApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Affiliater details updated successfully.'
+                  data:
+                    id: 3
+                    name: 'test2 affiliater2'
+                    email: test1@yopmail.com
+                    phone: '1231231231'
+                    email_verified_at: null
+                    image: 'Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png'
+                    status: '1'
+                    created_at: '2024-03-13T12:57:34.000000Z'
+                    updated_at: '2024-03-14T06:16:19.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Affiliater details updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'test2 affiliater2'
+                      email:
+                        type: string
+                        example: test1@yopmail.com
+                      phone:
+                        type: string
+                        example: '1231231231'
+                      email_verified_at:
+                        type: string
+                        example: null
+                      image:
+                        type: string
+                        example: 'Affiliate Marketer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png'
+                      status:
+                        type: string
+                        example: '1'
+                      created_at:
+                        type: string
+                        example: '2024-03-13T12:57:34.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-03-14T06:16:19.000000Z'
+      tags:
+        - 'Affiliater Profile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                phone:
+                  type: string
+                  description: 'The phone of the user.'
+                  example: "+1 1234 567 890\n<<<<<<< HEAD\n======="
+                address:
+                  type: string
+                  description: 'The address of the user.'
+                  example: "USA,678\n>>>>>>> c1785ddb5e90245089796b4a8046a3bd1939716d"
+              required:
+                - name
+                - phone
+                - address
+  /api/v1/affiliater/create-link:
+    post:
+      summary: 'AffiliateLink Api'
+      operationId: affiliateLinkApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Affiliate link created successfully.'
+                  data: 'http://127.0.0.1:8001/pricing/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9'
+                  status: true
+                properties:
+                  message:
+                    type: string
+                    example: 'Affiliate link created successfully.'
+                  data:
+                    type: string
+                    example: 'http://127.0.0.1:8001/pricing/eyJpdiI6IkJZQnQ1NTNUR0RwOGNKK3RTWURJN2c9PSIsInZhbHVlIjoieE9rbkFxWGUxKzRucE92N3VOTCtrUT09IiwibWFjIjoiYzJiYzQzMGUyNTIyNmU3MmYyYjdkMzhmODgzZWE4MmYxNThkYWUyMDIzNmI1MTA0NWFhMTAzZWFhYTk3OTIxNyIsInRhZyI6IiJ9'
+                  status:
+                    type: boolean
+                    example: true
+      tags:
+        - 'Affiliater Profile'
+  /api/v1/affiliater/dashboard:
+    post:
+      summary: 'Dashboard Api'
+      operationId: dashboardApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success:
+                    total_commissions: 1
+                    total_commision_amount: 100
+                    commision_amount_this_month: 100
+                    commision_amount_this_week: 100
+                properties:
+                  success:
+                    type: object
+                    properties:
+                      total_commissions:
+                        type: integer
+                        example: 1
+                      total_commision_amount:
+                        type: integer
+                        example: 100
+                      commision_amount_this_month:
+                        type: integer
+                        example: 100
+                      commision_amount_this_week:
+                        type: integer
+                        example: 100
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthorised
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Affiliater dashboard'
+  /api/v1/login:
+    post:
+      summary: 'Login Api'
+      operationId: loginApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    auth_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks
+                    user:
+                      id: 3
+                      name: 'test2 affiliater2'
+                      email: test1@yopmail.com
+                      status: '1'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      auth_token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 3
+                          name:
+                            type: string
+                            example: 'test2 affiliater2'
+                          email:
+                            type: string
+                            example: test1@yopmail.com
+                          status:
+                            type: string
+                            example: '1'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'Invalid user & Password!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'Invalid user & Password!'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: john@yopmail.com
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: '12345678'
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/register:
+    post:
+      summary: 'Register Api'
+      operationId: registerApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    user:
+                      name: 'test affiliaters'
+                      email: test123@yopmail.com
+                      phone: 8956237845
+                      status: 1
+                      updated_at: '2024-03-14T05:57:00.000000Z'
+                      created_at: '2024-03-14T05:57:00.000000Z'
+                      id: 4
+                  message: 'registered successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: 'test affiliaters'
+                          email:
+                            type: string
+                            example: test123@yopmail.com
+                          phone:
+                            type: integer
+                            example: 8956237845
+                          status:
+                            type: integer
+                            example: 1
+                          updated_at:
+                            type: string
+                            example: '2024-03-14T05:57:00.000000Z'
+                          created_at:
+                            type: string
+                            example: '2024-03-14T05:57:00.000000Z'
+                          id:
+                            type: integer
+                            example: 4
+                  message:
+                    type: string
+                    example: 'registered successfully'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'The email has already been taken.'
+                      - 'The confirm password and password must match.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                          - 'The confirm password and password must match.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                phone:
+                  type: string
+                  description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
+                  example: jkrfphpenhoavpkyynmtuzwheoknymsvrlqfsszvhbmagcpdvcfarltzhepkyxmddwbqvvpwywfqdbnegugg
+                email:
+                  type: string
+                  description: 'The email of the user. Example:'
+                  example: trace19@example.net
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: '12345678'
+                confirm_password:
+                  type: string
+                  description: 'The confirm_password of the user.'
+                  example: '12345678'
+              required:
+                - name
+                - phone
+                - email
+                - password
+                - confirm_password
+      security: []
+  /api/v1/cms/home:
+    post:
+      summary: 'Home-Page Api'
+      operationId: homePageApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n     \"status\": true,\n      \"message\": \"Home CMS data fetched successfully\",\n     \"statusCode\": \"200\",\n     \"data\": {\n         \"id\": 1,\n         \"top_back_image\": \"home/top_back.png\",\n         \"top_short_title\": \"Your All-In-One Entertainment Hub\",\n         \"top_main_title\": \"Unlimited Entertainment.At Your Fingertips.\",\n         \"top_button_text\": \"Sign Up Today\",\n         \"section1_main_image\": \"home/section1_main.png\",\n         \"section1_back_image\": \"home/section1_back.png\",\n         \"section2_back_image\": \"home/section2_back.png\",\n         \"section2_main_image\": \"home/section2_main.png\",\n         \"section2_title\": \"Everything You Love.All In One Place.\",\n         \"section2_description\": \"Our platform seamlessly integrates content from top streaming platforms like Netflix, Hulu, Disney, and more. Imagine having access to all your favorite shows and movies in one place, without the hassle of switching between multiple apps.\",\n         \"section2_short_title\": \"View Our Plans And Pricing\",\n         \"section2_main_icon\": \"home/main_icon.png\",\n         \"entertainment_title\": \"Entertainment Everywhere\",\n         \"entertainment_description\": \"Enjoy The Family Flix app on your TV, mobile, and tablet. Our platform supports all your devices. Anywhere, Any Device: The Family Flix Advantage\",\n         \"section3_back_image\": \"home/section3_back.png\",\n         \"section3_main_image\": \"home/section3_main.png\",\n         \"section3_title\": \"How It Works\",\n         \"section3_video_link\": \"home/4YGx75Dq9sxjUK2dMWThhIVSrYjWo9ZPNkFieaHq.mp4\",\n         \"section4_title\": \"Unbeatable Variety\",\n         \"section4_description\": \"Blockbuster hits, binge-worthy series, and hidden gems at your fingertips. A universe of entertainment curated for you.\",\n         \"section4_back_image\": \"home/section4_back.png\",\n         \"section5_back_image\": \"home/section5_back.png\",\n         \"section5_main_title\": \"Kid's Corner\",\n         \"section5_main_description\": \"<p>A dedicated space filled with family-friendly movies and shows to keep the little ones entertained. From animated adventures to educational content, we&rsquo;ve got it all in one safe and fun place.Subscription to The Family Flix means entertainment for the whole family, so your kids can have a blast while you enjoy your favorites. Subscribe today and let the young ones embark on their own cinematic journeys!</p>\",\n         \"section5_main_image\": \"home/section5_main.png\",\n         \"plan_section_title\": \"Pricing Plans & Options.\",\n         \"plan_section_back_image\": \"home/plan_back.png\",\n         \"created_at\": \"2024-03-06T05:24:23.000000Z\",\n         \"updated_at\": \"2024-03-06T05:35:15.000000Z\"\n     },\n}"
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n     \"status\": false,\n    \"message\": \"No Data Found\",\n   \"statusCode\": \"401\",\n}"
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/grid-section:
+    post:
+      summary: 'Grid-Section Api'
+      operationId: gridSectionApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"top_grid\": [\n      {\n          \"id\": 1,\n          \"icon\": \"grid/grid_icon1.png\",\n          \"title\": \"Unlimited Access\",\n          \"description\": \"Dive into a vast library of movies, TV series, and exclusive content.\"\n      },\n      {\n          \"id\": 2,\n          \"icon\": \"grid/grid_icon2.png\",\n          \"title\": \"Savings Simplified\",\n          \"description\": \"Affordable plans that eliminate the need for multiple subscriptions.\"\n      },\n      {\n          \"id\": 3,\n          \"icon\": \"grid/grid_icon3.png\",\n          \"title\": \"Watch Anywhere, Anytime\",\n          \"description\": \"Enjoy your favorites on your terms - mobile, desktop, or TV.\"\n      }\n  ],\n  \"entertainment_cms\": [\n      {\n          \"id\": 1,\n          \"image\": \"entertainment/en-1.png\",\n          \"image_name\": \"On Your TV\"\n      },\n      {\n          \"id\": 2,\n          \"image\": \"entertainment/en-2.png\",\n          \"image_name\": \"Mobiles & Tablets\"\n      },\n      {\n          \"id\": 3,\n          \"image\": \"entertainment/en-3.png\",\n          \"image_name\": \"On Firestick & Firecube\"\n      }\n  ],\n  \"message\": \"Grid Section CMS data fetched successfully\""
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/about:
+    post:
+      summary: 'About-Page Api'
+      operationId: aboutPageApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    id: 1
+                    title: 'About Us'
+                    banner_img: about/abt-bg.png
+                    section1_title: 'Celebrating Your Entertainment'
+                    section1_description: "Welcome to The Family Flix, where our passion lies in\r\n        crafting an exceptional entertainment experience that is\r\n        both accessible and affordable, catering to your unique\r\n        tastes. Our journey began with a simple yet ambitious\r\n        vision – to create a platform that brings together the\r\n        fragmented world of streaming services, providing you with\r\n        an easier and more cost-effective way to enjoy your\r\n        favorite movies, TV series, and more."
+                    section1_img: about/section1-img.png
+                    section2_title1: 'Our Commitment to You'
+                    section2_description1: 'At The Family Flix, our commitment is unwavering. We strive to deliver the best possible entertainment experience, and our dedicated team is at your service with top-notch customer support 24/7. We understand the value of your time and money, and our goal is to assist you in making the most of both.'
+                    section2_img2: about/section2_img2.png
+                    section3_title: 'What Sets Us Apart'
+                    section3_back_img: about/section3_back.png
+                    section3_title1: 'Vast Content Library'
+                    section3_description1: 'The Family Flix takes pride in presenting an ever-expanding content library. We embrace diversity, offering a range that includes movies, TV series, anime, web series, Korean drama, and more. Whatever your interests, we have something for everyone.'
+                    section3_image1: about/section3_img1.png
+                    section3_title2: 'Platform Flexibility'
+                    section3_description2: 'Enjoy the flexibility of watching your favorite shows and movies on your terms. The Family Flix supports all major platforms, whether you prefer streaming on your phone, tablet, or TV. Our user-friendly app ensures a seamless experience wherever you are.'
+                    section3_image2: about/section3_img2.png
+                    section3_title3: 'Savings & Simplicity'
+                    section3_description3: 'Simplify your entertainment budget with The Family Flix’s cost-effective solutions. Bid farewell to the hassles of managing multiple subscriptions and enjoy unbeatable value for a diverse range of content.'
+                    section3_image3: about/section3_img3.png
+                    created_at: '2024-03-06T05:24:23.000000Z'
+                    updated_at: '2024-03-06T05:24:23.000000Z'
+                  message: 'About CMS data fetched successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: 'About Us'
+                      banner_img:
+                        type: string
+                        example: about/abt-bg.png
+                      section1_title:
+                        type: string
+                        example: 'Celebrating Your Entertainment'
+                      section1_description:
+                        type: string
+                        example: "Welcome to The Family Flix, where our passion lies in\r\n        crafting an exceptional entertainment experience that is\r\n        both accessible and affordable, catering to your unique\r\n        tastes. Our journey began with a simple yet ambitious\r\n        vision – to create a platform that brings together the\r\n        fragmented world of streaming services, providing you with\r\n        an easier and more cost-effective way to enjoy your\r\n        favorite movies, TV series, and more."
+                      section1_img:
+                        type: string
+                        example: about/section1-img.png
+                      section2_title1:
+                        type: string
+                        example: 'Our Commitment to You'
+                      section2_description1:
+                        type: string
+                        example: 'At The Family Flix, our commitment is unwavering. We strive to deliver the best possible entertainment experience, and our dedicated team is at your service with top-notch customer support 24/7. We understand the value of your time and money, and our goal is to assist you in making the most of both.'
+                      section2_img2:
+                        type: string
+                        example: about/section2_img2.png
+                      section3_title:
+                        type: string
+                        example: 'What Sets Us Apart'
+                      section3_back_img:
+                        type: string
+                        example: about/section3_back.png
+                      section3_title1:
+                        type: string
+                        example: 'Vast Content Library'
+                      section3_description1:
+                        type: string
+                        example: 'The Family Flix takes pride in presenting an ever-expanding content library. We embrace diversity, offering a range that includes movies, TV series, anime, web series, Korean drama, and more. Whatever your interests, we have something for everyone.'
+                      section3_image1:
+                        type: string
+                        example: about/section3_img1.png
+                      section3_title2:
+                        type: string
+                        example: 'Platform Flexibility'
+                      section3_description2:
+                        type: string
+                        example: 'Enjoy the flexibility of watching your favorite shows and movies on your terms. The Family Flix supports all major platforms, whether you prefer streaming on your phone, tablet, or TV. Our user-friendly app ensures a seamless experience wherever you are.'
+                      section3_image2:
+                        type: string
+                        example: about/section3_img2.png
+                      section3_title3:
+                        type: string
+                        example: 'Savings & Simplicity'
+                      section3_description3:
+                        type: string
+                        example: 'Simplify your entertainment budget with The Family Flix’s cost-effective solutions. Bid farewell to the hassles of managing multiple subscriptions and enjoy unbeatable value for a diverse range of content.'
+                      section3_image3:
+                        type: string
+                        example: about/section3_img3.png
+                      created_at:
+                        type: string
+                        example: '2024-03-06T05:24:23.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-03-06T05:24:23.000000Z'
+                  message:
+                    type: string
+                    example: 'About CMS data fetched successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 500
+                  message: 'No Data Found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: 'No Data Found'
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/contact:
+    post:
+      summary: 'Contact-Page Api'
+      operationId: contactPageApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    id: 1
+                    title: Contact
+                    banner_img: contact/contact-banner.png
+                    background_img: contact/contact-bg.png
+                    main_title: 'Connect With Us'
+                    short_title: 'To learn more about how Streamit can help you, contact us.'
+                    button_name: 'Contact Us'
+                    map_link: 'https://maps.google.com/maps?q=Orlando%2C%20Florida&t=m&z=15&output=embed&iwloc=near'
+                    created_at: '2024-03-06T05:24:23.000000Z'
+                    updated_at: '2024-03-06T05:24:23.000000Z'
+                  message: 'Contact CMS data fetched successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: Contact
+                      banner_img:
+                        type: string
+                        example: contact/contact-banner.png
+                      background_img:
+                        type: string
+                        example: contact/contact-bg.png
+                      main_title:
+                        type: string
+                        example: 'Connect With Us'
+                      short_title:
+                        type: string
+                        example: 'To learn more about how Streamit can help you, contact us.'
+                      button_name:
+                        type: string
+                        example: 'Contact Us'
+                      map_link:
+                        type: string
+                        example: 'https://maps.google.com/maps?q=Orlando%2C%20Florida&t=m&z=15&output=embed&iwloc=near'
+                      created_at:
+                        type: string
+                        example: '2024-03-06T05:24:23.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-03-06T05:24:23.000000Z'
+                  message:
+                    type: string
+                    example: 'Contact CMS data fetched successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 500
+                  message: 'No Data Found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: 'No Data Found'
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/pricing:
+    post:
+      summary: 'Pricing-Page Api'
+      operationId: pricingPageApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  plan_cms:
+                    id: 1
+                    title: Pricing
+                    banner_img: pricing/pricing-banner.png
+                    background_img: pricing/pricing-bg.png
+                    main_title: 'Pricing Plans & Options'
+                    short_title: 'Choose the plan that works best for you.'
+                    created_at: '2024-03-06T05:24:23.000000Z'
+                    updated_at: '2024-03-06T05:24:23.000000Z'
+                  message: 'Pricing CMS data fetched successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  plan_cms:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: Pricing
+                      banner_img:
+                        type: string
+                        example: pricing/pricing-banner.png
+                      background_img:
+                        type: string
+                        example: pricing/pricing-bg.png
+                      main_title:
+                        type: string
+                        example: 'Pricing Plans & Options'
+                      short_title:
+                        type: string
+                        example: 'Choose the plan that works best for you.'
+                      created_at:
+                        type: string
+                        example: '2024-03-06T05:24:23.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-03-06T05:24:23.000000Z'
+                  message:
+                    type: string
+                    example: 'Pricing CMS data fetched successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 500
+                  message: 'No Data Found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: 'No Data Found'
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/faq:
+    post:
+      summary: 'Faq-Details Api'
+      operationId: faqDetailsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 8,\n          \"type\": \"payment\",\n          \"question\": \"How do I sign up for The Family Flix?\",\n          \"answer\": \"Visit our website and click on the “Sign Up” button. Follow the simple steps to create your account, and you’ll be ready to enjoy our vast content library.\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      },\n      {\n          \"id\": 9,\n          \"type\": \"payment\",\n          \"question\": \"What devices can I use to access The Family Flix?\",\n          \"answer\": \"The Family Flix is compatible with all major platforms, including mobile devices, tablets, and smart TVs. Download our app for a seamless viewing experience.\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      },\n]\n}"
+      tags:
+        - Cms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: ''
+                  example: architecto
+              required:
+                - type
+      security: []
+  /api/v1/cms/privacy:
+    post:
+      summary: 'Privacy Api'
+      operationId: privacyApi
+      description: "@response 200{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 2,\n          \"banner_image\": \"business_management/privacy_banner.png\",\n          \"banner_heading\": \"Privacy Policy\",\n          \"content\": \"Welcome to The Family Flix! Your privacy is important to us....\",\n          \"type\": \"privacy-policy\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      }\n  ],\n  \"message\": \"Privacy Details fetched successfully\"\n}"
+      parameters: []
+      responses: {  }
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/terms:
+    post:
+      summary: 'Term-condition Api'
+      operationId: termConditionApi
+      description: "@response 200{\n  \"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 2,\n          \"banner_image\": \"business_management/term_banner.png\",\n          \"banner_heading\": \"Term & Conditions\",\n          \"content\": \"Welcome to Family Flix! By accessing our website or using our services, you agree to be bound by the following terms and conditions (the \\\"Terms\\\"). Please read them carefully. If you do not agree with these Terms, you must not use our services...\",\n          \"type\": \"term-condition\",\n          \"created_at\": \"2024-03-12T10:44:52.000000Z\",\n          \"updated_at\": \"2024-03-12T10:44:52.000000Z\"\n      }\n  ],\n  \"message\": \"Privacy Details fetched successfully\"\n}"
+      parameters: []
+      responses: {  }
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/contact-details:
+    post:
+      summary: 'Contact details Api'
+      operationId: contactDetailsApi
+      description: "@response 200\n\"status\": true,\n  \"statusCode\": 200,\n  \"data\": [\n      {\n          \"id\": 1,\n          \"icon\": \"fa-solid fa-phone\",\n          \"title\": \"Call Us\",\n          \"details\": \"+ 18453297101\"\n      },\n      {\n          \"id\": 2,\n          \"icon\": \"fa-solid fa-envelope\",\n          \"title\": \"Email Us\",\n          \"details\": \"support@thefamilyflix.com\"\n      },\n      {\n          \"id\": 3,\n          \"icon\": \"fa-solid fa-location-dot\",\n          \"title\": \"Location\",\n          \"details\": \"Orlando Florida\"\n      },\n      {\n          \"id\": 4,\n          \"icon\": \"fa-regular fa-clock\",\n          \"title\": \"Office Hours (Closed Saturday)\",\n          \"details\": \"9am-11pm\"\n      }\n  ],\n  \"message\": \"Contact Details data fetched successfully\""
+      parameters: []
+      responses: {  }
+      tags:
+        - Cms
+      security: []
+  /api/v1/cms/subscription:
+    post:
+      summary: 'Subscription-cmas Api'
+      operationId: subscriptionCmasApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n\"statusCode\": 200,\n\"data\": {\n  \"id\": 1,\n  \"section1_title\": \"Experience Cinematic Magic Today! Subscribe to The Family Flix.\",\n  \"section1_description\": \"Are you ready to embark on an unparalleled entertainment journey? Join The Family Flix community now and unlock a world of cinematic wonders!\",\n  \"section1_background_img\": \"subscription/subscription-bg.png\",\n  \"section1_button_name\": \"Sign Up Today\",\n  \"subscribe_title\": \"Subscribe For Updates.\",\n  \"subscription_placeholder\": \"Enter your Email\",\n  \"button_name\": \"Subscribe\",\n  \"created_at\": \"2024-03-15T10:11:44.000000Z\",\n  \"updated_at\": \"2024-03-15T10:11:44.000000Z\"\n},"
+      tags:
+        - Cms
+      security: []
+  /api/v1/coupon-check:
+    post:
+      summary: 'Coupon check Api'
+      operationId: couponCheckApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": false,\n\"message\": \"Coupon code is not valid for you\",\n\"status_code\": 200\n},"
+      tags:
+        - 'Coupon Check'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coupon_code:
+                  type: string
+                  description: ''
+                  example: aut
+                plan_id:
+                  type: string
+                  description: ''
+                  example: nam
+                plan_price:
+                  type: string
+                  description: ''
+                  example: at
+                email:
+                  type: string
+                  description: 'This field is required when <code>phone</code> is not present.  Must be a valid email address.'
+                  example: euna.mann@example.com
+                phone:
+                  type: string
+                  description: 'This field is required when <code>email</code> is not present.'
+                  example: null
+              required:
+                - coupon_code
+                - plan_id
+                - plan_price
+      security: []
+  /api/v1/customer/register:
+    post:
+      summary: 'Register Api for Customer'
+      operationId: registerApiForCustomer
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    user:
+                      name: 'test customer'
+                      email: testcustomer@yopmail.com
+                      phone: 8989898965
+                      status: 1
+                      updated_at: '2024-03-14T05:57:00.000000Z'
+                      created_at: '2024-03-14T05:57:00.000000Z'
+                      id: 4
+                  message: 'registered successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: 'test customer'
+                          email:
+                            type: string
+                            example: testcustomer@yopmail.com
+                          phone:
+                            type: integer
+                            example: 8989898965
+                          status:
+                            type: integer
+                            example: 1
+                          updated_at:
+                            type: string
+                            example: '2024-03-14T05:57:00.000000Z'
+                          created_at:
+                            type: string
+                            example: '2024-03-14T05:57:00.000000Z'
+                          id:
+                            type: integer
+                            example: 4
+                  message:
+                    type: string
+                    example: 'registered successfully'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'The email has already been taken.'
+                      - 'The confirm password and password must match.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                          - 'The confirm password and password must match.'
+                        items:
+                          type: string
+      tags:
+        - Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                phone:
+                  type: string
+                  description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
+                  example: tpfyybjwtghbfysvdnsujttdnaxabedudkkqbrd
+                email:
+                  type: string
+                  description: 'The email of the user. Example:'
+                  example: benny69@example.net
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: '12345678'
+                confirm_password:
+                  type: string
+                  description: 'The confirm_password of the user.'
+                  example: '12345678'
+              required:
+                - name
+                - phone
+                - email
+                - password
+                - confirm_password
+      security: []
+  /api/v1/customer/login:
+    post:
+      summary: 'Login Api for customer'
+      operationId: loginApiForCustomer
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  data:
+                    auth_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks
+                    user:
+                      id: 3
+                      name: 'test2 affiliater2'
+                      email: test1@yopmail.com
+                      status: '1'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      auth_token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY3MWMyMjEwNTg0N2RmMmQ1YmU5YWVmYTEwMWY3YjA4MWM4ODk5OTU4ODk2ZTdlNWRhMmRkMTg5ZmM1ZTc4MmFjYmYzYmQ0NDkyZDA0MDUiLCJpYXQiOjE3MTAzOTYwMzMuNTMzMjY2LCJuYmYiOjE3MTAzOTYwMzMuNTMzMjY5LCJleHAiOjE3NDE5MzIwMzMuNTEwMDA1LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.AEf1NATUpiobMWd1AFoYXqGYDUDONeHU14daG21OyLSO69xpptoEujD_tfBZJYiS_mp4vlYvBqbEl8-LAlkmek81UKaALBkJD3CP4cbQiAjVSQI_xy9BVJiF3rJMHjouYClxWqM-JoiccX5NUB1RQzTgWhMIEQsKjZlEh3JVNiAiTRAKOq4Vdq_IB5j2W9pqvG9we_dYdgmzNbOcZFrFOhdFxwVMxpQRCvJwwKAiINsfV-yXuAWE2lFCSxGVh9U1Hv7bl-xu6x5F3lSvO_1FFSBFgVeDJbUpFAzqVnG8OfOkw6Yyj20N7wA3KbCxZ8tnofD88qP54kDec82zGjze7Cyx0H4fpGMr83skNNQy2iwHrVX04qqspaZEQRdsI26XX16ZliFGY3hZl8RZ7RW8ceXJVlsqv5RZw9XJcxp1CaDb5zThsjxUKpxApExXOZ0Rc6JmLeqAQHSF7n9Kpw0Oeu3CwQSD6UAzOkF-nqKJKR6AmEr1ewaT9nccvt546nVtgKcHDR6Wpni4wLBAw4DCiwUyLtfQhnueoNpnZvBHnLe-KyXFrLEse8yTETdo21Xk3Chk8DkjrIrwaMN16G_6SoTY7ZqCaVly2JPbiMtfVzqqRRxWnLIHNvbXS0a2iWNWpkI3UOWRSTKt2B2rVnbzY4Xfkwn_uzigPiUyovUZxks
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 3
+                          name:
+                            type: string
+                            example: 'test2 affiliater2'
+                          email:
+                            type: string
+                            example: test1@yopmail.com
+                          status:
+                            type: string
+                            example: '1'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: 'Invalid user & Password!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: 'Invalid user & Password!'
+      tags:
+        - Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: john@yopmail.com
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: '12345678'
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/customer/account-delete:
+    post:
+      summary: 'Delete API for Authenticated Customer'
+      operationId: deleteAPIForAuthenticatedCustomer
+      description: "This API endpoint allows an authenticated customer (user) to delete their own account.\nThe endpoint does not require any parameters as it uses the authenticated user's ID.\n\nRequest Type: DELETE\n\nURL: /api/customer/delete\n\nAuthentication: Required (The user must be logged in)\n\nRequest Parameters: None\n\nResponse (Success - 200):\n{\n  \"message\": \"Customer deleted successfully\"\n}\n\nResponse (Error - 401):\n{\n  \"error\": \"An error occurred while deleting the customer\",\n  \"details\": \"Error details here\"\n}"
+      parameters: []
+      responses: {  }
+      tags:
+        - Customer
+      security: []
+  /api/v1/customer/account-details:
+    post:
+      summary: 'Details Api'
+      operationId: detailsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success:
+                    id: 1
+                    name: 'John Doe'
+                    email: john@yopmail.com
+                    email_verified_at: null
+                    created_at: '2021-05-27T06:50:50.000000Z'
+                    updated_at: '2021-05-27T06:50:50.000000Z'
+                properties:
+                  success:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: john@yopmail.com
+                      email_verified_at:
+                        type: string
+                        example: null
+                      created_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2021-05-27T06:50:50.000000Z'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: Unauthorised
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Customer Profile '
+  /api/v1/customer/account-update:
+    post:
+      summary: 'Update-Profile Api'
+      operationId: updateProfileApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Customer details updated successfully.'
+                  data:
+                    id: 3
+                    name: 'test2 affiliater2'
+                    email: test1@yopmail.com
+                    phone: '1231231231'
+                    email_verified_at: null
+                    image: Customer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png
+                    status: '1'
+                    created_at: '2024-03-13T12:57:34.000000Z'
+                    updated_at: '2024-03-14T06:16:19.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Customer details updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      name:
+                        type: string
+                        example: 'test2 affiliater2'
+                      email:
+                        type: string
+                        example: test1@yopmail.com
+                      phone:
+                        type: string
+                        example: '1231231231'
+                      email_verified_at:
+                        type: string
+                        example: null
+                      image:
+                        type: string
+                        example: Customer/1710396979_29689_c7ca91b4-b2eb-42b3-a317-58d00bb96190.png
+                      status:
+                        type: string
+                        example: '1'
+                      created_at:
+                        type: string
+                        example: '2024-03-13T12:57:34.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-03-14T06:16:19.000000Z'
+      tags:
+        - 'Customer Profile '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: whiteglovecomics@gmail.com
+              required:
+                - name
+                - email
+  /api/v1/affiliater-forgot-password:
+    post:
+      summary: ''
+      operationId: postApiV1AffiliaterForgotPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Forget Password '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
+                  example: kek.q.t@7.x.b.b.cb$/ix
+              required:
+                - email
+      security: []
+  /api/v1/customer-forgot-password:
+    post:
+      summary: ''
+      operationId: postApiV1CustomerForgotPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Forget Password '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
+                  example: i@ro4keuu.t0f987w.nx$/ix
+              required:
+                - email
+      security: []
+  /api/v1/contact-us:
+    post:
+      summary: 'Contact Api'
+      operationId: contactApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n \"message\": \"Contact us details added successfully.\",\n \"success\": {\n      \"user_name\": \"John\",\n      \"user_email\": \"\n      \"user_phone\": \"1234567890\",\n      \"message\": \"This is a test message\",\n      \"id\": 1\n  }\n}"
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'The user email field is required.'
+                properties:
+                  error:
+                    type: string
+                    example: 'The user email field is required.'
+      tags:
+        - General
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: John
+                user_email:
+                  type: string
+                  description: 'The email of the user. Example:'
+                  example: ywiegand@example.net
+                user_phone:
+                  type: string
+                  description: 'The phone of the user.'
+                  example: '1234567890'
+                message:
+                  type: string
+                  description: 'The message of the user.'
+                  example: 'This is a test message'
+              required:
+                - user_name
+                - user_email
+                - user_phone
+                - message
+      security: []
+  /api/v1/subscribe-us:
+    post:
+      summary: 'Subscribe Api'
+      operationId: subscribeApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  message: 'You have been subscribed successfully'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'You have been subscribed successfully'
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'The email has already been taken.'
+                properties:
+                  error:
+                    type: string
+                    example: 'The email has already been taken.'
+      tags:
+        - General
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user. Example:'
+                  example: kemmerich@example.org
+              required:
+                - email
+      security: []
+  /api/v1/payment-capture:
+    post:
+      summary: 'Payment capture Api'
+      operationId: paymentCaptureApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  message: 'Payment captured successfully'
+                  status_code: 200
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Payment captured successfully'
+                  status_code:
+                    type: integer
+                    example: 200
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  message: 'Something went wrong'
+                  status_code: 401
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Something went wrong'
+                  status_code:
+                    type: integer
+                    example: 401
+      tags:
+        - 'Payment Capture'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emailId:
+                  type: string
+                  description: ''
+                  example: omnis
+                first_name:
+                  type: string
+                  description: ''
+                  example: dolores
+                last_name:
+                  type: string
+                  description: ''
+                  example: laudantium
+                country:
+                  type: string
+                  description: ''
+                  example: voluptatibus
+                house_name:
+                  type: string
+                  description: ''
+                  example: praesentium
+                detail_address:
+                  type: string
+                  description: ''
+                  example: sunt
+                city:
+                  type: string
+                  description: ''
+                  example: pariatur
+                state:
+                  type: string
+                  description: ''
+                  example: aut
+                post_code:
+                  type: string
+                  description: ''
+                  example: porro
+                phone:
+                  type: string
+                  description: ''
+                  example: magnam
+                amount:
+                  type: string
+                  description: ''
+                  example: dolorum
+                paymentID:
+                  type: string
+                  description: ''
+                  example: soluta
+                plan_name:
+                  type: string
+                  description: ''
+                  example: quis
+                plan_price:
+                  type: string
+                  description: ''
+                  example: sequi
+                payment_type:
+                  type: string
+                  description: ''
+                  example: rerum
+              required:
+                - emailId
+                - first_name
+                - last_name
+                - country
+                - house_name
+                - detail_address
+                - city
+                - state
+                - post_code
+                - phone
+                - amount
+                - paymentID
+                - plan_name
+                - plan_price
+                - payment_type
+      security: []
+  /api/v1/billing-address:
+    post:
+      summary: ''
+      operationId: postApiV1BillingAddress
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Payment Capture'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emailId:
+                  type: string
+                  description: ''
+                  example: tempore
+              required:
+                - emailId
+      security: []
+  /api/v1/plans/show:
+    post:
+      summary: 'Plan-List Api'
+      operationId: planListApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"status\": true,\n  \"statusCode\": 200,\n  \"message\": \"Plan details found successfully\",\n  \"data\": {\n      \"plan\": [\n      {\n          \"id\": 1,\n          \"plan_name\": \"Starter\",\n          \"plan_details\": \"Welcome to our starter pack where 2 people can enjoy unlimited movies and shows.\",\n          \"plan_actual_price\": \"30\",\n          \"plan_offer_price\": \"25\",\n          \"button_text\": \"Subscribe\",\n          \"specification\": [\n              {\n                  \"id\": 1,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"1-2 Device Limit\"\n              },\n              {\n                  \"id\": 2,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Preminum Server\"\n              },\n              {\n                  \"id\": 3,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Full HD Available\"\n              },\n              {\n                  \"id\": 4,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Desktop, Mobile and TV App\"\n              },\n              {\n                  \"id\": 5,\n                  \"plan_id\": 1,\n                  \"specification_name\": \"Unlimited Movies and TV Shows\"\n              }\n          ]\n      },\n  ]\n }"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error:
+                    message:
+                      - 'No detail found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: array
+                        example:
+                          - 'No detail found!'
+                        items:
+                          type: string
+      tags:
+        - 'Plan Listing'
+      security: []
+  /api/v1/product/unbeatable-variety:
+    post:
+      summary: 'Unbeatable-Variety  Api'
+      operationId: unbeatableVarietyApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No unbeatable variety found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No unbeatable variety found'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 500
+                  message: 'Something went wrong'
+                  error: 'Error message'
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: 'Something went wrong'
+                  error:
+                    type: string
+                    example: 'Error message'
+      tags:
+        - Product
+      security: []
+  /api/v1/show/detail:
+    post:
+      summary: 'Show  Api'
+      operationId: showApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No show found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No show found'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 500
+                  message: 'Something went wrong'
+                  error: 'Error message'
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: 'Something went wrong'
+                  error:
+                    type: string
+                    example: 'Error message'
+      tags:
+        - Product
+      security: []
+  /api/v1/movie/detail:
+    post:
+      summary: 'Movie  Api'
+      operationId: movieApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No movie found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No movie found'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 500
+                  message: 'Something went wrong'
+                  error: 'Error message'
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: 'Something went wrong'
+                  error:
+                    type: string
+                    example: 'Error message'
+      tags:
+        - Product
+      security: []
+  /api/v1/kid/detail:
+    post:
+      summary: 'Kid  Api'
+      operationId: kidApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No kid found'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No kid found'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 500
+                  message: 'Something went wrong'
+                  error: 'Error message'
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: 'Something went wrong'
+                  error:
+                    type: string
+                    example: 'Error message'
+      tags:
+        - Product
+      security: []
+  /api/v1/customer/subscription/list:
+    post:
+      summary: 'Subscriptions Api'
+      operationId: subscriptionsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No commission found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No commission found!'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: Unauthorised
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - Subscription
+  /api/v1/subscription-payment/credential:
+    post:
+      summary: 'Subscriptions Api'
+      operationId: subscriptionsApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  error: 'Stripe credential not found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  error:
+                    type: string
+                    example: 'Stripe credential not found!'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: Unauthorised
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - Subscription
+  /api/v1/subscription-payment/create:
+    post:
+      summary: 'Subscriptions create Api'
+      operationId: subscriptionsCreateApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Subscription created successfully!'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Subscription created successfully!'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 422
+                  error:
+                    payment_method_id:
+                      - 'The payment method id field is required.'
+                    email:
+                      - 'The email field is required.'
+                    amount:
+                      - 'The amount field is required.'
+                    plan_id:
+                      - 'The plan id field is required.'
+                    plan_name:
+                      - 'The plan name field is required.'
+                    plan_price:
+                      - 'The plan price field is required.'
+                    country:
+                      - 'The country field is required.'
+                    state:
+                      - 'The state field is required.'
+                    city:
+                      - 'The city field is required.'
+                    house_name:
+                      - 'The house name field is required.'
+                    post_code:
+                      - 'The post code field is required.'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 422
+                  error:
+                    type: object
+                    properties:
+                      payment_method_id:
+                        type: array
+                        example:
+                          - 'The payment method id field is required.'
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+                      amount:
+                        type: array
+                        example:
+                          - 'The amount field is required.'
+                        items:
+                          type: string
+                      plan_id:
+                        type: array
+                        example:
+                          - 'The plan id field is required.'
+                        items:
+                          type: string
+                      plan_name:
+                        type: array
+                        example:
+                          - 'The plan name field is required.'
+                        items:
+                          type: string
+                      plan_price:
+                        type: array
+                        example:
+                          - 'The plan price field is required.'
+                        items:
+                          type: string
+                      country:
+                        type: array
+                        example:
+                          - 'The country field is required.'
+                        items:
+                          type: string
+                      state:
+                        type: array
+                        example:
+                          - 'The state field is required.'
+                        items:
+                          type: string
+                      city:
+                        type: array
+                        example:
+                          - 'The city field is required.'
+                        items:
+                          type: string
+                      house_name:
+                        type: array
+                        example:
+                          - 'The house name field is required.'
+                        items:
+                          type: string
+                      post_code:
+                        type: array
+                        example:
+                          - 'The post code field is required.'
+                        items:
+                          type: string
+      tags:
+        - Subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment_method_id:
+                  type: string
+                  description: ''
+                  example: cumque
+                email:
+                  type: string
+                  description: ''
+                  example: quia
+                first_name:
+                  type: string
+                  description: ''
+                  example: null
+                last_name:
+                  type: string
+                  description: ''
+                  example: null
+                amount:
+                  type: string
+                  description: ''
+                  example: nesciunt
+                plan_id:
+                  type: string
+                  description: ''
+                  example: sit
+                plan_name:
+                  type: string
+                  description: ''
+                  example: expedita
+                plan_price:
+                  type: string
+                  description: ''
+                  example: ea
+                country:
+                  type: string
+                  description: ''
+                  example: et
+                state:
+                  type: string
+                  description: ''
+                  example: ut
+                city:
+                  type: string
+                  description: ''
+                  example: culpa
+                house_name:
+                  type: string
+                  description: ''
+                  example: sed
+                post_code:
+                  type: string
+                  description: ''
+                  example: eveniet
+              required:
+                - payment_method_id
+                - email
+                - amount
+                - plan_id
+                - plan_name
+                - plan_price
+                - country
+                - state
+                - city
+                - house_name
+                - post_code
+      security: []
+  /api/v1/affiliater/wallet/list:
+    post:
+      summary: 'Wallet History Api'
+      operationId: walletHistoryApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 200
+                  message: 'No wallet history found!'
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'No wallet history found!'
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  statusCode: 401
+                  error: Unauthorised
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  statusCode:
+                    type: integer
+                    example: 401
+                  error:
+                    type: string
+                    example: Unauthorised
+      tags:
+        - 'Wallet - History'
+tags:
+  -
+    name: 'Affiliater - Commission'
+    description: ''
+  -
+    name: 'Affiliater Profile'
+    description: ''
+  -
+    name: 'Affiliater dashboard'
+    description: ''
+  -
+    name: Authentication
+    description: "\nAPIs for Authentication"
+  -
+    name: Cms
+    description: "\nAPIs for Cms"
+  -
+    name: 'Coupon Check'
+    description: "\nAPIs for Coupon Check"
+  -
+    name: Customer
+    description: "\nAPIs for Authentication"
+  -
+    name: 'Customer Profile '
+    description: "\nAPIs for Profile Details"
+  -
+    name: 'Forget Password '
+    description: "\nAPIs for Forget Password"
+  -
+    name: General
+    description: "\nAPIs for General"
+  -
+    name: 'Payment Capture'
+    description: "\nAPIs for Payment Capture"
+  -
+    name: 'Plan Listing'
+    description: "\nAPIs for Plan Listing"
+  -
+    name: Product
+    description: "\nAPIs for Prduct Listing"
+  -
+    name: Subscription
+    description: "\nAPIs for Subscription List"
+  -
+    name: 'Wallet - History'
+    description: ''

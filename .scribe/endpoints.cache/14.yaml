@@ -32,7 +32,7 @@ endpoints:
         name: emailId
         description: ''
         required: true
-        example: veritatis
+        example: omnis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -41,7 +41,7 @@ endpoints:
         name: first_name
         description: ''
         required: true
-        example: sit
+        example: dolores
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -50,7 +50,7 @@ endpoints:
         name: last_name
         description: ''
         required: true
-        example: id
+        example: laudantium
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -59,7 +59,7 @@ endpoints:
         name: country
         description: ''
         required: true
-        example: eligendi
+        example: voluptatibus
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -68,7 +68,7 @@ endpoints:
         name: house_name
         description: ''
         required: true
-        example: rem
+        example: praesentium
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -77,7 +77,7 @@ endpoints:
         name: detail_address
         description: ''
         required: true
-        example: magnam
+        example: sunt
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -86,7 +86,7 @@ endpoints:
         name: city
         description: ''
         required: true
-        example: et
+        example: pariatur
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -95,7 +95,7 @@ endpoints:
         name: state
         description: ''
         required: true
-        example: veniam
+        example: aut
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -104,7 +104,7 @@ endpoints:
         name: post_code
         description: ''
         required: true
-        example: est
+        example: porro
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -113,7 +113,7 @@ endpoints:
         name: phone
         description: ''
         required: true
-        example: tenetur
+        example: magnam
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -122,7 +122,7 @@ endpoints:
         name: amount
         description: ''
         required: true
-        example: similique
+        example: dolorum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -131,7 +131,7 @@ endpoints:
         name: paymentID
         description: ''
         required: true
-        example: dolor
+        example: soluta
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -140,7 +140,7 @@ endpoints:
         name: plan_name
         description: ''
         required: true
-        example: numquam
+        example: quis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -149,7 +149,7 @@ endpoints:
         name: plan_price
         description: ''
         required: true
-        example: cumque
+        example: sequi
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -158,27 +158,27 @@ endpoints:
         name: payment_type
         description: ''
         required: true
-        example: in
+        example: rerum
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      emailId: veritatis
-      first_name: sit
-      last_name: id
-      country: eligendi
-      house_name: rem
-      detail_address: magnam
-      city: et
-      state: veniam
-      post_code: est
-      phone: tenetur
-      amount: similique
-      paymentID: dolor
-      plan_name: numquam
-      plan_price: cumque
-      payment_type: in
+      emailId: omnis
+      first_name: dolores
+      last_name: laudantium
+      country: voluptatibus
+      house_name: praesentium
+      detail_address: sunt
+      city: pariatur
+      state: aut
+      post_code: porro
+      phone: magnam
+      amount: dolorum
+      paymentID: soluta
+      plan_name: quis
+      plan_price: sequi
+      payment_type: rerum
     fileParameters: []
     responses:
       -
@@ -236,13 +236,13 @@ endpoints:
         name: emailId
         description: ''
         required: true
-        example: fugit
+        example: tempore
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      emailId: fugit
+      emailId: tempore
     fileParameters: []
     responses: []
     responseFields: []

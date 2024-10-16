@@ -32,7 +32,7 @@ endpoints:
         name: coupon_code
         description: ''
         required: true
-        example: dolores
+        example: aut
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -41,7 +41,7 @@ endpoints:
         name: plan_id
         description: ''
         required: true
-        example: sed
+        example: nam
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -50,7 +50,7 @@ endpoints:
         name: plan_price
         description: ''
         required: true
-        example: et
+        example: at
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -59,7 +59,7 @@ endpoints:
         name: email
         description: 'This field is required when <code>phone</code> is not present.  Must be a valid email address.'
         required: false
-        example: weldon86@example.org
+        example: euna.mann@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -74,10 +74,10 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      coupon_code: dolores
-      plan_id: sed
-      plan_price: et
-      email: weldon86@example.org
+      coupon_code: aut
+      plan_id: nam
+      plan_price: at
+      email: euna.mann@example.com
     fileParameters: []
     responses:
       -

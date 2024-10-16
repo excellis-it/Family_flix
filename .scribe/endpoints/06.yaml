@@ -39,7 +39,7 @@ endpoints:
         name: phone
         description: 'Must match the regex /^([0-9\s\-\+\(\)]*)$/. Must be at least 10 characters.'
         required: true
-        example: pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv
+        example: tpfyybjwtghbfysvdnsujttdnaxabedudkkqbrd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -48,7 +48,7 @@ endpoints:
         name: email
         description: 'The email of the user. Example:'
         required: true
-        example: bobby.wiza@example.org
+        example: benny69@example.net
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -73,8 +73,8 @@ endpoints:
         custom: []
     cleanBodyParameters:
       name: 'John Doe'
-      phone: pwnqwicbpdqfzhkaadfwfqrnwhzzlsqggpukfnhqvepyghopaflchswhrhbvdxmlwbtcrnmgxezmkzaeuxthnyv
-      email: bobby.wiza@example.org
+      phone: tpfyybjwtghbfysvdnsujttdnaxabedudkkqbrd
+      email: benny69@example.net
       password: '12345678'
       confirm_password: '12345678'
     fileParameters: []
@@ -199,6 +199,59 @@ endpoints:
         headers: []
         description: ''
         custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/customer/account-delete
+    metadata:
+      groupName: Customer
+      groupDescription: |-
+
+        APIs for Authentication
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete API for Authenticated Customer'
+      description: |-
+        This API endpoint allows an authenticated customer (user) to delete their own account.
+        The endpoint does not require any parameters as it uses the authenticated user's ID.
+
+        Request Type: DELETE
+
+        URL: /api/customer/delete
+
+        Authentication: Required (The user must be logged in)
+
+        Request Parameters: None
+
+        Response (Success - 200):
+        {
+          "message": "Customer deleted successfully"
+        }
+
+        Response (Error - 401):
+        {
+          "error": "An error occurred while deleting the customer",
+          "details": "Error details here"
+        }
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null

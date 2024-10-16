@@ -403,13 +403,13 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: consequatur
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      type: consequatur
+      type: architecto
     fileParameters: []
     responses:
       -

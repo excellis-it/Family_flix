@@ -142,4 +142,57 @@ class AuthController extends Controller
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
         }
     }
+
+    /**
+     * Delete API for Authenticated Customer
+     *
+     * This API endpoint allows an authenticated customer (user) to delete their own account.
+     * The endpoint does not require any parameters as it uses the authenticated user's ID.
+     *
+     * Request Type: DELETE
+     * 
+     * URL: /api/customer/delete
+     * 
+     * Authentication: Required (The user must be logged in)
+     *
+     * Request Parameters: None
+     * 
+     * Response (Success - 200):
+     * {
+     *   "message": "Customer deleted successfully"
+     * }
+     * 
+     * Response (Error - 401):
+     * {
+     *   "error": "An error occurred while deleting the customer",
+     *   "details": "Error details here"
+     * }
+    */
+    
+
+    public function customerDelete(Request $request)
+    {
+        try {
+            // Get the authenticated user
+            $customer = Auth::user();
+            if (!$customer->hasRole('CUSTOMER')) {
+                return response()->json([
+                    'error' => 'Unauthorized action. This customer has no valid account'
+                ], $this->successStatus); // Forbidden error
+            }
+            
+            $customer->delete();
+    
+            return response()->json([
+                'status' => true,
+                'statusCode' => 200, 
+                'message' => 'Customer deleted successfully'
+            ], $this->successStatus);
+    
+        } catch (\Throwable $th) {
+            // Return error response in case of exception
+            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
+        }
+    }
+    
 }

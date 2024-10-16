@@ -74,6 +74,8 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
                     // Route::post('create', [CustomerSubscriptionController::class, 'stripePaymentCreate']);
                     Route::post('list', [CustomerSubscriptionController::class, 'subscriptionList']);  // customer subscriptions api
                 });
+
+                Route::post('account-delete', [CustomerAuthController::class, 'customerDelete']);  // delete user api
                 
             });
         });
