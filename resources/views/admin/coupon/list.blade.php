@@ -7,6 +7,10 @@
         .error {
             color: red !important;
         }
+
+        .copy-icon {
+            cursor: pointer; /* Change the cursor to a pointer when hovering */
+        }
     </style>
 @endpush
 @section('content')
@@ -162,6 +166,24 @@
             });
         });
     });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.copy-icon').on('click', function() {
+                var couponCode = $(this).siblings('.coupon-code').text();
+                var $copyMessage = $(this).siblings('.copy-message');
+
+                // Copy to clipboard
+                var tempInput = $('<input>').val(couponCode).appendTo('body').select();
+                document.execCommand('copy');
+                tempInput.remove();
+
+                // Show the copied message
+                $copyMessage.css({ display: 'block', opacity: 1 })
+                            .fadeIn(200).delay(1000).fadeOut(200);
+            });
+        });
     </script>
    
 @endpush

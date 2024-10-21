@@ -85,7 +85,6 @@ class SubscriptionController extends Controller
     public function stripePaymentCreate(Request $request)
     {
 
-
         $validator = Validator::make($request->all(), [
             'payment_method_id' => 'required',
             'email' => 'required',

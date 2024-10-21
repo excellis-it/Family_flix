@@ -22,6 +22,7 @@ use App\Models\AffiliateCommission;
 use App\Models\Affiliate;
 use App\Models\Wallet;
 use App\Models\Payment;
+use App\Models\Coupon;
 use Illuminate\Support\Str;
 use App\Helpers\Helper;
 use App\Models\CustomerDetails;
@@ -37,31 +38,34 @@ class SubscriptionController extends Controller
     //
     public function createSubscription(Request $request)
     {
-       // need Helper function stripeCredential 
-       
-       $stripe = Helper::stripeCredential(); 
 
-       if (!empty($stripe->stripe_secret)) {
-           \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
-       } else {
-           // Handle missing secret key
-           throw new \Exception('Stripe secret key is missing');
-       }
-       
+        // need Helper function stripeCredential 
+        $stripe = Helper::stripeCredential();
+
+        if (!empty($stripe->stripe_secret)) {
+            \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
+        } else {
+            // Handle missing secret key
+            throw new \Exception('Stripe secret key is missing');
+        }
+
         // Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
 
         $data = $request->all();
         $paymentMethodId = $data['payment_method_id'];
         $price_id = '';  // Declare the variable outside the loop
-        $plan = Plan::all();  // Retrieve all plans
+        $plan = Plan::all(); // Retrieve all plans
         $arrayVal = array();
+
 
         foreach ($plan as $key => $value) {
 
+            // if($value->active == 1){
             $amount = $value->amount / 100;
             $actual_amount = number_format($amount, 2);
             $arrayVal[$actual_amount]['plan_id'] = $value->id;
             $arrayVal[$actual_amount]['actual_amount'] = $actual_amount;
+            // }
         }
 
         if (strpos($data['plan_price'], '.') === false) {
@@ -99,16 +103,34 @@ class SubscriptionController extends Controller
             );
         }
 
-        $subscription = Subscription::create([
+        $subscriptionParams = [
             'customer' => $customer->id,
             'items' => [[
                 'price' => $price_id, // Replace with your price ID from Stripe Dashboard
             ]],
             'default_payment_method' => $paymentMethod,
             'expand' => ['latest_invoice.payment_intent'],
-        ]);
+        ];
 
-       
+        $coupon_detail = Coupon::where('code', $request->coupon_code)->first();
+
+        if (!empty($coupon_detail)) {
+            // Check if the coupon exists in Stripe
+            try {
+                $coupon = \Stripe\Coupon::retrieve($coupon_detail->stripe_coupon_id);
+                if ($coupon) {
+                    // Add coupon to the subscription parameters
+                    $subscriptionParams['coupon'] = $coupon_detail->stripe_coupon_id;
+                }
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Invalid coupon code.'], 400);
+            }
+        }
+
+
+        $subscription = \Stripe\Subscription::create($subscriptionParams);
+
+
 
         // check user exists or not
         $check_user_exists = User::where('email', $data['email'])->count();
@@ -137,8 +159,8 @@ class SubscriptionController extends Controller
             $user_id = $user->id;
         }
 
-        
-        
+
+
         //customer details add
         $customer_details_count = CustomerDetails::where('email_address', $data['email'])->count();
         if ($customer_details_count > 0) {
@@ -209,7 +231,7 @@ class SubscriptionController extends Controller
         $user_subscription->subscription_status = 1;
         $user_subscription->save();
 
-        
+
 
         // admin wallet add
         $wallet = new Wallet();
@@ -241,7 +263,7 @@ class SubscriptionController extends Controller
             $affiliator_balance->update();
         }
 
-       
+
         $payment = new Payment();
         $payment->user_subscription_id = $user_subscription->id;
         $payment->transaction_id = $paymentMethodId;
@@ -263,7 +285,7 @@ class SubscriptionController extends Controller
             'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
         ];
 
-       
+
         $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
         Mail::to($user_detail->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
         Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
@@ -272,15 +294,14 @@ class SubscriptionController extends Controller
             'success' => true,
             'message' => 'Subscription created successfully'
         ]);
-
     }
 
     public function successSubscription()
     {
         // get session user id
-        if(Auth::user()){
+        if (Auth::user()) {
             return redirect()->route('customer.myFamily-cinema');
-        }else{
+        } else {
             $user_id = Session::get('user_id');
             $user = User::find($user_id);
             Auth::login($user);
@@ -289,7 +310,7 @@ class SubscriptionController extends Controller
         }
 
 
-        
+
         // return view('frontend.pages.thankyou');
     }
 

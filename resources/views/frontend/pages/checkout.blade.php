@@ -379,7 +379,7 @@
                                                 <input type="hidden" name="plan_id" id="plan_id"
                                                     value="{{ $plan->id }}">
 
-                                                {{-- <div class="cupon-div-main">
+                                                <div class="cupon-div-main">
                                                     <div class="row justify-content-center align-items-center">
                                                         <div class="col-lg-8">
                                                             <div class="cupon-div">
@@ -397,8 +397,14 @@
                                                         <span id="coupon_error"></span>
 
                                                     </div>
-                                                </div> --}}
+                                                </div>
+
                                             </div>
+
+
+                                            {{-- <div class="coupan-code">
+                                                <p><span>Code:</span> FAMILY0011 </p>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </form>
@@ -643,7 +649,7 @@
                         
                         window.location.href = "{{ route('success-subscription') }}";
                     } else {
-                         window.location.href = "{{ route('failed-subscription') }}";
+                        window.location.href = "{{ route('failed-subscription') }}";
                         console.log('Subscription failed', data);
                     }
                 })
@@ -687,8 +693,10 @@
                 var coupon_code = $('#coupon_code').val();
                 var plan_id = {{ $plan->id }};
                 var plan_price = {{ $plan->plan_offer_price }};
-                var emailId = $('#floatingInput1').val();
-                var phone = $('#floatingInput9').val();
+                var emailId = $('#email_address').val();
+                var phone = $('#phone').val();
+
+                
 
                 if (emailId == '') {
                     alert('Please enter email address');

@@ -7,7 +7,9 @@
     <tr class="tableRow" data-id="{{ $coupon->id }}">
         <td>{{ $coupon->plan->plan_name }}</td>
         <td>@if($coupon->user_type == 'new_user') New User @else EXisting User @endif</td>
-        <td>{{ $coupon->code }}</td>
+        <td><span class="coupon-code">{{ $coupon->code }}</span> <i class="fa fa-copy copy-icon"></i>
+            <span class="copy-message" style="display:none; position:absolute; background:#6e6d6d; color:#fff; padding:5px; border-radius:2px;">Copied!</span>
+        </td>
         <td>{{ $coupon->coupon_type }}</td>                                           
         <td>{{ $coupon->value }}</td>
         <td>

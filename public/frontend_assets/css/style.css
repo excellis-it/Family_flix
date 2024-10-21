@@ -3509,4 +3509,26 @@ margin-left:-15px;
 }
 
 
+/* css by pramesh  */
+.coupan-code{
+  width:100%;
+  height:40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+  /* padding: 7px; */
+}
+.coupan-code p{
+  margin-bottom:0px;
+}
+.coupan-code span{
+  background-color: #009688;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  height: 38px;
+  width: 55px;
+  line-height: 18px;
 
+}

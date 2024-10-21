@@ -208,9 +208,11 @@ class PaypalController extends Controller
 
     public function couponCheck(Request $request)
     {
+       
         $check_user = CustomerDetails::where('email_address', $request->emailId)->orWhere('phone', $request->phone)->first();
         $coupon = Coupon::where('code', $request->coupon_code)->where('plan_id', $request->plan_id)->first();
         if (!$coupon) {
+           
             return response()->json(['status' => 'error', 'message' => 'Invalid coupon code']);
         }
         $check_coupon_user_type = $coupon->user_type;
