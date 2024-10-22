@@ -11,11 +11,14 @@ use App\Models\Wallet;
 use App\Models\Payment;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\UserSubscriptionMail;
+use App\Mail\AdminSubscriptionMail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use App\Models\UserSubscription;
 use Stripe\Stripe;
 use App\Models\PaymentDetailMail;
+use App\Models\Coupon;
 use Stripe\Customer;
 use Stripe\PaymentMethod;
 use Stripe\Subscription;
@@ -114,7 +117,6 @@ class SubscriptionController extends Controller
             }
         }
 
-
         if ($validator->fails()) {
             return response()->json(['status' => false, 'statusCode' => 200,  'error' => $validator->errors()->first()], 200);
         }
@@ -179,14 +181,39 @@ class SubscriptionController extends Controller
                 );
             }
 
-            $subscription = Subscription::create([
+            // $subscription = Subscription::create([
+            //     'customer' => $customer->id,
+            //     'items' => [[
+            //         'price' => $price_id, // Replace with your price ID from Stripe Dashboard
+            //     ]],
+            //     'default_payment_method' => $paymentMethod,
+            //     'expand' => ['latest_invoice.payment_intent'],
+            // ]);
+
+            $subscriptionParams = [
                 'customer' => $customer->id,
                 'items' => [[
                     'price' => $price_id, // Replace with your price ID from Stripe Dashboard
                 ]],
                 'default_payment_method' => $paymentMethod,
                 'expand' => ['latest_invoice.payment_intent'],
-            ]);
+            ];
+    
+            $coupon_detail = Coupon::where('code', $request->coupan_code)->first();
+    
+            if (!empty($coupon_detail)) {
+                // Check if the coupon exists in Stripe
+                try {
+                    $coupon = \Stripe\Coupon::retrieve($coupon_detail->stripe_coupon_id);
+                    if ($coupon) {
+                        // Add coupon to the subscription parameters
+                        $subscriptionParams['coupon'] = $coupon_detail->stripe_coupon_id;
+                    }
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'Invalid coupon code.'], 400);
+                }
+            }
+            $subscription = \Stripe\Subscription::create($subscriptionParams);
 
         
             $check_user_exists = User::where('email', $data['email'])->count();
@@ -210,7 +237,8 @@ class SubscriptionController extends Controller
                     'email' => $user->email,
                     'password' => 12345678,
                 ];
-               // Mail::to($user->email)->send(new WelcomeMail($maildata));
+
+                Mail::to($user->email)->send(new WelcomeMail($maildata));
                 $user_id = $user->id;
             }
     
@@ -267,7 +295,8 @@ class SubscriptionController extends Controller
                 $user_subscription->affiliate_id = null;
                 $user_subscription->affiliate_commission = 0;
             }
-    
+            
+            $user_subscription->stripe_subscription_id = $subscription->id;
             // $user_subscription->payment_type = $data['payment_type'];
             $user_subscription->plan_id = $data['plan_id'] ?? '';
             $user_subscription->plan_name = $data['plan_name'] ?? '';
@@ -323,19 +352,18 @@ class SubscriptionController extends Controller
             $payment->payment_currency = 'USD';
             $payment->save();
 
-            // $userSubscriptionMailData = [
-            //     'name' => $user->name,
-            //     'email' => $user->email,
-            //     'plan_name' => $data['plan_name'],
-            //     'plan_price' => $data['plan_price'],
-            //     'plan_start_date' => $today,
-            //     'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
-            // ];
+            $userSubscriptionMailData = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'plan_name' => $data['plan_name'],
+                'plan_price' => $data['plan_price'],
+                'plan_start_date' => $today,
+                'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
+            ];
     
-            // $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
-            // Mail::to($user->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
-    
-            // Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
+            $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
+            Mail::to($user->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
+            Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
 
             return response()->json(['status' => true, 'statusCode' => 200, 'message' => 'Subscription created successfully!'], 200);
         } catch (\Throwable $th) {
