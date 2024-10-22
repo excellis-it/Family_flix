@@ -29,6 +29,7 @@
                             @csrf
                             <div class="row">
                                 <input type="hidden" name="coupon_id" value="{{ $coupon_edit->id }}">
+                                <input type="hidden" name="stripe_coupon_id" value="{{ $coupon_edit->stripe_coupon_id }}">
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Plan<span style="color: red;">*</span></label>

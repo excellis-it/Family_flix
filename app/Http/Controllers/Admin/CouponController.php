@@ -174,6 +174,35 @@ class CouponController extends Controller
         $coupon_edit->status = $request->status;
         $coupon_edit->update();
 
+        $type = $request->coupon_type;
+        $value = $request->value ?? null;
+
+        $stripe = Helper::stripeCredential(); 
+        if (!empty($stripe->stripe_secret)) {
+            \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
+        } else {
+            // Handle missing secret key
+            throw new \Exception('Stripe secret key is missing');
+        }
+        
+        $couponId = $request->coupon_id; // Assuming you have the coupon ID from the request
+        
+        $couponData = [
+            'name' => $request->code,
+            'duration' => 'once', // Discount applies only to the first payment
+        ];
+        
+        if ($type === 'percentage') {
+            $couponData['percent_off'] = $value;
+        } else {
+            $couponData['currency'] = 'usd';
+            $couponData['amount_off'] = $value * 100;
+        }
+
+        $coupon_update = Coupon::where('id',$coupon_edit->id)->first();
+        $coupon_update->stripe_coupon_id = $coupon->id;
+        $coupon_update->update();
+
 
         return redirect()->route('coupons.index')->with('message','Coupon updated successfully');
         
