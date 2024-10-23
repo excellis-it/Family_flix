@@ -403,8 +403,14 @@
 
 
                                             {{-- <div class="coupan-code">
-                                                <p><span>Code:</span> FAMILY0011 </p>
+                                                <p><span>Code :</span> FAMILY0011 &nbsp;<i
+                                                        class="fa-regular fa-copy"></i></p>
                                             </div> --}}
+
+                                            <div id="coupon-container">
+                                                
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </form>
@@ -771,6 +777,7 @@
 
     <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
 
+
     {{-- <script>
         checkStatus = true;
         paypal.Buttons({
@@ -984,7 +991,6 @@
         }
     </script> --}}
 
-  
     @auth
     <script>
         $(document).ready(function() {
@@ -1024,8 +1030,6 @@
                                 // Code to execute when the user cancels
                             }
                         });
-
-
                     }
                 }
             });
@@ -1033,6 +1037,43 @@
 
     </script>
     @endauth
+
+    <script>
+        $(document).ready(function() {
+            $('#phone').on('change', function() {
+                var phone = $('#phone').val();
+                var email = $('#email_address').val();
+                var plan_id = $('#plan_id').val();
+
+                $.ajax({
+                    url: "{{ route('coupon-list') }}", // Ensure this route exists and accepts POST
+                    type: "POST",
+                    data: {
+                        _token: '{{ csrf_token() }}', // Include CSRF token
+                        phone: phone,
+                        plan_id: plan_id,
+                        emailId: email 
+                    },
+                    success: function(response) {
+                        var couponContainer = $('#coupon-container');
+                            couponContainer.empty(); // Clear any existing coupons
+
+                            response.coupon_list.forEach(function(coupon) {
+                                var couponHtml = `
+                                    <div class="coupan-code">
+                                        <p><span>Code :</span> ${coupon.code} &nbsp;</p>
+                                    </div>
+                                `;
+                                couponContainer.append(couponHtml);
+                            });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error: ", error); // Handle errors
+                    }
+                });  
+            });
+        });
+    </script>
 
 </body>
 

@@ -345,4 +345,27 @@ class SubscriptionController extends Controller
 
         http_response_code(200);
     }
+
+    public function couponList(Request $request)
+    {
+
+        $check_user = CustomerDetails::where('email_address', $request->emailId)->orWhere('phone', $request->plan_id)->count();
+        if($check_user > 0)
+        {
+            $coupon = Coupon::where('plan_id',$request->plan_id)->where('user_type','existing_user')->select('code','id')->get();
+            if($coupon)
+            {
+                return response()->json(['status' => true, 'message' => 'Coupon list fetch successfully', 'coupon_list' => $coupon, 'status_code' => 200]);
+            }
+        }
+        else
+        {
+            $coupon = Coupon::where('plan_id',$request->plan_id)->where('user_type','new_user')->select('code','id')->get();
+            if($coupon)
+            {
+                return response()->json(['status' => true, 'message' => 'Coupon list fetch successfully', 'coupon_list' => $coupon, 'status_code' => 200]);
+            }
+        }
+    
+    }
 }

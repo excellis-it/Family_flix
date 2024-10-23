@@ -113,6 +113,7 @@ Route::get('/failed-subscription',[FrontendSubscriptionController::class, 'faile
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
+Route::post('/coupon-list', [FrontendSubscriptionController::class, 'couponList'])->name('coupon-list');
 // affliate authentication
 Route::name('affiliate-marketer.')
     ->prefix('affiliate-marketer')

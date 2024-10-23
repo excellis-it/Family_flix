@@ -116,16 +116,16 @@ class PaypalController extends Controller
     public function checkPaymentsEmail(Request $request)
     {
         $check_email_exists = User::where('email', $request->emailId)->count();
+        
         if ($check_email_exists > 0) {
             return response()->json(['status' => 'error', 'message' => 'Email already exists', 'email' => $request->emailId]);
         } else {
-            return response()->json(['status' => 'success', 'message' => 'Email is available', 'email' => $request->emailId]);
+            return response()->json(['status' => 'success', 'message' => 'Email is not available', 'email' => $request->emailId]);
         }
     }
 
     public function successPayment(Request $request)
     {
-
         if ($request->input('paymentId') && $request->input('PayerID')) {
             $transaction = $this->gateway->completePurchase(array(
                 'payer_id'             => $request->input('PayerID'),
