@@ -104,13 +104,14 @@ class SubscriptionController extends Controller
             'post_code' => 'required',
         ]);
 
-        $check_user_exists = User::where('email', $request->email)->count();
-        if($check_user_exists > 0)
+        $check_user_exists = User::where('email', $request->email)->first();
+        if($check_user_exists) // Check if user exists
         {
             $user_subscription = UserSubscription::where('customer_id', $check_user_exists->id)
-            ->where('plan_id', $request->plan_id)
-            ->where('plan_expiry_date', '>=', date('Y-m-d'))
-            ->first();
+                ->where('plan_id', $request->plan_id)
+                ->where('plan_expiry_date', '>=', date('Y-m-d'))
+                ->first();
+                
             if($user_subscription)
             {
                 return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'You already have an active subscription!'], 200);
