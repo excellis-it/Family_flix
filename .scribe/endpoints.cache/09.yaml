@@ -405,13 +405,13 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: architecto
+        example: quo
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      type: architecto
+      type: quo
     fileParameters: []
     responses:
       -

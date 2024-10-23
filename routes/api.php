@@ -118,6 +118,7 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
 
         //payment gateway
         Route::post('coupon-check', [CouponCheckController::class, 'checkCoupon']);
+        Route::post('coupon-list', [CouponCheckController::class, 'listCoupon']);
         Route::post('payment-capture', [PaymentController::class, 'paymentCapture']);
         Route::post('billing-address', [PaymentController::class, 'billingAddress']);
 

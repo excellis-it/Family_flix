@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "2c399ffb-17a0-4947-ba56-df59ea12cc1e",
+        "_postman_id": "068d494e-7f64-4e80-b499-87deb0adf753",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -297,7 +297,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"jkrfphpenhoavpkyynmtuzwheoknymsvrlqfsszvhbmagcpdvcfarltzhepkyxmddwbqvvpwywfqdbnegugg\",\"email\":\"trace19@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"aggrctrynpvetrvzatpptjhrzh\",\"email\":\"leone.bogan@example.org\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -546,7 +546,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"type\":\"architecto\"}"
+                            "raw": "{\"type\":\"quo\"}"
                         },
                         "description": "",
                         "auth": {
@@ -709,7 +709,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"coupon_code\":\"aut\",\"plan_id\":\"nam\",\"plan_price\":\"at\",\"email\":\"euna.mann@example.com\"}"
+                            "raw": "{\"coupon_code\":\"libero\",\"plan_id\":\"aut\",\"plan_price\":\"occaecati\",\"email\":\"epfannerstill@example.org\"}"
                         },
                         "description": "",
                         "auth": {
@@ -733,6 +733,44 @@
                             "header": [],
                             "code": 200,
                             "body": "{\n\"status\": false,\n\"message\": \"Coupon code is not valid for you\",\n\"status_code\": 200\n},",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Coupon list Api",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/coupon-list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/coupon-list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"plan_id\":\"ex\",\"email\":\"bednar.elody@example.org\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"status\": true,\n\"message\": \"Coupon list fetch successfully\",\n\"coupon_list\": [\n{\n\"code\": \"TEST123\",\n\"id\": 1\n},\n{\n\"code\": \"TEST456\",\n\"id\": 2\n}\n],\n\"status_code\": 200\n}",
                             "name": ""
                         }
                     ]
@@ -765,7 +803,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"John Doe\",\"phone\":\"tpfyybjwtghbfysvdnsujttdnaxabedudkkqbrd\",\"email\":\"benny69@example.net\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
+                            "raw": "{\"name\":\"John Doe\",\"phone\":\"edyfdktdnfgizommkuiukmnxtyojwsfjeksnqfgorawufogkotsvbkntmcrqogewuvxeyxjoykkkbrx\",\"email\":\"vpowlowski@example.com\",\"password\":\"12345678\",\"confirm_password\":\"12345678\"}"
                         },
                         "description": "",
                         "auth": {
@@ -966,7 +1004,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"kek.q.t@7.x.b.b.cb$\\\/ix\"}"
+                            "raw": "{\"email\":\"y_.o4idx+@64lfv8.kvekfh.lb1eq2.titc$\\\/ix\"}"
                         },
                         "description": "",
                         "auth": {
@@ -997,7 +1035,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"i@ro4keuu.t0f987w.nx$\\\/ix\"}"
+                            "raw": "{\"email\":\"58r7q.apfv1x.mhhdma@qy.nf.6w.wpv$\\\/ix\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1034,7 +1072,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_name\":\"John\",\"user_email\":\"ywiegand@example.net\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
+                            "raw": "{\"user_name\":\"John\",\"user_email\":\"vicente.halvorson@example.org\",\"user_phone\":\"1234567890\",\"message\":\"This is a test message\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1078,7 +1116,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"kemmerich@example.org\"}"
+                            "raw": "{\"email\":\"smith.marianne@example.com\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1128,7 +1166,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"omnis\",\"first_name\":\"dolores\",\"last_name\":\"laudantium\",\"country\":\"voluptatibus\",\"house_name\":\"praesentium\",\"detail_address\":\"sunt\",\"city\":\"pariatur\",\"state\":\"aut\",\"post_code\":\"porro\",\"phone\":\"magnam\",\"amount\":\"dolorum\",\"paymentID\":\"soluta\",\"plan_name\":\"quis\",\"plan_price\":\"sequi\",\"payment_type\":\"rerum\"}"
+                            "raw": "{\"emailId\":\"voluptates\",\"first_name\":\"cum\",\"last_name\":\"aut\",\"country\":\"et\",\"house_name\":\"omnis\",\"detail_address\":\"accusantium\",\"city\":\"doloribus\",\"state\":\"veniam\",\"post_code\":\"dolores\",\"phone\":\"rem\",\"amount\":\"et\",\"paymentID\":\"debitis\",\"plan_name\":\"qui\",\"plan_price\":\"praesentium\",\"payment_type\":\"sit\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1172,7 +1210,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"emailId\":\"tempore\"}"
+                            "raw": "{\"emailId\":\"voluptatem\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1514,7 +1552,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"payment_method_id\":\"cumque\",\"email\":\"quia\",\"amount\":\"nesciunt\",\"plan_id\":\"sit\",\"plan_name\":\"expedita\",\"plan_price\":\"ea\",\"country\":\"et\",\"state\":\"ut\",\"city\":\"culpa\",\"house_name\":\"sed\",\"post_code\":\"eveniet\"}"
+                            "raw": "{\"payment_method_id\":\"necessitatibus\",\"email\":\"omnis\",\"amount\":\"nesciunt\",\"plan_id\":\"laborum\",\"plan_name\":\"iure\",\"plan_price\":\"in\",\"country\":\"rerum\",\"state\":\"eos\",\"city\":\"omnis\",\"house_name\":\"illum\",\"post_code\":\"et\"}"
                         },
                         "description": "",
                         "auth": {

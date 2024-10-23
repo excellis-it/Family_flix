@@ -195,7 +195,7 @@ endpoints:
         name: payment_method_id
         description: ''
         required: true
-        example: cumque
+        example: necessitatibus
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -204,7 +204,7 @@ endpoints:
         name: email
         description: ''
         required: true
-        example: quia
+        example: omnis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -240,7 +240,7 @@ endpoints:
         name: plan_id
         description: ''
         required: true
-        example: sit
+        example: laborum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -249,7 +249,7 @@ endpoints:
         name: plan_name
         description: ''
         required: true
-        example: expedita
+        example: iure
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -258,7 +258,7 @@ endpoints:
         name: plan_price
         description: ''
         required: true
-        example: ea
+        example: in
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -267,7 +267,7 @@ endpoints:
         name: country
         description: ''
         required: true
-        example: et
+        example: rerum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -276,7 +276,7 @@ endpoints:
         name: state
         description: ''
         required: true
-        example: ut
+        example: eos
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -285,7 +285,7 @@ endpoints:
         name: city
         description: ''
         required: true
-        example: culpa
+        example: omnis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -294,7 +294,7 @@ endpoints:
         name: house_name
         description: ''
         required: true
-        example: sed
+        example: illum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -303,23 +303,23 @@ endpoints:
         name: post_code
         description: ''
         required: true
-        example: eveniet
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      payment_method_id: cumque
-      email: quia
+      payment_method_id: necessitatibus
+      email: omnis
       amount: nesciunt
-      plan_id: sit
-      plan_name: expedita
-      plan_price: ea
-      country: et
-      state: ut
-      city: culpa
-      house_name: sed
-      post_code: eveniet
+      plan_id: laborum
+      plan_name: iure
+      plan_price: in
+      country: rerum
+      state: eos
+      city: omnis
+      house_name: illum
+      post_code: et
     fileParameters: []
     responses:
       -
