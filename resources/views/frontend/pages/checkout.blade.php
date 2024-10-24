@@ -355,7 +355,7 @@
                                                                     </th>
                                                                 </tr>
                                                                 <tr class="recurring">
-                                                                    <th>Recurring totals</th>
+                                                                    <th>Recurring amounts</th>
                                                                     <div class="text-end">
                                                                         <td class="text-end">
                                                                             ${{ $plan->plan_offer_price }}/
@@ -505,7 +505,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ck-ftr-btm">
+                    {{-- <div class="ck-ftr-btm">
                         <div class="row justify-content-center">
                             <div class="col-lg-12">
                                 <div class="ck-ftr-btm-img">
@@ -513,7 +513,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </footer>

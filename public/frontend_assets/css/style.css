@@ -3197,6 +3197,7 @@ opacity: 0.8;
   font-weight: 500;
   padding: 20px 10px;
   border-bottom: none;
+  min-width: 150px;
 }
 .recurring td{
   border-bottom: none;
@@ -3209,7 +3210,7 @@ opacity: 0.8;
   color: var(--white-color);
  border-radius: 3px;
  border: none;
- padding: 10px 32px;
+ padding: 10px 25px;
 }
 .paypal-btn{
   background: #ffc439;
