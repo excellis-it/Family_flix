@@ -141,14 +141,13 @@ class WalletController extends Controller
     public function walletMoneyTransferFetchData(Request $request)
     {
         if ($request->ajax()) {
-            $query = $request->get('query', ''); // Default to empty string if not set
+            $query = $request->get('query',''); // Default to empty string if not set
             $wallet_money_transfer = WalletMoneyTransaction::query()
                 ->where('user_id', Auth::user()->id)
                 ->where(function ($q) use ($query) {
                     $q->where('transaction_amount', 'like', '%' . $query . '%')
                         ->orWhere('transaction_type', 'like', '%' . $query . '%')
                         ->orWhere('last_available_balance', 'like', '%' . $query . '%')
-                        // 2024-08-13, 13.43 PM
                         ->orWhere('created_at', 'like', '%' . $query . '%');
                 })
                 ->paginate(10);
@@ -192,13 +191,14 @@ class WalletController extends Controller
                 $wallet_money_transfer->transaction_id = $transfer->id;
                 $wallet_money_transfer->transaction_type = 'debit';
                 $wallet_money_transfer->transaction_amount = $request->amount;
-                $wallet_money_transfer->last_available_balance = $wallet->wallet_balance - $request->amount;
+                $balance = ($wallet->wallet_balance - $request->amount); 
+                $wallet_money_transfer->last_available_balance = number_format($balance, 2);
                 $wallet_money_transfer->transaction_description = 'Wallet money transfer';
                 $wallet_money_transfer->save();
 
                 // wallet balance update
 
-                $wallet->wallet_balance = $wallet->wallet_balance - $request->amount;
+                $wallet->wallet_balance =  $balance;
                 $wallet->save();
 
                 return redirect()->back()->with('message', 'Money transfer successfully. Please check your wallet transaction list.');

@@ -17,7 +17,7 @@ use App\Models\Wallet;
 use Illuminate\Support\Facades\Session;
 use Omnipay\Omnipay;
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use App\Models\UserSubscriptionRecurring;
 use App\Traits\PayPalTrait;
@@ -219,12 +219,14 @@ class PaypalController extends Controller
         if (!$check_user && $check_coupon_user_type == 'new_user') {
             //calculate discount
             if ($coupon->coupon_type == 'percentage') {
-                $discount = round(($request->plan_price  / 100) * $coupon->value);
+                $dis_amount = ($request->plan_price / 100) * $coupon->value;
+                $discount = number_format($dis_amount, 2);
             } else {
                 $discount = $coupon->value;
             }
 
-            $discount_amount = round($request->plan_price - $discount);
+            $dis_amnt = $request->plan_price - $discount;
+            $discount_amount = number_format($dis_amnt, 2);
 
             if ($discount_amount) {
                 return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type,]);
@@ -233,14 +235,14 @@ class PaypalController extends Controller
 
             //calculate discount
             if ($coupon->coupon_type == 'percentage') {
-
-                $discount = round(($request->plan_price  / 100) * $coupon->value);
+                $dis_amount = ($request->plan_price  / 100) * $coupon->value;
+                $discount = number_format($dis_amount, 2);
             } else {
 
                 $discount = $coupon->value;
             }
-
-            $discount_amount = round($request->plan_price - $discount);
+            $dis_amnt = $request->plan_price - $discount;
+            $discount_amount = number_format($dis_amnt, 2);
 
             if ($discount_amount) {
                 return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type,]);
@@ -336,8 +338,6 @@ class PaypalController extends Controller
                         $admin_commission = $data['amount'];
                     }
 
-
-
                     $user_subscription->affiliate_id = Session::get('affiliate_id');
                     $user_subscription->affiliate_commission = $commission_dis;
                 } else {
@@ -360,7 +360,8 @@ class PaypalController extends Controller
                 $wallet->save();
 
                 $admin_balance = User::role('ADMIN')->first();
-                $admin_balance->wallet_balance = $admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
+                $balance_amount = $admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
+                $admin_balance->wallet_balance = number_format($balance_amount, 2, '.', '');
                 $admin_balance->update();
 
                 //affiliator wallet add
@@ -424,13 +425,14 @@ class PaypalController extends Controller
             // $unique_id = substr(uniqid(rand(10, 99), true), -8, 8);
             $wallet->wallet_id = $walletId;
             $wallet->user_subscription_id = $user_subscription->id;
-            $wallet->user_type = 'admin';
-            $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
+            $wallet->user_type = 'admin';  
+            $wallet->balance = number_format($data['amount'] - $user_subscription->affiliate_commission, 2, '.', '');
             $wallet->date = date('Y-m-d');
             $wallet->save();
 
             $admin_balance = User::role('ADMIN')->first();
-            $admin_balance->wallet_balance = $admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
+            $wallet_balance = number_format($admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission), 2, '.', '');
+            $admin_balance->wallet_balance = $wallet_balance;
             $admin_balance->update();
 
             //affiliator wallet add
@@ -445,7 +447,7 @@ class PaypalController extends Controller
 
             $affiliator_balance = User::find($user_subscription->affiliate_id);
             if ($affiliator_balance) {
-                $affiliator_balance->wallet_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
+                $affiliator_balance->wallet_balance = number_format($affiliator_balance->wallet_balance + $user_subscription->affiliate_commission, 2, '.','');
                 $affiliator_balance->update();
             }
 

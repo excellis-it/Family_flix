@@ -66,10 +66,6 @@ class ProfileController extends Controller
      * @authenticated
      * @bodyParam name string required The name of the user. Example: John Doe
      * @bodyParam phone string required The phone of the user. Example: +1 1234 567 890
-<<<<<<< HEAD
-=======
-     * @bodyParam address string required The address of the user. Example: USA,678
->>>>>>> c1785ddb5e90245089796b4a8046a3bd1939716d
      * @response 200{
      *   "message": "Affiliater details updated successfully.",
      *   "data": {

@@ -324,7 +324,8 @@ class SubscriptionController extends Controller
             $wallet->save();
     
             $admin_balance = User::role('ADMIN')->first();
-            $admin_balance->wallet_balance = $admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
+            $balance = $admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
+            $admin_balance->wallet_balance = number_format($balance, 2);
             $admin_balance->update();
     
             //affiliator wallet add
@@ -339,7 +340,8 @@ class SubscriptionController extends Controller
     
             $affiliator_balance = User::find($user_subscription->affiliate_id);
             if ($affiliator_balance) {
-                $affiliator_balance->wallet_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
+                $balance_amount = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
+                $affiliator_balance->wallet_balance = number_format($balance_amount, 2);
                 $affiliator_balance->update();
             }
     

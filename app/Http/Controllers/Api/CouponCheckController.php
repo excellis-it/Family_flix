@@ -68,14 +68,16 @@ class CouponCheckController extends Controller
                 //calculate discount
                 if($coupon->coupon_type == 'percentage')
                 {
-                    $discount = round(($request->plan_price  / 100) * $coupon->value);
+                    $discount_percent_amt = ($request->plan_price / 100) * $coupon->value;
+                    $discount = number_format($discount_percent_amt, 2, '.', '');
                 }
                 else
                 {
                     $discount = $coupon->value;
                 }
 
-                $discount_amount = round($request->plan_price - $discount);
+                $dis_amount = $request->plan_price - $discount;
+                $discount_amount = number_format($dis_amount, 2, '.', '');
 
                 if($discount_amount)
                 {

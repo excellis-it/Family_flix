@@ -61,7 +61,8 @@ class WalletController extends Controller
     public function walletList(Request $request)
     {
         try{
-            $wallet_sum = Wallet::where('user_id', Auth::user()->id)->sum('balance');
+            $sum_value = Wallet::where('user_id', Auth::user()->id)->sum('balance');
+            $wallet_sum = number_format($sum_value, 2, '.', '');
             $wallets = Wallet::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->with('subscription','subscription.customer')->get();
             if ($request->search) {
                 $query = $request->get('search', ''); // Default to empty string if not set
