@@ -39,9 +39,9 @@
 
     {{-- toastr cdn --}}
     <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-   
-    
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
 </head>
 
 <body>
@@ -53,61 +53,61 @@
 
         @include('frontend.includes.header')
         @yield('content')
-<style>
-    @media (max-width:1280px) {
+        <style>
+            @media (max-width:1280px) {
 
-    .vdo-img {
-        height: 250px;
-        margin-top: -9%;
-    }
-   
-}
+                .vdo-img {
+                    height: 250px;
+                    margin-top: -9%;
+                }
 
-@media (max-width:1600px) {
-    
-    .imdb-sec {
-        margin-top: -6.2%;
-    }
-    
- 
-}
-</style>
-    <section class="subscribe-sec">
-        <div class="container">
-            <div class="subscribe-sec-wrap">
-                <div class="row justify-content-center">
-                    <div class="col-xl-11">
-                        <div class="subscribe-head">
-                            <h2>{{ $subscribe_cms->subscribe_title }}</h2>
-                        </div>
-                        <form action="{{ route('subscribe.submit') }}" method="post" id="subscription-form">
-                            @csrf
-                            <div class="subscribe-form">
-                                <div class="row ">
-                                    <div class="col-xl-12">
-                                        <div class="subscribe-form-wrap">
-                                            <input type="text" class="form-control"  name="user_email"
-                                                placeholder="{{ $subscribe_cms->subscription_placeholder }}">
-                                            @if ($errors->has('name'))
+            }
+
+            @media (max-width:1600px) {
+
+                .imdb-sec {
+                    margin-top: -6.2%;
+                }
+
+
+            }
+        </style>
+        <section class="subscribe-sec">
+            <div class="container">
+                <div class="subscribe-sec-wrap">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-11">
+                            <div class="subscribe-head">
+                                <h2>{{ $subscribe_cms->subscribe_title }}</h2>
+                            </div>
+                            <form action="{{ route('subscribe.submit') }}" method="post" id="subscription-form">
+                                @csrf
+                                <div class="subscribe-form">
+                                    <div class="row ">
+                                        <div class="col-xl-12">
+                                            <div class="subscribe-form-wrap">
+                                                <input type="text" class="form-control" name="user_email"
+                                                    placeholder="{{ $subscribe_cms->subscription_placeholder }}">
+                                                @if ($errors->has('name'))
                                                 <div class="error" style="color:red;">
                                                     {{ $errors->first('name') }}</div>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="sign-up-btn subscribe-btn mt-4">
+                                        <button type="submit">{{ $subscribe_cms->button_name }}</button>
+                                    </div>
                                 </div>
-                                <div class="sign-up-btn subscribe-btn mt-4">
-                                    <button type="submit">{{ $subscribe_cms->button_name }}</button>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- <div class="subscribe-line"></div> -->
+                            </form>
+                            <!-- <div class="subscribe-line"></div> -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-   
+
         @include('frontend.includes.footer')
 
         <div class="scroll-top">
@@ -222,8 +222,8 @@
 
     </script>
 
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
         // Function to check if user is authenticated
         function checkAuthenticationAffi() {
             @auth
@@ -255,12 +255,12 @@
         });
     });
 
-</script>
+    </script>
 
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
     s1.async=true;
@@ -271,6 +271,13 @@
     })();
     </script>
     <!--End of Tawk.to Script-->
+
+
+    <script type="text/javascript">
+        function loadAcDiv(t){let e;(e=t.createElement("div")).id="embed-ab",e.async=!0,e.setAttribute("data-ab-id","ZLqZX5je"),e.setAttribute("data-btn-bg","#239789"),e.setAttribute("data-btn-img","https://myagencycoach.agency/storage/uploads/5457/img_1723028547_iEk.png"),e.setAttribute('data-avtr-img',"https://myagencycoach.agency/storage/uploads/5457/img_1723028389_68d.png"),e.setAttribute("data-ab-url","https://myagencycoach.agency"),e.setAttribute("data-bub-ani","anim-ok"),e.setAttribute("data-wid-pos","fcpw-left"),t.body.appendChild(e)}function initialize(t){let e;(e=t.createElement("script")).id="script-ab",e.async=!0,(e.type = "text/javascript"),e.src="https://myagencycoach.agency/assets/chat/embed.js",e.onload=loadAcDiv(t),t.body.appendChild(e)}window.addEventListener?window.addEventListener("load",initialize(document),!1):window.attachEvent("load",initialize(document),!1);
+    </script>
+
+
 
     @stack('scripts')
 
