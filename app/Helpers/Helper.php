@@ -32,7 +32,7 @@ class Helper {
     public static function adminWallet()
     {
         $admin_wallet = auth()->user()->wallet_balance;
-        $admin_wallet_formatted = $admin_wallet ? number_format($admin_wallet, 2, '.', '') : '0.00';
+        $admin_wallet_formatted = $admin_wallet ? $admin_wallet : '0.00';
         return $admin_wallet_formatted;
     }
 
