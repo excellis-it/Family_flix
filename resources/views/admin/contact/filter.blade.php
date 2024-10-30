@@ -8,7 +8,7 @@
         <td>{{ $contact->user_name }}</td>
         <td>{{ $contact->user_email }}</td>
         <td>{{ $contact->user_phone }}</td>
-        <td>{{ $contact->message }}</td>                                           
+        <td>{{ Str::of($contact->message)->limit(20); }}</td>                                           
         
     </tr>
 @endforeach
