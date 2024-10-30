@@ -319,7 +319,7 @@
                         </span>Communications
                         <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
-                    <ul class="submenu collapse {{ Request::is('admin/contact-us*')  ? 'show' : '' }}">
+                    <ul class="submenu collapse {{ Request::is('admin/contact-us*') || Request::is('admin/subscriber-list*')  ? 'show' : '' }}">
                         @if(Gate::check('View Contactus'))
                         <li class="{{ Request::is('admin/contact-us*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('contact-us.list') }}">Contact Us List</a>
@@ -337,73 +337,72 @@
 
 
                 @if(Gate::check('Manage Coupon'))
-                <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/coupons*') ? 'active' : ' ' }}" href="#">
-                        <span>
-                            <i class="ti ti-gift"></i>
-                        </span>Coupons
-                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
-                    </a>
-                    <ul class="submenu collapse {{ Request::is('admin/coupons*') ? 'active' : ' ' }}">
-                        <li class="{{ Request::is('admin/coupons*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('coupons.index') }}">List</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="nav-item has-submenu">
+                        <a class="nav-link {{ Request::is('admin/coupons*') ? 'active' : '' }}" href="#">
+                            <span>
+                                <i class="ti ti-gift"></i>
+                            </span>Coupons
+                            <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                        </a>
+                        <ul class="submenu collapse {{ Request::is('admin/coupons*') ? 'show' : '' }}">
+                            <li class="{{ Request::is('admin/coupons*') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('coupons.index') }}">List</a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
 
                 
                 @if(Gate::check('Manage Payment Detail'))
-                <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/site-settings*') ? 'active' : ' ' }}" href="#">
-                        <span>
-                            <i class="fa fa-cog"></i>
-                        </span>Payment Setting
-                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
-                    </a>
-                    <ul class="submenu collapse">
-                        <li class="{{ Request::is('admin/site-settings/credentials*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('credentials.index') }}">Stripe Credentials</a>
-                        </li>
-
-                        <li class="{{ Request::is('admin/site-settings/payment-details-mail*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('payment-detail-mail.edit-detail') }}">Payment Detail Mail</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="nav-item has-submenu">
+                        <a class="nav-link {{ Request::is('admin/site-settings*') ? 'active' : '' }}" href="#">
+                            <span>
+                                <i class="fa fa-cog"></i>
+                            </span>Payment Setting
+                            <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                        </a>
+                        <ul class="submenu collapse {{ Request::is('admin/site-settings*') ? 'show' : '' }}">
+                            <li class="{{ Request::is('admin/site-settings/credentials*') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('credentials.index') }}">Stripe Credentials</a>
+                            </li>
+                            <li class="{{ Request::is('admin/site-settings/payment-details-mail*') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('payment-detail-mail.edit-detail') }}">Payment Detail Mail</a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
 
                 @if(Gate::check('Manage Wallet'))
-                <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/wallets*') ? 'active' : ' ' }}" href="#">
-                        <span>
-                            <i class="fa fa-money"></i>
-                        </span>Wallet
-                        <span class="arrow-down"><i id="icon" class="ti ti-wallet"></i></span>
-                    </a>
-                    <ul class="submenu collapse {{ Request::is('admin/wallets*') ? 'active' : ' ' }}">
-                        <li class="{{ Request::is('admin/wallets*') ? 'active' : ' ' }}">
-                            <a class="nav-link" href="{{ route('wallets.list') }}">Details</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="nav-item has-submenu">
+                        <a class="nav-link {{ Request::is('admin/wallet-list*') ? 'active' : '' }}" href="#">
+                            <span>
+                                <i class="fa fa-money"></i>
+                            </span>Wallet
+                            <span class="arrow-down"><i id="icon" class="ti ti-wallet"></i></span>
+                        </a>
+                        <ul class="submenu collapse {{ Request::is('admin/wallet-list*') ? 'show' : '' }}">
+                            <li class="{{ Request::is('admin/wallet-list*') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('wallets.list') }}">Details</a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
 
                 @if (Auth::user()->hasRole('ADMIN'))
                 <li class="nav-item has-submenu">
-                    <a class="nav-link {{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : ' ' }}" href="#">
+                    <a class="nav-link {{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : '' }}" href="#">
                         <span>
                             <i class="ti ti-arrow-right"></i>
                         </span>Wallet Transfer History
-                        <span class="arrow-down "><i id="icon" class="ti ti-chevron-right"></i></span>
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
                     </a>
-                    <ul class="submenu collapse {{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : ' ' }}">
-                        <li class="{{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : ' ' }}">
+                    <ul class="submenu collapse {{ Request::is('admin/wallet-money-transfer-list*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/wallet-money-transfer-list*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('wallet.money-transfer.list') }}">List</a>
                         </li>
                     </ul>
                 </li>
-                @endif
+            @endif
             </ul>
             </div>
         </nav>
