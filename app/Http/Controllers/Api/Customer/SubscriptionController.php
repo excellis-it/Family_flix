@@ -322,9 +322,11 @@ class SubscriptionController extends Controller
             $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
             $wallet->date = date('Y-m-d');
             $wallet->save();
-    
+
+
             $admin_balance = User::role('ADMIN')->first();
-            $balance = $admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
+            $admin_wallet_balance = str_replace(',', '', $admin_balance->wallet_balance);
+            $balance = $admin_wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
             $admin_balance->wallet_balance = number_format($balance, 2);
             $admin_balance->update();
     
