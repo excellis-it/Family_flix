@@ -214,7 +214,21 @@
                 @endif
 
 
-
+                @if (auth()->user()->hasRole('ADMIN'))
+                <li class="nav-item has-submenu">
+                    <a class="nav-link {{ Request::is('admin/emails*') ? 'active' : ' ' }}" href="#">
+                        <span>
+                            <i class="ti ti-aperture"></i>
+                        </span>Email Template
+                        <span class="arrow-down"><i id="icon" class="ti ti-chevron-right"></i></span>
+                    </a>
+                    <ul class="submenu collapse {{ Request::is('admin/emails*') ? 'show' : '' }}">
+                        <li class="{{ Request::is('admin/emails*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('emails.index') }}">List</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
 
 
                 @if(Gate::check('Manage Cms'))
@@ -352,7 +366,7 @@
                     </li>
                 @endif
 
-                
+
                 @if(Gate::check('Manage Payment Detail'))
                     <li class="nav-item has-submenu">
                         <a class="nav-link {{ Request::is('admin/site-settings*') ? 'active' : '' }}" href="#">

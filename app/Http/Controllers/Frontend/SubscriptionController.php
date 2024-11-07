@@ -31,7 +31,7 @@ use App\Mail\AdminSubscriptionMail;
 use Illuminate\Support\Facades\DB;
 use App\Models\PaymentDetailMail;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
 {
@@ -39,264 +39,319 @@ class SubscriptionController extends Controller
     public function createSubscription(Request $request)
     {
 
-        // need Helper function stripeCredential 
-        $stripe = Helper::stripeCredential();
+        $rules = [
+            'email' => 'required|email',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'house_name' => 'required|string|max:255',
+            'detail_address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'post_code' => 'required|string|max:20',
+            'phone' => 'required|numeric',
+            'payment_method_id' => 'required|string',
+            'plan_id' => 'required|integer',
+        ];
 
-        if (!empty($stripe->stripe_secret)) {
-            \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
-        } else {
-            // Handle missing secret key
-            throw new \Exception('Stripe secret key is missing');
+        // If the user is authenticated, skip password validation
+        if (!Auth::check()) {
+            $rules['password'] = 'required|min:6';
         }
 
-        // Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
+        $validator = Validator::make($request->all(), $rules);
 
-        $data = $request->all();
-        $paymentMethodId = $data['payment_method_id'];
-        $price_id = '';  // Declare the variable outside the loop
-        $plan = Plan::all(); // Retrieve all plans
-        $arrayVal = array();
-
-
-        foreach ($plan as $key => $value) {
-
-            // if($value->active == 1){
-            $amount = $value->amount / 100;
-            $actual_amount = number_format($amount, 2);
-            $arrayVal[$actual_amount]['plan_id'] = $value->id;
-            $arrayVal[$actual_amount]['actual_amount'] = $actual_amount;
-            // }
-        }
-
-        if (strpos($data['plan_price'], '.') === false) {
-            $formattedPrice = number_format($data['plan_price'], 2);
-        } else {
-            $formattedPrice = $data['plan_price'];
-        }
-
-        if (isset($arrayVal[$formattedPrice])) {
-            $price_id = $arrayVal[$formattedPrice]['plan_id'];
-        } else {
+        if ($validator->fails()) {
             return response()->json([
-                'error' => true,
-                'message' => 'Plan not found'
+                'success' => false,
+                'errors' => $validator->errors(),
             ]);
         }
 
-        // payment process
-        $customer = Customer::all(['email' => $data['email']])->data[0] ?? null;
-        if (!$customer) {
-            $customer = Customer::create([
-                'email' => $data['email'],
-                'name' => $data['first_name'] . ' ' . $data['last_name'],
-            ]);
-        }
+        try {
+            $data = $request->all();
 
-        $paymentMethod = PaymentMethod::retrieve($paymentMethodId);
-        if ($paymentMethod->customer !== $customer->id) {
-            $paymentMethod->attach(['customer' => $customer->id]);
+            $user = User::where('email', $request->email)->first();
+            if (!Auth::check()) {
+                if ($user) {
+                    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                        $user = User::where('email', $request->email)->first();
+                        if ($user->hasRole('CUSTOMER') && $user->status == 1) {
+                            // Auth::login();
+                            $user_id = $user->id;
+                        } else {
+                            Auth::logout();
+                            return response()->json([
+                                'success' => false,
+                                'error' => 'Your account is deactivate!',
+                            ]);
+                        }
+                    } else {
+                        return response()->json([
+                            'success' => false,
+                            'error' => 'Email id & password was invalid!',
+                        ]);
+                    }
+                } else {
+                    $user = new User();
+                    $user->name = $data['first_name'] . ' ' . $data['last_name'];
+                    $user->email = $data['email'];
+                    $password = $data['password'];
+                    $user->password = bcrypt($password);
+                    $user->phone = $data['phone'] ?? '';
+                    $user->status = 1;
+                    $user->wallet_balance = 0;
+                    $user->save();
+                    $user->assignRole('CUSTOMER');
 
-            // update card details in customer default payment method
-            $customer = Customer::update(
-                $customer->id,
-                ['invoice_settings' => ['default_payment_method' => $paymentMethodId]]
-            );
-        }
-
-        $subscriptionParams = [
-            'customer' => $customer->id,
-            'items' => [[
-                'price' => $price_id, // Replace with your price ID from Stripe Dashboard
-            ]],
-            'default_payment_method' => $paymentMethod,
-            'expand' => ['latest_invoice.payment_intent'],
-        ];
-
-        $coupon_detail = Coupon::where('code', $request->coupon_code)->first();
-
-        if (!empty($coupon_detail)) {
-            // Check if the coupon exists in Stripe
-            try {
-                $coupon = \Stripe\Coupon::retrieve($coupon_detail->stripe_coupon_id);
-                if ($coupon) {
-                    // Add coupon to the subscription parameters
-                    $subscriptionParams['coupon'] = $coupon_detail->stripe_coupon_id;
+                    //send welcome email
+                    $maildata = [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'password' => $password,
+                    ];
+                    Mail::to($user->email)->send(new WelcomeMail($maildata));
+                    $user_id = $user->id;
                 }
-            } catch (\Exception $e) {
-                return response()->json(['error' => 'Invalid coupon code.'], 400);
-            }
-        }
-
-
-        $subscription = \Stripe\Subscription::create($subscriptionParams);
-
-
-
-        // check user exists or not
-        $check_user_exists = User::where('email', $data['email'])->count();
-        if ($check_user_exists > 0) {
-            $user_get = User::where('email', $data['email'])->first();
-            $user_id = $user_get->id;
-        } else {
-            $user = new User();
-            $user->name = $data['first_name'] . ' ' . $data['last_name'];
-            $user->email = $data['email'];
-            $password = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 8);
-            $user->password = bcrypt($password);
-            $user->phone = $data['phone'] ?? '';
-            $user->status = 1;
-            $user->wallet_balance = 0;
-            $user->save();
-            $user->assignRole('CUSTOMER');
-
-            //send welcome email
-            $maildata = [
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => $password,
-            ];
-            Mail::to($user->email)->send(new WelcomeMail($maildata));
-            $user_id = $user->id;
-        }
-
-
-
-        //customer details add
-        $customer_details_count = CustomerDetails::where('email_address', $data['email'])->count();
-        if ($customer_details_count > 0) {
-            $customer_details = CustomerDetails::where('email_address', $data['email'])->first();
-            $customer_details->email_address = $data['email'];
-            $customer_details->first_name = $data['first_name'];
-            $customer_details->last_name = $data['last_name'];
-            $customer_details->country = $data['country'];
-            $customer_details->house_no_street_name = $data['house_name'];
-            $customer_details->apartment = $data['detail_address'];
-            $customer_details->town = $data['city'];
-            $customer_details->state = $data['state'];
-            $customer_details->post_code = $data['post_code'];
-            $customer_details->phone = $data['phone'];
-            $customer_details->update();
-        } else {
-            $customer_details = new CustomerDetails();
-            $customer_details->email_address = $data['email'];
-            $customer_details->first_name = $data['first_name'];
-            $customer_details->last_name = $data['last_name'];
-            $customer_details->country = $data['country'];
-            $customer_details->house_no_street_name = $data['house_name'];
-            $customer_details->apartment = $data['detail_address'];
-            $customer_details->town = $data['city'];
-            $customer_details->state = $data['state'];
-            $customer_details->post_code = $data['post_code'];
-            $customer_details->phone = $data['phone'];
-            $customer_details->save();
-        }
-
-        // add user subscription
-        $user_subscription = new UserSubscription();
-        $user_subscription->customer_details_id = $customer_details->id ?? null;
-        $user_subscription->customer_id = $user_id ?? null;
-        if (Session::has('affiliate_id')) {
-            //affiliate commission calculation
-            $affiliate_id = Session::get('affiliate_id');
-            $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
-            if ($commission) {
-                $commission_dis = number_format(($data['amount'] / 100) * $commission->percentage, 2);
-                $admin_commission = $data['amount'] - $commission_dis;
             } else {
-                $commission_dis = 0;
-                $admin_commission = $data['amount'];
+                $user_id = auth()->id();
             }
 
-            $user_subscription->affiliate_id = Session::get('affiliate_id') ?? null;
-            $user_subscription->affiliate_commission = $commission_dis ?? 0;
-        } else {
-            $user_subscription->affiliate_id = null;
-            $user_subscription->affiliate_commission = 0;
+
+            // need Helper function stripeCredential
+            $stripe = Helper::stripeCredential();
+
+            if (!empty($stripe->stripe_secret)) {
+                \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
+            } else {
+                // Handle missing secret key
+                throw new \Exception('Stripe secret key is missing');
+            }
+
+            // Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
+
+
+            $paymentMethodId = $data['payment_method_id'];
+            $price_id = '';  // Declare the variable outside the loop
+            $plan = Plan::all(); // Retrieve all plans
+            $arrayVal = array();
+
+            // dd($plan);
+            foreach ($plan as $key => $value) {
+
+                // if($value->active == 1){
+                $amount = $value->amount / 100;
+                $actual_amount = number_format($amount, 2);
+                $arrayVal[$actual_amount]['plan_id'] = $value->id;
+                $arrayVal[$actual_amount]['actual_amount'] = $actual_amount;
+                // }
+            }
+
+
+            if (strpos($data['plan_price'], '.') === false) {
+                $formattedPrice = number_format($data['plan_price'], 2);
+            } else {
+                $formattedPrice = $data['plan_price'];
+            }
+
+            if (isset($arrayVal[$formattedPrice])) {
+                $price_id = $arrayVal[$formattedPrice]['plan_id'];
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Plan not found'
+                ]);
+            }
+
+            // payment process
+            $customer = Customer::all(['email' => $data['email']])->data[0] ?? null;
+            if (!$customer) {
+                $customer = Customer::create([
+                    'email' => $data['email'],
+                    'name' => $data['first_name'] . ' ' . $data['last_name'],
+                ]);
+            }
+
+            $paymentMethod = PaymentMethod::retrieve($paymentMethodId);
+            if ($paymentMethod->customer !== $customer->id) {
+                $paymentMethod->attach(['customer' => $customer->id]);
+
+                // update card details in customer default payment method
+                $customer = Customer::update(
+                    $customer->id,
+                    ['invoice_settings' => ['default_payment_method' => $paymentMethodId]]
+                );
+            }
+
+            $subscriptionParams = [
+                'customer' => $customer->id,
+                'items' => [[
+                    'price' => $price_id, // Replace with your price ID from Stripe Dashboard
+                ]],
+                'default_payment_method' => $paymentMethod,
+                'expand' => ['latest_invoice.payment_intent'],
+            ];
+
+            $coupon_detail = Coupon::where('code', $request->coupon_code)->first();
+
+            if (!empty($coupon_detail)) {
+                // Check if the coupon exists in Stripe
+                try {
+                    $coupon = \Stripe\Coupon::retrieve($coupon_detail->stripe_coupon_id);
+                    if ($coupon) {
+                        // Add coupon to the subscription parameters
+                        $subscriptionParams['coupon'] = $coupon_detail->stripe_coupon_id;
+                    }
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'Invalid coupon code.', 'succuss' => false], 400);
+                }
+            }
+
+
+            $subscription = \Stripe\Subscription::create($subscriptionParams);
+
+            //customer details add
+            $customer_details_count = CustomerDetails::where('email_address', $data['email'])->count();
+            if ($customer_details_count > 0) {
+                $customer_details = CustomerDetails::where('email_address', $data['email'])->first();
+                $customer_details->email_address = $data['email'];
+                $customer_details->first_name = $data['first_name'];
+                $customer_details->last_name = $data['last_name'];
+                $customer_details->country = $data['country'];
+                $customer_details->house_no_street_name = $data['house_name'];
+                $customer_details->apartment = $data['detail_address'];
+                $customer_details->town = $data['city'];
+                $customer_details->state = $data['state'];
+                $customer_details->post_code = $data['post_code'];
+                $customer_details->phone = $data['phone'];
+                $customer_details->update();
+            } else {
+                $customer_details = new CustomerDetails();
+                $customer_details->email_address = $data['email'];
+                $customer_details->first_name = $data['first_name'];
+                $customer_details->last_name = $data['last_name'];
+                $customer_details->country = $data['country'];
+                $customer_details->house_no_street_name = $data['house_name'];
+                $customer_details->apartment = $data['detail_address'];
+                $customer_details->town = $data['city'];
+                $customer_details->state = $data['state'];
+                $customer_details->post_code = $data['post_code'];
+                $customer_details->phone = $data['phone'];
+                $customer_details->save();
+            }
+
+            // add user subscription
+            $user_subscription = new UserSubscription();
+            $user_subscription->customer_details_id = $customer_details->id ?? null;
+            $user_subscription->customer_id = $user_id ?? null;
+            if (Session::has('affiliate_id')) {
+                //affiliate commission calculation
+                $affiliate_id = Session::get('affiliate_id');
+                $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
+                if ($commission) {
+                    $commission_dis = number_format(($data['amount'] / 100) * $commission->percentage, 2);
+                    $admin_commission = $data['amount'] - $commission_dis;
+                } else {
+                    $commission_dis = 0;
+                    $admin_commission = $data['amount'];
+                }
+
+                $user_subscription->affiliate_id = Session::get('affiliate_id') ?? null;
+                $user_subscription->affiliate_commission = $commission_dis ?? 0;
+            } else {
+                $user_subscription->affiliate_id = null;
+                $user_subscription->affiliate_commission = 0;
+            }
+
+            $user_subscription->stripe_subscription_id = $subscription->id;
+            // $user_subscription->payment_type = $data['payment_type'];
+            $user_subscription->plan_id = $data['plan_id'] ?? '';
+            $user_subscription->plan_name = $data['plan_name'] ?? '';
+            $user_subscription->plan_price = $data['plan_price'] ?? '';
+            $user_subscription->coupan_code = $data['coupon_code'] ?? '';
+            $user_subscription->coupan_discount_type = $data['coupon_discount_type'] ?? '';
+            $user_subscription->coupan_discount = $data['coupon_discount'] ?? '';
+            $user_subscription->sub_total = $data['plan_price'] ?? '';
+            $user_subscription->total = $data['amount'] ?? '';
+            $user_subscription->additional_information = $data['additional_information'] ?? '';
+            $today = date('Y-m-d');
+            $user_subscription->plan_start_date = $today ?? '';
+            $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
+            $user_subscription->subscription_status = 1;
+            $user_subscription->save();
+
+
+
+            // admin wallet add
+            $wallet = new Wallet();
+            $walletId = Str::random(12);
+            $wallet->wallet_id = $walletId;
+            $wallet->user_subscription_id = $user_subscription->id;
+            $wallet->user_type = 'admin';
+            $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
+            $wallet->date = date('Y-m-d');
+            $wallet->save();
+
+            $admin_balance = User::role('ADMIN')->first();
+            $admin_wallet_balance = str_replace(',', '', $admin_balance->wallet_balance);
+            $balance = $admin_wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
+            $admin_balance->wallet_balance = number_format($balance, 2);
+            $admin_balance->update();
+
+            //affiliator wallet add
+            $wallet = new Wallet();
+            $wallet->wallet_id = $walletId;
+            $wallet->user_subscription_id = $user_subscription->id ?? null;
+            $wallet->user_type = 'affiliator';
+            $wallet->user_id = $user_subscription->affiliate_id ?? null;
+            $wallet->balance = $user_subscription->affiliate_commission ?? 0;
+            $wallet->date = date('Y-m-d');
+            $wallet->save();
+
+            $affiliator_balance = User::find($user_subscription->affiliate_id);
+            if ($affiliator_balance) {
+                $affi_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
+                $affiliator_balance->wallet_balance = number_format($affi_balance, 2);
+                $affiliator_balance->update();
+            }
+
+
+            $payment = new Payment();
+            $payment->user_subscription_id = $user_subscription->id;
+            $payment->transaction_id = $paymentMethodId;
+            $payment->payment_type = 'stripe';
+            $payment->payment_status = 'success';
+            $payment->payment_date = date('y-m-d');
+            $payment->payment_amount = $data['amount'];
+            $payment->payment_currency = 'USD';
+            $payment->save();
+            Session::put('user_id', $user_id);
+            $user_detail = User::find($user_id);
+            // user subscription mail
+            $userSubscriptionMailData = [
+                'name' => $user_detail->name,
+                'email' => $user_detail->email,
+                'plan_name' => $data['plan_name'],
+                'plan_price' => $data['plan_price'],
+                'plan_start_date' => $today,
+                'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
+            ];
+
+
+            $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
+            Mail::to($user_detail->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
+            Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Subscription created successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'error' => $th->getMessage(),
+            ]);
         }
-
-        $user_subscription->stripe_subscription_id = $subscription->id;
-        // $user_subscription->payment_type = $data['payment_type'];
-        $user_subscription->plan_id = $data['plan_id'] ?? '';
-        $user_subscription->plan_name = $data['plan_name'] ?? '';
-        $user_subscription->plan_price = $data['plan_price'] ?? '';
-        $user_subscription->coupan_code = $data['coupon_code'] ?? '';
-        $user_subscription->coupan_discount_type = $data['coupon_discount_type'] ?? '';
-        $user_subscription->coupan_discount = $data['coupon_discount'] ?? '';
-        $user_subscription->sub_total = $data['plan_price'] ?? '';
-        $user_subscription->total = $data['amount'] ?? '';
-        $user_subscription->additional_information = $data['additional_information'] ?? '';
-        $today = date('Y-m-d');
-        $user_subscription->plan_start_date = $today ?? '';
-        $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
-        $user_subscription->subscription_status = 1;
-        $user_subscription->save();
-
-
-
-        // admin wallet add
-        $wallet = new Wallet();
-        $walletId = Str::random(12);
-        $wallet->wallet_id = $walletId;
-        $wallet->user_subscription_id = $user_subscription->id;
-        $wallet->user_type = 'admin';
-        $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
-        $wallet->date = date('Y-m-d');
-        $wallet->save();
-
-        $admin_balance = User::role('ADMIN')->first();
-        $admin_wallet_balance = str_replace(',', '', $admin_balance->wallet_balance);
-        $balance = $admin_wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
-        $admin_balance->wallet_balance = number_format($balance, 2);
-        $admin_balance->update();
-
-        //affiliator wallet add
-        $wallet = new Wallet();
-        $wallet->wallet_id = $walletId;
-        $wallet->user_subscription_id = $user_subscription->id ?? null;
-        $wallet->user_type = 'affiliator';
-        $wallet->user_id = $user_subscription->affiliate_id ?? null;
-        $wallet->balance = $user_subscription->affiliate_commission ?? 0;
-        $wallet->date = date('Y-m-d');
-        $wallet->save();
-
-        $affiliator_balance = User::find($user_subscription->affiliate_id);
-        if ($affiliator_balance) {
-            $affi_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
-            $affiliator_balance->wallet_balance = number_format($affi_balance, 2);
-            $affiliator_balance->update();
-        }
-
-
-        $payment = new Payment();
-        $payment->user_subscription_id = $user_subscription->id;
-        $payment->transaction_id = $paymentMethodId;
-        $payment->payment_type = 'stripe';
-        $payment->payment_status = 'success';
-        $payment->payment_date = date('y-m-d');
-        $payment->payment_amount = $data['amount'];
-        $payment->payment_currency = 'USD';
-        $payment->save();
-        Session::put('user_id', $user_id);
-        $user_detail = User::find($user_id);
-        // user subscription mail
-        $userSubscriptionMailData = [
-            'name' => $user_detail->name,
-            'email' => $user_detail->email,
-            'plan_name' => $data['plan_name'],
-            'plan_price' => $data['plan_price'],
-            'plan_start_date' => $today,
-            'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
-        ];
-
-
-        $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
-        Mail::to($user_detail->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
-        Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Subscription created successfully'
-        ]);
     }
 
     public function successSubscription()
@@ -353,22 +408,16 @@ class SubscriptionController extends Controller
     {
 
         $check_user = CustomerDetails::where('email_address', $request->emailId)->orWhere('phone', $request->plan_id)->count();
-        if($check_user > 0)
-        {
-            $coupon = Coupon::where('plan_id',$request->plan_id)->where('user_type','existing_user')->select('code','id')->get();
-            if($coupon)
-            {
+        if ($check_user > 0) {
+            $coupon = Coupon::where('plan_id', $request->plan_id)->where('user_type', 'existing_user')->select('code', 'id')->get();
+            if ($coupon) {
+                return response()->json(['status' => true, 'message' => 'Coupon list fetch successfully', 'coupon_list' => $coupon, 'status_code' => 200]);
+            }
+        } else {
+            $coupon = Coupon::where('plan_id', $request->plan_id)->where('user_type', 'new_user')->select('code', 'id')->get();
+            if ($coupon) {
                 return response()->json(['status' => true, 'message' => 'Coupon list fetch successfully', 'coupon_list' => $coupon, 'status_code' => 200]);
             }
         }
-        else
-        {
-            $coupon = Coupon::where('plan_id',$request->plan_id)->where('user_type','new_user')->select('code','id')->get();
-            if($coupon)
-            {
-                return response()->json(['status' => true, 'message' => 'Coupon list fetch successfully', 'coupon_list' => $coupon, 'status_code' => 200]);
-            }
-        }
-    
     }
 }

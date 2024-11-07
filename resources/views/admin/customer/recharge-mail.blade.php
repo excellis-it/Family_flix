@@ -39,18 +39,57 @@ Customer Send mail
                                     {{ $errors->first('name') }}</div>
                                 @endif
                             </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="form-group col-md-6 mb-3">
-                                <label>Description<span style="color: red;">*</span></label>
-                                <textarea name="mail_content" id="editor1" class="form-control"
-                                    placeholder="Enter Content"></textarea>
-                                @if ($errors->has('mail_content'))
-                                <div class="error" style="color:red;">
-                                    {{ $errors->first('mail_content') }}</div>
+                            <div class="form-group col-md-6">
+                                <label>Email Template<span style="color: red;">*</span></label>
+                                <select name="email_id" class="form-control">
+                                    <option value="">Select Email Template</option>
+                                    @foreach($emails as $email)
+                                    <option value="{{ $email->id }}">{{ $email->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('email_id'))
+                                    <div class="error" style="color:red;">
+                                        {{ $errors->first('email_id') }}</div>
                                 @endif
                             </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="inputEnterYourName" class="col-form-label"> Company Name </label>
+                                <input type="text" name="company_name" id="" class="form-control" value="{{ old('company_name') }}"
+                                    placeholder="Enter Login Information" >
+                                @if ($errors->has('company_name'))
+                                <div class="error" style="color:red;">
+                                    {{ $errors->first('company_name') }}</div>
+                                @endif
+                            </div>
+
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="inputEnterYourName" class="col-form-label"> Login Information </label>
+                                <input type="text" name="login_information" id="" class="form-control" value="{{ old('login_information') }}"
+                                    placeholder="Enter Login Information" >
+                                @if ($errors->has('login_information'))
+                                <div class="error" style="color:red;">
+                                    {{ $errors->first('login_information') }}</div>
+                                @endif
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="inputEnterYourName" class="col-form-label"> Account Number </label>
+                                <input type="text" name="account_number" id="" class="form-control" value="{{ old('account_number') }}"
+                                    placeholder="Enter Account Number" >
+                                @if ($errors->has('account_number'))
+                                <div class="error" style="color:red;">
+                                    {{ $errors->first('account_number') }}</div>
+                                @endif
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="inputEnterYourName" class="col-form-label"> Password </label>
+                                <input type="text" name="password" id="" class="form-control" value="{{ old('password') }}"
+                                    placeholder="Enter Password" >
+                                @if ($errors->has('password'))
+                                <div class="error" style="color:red;">
+                                    {{ $errors->first('password') }}</div>
+                                @endif
+                            </div>
+
                             <div class="w-100 text-end">
                                 <button type="submit" class="print_btn">Send</button>
                             </div>

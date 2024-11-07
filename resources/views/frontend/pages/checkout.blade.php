@@ -28,12 +28,13 @@
     <link href="{{ asset('frontend_assets/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend_assets/css/responsive.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend_assets/css/circle.css') }}" rel="stylesheet" />
-    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
     @php
-    use App\Helpers\Helper;
+        use App\Helpers\Helper;
     @endphp
     <main>
         <section id="loading">
@@ -98,146 +99,157 @@
                         <div class="checkout-form">
                             {{-- <form id="signUpForm" action="{{ route('create-subscription') }}" method="post"> --}}
 
-                                <form action="" method="post" id="signUpForm">
-                                    @csrf
-                                    <!-- start step indicators -->
-                                    <div class="form-header d-flex mb-4">
-                                        <span class="stepIndicator">Information</span>
-                                        <span class="stepIndicator">Finish</span>
-                                    </div>
-                                    <!-- end step indicators -->
+                            <form action="" method="post" id="signUpForm">
+                                @csrf
+                                <!-- start step indicators -->
+                                <div class="form-header d-flex mb-4">
+                                    <span class="stepIndicator">Information</span>
+                                    <span class="stepIndicator">Finish</span>
+                                </div>
+                                <!-- end step indicators -->
 
 
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class="form-left">
-                                                <!-- step one -->
-                                                <div class="step">
-                                                    <div class="step-div">
-                                                        <h3>Customer information</h3>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-left">
+                                            <!-- step one -->
+                                            <div class="step">
+                                                <div class="step-div">
+                                                    <h3>Customer information</h3>
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" name="email_address"
+                                                            id="email_address" placeholder=""
+                                                            value="{{ Auth::user()->email ?? '' }}">
+                                                        <label for="floatingInput1">Email Address
+                                                            <span>*</span></label>
+                                                        <span id="email_error" class="text-danger"></span>
+                                                    </div>
+                                                    @if (!auth()->check())
                                                         <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control" name="email_address"
-                                                                id="email_address" placeholder=""
-                                                                value="{{ Auth::user()->email ?? '' }}">
-                                                            <label for="floatingInput1">Email Address
+                                                            <input type="text" class="form-control" name="password"
+                                                                id="password" placeholder="" value="">
+                                                            <label for="floatingInput1">Password
                                                                 <span>*</span></label>
-                                                            <span id="email_error" class="text-danger"></span>
+                                                            <span id="password_error" class="text-danger"></span>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="step-div">
+                                                    <h3>Billing details</h3>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    name="first_name" id="first_name" placeholder=""
+                                                                    value="{{ $customer_details->first_name ?? '' }}">
+                                                                <label for="floatingInput2">First Name
+                                                                    <span>*</span></label>
+                                                                <span id="first_name_error"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    name="last_name" id="last_name" placeholder=""
+                                                                    value="{{ $customer_details->last_name ?? '' }}">
+                                                                <label for="floatingInput3">Last Name
+                                                                    <span>*</span></label>
+                                                                <span id="last_name_error" class="text-danger"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="step-div">
-                                                        <h3>Billing details</h3>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        name="first_name" id="first_name" placeholder=""
-                                                                        value="{{ $customer_details->first_name ?? '' }}">
-                                                                    <label for="floatingInput2">First Name
-                                                                        <span>*</span></label>
-                                                                    <span id="fname_error" class="text-danger"></span>
-                                                                </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    id="country" name="country" placeholder=""
+                                                                    value="{{ $customer_details->country ?? '' }}">
+                                                                <label for="floatingSelect1">Country
+                                                                    <span>*</span></label>
+                                                                <span id="country_error" class="text-danger"></span>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    id="house_name" name="house_name" placeholder=""
+                                                                    value="{{ $customer_details->house_no_street_name ?? '' }}">
+                                                                <label for="floatingInput4">House number and street
+                                                                    name <span>*</span></label>
+                                                                <span id="house_name_error"
+                                                                    class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    id="detail_address" name="detail_address"
+                                                                    placeholder=""
+                                                                    value="{{ $customer_details->apartment ?? '' }}">
+                                                                <label for="floatingInput5">Apartment, suite, unit,
+                                                                    etc.<span>*</span></label>
+                                                                <span id="detail_address_error"
+                                                                    class="text-danger"></span>
 
-                                                            <div class="col-lg-6">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        name="last_name" id="last_name" placeholder=""
-                                                                        value="{{ $customer_details->last_name ?? '' }}">
-                                                                    <label for="floatingInput3">Last Name
-                                                                        <span>*</span></label>
-                                                                    <span id="lname_error" class="text-danger"></span>
-                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control" id="country"
-                                                                        name="country" placeholder=""
-                                                                        value="{{ $customer_details->country ?? '' }}">
-                                                                    <label for="floatingSelect1">Country
-                                                                        <span>*</span></label>
-                                                                    <span id="country_error" class="text-danger"></span>
-                                                                </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    id="city" name="city" placeholder=""
+                                                                    value="{{ $customer_details->town ?? '' }}">
+                                                                <label for="floatingInput6">City
+                                                                    <span>*</span></label>
+                                                                <span id="city_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="house_name" name="house_name" placeholder=""
-                                                                        value="{{ $customer_details->house_no_street_name ?? '' }}">
-                                                                    <label for="floatingInput4">House number and street
-                                                                        name <span>*</span></label>
-                                                                    <span id="houseNo_error" class="text-danger"></span>
-                                                                </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    id="state" name="state" placeholder=""
+                                                                    value="{{ $customer_details->state ?? '' }}">
+                                                                <label for="floatingInput7">State
+                                                                    <span>*</span></label>
+                                                                <span id="state_error" class="text-danger"></span>
                                                             </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="detail_address" name="detail_address"
-                                                                        placeholder=""
-                                                                        value="{{ $customer_details->apartment ?? '' }}">
-                                                                    <label for="floatingInput5">Apartment, suite, unit,
-                                                                        etc.<span>*</span></label>
-                                                                    <span id="addr_error" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    id="post_code" name="post_code" placeholder=""
+                                                                    value="{{ $customer_details->post_code ?? '' }}">
+                                                                <label for="floatingInput8">Post code
+                                                                    <span>*</span></label>
+                                                                <span id="post_code_error" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    name="phone" id="phone" placeholder=""
+                                                                    value="{{ $customer_details->phone ?? '' }}">
+                                                                <label for="floatingInput9">Phone
+                                                                    <span>*</span></label>
 
-                                                                </div>
+                                                                <span id="phone_error" class="text-danger"></span>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control" id="city"
-                                                                        name="city" placeholder=""
-                                                                        value="{{ $customer_details->town ?? '' }}">
-                                                                    <label for="floatingInput6">City
-                                                                        <span>*</span></label>
-                                                                    <span id="city_error" class="text-danger"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control" id="state"
-                                                                        name="state" placeholder=""
-                                                                        value="{{ $customer_details->state ?? '' }}">
-                                                                    <label for="floatingInput7">State
-                                                                        <span>*</span></label>
-                                                                    <span id="state_error" class="text-danger"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="post_code" name="post_code" placeholder=""
-                                                                        value="{{ $customer_details->post_code ?? '' }}">
-                                                                    <label for="floatingInput8">Post code
-                                                                        <span>*</span></label>
-                                                                    <span id="postCode_error"
-                                                                        class="text-danger"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control" name="phone"
-                                                                        id="phone" placeholder=""
-                                                                        value="{{ $customer_details->phone ?? '' }}">
-                                                                    <label for="floatingInput9">Phone
-                                                                        <span>*</span></label>
-
-                                                                    <span id="phone_error" class="text-danger"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{-- <div class="row">
+                                                    </div>
+                                                    {{-- <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="form-floating mb-3">
                                                                     <select class="form-select" name="payment_type"
                                                                         id="floatingSelect2"
                                                                         aria-label="Floating label select example">
-                                                                        @if(Auth::check() && $plan_exists > 0)
+                                                                        @if (Auth::check() && $plan_exists > 0)
                                                                         <option value="Renewal">Renewal</option>
                                                                         @else
                                                                         <option value="New Subscription">New
@@ -251,24 +263,21 @@
                                                                 </div>
                                                             </div>
                                                         </div> --}}
-                                                        <div class="step-div">
-                                                            <h3>Additional information</h3>
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-floating">
-                                                                        <textarea class="form-control"
-                                                                            placeholder="Leave a comment here"
-                                                                            id="additional_information"
-                                                                            name="additional_information"
-                                                                            style="height: 100px"></textarea>
-                                                                        <label for="floatingTextarea2">Notes about your
-                                                                            order, e.g. special notes for
-                                                                            delivery.</label>
-                                                                    </div>
+                                                    <div class="step-div">
+                                                        <h3>Additional information</h3>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-floating">
+                                                                    <textarea class="form-control" placeholder="Leave a comment here" id="additional_information"
+                                                                        name="additional_information" style="height: 100px"></textarea>
+                                                                    <label for="floatingTextarea2">Notes about your
+                                                                        order, e.g. special notes for
+                                                                        delivery.</label>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{-- <div class="step-div">
+                                                    </div>
+                                                    {{-- <div class="step-div">
                                                             <h3>Payment</h3>
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -299,121 +308,121 @@
                                                                 </div>
                                                             </div>
                                                         </div> --}}
-                                                    </div>
                                                 </div>
+                                            </div>
 
-                                                {{-- <button class="paypal-btn" type="submit"><img
+                                            {{-- <button class="paypal-btn" type="submit"><img
                                                         src="{{ asset('frontend_assets/images/paypal.png') }}"></button>
                                                 <button class="paypal-btn paypal-btn-2 mt-2"><span><i
                                                             class="fa-solid fa-credit-card"></i></span>Debit or Credit
                                                     Card</button> --}}
 
-                                                {{-- <div id="paypal-button-container"></div> --}}
-                                                <div class="step-div">
-                                                    <h3> Pay Through <i class="fa-brands fa-cc-stripe fa-2xl"></i></h3>
-                                                    <div id="card-element" class="card-detail-structure"></div>
-                                                    <span id="card_detail_error" class="text-danger"></span>
-                                                    <button id="submit-button">Subscribe</button>
-                                                </div>
-
+                                            {{-- <div id="paypal-button-container"></div> --}}
+                                            <div class="step-div">
+                                                <h3> Pay Through <i class="fa-brands fa-cc-stripe fa-2xl"></i></h3>
+                                                <div id="card-element" class="card-detail-structure"></div>
+                                                <span id="card_detail_error" class="text-danger"></span>
+                                                <button id="submit-button">Subscribe</button>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-right">
-                                                <div class="step-div">
-                                                    <h3>Your Oder</h3>
-                                                </div>
-                                                <div class="form-right-table">
-                                                    <table class="table">
-                                                        <div class="table-responsive">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="product-name">Plan</th>
-                                                                    <th class="product-total text-end"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>{{ $plan->plan_name }}</td>
-                                                                    <td class="text-end">x 1 &nbsp;
-                                                                        ${{ $plan->plan_offer_price }} / month(30 days)
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Subtotal</td>
-                                                                    <td class="text-end"> ${{ $plan->plan_offer_price }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="coupon-dis">
-                                                                    <td>Coupon Discount</td>
-                                                                    <td class="text-end "> $0.00
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="total-order">
-                                                                    <th>Total</th>
-                                                                    <th class="text-end">${{ $plan->plan_offer_price }}
-                                                                    </th>
-                                                                </tr>
-                                                                <tr class="recurring">
-                                                                    <th>Recurring amounts</th>
-                                                                    <div class="text-end">
-                                                                        <td class="text-end">
-                                                                            ${{ $plan->plan_offer_price }}/
-                                                                            month<br><span>(ex. VAT)</span></td>
-                                                                    </div>
-                                                                </tr>
-                                                            </tbody>
-                                                        </div>
-                                                    </table>
-                                                </div>
-                                                <input type="hidden" name="plan_name" id="plan_name"
-                                                    value="{{ $plan->plan_name }}">
-                                                <input type="hidden" name="plan_price" id="plan_price"
-                                                    value="{{ $plan->plan_offer_price }}">
-                                                <input type="hidden" name="amount" value="{{ $plan->plan_offer_price }}"
-                                                    id="total_amount">
-                                                <input type="hidden" id="coupan_code" name="coupan_code">
-                                                <input type="hidden" id="coupon_discount" name="coupon_discount">
-                                                <input type="hidden" id="coupon_discount_type"
-                                                    name="coupon_discount_type">
-                                                <input type="hidden" name="plan_id" id="plan_id"
-                                                    value="{{ $plan->id }}">
 
-                                                <div class="cupon-div-main">
-                                                    <div class="row justify-content-center align-items-center">
-                                                        <div class="col-lg-8">
-                                                            <div class="cupon-div">
-                                                                <div class="">
-                                                                    <input type="text" class="form-control"
-                                                                        id="coupon_code" placeholder="Cupon Code">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-right">
+                                            <div class="step-div">
+                                                <h3>Your Oder</h3>
+                                            </div>
+                                            <div class="form-right-table">
+                                                <table class="table">
+                                                    <div class="table-responsive">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="product-name">Plan</th>
+                                                                <th class="product-total text-end"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>{{ $plan->plan_name }}</td>
+                                                                <td class="text-end">x 1 &nbsp;
+                                                                    ${{ $plan->plan_offer_price }} / month(30 days)
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Subtotal</td>
+                                                                <td class="text-end"> ${{ $plan->plan_offer_price }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="coupon-dis">
+                                                                <td>Coupon Discount</td>
+                                                                <td class="text-end "> $0.00
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="total-order">
+                                                                <th>Total</th>
+                                                                <th class="text-end">${{ $plan->plan_offer_price }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr class="recurring">
+                                                                <th>Recurring amounts</th>
+                                                                <div class="text-end">
+                                                                    <td class="text-end">
+                                                                        ${{ $plan->plan_offer_price }}/
+                                                                        month<br><span>(ex. VAT)</span></td>
                                                                 </div>
+                                                            </tr>
+                                                        </tbody>
+                                                    </div>
+                                                </table>
+                                            </div>
+                                            <input type="hidden" name="plan_name" id="plan_name"
+                                                value="{{ $plan->plan_name }}">
+                                            <input type="hidden" name="plan_price" id="plan_price"
+                                                value="{{ $plan->plan_offer_price }}">
+                                            <input type="hidden" name="amount"
+                                                value="{{ $plan->plan_offer_price }}" id="total_amount">
+                                            <input type="hidden" id="coupan_code" name="coupan_code">
+                                            <input type="hidden" id="coupon_discount" name="coupon_discount">
+                                            <input type="hidden" id="coupon_discount_type"
+                                                name="coupon_discount_type">
+                                            <input type="hidden" name="plan_id" id="plan_id"
+                                                value="{{ $plan->id }}">
+
+                                            <div class="cupon-div-main">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-lg-8">
+                                                        <div class="cupon-div">
+                                                            <div class="">
+                                                                <input type="text" class="form-control"
+                                                                    id="coupon_code" placeholder="Cupon Code">
                                                             </div>
                                                         </div>
-
-                                                        <div class="col-lg-4">
-                                                            <button class="apply-btn" type="button"
-                                                                id="nextBtn">Apply</button>
-                                                        </div>
-                                                        <span id="coupon_error"></span>
-
                                                     </div>
-                                                </div>
 
+                                                    <div class="col-lg-4">
+                                                        <button class="apply-btn" type="button"
+                                                            id="nextBtn">Apply</button>
+                                                    </div>
+                                                    <span id="coupon_error"></span>
+
+                                                </div>
                                             </div>
 
+                                        </div>
 
-                                            {{-- <div class="coupan-code">
+
+                                        {{-- <div class="coupan-code">
                                                 <p><span>Code :</span> FAMILY0011 &nbsp;<i
                                                         class="fa-regular fa-copy"></i></p>
                                             </div> --}}
 
-                                            <div id="coupon-container">
-                                                
-                                            </div>
-                                            
+                                        <div id="coupon-container">
+
                                         </div>
+
                                     </div>
-                                </form>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -435,22 +444,25 @@
                                     <div class="col-xl-12">
                                         <div class="faq-left">
                                             @foreach ($faq_qstn_ansrs as $index => $faq_qstn_ansr)
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="heading{{ $index }}">
-                                                    <button class="accordion-button" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}"
-                                                        aria-expanded="true" aria-controls="collapse{{ $index }}">
-                                                        {{ $faq_qstn_ansr->question }}
-                                                    </button>
-                                                </h2>
-                                                <div id="collapse{{ $index }}" class="accordion-collapse collapse"
-                                                    aria-labelledby="heading{{ $index }}"
-                                                    data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <p>{{ $faq_qstn_ansr->answer }}</p>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="heading{{ $index }}">
+                                                        <button class="accordion-button" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#collapse{{ $index }}"
+                                                            aria-expanded="true"
+                                                            aria-controls="collapse{{ $index }}">
+                                                            {{ $faq_qstn_ansr->question }}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapse{{ $index }}"
+                                                        class="accordion-collapse collapse"
+                                                        aria-labelledby="heading{{ $index }}"
+                                                        data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <p>{{ $faq_qstn_ansr->answer }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             @endforeach
                                         </div>
                                     </div>
@@ -467,45 +479,46 @@
         {{-- user exists modal --}}
         @auth
         @else
-        <div class="modal fade" id="userExistsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="userExistsModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">User Exists</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p>User already exists with this email address. Please login to continue.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="{{ route('customer.login') }}"><button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Ok</button></a>
+            <div class="modal fade" id="userExistsModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="userExistsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">User Exists</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p>User already exists with this email address. Please login to continue.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ route('customer.login') }}"><button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Ok</button></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @endif
+            @endif
 
-        {{-- user exists modal --}}
+            {{-- user exists modal --}}
 
-        <footer class="ck-ftr">
-            <div class="container">
-                <div class="ck-ftr-wrap">
-                    <div class="ck-ftr-top">
-                        <div class="row justify-content-center align-items-center">
-                            <div class="col-lg-12">
-                                <div class="ck-ftr-menu">
-                                    <ul>
-                                        <li><a href="{{ route('home') }}">Home</a></li>
-                                        <li><a href="{{ route('privacy-policy') }}">Privacy policy</a></li>
-                                        <li><a href="{{ route('term-service') }}">Terms of service</a></li>
-                                    </ul>
+            <footer class="ck-ftr">
+                <div class="container">
+                    <div class="ck-ftr-wrap">
+                        <div class="ck-ftr-top">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-lg-12">
+                                    <div class="ck-ftr-menu">
+                                        <ul>
+                                            <li><a href="{{ route('home') }}">Home</a></li>
+                                            <li><a href="{{ route('privacy-policy') }}">Privacy policy</a></li>
+                                            <li><a href="{{ route('term-service') }}">Terms of service</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {{-- <div class="ck-ftr-btm">
+                        {{-- <div class="ck-ftr-btm">
                         <div class="row justify-content-center">
                             <div class="col-lg-12">
                                 <div class="ck-ftr-btm-img">
@@ -514,161 +527,189 @@
                             </div>
                         </div>
                     </div> --}}
+                    </div>
                 </div>
+            </footer>
+            <div class="scroll-top">
+                <a id="scroll-top-btn"></a>
             </div>
-        </footer>
-        <div class="scroll-top">
-            <a id="scroll-top-btn"></a>
-        </div>
-    </main>
+        </main>
 
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script src="{{ asset('frontend_assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="{{ asset('frontend_assets/js/custom.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox-plus-jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+        <script src="{{ asset('frontend_assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="{{ asset('frontend_assets/js/custom.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox-plus-jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-    <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- SweetAlert2 CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <!-- SweetAlert2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            // $stripe_detail strpe credential
-        @php
-            $stripeKey = optional(Helper::stripeCredential())->stripe_key;
-        @endphp
 
-        var stripeKey = {!! json_encode($stripeKey) !!};
-        if (stripeKey) {
-            var stripe = Stripe(stripeKey);
-        } else {
-            console.log('Stripe key not found');
-        }
-        var elements = stripe.elements();
-        var cardElement = elements.create('card');
-        cardElement.mount('#card-element');
-
-        var form = document.getElementById('signUpForm');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            let formData = {
-                email: document.getElementById('email_address').value,
-                first_name: document.getElementById('first_name').value,
-                last_name: document.getElementById('last_name').value,
-                country: document.getElementById('country').value,
-                house_name: document.getElementById('house_name').value,
-                detail_address: document.getElementById('detail_address').value,
-                city: document.getElementById('city').value,
-                state: document.getElementById('state').value,
-                post_code: document.getElementById('post_code').value,
-                phone: document.getElementById('phone').value,
-                additional_information: document.getElementById('additional_information').value,
-                plan_name: document.getElementById('plan_name').value,
-                plan_price: document.getElementById('plan_price').value,
-                amount: document.getElementById('total_amount').value,
-                coupon_code: document.getElementById('coupan_code').value,
-                coupon_discount: document.getElementById('coupon_discount').value,
-                coupon_discount_type: document.getElementById('coupon_discount_type').value,
-                plan_id: document.getElementById('plan_id').value
-            };
-
-            //rule validation for email, first name, last name, country, house name, detail address, city, state, post code, phone
-            function validateField(formData, errorElement, errorMessage) {
-                if (formData == '') {
-                    $(errorElement).text(errorMessage);
-                    return false;
-                } else {
-                    $(errorElement).text('');
-                    return true;
+        <script>
+            @if (Session::has('message'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
                 }
-            }
-            const isEmailValid = validateField(formData.email, '#email_error', 'Please enter email address');
-            const isFirstNameValid = validateField(formData.first_name, '#fname_error', 'Please enter first name');
-            const isLastNameValid = validateField(formData.last_name, '#lname_error', 'Please enter last name');
-            const isCountryValid = validateField(formData.country, '#country_error', 'Please enter country');
-            const isHouseNameValid = validateField(formData.house_name, '#houseNo_error', 'Please enter house number and street name');
-            const isDetailAddressValid = validateField(formData.detail_address, '#addr_error', 'Please enter apartment, suite, unit, etc.');
-            const isCityValid = validateField(formData.city, '#city_error', 'Please enter town/city');
-            const isStateValid = validateField(formData.state, '#state_error', 'Please enter state/country');
-            const isPostCodeValid = validateField(formData.post_code, '#postCode_error', 'Please enter post code');
-            const isPhoneValid = validateField(formData.phone, '#phone_error', 'Please enter phone');
+                toastr.success("{{ session('message') }}");
+            @endif
 
-            // card detail validation
-            if (!cardElement._complete) {
-                $('#card_detail_error').text('Please enter card details');
-                return false;
-            }
+            @if (Session::has('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.error("{{ session('error') }}");
+            @endif
 
+            @if (Session::has('info'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.info("{{ session('info') }}");
+            @endif
 
-            if (!isEmailValid || !isFirstNameValid || !isLastNameValid || !isCountryValid || !isHouseNameValid || !isDetailAddressValid || !isCityValid || !isStateValid || !isPostCodeValid || !isPhoneValid) {
-                return false;
-            }
-            
-            // Show the loading spinner
-            $('#loading-content').show();
-            $('#loading').addClass('loading');
-            $('#loading-content').addClass('loading-content');
+            @if (Session::has('warning'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.warning("{{ session('warning') }}");
+            @endif
+        </script>
 
-            // Create the Payment Method
-            const { paymentMethod, error } = await stripe.createPaymentMethod({
-                type: 'card',
-                card: cardElement,
-            });
+        <script>
+            $(document).ready(function() {
+                // Stripe integration
+                @php
+                    $stripeKey = optional(Helper::stripeCredential())->stripe_key;
+                @endphp
 
-            if (error) {
-                console.log(error);
-            } else {
-                formData.payment_method_id = paymentMethod.id;
-                // card details
-                formData.card_brand = paymentMethod.card.brand;
-                formData.card_last4 = paymentMethod.card.last4;
-                formData.card_exp_month = paymentMethod.card.exp_month;
-                formData.card_exp_year = paymentMethod.card.exp_year;
+                var stripeKey = {!! json_encode($stripeKey) !!};
+                if (stripeKey) {
+                    var stripe = Stripe(stripeKey);
+                } else {
+                    console.log('Stripe key not found');
+                }
 
-                const subscribeUrl = "{{ route('create-subscription') }}";
-                fetch(subscribeUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    $('#loading-content').hide();
-                    $('#loading').removeClass('loading');
-                    $('#loading-content').removeClass('loading-content');
+                var elements = stripe.elements();
+                var cardElement = elements.create('card');
+                cardElement.mount('#card-element');
 
-                    if (data.success) {
-                        Swal.fire({
-                            title: 'Success',
-                            text: data.message,
-                            icon: 'success'
-                        });
-                        
-                        window.location.href = "{{ route('success-subscription') }}";
-                    } else {
-                        window.location.href = "{{ route('failed-subscription') }}";
-                        console.log('Subscription failed', data);
+                var form = document.getElementById('signUpForm');
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    let formData = {
+                        email: document.getElementById('email_address').value,
+                        @if (!auth()->check())
+                        password: document.getElementById('password').value,
+                        @endif
+                        first_name: document.getElementById('first_name').value,
+                        last_name: document.getElementById('last_name').value,
+                        country: document.getElementById('country').value,
+                        house_name: document.getElementById('house_name').value,
+                        detail_address: document.getElementById('detail_address').value,
+                        city: document.getElementById('city').value,
+                        state: document.getElementById('state').value,
+                        post_code: document.getElementById('post_code').value,
+                        phone: document.getElementById('phone').value,
+                        additional_information: document.getElementById('additional_information').value,
+                        plan_name: document.getElementById('plan_name').value,
+                        plan_price: document.getElementById('plan_price').value,
+                        amount: document.getElementById('total_amount').value,
+                        coupon_code: document.getElementById('coupan_code').value,
+                        coupon_discount: document.getElementById('coupon_discount').value,
+                        coupon_discount_type: document.getElementById('coupon_discount_type').value,
+                        plan_id: document.getElementById('plan_id').value
+                    };
+
+                    // Card detail validation
+                    if (!cardElement._complete) {
+                        $('#card_detail_error').text('Please enter card details');
+                        return false;
                     }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+
+                    // Show the loading spinner
+                    $('#loading-content').show();
+                    $('#loading').addClass('loading');
+                    $('#loading-content').addClass('loading-content');
+
+                    // Create the Payment Method
+                    const {
+                        paymentMethod,
+                        error
+                    } = await stripe.createPaymentMethod({
+                        type: 'card',
+                        card: cardElement,
+                    });
+
+                    if (error) {
+                        $('#loading').removeClass('loading');
+                        $('#loading-content').removeClass('loading-content');
+                        toastr.error(error.message);
+                    } else {
+                        formData.payment_method_id = paymentMethod.id;
+                        // card details
+                        formData.card_brand = paymentMethod.card.brand;
+                        formData.card_last4 = paymentMethod.card.last4;
+                        formData.card_exp_month = paymentMethod.card.exp_month;
+                        formData.card_exp_year = paymentMethod.card.exp_year;
+
+                        const subscribeUrl = "{{ route('create-subscription') }}";
+                        fetch(subscribeUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+                                },
+                                body: JSON.stringify(formData)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                $('#loading-content').hide();
+                                $('#loading').removeClass('loading');
+                                $('#loading-content').removeClass('loading-content');
+
+                                if (!data.success) {
+                                    // Show validation errors
+                                    if (data.errors) {
+                                        $('.text-danger').text('');
+                                        $.each(data.errors, function(field, message) {
+                                            $('#' + field + '_error').text(message);
+                                        });
+                                    } else {
+                                        toastr.error(data.error);
+                                    }
+
+                                } else {
+                                    Swal.fire({
+                                        title: 'Success',
+                                        text: data.message,
+                                        icon: 'success'
+                                    });
+
+                                    window.location.href = "{{ route('success-subscription') }}";
+                                }
+                            })
+                            .catch(error => {
+                                toastr.error('Error:', error);
+                            });
+                    }
                 });
-            }
-        });
-    });
+            });
+        </script>
 
-    </script>
 
-    <script>
+        {{-- <script>
         //onchange validation
         $('#email_address').on('change', function() {
             var emailId = $('#email_address').val();
@@ -690,95 +731,96 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
-    <script>
-        // coupon check and total amount discount
-        $(document).ready(function() {
-            $('#nextBtn').click(function() {
-                var coupon_code = $('#coupon_code').val();
-                var plan_id = {{ $plan->id }};
-                var plan_price = {{ $plan->plan_offer_price }};
-                var emailId = $('#email_address').val();
-                var phone = $('#phone').val();
+        <script>
+            // coupon check and total amount discount
+            $(document).ready(function() {
+                $('#nextBtn').click(function() {
+                    var coupon_code = $('#coupon_code').val();
+                    var plan_id = {{ $plan->id }};
+                    var plan_price = {{ $plan->plan_offer_price }};
+                    var emailId = $('#email_address').val();
+                    var phone = $('#phone').val();
 
-                
 
-                if (emailId == '') {
-                    alert('Please enter email address');
-                    return false;
-                } else if (phone == '') {
-                    alert('Please enter phone number');
-                    return false;
-                } else {
-                    $.ajax({
-                        url: "{{ route('coupon-check') }}",
-                        type: "POST",
-                        data: {
-                            coupon_code: coupon_code,
-                            plan_price: plan_price,
-                            plan_id: plan_id,
-                            emailId: emailId,
-                            phone: phone,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            if (response.status == 'success') {
-                                var total = response.discount;
-                                var discount = response.coupon_discount;
-                                var discpount_type = response.coupon_discount_type;
-                                $('#total_amount').val(total);
-                                $('#coupan_code').val(coupon_code);
-                                $('#coupon_discount').val(discount);
-                                $('#coupon_discount_type').val(discpount_type);
-                                $('.coupon-dis').html(
-                                    '<th>Coupon Discount</th><th class="text-end">-$' +
-                                    discount + '</th>');
 
-                                $('.total-order').html('<th>Total</th><th class="text-end">$' +
-                                    total + '</th>');
-                                $('.recurring').html(
-                                    '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                    total + '/ month<br><span>(ex. VAT)</span></td></div>');
+                    if (emailId == '') {
+                        alert('Please enter email address');
+                        return false;
+                    } else if (phone == '') {
+                        alert('Please enter phone number');
+                        return false;
+                    } else {
+                        $.ajax({
+                            url: "{{ route('coupon-check') }}",
+                            type: "POST",
+                            data: {
+                                coupon_code: coupon_code,
+                                plan_price: plan_price,
+                                plan_id: plan_id,
+                                emailId: emailId,
+                                phone: phone,
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                if (response.status == 'success') {
+                                    var total = response.discount;
+                                    var discount = response.coupon_discount;
+                                    var discpount_type = response.coupon_discount_type;
+                                    $('#total_amount').val(total);
+                                    $('#coupan_code').val(coupon_code);
+                                    $('#coupon_discount').val(discount);
+                                    $('#coupon_discount_type').val(discpount_type);
+                                    $('.coupon-dis').html(
+                                        '<th>Coupon Discount</th><th class="text-end">-$' +
+                                        discount + '</th>');
+
+                                    $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                        total + '</th>');
+                                    $('.recurring').html(
+                                        '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                        total + '/ month<br><span>(ex. VAT)</span></td></div>');
                                     $('#coupon_error').text('Coupon Applied').css('color', 'green');
-                            } else {
-                                //show message invlid coupon
-                                $('#coupon_error').text('Invalid Coupon Code').css('color', 'red');
-                                $('#total_amount').val(plan_price);
-                                $('#coupan_code').val('');
-                                $('#coupon_discount').val('0.00');
-                                $('#coupon_discount_type').val('');
-                                $('.coupon-dis').html(
-                                    '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>'
-                                );
+                                } else {
+                                    //show message invlid coupon
+                                    $('#coupon_error').text('Invalid Coupon Code').css('color',
+                                        'red');
+                                    $('#total_amount').val(plan_price);
+                                    $('#coupan_code').val('');
+                                    $('#coupon_discount').val('0.00');
+                                    $('#coupon_discount_type').val('');
+                                    $('.coupon-dis').html(
+                                        '<th>Coupon Discount</th><th class="text-end">-$00.0 </th>'
+                                    );
 
-                                $('.total-order').html('<th>Total</th><th class="text-end">$' +
-                                    plan_price + '</th>');
-                                $('.recurring').html(
-                                    '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
-                                    plan_price +
-                                    '/ month<br><span>(ex. VAT)</span></td></div>');
+                                    $('.total-order').html('<th>Total</th><th class="text-end">$' +
+                                        plan_price + '</th>');
+                                    $('.recurring').html(
+                                        '<th>Recurring totals</th><div class="text-end"><td class="text-end">$' +
+                                        plan_price +
+                                        '/ month<br><span>(ex. VAT)</span></td></div>');
 
+                                }
                             }
-                        }
-                    });
-                }
+                        });
+                    }
 
+                });
             });
-        });
-    </script>
+        </script>
 
-    {{-- form validation --}}
+        {{-- form validation --}}
 
-    {{-- paypal credit --}}
-    {{-- <script
+        {{-- paypal credit --}}
+        {{-- <script
         src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
     </script> --}}
 
-    <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
 
 
-    {{-- <script>
+        {{-- <script>
         checkStatus = true;
         paypal.Buttons({
             onClick: function() {
@@ -991,71 +1033,69 @@
         }
     </script> --}}
 
-    @auth
-    <script>
-        $(document).ready(function() {
+        @auth
+            <script>
+                $(document).ready(function() {
 
-            var payment_type = $('#floatingSelect2').val();
-            var plan_name = $('#plan_name').val();
+                    var payment_type = $('#floatingSelect2').val();
+                    var plan_name = $('#plan_name').val();
 
-            $.ajax({
-                url: "{{ route('payments.payment-type-check') }}",
-                type: "POST",
-                data: {
-                    payment_type: payment_type,
-                    plan_name: plan_name,
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function(response) {
-                    if (response.status == 'success') {
-                        if(response.same_plan == true)
-                        {
-                            return true;
-                        }
+                    $.ajax({
+                        url: "{{ route('payments.payment-type-check') }}",
+                        type: "POST",
+                        data: {
+                            payment_type: payment_type,
+                            plan_name: plan_name,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            if (response.status == 'success') {
+                                if (response.same_plan == true) {
+                                    return true;
+                                }
 
-                    } else {
-
-                        Swal.fire({
-                            title: 'You already have an active subscription',
-                            text: 'Do you want to renew your subscription? or would you prefer to wait until your current subscription expires before starting the new one?',
-                            icon: 'info',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Ok',
-                            allowOutsideClick: false
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "{{ route('customer.subscription') }}";
-                                // Code to execute when the user confirms
                             } else {
-                                // Code to execute when the user cancels
+
+                                Swal.fire({
+                                    title: 'You already have an active subscription',
+                                    text: 'Do you want to renew your subscription? or would you prefer to wait until your current subscription expires before starting the new one?',
+                                    icon: 'info',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ok',
+                                    allowOutsideClick: false
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = "{{ route('customer.subscription') }}";
+                                        // Code to execute when the user confirms
+                                    } else {
+                                        // Code to execute when the user cancels
+                                    }
+                                });
                             }
-                        });
-                    }
-                }
-            });
-        });
+                        }
+                    });
+                });
+            </script>
+        @endauth
 
-    </script>
-    @endauth
+        <script>
+            $(document).ready(function() {
+                $('#phone').on('change', function() {
+                    var phone = $('#phone').val();
+                    var email = $('#email_address').val();
+                    var plan_id = $('#plan_id').val();
 
-    <script>
-        $(document).ready(function() {
-            $('#phone').on('change', function() {
-                var phone = $('#phone').val();
-                var email = $('#email_address').val();
-                var plan_id = $('#plan_id').val();
-
-                $.ajax({
-                    url: "{{ route('coupon-list') }}", // Ensure this route exists and accepts POST
-                    type: "POST",
-                    data: {
-                        _token: '{{ csrf_token() }}', // Include CSRF token
-                        phone: phone,
-                        plan_id: plan_id,
-                        emailId: email 
-                    },
-                    success: function(response) {
-                        var couponContainer = $('#coupon-container');
+                    $.ajax({
+                        url: "{{ route('coupon-list') }}", // Ensure this route exists and accepts POST
+                        type: "POST",
+                        data: {
+                            _token: '{{ csrf_token() }}', // Include CSRF token
+                            phone: phone,
+                            plan_id: plan_id,
+                            emailId: email
+                        },
+                        success: function(response) {
+                            var couponContainer = $('#coupon-container');
                             couponContainer.empty(); // Clear any existing coupons
 
                             response.coupon_list.forEach(function(coupon) {
@@ -1066,15 +1106,15 @@
                                 `;
                                 couponContainer.append(couponHtml);
                             });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error: ", error); // Handle errors
-                    }
-                });  
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: ", error); // Handle errors
+                        }
+                    });
+                });
             });
-        });
-    </script>
+        </script>
 
-</body>
+    </body>
 
-</html>
+    </html>

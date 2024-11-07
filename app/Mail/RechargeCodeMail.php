@@ -17,10 +17,12 @@ class RechargeCodeMail extends Mailable
      * @return void
      */
     public $maildata;
+    public $subject;
 
     public function __construct($maildata)
     {
         $this->maildata = $maildata;
+        $this->subject = $maildata['subject'];
     }
 
     /**
@@ -30,6 +32,6 @@ class RechargeCodeMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('admin.mail.rechargeCodeMail')->subject('Affiliate Marketer Login Details')->with('maildata', $this->maildata);
+        return $this->markdown('admin.mail.rechargeCodeMail')->subject($this->subject)->with('maildata',  $this->maildata);
     }
 }

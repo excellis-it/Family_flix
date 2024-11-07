@@ -10,9 +10,7 @@ use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RechargeCodeMail;
-
-
-
+use App\Models\EmailTemplate;
 
 class CustomerController extends Controller
 {
@@ -22,7 +20,7 @@ class CustomerController extends Controller
         if (Auth::user()->can('Manage Customer')) {
             $customers = User::with('userLastSubscription')->role('CUSTOMER')->orderBy('id', 'desc')->paginate(15);
             // dd($customers);
-            return view('admin.customer.list',compact('customers'));
+            return view('admin.customer.list', compact('customers'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -34,15 +32,15 @@ class CustomerController extends Controller
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
             $customers = User::role('CUSTOMER')
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('id', 'like', '%' . $query . '%')
-                    ->orWhere('name', 'like', '%' . $query . '%')
-                    ->orWhere('email', 'like', '%' . $query . '%')
-                    ->orWhere('phone', 'like', '%' . $query . '%');
-            })
-            ->with('userLastSubscription')
-            ->orderBy('id', 'desc')
-            ->paginate(15);
+                ->where(function ($queryBuilder) use ($query) {
+                    $queryBuilder->where('id', 'like', '%' . $query . '%')
+                        ->orWhere('name', 'like', '%' . $query . '%')
+                        ->orWhere('email', 'like', '%' . $query . '%')
+                        ->orWhere('phone', 'like', '%' . $query . '%');
+                })
+                ->with('userLastSubscription')
+                ->orderBy('id', 'desc')
+                ->paginate(15);
 
             return response()->json(['data' => view('admin.customer.table', compact('customers'))->render()]);
         }
@@ -52,12 +50,12 @@ class CustomerController extends Controller
     {
         $plans = Plan::orderBy('plan_order', 'desc')->get();
         $subscriptions = UserSubscription::where('customer_id', $id)->orderBy('id', 'desc')->paginate(12);
-        return view('admin.customer.show-plans', compact('subscriptions','plans','id'));
+        return view('admin.customer.show-plans', compact('subscriptions', 'plans', 'id'));
     }
 
     public function changeStatus(Request $request)
     {
-    //    return $request;
+        //    return $request;
         $customer = User::find($request->user_id);
         $customer->status = $request->status;
         $customer->save();
@@ -115,7 +113,7 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->status = $request->status;
-        if($request->password){
+        if ($request->password) {
             $customer->password = bcrypt($request->password);
         }
         $customer->update();
@@ -126,26 +124,45 @@ class CustomerController extends Controller
     public function rechargeMail($id)
     {
         $user = User::find($id);
-        return view('admin.customer.recharge-mail', compact('user'));
+        $emails = EmailTemplate::orderBy('name', 'asc')->get();
+        return view('admin.customer.recharge-mail', compact('user', 'emails'));
     }
 
     public function rechargeCodeMailSend(Request $request)
     {
-        
         $request->validate([
-            'mail_content' => 'required',
+            'login_information' => 'required',
+            'account_number' => 'required',
+            'company_name' => 'required',
+            'email_id' => 'required|exists:email_templates,id',
+            'password' => 'required',
         ]);
 
-        $user = User::find($request->user_id);
+        $user = User::findOrFail($request->user_id);
+        $emailTemplate = EmailTemplate::findOrFail($request->email_id);
+
+        // Prepare dynamic data
         $maildata = [
             'name' => $user->name,
             'email' => $user->email,
-            'mail_content' => $request->mail_content,
+            'login_information' => $request->login_information,
+            'account_number' => $request->account_number,
+            'password' => $request->password,
+            'company_name' => $request->company_name,
+            'subject' => $emailTemplate->subject,
+            'title' =>  $emailTemplate->title,
         ];
 
+        // Replace placeholders in the email content with actual data
+        $maildata['mail_content'] = str_replace(
+            ['{customer_name}', '{login_information}', '{account_number}', '{password}', '{company_name}'],
+            [$maildata['name'], $maildata['login_information'], $maildata['account_number'], $maildata['password'], $maildata['company_name']],
+            $emailTemplate->content
+        );
+
+        // Send the email
         Mail::to($user->email)->send(new RechargeCodeMail($maildata));
 
         return redirect()->route('customers.index')->with('message', 'Recharge code mail sent successfully');
     }
-
 }

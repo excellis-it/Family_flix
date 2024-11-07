@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\OttServiceController;
 use App\Http\Controllers\Admin\PaypalCredentialController;
 use App\Http\Controllers\Admin\StripeCredentialController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
+use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\AffiliateMarketer\CommissionHistoryController;
 use App\Http\Controllers\AffiliateMarketer\WalletController;
 use App\Http\Controllers\AffiliateMarketer\DashboardController as AffiliateMarketerDashboardController;
@@ -49,6 +50,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\WalletController as AdminWalletcontroller;
 use App\Http\Controllers\Captcha\RefreshCaptchaController;
+use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Artisan;
 
 // Clear cache
@@ -186,7 +188,10 @@ Route::group(['prefix' => 'admin'], function () {
             'ott-service' => OttServiceController::class,
             'managers' =>ManagerController::class,
             'users' => UserController::class,
+            'emails' => EmailTemplateController::class
         ]);
+
+        Route::get('/emails-fetch-data', [EmailTemplateController::class, 'fetchEmailseData'])->name('emails.ajax.list');
 
         Route::get('/delete-users/{id}', [UserController::class, 'deleteUser'])->name('delete.user');
         Route::post('/update-users', [UserController::class, 'updateUser'])->name('update.users');
@@ -370,7 +375,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'site-settings'], function () {
             Route::resources([
                 'credentials' => StripeCredentialController::class,
-                
+
             ]);
             Route::get('/payment-details-mail', [PaymentDetailMailController::class, 'paymentDetailMail'])->name('payment-detail-mail.edit-detail');
             Route::post('/payment-details-mail-update', [PaymentDetailMailController::class, 'paymentDetailMailUpdate'])->name('payment-detail-mail.update');
