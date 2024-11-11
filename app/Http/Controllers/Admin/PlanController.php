@@ -81,14 +81,14 @@ class PlanController extends Controller
             'plan_details'    => 'required',
             'plan_actual_price'    => 'required|numeric',
             'plan_offer_price' => [
-                    'required',
-                    'numeric',
-                    Rule::unique('plans')->ignore($request->id), // Assuming 'id' is the primary key of your Plan model
-                ],
+                'required',
+                'numeric',
+                Rule::unique('plans')->ignore($request->id), // Assuming 'id' is the primary key of your Plan model
+            ],
             'button_text'    => 'required',
         ]);
 
-        $stripe = Helper::stripeCredential(); 
+        $stripe = Helper::stripeCredential();
 
         if (!empty($stripe->stripe_secret)) {
             \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
@@ -101,9 +101,9 @@ class PlanController extends Controller
             'name' => $request->plan_name,
             'description' => $request->plan_details,
         ]);
-        
+
         if ($stripe_product) {
-        
+
             // Create a price (billing plan) for the product in Stripe
             $price = Price::create([
                 'product' => $stripe_product->id,
@@ -114,7 +114,7 @@ class PlanController extends Controller
                     'interval_count' => 1,
                 ],
             ]);
-        
+
             // Handle database storage for Plan (if needed)
             $old_plan = Plan::orderBy('plan_order', 'desc')->first();
             if ($old_plan) {
@@ -122,10 +122,10 @@ class PlanController extends Controller
             } else {
                 $order = 1;
             }
-        
+
             $plan = new Plan();
-            $plan->stripe_product_id = $stripe_product->id;  
-            $plan->stripe_price_id = $price->id; 
+            $plan->stripe_product_id = $stripe_product->id;
+            $plan->stripe_price_id = $price->id;
             $plan->plan_name = $request->plan_name;
             $plan->plan_details = $request->plan_details;
             $plan->plan_actual_price = $request->plan_actual_price;
@@ -154,7 +154,7 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -323,7 +323,7 @@ class PlanController extends Controller
         // $plan_update->button_text = $request->button_text;
         // $plan_update->update();
 
-        $stripe = Helper::stripeCredential(); 
+        $stripe = Helper::stripeCredential();
 
         if (!empty($stripe->stripe_secret)) {
             \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
@@ -334,29 +334,54 @@ class PlanController extends Controller
 
         $stripe_product_id = $request->stripe_product_id; // The ID of the Stripe product to update
         $stripe_price_id = $request->stripe_price_id; // The ID of the Stripe price to update
+        if ($stripe_product_id && $stripe_price_id) {
+            // Update the product in Stripe
+            $stripe_product = Product::update($stripe_product_id, [
+                'name' => $request->plan_name,
+                'description' => $request->plan_details,
+            ]);
 
-        // Update the product in Stripe
-        $stripe_product = Product::update($stripe_product_id, [
-            'name' => $request->plan_name,
-            'description' => $request->plan_details,
-        ]);
-        
-        // Create a new price (billing plan) for the product in Stripe
-        $new_price = Price::create([
-            'product' => $stripe_product_id,
-            'unit_amount' => $request->plan_offer_price * 100, // Amount in cents
-            'currency' => 'usd',
-            'recurring' => [
-                'interval' => 'month',
-                'interval_count' => 1,
-            ],
-        ]);
-        
+            // Create a new price (billing plan) for the product in Stripe
+            $new_price = Price::create([
+                'product' => $stripe_product_id,
+                'unit_amount' => $request->plan_offer_price * 100, // Amount in cents
+                'currency' => 'usd',
+                'recurring' => [
+                    'interval' => 'month',
+                    'interval_count' => 1,
+                ],
+            ]);
+        } else {
+
+            // Create a new product in Stripe
+            $stripe_product = Product::create([
+                'name' => $request->plan_name,
+                'description' => $request->plan_details,
+            ]);
+
+            // Create a price (billing plan) for the product in Stripe
+            $new_price = Price::create([
+                'product' => $stripe_product->id,
+                'unit_amount' => $request->plan_offer_price * 100, // Amount in cents
+                'currency' => 'usd',
+                'recurring' => [
+                    'interval' => 'month',
+                    'interval_count' => 1,
+                ],
+            ]);
+        }
+
+
+
 
         // Handle database storage for Plan (if needed)
         $plan = Plan::where('stripe_product_id', $stripe_product_id)->first();
         if ($plan) {
             $plan->plan_name = $request->plan_name;
+            if (!$stripe_product_id && !$stripe_price_id) {
+                $plan->stripe_product_id = $stripe_product->id;
+                $plan->stripe_price_id = $new_price->id;
+            }
             $plan->plan_details = $request->plan_details;
             $plan->plan_actual_price = $request->plan_actual_price;
             $plan->plan_offer_price = $request->plan_offer_price;
@@ -364,22 +389,22 @@ class PlanController extends Controller
             $plan->save();
         }
 
-            if ($request->plan_specification != null) {
-                PlanSpecification::where('plan_id', $request->id)->delete();
-                foreach ($request->plan_specification as $key => $specification) {
-                    if ($specification != null) {
-                        $plan_specification = PlanSpecification::create([
-                            'plan_id' => $request->id,
-                            'specification_name' => $specification,
-                        ]);
-                    }
+        if ($request->plan_specification != null) {
+            PlanSpecification::where('plan_id', $request->id)->delete();
+            foreach ($request->plan_specification as $key => $specification) {
+                if ($specification != null) {
+                    $plan_specification = PlanSpecification::create([
+                        'plan_id' => $request->id,
+                        'specification_name' => $specification,
+                    ]);
                 }
             }
+        }
 
-            return redirect()->route('plan.index')->with('message', 'Plan updated successfully');
-            // } catch (\Throwable $th) {
-            //     return redirect()->route('plan.index')->with('error', 'Something went wrong');
-            // }
+        return redirect()->route('plan.index')->with('message', 'Plan updated successfully');
+        // } catch (\Throwable $th) {
+        //     return redirect()->route('plan.index')->with('error', 'Something went wrong');
+        // }
     }
 
     /**
