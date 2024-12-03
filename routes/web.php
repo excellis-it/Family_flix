@@ -207,6 +207,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/customers/update',[AdminCustomerController::class, 'updateDetail'])->name('customers.update-deatil');
         Route::get('/customers/recharge-code/{id}',[AdminCustomerController::class, 'rechargeMail'])->name('customers.recharge-code-mail');
         Route::post('/customers/recharge-code',[AdminCustomerController::class, 'rechargeCodeMailSend'])->name('customers.recharge-code-send');
+        Route::post('/customers/delete-multiple', [AdminCustomerController::class, 'deleteMultiple'])->name('customers.delete-multiple');
 
 
         Route::get('/manager-permission', [ManagerPermissionController::class, 'index'])->name('manager-permission.index');
@@ -255,6 +256,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/affliate-marketer-change-status', [AffliateMarketerController::class, 'changeStatus'])->name('affliate-marketer.change-status');
         Route::prefix('affliate-marketer')->group(function () {
             Route::get('/affliate-marketer-delete/{id}', [AffliateMarketerController::class, 'delete'])->name('affliate-marketer.delete');
+            Route::post('/affliate-marketer-delete', [AffliateMarketerController::class, 'deleteMultiple'])->name('affliate-marketer.delete-multiple');
         });
 
         //products ajax list

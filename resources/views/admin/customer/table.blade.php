@@ -4,6 +4,9 @@
 @if (count($customers) > 0)
     @foreach ($customers as $customer)
         <tr>
+            <td>
+                <input type="checkbox" class="selectCustomer new-checkbox" value="{{ $customer->id }}" >
+            </td>
             <td>{{ $customer->name ?? 'N/A' }}</td>
             <td>{{ $customer->email ?? 'N/A' }}</td>
             <td>{{ $customer->phone ?? 'N/A' }}</td>
@@ -55,7 +58,7 @@
         </tr>
     @endforeach
     <tr class="toxic">
-        <td colspan="7" class="text-left">
+        <td colspan="8" class="text-left">
             <div class="d-flex justify-content-between">
                 <div class="">
                     {!! $customers->links() !!}
@@ -67,6 +70,6 @@
     </tr>
 @else
     <tr>
-        <td colspan="7" class="text-center">No data found</td>
+        <td colspan="8" class="text-center">No data found</td>
     </tr>
 @endif

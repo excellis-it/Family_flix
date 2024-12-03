@@ -62,7 +62,6 @@
     </style>
 @endpush
 @section('content')
-
     <section id="loading">
         <div id="loading-content"></div>
     </section>
@@ -83,7 +82,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="w-100 text-end mb-3">
-                    <a class="print_btn" href="{{route('customers.create')}}" >+ Add
+                    <a class="print_btn delete_selected_btn" href="javascript:void(0);"><i class="fas fa-trash"></i> Delete
+                        Selected</a>
+
+                    <a class="print_btn" href="{{ route('customers.create') }}">+ Add
                         a Customer</a>
                 </div>
                 <div class="card w-100">
@@ -91,10 +93,18 @@
 
                         <div class="row justify-content-between align-items-center mb-2">
                             <div class="col-md-6">
-                                <div>
-                                    <h4>List of Customers</h4>
+                                <div> Show:
+                                    <select name="show_page" id="show_page"
+                                        style="padding: 11px; border: 1px solid #C4C4C4; border-radius: 20px;">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="500">500</option>
+                                    </select>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="row g-1 justify-content-end">
                                     <div class="col-md-8 pr-0">
@@ -114,6 +124,9 @@
                                 id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
                                     <tr>
+                                        <th>
+                                            <input type="checkbox" id="selectAll" class="new-checkbox">
+                                        </th>
                                         <th><span class="fs-4 fw-semibold mb-0">Name</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Email</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Phone</span></th>
@@ -201,12 +214,13 @@
 
     <script>
         $(document).ready(function() {
-            function fetch_data(page, query) {
+            function fetch_data(page, query, limit) {
                 $.ajax({
                     url: "{{ route('customers.ajax.list') }}",
                     data: {
                         page: page,
-                        query: query
+                        query: query,
+                        limit: limit
                     },
                     success: function(data) {
                         $('tbody').html(data.data);
@@ -214,25 +228,38 @@
                 });
             }
 
+            // Fetch data when search input changes
             $(document).on('keyup', '#search', function() {
                 var query = $('#search').val();
                 var page = $('#hidden_page').val();
-                fetch_data(page, query);
+                var limit = $('#show_page').val();
+                fetch_data(page, query, limit);
             });
+
+            // Fetch data when pagination is clicked
             $(document).on('click', '.close-pagination a', function(event) {
                 event.preventDefault();
                 var page = $(this).attr('href').split('page=')[1];
                 $('#hidden_page').val(page);
 
                 var query = $('#search').val();
+                var limit = $('#show_page').val();
 
                 $('li').removeClass('active');
                 $(this).parent().addClass('active');
-                fetch_data(page, query);
+                fetch_data(page, query, limit);
             });
 
+            // Fetch data when show filter changes
+            $('#show_page').on('change', function() {
+                var query = $('#search').val();
+                var page = $('#hidden_page').val();
+                var limit = $(this).val();
+                fetch_data(page, query, limit);
+            });
         });
     </script>
+
 
     <script>
         function copyText(element) {
@@ -316,6 +343,64 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '#selectAll', function() {
+                $('.selectCustomer').prop('checked', this.checked);
+            });
 
+            // Individual checkbox change
+            $(document).on('change', '.selectCustomer', function() {
+                if (!$(this).prop("checked")) {
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+            // Delete Selected Customers
+            $(document).on('click', '.delete_selected_btn', function() {
+                let selectedIds = [];
+                $('.selectCustomer:checked').each(function() {
+                    selectedIds.push($(this).val());
+                });
 
+                if (selectedIds.length === 0) {
+                    toastr.error('No customers selected');
+                    return;
+                }
+
+                // SweetAlert Confirmation
+                swal({
+                    title: 'Are you sure?',
+                    text: 'You will not be able to recover these records!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete them!',
+                    cancelButtonText: 'No, cancel!',
+                }).then((result) => {
+                    if (result.value) {
+                        // AJAX Request
+                        $.ajax({
+                            url: "{{ route('customers.delete-multiple') }}", // Update with correct route
+                            method: 'POST',
+                            data: {
+                                ids: selectedIds,
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    toastr.success(response.message);
+                                    // Reload Table Data
+                                    $('#myTable').load(location.href + " #myTable");
+                                } else {
+                                    toastr.error(response.message);
+                                }
+                            },
+                            error: function(xhr) {
+                                toastr.error('An error occurred.');
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

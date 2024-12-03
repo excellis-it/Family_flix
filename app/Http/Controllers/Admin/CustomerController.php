@@ -18,7 +18,7 @@ class CustomerController extends Controller
     public function index()
     {
         if (Auth::user()->can('Manage Customer')) {
-            $customers = User::with('userLastSubscription')->role('CUSTOMER')->orderBy('id', 'desc')->paginate(15);
+            $customers = User::with('userLastSubscription')->role('CUSTOMER')->orderBy('id', 'desc')->paginate(10);
             // dd($customers);
             return view('admin.customer.list', compact('customers'));
         } else {
@@ -31,6 +31,8 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
+            $limit = $request->get('limit', 10); // Default to 15 if no limit is provided
+
             $customers = User::role('CUSTOMER')
                 ->where(function ($queryBuilder) use ($query) {
                     $queryBuilder->where('id', 'like', '%' . $query . '%')
@@ -40,11 +42,12 @@ class CustomerController extends Controller
                 })
                 ->with('userLastSubscription')
                 ->orderBy('id', 'desc')
-                ->paginate(15);
+                ->paginate($limit); // Use the limit here
 
             return response()->json(['data' => view('admin.customer.table', compact('customers'))->render()]);
         }
     }
+
 
     public function showPlans($id)
     {
@@ -171,5 +174,22 @@ class CustomerController extends Controller
         $customer = User::find($id);
         $customer->delete();
         return redirect()->route('customers.index')->with('message', 'Customer deleted successfully');
+    }
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (empty($ids)) {
+            return response()->json(['success' => false, 'message' => 'No customers selected']);
+        }
+
+        try {
+            User::whereIn('id', $ids)->delete();
+
+            return response()->json(['success' => true, 'message' => 'Selected customers deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete customers']);
+        }
     }
 }

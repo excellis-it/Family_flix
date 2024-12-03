@@ -27,30 +27,33 @@ class AffliateMarketerController extends Controller
 
         if (Auth::user()->can('Manage Affiliater')) {
             $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->paginate(15);
-            return view('admin.affliate-marketer.list',compact('affiliaters'));
+            return view('admin.affliate-marketer.list', compact('affiliaters'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
-        }  
+        }
     }
 
     public function affliateMarketerAjaxList(Request $request)
     {
         if ($request->ajax()) {
-            $query = $request->get('query');
+            $query = $request->get('query', '');
             $query = str_replace(" ", "%", $query);
-            $affiliaters = User::role('AFFLIATE MARKETER')
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('id', 'like', '%' . $query . '%')
-                    ->orWhere('name', 'like', '%' . $query . '%')
-                    ->orWhere('email', 'like', '%' . $query . '%')
-                    ->orWhere('phone', 'like', '%' . $query . '%');
-            })
-            ->orderBy('id', 'desc')
-            ->paginate(15);
+            $limit = $request->get('limit', 15); // Default is 15 per page
 
+
+                $affiliaters = User::role('AFFLIATE MARKETER')
+                    ->where(function ($queryBuilder) use ($query) {
+                        $queryBuilder->where('id', 'like', '%' . $query . '%')
+                            ->orWhere('name', 'like', '%' . $query . '%')
+                            ->orWhere('email', 'like', '%' . $query . '%')
+                            ->orWhere('phone', 'like', '%' . $query . '%');
+                    })
+                    ->orderBy('id', 'desc')
+                    ->paginate((int)$limit); // Paginate with limit
             return response()->json(['data' => view('admin.affliate-marketer.filter', compact('affiliaters'))->render()]);
-        } 
+        }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,7 +67,6 @@ class AffliateMarketerController extends Controller
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
-        
     }
 
     /**
@@ -83,7 +85,7 @@ class AffliateMarketerController extends Controller
             'phone' => 'required',
             'profile_picture' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
             'status' => 'required',
-            
+
         ]);
 
         $data = new User();
@@ -92,7 +94,7 @@ class AffliateMarketerController extends Controller
         $data->password = bcrypt($request->password);
         $data->phone = $request->phone;
         $data->status = $request->status;
-        if($request->hasFile('profile_picture')){
+        if ($request->hasFile('profile_picture')) {
             $data->image = $this->imageUpload($request->file('profile_picture'), 'Affiliate Marketer')['filePath'];
         }
         $data->save();
@@ -135,12 +137,11 @@ class AffliateMarketerController extends Controller
     {
         if (Auth::user()->can('Edit Affiliater')) {
             $affiliate_marketer = User::findOrFail($id);
-            $affiliate_commission = AffiliateCommission::where('affiliate_id',$id)->first() ?? '';
-            return view('admin.affliate-marketer.edit')->with(compact('affiliate_marketer','affiliate_commission'));
+            $affiliate_commission = AffiliateCommission::where('affiliate_id', $id)->first() ?? '';
+            return view('admin.affliate-marketer.edit')->with(compact('affiliate_marketer', 'affiliate_commission'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
-        
     }
 
     /**
@@ -154,10 +155,10 @@ class AffliateMarketerController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|unique:users,email,'.$id,
+            'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|unique:users,email,' . $id,
             'phone' => 'required',
             'status' => 'required',
-        
+
         ]);
         $data = User::findOrFail($id);
         $data->name = $request->name;
@@ -175,20 +176,20 @@ class AffliateMarketerController extends Controller
             $request->validate([
                 'profile_picture' => 'image|mimes:jpg,png,jpeg,gif,svg',
             ]);
-            
+
             if ($data->profile_picture) {
                 $currentImageFilename = $data->profile_picture; // get current image name
-                Storage::delete('app/'.$currentImageFilename);
+                Storage::delete('app/' . $currentImageFilename);
             }
             $data->image = $this->imageUpload($request->file('profile_picture'), 'Affiliate Marketer')['filePath'];
         }
         $data->save();
 
         $update_commission = AffiliateCommission::where('affiliate_id', $data->id)->first();
-        if($update_commission) {
+        if ($update_commission) {
             $update_commission->percentage = $request->commission_percentage;
             $update_commission->update();
-        }else{
+        } else {
             $add_commission = new AffiliateCommission;
             $add_commission->affiliate_id = $data->id;
             $add_commission->percentage = $request->commission_percentage;
@@ -222,5 +223,22 @@ class AffliateMarketerController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('affliate-marketer.index')->with('error', 'Affiliate Marketer has been deleted successfully.');
+    }
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (empty($ids)) {
+            return response()->json(['success' => false, 'message' => 'No affiliate marketer selected']);
+        }
+
+        try {
+            User::whereIn('id', $ids)->delete();
+
+            return response()->json(['success' => true, 'message' => 'Selected affiliate marketer deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete affiliate marketer']);
+        }
     }
 }
