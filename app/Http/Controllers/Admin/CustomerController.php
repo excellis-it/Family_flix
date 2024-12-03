@@ -165,4 +165,11 @@ class CustomerController extends Controller
 
         return redirect()->route('customers.index')->with('message', 'Recharge code mail sent successfully');
     }
+
+    public function deleteDetail($id)
+    {
+        $customer = User::find($id);
+        $customer->delete();
+        return redirect()->route('customers.index')->with('message', 'Customer deleted successfully');
+    }
 }

@@ -203,6 +203,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/customers/create',[AdminCustomerController::class, 'create'])->name('customers.create');
         Route::post('/customers/store',[AdminCustomerController::class, 'store'])->name('customers.store');
         Route::get('/customers/edit/{id}',[AdminCustomerController::class, 'editDetail'])->name('customers.edit-detail');
+        Route::get('/customers/delete/{id}',[AdminCustomerController::class, 'deleteDetail'])->name('customers.delete-detail');
         Route::post('/customers/update',[AdminCustomerController::class, 'updateDetail'])->name('customers.update-deatil');
         Route::get('/customers/recharge-code/{id}',[AdminCustomerController::class, 'rechargeMail'])->name('customers.recharge-code-mail');
         Route::post('/customers/recharge-code',[AdminCustomerController::class, 'rechargeCodeMailSend'])->name('customers.recharge-code-send');

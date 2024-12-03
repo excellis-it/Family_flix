@@ -48,6 +48,9 @@
                 <a href="{{ route('customers.recharge-code-mail', $customer->id) }}" class="edit-btn" data-toggle="tooltip" data-placement="top" title="Send Mail"
                    ><i class="fa fa-send" ></i>&nbsp;
                 </a>
+                <a href="javascript:void(0);" data-route="{{ route('customers.delete-detail', $customer->id) }}" class="edit-btn" id="delete" data-toggle="tooltip" data-placement="top" title="Delete Customer"
+                    ><i class="fas fa-trash" ></i>
+                </a>
             </td>
         </tr>
     @endforeach
