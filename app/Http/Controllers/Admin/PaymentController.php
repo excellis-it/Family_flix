@@ -22,9 +22,9 @@ class PaymentController extends Controller
 
 
         $data = $request->all();
-        $customer_details =  CustomerDetails::where('id',$data['customer_id'])->orderBy('id','desc')->first() ?? '';
+        $customer_details =  CustomerDetails::where('id', $data['customer_id'])->orderBy('id','desc')->first() ?? '';
         $plan_details = Plan::where('id',$data['plan_id'])->first();
-        $user_details = User::where('id','customer_id')->first();
+        $user_details = User::where('id',$data['customer_id'])->first();
 
         if($customer_details){
             $customer_details_add = new CustomerDetails();
@@ -58,7 +58,7 @@ class PaymentController extends Controller
         // if($check_user_exists > 0)
         // {
         //     $user_get = User::where('email',$data['emailId'])->first();
-        //     $user_id = $user_get->id; 
+        //     $user_id = $user_get->id;
         // }else{
         //     $user = new User();
         //     $user->name = $data['first_name'].' '.$data['last_name'];
@@ -79,7 +79,7 @@ class PaymentController extends Controller
         //     $user_id = $user->id;
         // }
 
-         
+
 
 
         //user subscription

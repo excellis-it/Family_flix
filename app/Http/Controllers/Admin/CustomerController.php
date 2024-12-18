@@ -134,12 +134,23 @@ class CustomerController extends Controller
     public function rechargeCodeMailSend(Request $request)
     {
         $request->validate([
-            'login_information' => 'required',
-            'account_number' => 'required',
-            'company_name' => 'required',
             'email_id' => 'required|exists:email_templates,id',
-            'password' => 'required',
+            'login_information' => 'required_if:email_id,1',
+            'account_number' => 'required_if:email_id,1',
+            'company_name' => 'required_if:email_id,1|required_if:email_id,2',
+            'password' => 'required_if:email_id,1',
+            'rental_code' => 'required_if:email_id,2',
+        ], [
+            'email_id.required' => 'The email template field is required.',
+            'email_id.exists' => 'The selected email template is invalid.',
+            'login_information.required_if' => 'The login information is required when email template 1 is selected.',
+            'account_number.required_if' => 'The account number is required when email template 1 is selected.',
+            'company_name.required_if' => 'The company name is required when email template 1 or 2 is selected.',
+            'password.required_if' => 'The password is required when email template 1 is selected.',
+            'rental_code.required_if' => 'The rental code is required when email template 2 is selected.',
         ]);
+
+
 
         $user = User::findOrFail($request->user_id);
         $emailTemplate = EmailTemplate::findOrFail($request->email_id);
@@ -156,12 +167,21 @@ class CustomerController extends Controller
             'title' =>  $emailTemplate->title,
         ];
 
+        if ($request->email_id == 1) {
+            $maildata['mail_content'] = str_replace(
+                ['{customer_name}', '{login_information}', '{account_number}', '{password}', '{company_name}'],
+                [$maildata['name'], $maildata['login_information'], $maildata['account_number'], $maildata['password'], $maildata['company_name']],
+                $emailTemplate->content
+            );
+        } else {
+            $maildata['mail_content'] = str_replace(
+                ['{customer_name}', '{rental_code}',  '{company_name}'],
+                [$maildata['name'], $request->rental_code, $maildata['company_name']],
+                $emailTemplate->content
+            );
+        }
         // Replace placeholders in the email content with actual data
-        $maildata['mail_content'] = str_replace(
-            ['{customer_name}', '{login_information}', '{account_number}', '{password}', '{company_name}'],
-            [$maildata['name'], $maildata['login_information'], $maildata['account_number'], $maildata['password'], $maildata['company_name']],
-            $emailTemplate->content
-        );
+
 
         // Send the email
         Mail::to($user->email)->send(new RechargeCodeMail($maildata));

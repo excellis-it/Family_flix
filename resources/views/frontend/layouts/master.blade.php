@@ -48,7 +48,7 @@
     <main>
 
         @php
-        $subscribe_cms = App\Models\SubscribeCms::first();
+            $subscribe_cms = App\Models\SubscribeCms::first();
         @endphp
 
         @include('frontend.includes.header')
@@ -89,8 +89,8 @@
                                                 <input type="text" class="form-control" name="user_email"
                                                     placeholder="{{ $subscribe_cms->subscription_placeholder }}">
                                                 @if ($errors->has('name'))
-                                                <div class="error" style="color:red;">
-                                                    {{ $errors->first('name') }}</div>
+                                                    <div class="error" style="color:red;">
+                                                        {{ $errors->first('name') }}</div>
                                                 @endif
                                             </div>
                                         </div>
@@ -191,44 +191,9 @@
             // Function to check if user is authenticated
             function checkAuthentication() {
                 @auth
-                    // If user is authenticated, open popup
-                    Swal.fire({
-                        
-                        text: "You're currently logged in another account. Please log out of this account.",
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, log out!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // If the user confirms, log out
-                            window.location.href = "{{ route('any-user.logout') }}"; 
-                        }
-                    })
-                @else
-                    // If user is not authenticated, proceed to customer login
-                    var loginRoute = $('.cust-login').attr('href');
-                    window.location.href = loginRoute; // Redirect to customer login route
-                @endauth
-            }
+                // If user is authenticated, open popup
+                Swal.fire({
 
-            // Call the function to check authentication when the customer login link is clicked
-            $('.cust-login').click(function(event) {
-                event.preventDefault(); // Prevent the default link behavior
-                checkAuthentication();
-            });
-        });
-
-    </script>
-
-    <script>
-        $(document).ready(function() {
-        // Function to check if user is authenticated
-        function checkAuthenticationAffi() {
-            @auth
-            Swal.fire({
-                        
                     text: "You're currently logged in another account. Please log out of this account.",
                     icon: 'question',
                     showCancelButton: true,
@@ -238,7 +203,41 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // If the user confirms, log out
-                        window.location.href = "{{ route('any-user.logout') }}"; 
+                        window.location.href = "{{ route('any-user.logout') }}";
+                    }
+                })
+            @else
+                // If user is not authenticated, proceed to customer login
+                var loginRoute = $('.cust-login').attr('href');
+                window.location.href = loginRoute; // Redirect to customer login route
+            @endauth
+        }
+
+        // Call the function to check authentication when the customer login link is clicked
+        $('.cust-login').click(function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            checkAuthentication();
+        });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Function to check if user is authenticated
+            function checkAuthenticationAffi() {
+                @auth
+                Swal.fire({
+
+                    text: "You're currently logged in another account. Please log out of this account.",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, log out!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If the user confirms, log out
+                        window.location.href = "{{ route('any-user.logout') }}";
                     }
                 })
             @else
@@ -253,13 +252,12 @@
             event.preventDefault(); // Prevent the default link behavior
             checkAuthenticationAffi();
         });
-    });
-
+        });
     </script>
 
 
     <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -269,12 +267,28 @@
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
-    </script>
+    </script> --}}
     <!--End of Tawk.to Script-->
 
 
     <script type="text/javascript">
-        function loadAcDiv(t){let e;(e=t.createElement("div")).id="embed-ab",e.async=!0,e.setAttribute("data-ab-id","ZLqZX5je"),e.setAttribute("data-btn-bg","#239789"),e.setAttribute("data-btn-img","https://myagencycoach.agency/storage/uploads/5457/img_1723028547_iEk.png"),e.setAttribute('data-avtr-img',"https://myagencycoach.agency/storage/uploads/5457/img_1723028389_68d.png"),e.setAttribute("data-ab-url","https://myagencycoach.agency"),e.setAttribute("data-bub-ani","anim-ok"),e.setAttribute("data-wid-pos","fcpw-left"),t.body.appendChild(e)}function initialize(t){let e;(e=t.createElement("script")).id="script-ab",e.async=!0,(e.type = "text/javascript"),e.src="https://myagencycoach.agency/assets/chat/embed.js",e.onload=loadAcDiv(t),t.body.appendChild(e)}window.addEventListener?window.addEventListener("load",initialize(document),!1):window.attachEvent("load",initialize(document),!1);
+        function loadAcDiv(t) {
+            let e;
+            (e = t.createElement("div")).id = "embed-ab", e.async = !0, e.setAttribute("data-ab-id", "ZLqZX5je"), e
+                .setAttribute("data-btn-bg", "#239789"), e.setAttribute("data-btn-img",
+                    "https://myagencycoach.agency/storage/uploads/5457/img_1723028547_iEk.png"), e.setAttribute(
+                    'data-avtr-img', "https://myagencycoach.agency/storage/uploads/5457/img_1723028389_68d.png"), e
+                .setAttribute("data-ab-url", "https://myagencycoach.agency"), e.setAttribute("data-bub-ani", "anim-ok"), e
+                .setAttribute("data-wid-pos", "fcpw-right"), t.body.appendChild(e)
+        }
+
+        function initialize(t) {
+            let e;
+            (e = t.createElement("script")).id = "script-ab", e.async = !0, (e.type = "text/javascript"), e.src =
+                "https://myagencycoach.agency/assets/chat/embed.js", e.onload = loadAcDiv(t), t.body.appendChild(e)
+        }
+        window.addEventListener ? window.addEventListener("load", initialize(document), !1) : window.attachEvent("load",
+            initialize(document), !1);
     </script>
 
 

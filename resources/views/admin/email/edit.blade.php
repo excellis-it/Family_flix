@@ -33,17 +33,28 @@
                                     <div class="row text-xs">
 
                                         <div class="row">
+                                            @if ($email->id == 2)
+                                                <p class="col-4">Customer Name : <span
+                                                        class="pull-end text-primary">{customer_name}</span></p>
+                                                <p class="col-4">Rental Code : <span
+                                                        class=" text-primary">{rental_code}</span></p>
+                                                <p class="col-4">Company Name : <span
+                                                        class=" text-primary">{company_name}</span>
+                                                </p>
+                                            @else
+                                                <p class="col-4">Customer Name : <span
+                                                        class="pull-end text-primary">{customer_name}</span></p>
+                                                <p class="col-4">Login Information : <span
+                                                        class=" text-primary">{login_information}</span></p>
+                                                <p class="col-4">Account Number : <span
+                                                        class=" text-primary">{account_number}</span></p>
+                                                <p class="col-4">Company Name : <span
+                                                        class=" text-primary">{company_name}</span>
+                                                </p>
+                                                <p class="col-4">Password : <span class=" text-primary">{password}</span>
+                                                </p>
+                                            @endif
 
-                                            <p class="col-4">Customer Name : <span
-                                                    class="pull-end text-primary">{customer_name}</span></p>
-                                            <p class="col-4">Login Information : <span
-                                                    class=" text-primary">{login_information}</span></p>
-                                            <p class="col-4">Account Number : <span
-                                                    class=" text-primary">{account_number}</span></p>
-                                            <p class="col-4">Company Name : <span class=" text-primary">{company_name}</span>
-                                            </p>
-                                            <p class="col-4">Password : <span
-                                                    class=" text-primary">{password}</span></p>
                                         </div>
                                     </div>
 
