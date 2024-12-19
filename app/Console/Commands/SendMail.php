@@ -51,26 +51,26 @@ class SendMail extends Command
         $customers = UserSubscription::with('customer')
         ->where('plan_expiry_date', Carbon::today()->addDays(4)->toDateString())
         ->get();
-        
+
         Log::info('Customers found: ' . $customers->count());
-    
+
         if ($customers->isEmpty()) {
             Log::info('No customers found with plan expiring in 4 days.');
             return;
         }
-    
+
         // Send reminder emails
         foreach ($customers as $customer) {
             Log::info('Preparing to send email to: ' . $customer->customer->email);
-            
+
             try {
                 Mail::to($customer->customer->email)->send(new SubscriptionExpiryMail($customer));
-                
+
                 Log::info('Email sent successfully to: ' . $customer->customer->email);
             } catch (\Exception $e) {
-                
+
                 Log::error('Failed to send email to: ' . $customer->customer->email . ' - Error: ' . $e->getMessage());
-    
+
                 // Test sending a plain text email
                 try {
                     Mail::raw('This is a test email to verify sending functionality.', function ($message) use ($customer) {

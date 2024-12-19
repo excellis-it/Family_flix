@@ -64,6 +64,11 @@ Route::get('reminder-mail-for-plan-expiry', function () {
     return "Reminder mail has been successfully";
 });
 
+Route::get('renwal-subscription', function () {
+    Artisan::call('renewal:subscription');
+    return "Renawal subscription has been successfully";
+});
+
 /* ----------------- Frontend Routes -----------------*/
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/admin', [AuthController::class, 'adminLogin'])->name('admin.login');
