@@ -31,6 +31,6 @@ class UserSubscriptionMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('frontend.mail.UserSubscriptionMail')->subject('Welcome to our website')->with('userSubscriptionMailData', $this->userSubscriptionMailData);
+        return $this->markdown('frontend.mail.UserSubscriptionMail')->subject('Welcome to Family-Flix!')->with('userSubscriptionMailData', $this->userSubscriptionMailData);
     }
 }
