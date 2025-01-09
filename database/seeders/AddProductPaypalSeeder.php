@@ -16,6 +16,10 @@ class AddProductPaypalSeeder extends Seeder
      */
     public function run()
     {
+        // Truncate the table to remove existing data
+        PaypalProduct::truncate();
+
+        // Data to be seeded
         $data = [
             'name' => 'Video Streaming Service',
             'description' => 'Video streaming service',
@@ -24,8 +28,10 @@ class AddProductPaypalSeeder extends Seeder
             'home_url' => 'https://thefamilyflix.com/'
         ];
 
+        // Attempt to create the product
         $response = $this->createProduct($data);
-
+        // dd($response);
+        // Check if the product creation was successful
         if (isset($response->id)) {
             $paypal_product = new PaypalProduct();
             $paypal_product->product_id = $response->id;

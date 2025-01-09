@@ -1,9 +1,9 @@
 @if (count($credentials) > 0)
     @foreach ($credentials as $credential)
         <tr>
-            <td>{{ $credential->stripe_key ? (strlen($credential->stripe_key) > 35 ? substr($credential->stripe_key, 0, 35) . '...' : $credential->stripe_key) : 'N/A' }}</td>
+            <td>{{ $credential->client_id ? (strlen($credential->client_id) > 35 ? substr($credential->client_id, 0, 35) . '...' : $credential->client_id) : 'N/A' }}</td>
             <td>
-                <span class="secret-text" data-text="{{ $credential->stripe_secret ? $credential->stripe_secret : 'N/A' }}">
+                <span class="secret-text" data-text="{{ $credential->client_id ? $credential->client_id : 'N/A' }}">
                     ******************************
                 </span>
                 <i class="toggle-secret fa fa-eye-slash" aria-hidden="true"></i>

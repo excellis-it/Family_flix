@@ -798,7 +798,7 @@
                 // This function sets up the details of the transaction, including the amount and line item details.
                 return actions.order.create({
                     application_context: {
-                        brand_name: 'Laravel Book Store Demo Paypal App',
+                        brand_name: 'The Family Flix',
                         user_action: 'PAY_NOW',
                     },
                     purchase_units: [{

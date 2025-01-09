@@ -377,7 +377,7 @@
                         </a>
                         <ul class="submenu collapse {{ Request::is('admin/site-settings*') ? 'show' : '' }}">
                             <li class="{{ Request::is('admin/site-settings/credentials*') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('credentials.index') }}">Stripe Credentials</a>
+                                <a class="nav-link" href="{{ route('credentials.index') }}">Paypal Credentials</a>
                             </li>
                             <li class="{{ Request::is('admin/site-settings/payment-details-mail*') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('payment-detail-mail.edit-detail') }}">Payment Detail Mail</a>

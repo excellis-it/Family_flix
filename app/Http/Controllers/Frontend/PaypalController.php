@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdminSubscriptionMail;
+use App\Mail\UserSubscriptionMail;
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Coupon;
@@ -19,11 +21,13 @@ use Omnipay\Omnipay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
+use App\Models\PaymentDetailMail;
 use App\Models\UserSubscriptionRecurring;
 use App\Traits\PayPalTrait;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class PaypalController extends Controller
 {
@@ -57,10 +61,10 @@ class PaypalController extends Controller
         }
 
         $faq_qstn_ansrs = Faq::where('type', 'payment')->orderBy('id', 'asc')->get();
-        return view('frontend.pages.checkout', compact('plan', 'faq_qstn_ansrs', 'customer_details', 'plan_exists','stripe_detail'));
+        return view('frontend.pages.checkout', compact('plan', 'faq_qstn_ansrs', 'customer_details', 'plan_exists', 'stripe_detail'));
     }
 
-    public function renewalPayments($name) {}
+
 
     public function paymentTypeCheck(Request $request)
     {
@@ -116,7 +120,7 @@ class PaypalController extends Controller
     public function checkPaymentsEmail(Request $request)
     {
         $check_email_exists = User::where('email', $request->emailId)->count();
-        
+
         if ($check_email_exists > 0) {
             return response()->json(['status' => 'error', 'message' => 'Email already exists', 'email' => $request->emailId]);
         } else {
@@ -208,11 +212,11 @@ class PaypalController extends Controller
 
     public function couponCheck(Request $request)
     {
-       
+
         $check_user = CustomerDetails::where('email_address', $request->emailId)->orWhere('phone', $request->phone)->first();
         $coupon = Coupon::where('code', $request->coupon_code)->where('plan_id', $request->plan_id)->first();
         if (!$coupon) {
-           
+
             return response()->json(['status' => 'error', 'message' => 'Invalid coupon code']);
         }
         $check_coupon_user_type = $coupon->user_type;
@@ -220,13 +224,13 @@ class PaypalController extends Controller
             //calculate discount
             if ($coupon->coupon_type == 'percentage') {
                 $dis_amount = ($request->plan_price / 100) * $coupon->value;
-                $discount = number_format($dis_amount, 2);
+                $discount = round($dis_amount, 2);
             } else {
                 $discount = $coupon->value;
             }
 
             $dis_amnt = $request->plan_price - $discount;
-            $discount_amount = number_format($dis_amnt, 2);
+            $discount_amount = round($dis_amnt, 2);
 
             if ($discount_amount) {
                 return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type,]);
@@ -236,13 +240,13 @@ class PaypalController extends Controller
             //calculate discount
             if ($coupon->coupon_type == 'percentage') {
                 $dis_amount = ($request->plan_price  / 100) * $coupon->value;
-                $discount = number_format($dis_amount, 2);
+                $discount = round($dis_amount, 2);
             } else {
 
                 $discount = $coupon->value;
             }
             $dis_amnt = $request->plan_price - $discount;
-            $discount_amount = number_format($dis_amnt, 2);
+            $discount_amount = round($dis_amnt, 2);
 
             if ($discount_amount) {
                 return response()->json(['status' => 'success', 'message' => 'Coupon code applied successfully', 'discount' => $discount_amount, 'coupon_discount' => $discount, 'coupon_discount_type' => $coupon->coupon_type,]);
@@ -257,15 +261,104 @@ class PaypalController extends Controller
         return view('frontend.pages.thankyou');
     }
 
+
+    public function paymentsValidate(Request $request)
+    {
+        $rules = [
+            'email' => 'required|email',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'house_name' => 'required|string|max:255',
+            'detail_address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'post_code' => 'required|string|max:20',
+            'phone' => 'required|numeric',
+            'plan_id' => 'required|integer',
+        ];
+
+        // If the user is authenticated, skip password validation
+        if (!Auth::check()) {
+            $rules['password'] = 'required|min:6';
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ]);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Validate successful.'
+            ]);
+        }
+
+        if (!Auth::check()) {
+            if ($user) {
+                if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                    $user = User::where('email', $request->email)->first();
+                    if ($user->hasRole('CUSTOMER') && $user->status == 1) {
+                        // Auth::login();
+                        $user_id = $user->id;
+                    } else {
+                        Auth::logout();
+                        return response()->json([
+                            'success' => false,
+                            'error' => 'Your account is deactivate!',
+                        ]);
+                    }
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'error' => 'Email id & password was invalid!',
+                    ]);
+                }
+            } else {
+                $user = new User();
+                $user->name = $data['first_name'] . ' ' . $data['last_name'];
+                $user->email = $data['email'];
+                $password = $data['password'];
+                $user->password = bcrypt($password);
+                $user->phone = $data['phone'] ?? '';
+                $user->status = 1;
+                $user->wallet_balance = 0;
+                $user->save();
+                $user->assignRole('CUSTOMER');
+
+                //send welcome email
+                $maildata = [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'password' => $password,
+                ];
+                Mail::to($user->email)->send(new WelcomeMail($maildata));
+                $user_id = $user->id;
+            }
+        } else {
+            $user_id = auth()->id();
+        }
+    }
+
     public function paymentcapture(Request $request)
     {
 
         $data = $request->all();
 
-        $customer_details_count = CustomerDetails::where('email_address', $data['emailId'])->count();
+        if (auth()->check()) {
+            $user = auth()->user();
+        } else {
+            $user = User::where('email', $request->email)->first();
+        }
+        $user_id = $user->id;
+
+        $customer_details_count = CustomerDetails::where('email_address', $data['email'])->count();
         if ($customer_details_count > 0) {
-            $customer_details = CustomerDetails::where('email_address', $data['emailId'])->first();
-            $customer_details->email_address = $data['emailId'];
+            $customer_details = CustomerDetails::where('email_address', $data['email'])->first();
+            $customer_details->email_address = $data['email'];
             $customer_details->first_name = $data['first_name'];
             $customer_details->last_name = $data['last_name'];
             $customer_details->country = $data['country'];
@@ -278,7 +371,7 @@ class PaypalController extends Controller
             $customer_details->update();
         } else {
             $customer_details = new CustomerDetails();
-            $customer_details->email_address = $data['emailId'];
+            $customer_details->email_address = $data['email'];
             $customer_details->first_name = $data['first_name'];
             $customer_details->last_name = $data['last_name'];
             $customer_details->country = $data['country'];
@@ -291,166 +384,77 @@ class PaypalController extends Controller
             $customer_details->save();
         }
 
-        $check_user_exists = User::where('email', $data['emailId'])->count();
-        if ($check_user_exists > 0) {
-            $user_get = User::where('email', $data['emailId'])->first();
-            $user_id = $user_get->id;
+
+
+        $user_subscription = new UserSubscription();
+        $user_subscription->customer_details_id = $customer_details->id;
+        $user_subscription->customer_id = $user_id;
+        if (Session::has('affiliate_id')) {
+
+            //affiliate commission calculation
+            $affiliate_id = Session::get('affiliate_id');
+            $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
+            if ($commission) {
+                $commission_dis = ($data['amount'] / 100) * $commission->percentage;
+                $admin_commission = $data['amount'] - $commission_dis;
+            } else {
+                $commission_dis = 0;
+                $admin_commission = $data['amount'];
+            }
+
+            $user_subscription->affiliate_id = Session::get('affiliate_id');
+            $user_subscription->affiliate_commission = $commission_dis;
         } else {
-            $user = new User();
-            $user->name = $data['first_name'] . ' ' . $data['last_name'];
-            $user->email = $data['emailId'];
-            $user->password = bcrypt('12345678');
-            $user->status = 1;
-            $user->wallet_balance = 0;
-            $user->save();
-            $user->assignRole('CUSTOMER');
-
-            //send welcome email
-            $maildata = [
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => 12345678,
-            ];
-            Mail::to($user->email)->send(new WelcomeMail($maildata));
-
-            $user_id = $user->id;
+            $user_subscription->affiliate_id = null;
+            $user_subscription->affiliate_commission = 0;
         }
 
+        // $user_subscription->payment_type = $data['payment_type'];
+        $user_subscription->plan_id = $data['plan_id'];
+        $user_subscription->plan_name = $data['plan_name'];
+        $user_subscription->plan_price = $data['plan_price'];
+        $user_subscription->coupan_code = $data['coupan_code'] ?? null;
+        $user_subscription->coupan_discount_type = $data['coupon_discount_type'] ?? null;
+        $user_subscription->coupan_discount = $data['coupon_discount'] ?? null;
+        $user_subscription->sub_total = $data['plan_price'];
+        $user_subscription->total = $data['amount'];
+        $user_subscription->additional_information = $data['additional_information'];
+        $today = date('Y-m-d');
+        $user_subscription->plan_start_date = $today;
+        $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
+        $user_subscription->save();
 
-        // for renewal plan
-        if ($data['payment_type'] == 'Renewal') {
-            $user_subscription = UserSubscription::where('customer_id', $user_id)
-                ->where('plan_name', $data['plan_name'])
-                ->where('plan_expiry_date', '>=', date('Y-m-d'))
-                ->first();
-            if ($user_subscription) {
+        // admin wallet
+        $wallet = new Wallet();
+        $walletId = Str::random(12);
+        // $unique_id = substr(uniqid(rand(10, 99), true), -8, 8);
+        $wallet->wallet_id = $walletId;
+        $wallet->user_subscription_id = $user_subscription->id;
+        $wallet->user_type = 'admin';
+        $wallet->balance = round(($data['amount'] - $user_subscription->affiliate_commission), 2);
+        $wallet->date = date('Y-m-d');
+        $wallet->save();
 
-                if (Session::has('affiliate_id')) {
+        $admin_balance = User::role('ADMIN')->first();
+        // dd($admin_balance->wallet_balance, $user_subscription->affiliate_commission, $data['amount']);
+        $wallet_balance = round(($admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission)), 2);
+        $admin_balance->wallet_balance = $wallet_balance;
+        $admin_balance->update();
 
-                    //affiliate commission calculation
-                    $affiliate_id = Session::get('affiliate_id');
-                    $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
-                    if ($commission) {
-                        $commission_dis = ($data['amount'] / 100) * $commission->percentage;
-                        $admin_commission = $data['amount'] - $commission_dis;
-                    } else {
-                        $commission_dis = 0;
-                        $admin_commission = $data['amount'];
-                    }
+        //affiliator wallet add
+        $wallet = new Wallet();
+        $wallet->wallet_id = $walletId;
+        $wallet->user_subscription_id = $user_subscription->id ?? null;
+        $wallet->user_type = 'affiliator';
+        $wallet->user_id = $user_subscription->affiliate_id ?? null;
+        $wallet->balance = $user_subscription->affiliate_commission ?? 0;
+        $wallet->date = date('Y-m-d');
+        $wallet->save();
 
-                    $user_subscription->affiliate_id = Session::get('affiliate_id');
-                    $user_subscription->affiliate_commission = $commission_dis;
-                } else {
-                    $user_subscription->affiliate_id = null;
-                    $user_subscription->affiliate_commission = 0;
-                }
-
-
-                $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($user_subscription->plan_expiry_date)));
-                $user_subscription->update();
-
-                // admin wallet
-                $wallet = new Wallet();
-                $walletId = Str::random(12);
-                $wallet->wallet_id = $walletId;
-                $wallet->user_subscription_id = $user_subscription->id;
-                $wallet->user_type = 'admin';
-                $wallet->balance = $data['amount'] - $user_subscription->affiliate_commission;
-                $wallet->date = date('Y-m-d');
-                $wallet->save();
-
-                $admin_balance = User::role('ADMIN')->first();
-                $balance_amount = $admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
-                $admin_balance->wallet_balance = number_format($balance_amount, 2, '.', '');
-                $admin_balance->update();
-
-                //affiliator wallet add
-                $wallet = new Wallet();
-                $wallet->wallet_id = $walletId;
-                $wallet->user_subscription_id = $user_subscription->id;
-                $wallet->user_type = 'affiliator';
-                $wallet->balance = $user_subscription->affiliate_commission;
-                $wallet->date = date('Y-m-d');
-                $wallet->save();
-                if ($user_subscription->affiliate_id) {
-                    $aff_bal = User::find($user_subscription->affiliate_id);
-                    $aff_bal->wallet_balance;
-                    $aff_bal->wallet_balance = $aff_bal->wallet_balance + $user_subscription->affiliate_commission;
-                    $aff_bal->update();
-                }
-            }
-        } else {
-
-            $user_subscription = new UserSubscription();
-            $user_subscription->customer_details_id = $customer_details->id;
-            $user_subscription->customer_id = $user_id;
-            if (Session::has('affiliate_id')) {
-
-                //affiliate commission calculation
-                $affiliate_id = Session::get('affiliate_id');
-                $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
-                if ($commission) {
-                    $commission_dis = ($data['amount'] / 100) * $commission->percentage;
-                    $admin_commission = $data['amount'] - $commission_dis;
-                } else {
-                    $commission_dis = 0;
-                    $admin_commission = $data['amount'];
-                }
-
-                $user_subscription->affiliate_id = Session::get('affiliate_id');
-                $user_subscription->affiliate_commission = $commission_dis;
-            } else {
-                $user_subscription->affiliate_id = null;
-                $user_subscription->affiliate_commission = 0;
-            }
-
-            $user_subscription->payment_type = $data['payment_type'];
-            $user_subscription->plan_id = $data['plan_id'];
-            $user_subscription->plan_name = $data['plan_name'];
-            $user_subscription->plan_price = $data['plan_price'];
-            $user_subscription->coupan_code = $data['coupan_code'];
-            $user_subscription->coupan_discount_type = $data['coupon_discount_type'];
-            $user_subscription->coupan_discount = $data['coupon_discount'];
-            $user_subscription->sub_total = $data['plan_price'];
-            $user_subscription->total = $data['amount'];
-            $user_subscription->additional_information = $data['additional_information'];
-            $today = date('Y-m-d');
-            $user_subscription->plan_start_date = $today;
-            $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
-            $user_subscription->save();
-
-            // admin wallet
-            $wallet = new Wallet();
-            $walletId = Str::random(12);
-            // $unique_id = substr(uniqid(rand(10, 99), true), -8, 8);
-            $wallet->wallet_id = $walletId;
-            $wallet->user_subscription_id = $user_subscription->id;
-            $wallet->user_type = 'admin';  
-            $wallet->balance = number_format($data['amount'] - $user_subscription->affiliate_commission, 2, '.', '');
-            $wallet->date = date('Y-m-d');
-            $wallet->save();
-
-            $admin_balance = User::role('ADMIN')->first();
-            $wallet_balance = number_format($admin_balance->wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission), 2, '.', '');
-            $admin_balance->wallet_balance = $wallet_balance;
-            $admin_balance->update();
-
-            //affiliator wallet add
-            $wallet = new Wallet();
-            $wallet->wallet_id = $walletId;
-            $wallet->user_subscription_id = $user_subscription->id ?? null;
-            $wallet->user_type = 'affiliator';
-            $wallet->user_id = $user_subscription->affiliate_id ?? null;
-            $wallet->balance = $user_subscription->affiliate_commission ?? 0;
-            $wallet->date = date('Y-m-d');
-            $wallet->save();
-
-            $affiliator_balance = User::find($user_subscription->affiliate_id);
-            if ($affiliator_balance) {
-                $affiliator_balance->wallet_balance = number_format($affiliator_balance->wallet_balance + $user_subscription->affiliate_commission, 2, '.','');
-                $affiliator_balance->update();
-            }
-
+        $affiliator_balance = User::find($user_subscription->affiliate_id);
+        if ($affiliator_balance) {
+            $affiliator_balance->wallet_balance = round(($affiliator_balance->wallet_balance + $user_subscription->affiliate_commission), 2);
+            $affiliator_balance->update();
         }
 
         $payment = new Payment();
@@ -464,7 +468,22 @@ class PaypalController extends Controller
         $payment->save();
         session()->put('user_subscription_id', $user_subscription->id);
         session()->put('data', $data);
-        return 'success';
+
+        $userSubscriptionMailData = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'plan_name' => $data['plan_name'],
+            'plan_price' => $data['plan_price'],
+            'plan_start_date' => $today,
+            'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
+        ];
+
+
+        $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
+        Mail::to($user->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
+        Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
+
+        return response()->json(['success' => true, 'message' => 'payment successful']);
     }
 
 
@@ -473,8 +492,13 @@ class PaypalController extends Controller
         $user_subscription_id = session()->get('user_subscription_id');
         $user_subscription = UserSubscription::find($user_subscription_id);
         $data = session()->get('data');
-
         $plan = Plan::find($user_subscription['plan_id']);
+
+
+        $user = User::where('email', $data['email'])->first();
+        Auth::login($user);
+
+        $paymentId = $data['paymentID'];
         $reccuring = [
             "plan_id" => $plan->paypal_plan_id,
             "start_time" => Carbon::now()->addDays(30)->format('Y-m-d\TH:i:s\Z'),
@@ -487,7 +511,7 @@ class PaypalController extends Controller
                     "given_name" => $data['first_name'],
                     "surname" => $data['last_name']
                 ],
-                "email_address" => $data['emailId'],
+                "email_address" => $data['email'],
                 "shipping_address" => [
                     "name" => [
                         "full_name" => $data['first_name'] . ' ' . $data['last_name']
@@ -515,9 +539,10 @@ class PaypalController extends Controller
                 "cancel_url" => route('paypal.pay.failed')
             ]
         ];
+
         $response = $this->subscribeUser($reccuring);
         // dd($response);
-        if (isset($response) && $response['id']) {
+        if (isset($response) && isset($response['id'])) {
             $user_subscription->paypal_subscription_id = $response['id'];
             $user_subscription->update();
             $user_subscription_reccuring = new UserSubscriptionRecurring();
@@ -544,8 +569,13 @@ class PaypalController extends Controller
 
             session()->forget('data');
             session()->forget('user_subscription_id');
-            return view('frontend.pages.thankyou');
+            return redirect()->route('paypal.thank-you');
         }
+    }
+
+    public function thankYou()
+    {
+        return view('frontend.pages.thankyou');
     }
 
     public function paypalPayFailed($err = null)

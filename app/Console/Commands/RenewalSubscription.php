@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Helpers\Helper;
 use App\Mail\RenewalMail;
 use App\Models\User;
+use App\Traits\PayPalTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,7 @@ use Stripe\Subscription;
 
 class RenewalSubscription extends Command
 {
+    use PayPalTrait;
     /**
      * The name and signature of the console command.
      *
@@ -25,7 +27,7 @@ class RenewalSubscription extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Renewal subscription';
 
     /**
      * Create a new command instance.
@@ -44,52 +46,56 @@ class RenewalSubscription extends Command
      */
     public function handle()
     {
+        // Fetch customers with their last subscription and order by ID in descending order
         $customers = User::with('userLastSubscription')->role('CUSTOMER')->orderBy('id', 'desc')->get();
 
-        foreach ($customers as $key => $customer) {
+        foreach ($customers as $customer) {
             $last_subscription = $customer->userLastSubscription;
 
+            Log::info("Processing customer: {$customer->name}");
+
             if ($last_subscription) {
-                $current_date = date('Y-m-d');
-                $expiry_date = date('Y-m-d', strtotime($last_subscription->plan_expiry_date)); // Ensure expiry_date is the correct column name
+                $current_date = now()->format('Y-m-d');
+                $expiry_date = optional($last_subscription)->plan_expiry_date
+                    ? date('Y-m-d', strtotime($last_subscription->plan_expiry_date))
+                    : null;
 
-                if ($expiry_date < $current_date) {
-                    // Initialize Stripe API with your secret key
-                    $stripe = Helper::stripeCredential();
-                    if (!empty($stripe->stripe_secret)) {
-                        Stripe::setApiKey($stripe->stripe_secret);
-                    } else {
-                        // Handle missing secret key
-                        throw new \Exception('Stripe secret key is missing');
-                    }
+                if ($expiry_date && $expiry_date < $current_date) {
+                    $paypal_subscription_id = $last_subscription->paypal_subscription_id ?? null;
 
+                    if ($paypal_subscription_id) {
+                        try {
+                            // Fetch subscription details from PayPal
+                            $subscriptionDetails = $this->getSubscriptionDetails($paypal_subscription_id);
 
-                    $stripe_subscription_id = $last_subscription->stripe_subscription_id;
+                            // Log::info("PayPal subscription details fetched for customer {$subscriptionDetails}: {$paypal_subscription_id}");
+                            // dd($subscriptionDetails);
+                            if ($subscriptionDetails['status'] === 'ACTIVE') {
+                                // Extend expiry date by 30 days
+                                $new_expiry_date = now()->addDays(30)->format('Y-m-d');
+                                $last_subscription->plan_expiry_date = $new_expiry_date;
+                                $last_subscription->save();
 
-                    try {
-                        // Fetch subscription status from Stripe
-                        $stripe_subscription = Subscription::retrieve($stripe_subscription_id);
+                                $admin_email = 'amairmiller24@gmail.com';
+                                // Send renewal email notification (commented for now)
+                                // Mail::to($admin_email)->send(new RenewalMail($customer, $new_expiry_date));
 
-                        if ($stripe_subscription->status === 'active') {
-                            // Update the expiry date in your database
-                            $new_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($expiry_date)));
-
-                            $last_subscription->plan_expiry_date = $new_expiry_date;
-                            $last_subscription->save();
-                            $admin_email = 'amairmiller24@gmail.com';
-                            // $admin_email = 'swarnadwip@excellisit.net';
-                            Mail::to($admin_email)->send(new RenewalMail($customer, $new_expiry_date));
-                            Log::info('Renewal subscription for customer ' . $customer->name . ' has been updated.');
-                            $this->info('Renewal subscription for customer ' . $customer->name . ' has been updated.');
-                        } else {
-                            Log::info('Subscription for customer ' . $customer->name . ' is not active on Stripe.');
-                            $this->info('Subscription for customer ' . $customer->name . ' is not active on Stripe.');
+                                Log::info("Renewal subscription for customer {$customer->name} has been updated to {$new_expiry_date}.");
+                                $this->info("Renewal subscription for customer {$customer->name} has been updated.");
+                            } else {
+                                Log::warning("Subscription for customer {$customer->name} is not active on PayPal.");
+                                $this->warn("Subscription for customer {$customer->name} is not active on PayPal.");
+                            }
+                        } catch (\Exception $e) {
+                            Log::error("Error checking subscription for customer {$customer->name}: {$e->getMessage()}");
+                            $this->error("Error checking subscription for customer {$customer->name}: {$e->getMessage()}");
                         }
-                    } catch (\Exception $e) {
-                        Log::error('Error checking subscription for customer ' . $customer->name . ': ' . $e->getMessage());
-                        $this->error('Error checking subscription for customer ' . $customer->name . ': ' . $e->getMessage());
+                    } else {
+                        Log::warning("No PayPal subscription ID found for customer {$customer->name}.");
                     }
                 }
+            } else {
+                Log::info("No active subscription found for customer {$customer->name}.");
             }
         }
     }

@@ -111,12 +111,13 @@ Route::post('payment-type-check', [PaypalController::class, 'paymentTypeCheck'])
 Route::get('/paypal-success-payment-recurring', [PaypalController::class, 'paypalSuccessPaymentRecurring'])->name('paypal.success.payment');
 //paypal.pay.failed
 Route::get('/paypal-pay-failed-recurring', [PaypalController::class, 'paypalPayRecurringFailed'])->name('paypal.pay.failed');
-
-
+Route::post('payment-validate', [PaypalController::class, 'paymentsValidate'])->name('payments.validate');
+Route::get('/paypal-thank-you', [PaypalController::class, 'thankYou'])->name('paypal.thank-you');
 //stripe recurring payment
 Route::post('/create-subscription', [FrontendSubscriptionController::class, 'createSubscription'])->name('create-subscription');
 Route::get('/success-subscription',[FrontendSubscriptionController::class, 'successSubscription'])->name('success-subscription');
 Route::get('/failed-subscription',[FrontendSubscriptionController::class, 'failedSubscription'])->name('failed-subscription');
+
 
 // coupon check
 Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
@@ -382,7 +383,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::group(['prefix' => 'site-settings'], function () {
             Route::resources([
-                'credentials' => StripeCredentialController::class,
+                'credentials' => PaypalCredentialController::class,
 
             ]);
             Route::get('/payment-details-mail', [PaymentDetailMailController::class, 'paymentDetailMail'])->name('payment-detail-mail.edit-detail');
@@ -390,7 +391,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/paypal-change-status', [PaypalCredentialController::class, 'changeStatus'])->name('credentials.change-status');
         });
 
-        Route::get('/credentials-filter', [StripeCredentialController::class, 'filter'])->name('credentials.filter');
+        Route::get('/credentials-filter', [PaypalCredentialController::class, 'filter'])->name('credentials.filter');
 
     });
 });

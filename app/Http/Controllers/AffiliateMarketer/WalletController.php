@@ -191,8 +191,8 @@ class WalletController extends Controller
                 $wallet_money_transfer->transaction_id = $transfer->id;
                 $wallet_money_transfer->transaction_type = 'debit';
                 $wallet_money_transfer->transaction_amount = $request->amount;
-                $balance = ($wallet->wallet_balance - $request->amount); 
-                $wallet_money_transfer->last_available_balance = number_format($balance, 2);
+                $balance = ($wallet->wallet_balance - $request->amount);
+                $wallet_money_transfer->last_available_balance = round($balance, 2);
                 $wallet_money_transfer->transaction_description = 'Wallet money transfer';
                 $wallet_money_transfer->save();
 

@@ -141,7 +141,7 @@ class SubscriptionController extends Controller
 
                 // if($value->active == 1){
                 $amount = $value->amount / 100;
-                $actual_amount = number_format($amount, 2);
+                $actual_amount = round($amount, 2);
                 $arrayVal[$actual_amount]['plan_id'] = $value->id;
                 $arrayVal[$actual_amount]['actual_amount'] = $actual_amount;
                 // }
@@ -149,7 +149,7 @@ class SubscriptionController extends Controller
 
 
             if (strpos($data['plan_price'], '.') === false) {
-                $formattedPrice = number_format($data['plan_price'], 2);
+                $formattedPrice = round($data['plan_price'], 2);
             } else {
                 $formattedPrice = $data['plan_price'];
             }
@@ -249,7 +249,7 @@ class SubscriptionController extends Controller
                 $affiliate_id = Session::get('affiliate_id');
                 $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
                 if ($commission) {
-                    $commission_dis = number_format(($data['amount'] / 100) * $commission->percentage, 2);
+                    $commission_dis = round(($data['amount'] / 100) * $commission->percentage, 2);
                     $admin_commission = $data['amount'] - $commission_dis;
                 } else {
                     $commission_dis = 0;
@@ -295,7 +295,7 @@ class SubscriptionController extends Controller
             $admin_balance = User::role('ADMIN')->first();
             $admin_wallet_balance = str_replace(',', '', $admin_balance->wallet_balance);
             $balance = $admin_wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
-            $admin_balance->wallet_balance = number_format($balance, 2);
+            $admin_balance->wallet_balance = round($balance, 2);
             $admin_balance->update();
 
             //affiliator wallet add
@@ -311,7 +311,7 @@ class SubscriptionController extends Controller
             $affiliator_balance = User::find($user_subscription->affiliate_id);
             if ($affiliator_balance) {
                 $affi_balance = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
-                $affiliator_balance->wallet_balance = number_format($affi_balance, 2);
+                $affiliator_balance->wallet_balance = round($affi_balance, 2);
                 $affiliator_balance->update();
             }
 

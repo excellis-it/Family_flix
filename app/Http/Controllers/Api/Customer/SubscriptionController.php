@@ -111,7 +111,7 @@ class SubscriptionController extends Controller
                 ->where('plan_id', $request->plan_id)
                 ->where('plan_expiry_date', '>=', date('Y-m-d'))
                 ->first();
-                
+
             if($user_subscription)
             {
                 return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'You already have an active subscription!'], 200);
@@ -123,7 +123,7 @@ class SubscriptionController extends Controller
         }
 
         // Stripe::setApiKey(env('STRIPE_SUBSCRIPTION_SECRET'));
-        $stripe = Helper::stripeCredential(); 
+        $stripe = Helper::stripeCredential();
 
         if (!empty($stripe->stripe_secret)) {
             \Stripe\Stripe::setApiKey($stripe->stripe_secret);  // Set the secret API key
@@ -142,13 +142,13 @@ class SubscriptionController extends Controller
             foreach ($plan as $key => $value) {
 
                 $amount = $value->amount / 100;
-                $actual_amount = number_format($amount, 2);
+                $actual_amount = round($amount, 2);
                 $arrayVal[$actual_amount]['plan_id'] = $value->id;
                 $arrayVal[$actual_amount]['actual_amount'] = $actual_amount;
             }
 
             if (strpos($data['plan_price'], '.') === false) {
-                $formattedPrice = number_format($data['plan_price'], 2);
+                $formattedPrice = round($data['plan_price'], 2);
             } else {
                 $formattedPrice = $data['plan_price'];
             }
@@ -199,9 +199,9 @@ class SubscriptionController extends Controller
                 'default_payment_method' => $paymentMethod,
                 'expand' => ['latest_invoice.payment_intent'],
             ];
-    
+
             $coupon_detail = Coupon::where('code', $request->coupan_code)->first();
-    
+
             if (!empty($coupon_detail)) {
                 // Check if the coupon exists in Stripe
                 try {
@@ -216,7 +216,7 @@ class SubscriptionController extends Controller
             }
             $subscription = \Stripe\Subscription::create($subscriptionParams);
 
-        
+
             $check_user_exists = User::where('email', $data['email'])->count();
             if ($check_user_exists > 0) {
                 $user_get = User::where('email', $data['email'])->first();
@@ -231,7 +231,7 @@ class SubscriptionController extends Controller
                 $user->wallet_balance = 0;
                 $user->save();
                 $user->assignRole('CUSTOMER');
-    
+
                 //send welcome email
                 $maildata = [
                     'name' => $user->name,
@@ -242,7 +242,7 @@ class SubscriptionController extends Controller
                 Mail::to($user->email)->send(new WelcomeMail($maildata));
                 $user_id = $user->id;
             }
-    
+
             //customer details add
             $customer_details_count = CustomerDetails::where('email_address', $data['email'])->count();
             if ($customer_details_count > 0) {
@@ -272,7 +272,7 @@ class SubscriptionController extends Controller
                 $customer_details->phone = $data['phone'];
                 $customer_details->save();
             }
-    
+
             // add user subscription
             $user_subscription = new UserSubscription();
             $user_subscription->customer_details_id = $customer_details->id ?? null;
@@ -283,20 +283,20 @@ class SubscriptionController extends Controller
                 $commission = AffiliateCommission::where('affiliate_id', $affiliate_id)->orderBy('id', 'desc')->first();
                 if ($commission) {
                     // $commission_dis = ($data['amount'] / 100) * $commission->percentage;
-                    $commission_dis = number_format(($data['amount'] / 100) * $commission->percentage, 2);
+                    $commission_dis = round(($data['amount'] / 100) * $commission->percentage, 2);
                     $admin_commission = $data['amount'] - $commission_dis;
                 } else {
                     $commission_dis = 0;
                     $admin_commission = $data['amount'];
                 }
-    
+
                 $user_subscription->affiliate_id = Session::get('affiliate_id') ?? null;
                 $user_subscription->affiliate_commission = $commission_dis ?? 0;
             } else {
                 $user_subscription->affiliate_id = null;
                 $user_subscription->affiliate_commission = 0;
             }
-            
+
             $user_subscription->stripe_subscription_id = $subscription->id;
             // $user_subscription->payment_type = $data['payment_type'];
             $user_subscription->plan_id = $data['plan_id'] ?? '';
@@ -312,7 +312,7 @@ class SubscriptionController extends Controller
             $user_subscription->plan_start_date = $today ?? '';
             $user_subscription->plan_expiry_date = date('Y-m-d', strtotime('+30 days', strtotime($today)));
             $user_subscription->save();
-    
+
             // admin wallet add
             $wallet = new Wallet();
             $walletId = Str::random(12);
@@ -327,9 +327,9 @@ class SubscriptionController extends Controller
             $admin_balance = User::role('ADMIN')->first();
             $admin_wallet_balance = str_replace(',', '', $admin_balance->wallet_balance);
             $balance = $admin_wallet_balance + ($data['amount'] - $user_subscription->affiliate_commission);
-            $admin_balance->wallet_balance = number_format($balance, 2);
+            $admin_balance->wallet_balance = round($balance, 2);
             $admin_balance->update();
-    
+
             //affiliator wallet add
             $wallet = new Wallet();
             $wallet->wallet_id = $walletId;
@@ -339,14 +339,14 @@ class SubscriptionController extends Controller
             $wallet->balance = $user_subscription->affiliate_commission ?? 0;
             $wallet->date = date('Y-m-d');
             $wallet->save();
-    
+
             $affiliator_balance = User::find($user_subscription->affiliate_id);
             if ($affiliator_balance) {
                 $balance_amount = $affiliator_balance->wallet_balance + $user_subscription->affiliate_commission;
-                $affiliator_balance->wallet_balance = number_format($balance_amount, 2);
+                $affiliator_balance->wallet_balance = round($balance_amount, 2);
                 $affiliator_balance->update();
             }
-    
+
             $payment = new Payment();
             $payment->user_subscription_id = $user_subscription->id;
             $payment->transaction_id = $paymentMethodId;
@@ -365,7 +365,7 @@ class SubscriptionController extends Controller
                 'plan_start_date' => $today,
                 'plan_expiry_date' => date('Y-m-d', strtotime('+30 days', strtotime($today))),
             ];
-    
+
             $admin_payment_mail = PaymentDetailMail::where('status', 1)->first();
             Mail::to($user->email)->send(new UserSubscriptionMail($userSubscriptionMailData));
             Mail::to($admin_payment_mail->email)->send(new AdminSubscriptionMail($userSubscriptionMailData));
@@ -426,10 +426,10 @@ class SubscriptionController extends Controller
      * "error": "Unauthorised"
      * }
      */
-    
+
     public function subscriptionList(Request $request)
     {
-        
+
         try {
             $user_subscriptions = UserSubscription::where('customer_id', auth()->user()->id)->orderBy('id', 'desc')->with('affiliate')->get();
 
@@ -465,7 +465,7 @@ class SubscriptionController extends Controller
      * "error": "Unauthorised"
      * }
      */
-    
+
     public function stripePaymentCredential()
     {
         try{
@@ -476,12 +476,12 @@ class SubscriptionController extends Controller
             }else{
                 return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'Stripe credential not found!'], 200);
             }
-            
+
         }catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
         }
-        
+
     }
 
-  
+
 }
