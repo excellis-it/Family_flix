@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\GeneralController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Affiliater\ProfileController;
 use App\Http\Controllers\Api\Customer\AuthController as CustomerAuthController;
-use App\Http\Controllers\Api\Customer\ProfileController as CustomerProfileController; 
+use App\Http\Controllers\Api\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\Api\Customer\SubscriptionController as CustomerSubscriptionController;
 use App\Http\Controllers\Api\Affiliater\CommissionController;
 use App\Http\Controllers\Api\CouponCheckController;
@@ -50,8 +50,8 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
                 Route::group(['prefix' => 'wallet'], function () {
                     Route::post('list', [WalletController::class, 'walletList']);  // wallet details api
                 });
-               
-                
+
+
                 Route::group(['prefix' => 'commission'], function () {
                     Route::post('list', [CommissionController::class, 'commissionList']);  // commission details api
                 });
@@ -62,7 +62,7 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
         });
 
         //user routes
-        
+
         Route::group(['prefix' => 'customer'], function () {
             Route::post('register', [CustomerAuthController::class, 'customerRegister']);  // register api
             Route::post('login', [CustomerAuthController::class, 'customerLogin']);  // login api
@@ -76,14 +76,14 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
                 });
 
                 Route::post('account-delete', [CustomerAuthController::class, 'customerDelete']);  // delete user api
-                
+
             });
         });
 
         // Grouping CMS routes
         Route::prefix('cms')->group(function () {
             // Defining route for CMS home
-            Route::post('home', [CmsController::class, 'homeCms']);  
+            Route::post('home', [CmsController::class, 'homeCms']);
             Route::post('grid-section', [CmsController::class, 'gridSectionCms']);
             Route::post('about', [CmsController::class, 'aboutCms']);
             Route::post('contact', [CmsController::class, 'contactCms']);
@@ -98,7 +98,7 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
         Route::prefix('product')->group(function () {
             Route::post('unbeatable-variety', [ProductController::class, 'unbeatableVariety']);
         });
-        
+
         Route::prefix('plans')->group(function () {
             Route::post('show', [PlanController::class, 'planDetails']);
         });
@@ -122,9 +122,10 @@ use App\Http\Controllers\Api\Affiliater\WalletController;
         Route::post('payment-capture', [PaymentController::class, 'paymentCapture']);
         Route::post('billing-address', [PaymentController::class, 'billingAddress']);
 
-       
+
         Route::group(['prefix' => 'subscription-payment'], function () {
-            Route::post('credential', [CustomerSubscriptionController::class, 'stripePaymentCredential']);
+            // Route::post('credential', [CustomerSubscriptionController::class, 'stripePaymentCredential']);
+            Route::post('credential', [CustomerSubscriptionController::class, 'paypalPaymentCredential']);
             Route::post('create', [CustomerSubscriptionController::class, 'stripePaymentCreate']);
         });
 

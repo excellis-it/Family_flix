@@ -484,4 +484,22 @@ class SubscriptionController extends Controller
     }
 
 
+    public function paypalPaymentCredential()
+    {
+        try{
+            $paypal = Helper::paypalCredential();
+            if($paypal)
+            {
+                return response()->json(['status' => true, 'statusCode' => 200, 'data' => $paypal], 200);
+            }else{
+                return response()->json(['status' => false, 'statusCode' => 200, 'error' => 'Stripe credential not found!'], 200);
+            }
+
+        }catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
+        }
+
+    }
+
+
 }
