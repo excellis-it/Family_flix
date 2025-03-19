@@ -289,32 +289,35 @@ class PaypalController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors(),
-            ]);
-        } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'Validate successful.'
+                'single' => false,
             ]);
         }
-
+        $data = $request->all();
         if (!Auth::check()) {
+            $user = User::where('email', $request->email)->first();
             if ($user) {
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                     $user = User::where('email', $request->email)->first();
                     if ($user->hasRole('CUSTOMER') && $user->status == 1) {
                         // Auth::login();
                         $user_id = $user->id;
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'login successful',
+                        ]);
                     } else {
                         Auth::logout();
                         return response()->json([
                             'success' => false,
-                            'error' => 'Your account is deactivate!',
+                            'errors' => ['Your account is deactivate!'],
+                            'single' => true,
                         ]);
                     }
                 } else {
                     return response()->json([
                         'success' => false,
-                        'error' => 'Email id & password was invalid!',
+                        'errors' => ['Email id & password was invalid!'],
+                        'single' => true,
                     ]);
                 }
             } else {
@@ -337,9 +340,17 @@ class PaypalController extends Controller
                 ];
                 Mail::to($user->email)->send(new WelcomeMail($maildata));
                 $user_id = $user->id;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'login successful',
+                ]);
             }
         } else {
             $user_id = auth()->id();
+            return response()->json([
+                'success' => true,
+                'message' => 'login successful',
+            ]);
         }
     }
 

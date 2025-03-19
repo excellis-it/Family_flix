@@ -541,14 +541,46 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
         <!-- SweetAlert2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
         {{-- paypal credit --}}
         {{-- <script
             src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
         </script> --}}
+        <script>
+            @if (Session::has('message'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.success("{{ session('message') }}");
+            @endif
 
+            @if (Session::has('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.error("{{ session('error') }}");
+            @endif
+
+            @if (Session::has('info'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.info("{{ session('info') }}");
+            @endif
+
+            @if (Session::has('warning'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.warning("{{ session('warning') }}");
+            @endif
+        </script>
 
         <script>
             // coupon check and total amount discount
@@ -630,16 +662,13 @@
         <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
 
         <script>
-            let formData = {}; // Define formData in the broader scope
+            let formData = {};
             let checkStatus = true;
 
             paypal.Buttons({
                 onClick: async function() {
-                    formData = { // Assign values to the global formData
+                    formData = {
                         email: document.getElementById('email_address').value,
-                        @if (!auth()->check())
-                            password: document.getElementById('password').value,
-                        @endif
                         first_name: document.getElementById('first_name').value,
                         last_name: document.getElementById('last_name').value,
                         country: document.getElementById('country').value,
@@ -659,9 +688,13 @@
                         plan_id: document.getElementById('plan_id').value
                     };
 
-                    // Send formData to the backend for validation
-                    const validationUrl =
-                    "{{ route('payments.validate') }}"; // Define a backend route for validation
+                    // Include password only if user is not authenticated
+                    if (!{{ auth()->check() ? 'true' : 'false' }}) {
+                        formData.password = document.getElementById('password').value;
+                    }
+
+                    const validationUrl = "{{ route('payments.validate') }}";
+
                     try {
                         const response = await fetch(validationUrl, {
                             method: 'POST',
@@ -675,16 +708,18 @@
                         const result = await response.json();
 
                         if (result.success) {
-                            // Backend validation passed
-                            $('.text-danger').text(''); // Clear any previous error messages
+                            $('.text-danger').text('');
                             checkStatus = true;
                         } else {
-                            // Display backend validation errors
                             checkStatus = false;
-                            $('.text-danger').text(''); // Clear previous error messages
+                            $('.text-danger').text('');
                             if (result.errors) {
                                 $.each(result.errors, function(field, message) {
-                                    $('#' + field + '_error').text(message);
+                                    if (result.single == true) {
+                                        toastr.error(message);
+                                    } else {
+                                        $('#' + field + '_error').text(message);
+                                    }
                                 });
                             } else {
                                 toastr.error(result.error);
@@ -700,7 +735,6 @@
                 },
 
                 createOrder: function(data, actions) {
-                    // Create the transaction
                     return actions.order.create({
                         application_context: {
                             brand_name: 'The Family Flix',
@@ -715,10 +749,10 @@
                 },
 
                 onApprove: function(data, actions) {
-                    // Capture the payment
                     return actions.order.capture().then(function(details) {
                         if (details.status === 'COMPLETED') {
                             const captureUrl = "{{ route('paypal-capture-payment') }}";
+
                             return fetch(captureUrl, {
                                     method: 'POST',
                                     headers: {
@@ -726,7 +760,7 @@
                                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                     },
                                     body: JSON.stringify({
-                                        ...formData, // Use the global formData here
+                                        ...formData,
                                         paymentID: data.paymentID
                                     })
                                 })
@@ -754,13 +788,6 @@
                     toastr.error('An error occurred during the PayPal transaction.');
                 }
             }).render('#paypal-button-container');
-
-            function status(res) {
-                if (!res.ok) {
-                    throw new Error(res.statusText);
-                }
-                return res;
-            }
         </script>
 
 
