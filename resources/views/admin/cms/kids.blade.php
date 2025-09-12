@@ -122,6 +122,47 @@
                                 </div>
 
                             </div>
+                            <div class="row">
+                                <h4 class="text-left">SEO Section</h4>
+                                <hr>
+
+                                {{-- Meta Title --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Title</label>
+                                    <input type="text" name="meta_title" class="form-control"
+                                        placeholder="Enter Meta Title"
+                                        value="{{ old('meta_title', $kid_cms->meta_title ?? '') }}">
+                                    @if ($errors->has('meta_title'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_title') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Meta Keyword --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Keyword</label>
+                                    <input type="text" name="meta_keyword" class="form-control"
+                                        placeholder="Enter Meta Keyword"
+                                        value="{{ old('meta_keyword', $kid_cms->meta_keyword ?? '') }}">
+                                    @if ($errors->has('meta_keyword'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_keyword') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Meta Description --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Description</label>
+                                    <textarea name="meta_description" class="form-control" rows="3" placeholder="Enter Meta Description">{{ old('meta_description', $kid_cms->meta_description ?? '') }}</textarea>
+                                    @if ($errors->has('meta_description'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_description') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
 
                             <br>
 

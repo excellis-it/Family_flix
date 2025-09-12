@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CmsController extends Controller
 {
-    
+
     public function homeCms()
     {
         if (Auth::user()->can('Home Cms')) {
@@ -33,10 +33,10 @@ class CmsController extends Controller
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
-   
+
     public function homeCmsUpdate(Request $request)
     {
-        
+
         $request->validate([
             'top_short_title' => 'required',
             'top_main_title' => 'required',
@@ -72,26 +72,30 @@ class CmsController extends Controller
         $home_cms->entertainment_title = $request->entertainment_title;
         $home_cms->entertainment_description = $request->entertainment_description;
 
+        $home_cms->meta_title = $request->meta_title;
+        $home_cms->meta_keyword = $request->meta_keyword;
+        $home_cms->meta_description = $request->meta_description;
+
 
         //video upload
         if ($request->hasFile('section3_video_link')) {
             $request->validate([
                 'section3_video_link' => 'required',
             ]);
-            
+
             $file6= $request->file('section3_video_link');
             $filename6= date('YmdHi').$file6->getClientOriginalName();
             $video_path = $request->file('section3_video_link')->store('home', 'public');
             $home_cms->section3_video_link = $video_path;
         }
-        
+
         //top back image upload
 
         if ($request->hasFile('top_back_image')) {
             $request->validate([
                 'top_back_image' => 'required',
             ]);
-            
+
             $file= $request->file('top_back_image');
             $filename= date('YmdHi').$file->getClientOriginalName();
             $image_path = $request->file('top_back_image')->store('home', 'public');
@@ -104,7 +108,7 @@ class CmsController extends Controller
             $request->validate([
                 'section1_main_image' => 'required',
             ]);
-            
+
             $file1= $request->file('section1_main_image');
             $filename1= date('YmdHi').$file1->getClientOriginalName();
             $image_path1 = $request->file('section1_main_image')->store('home', 'public');
@@ -116,7 +120,7 @@ class CmsController extends Controller
             $request->validate([
                 'section1_back_image' => 'required',
             ]);
-            
+
             $file2= $request->file('section1_back_image');
             $filename2= date('YmdHi').$file2->getClientOriginalName();
             $image_path2 = $request->file('section1_back_image')->store('home', 'public');
@@ -129,7 +133,7 @@ class CmsController extends Controller
             $request->validate([
                 'section2_main_image' => 'required',
             ]);
-            
+
             $file3= $request->file('section2_main_image');
             $filename3= date('YmdHi').$file3->getClientOriginalName();
             $image_path3 = $request->file('section2_main_image')->store('home', 'public');
@@ -141,7 +145,7 @@ class CmsController extends Controller
             $request->validate([
                 'section2_back_image' => 'required',
             ]);
-            
+
             $file4= $request->file('section2_back_image');
             $filename4= date('YmdHi').$file4->getClientOriginalName();
             $image_path4 = $request->file('section2_back_image')->store('home', 'public');
@@ -153,7 +157,7 @@ class CmsController extends Controller
             $request->validate([
                 'section2_main_icon' => 'required',
             ]);
-            
+
             $file5= $request->file('section2_main_icon');
             $filename5= date('YmdHi').$file5->getClientOriginalName();
             $image_path5 = $request->file('section2_main_icon')->store('home', 'public');
@@ -165,44 +169,44 @@ class CmsController extends Controller
         // if ($request->hasFile('grid_icon')) {
         //     foreach ($request->file('grid_icon') as $key => $file) {
         //         if ($file->isValid()) {
-        //             $file_path = $file->store('grid', 'public'); 
-        
+        //             $file_path = $file->store('grid', 'public');
+
         //             $top_grid = new TopGrid();
-        //             $top_grid->icon = $file_path; 
+        //             $top_grid->icon = $file_path;
         //             $top_grid->title = $request->grid_title[$key];
         //             $top_grid->description = $request->grid_description[$key];
         //             $top_grid->save();
-        //         } 
+        //         }
         //     }
         // }
 
-        
+
         //multiple ott icon upload
         // if ($request->hasFile('ott_icon')) {
-            
+
         //     foreach ($request->file('ott_icon') as $key => $file) {
         //         if ($file->isValid()) {
-        //             $file_path = $file->store('ott_icon', 'public'); 
-        
+        //             $file_path = $file->store('ott_icon', 'public');
+
         //             $ott_service = new OttService();
-        //             $ott_service->icon = $file_path; 
+        //             $ott_service->icon = $file_path;
         //             $ott_service->save();
-        //         } 
+        //         }
         //     }
         // }
 
         // multiple entertainment imge and image name upload
         if ($request->hasFile('entern_image')) {
-            
+
             foreach ($request->file('entern_image') as $keys => $file1) {
                 if ($file1->isValid()) {
-                    $file_path1 = $file1->store('entertainment', 'public'); 
-        
+                    $file_path1 = $file1->store('entertainment', 'public');
+
                     $entertainment_add = new EntertainmentCms();
-                    $entertainment_add->image = $file_path1; 
+                    $entertainment_add->image = $file_path1;
                     $entertainment_add->image_name = $request->image_name[$keys];
                     $entertainment_add->save();
-                } 
+                }
             }
         }
 
@@ -211,19 +215,19 @@ class CmsController extends Controller
             $request->validate([
                 'section3_back_image' => 'required',
             ]);
-            
+
             $file14= $request->file('section3_back_image');
             $filename14= date('YmdHi').$file14->getClientOriginalName();
             $image_path14 = $request->file('section3_back_image')->store('home', 'public');
             $home_cms->section3_back_image = $image_path14;
         }
-       
+
         //section3_main_image upload
         if ($request->hasFile('section3_main_image')) {
             $request->validate([
                 'section3_main_image' => 'required',
             ]);
-            
+
             $file15= $request->file('section3_main_image');
             $filename15= date('YmdHi').$file15->getClientOriginalName();
             $image_path15 = $request->file('section3_main_image')->store('home', 'public');
@@ -236,7 +240,7 @@ class CmsController extends Controller
             $request->validate([
                 'section4_back_image' => 'required',
             ]);
-            
+
             $file16= $request->file('section4_back_image');
             $filename16= date('YmdHi').$file16->getClientOriginalName();
             $image_path16 = $request->file('section4_back_image')->store('home', 'public');
@@ -249,7 +253,7 @@ class CmsController extends Controller
             $request->validate([
                 'section5_back_image' => 'required',
             ]);
-            
+
             $file17= $request->file('section5_back_image');
             $filename17= date('YmdHi').$file17->getClientOriginalName();
             $image_path17 = $request->file('section5_back_image')->store('home', 'public');
@@ -261,7 +265,7 @@ class CmsController extends Controller
             $request->validate([
                 'section5_main_image' => 'required',
             ]);
-            
+
             $file18= $request->file('section5_main_image');
             $filename18= date('YmdHi').$file18->getClientOriginalName();
             $image_path18 = $request->file('section5_main_image')->store('home', 'public');
@@ -275,7 +279,7 @@ class CmsController extends Controller
             $request->validate([
                 'plan_section_back_image' => 'required',
             ]);
-            
+
             $file19= $request->file('plan_section_back_image');
             $filename19= date('YmdHi').$file19->getClientOriginalName();
             $image_path19 = $request->file('plan_section_back_image')->store('home', 'public');
@@ -357,12 +361,18 @@ class CmsController extends Controller
         $aboutUs_update->section3_title3 = $request->section3_title3;
         $aboutUs_update->section3_description3 = $request->section3_description3;
 
+
+        $aboutUs_update->meta_title = $request->meta_title;
+        $aboutUs_update->meta_keyword = $request->meta_keyword;
+        $aboutUs_update->meta_description = $request->meta_description;
+
+
         //about banner upload
         if ($request->hasFile('banner_img')) {
             $request->validate([
                 'banner_img' => 'required',
             ]);
-            
+
             $file19= $request->file('banner_img');
             $filename19= date('YmdHi').$file19->getClientOriginalName();
             $image_path19 = $request->file('banner_img')->store('about', 'public');
@@ -374,7 +384,7 @@ class CmsController extends Controller
             $request->validate([
                 'section1_img' => 'required',
             ]);
-            
+
             $file00= $request->file('section1_img');
             $filename00= date('YmdHi').$file00->getClientOriginalName();
             $image_path00 = $request->file('section1_img')->store('about', 'public');
@@ -386,7 +396,7 @@ class CmsController extends Controller
             $request->validate([
                 'section2_img2' => 'required',
             ]);
-            
+
             $file11= $request->file('section2_img2');
             $filename11= date('YmdHi').$file11->getClientOriginalName();
             $image_path11 = $request->file('section2_img2')->store('about', 'public');
@@ -398,7 +408,7 @@ class CmsController extends Controller
             $request->validate([
                 'section3_back_img' => 'required',
             ]);
-            
+
             $file01= $request->file('section3_back_img');
             $filename01= date('YmdHi').$file01->getClientOriginalName();
             $image_path01 = $request->file('section3_back_img')->store('about', 'public');
@@ -410,7 +420,7 @@ class CmsController extends Controller
             $request->validate([
                 'section3_image1' => 'required',
             ]);
-            
+
             $file02= $request->file('section3_image1');
             $filename02= date('YmdHi').$file02->getClientOriginalName();
             $image_path02 = $request->file('section3_image1')->store('about', 'public');
@@ -422,7 +432,7 @@ class CmsController extends Controller
             $request->validate([
                 'section3_image2' => 'required',
             ]);
-            
+
             $file03= $request->file('section3_image2');
             $filename03= date('YmdHi').$file03->getClientOriginalName();
             $image_path03 = $request->file('section3_image2')->store('about', 'public');
@@ -434,7 +444,7 @@ class CmsController extends Controller
             $request->validate([
                 'section3_image3' => 'required',
             ]);
-            
+
             $file04= $request->file('section3_image3');
             $filename04= date('YmdHi').$file04->getClientOriginalName();
             $image_path04 = $request->file('section3_image3')->store('about', 'public');
@@ -465,7 +475,7 @@ class CmsController extends Controller
             'details' => 'required',
         ]);
 
-       
+
         if ($validator->fails()) {
            return back()->with('error','Please check your submission data');
         }
@@ -475,11 +485,11 @@ class CmsController extends Controller
             foreach ($request->icon as $keys => $icon) {
                 if ( $icon !='') {
                     $contact_details = new ContactDetails();
-                    $contact_details->icon = $icon; 
+                    $contact_details->icon = $icon;
                     $contact_details->title = $request->title[$keys];
                     $contact_details->details = $request->details[$keys];
                     $contact_details->save();
-                } 
+                }
             }
         }
 
@@ -499,14 +509,14 @@ class CmsController extends Controller
 
     public function followCmsUpdate(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'icon' => 'required',
             'link' => 'required',
-            
+
         ]);
 
-       
+
         if ($validator->fails()) {
            return back()->with('error','Please check your submission data');
         }
@@ -516,15 +526,15 @@ class CmsController extends Controller
             foreach ($request->icon as $keys => $icon) {
                 if ($icon !='') {
                     $social_details = new SocialMedia();
-                    $social_details->icon = $icon; 
+                    $social_details->icon = $icon;
                     $social_details->link = $request->link[$keys];
                     $social_details->save();
-                } 
+                }
             }
         }
 
         return back()->with('message','Social Updated successfully');
-    } 
+    }
 
     public function subcriptionCms()
     {
@@ -559,7 +569,7 @@ class CmsController extends Controller
             $request->validate([
                 'section1_background_img' => 'required',
             ]);
-            
+
             $file04= $request->file('section1_background_img');
             $filename04= date('YmdHi').$file04->getClientOriginalName();
             $image_path04 = $request->file('section1_background_img')->store('subscription', 'public');
@@ -590,7 +600,7 @@ class CmsController extends Controller
             $request->validate([
                 'footer_logo' => 'required',
             ]);
-            
+
             $file04= $request->file('footer_logo');
             $filename04= date('YmdHi').$file04->getClientOriginalName();
             $image_path04 = $request->file('footer_logo')->store('footer', 'public');
@@ -602,7 +612,7 @@ class CmsController extends Controller
             $request->validate([
                 'footer_image' => 'required',
             ]);
-            
+
             $file05= $request->file('footer_image');
             $filename05= date('YmdHi').$file05->getClientOriginalName();
             $image_path05 = $request->file('footer_image')->store('footer', 'public');
@@ -614,7 +624,7 @@ class CmsController extends Controller
             $request->validate([
                 'footer_background' => 'required',
             ]);
-            
+
             $file06= $request->file('footer_background');
             $filename06= date('YmdHi').$file06->getClientOriginalName();
             $image_path06 = $request->file('footer_background')->store('footer', 'public');

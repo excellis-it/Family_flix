@@ -1,14 +1,17 @@
 
 @extends('frontend.layouts.master')
-@section('meta_title')
+@section('meta')
+    <meta name="title" content="{{ $movie_cms->meta_title  ?? ''}}">
+    <meta name="keywords" content="{{ $movie_cms->meta_keyword ?? '' }}">
+    <meta name="description" content="{{ $movie_cms->meta_description ?? '' }}">
 @endsection
-@section('title', 'Movies - Family Flix')
+@section('title',  $movie_cms->meta_title  ?? '')
 @push('styles')
 @endpush
 
 @section('content')
-      
-      
+
+
       <section
         class="inner_banner_sec"
         style="
@@ -40,8 +43,8 @@
         </div>
       </section>
       @include('frontend.partials.entr_banner')
-     
-      
+
+
       <section class="shows-watch-sec">
         <div class="shows-watch-bg">
           <img src="{{ Storage::url($movie_cms->top_10_show_background) }}" alt="" />
@@ -59,7 +62,7 @@
           </div>
         </div>
       </section>
-     
+
       <section class="unbeatable-sec popular-movies">
         <div class="unbeatable-bg">
           <img src="{{ Storage::url($movie_cms->popular_show_background) }}" alt="" />
@@ -84,4 +87,3 @@
       @include('frontend.partials.subscription')
 
       @endsection
-     

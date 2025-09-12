@@ -1,7 +1,10 @@
 @extends('frontend.layouts.master')
-@section('meta_title')
+@section('meta')
+    <meta name="title" content="{{ $show_cms->meta_title  ?? ''}}">
+    <meta name="keywords" content="{{ $show_cms->meta_keyword ?? '' }}">
+    <meta name="description" content="{{ $show_cms->meta_description ?? '' }}">
 @endsection
-@section('title', 'Show - Family Flix')
+@section('title', $show_cms->meta_title  ?? '')
 @push('styles')
 @endpush
 
@@ -47,7 +50,7 @@
                     </div>
                     <div class="shows-slider">
                         @include('frontend.partials.top_10')
-                       
+
                     </div>
                 </div>
             </div>

@@ -278,36 +278,36 @@
                                                         </div>
                                                     </div>
                                                     {{-- <div class="step-div">
-                                                        <h3>Payment</h3>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="payment-div">
-                                                                    <h3>Paypal</h3>
-                                                                    <h4>Pay via PayPal.</h4>
-                                                                </div>
-                                                                <div class="check-1">
-                                                                    <div class="form-check d-flex">
-                                                                        <input class="form-check-input"
-                                                                            type="checkbox" value=""
-                                                                            id="flexCheckChecked">
-                                                                        <label class="form-check-label"
-                                                                            for="flexCheckChecked">
-                                                                            I would like to receive exclusive emails
-                                                                            with discounts and product information
-                                                                        </label>
+                                                            <h3>Payment</h3>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="payment-div">
+                                                                        <h3>Paypal</h3>
+                                                                        <h4>Pay via PayPal.</h4>
+                                                                    </div>
+                                                                    <div class="check-1">
+                                                                        <div class="form-check d-flex">
+                                                                            <input class="form-check-input"
+                                                                                type="checkbox" value=""
+                                                                                id="flexCheckChecked">
+                                                                            <label class="form-check-label"
+                                                                                for="flexCheckChecked">
+                                                                                I would like to receive exclusive emails
+                                                                                with discounts and product information
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="check-text">
+                                                                        <p>Your personal data will be used to process
+                                                                            your
+                                                                            order, support your experience
+                                                                            throughout this website, and for other
+                                                                            purposes
+                                                                            described in our privacy policy</p>
                                                                     </div>
                                                                 </div>
-                                                                <div class="check-text">
-                                                                    <p>Your personal data will be used to process
-                                                                        your
-                                                                        order, support your experience
-                                                                        throughout this website, and for other
-                                                                        purposes
-                                                                        described in our privacy policy</p>
-                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div> --}}
+                                                        </div> --}}
                                                 </div>
                                             </div>
 
@@ -317,8 +317,17 @@
                                                             class="fa-solid fa-credit-card"></i></span>Debit or Credit
                                                     Card</button> --}}
 
-                                            <div id="paypal-button-container"></div>
+                                            {{-- <div id="paypal-button-container"></div> --}}
+                                            {{-- <div class="step-div">
+                                                <h3> Pay Through <i class="fa-brands fa-cc-stripe fa-2xl"></i></h3>
+                                                <div id="card-element" class="card-detail-structure"></div>
+                                                <span id="card_detail_error" class="text-danger"></span>
+                                                <button id="submit-button">Subscribe</button>
+                                            </div> --}}
+                                            <div id="braintree-dropin-container">
 
+                                            </div>
+                                            <button id="submit-button">Subscribe</button>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -529,6 +538,7 @@
             </div>
         </main>
 
+        <script src="https://js.stripe.com/v3/"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
         <script src="{{ asset('frontend_assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -542,12 +552,9 @@
         <!-- SweetAlert2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
-        {{-- paypal credit --}}
-        {{-- <script
-            src="https://www.paypal.com/sdk/js?client-id=AWQWgAsqAtQ6B2GRSRfRpuy07Ny5i-KyBWQQc23bv0zNQsecQUuY0iixsOGCkx2cS4NNpxwmHbyacJNQ">
-        </script> --}}
         <script>
             @if (Session::has('message'))
                 toastr.options = {
@@ -582,6 +589,128 @@
             @endif
         </script>
 
+        <script src="https://js.braintreegateway.com/web/dropin/1.38.0/js/dropin.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Initialize Braintree Drop-in UI
+                var braintreeToken =
+                    "{{ $braintreeToken }}"; // Replace with your generated client token from the server
+                var dropinInstance;
+
+                if (braintreeToken) {
+                    braintree.dropin.create({
+                        authorization: braintreeToken,
+                        container: '#braintree-dropin-container' // Replace with the ID of your Drop-in container
+                    }, function(createErr, instance) {
+                        if (createErr) {
+                            console.error('Error creating Braintree Drop-in:', createErr);
+                            toastr.error('Error initializing payment gateway.');
+                            return;
+                        }
+                        dropinInstance = instance;
+                    });
+                } else {
+                    console.error('Braintree client token not found.');
+                }
+
+                var form = document.getElementById('signUpForm');
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    if (!dropinInstance) {
+                        toastr.error('Payment gateway not initialized.');
+                        return;
+                    }
+
+                    let formData = {
+                        email: document.getElementById('email_address').value,
+                        @if (!auth()->check())
+                            password: document.getElementById('password').value,
+                        @endif
+                        first_name: document.getElementById('first_name').value,
+                        last_name: document.getElementById('last_name').value,
+                        country: document.getElementById('country').value,
+                        house_name: document.getElementById('house_name').value,
+                        detail_address: document.getElementById('detail_address').value,
+                        city: document.getElementById('city').value,
+                        state: document.getElementById('state').value,
+                        post_code: document.getElementById('post_code').value,
+                        phone: document.getElementById('phone').value,
+                        additional_information: document.getElementById('additional_information').value,
+                        plan_name: document.getElementById('plan_name').value,
+                        plan_price: document.getElementById('plan_price').value,
+                        amount: document.getElementById('total_amount').value,
+                        coupon_code: document.getElementById('coupan_code').value,
+                        coupon_discount: document.getElementById('coupon_discount').value,
+                        coupon_discount_type: document.getElementById('coupon_discount_type').value,
+                        plan_id: document.getElementById('plan_id').value
+                    };
+
+                    // Show the loading spinner
+                    $('#loading-content').show();
+                    $('#loading').addClass('loading');
+                    $('#loading-content').addClass('loading-content');
+
+                    // Request the payment method nonce from Drop-in UI
+                    dropinInstance.requestPaymentMethod(function(err, payload) {
+                        if (err) {
+                            console.error('Error fetching payment method:', err);
+                            toastr.error('Failed to process payment details.');
+                            $('#loading').removeClass('loading');
+                            $('#loading-content').removeClass('loading-content');
+                            return;
+                        }
+
+                        formData.payment_method_nonce = payload.nonce;
+
+                        const subscribeUrl = "{{ route('create-subscription-braintree') }}";
+                        fetch(subscribeUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+                                },
+                                body: JSON.stringify(formData)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                $('#loading-content').hide();
+                                $('#loading').removeClass('loading');
+                                $('#loading-content').removeClass('loading-content');
+
+                                if (!data.success) {
+                                    // Show validation errors
+                                    if (data.errors) {
+                                        $('.text-danger').text('');
+                                        $.each(data.errors, function(field, message) {
+                                            $('#' + field + '_error').text(message);
+                                        });
+                                    } else {
+                                        toastr.error(data.error);
+                                    }
+                                } else {
+                                    Swal.fire({
+                                        title: 'Success',
+                                        text: data.message,
+                                        icon: 'success'
+                                    });
+
+                                    window.location.href = "{{ route('success-subscription') }}";
+                                }
+                            })
+                            .catch(error => {
+                                toastr.error('Error:', error);
+                                $('#loading').removeClass('loading');
+                                $('#loading-content').removeClass('loading-content');
+                            });
+                    });
+                });
+            });
+        </script>
+
+
+
+
         <script>
             // coupon check and total amount discount
             $(document).ready(function() {
@@ -589,8 +718,10 @@
                     var coupon_code = $('#coupon_code').val();
                     var plan_id = {{ $plan->id }};
                     var plan_price = {{ $plan->plan_offer_price }};
-                    var emailId = $('#floatingInput1').val();
-                    var phone = $('#floatingInput9').val();
+                    var emailId = $('#email_address').val();
+                    var phone = $('#phone').val();
+
+
 
                     if (emailId == '') {
                         alert('Please enter email address');
@@ -657,165 +788,9 @@
             });
         </script>
 
-        {{-- form validation --}}
-
-        <script src="https://www.paypal.com/sdk/js?client-id={{ Helper::paypalCredential()['client_id'] ?? '' }}"></script>
-
-        <script>
-            let formData = {};
-            let checkStatus = true;
-
-            paypal.Buttons({
-                onClick: async function() {
-                    formData = {
-                        email: document.getElementById('email_address').value,
-                        first_name: document.getElementById('first_name').value,
-                        last_name: document.getElementById('last_name').value,
-                        country: document.getElementById('country').value,
-                        house_name: document.getElementById('house_name').value,
-                        detail_address: document.getElementById('detail_address').value,
-                        city: document.getElementById('city').value,
-                        state: document.getElementById('state').value,
-                        post_code: document.getElementById('post_code').value,
-                        phone: document.getElementById('phone').value,
-                        additional_information: document.getElementById('additional_information').value,
-                        plan_name: document.getElementById('plan_name').value,
-                        plan_price: document.getElementById('plan_price').value,
-                        amount: document.getElementById('total_amount').value,
-                        coupon_code: document.getElementById('coupan_code').value,
-                        coupon_discount: document.getElementById('coupon_discount').value,
-                        coupon_discount_type: document.getElementById('coupon_discount_type').value,
-                        plan_id: document.getElementById('plan_id').value
-                    };
-
-                    // Include password only if user is not authenticated
-                    if (!{{ auth()->check() ? 'true' : 'false' }}) {
-                        formData.password = document.getElementById('password').value;
-                    }
-
-                    const validationUrl = "{{ route('payments.validate') }}";
-
-                    try {
-                        const response = await fetch(validationUrl, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify(formData)
-                        });
-
-                        const result = await response.json();
-
-                        if (result.success) {
-                            $('.text-danger').text('');
-                            checkStatus = true;
-                        } else {
-                            checkStatus = false;
-                            $('.text-danger').text('');
-                            if (result.errors) {
-                                $.each(result.errors, function(field, message) {
-                                    if (result.single == true) {
-                                        console.error('Validation Error:', message);
-                                        toastr.error(message);
-                                    } else {
-                                        $('#' + field + '_error').text(message);
-                                    }
-                                });
-                            } else {
-                                toastr.error(result.error);
-                            }
-                        }
-                    } catch (error) {
-                        console.error('Validation Error:', error);
-                        toastr.error('An error occurred during validation.');
-                        checkStatus = false;
-                    }
-
-                    return checkStatus;
-                },
-
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        application_context: {
-                            brand_name: 'The Family Flix',
-                            user_action: 'PAY_NOW',
-                        },
-                        purchase_units: [{
-                            amount: {
-                                value: $('#total_amount').val(),
-                            }
-                        }],
-                    });
-                },
-
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        if (details.status === 'COMPLETED') {
-                            const captureUrl = "{{ route('paypal-capture-payment') }}";
-
-                            return fetch(captureUrl, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    },
-                                    body: JSON.stringify({
-                                        ...formData,
-                                        paymentID: data.paymentID
-                                    })
-                                })
-                                .then(response => response.json())
-                                .then(responseData => {
-                                    if (responseData.success) {
-                                        window.location.href = '{{ route('paypal-success-payment') }}';
-                                    } else {
-                                        toastr.error(responseData.message);
-                                        window.location.href = '{{ route('paypal-pay-failed') }}';
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Capture Error:', error);
-                                    window.location.href = '{{ route('paypal-pay-failed') }}';
-                                });
-                        } else {
-                            window.location.href = '{{ route('paypal-pay-failed') }}';
-                        }
-                    });
-                },
-
-                onError: function(err) {
-                    console.error('PayPal Error:', err);
-                    toastr.error('An error occurred during the PayPal transaction.');
-                }
-            }).render('#paypal-button-container');
-        </script>
 
 
 
-        <script>
-            //onchange validation
-            $('#floatingInput1').on('change', function() {
-                var emailId = $('#floatingInput1').val();
-
-                $.ajax({
-                    url: "{{ route('payments.email-check') }}",
-                    type: "POST",
-                    data: {
-                        emailId: emailId,
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        if (response.status == 'success') {
-                            $('#email_error').text('');
-                        } else {
-                            $('#userExistsModal').modal('show');
-                            return true;
-                        }
-                    }
-                });
-            });
-        </script>
         @auth
             <script>
                 $(document).ready(function() {
@@ -854,14 +829,49 @@
                                         // Code to execute when the user cancels
                                     }
                                 });
-
-
                             }
                         }
                     });
                 });
             </script>
         @endauth
+
+        <script>
+            $(document).ready(function() {
+                $('#phone').on('change', function() {
+                    var phone = $('#phone').val();
+                    var email = $('#email_address').val();
+                    var plan_id = $('#plan_id').val();
+
+                    $.ajax({
+                        url: "{{ route('coupon-list') }}", // Ensure this route exists and accepts POST
+                        type: "POST",
+                        data: {
+                            _token: '{{ csrf_token() }}', // Include CSRF token
+                            phone: phone,
+                            plan_id: plan_id,
+                            emailId: email
+                        },
+                        success: function(response) {
+                            var couponContainer = $('#coupon-container');
+                            couponContainer.empty(); // Clear any existing coupons
+
+                            response.coupon_list.forEach(function(coupon) {
+                                var couponHtml = `
+                                    <div class="coupan-code">
+                                        <p><span>Code :</span> ${coupon.code} &nbsp;</p>
+                                    </div>
+                                `;
+                                couponContainer.append(couponHtml);
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: ", error); // Handle errors
+                        }
+                    });
+                });
+            });
+        </script>
 
     </body>
 

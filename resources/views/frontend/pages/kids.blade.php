@@ -1,16 +1,19 @@
 
-     
-     
-    
+
+
+
 @extends('frontend.layouts.master')
-@section('meta_title')
+@section('meta')
+    <meta name="title" content="{{ $kid_cms->meta_title  ?? ''}}">
+    <meta name="keywords" content="{{ $kid_cms->meta_keyword ?? '' }}">
+    <meta name="description" content="{{ $kid_cms->meta_description ?? '' }}">
 @endsection
-@section('title', 'Kids - Family Flix')
+@section('title', $kid_cms->meta_title  ?? '')
 @push('styles')
 @endpush
 
 @section('content')
-    
+
 
      <section
         class="inner_banner_sec"
@@ -84,4 +87,4 @@
       @include('frontend.partials.subscription')
 
       @endsection
-      
+

@@ -15,38 +15,72 @@ class CommissionPercentageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
-          
-        $commission_percentages = AffiliateCommission::paginate(15);
-        $distinct_percentage_count = AffiliateCommission::select('percentage')
-        ->distinct('percentage')
-        ->count();
-    
-        return view('admin.commission_percentage.list',compact('commission_percentages','distinct_percentage_count'));
+        // page distinct percentage values
+        $percentagesPage = AffiliateCommission::with('affiliate')->select('percentage')
+            ->distinct()
+            ->orderBy('percentage', 'desc') // change order as needed
+            ->paginate(15);
+
+        // load all commissions for the percentages on this page and group them
+        $percentages = $percentagesPage->pluck('percentage')->toArray();
+
+        $commissionsForPage = AffiliateCommission::with('affiliate')
+            ->whereIn('percentage', $percentages)
+            ->get()
+            ->groupBy('percentage'); // collection keyed by percentage
+
+        // we'll pass both: the paginated percentages (for links / counts) and grouped commissions
+        return view('admin.commission_percentage.list', [
+            'percentagesPage' => $percentagesPage,
+            'commissionsForPage' => $commissionsForPage,
+            'distinct_percentage_count' => AffiliateCommission::select('percentage')->distinct()->count(),
+        ]);
     }
 
     public function fetchCommissionPercentage(Request $request)
     {
-        if ($request->ajax()) {
-            $query = $request->get('query');
-            $query = str_replace(" ", "%", $query);
-            
-            // Retrieve unique count of percentage values
-            $distinct_percentage_count = AffiliateCommission::select('percentage')
-                ->where('id', 'like', '%' . $query . '%')
-                ->orWhere('percentage', 'like', '%' . $query . '%')
-                ->distinct('percentage')
-                ->count();
-        
-            $commission_percentages = AffiliateCommission::where('id', 'like', '%' . $query . '%')
-                ->orWhere('percentage', 'like', '%' . $query . '%')
-                ->paginate(15);
+        if (! $request->ajax()) {
+            abort(400);
+        }
 
+        $query = $request->get('query', '');
+        $queryLike = '%' . str_replace(' ', '%', $query) . '%';
 
-            return response()->json(['data' => view('admin.commission_percentage.filter', compact('commission_percentages','distinct_percentage_count'))->render()]);    
-        }  
+        // Find distinct percentages filtered by id or percentage or affiliate name
+        // If you want to also search by affiliate name, join to affiliates
+        $base = AffiliateCommission::query()
+            ->leftJoin('affiliates', 'affiliate_commissions.affiliate_id', '=', 'affiliates.id')
+            ->select('affiliate_commissions.percentage');
+
+        if ($query) {
+            $base->where(function ($q) use ($queryLike) {
+                $q->where('affiliate_commissions.id', 'like', $queryLike)
+                    ->orWhere('affiliate_commissions.percentage', 'like', $queryLike)
+                    ->orWhere('affiliates.name', 'like', $queryLike);
+            });
+        }
+
+        $percentagesPage = $base->distinct()
+            ->orderBy('affiliate_commissions.percentage', 'desc')
+            ->paginate(15);
+
+        $percentages = $percentagesPage->pluck('percentage')->toArray();
+
+        $commissionsForPage = AffiliateCommission::with('affiliate')
+            ->whereIn('percentage', $percentages)
+            ->get()
+            ->groupBy('percentage');
+
+        return response()->json([
+            'data' => view('admin.commission_percentage.filter', compact('percentagesPage', 'commissionsForPage', 'distinct_percentage_count'))->render()
+        ]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -55,8 +89,8 @@ class CommissionPercentageController extends Controller
      */
     public function create()
     {
-        $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->where('status',1)->get();
-        return view('admin.commission_percentage.create',compact('affiliaters'));
+        $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->where('status', 1)->get();
+        return view('admin.commission_percentage.create', compact('affiliaters'));
     }
 
     /**
@@ -67,13 +101,13 @@ class CommissionPercentageController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'percentage' => 'required',
             'affiliaters' => 'required'
         ]);
-        if($request->affiliaters){
-            foreach($request->affiliaters as $affiliater){
+        if ($request->affiliaters) {
+            foreach ($request->affiliaters as $affiliater) {
                 $affiliate = User::find($affiliater);
                 $affiliate->assignRole('AFFLIATE MARKETER');
                 $affiliate_commission = new AffiliateCommission;
@@ -83,8 +117,8 @@ class CommissionPercentageController extends Controller
             }
         }
 
-        
-        return redirect()->route('commission-percentage.index')->with('message','Commission Percentage Added Successfully');
+
+        return redirect()->route('commission-percentage.index')->with('message', 'Commission Percentage Added Successfully');
     }
 
     /**
@@ -107,12 +141,11 @@ class CommissionPercentageController extends Controller
     public function edit($id)
     {
         //
-        $affiliate_commission = AffiliateCommission::where('id',$id)->first();
-        $commi_affiliaters = AffiliateCommission::where('percentage',$affiliate_commission->percentage)->get();
+        $affiliate_commission = AffiliateCommission::where('id', $id)->first();
+        $commi_affiliaters = AffiliateCommission::where('percentage', $affiliate_commission->percentage)->get();
         $affiliaters =  User::role('AFFLIATE MARKETER')->orderBy('id', 'desc')->get();
 
-        return view('admin.commission_percentage.edit',compact('affiliate_commission','affiliaters','commi_affiliaters'));
-        
+        return view('admin.commission_percentage.edit', compact('affiliate_commission', 'affiliaters', 'commi_affiliaters'));
     }
 
     public function updatePercentage(Request $request)
@@ -121,9 +154,9 @@ class CommissionPercentageController extends Controller
             'percentage' => 'required',
             'affiliaters' => 'required'
         ]);
-        if($request->affiliaters){
-            $delete_affiliater = AffiliateCommission::where('percentage',$request->percentage)->delete();
-            foreach($request->affiliaters as $affiliater){
+        if ($request->affiliaters) {
+            $delete_affiliater = AffiliateCommission::where('percentage', $request->percentage)->delete();
+            foreach ($request->affiliaters as $affiliater) {
                 $affiliate_commission = new AffiliateCommission;
                 $affiliate_commission->affiliate_id = $affiliater;
                 $affiliate_commission->percentage = $request->percentage;
@@ -131,8 +164,8 @@ class CommissionPercentageController extends Controller
             }
         }
 
-        
-        return redirect()->route('commission-percentage.index')->with('message','Commission Percentage Updated Successfully');
+
+        return redirect()->route('commission-percentage.index')->with('message', 'Commission Percentage Updated Successfully');
     }
 
     /**
@@ -160,10 +193,9 @@ class CommissionPercentageController extends Controller
 
     public function deletePercentage($id)
     {
-        $commission = AffiliateCommission::where('id',$id)->first();
-        $found_percentages = AffiliateCommission::where('percentage',$commission->percentage)->delete();
+        $commission = AffiliateCommission::where('id', $id)->first();
+        $found_percentages = AffiliateCommission::where('percentage', $commission->percentage)->delete();
 
-        return redirect()->route('commission-percentage.index')->with('message','Commission Percentage Deleted Successfully');
-
+        return redirect()->route('commission-percentage.index')->with('message', 'Commission Percentage Deleted Successfully');
     }
 }

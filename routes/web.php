@@ -36,7 +36,7 @@ use App\Http\Controllers\AffiliateMarketer\ProfileController as AffiliateMarkete
 use App\Http\Controllers\AffiliateMarketer\ForgotPasswordController as AffiliateMarketerForgotPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\PaypalController;
+use App\Http\Controllers\Frontend\BraintreeController;
 use App\Http\Controllers\Frontend\SubscriptionController as FrontendSubscriptionController;
 use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Customer\DashboardController as CustomerDashboardController;
@@ -97,31 +97,31 @@ Route::get('/term-service', [HomeController::class, 'termService'])->name('term-
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
 //payments
-Route::post('/check-payments-email', [PaypalController::class, 'checkPaymentsEmail'])->name('payments.email-check');
-Route::get('/create-payments/{id}', [PaypalController::class, 'createPayments'])->name('create-payments');
-Route::post('/process-payments', [PaypalController::class, 'processPayments'])->name('process-payments');
-Route::get('/success-payment', [PaypalController::class, 'successPayment'])->name('success-payment');
-Route::get('/cancel-payments', [PaypalController::class, 'cancelPayments'])->name('cancel-payments');
-Route::get('/successPayment',[PaypalController::class, 'paymentSuccess'])->name('payment.successful');
-Route::post('/capturePayment',[PaypalController::class, 'paymentcapture'])->name('paypal-capture-payment');
-Route::post('/paypal-payment/{ord?}', [PaypalController::class, 'paypalPayment'])->name('paypal-payment');
-Route::get('/paypal-success-payment/{pay?}/{pyr?}', [PaypalController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
-Route::get('/paypal-pay-failed/{err?}',[PaypalController::class, 'paypalPayFailed'])->name('paypal-pay-failed');
-Route::post('payment-type-check', [PaypalController::class, 'paymentTypeCheck'])->name('payments.payment-type-check');
+Route::post('/check-payments-email', [BraintreeController::class, 'checkPaymentsEmail'])->name('payments.email-check');
+Route::get('/create-payments/{id}', [BraintreeController::class, 'createPayments'])->name('create-payments');
+Route::post('/process-payments', [BraintreeController::class, 'processPayments'])->name('process-payments');
+Route::get('/success-payment', [BraintreeController::class, 'successPayment'])->name('success-payment');
+Route::get('/cancel-payments', [BraintreeController::class, 'cancelPayments'])->name('cancel-payments');
+Route::get('/successPayment', [BraintreeController::class, 'paymentSuccess'])->name('payment.successful');
+Route::post('/capturePayment', [BraintreeController::class, 'paymentcapture'])->name('paypal-capture-payment');
+Route::post('/paypal-payment/{ord?}', [BraintreeController::class, 'paypalPayment'])->name('paypal-payment');
+Route::get('/paypal-success-payment/{pay?}/{pyr?}', [BraintreeController::class, 'paypalSuccessPayment'])->name('paypal-success-payment');
+Route::get('/paypal-pay-failed/{err?}', [BraintreeController::class, 'paypalPayFailed'])->name('paypal-pay-failed');
+Route::post('payment-type-check', [BraintreeController::class, 'paymentTypeCheck'])->name('payments.payment-type-check');
 // paypal.success.payment
-Route::get('/paypal-success-payment-recurring', [PaypalController::class, 'paypalSuccessPaymentRecurring'])->name('paypal.success.payment');
+Route::get('/paypal-success-payment-recurring', [BraintreeController::class, 'paypalSuccessPaymentRecurring'])->name('paypal.success.payment');
 //paypal.pay.failed
-Route::get('/paypal-pay-failed-recurring', [PaypalController::class, 'paypalPayRecurringFailed'])->name('paypal.pay.failed');
-Route::post('payment-validate', [PaypalController::class, 'paymentsValidate'])->name('payments.validate');
-Route::get('/paypal-thank-you', [PaypalController::class, 'thankYou'])->name('paypal.thank-you');
+Route::get('/paypal-pay-failed-recurring', [BraintreeController::class, 'paypalPayRecurringFailed'])->name('paypal.pay.failed');
+Route::post('payment-validate', [BraintreeController::class, 'paymentsValidate'])->name('payments.validate');
+Route::get('/paypal-thank-you', [BraintreeController::class, 'thankYou'])->name('paypal.thank-you');
 //stripe recurring payment
 Route::post('/create-subscription', [FrontendSubscriptionController::class, 'createSubscription'])->name('create-subscription');
-Route::get('/success-subscription',[FrontendSubscriptionController::class, 'successSubscription'])->name('success-subscription');
-Route::get('/failed-subscription',[FrontendSubscriptionController::class, 'failedSubscription'])->name('failed-subscription');
+Route::get('/success-subscription', [FrontendSubscriptionController::class, 'successSubscription'])->name('success-subscription');
+Route::get('/failed-subscription', [FrontendSubscriptionController::class, 'failedSubscription'])->name('failed-subscription');
 
-
+Route::post('/create-subscription-braintree', [FrontendSubscriptionController::class, 'createSubscriptionBraintree'])->name('create-subscription-braintree');
 // coupon check
-Route::post('/coupon-check', [PaypalController::class, 'couponCheck'])->name('coupon-check');
+Route::post('/coupon-check', [BraintreeController::class, 'couponCheck'])->name('coupon-check');
 Route::post('/coupon-list', [FrontendSubscriptionController::class, 'couponList'])->name('coupon-list');
 // affliate authentication
 Route::name('affiliate-marketer.')
@@ -174,7 +174,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('admin.profile.update');
         Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
 
-        Route::post('cutomer-payment',[AdminPaymentController::class, 'customerPayment'])->name('customer.payment');
+        Route::post('cutomer-payment', [AdminPaymentController::class, 'customerPayment'])->name('customer.payment');
 
         Route::prefix('password')->group(function () {
             Route::get('/', [ProfileController::class, 'password'])->name('admin.password');
@@ -193,7 +193,7 @@ Route::group(['prefix' => 'admin'], function () {
             'commission-history' => AdminCommissionHistoryController::class,
             'commission-percentage' => CommissionPercentageController::class,
             'ott-service' => OttServiceController::class,
-            'managers' =>ManagerController::class,
+            'managers' => ManagerController::class,
             'users' => UserController::class,
             'emails' => EmailTemplateController::class
         ]);
@@ -203,17 +203,17 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/delete-users/{id}', [UserController::class, 'deleteUser'])->name('delete.user');
         Route::post('/update-users', [UserController::class, 'updateUser'])->name('update.users');
 
-        Route::get('/customers',[AdminCustomerController::class, 'index'])->name('customers.index');
+        Route::get('/customers', [AdminCustomerController::class, 'index'])->name('customers.index');
         Route::get('/customers-plans/{id}', [AdminCustomerController::class, 'showPlans'])->name('customers.plans.show');
         Route::get('/customers-ajax-list', [AdminCustomerController::class, 'customerAjaxList'])->name('customers.ajax.list');
         Route::get('/customer-change-status', [AdminCustomerController::class, 'changeStatus'])->name('customers.change-status');
-        Route::get('/customers/create',[AdminCustomerController::class, 'create'])->name('customers.create');
-        Route::post('/customers/store',[AdminCustomerController::class, 'store'])->name('customers.store');
-        Route::get('/customers/edit/{id}',[AdminCustomerController::class, 'editDetail'])->name('customers.edit-detail');
-        Route::get('/customers/delete/{id}',[AdminCustomerController::class, 'deleteDetail'])->name('customers.delete-detail');
-        Route::post('/customers/update',[AdminCustomerController::class, 'updateDetail'])->name('customers.update-deatil');
-        Route::get('/customers/recharge-code/{id}',[AdminCustomerController::class, 'rechargeMail'])->name('customers.recharge-code-mail');
-        Route::post('/customers/recharge-code',[AdminCustomerController::class, 'rechargeCodeMailSend'])->name('customers.recharge-code-send');
+        Route::get('/customers/create', [AdminCustomerController::class, 'create'])->name('customers.create');
+        Route::post('/customers/store', [AdminCustomerController::class, 'store'])->name('customers.store');
+        Route::get('/customers/edit/{id}', [AdminCustomerController::class, 'editDetail'])->name('customers.edit-detail');
+        Route::get('/customers/delete/{id}', [AdminCustomerController::class, 'deleteDetail'])->name('customers.delete-detail');
+        Route::post('/customers/update', [AdminCustomerController::class, 'updateDetail'])->name('customers.update-deatil');
+        Route::get('/customers/recharge-code/{id}', [AdminCustomerController::class, 'rechargeMail'])->name('customers.recharge-code-mail');
+        Route::post('/customers/recharge-code', [AdminCustomerController::class, 'rechargeCodeMailSend'])->name('customers.recharge-code-send');
         Route::post('/customers/delete-multiple', [AdminCustomerController::class, 'deleteMultiple'])->name('customers.delete-multiple');
 
 
@@ -358,7 +358,6 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::get('/faq-general', [FaqController::class, 'faqGeneral'])->name('faq.general');
             Route::post('/faqGeneral/update', [FaqController::class, 'faqGeneralUpdate'])->name('faq.general.update');
-
         });
 
 
@@ -393,7 +392,6 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         Route::get('/credentials-filter', [PaypalCredentialController::class, 'filter'])->name('credentials.filter');
-
     });
 });
 
@@ -422,8 +420,7 @@ Route::name('customer.')
             Route::get('/subscriptions', [CustomerSubscriptionController::class, 'customerSubscription'])->name('subscription');
             Route::get('/subscriptions-fetch-data', [CustomerSubscriptionController::class, 'fetchSubscription'])->name('subscription.ajax-list');
             Route::get('/subscriptions-details/{id}', [CustomerSubscriptionController::class, 'customerSubscriptionDetail'])->name('subscription.show');
-            Route::post('/subscription-change-status',[CustomerSubscriptionController::class, 'subscriptionChangeStatus'])->name('subscription.change-status');
-
+            Route::post('/subscription-change-status', [CustomerSubscriptionController::class, 'subscriptionChangeStatus'])->name('subscription.change-status');
         });
 
         Route::get('/my-family-cinema', [CustomerSubscriptionController::class, 'myFamilyCinema'])->name('myFamily-cinema');
@@ -437,10 +434,6 @@ Route::get('/cronsStartToWorkEmailSend', function () {
 });
 
 //view page call
-Route::get('/user-panel', function()
-{
+Route::get('/user-panel', function () {
     return view('user-panel');
 });
-
-
-

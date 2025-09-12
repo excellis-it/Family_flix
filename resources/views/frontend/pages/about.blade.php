@@ -1,17 +1,21 @@
 
 @extends('frontend.layouts.master')
-@section('meta_title')
+@section('meta')
+    <meta name="title" content="{{ $about_cms->meta_title  ?? ''}}">
+    <meta name="keywords" content="{{ $about_cms->meta_keyword ?? '' }}">
+    <meta name="description" content="{{ $about_cms->meta_description ?? '' }}">
+
 @endsection
 
-@section('title', 'About Us - Family Flix')
+@section('title', $about_cms->meta_title ?? '')
 
 
 @push('styles')
 @endpush
 
-@section('content') 
-     
-    
+@section('content')
+
+
      <section
         class="inner_banner_sec"
         style="
@@ -58,7 +62,7 @@
               <div class="col-lg-6">
                 <div class="about-sec-text">
                   <div class="heading-1">
-                    
+
                     <h3>{{ $about_cms->section1_title }}</h3>
                     <p>
                       {{ $about_cms->section1_description }}
@@ -165,10 +169,10 @@
         </div>
         <div class="entertainment-div">
           @include('frontend.partials.entertainment');
-         
+
       </div>
       </section>
 
       @endsection
-      
-     
+
+

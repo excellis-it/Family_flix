@@ -18,7 +18,7 @@ class GeneralCmsController extends Controller
     public function planCms()
     {
         $plan_cms = PlanCms::first();
-        return View('admin.cms.plan',compact('plan_cms'));
+        return View('admin.cms.plan', compact('plan_cms'));
     }
 
     public function planCmsUpdate(Request $request)
@@ -41,7 +41,7 @@ class GeneralCmsController extends Controller
         $plan_cms->main_title = $request->main_title;
         $plan_cms->middle_content = $request->middle_content;
         $plan_cms->title1 = $request->title1;
-        $plan_cms->description1 = $request->description1; 
+        $plan_cms->description1 = $request->description1;
         $plan_cms->title2 = $request->title2;
         $plan_cms->description2 = $request->description2;
 
@@ -50,21 +50,21 @@ class GeneralCmsController extends Controller
             $request->validate([
                 'banner_img' => 'required',
             ]);
-            
-            $file= $request->file('banner_img');
-            $filename= date('YmdHi').$file->getClientOriginalName();
+
+            $file = $request->file('banner_img');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
             $image_path = $request->file('banner_img')->store('plan', 'public');
             $plan_cms->banner_img = $image_path;
         }
 
-         //background image upload
-         if ($request->hasFile('background_img')) {
+        //background image upload
+        if ($request->hasFile('background_img')) {
             $request->validate([
                 'background_img' => 'required',
             ]);
-            
+
             $file1 = $request->file('background_img');
-            $filename1 = date('YmdHi').$file1->getClientOriginalName();
+            $filename1 = date('YmdHi') . $file1->getClientOriginalName();
             $image_path1 = $request->file('background_img')->store('plan', 'public');
             $plan_cms->background_img = $image_path1;
         }
@@ -74,9 +74,9 @@ class GeneralCmsController extends Controller
             $request->validate([
                 'middle_back_img' => 'required',
             ]);
-            
+
             $file11 = $request->file('middle_back_img');
-            $filename11 = date('YmdHi').$file11->getClientOriginalName();
+            $filename11 = date('YmdHi') . $file11->getClientOriginalName();
             $image_path11 = $request->file('middle_back_img')->store('plan', 'public');
             $plan_cms->middle_back_img = $image_path11;
         }
@@ -86,9 +86,9 @@ class GeneralCmsController extends Controller
             $request->validate([
                 'anime1_img' => 'required',
             ]);
-            
+
             $file12 = $request->file('anime1_img');
-            $filename12 = date('YmdHi').$file12->getClientOriginalName();
+            $filename12 = date('YmdHi') . $file12->getClientOriginalName();
             $image_path12 = $request->file('anime1_img')->store('plan', 'public');
             $plan_cms->anime1_img = $image_path12;
         }
@@ -98,21 +98,21 @@ class GeneralCmsController extends Controller
             $request->validate([
                 'anime2_img' => 'required',
             ]);
-            
+
             $file13 = $request->file('anime2_img');
-            $filename13 = date('YmdHi').$file13->getClientOriginalName();
+            $filename13 = date('YmdHi') . $file13->getClientOriginalName();
             $image_path13 = $request->file('anime2_img')->store('plan', 'public');
             $plan_cms->anime2_img = $image_path13;
-        } 
+        }
         $plan_cms->update();
 
-        return back()->with('message','Plan cms updated successfully');
+        return back()->with('message', 'Plan cms updated successfully');
     }
 
     public function kidCms()
     {
-        $kid_cms =  ContentTypeCms::where('type','kid')->first();
-        return View('admin.cms.kids',compact('kid_cms'));
+        $kid_cms =  ContentTypeCms::where('type', 'kid')->first();
+        return View('admin.cms.kids', compact('kid_cms'));
     }
 
     public function kidCmsUpdate(Request $request)
@@ -122,56 +122,58 @@ class GeneralCmsController extends Controller
             'small_description' => 'required',
         ]);
 
-        $kid_cms = ContentTypeCms::where('id', $request->id)->where('type','kid')->first();
+        $kid_cms = ContentTypeCms::where('id', $request->id)->where('type', 'kid')->first();
         $kid_cms->heading = $request->heading;
         $kid_cms->small_description = $request->small_description;
+         $kid_cms->meta_title = $request->meta_title;
+        $kid_cms->meta_keyword = $request->meta_keyword;
+        $kid_cms->meta_description = $request->meta_description;
 
-         //banner_img upload
-         if ($request->hasFile('banner_img')) {
+        //banner_img upload
+        if ($request->hasFile('banner_img')) {
             $request->validate([
                 'banner_img' => 'required',
             ]);
-            
+
             $file13 = $request->file('banner_img');
-            $filename13 = date('YmdHi').$file13->getClientOriginalName();
+            $filename13 = date('YmdHi') . $file13->getClientOriginalName();
             $image_path13 = $request->file('banner_img')->store('kids', 'public');
             $kid_cms->banner_img = $image_path13;
-        } 
+        }
 
         //top_10_show_background upload
         if ($request->hasFile('top_10_show_background')) {
             $request->validate([
                 'top_10_show_background' => 'required',
             ]);
-            
+
             $file14 = $request->file('top_10_show_background');
-            $filename14 = date('YmdHi').$file14->getClientOriginalName();
+            $filename14 = date('YmdHi') . $file14->getClientOriginalName();
             $image_path14 = $request->file('top_10_show_background')->store('kids', 'public');
             $kid_cms->top_10_show_background = $image_path14;
-        } 
+        }
 
         // popular_show_background upload
         if ($request->hasFile('popular_show_background')) {
             $request->validate([
                 'popular_show_background' => 'required',
             ]);
-            
+
             $file15 = $request->file('popular_show_background');
-            $filename15 = date('YmdHi').$file15->getClientOriginalName();
+            $filename15 = date('YmdHi') . $file15->getClientOriginalName();
             $image_path15 = $request->file('popular_show_background')->store('kids', 'public');
             $kid_cms->popular_show_background = $image_path15;
-        } 
+        }
 
         $kid_cms->update();
 
-        return back()->with('message','Kid cms updated successfully');
-
+        return back()->with('message', 'Kid cms updated successfully');
     }
 
     public function showCms()
     {
-        $show_cms = ContentTypeCms::where('type','show')->first();
-        return view('admin.cms.show',compact('show_cms'));
+        $show_cms = ContentTypeCms::where('type', 'show')->first();
+        return view('admin.cms.show', compact('show_cms'));
     }
 
     public function showCmsUpdate(Request $request)
@@ -181,33 +183,36 @@ class GeneralCmsController extends Controller
             'small_description' => 'required',
         ]);
 
-        $show_cms = ContentTypeCms::where('id', $request->id)->where('type','show')->first();
+        $show_cms = ContentTypeCms::where('id', $request->id)->where('type', 'show')->first();
         $show_cms->heading = $request->heading;
         $show_cms->small_description = $request->small_description;
 
-         //banner_img upload
-         if ($request->hasFile('banner_img')) {
+        $show_cms->meta_title = $request->meta_title;
+        $show_cms->meta_keyword = $request->meta_keyword;
+        $show_cms->meta_description = $request->meta_description;
+        //banner_img upload
+        if ($request->hasFile('banner_img')) {
             $request->validate([
                 'banner_img' => 'required',
             ]);
-            
+
             $file13 = $request->file('banner_img');
-            $filename13 = date('YmdHi').$file13->getClientOriginalName();
+            $filename13 = date('YmdHi') . $file13->getClientOriginalName();
             $image_path13 = $request->file('banner_img')->store('kids', 'public');
             $show_cms->banner_img = $image_path13;
-        } 
+        }
 
         //top_10_show_background upload
         if ($request->hasFile('top_10_show_background')) {
             $request->validate([
                 'top_10_show_background' => 'required',
             ]);
-            
+
             $file14 = $request->file('top_10_show_background');
-            $filename14 = date('YmdHi').$file14->getClientOriginalName();
+            $filename14 = date('YmdHi') . $file14->getClientOriginalName();
             $image_path14 = $request->file('top_10_show_background')->store('kids', 'public');
             $show_cms->top_10_show_background = $image_path14;
-        } 
+        }
 
         // popular_show_background upload
 
@@ -215,22 +220,22 @@ class GeneralCmsController extends Controller
             $request->validate([
                 'popular_show_background' => 'required',
             ]);
-            
+
             $file15 = $request->file('popular_show_background');
-            $filename15 = date('YmdHi').$file15->getClientOriginalName();
+            $filename15 = date('YmdHi') . $file15->getClientOriginalName();
             $image_path15 = $request->file('popular_show_background')->store('kids', 'public');
             $show_cms->popular_show_background = $image_path15;
-        } 
+        }
 
         $show_cms->update();
 
-        return back()->with('message','Show cms updated successfully');
+        return back()->with('message', 'Show cms updated successfully');
     }
 
     public function movieCms()
     {
-        $movie_cms = ContentTypeCms::where('type','movie')->first();
-        return view('admin.cms.movie',compact('movie_cms'));
+        $movie_cms = ContentTypeCms::where('type', 'movie')->first();
+        return view('admin.cms.movie', compact('movie_cms'));
     }
 
     public function movieCmsUpdate(Request $request)
@@ -240,33 +245,36 @@ class GeneralCmsController extends Controller
             'small_description' => 'required',
         ]);
 
-        $movie_cms = ContentTypeCms::where('id', $request->id)->where('type','movie')->first();
+        $movie_cms = ContentTypeCms::where('id', $request->id)->where('type', 'movie')->first();
         $movie_cms->heading = $request->heading;
         $movie_cms->small_description = $request->small_description;
+         $movie_cms->meta_title = $request->meta_title;
+        $movie_cms->meta_keyword = $request->meta_keyword;
+        $movie_cms->meta_description = $request->meta_description;
 
-         //banner_img upload
-         if ($request->hasFile('banner_img')) {
+        //banner_img upload
+        if ($request->hasFile('banner_img')) {
             $request->validate([
                 'banner_img' => 'required',
             ]);
-            
+
             $file13 = $request->file('banner_img');
-            $filename13 = date('YmdHi').$file13->getClientOriginalName();
+            $filename13 = date('YmdHi') . $file13->getClientOriginalName();
             $image_path13 = $request->file('banner_img')->store('movie', 'public');
             $movie_cms->banner_img = $image_path13;
-        } 
+        }
 
         //top_10_show_background upload
         if ($request->hasFile('top_10_show_background')) {
             $request->validate([
                 'top_10_show_background' => 'required',
             ]);
-            
+
             $file14 = $request->file('top_10_show_background');
-            $filename14 = date('YmdHi').$file14->getClientOriginalName();
+            $filename14 = date('YmdHi') . $file14->getClientOriginalName();
             $image_path14 = $request->file('top_10_show_background')->store('movie', 'public');
             $movie_cms->top_10_show_background = $image_path14;
-        } 
+        }
 
         // popular_show_background upload
 
@@ -274,22 +282,22 @@ class GeneralCmsController extends Controller
             $request->validate([
                 'popular_show_background' => 'required',
             ]);
-            
+
             $file15 = $request->file('popular_show_background');
-            $filename15 = date('YmdHi').$file15->getClientOriginalName();
+            $filename15 = date('YmdHi') . $file15->getClientOriginalName();
             $image_path15 = $request->file('popular_show_background')->store('movie', 'public');
             $movie_cms->popular_show_background = $image_path15;
-        } 
+        }
 
         $movie_cms->update();
 
-        return back()->with('message','Movie cms updated successfully');
+        return back()->with('message', 'Movie cms updated successfully');
     }
 
     public function contactCms()
     {
         $contact_cms = ContactUsCms::first();
-        return view('admin.cms.contact-us',compact('contact_cms'));
+        return view('admin.cms.contact-us', compact('contact_cms'));
     }
 
     public function contactCmsUpdate(Request $request)
@@ -313,29 +321,28 @@ class GeneralCmsController extends Controller
             $request->validate([
                 'banner_img' => 'required',
             ]);
-            
+
             $file15 = $request->file('banner_img');
-            $filename15 = date('YmdHi').$file15->getClientOriginalName();
+            $filename15 = date('YmdHi') . $file15->getClientOriginalName();
             $image_path15 = $request->file('banner_img')->store('contact', 'public');
             $contact_cms->banner_img = $image_path15;
-        } 
+        }
 
-        
+
         if ($request->hasFile('background_img')) {
             $request->validate([
                 'background_img' => 'required',
             ]);
-            
+
             $file11 = $request->file('background_img');
-            $filename11 = date('YmdHi').$file11->getClientOriginalName();
+            $filename11 = date('YmdHi') . $file11->getClientOriginalName();
             $image_path11 = $request->file('background_img')->store('contact', 'public');
             $contact_cms->background_img = $image_path11;
-        } 
+        }
 
 
         $contact_cms->update();
 
-        return back()->with('message','Contact cms updated successfully');
+        return back()->with('message', 'Contact cms updated successfully');
     }
-    
 }

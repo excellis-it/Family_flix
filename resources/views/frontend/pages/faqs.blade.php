@@ -1,14 +1,18 @@
 
 @extends('frontend.layouts.master')
-@section('meta_title')
+@section('meta')
+    <meta name="title" content="Unlimited Subscription Queries | FamilyFlix Orlando FAQ">
+    <meta name="keywords" content="Common questions about FamilyFlix subscription in Orlando, Unlimited subscription queries in Orlando, Orlando family streaming questions, Streaming plan queries Orlando">
+    <meta name="description" content="Have questions about FamilyFlix? Browse FAQs covering subscription details, unlimited plans, streaming support, and entertainment solutions in Orlando.">
+
 @endsection
-@section('title', 'Faq - Family Flix')
+@section('title', 'Unlimited Subscription Queries | FamilyFlix Orlando FAQ')
 @push('styles')
 @endpush
 
-@section('content') 
-     
-    
+@section('content')
+
+
      <section
         class="inner_banner_sec"
         style="
@@ -37,7 +41,7 @@
           </div>
         </div>
       </section>
-      
+
       <section class="pricing-text-1">
         <div class="container">
           <div class="row">
@@ -47,15 +51,15 @@
                 <h2>{{ $faq_qstn_ansr->question }}</h2>
                 <p>{{ $faq_qstn_ansr->answer }}</p>
                 @endforeach
-               
+
               </div>
             </div>
           </div>
         </div>
       </section>
-      
-      
+
+
 
       @endsection
-      
-     
+
+

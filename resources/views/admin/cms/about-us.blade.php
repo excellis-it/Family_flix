@@ -76,7 +76,7 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Description<span style="color: red;">*</span></label>
-                                    <textarea name="section1_description" 
+                                    <textarea name="section1_description"
                                         class="form-control" >{{ $about_cms->section1_description }}</textarea>
                                     @if ($errors->has('section1_description'))
                                         <div class="error" style="color:red;">
@@ -84,7 +84,7 @@
                                     @endif
                                 </div>
 
-                                
+
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Section1 Image<span style="color: red;">*</span></label>
                                     <input type="file" name="section1_img" id="section1_img" class="form-control">
@@ -304,6 +304,47 @@
                                     @endif
                                 </div>
 
+                            </div>
+                             <div class="row">
+                                <h4 class="text-left">SEO Section</h4>
+                                <hr>
+
+                                {{-- Meta Title --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Title</label>
+                                    <input type="text" name="meta_title" class="form-control"
+                                        placeholder="Enter Meta Title"
+                                        value="{{ old('meta_title', $about_cms->meta_title ?? '') }}">
+                                    @if ($errors->has('meta_title'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_title') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Meta Keyword --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Keyword</label>
+                                    <input type="text" name="meta_keyword" class="form-control"
+                                        placeholder="Enter Meta Keyword"
+                                        value="{{ old('meta_keyword', $about_cms->meta_keyword ?? '') }}">
+                                    @if ($errors->has('meta_keyword'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_keyword') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Meta Description --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Description</label>
+                                    <textarea name="meta_description" class="form-control" rows="3" placeholder="Enter Meta Description">{{ old('meta_description', $about_cms->meta_description ?? '') }}</textarea>
+                                    @if ($errors->has('meta_description'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_description') }}
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
 
                             <br>

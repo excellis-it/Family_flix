@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
-    <meta name="generator" content="Hugo 0.84.0" />
+    <meta name="author" content="" />
+    <meta name="generator" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('meta')
     <title>@yield('title', 'The Family Flix')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('frontend_assets/images/logo.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -40,14 +40,92 @@
     {{-- toastr cdn --}}
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CC9CJZ88JX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CC9CJZ88JX"></script>
 
-  gtag('config', 'G-CC9CJZ88JX');
+    @if (Request::is('faq*'))
+        <script type=""application/ld+json"">
+{
+  ""@context"": ""https://schema.org"",
+  ""@type"": ""FAQPage"",
+  ""mainEntity"": [{
+    ""@type"": ""Question"",
+    ""name"": ""What is The Family Flix?"",
+    ""acceptedAnswer"": {
+      ""@type"": ""Answer"",
+      ""text"": ""The Family Flix is a extra ordinary multimedia platform that gathers many different media information which users store in their cloud and allows then to create a vast library of movies, TV series, and exclusive content. By doing so users will be able to view various contents from other multiple platforms including Netflix, Amazon Prime, Hulu, Disney Plus, and more through our application from their cloud they uploaded all under one roof. Our service is designed to provide an affordable and convenient alternative to managing multiple subscriptions.""
+    }
+  },{
+    ""@type"": ""Question"",
+    ""name"": ""How does The Family Flix offer content from different streaming platforms?"",
+    ""acceptedAnswer"": {
+      ""@type"": ""Answer"",
+      ""text"": ""Our multimedia platform gathers different media information, which users can store in their cloud and access it by connecting The Family Flix to different devices.""
+    }
+  },{
+    ""@type"": ""Question"",
+    ""name"": ""What subscription plans are available?"",
+    ""acceptedAnswer"": {
+      ""@type"": ""Answer"",
+      ""text"": ""The Family Flix offers several subscription plans tailored to meet different needs and preferences. Our plans vary based on the number of screens that can be used simultaneously, video quality, and access to exclusive content. For detailed information on our plans, please visit our Subscription Plans page.""
+    }
+  },{
+    ""@type"": ""Question"",
+    ""name"": ""Can I watch content on The Family Flix without an internet connection?"",
+    ""acceptedAnswer"": {
+      ""@type"": ""Answer"",
+      ""text"": ""Yes, The Family Flix offers a download feature for mobile and tablet devices, allowing you to download your favorite shows and movies to watch offline. This feature is perfect for keeping entertained while on the move without internet access.""
+    }
+  },{
+    ""@type"": ""Question"",
+    ""name"": ""How can I watch The Family Flix on my TV?"",
+    ""acceptedAnswer"": {
+      ""@type"": ""Answer"",
+      ""text"": ""The Family Flix is compatible with various devices including most smart TVs, streaming media players, gaming consoles, and more. You can also cast The Family Flix from your mobile device or computer to your TV using Chromecast or AirPlay.""
+    }
+  },{
+    ""@type"": ""Question"",
+    ""name"": ""Are there any parental controls available?"",
+    ""acceptedAnswer"": {
+      ""@type"": ""Answer"",
+      ""text"": ""Yes, The Family Flix provides comprehensive parental controls allowing you to set viewing restrictions and create a safe viewing environment for children. You can customize profiles with age-appropriate content filters.""
+    }
+  },{
+    ""@type"": ""Question"",
+    ""name"": ""Can I share my account with friends and family?"",
+    ""acceptedAnswer"": {
+      ""@type"": ""Answer"",
+      ""text"": ""Our subscription plans include options to create multiple user profiles and allow simultaneous streaming on multiple devices. You can share your account with friends and family according to the terms of your selected plan.""
+    }
+  }]
+}
 </script>
+    @else
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-CC9CJZ88JX');
+        </script>
+
+        <script type=""application/ld+json"">
+{
+  ""@context"": ""https://schema.org/"",
+  ""@type"": ""WebSite"",
+  ""name"": ""The Family Flix"",
+  ""url"": ""https://thefamilyflix.com/"",
+  ""potentialAction"": {
+    ""@type"": ""SearchAction"",
+    ""target"": ""https://thefamilyflix.com/pricing{search_term_string}Unlimited subscription plans for family streaming"",
+    ""query-input"": ""required name=search_term_string""
+  }
+}
+</script>
+    @endif
+
 
 </head>
 

@@ -55,12 +55,13 @@
                                 id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
                                     <tr>
+                                        <th>Affilator Names</th>
                                         <th>Percentage</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody  id="tableBodyContents">
-                                    @include('admin.commission_percentage.filter') 
+                                    @include('admin.commission_percentage.filter')
                                 </tbody>
                             </table>
                             <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
@@ -135,5 +136,5 @@
 </script>
 
 
-   
+
 @endpush

@@ -1,36 +1,40 @@
 @extends('frontend.layouts.master')
-@section('meta_title')
+@section('meta')
+    <meta name="title" content="{{ $home_cms->meta_title ?? '' }}">
+    <meta name="keywords" content="{{ $home_cms->meta_keyword ?? '' }}">
+    <meta name="description" content="{{ $home_cms->meta_description ?? '' }}">
 @endsection
-@section('title', 'The Family Flix')
+@section('title', $home_cms->meta_title ?? '')
 @push('styles')
-<style>
- .video-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 69vh;
-    width: 70%;
-    margin: 0 auto;
-}
-</style>
+    <style>
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 69vh;
+            width: 70%;
+            margin: 0 auto;
+        }
+    </style>
 @endpush
 
 @section('content')
-    <section class="banner__slider banner_sec" style="background: url({{ Storage::url($home_cms->top_back_image) }});background-size: cover; background-position: center bottom;">
+    <section class="banner__slider banner_sec"
+        style="background: url({{ Storage::url($home_cms->top_back_image) }});background-size: cover; background-position: center bottom;">
         <div class="slider stick-dots">
             <div class="slide">
-                
+
                 <div class="slide__content slide__content__left">
                     <div class="slide__content--headings text-left">
                         <div class="bnr-text-p">
                             <p>{{ $home_cms->top_short_title }}</p>
                         </div>
-                        <h2 class="title">
+                        <h1 class="title">
                             <!-- <span>Welcome to</span> -->
                             {{ $home_cms->top_main_title }}
-                        </h2>
+                        </h1>
                         <div class="sign-up-btn mt-4">
-                            <a href="{{route('affiliate-marketer.register')}}">{{ $home_cms->top_button_text }}</a>
+                            <a href="{{ route('affiliate-marketer.register') }}">{{ $home_cms->top_button_text }}</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +52,7 @@
             <div class="access-div">
                 <div class="access-div-wrap">
                     <div class="row justify-content-center">
-                    @include('frontend.partials.top_grid')
+                        @include('frontend.partials.top_grid')
                     </div>
                 </div>
             </div>
@@ -105,25 +109,25 @@
                                                                         alt="Logo" />
                                                                 </div>
                                                             </div>
-                                                            @foreach($ott_icons as $index => $ott_icon)
-                                                            <div class="eael-circle-inner">
-                                                                <div class="eael-circle-item elementor-repeater-item-c5a3e9d">
-                                                                    <div class="eael-circle-btn" id="eael-circle-item-{{ $ott_icon->id }}">
-                                                                        <div class="eael-circle-icon-shapes classic">
-                                                                            <div class="eael-shape-1"></div>
-                                                                            <div class="eael-shape-2"></div>
-                                                                        </div>
-                                                                        <div class="eael-circle-btn-icon">
-                                                                            <div class="eael-circle-icon-inner">
-                                                                                <img
-                                                                                    src="{{ Storage::url($ott_icon->icon) }}" />
+                                                            @foreach ($ott_icons as $index => $ott_icon)
+                                                                <div class="eael-circle-inner">
+                                                                    <div
+                                                                        class="eael-circle-item elementor-repeater-item-c5a3e9d">
+                                                                        <div class="eael-circle-btn"
+                                                                            id="eael-circle-item-{{ $ott_icon->id }}">
+                                                                            <div class="eael-circle-icon-shapes classic">
+                                                                                <div class="eael-shape-1"></div>
+                                                                                <div class="eael-shape-2"></div>
+                                                                            </div>
+                                                                            <div class="eael-circle-btn-icon">
+                                                                                <div class="eael-circle-icon-inner">
+                                                                                    <img
+                                                                                        src="{{ Storage::url($ott_icon->icon) }}" />
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-
-                                                                @endforeach
-                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
@@ -136,6 +140,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <section class="entertainment-sec">
@@ -163,7 +168,8 @@
                             </div>
                             <img src="{{ Storage::url($home_cms->section3_main_image) }}" alt="" />
                             <div class="play-btn">
-                                <button type="button" class="play-btn" data-bs-toggle="modal" data-src="" data-bs-target="#myModal"><span><i class="fa-solid fa-play"></i></span></button>
+                                <button type="button" class="play-btn" data-bs-toggle="modal" data-src=""
+                                    data-bs-target="#myModal"><span><i class="fa-solid fa-play"></i></span></button>
                             </div>
                         </div>
                     </div>
@@ -171,31 +177,31 @@
             </div>
         </div>
     </section>
-    @if(count($products) > 0)
-    <section class="unbeatable-sec">
-        <div class="unbeatable-bg">
-            <img src="{{ Storage::url($home_cms->section4_back_image) }}" alt="" />
-        </div>
-        <div class="entertainment-div">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="entertainment-head">
-                            <div class="heading-1 text-center">
-                                <h3>{{ $home_cms->section4_title }}<span class="dot">.</span></h3>
-                                <p>
-                                    {{ $home_cms->section4_description }}
-                                </p>
+    @if (count($products) > 0)
+        <section class="unbeatable-sec">
+            <div class="unbeatable-bg">
+                <img src="{{ Storage::url($home_cms->section4_back_image) }}" alt="" />
+            </div>
+            <div class="entertainment-div">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="entertainment-head">
+                                <div class="heading-1 text-center">
+                                    <h3>{{ $home_cms->section4_title }}<span class="dot">.</span></h3>
+                                    <p>
+                                        {{ $home_cms->section4_description }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="unbeatable-slider">
-            @include('frontend.partials.unbeatable-slider')
-        </div>
-    </section>
+            <div class="unbeatable-slider">
+                @include('frontend.partials.unbeatable-slider')
+            </div>
+        </section>
     @endif
     <section class="kids-sec">
         <div class="kid-bg">
@@ -249,7 +255,8 @@
 
 
     {{-- modal open --}}
-    <div class="modal modal-1 fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal modal-1 fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -259,14 +266,14 @@
                     <!-- Adjust width and height attributes for the iframe -->
                     <!--<iframe width="1280" height="720" src="{{ Storage::url($home_cms->section3_video_link) }}" title="YouTube video player" frameborder="0"   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
                     <video width="100%" height="720" controls>
-                       <source src="{{ Storage::url($home_cms->section3_video_link) }}" type="video/mp4">
-                     </video>
+                        <source src="{{ Storage::url($home_cms->section3_video_link) }}" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>
     </div>
-    
-      {{-- modal close --}}
+
+    {{-- modal close --}}
 
     <div class="scroll-top">
         <a id="scroll-top-btn"></a>

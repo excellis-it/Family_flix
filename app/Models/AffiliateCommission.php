@@ -11,8 +11,8 @@ class AffiliateCommission extends Model
 
     protected $fillable = ['percentage'];
 
-    public function affiliators()
+    public function affiliate()
     {
-        return $this->hasMany(User::class , 'id');
+        return $this->hasOne(User::class , 'id','affiliate_id');
     }
 }

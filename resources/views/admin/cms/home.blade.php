@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+
 @section('title')
     Home CMS
 @endsection
@@ -231,7 +232,7 @@
                                 </div>
 
                             </div>
-                           
+
 
                             <div class="row">
                                 <h4 class="text-left">Entertainment section</h4>
@@ -352,9 +353,7 @@
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Video upload<span style="color: red;">*</span></label>
-                                    <input type="file" name="section3_video_link"
-                                         class="form-control"
-                                        >
+                                    <input type="file" name="section3_video_link" class="form-control">
                                     @if ($errors->has('section3_video_link'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('section3_video_link') }}</div>
@@ -368,7 +367,7 @@
                                         <video width="520px" height="240px" controls>
                                             <source src="{{ Storage::url($home_cms->section3_video_link) }}"
                                                 type="video/mp4">
-                                            
+
                                         </video>
                                     @else
                                         <img id="preview-section3-main-image"
@@ -537,6 +536,50 @@
 
                             </div>
 
+
+                            <div class="row">
+                                <h4 class="text-left">SEO Section</h4>
+                                <hr>
+
+                                {{-- Meta Title --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Title</label>
+                                    <input type="text" name="meta_title" class="form-control"
+                                        placeholder="Enter Meta Title"
+                                        value="{{ old('meta_title', $home_cms->meta_title ?? '') }}">
+                                    @if ($errors->has('meta_title'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_title') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Meta Keyword --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Keyword</label>
+                                    <input type="text" name="meta_keyword" class="form-control"
+                                        placeholder="Enter Meta Keyword"
+                                        value="{{ old('meta_keyword', $home_cms->meta_keyword ?? '') }}">
+                                    @if ($errors->has('meta_keyword'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_keyword') }}
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Meta Description --}}
+                                <div class="form-group col-md-12 mb-3">
+                                    <label>Meta Description</label>
+                                    <textarea name="meta_description" class="form-control" rows="3" placeholder="Enter Meta Description">{{ old('meta_description', $home_cms->meta_description ?? '') }}</textarea>
+                                    @if ($errors->has('meta_description'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('meta_description') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+
                             <div class="w-100 text-end">
                                 <button type="submit" class="print_btn">Update</button>
                             </div>
@@ -696,7 +739,7 @@
         });
     </script>
     {{-- ott icon --}}
-    
+
     {{-- entertainment --}}
     <script>
         $(document).ready(function() {
