@@ -15,12 +15,24 @@ use Stripe\Product;
 use Stripe\Price;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-
+use Braintree\Gateway;
 
 
 class PlanController extends Controller
 {
     use PayPalTrait;
+    protected $gateway;
+
+    public function __construct()
+    {
+        $this->gateway = new Gateway([
+            'environment' => env('BRAINTREE_ENV'),
+            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+            'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -77,107 +89,70 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'plan_name'     => 'required',
-            'plan_details'    => 'required',
-            'plan_actual_price'    => 'required|numeric',
-            'plan_offer_price' => [
-                'required',
-                'numeric',
-                Rule::unique('plans')->ignore($request->id), // Assuming 'id' is the primary key of your Plan model
-            ],
-            'button_text'    => 'required',
+            'plan_name'        => 'required',
+            'plan_details'     => 'required',
+            'plan_actual_price' => 'required|numeric',
+            'plan_offer_price' => 'required|numeric|unique:plans,plan_offer_price',
+            'button_text'      => 'required',
         ]);
 
-        $paypal_item = PaypalProduct::orderBy('id', 'desc')->first();
-        if ($paypal_item) {
-            $data = [
-                "product_id" => $paypal_item->product_id,
-                "name" => $request->plan_name,
-                "description" => $request->plan_details,
-                "status" => "ACTIVE",
-                "billing_cycles" => [
-                    [
-                        "frequency" => [
-                            "interval_unit" => "MONTH",
-                            "interval_count" => 1
-                        ],
-                        "tenure_type" => "TRIAL",
-                        "sequence" => 1,
-                        "total_cycles" => 1,
-                        "pricing_scheme" => [
-                            "fixed_price" => [
-                                "value" => $request->plan_offer_price,
-                                "currency_code" => "USD"
-                            ]
-                        ]
-                    ],
-                    [
-                        "frequency" => [
-                            "interval_unit" => "MONTH",
-                            "interval_count" => 1
-                        ],
-                        "tenure_type" => "REGULAR",
-                        "sequence" => 2,
-                        "total_cycles" => 12,
-                        "pricing_scheme" => [
-                            "fixed_price" => [
-                                "value" => $request->plan_offer_price,
-                                "currency_code" => "USD"
-                            ]
-                        ]
-                    ]
-                ],
-                "payment_preferences" => [
-                    "auto_bill_outstanding" => true,
-                    "setup_fee" => [
-                        "value" => "0",
-                        "currency_code" => "USD"
-                    ],
-                    "setup_fee_failure_action" => "CONTINUE",
-                    "payment_failure_threshold" => 3
-                ],
-                "taxes" => [
-                    "percentage" => "0",
-                    "inclusive" => false
-                ]
-            ];
+        try {
+            // Create a plan on Braintree
+            $result = $this->gateway->plan()->create([
+                'id' => 'plan_' . time(),  // Unique Plan ID
+                'name' => $request->plan_name,
+                'description' => $request->plan_details,
+                'price' => $request->plan_offer_price,  // Set the price here
+                'billingDayOfMonth' => 1,  // Billing day (e.g., the 1st day of the month)
+                'billingFrequency' => 1,  // Frequency of billing (1 = monthly, 12 = yearly)
+                'numberOfBillingCycles' => null,  // Set to null for indefinite billing cycles
+                'currencyIsoCode' => 'USD',  // e.g., 'USD'
+                'trialPeriod' => false,  // Set true/false based on trial days
+                // 'trialDuration' => $request->plan_trial_days,  // Number of trial days
+                // 'trialDurationUnit' => 'day',  // Unit for trial duration ('day' or 'month')
+            ]);
 
-            // dd(json_encode($data));
-            $response = $this->createPlan($data);
-            // return $response;
-        } else {
-            $response = null;
-        }
-        $old_plan = Plan::orderBy('plan_order', 'desc')->first();
-        if ($old_plan) {
-            $order = $old_plan->plan_order + 1;
-        } else {
-            $order = 1;
-        }
-        $plan = new Plan();
-        if ($response != null && isset($response->id)) {
-            $plan->paypal_plan_id = $response->id;
-        }
-        $plan->plan_name = $request->plan_name;
-        $plan->plan_details = $request->plan_details;
-        $plan->plan_actual_price = $request->plan_actual_price;
-        $plan->plan_offer_price = $request->plan_offer_price;
-        $plan->button_text = $request->button_text;
-        $plan->plan_order = $order;
-        $plan->save();
+            // dd($result);
 
-        $id = $plan->id;
-        foreach ($request->plan_specification as $key => $specification) {
-            if ($specification != null) {
-                $plan_specification = PlanSpecification::create([
-                    'plan_id' => $id,
-                    'specification_name' => $specification,
-                ]);
+            if ($result->success) {
+                // Handle successful creation of a plan on Braintree
+                $braintree_plan_id = $result->plan->id;
+
+                // Save the plan data to your database
+                $plan = new Plan();
+                $plan->braintree_plan_id = $braintree_plan_id;
+                $plan->plan_name = $request->plan_name;
+                $plan->plan_details = $request->plan_details;
+                $plan->plan_actual_price = $request->plan_actual_price;
+                $plan->plan_offer_price = $request->plan_offer_price;
+                $plan->button_text = $request->button_text;
+                $plan->plan_order = Plan::max('plan_order') + 1;
+                $plan->save();
+
+                // Add plan specifications if provided
+                $id = $plan->id;
+                foreach ($request->plan_specification as $specification) {
+                    if ($specification != null) {
+                        PlanSpecification::create([
+                            'plan_id' => $id,
+                            'specification_name' => $specification,
+                        ]);
+                    }
+                }
+
+                return redirect()->route('plan.index')->with('success', 'Plan has been created successfully.');
+            } else {
+                // Handle failure
+                return redirect()->back()->with('error', 'Failed to create the plan in Braintree.');
             }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error occurred: ' . $e->getMessage());
         }
-
-        return redirect()->route('plan.index')->with('success', 'Plan has been created successfully');
     }
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -234,139 +209,71 @@ class PlanController extends Controller
 
     public function planUpdate(Request $request)
     {
-
         $request->validate([
-            'plan_name'     => 'required',
-            'plan_details'    => 'required',
-            'plan_actual_price'    => 'required|numeric',
-            'plan_offer_price'    => 'required|numeric',
-            'button_text'    => 'required',
+            'plan_name' => 'required',
+            'plan_details' => 'required',
+            'plan_actual_price' => 'required|numeric',
+            'plan_offer_price' => 'required|numeric',
+            'button_text' => 'required',
+            // 'currency' => 'required|string', // Currency code
+            // 'billing_frequency' => 'required|integer', // Billing frequency (e.g., 1 = monthly)
         ]);
-        $plan_update = Plan::where('id', $request->id)->first();
 
-        if ($plan_update->paypal_plan_id) { {
-                // dd($plan_update->paypal_plan_id);
-                $data = [
-                    "pricing_schemes" => [
-                        [
-                            "billing_cycle_sequence" => 1,
-                            "pricing_scheme" => [
-                                "fixed_price" => [
-                                    "value" => $request->plan_offer_price,
-                                    "currency_code" => "USD"
-                                ],
-                                "roll_out_strategy" => [
-                                    "effective_time" => Carbon::now()->format('Y-m-d\TH:i:s\Z'),
-                                    "process_change_from" => "NEXT_PAYMENT"
-                                ]
-                            ]
-                        ],
-                        [
-                            "billing_cycle_sequence" => 2,
-                            "pricing_scheme" => [
-                                "fixed_price" => [
-                                    "value" => $request->plan_offer_price,
-                                    "currency_code" => "USD"
-                                ],
-                                "roll_out_strategy" => [
-                                    "effective_time" => Carbon::now()->format('Y-m-d\TH:i:s\Z'),
-                                    "process_change_froms" => "NEXT_PAYMENT",
-                                ]
-                            ]
-                        ]
-                    ]
-                ];
-            }
-            // dd(json_encode($plan_update->paypal_plan_id));
-            $update_response = $this->updatePricing($data, $plan_update->paypal_plan_id);
-            // dd($update_response);
-            $response = null;
-        } else {
-            $paypal_item = PaypalProduct::orderBy('id', 'desc')->first();
-            if ($paypal_item) {
-                $data = [
-                    "product_id" => $paypal_item->product_id,
-                    "name" => $request->plan_name,
-                    "description" => $request->plan_details,
-                    "status" => "ACTIVE",
-                    "billing_cycles" => [
-                        [
-                            "frequency" => [
-                                "interval_unit" => "MONTH",
-                                "interval_count" => 1
-                            ],
-                            "tenure_type" => "TRIAL",
-                            "sequence" => 1,
-                            "total_cycles" => 1,
-                            "pricing_scheme" => [
-                                "fixed_price" => [
-                                    "value" => $request->plan_offer_price,
-                                    "currency_code" => "USD"
-                                ]
-                            ]
-                        ],
-                        [
-                            "frequency" => [
-                                "interval_unit" => "MONTH",
-                                "interval_count" => 1
-                            ],
-                            "tenure_type" => "REGULAR",
-                            "sequence" => 2,
-                            "total_cycles" => 12,
-                            "pricing_scheme" => [
-                                "fixed_price" => [
-                                    "value" => $request->plan_offer_price,
-                                    "currency_code" => "USD"
-                                ]
-                            ]
-                        ]
-                    ],
-                    "payment_preferences" => [
-                        "auto_bill_outstanding" => true,
-                        "setup_fee" => [
-                            "value" => "0",
-                            "currency_code" => "USD"
-                        ],
-                        "setup_fee_failure_action" => "CONTINUE",
-                        "payment_failure_threshold" => 3
-                    ],
-                    "taxes" => [
-                        "percentage" => "0",
-                        "inclusive" => false
-                    ]
-                ];
+        // Fetch the existing plan details
+        $plan = Plan::find($request->plan_id);
 
-                $response = $this->createPlan($data);
-            } else {
-                $response = null;
-            }
-        } // end of else
-
-        if ($response != null && isset($response->id)) {
-            $plan_update->paypal_plan_id = $response->id;
+        if (!$plan) {
+            return redirect()->back()->with('error', 'Plan not found.');
         }
 
-        $plan_update->plan_name = $request->plan_name;
-        $plan_update->plan_details = $request->plan_details;
-        $plan_update->plan_actual_price = $request->plan_actual_price;
-        $plan_update->plan_offer_price = $request->plan_offer_price;
-        $plan_update->button_text = $request->button_text;
-        $plan_update->update();
+        try {
+            // Create a new plan in Braintree
+            $result = $this->gateway->plan()->create([
+                'id' => 'plan_' . time(),  // Unique Plan ID
+                'name' => $request->plan_name,
+                'description' => $request->plan_details,
+                'price' => $request->plan_offer_price,  // Set the price here
+                'billingDayOfMonth' => 1,  // Billing day (e.g., the 1st day of the month)
+                'billingFrequency' => 1,  // Frequency of billing (1 = monthly, 12 = yearly)
+                'numberOfBillingCycles' => null,  // Set to null for indefinite billing cycles
+                'currencyIsoCode' => 'USD',  // e.g., 'USD'
+                'trialPeriod' => false,  // Set true/false based on trial days
+                // 'trialDuration' => $request->plan_trial_days,  // Number of trial days
+                // 'trialDurationUnit' => 'day',  // Unit for trial duration ('day' or 'month')
+            ]);
 
-        if ($request->plan_specification != null) {
-            PlanSpecification::where('plan_id', $request->id)->delete();
-            foreach ($request->plan_specification as $key => $specification) {
-                if ($specification != null) {
-                    $plan_specification = PlanSpecification::create([
-                        'plan_id' => $request->id,
-                        'specification_name' => $specification,
-                    ]);
+            if ($result->success) {
+                // Update the plan in your database
+                $plan->plan_name = $request->plan_name;
+                $plan->plan_details = $request->plan_details;
+                $plan->plan_actual_price = $request->plan_actual_price;
+                $plan->plan_offer_price = $request->plan_offer_price;
+                $plan->braintree_plan_id = $result->plan->id; // Update the Braintree plan ID
+                $plan->update();
+
+                // Update plan specifications if provided
+                if ($request->plan_specification != null) {
+                    PlanSpecification::where('plan_id', $plan->id)->delete();
+                    foreach ($request->plan_specification as $specification) {
+                        if ($specification != null) {
+                            PlanSpecification::create([
+                                'plan_id' => $plan->id,
+                                'specification_name' => $specification,
+                            ]);
+                        }
+                    }
                 }
-            }
-        }
 
-        return redirect()->route('plan.index')->with('message', 'Plan updated successfully');
+                return redirect()->route('plan.index')->with('success', 'Plan updated successfully.');
+            } else {
+                return redirect()->back()->with('error', 'Error creating new plan in Braintree: ' . $result->message);
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
     }
+
+
 
     /**
      * Remove the specified resource from storage.
