@@ -53,6 +53,7 @@ use App\Http\Controllers\Captcha\RefreshCaptchaController;
 use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Artisan;
 
+
 // Clear cache
 Route::get('clear', function () {
     Artisan::call('optimize:clear');

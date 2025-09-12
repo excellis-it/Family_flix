@@ -3440,7 +3440,8 @@ margin-left:-15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; 
+    height: auto; 
+    padding: 20px 0px;
 }
 .login-head h2{
     font-size: 55px;
@@ -3480,10 +3481,10 @@ margin-left:-15px;
     padding: 10px 32px;
 }
 .sign-up-bg{
-    height: 100vh;
+    height: auto;
 }
 .sign-btn{
-      
+  height: auto;     
 }
 /*04-04-24*/
 .pg-ul nav ul {

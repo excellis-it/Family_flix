@@ -40,7 +40,14 @@
     {{-- toastr cdn --}}
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CC9CJZ88JX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-CC9CJZ88JX');
+</script>
 
 </head>
 

@@ -716,6 +716,7 @@
                             if (result.errors) {
                                 $.each(result.errors, function(field, message) {
                                     if (result.single == true) {
+                                        console.error('Validation Error:', message);
                                         toastr.error(message);
                                     } else {
                                         $('#' + field + '_error').text(message);
