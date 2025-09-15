@@ -7,9 +7,9 @@
 @endpush
 
 @section('content')
-    @php
+    {{-- @php
         use App\Http\Controllers\AffiliateMarketer\WalletController;
-    @endphp
+    @endphp --}}
     <div class="container-fluid">
         <div class="breadcome-list">
             <div class="row">
@@ -56,13 +56,13 @@
                                 </div>
                                 <div >
                                     {{-- stripe connect button --}}
-                                    @if (Auth::user()->stripeConnect()->exists())
+                                    {{-- @if (Auth::user()->stripeConnect()->exists())
                                         <a href="{{ WalletController::stripeUrl() }}" class="print_btn" target="_blank"><i
                                                 class="ti ti-link"></i> Recreate Your Stripe Account</a>
                                     @else
                                         <a href="{{ WalletController::stripeUrl() }}" class="print_btn" target="_blank"><i
                                                 class="ti ti-link"></i> Create Your Stripe Account</a>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         </div>

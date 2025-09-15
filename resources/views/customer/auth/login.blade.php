@@ -1,8 +1,10 @@
 @extends('customer.layouts.master')
 @section('meta_title')
+    <meta name="description" content="Sign in to The Family Flix. Quick entertainment login Orlando to manage your account, stream, and enjoy family-friendly content.">
+    <meta name="keywords" content="Streaming access Orlando , Member login Orlando, Customer account login for entertainment subscription in Orlando">
 @endsection
 
-@section('title', 'About Us - Family Flix')
+@section('title', 'Entertainment Login Orlando | The Family Flix Access')
 
 
 @push('styles')
@@ -39,14 +41,14 @@
                                     </div>
                                     <div class="form-group col-md-12 mb-3">
                                         <label>Password</label>
-                                        <input type="password" class="form-control" name="password" 
+                                        <input type="password" class="form-control" name="password"
                                             placeholder="Password">
                                             <i class="toggle-password fa fa-fw fa-eye-slash"></i>
                                         @if ($errors->has('password'))
                                             <div class="error" style="color:red;">{{ $errors->first('password') }}</div>
                                         @endif
                                     </div>
-                                    
+
                                     <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }} col-md-12 mb-3">
                                         <label for="captcha">Captcha</label>
                                         <div class="captcha">
@@ -122,7 +124,7 @@
         @endif
     </script>
 
-    
+
     <script>
         $(".toggle-password").click(function() {
             $(this).toggleClass("fa-eye fa-eye-slash");

@@ -9,6 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('meta')
     <title>@yield('title', 'The Family Flix')</title>
+    <link rel="canonical" href="{{ url()->current() }}" />
+
     <link rel="icon" type="image/x-icon" href="{{ asset('frontend_assets/images/logo.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- font -->

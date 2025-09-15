@@ -25,30 +25,25 @@
             <div class="col-lg-12">
                 <div class="card w-100">
                     <div class="card-body">
-                        <form action="{{ route('affiliate-marketer.wallet.money-transfer') }}" method="POST" id="project-create-form">
+                        <form action="{{ route('affiliate-marketer.wallet.money-transfer') }}" method="POST" id="project-create-form"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="form-group col-md-12 mb-3">
-                                    <label for="inputEnterYourName" class="col-form-label">Amount <span style="color: red;">*</span></label>
-                                    <input type="text" name="amount" class="form-control" value="{{ old('amount') }}" placeholder="Enter Amount">
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="inputEnterYourName" class="col-form-label"> Amount <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" name="amount" id="" class="form-control"
+                                        value="{{ old('amount') }}" placeholder="Enter Amount">
                                     @if ($errors->has('amount'))
                                         <div class="error" style="color:red;">
-                                            {{ $errors->first('amount') }}
-                                        </div>
+                                            {{ $errors->first('amount') }}</div>
                                     @endif
                                 </div>
 
-                                <div class="form-group col-md-12 mb-3">
-                                    {{-- <label for="card-details" class="col-form-label">Card Details <span style="color: red;">*</span></label> --}}
-                                    <div id="dropin-container"></div>
-                                </div>
-
                                 <div class="col-md-6 mt-4">
-                                    <button type="submit" id="submit-button" class="print_btn">Transfer</button>
+                                    <button type="submit" class="print_btn">Transfer</button>
                                 </div>
-                            </div>
                         </form>
-
                     </div>
                 </div>
 
@@ -139,39 +134,4 @@
 
     });
 </script>
-<script src="https://js.braintreegateway.com/web/dropin/1.36.1/js/dropin.min.js"></script>
-<script>
-    var form = document.querySelector('#project-create-form');
-    var clientToken = "{{ $braintreeToken }}";
-
-    braintree.dropin.create({
-        authorization: clientToken,
-        container: '#dropin-container'
-    }, function (err, instance) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            instance.requestPaymentMethod(function (err, payload) {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-
-                // Add the payment method nonce to the form
-                var hiddenInput = document.createElement('input');
-                hiddenInput.type = 'hidden';
-                hiddenInput.name = 'payment_method_nonce';
-                hiddenInput.value = payload.nonce;
-                form.appendChild(hiddenInput);
-
-                form.submit();
-            });
-        });
-    });
-</script>
-
 @endpush

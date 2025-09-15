@@ -52,7 +52,7 @@
 
                 <li class="nav-item has-submenu {{ Request::is('affiliate-marketer/money-transfer-list*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('affiliate-marketer.wallet.money-transfer.list') }}"> <span>
-                            <i class="fa fa-cc-stripe"></i>
+                           <i class="fa fa-exchange"></i>   <!-- Old FA 4 -->
                         </span>Transfer Wallet Money<span class="arrow-down"></span></a>
                 </li>
 

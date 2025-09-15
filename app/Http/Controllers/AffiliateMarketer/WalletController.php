@@ -9,18 +9,30 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\StripeConnect;
 use App\Models\User;
 use App\Models\WalletMoneyTransaction;
+use Braintree\Gateway;
 use Stripe\OAuth;
 use Stripe\Stripe;
 use Stripe\StripeClient;
+use Illuminate\Support\Facades\Log;
 
 class WalletController extends Controller
 {
     private $stripe;
+    protected $gateway;
     public function __construct()
     {
         $this->stripe = new StripeClient(env('STRIPE_SECRET'));
         Stripe::setApiKey(env('STRIPE_SECRET'));
+        $this->gateway = new Gateway([
+            'environment' => env('BRAINTREE_ENV'),
+            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+            'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        ]);
     }
+
+
+
 
     public function walletList()
     {
@@ -80,7 +92,7 @@ class WalletController extends Controller
         }
         $connectedAccountId = $token->stripe_user_id;
         $account = $this->getAccount($connectedAccountId);
-        if (Auth::user()->stripeConnect()->exists()) {
+        if (Auth::user()->stripeConnect && Auth::user()->stripeConnect->exists()) {
             $stripeAccount = StripeConnect::where('user_id', Auth::user()->id)->first();
             $message = 'Stripe account updated successfully.';
         } else {
@@ -108,7 +120,7 @@ class WalletController extends Controller
                 'grant_type' => 'authorization_code',
                 'code' => $code
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $token['error'] = $e->getMessage();
         }
         return $token;
@@ -122,7 +134,7 @@ class WalletController extends Controller
                 $connectedAccountId,
                 []
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $account['error'] = $e->getMessage();
         }
         return $account;
@@ -130,18 +142,19 @@ class WalletController extends Controller
 
     public function walletMoneyTransferList()
     {
-         if(auth()->user()->stripeConnect()->exists()){
+        //  if(auth()->user()->stripeConnect()->exists()){
         $wallet_money_transfer = WalletMoneyTransaction::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
-        return view('frontend.affiliate-marketer.wallet.transfer')->with(compact('wallet_money_transfer'));
-         } else {
-             return redirect()->route('affiliate-marketer.profile')->with('error', 'Please create stripe account first');
-        }
+        $braintreeToken = $this->gateway->clientToken()->generate();
+        return view('frontend.affiliate-marketer.wallet.transfer')->with(compact('wallet_money_transfer', 'braintreeToken'));
+        //  } else {
+        //      return redirect()->route('affiliate-marketer.profile')->with('error', 'Please create stripe account first');
+        // }
     }
 
     public function walletMoneyTransferFetchData(Request $request)
     {
         if ($request->ajax()) {
-            $query = $request->get('query',''); // Default to empty string if not set
+            $query = $request->get('query', ''); // Default to empty string if not set
             $wallet_money_transfer = WalletMoneyTransaction::query()
                 ->where('user_id', Auth::user()->id)
                 ->where(function ($q) use ($query) {
@@ -156,58 +169,120 @@ class WalletController extends Controller
         }
     }
 
+    // public function walletMoneyTransfer(Request $request)
+    // {
+    //     $request->validate([
+    //         'amount' => 'required|numeric|min:1',
+    //     ],[
+    //         'amount.required' => 'Please put a valid amount.',
+    //         'amount.numeric' => 'Please put a valid amount.',
+    //         'amount.min' => 'Please put at least 1 amount.',
+    //     ]);
+
+    //     // $wallet = Wallet::where('user_id', Auth::user()->id)->sum('balance');
+    //     if(auth()->user()->stripeConnect()->exists()){
+    //         if (auth()->user()->wallet_balance < $request->amount) {
+    //             return redirect()->back()->with('error', 'Insufficient balance.');
+    //         }
+    //     } else {
+    //          return redirect()->route('affiliate-marketer.profile')->with('error', 'Please create stripe account first');
+    //     }
+
+    //     try {
+
+    //         $transfer = $this->stripe->transfers->create([
+    //             'amount' => $request->amount * 100,
+    //             'currency' => 'usd',
+    //             'destination' => Auth::user()->stripeConnect->account_id,
+    //         ]);
+
+    //         // dd($transfer);
+    //         if (isset($transfer->id)) {
+    //             $wallet = User::find(Auth::user()->id);
+    //             $wallet_money_transfer = new WalletMoneyTransaction();
+    //             $wallet_money_transfer->user_id = Auth::user()->id;
+    //             $wallet_money_transfer->transaction_id = $transfer->id;
+    //             $wallet_money_transfer->transaction_type = 'debit';
+    //             $wallet_money_transfer->transaction_amount = $request->amount;
+    //             $balance = ($wallet->wallet_balance - $request->amount);
+    //             $wallet_money_transfer->last_available_balance = round($balance, 2);
+    //             $wallet_money_transfer->transaction_description = 'Wallet money transfer';
+    //             $wallet_money_transfer->save();
+
+    //             // wallet balance update
+
+    //             $wallet->wallet_balance =  $balance;
+    //             $wallet->save();
+
+    //             return redirect()->back()->with('message', 'Money transfer successfully. Please check your wallet transaction list.');
+    //         } else {
+    //             return redirect()->back()->with('error', 'Money transfer failed.');
+    //         }
+
+    //     } catch (\Throwable $th) {
+    //         return redirect()->back()->with('error', $th->getMessage());
+    //     }
+    // }
+
+
     public function walletMoneyTransfer(Request $request)
     {
+        // Validation
         $request->validate([
             'amount' => 'required|numeric|min:1',
-        ],[
+            'payment_method_nonce' => 'required'
+        ], [
             'amount.required' => 'Please put a valid amount.',
             'amount.numeric' => 'Please put a valid amount.',
             'amount.min' => 'Please put at least 1 amount.',
         ]);
 
-        // $wallet = Wallet::where('user_id', Auth::user()->id)->sum('balance');
-        if(auth()->user()->stripeConnect()->exists()){
-            if (auth()->user()->wallet_balance < $request->amount) {
-                return redirect()->back()->with('error', 'Insufficient balance.');
-            }
-        } else {
-             return redirect()->route('affiliate-marketer.profile')->with('error', 'Please create stripe account first');
+        // Check wallet balance
+        if (auth()->user()->wallet_balance < $request->amount) {
+            return redirect()->back()->with('error', 'Insufficient balance.');
         }
 
         try {
-
-            $transfer = $this->stripe->transfers->create([
-                'amount' => $request->amount * 100,
-                'currency' => 'usd',
-                'destination' => Auth::user()->stripeConnect->account_id,
+            // Perform the Braintree transaction
+            $result = $this->gateway->transaction()->sale([
+                'amount' => $request->amount,
+                'paymentMethodNonce' => $request->payment_method_nonce,
+                'options' => [
+                    'submitForSettlement' => true
+                ],
             ]);
+             dd($result);
+            // Log the result to inspect the full response
+            Log::info('Braintree Transaction Result:', ['result' => $result]);
 
-            // dd($transfer);
-            if (isset($transfer->id)) {
+            if ($result->success) {
+                // Get the transaction ID and save wallet transaction
+                $transactionId = $result->transaction->id;
+
                 $wallet = User::find(Auth::user()->id);
                 $wallet_money_transfer = new WalletMoneyTransaction();
                 $wallet_money_transfer->user_id = Auth::user()->id;
-                $wallet_money_transfer->transaction_id = $transfer->id;
+                $wallet_money_transfer->transaction_id = $transactionId;  // Use Braintree transaction ID
                 $wallet_money_transfer->transaction_type = 'debit';
                 $wallet_money_transfer->transaction_amount = $request->amount;
+
+                // Update wallet balance
                 $balance = ($wallet->wallet_balance - $request->amount);
                 $wallet_money_transfer->last_available_balance = round($balance, 2);
                 $wallet_money_transfer->transaction_description = 'Wallet money transfer';
                 $wallet_money_transfer->save();
 
-                // wallet balance update
-
-                $wallet->wallet_balance =  $balance;
+                // Update user wallet balance
+                $wallet->wallet_balance = $balance;
                 $wallet->save();
 
                 return redirect()->back()->with('message', 'Money transfer successfully. Please check your wallet transaction list.');
             } else {
-                return redirect()->back()->with('error', 'Money transfer failed.');
+                return redirect()->back()->with('error', 'Money transfer failed: ' . $result->message);
             }
-
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', $th->getMessage());
+            // Handle errors
+            return redirect()->back()->with('error', 'Error: ' . $th->getMessage());
         }
     }
 }
