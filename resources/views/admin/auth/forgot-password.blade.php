@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
 
-    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}"> 
 
     <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome/css/all.min.css') }}">

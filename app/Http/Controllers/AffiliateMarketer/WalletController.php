@@ -251,7 +251,6 @@ class WalletController extends Controller
                     'submitForSettlement' => true
                 ],
             ]);
-             dd($result);
             // Log the result to inspect the full response
             Log::info('Braintree Transaction Result:', ['result' => $result]);
 
