@@ -220,7 +220,7 @@ class PlanController extends Controller
         ]);
 
         // Fetch the existing plan details
-        $plan = Plan::find($request->plan_id);
+        $plan = Plan::find($request->id);
 
         if (!$plan) {
             return redirect()->back()->with('error', 'Plan not found.');
@@ -264,7 +264,7 @@ class PlanController extends Controller
                     }
                 }
 
-                return redirect()->route('plan.index')->with('success', 'Plan updated successfully.');
+                return redirect()->route('plan.index')->with('message', 'Plan updated successfully.');
             } else {
                 return redirect()->back()->with('error', 'Error creating new plan in Braintree: ' . $result->message);
             }
