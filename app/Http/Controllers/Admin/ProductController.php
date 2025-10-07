@@ -22,7 +22,7 @@ class ProductController extends Controller
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
-        
+
 
     }
 
@@ -60,7 +60,7 @@ class ProductController extends Controller
 
     public function changeUnbeatableStatus(Request $request)
     {
-       
+
         $change_unbeatable_status = Product::where('id',$request->pro_id)->first();
         $change_unbeatable_status->unbeatable_status = $request->status;
         $change_unbeatable_status->update();
@@ -97,12 +97,13 @@ class ProductController extends Controller
             $request->validate([
                 'product_image' => 'required',
             ]);
-            
+
             $file1= $request->file('product_image');
             $filename1= date('YmdHi').$file1->getClientOriginalName();
             $image_path1 = $request->file('product_image')->store('product', 'public');
             $product_store->product_image = $image_path1;
         }
+        $product_store->img_alt_tag = $request->img_alt_tag;
         $product_store->save();
 
         return redirect()->route('products.index')->with('message','product added successfully');
@@ -143,12 +144,13 @@ class ProductController extends Controller
             $request->validate([
                 'product_image' => 'required',
             ]);
-            
+
             $file1= $request->file('product_image');
             $filename1= date('YmdHi').$file1->getClientOriginalName();
             $image_path1 = $request->file('product_image')->store('product', 'public');
             $product_update->product_image = $image_path1;
         }
+        $product_update->img_alt_tag = $request->img_alt_tag;
         $product_update->update();
 
         return redirect()->route('products.index')->with('message','Product updated successfully');

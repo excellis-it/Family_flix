@@ -66,24 +66,25 @@ class EntertainmentBannerController extends Controller
         $entertainment_banner->long_description = $request->long_description;
         $entertainment_banner->banner_type = $request->banner_type;
         $entertainment_banner->button_name = $request->button_name;
+        $entertainment_banner->img_alt_tag = $request->img_alt_tag;
 
         if ($request->hasFile('banner_image')) {
             $request->validate([
                 'banner_image' => 'required',
             ]);
-            
+
             $file1= $request->file('banner_image');
             $filename1= date('YmdHi').$file1->getClientOriginalName();
             $image_path1 = $request->file('banner_image')->store('entertainment_banner', 'public');
             $entertainment_banner->banner_image = $image_path1;
         }
 
-        
+
         if ($request->hasFile('banner_logo')) {
             $request->validate([
                 'banner_logo' => 'required',
             ]);
-            
+
             $file11= $request->file('banner_logo');
             $filename11= date('YmdHi').$file11->getClientOriginalName();
             $image_path11 = $request->file('banner_logo')->store('entertainment_banner', 'public');
@@ -128,24 +129,25 @@ class EntertainmentBannerController extends Controller
         $update_ent_banner->long_description = $request->long_description;
         $update_ent_banner->banner_type = $request->banner_type;
         $update_ent_banner->button_name = $request->button_name;
+        $update_ent_banner->img_alt_tag = $request->img_alt_tag;
 
         if ($request->hasFile('banner_image')) {
             $request->validate([
                 'banner_image' => 'required',
             ]);
-            
+
             $file1= $request->file('banner_image');
             $filename1= date('YmdHi').$file1->getClientOriginalName();
             $image_path1 = $request->file('banner_image')->store('entertainment_banner', 'public');
             $update_ent_banner->banner_image = $image_path1;
         }
 
-        
+
         if ($request->hasFile('banner_logo')) {
             $request->validate([
                 'banner_logo' => 'required',
             ]);
-            
+
             $file11= $request->file('banner_logo');
             $filename11= date('YmdHi').$file11->getClientOriginalName();
             $image_path11 = $request->file('banner_logo')->store('entertainment_banner', 'public');

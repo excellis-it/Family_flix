@@ -41,12 +41,12 @@
             </div>
         </div>
         <div class="vdo-img">
-            <img src="{{ Storage::url($home_cms->section1_main_image) }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section1_main_image) }}" alt="{{$home_cms->section1_main_img_alt_tag ?? ''}}" />
         </div>
     </section>
     <section class="access-sec">
         <div class="access-bg-img">
-            <img src="{{ Storage::url($home_cms->section1_back_image) }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section1_back_image) }}" alt="{{$home_cms->section1_back_img_alt_tag ?? ''}}" />
         </div>
         <div class="container">
             <div class="access-div">
@@ -61,7 +61,7 @@
     </section>
     <section class="one-place">
         <div class="one-place-img text-end">
-            <img src="{{ Storage::url($home_cms->section2_main_image) }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section2_main_image) }}" alt="{{$home_cms->section2_main_img_alt_tag ?? ''}}" />
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
@@ -145,7 +145,7 @@
     </section>
     <section class="entertainment-sec">
         <div class="entertainment-bg">
-            <img src="{{ Storage::url($home_cms->section2_back_image) }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section2_back_image) }}" alt="{{$home_cms->section2_back_img_alt_tag ?? ''}}" />
         </div>
         <div class="entertainment-div">
             @include('frontend.partials.entertainment')
@@ -154,7 +154,7 @@
     </section>
     <section class="works-sec">
         <div class="works-sec-bg">
-            <img src="{{ Storage::url($home_cms->section3_back_image) }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section3_back_image) }}" alt="{{$home_cms->section3_back_img_alt_tag ?? ''}}" />
         </div>
         <div class="works-div-wrap">
             <div class="container">
@@ -166,7 +166,7 @@
                                     <h2>{{ $home_cms->section3_title }}<span class="dot">.</span></h2>
                                 </div>
                             </div>
-                            <img src="{{ Storage::url($home_cms->section3_main_image) }}" alt="" />
+                            <img src="{{ Storage::url($home_cms->section3_main_image) }}" alt="{{$home_cms->section3_main_img_alt_tag ?? ''}}" />
                             <div class="play-btn">
                                 <button type="button" class="play-btn" data-bs-toggle="modal" data-src=""
                                     data-bs-target="#myModal"><span><i class="fa-solid fa-play"></i></span></button>
@@ -180,7 +180,7 @@
     @if (count($products) > 0)
         <section class="unbeatable-sec">
             <div class="unbeatable-bg">
-                <img src="{{ Storage::url($home_cms->section4_back_image) }}" alt="" />
+                <img src="{{ Storage::url($home_cms->section4_back_image) }}" alt="{{$home_cms->section4_back_img_alt_tag ?? ''}}" />
             </div>
             <div class="entertainment-div">
                 <div class="container">
@@ -205,7 +205,7 @@
     @endif
     <section class="kids-sec">
         <div class="kid-bg">
-            <img src="{{ Storage::url($home_cms->section5_back_image) }}" alt="" />
+            <img src="{{ Storage::url($home_cms->section5_back_image) }}" alt="{{$home_cms->section5_back_img_alt_tag ?? ''}}" />
         </div>
         <div class="kids-div">
             <div class="container">
@@ -224,7 +224,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="kid-tv-img">
-                                    <img src="{{ Storage::url($home_cms->section5_main_image) }}" alt="" />
+                                    <img src="{{ Storage::url($home_cms->section5_main_image) }}" alt="{{$home_cms->section5_main_img_alt_tag ?? ''}}" />
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
     </section>
     <section class="pricing-sec">
         <div class="pricing-bg">
-            <img src="{{ Storage::url($home_cms->plan_section_back_image) }}" alt="" />
+            <img src="{{ Storage::url($home_cms->plan_section_back_image) }}" alt="{{$home_cms->plan_section_back_img_alt_tag ?? ''}}" />
         </div>
         <div class="container">
             <div class="pricing-sec-wrap">

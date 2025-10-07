@@ -4,7 +4,7 @@
     <div class="unbeatable-slider-div">
         <div class="unbeatable-slider-img">
              <a href="{{ Storage::url($show->product_image) }}" data-lightbox="homePortfolio">
-            <img src="{{ Storage::url($show->product_image) }}" alt="" />
+            <img src="{{ Storage::url($show->product_image) }}" alt="{{$show->img_alt_tag ?? ''}}" />
             </a>
         </div>
     </div>

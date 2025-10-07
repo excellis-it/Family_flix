@@ -120,6 +120,16 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
+                                    <label>Main Image Alt Tag</label>
+                                    <input type="text" name="section1_main_img_alt_tag" id="section1_main_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section1_main_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section1_main_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section1_main_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
                                     @if ($home_cms->section1_back_image != '')
                                         <img src="{{ Storage::url($home_cms->section1_back_image) }}" alt="preview image"
                                             style="max-height: 180px;">
@@ -127,6 +137,16 @@
                                         <img id="preview-section1-back"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="section1_back_img_alt_tag" id="section1_back_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section1_back_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section1_back_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section1_back_img_alt_tag') }}</div>
                                     @endif
                                 </div>
 
@@ -177,6 +197,26 @@
                                         <img id="preview-section2-back"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Main Image Alt Tag</label>
+                                    <input type="text" name="section2_main_img_alt_tag" id="section2_main_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section2_main_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section2_main_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section2_main_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="section2_back_img_alt_tag" id="section2_back_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section2_back_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section2_back_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section2_back_img_alt_tag') }}</div>
                                     @endif
                                 </div>
 
@@ -264,19 +304,29 @@
                                     @foreach ($entertainments as $key => $vall)
                                         <div class="row">
 
-                                            <div class="col-md-5 pb-3">
+                                            <div class="col-md-3 pb-3">
                                                 <div style="display: flex">
                                                     <img src="{{ Storage::url($vall->image) }}"
                                                         id="en-{{ $vall->id }}" width="200px;">
                                                 </div>
                                             </div>
-                                            <div class="col-md-5 pb-3">
+                                            <div class="col-md-3 pb-3">
 
                                                 <div style="display: flex">
                                                     <input type="text" name="image_name[]"
                                                         value="{{ $vall->image_name }}" class="form-control"
                                                         id="en-{{ $vall->id }}" placeholder="Enter Image Name"
                                                         readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 pb-3">
+
+                                                <div style="display: flex">
+                                                    <input type="text" name="image_alt_tag[]"
+                                                        value="{{ $vall->image_alt_tag }}" class="form-control"
+                                                        id="en-{{ $vall->id }}" placeholder="Enter Image Alt Tag"
+                                                        >
                                                 </div>
                                             </div>
 
@@ -338,6 +388,26 @@
                                         <img id="preview-section3-main-image"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Main Image Alt Tag</label>
+                                    <input type="text" name="section3_main_img_alt_tag" id="section3_main_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section3_main_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section3_main_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section3_main_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="section3_back_img_alt_tag" id="section3_back_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section3_back_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section3_back_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section3_back_img_alt_tag') }}</div>
                                     @endif
                                 </div>
 
@@ -424,6 +494,16 @@
                                     @endif
                                 </div>
 
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="section4_back_img_alt_tag" id="section4_back_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section4_back_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section4_back_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section4_back_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
                             </div>
                             <br>
 
@@ -470,6 +550,26 @@
                                         <img id="preview-section5-main-img"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Main Image Alt Tag</label>
+                                    <input type="text" name="section5_main_img_alt_tag" id="section5_main_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section5_main_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section5_main_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section5_main_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="section5_back_img_alt_tag" id="section5_back_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->section5_back_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section5_back_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section5_back_img_alt_tag') }}</div>
                                     @endif
                                 </div>
 
@@ -531,6 +631,17 @@
                                         <img id="preview-plan-back-img"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="plan_section_back_img_alt_tag" id="plan_section_back_img_alt_tag"
+                                        class="form-control" value="{{ $home_cms->plan_section_back_img_alt_tag ?? '' }}">
+
+                                    @if ($errors->has('plan_section_back_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('plan_section_back_img_alt_tag') }}</div>
                                     @endif
                                 </div>
 
@@ -746,7 +857,7 @@
             $(".ent-image").click(function() {
 
                 $(".entr-image-add").append(
-                    '<div class="row"><div class="col-md-5 pb-3"><div style="display: flex"><input type="file" name="entern_image[]" class="form-control"></div></div><div class="col-md-5 pb-3"><div style="display: flex"><input type="text" name="image_name[]" placeholder="Enter Image name" class="form-control"></div></div><div class="col-md-2"><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i>Remove</button></div></div>'
+                    '<div class="row"><div class="col-md-3 pb-3"><div style="display: flex"><input type="file" name="entern_image[]" class="form-control"></div></div><div class="col-md-3 pb-3"><div style="display: flex"><input type="text" name="image_name[]" placeholder="Enter Image name" class="form-control"></div></div><div class="col-md-3 pb-3"><div style="display: flex"><input type="text" name="image_alt_tag[]" placeholder="Enter Image alt tag" class="form-control"></div></div><div class="col-md-2"><button type="button" class="btn btn-danger cross good-button"><i class="fas fa-close"></i>Remove</button></div></div>'
                 );
             });
         });

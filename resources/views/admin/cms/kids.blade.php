@@ -94,6 +94,15 @@
                                             style="max-height: 180px;">
                                     @endif
                                 </div>
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="img_alt_tag" id="img_alt_tag"
+                                        class="form-control" value="{{ $kid_cms->img_alt_tag ?? '' }}">
+                                    @if ($errors->has('img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('img_alt_tag') }}</div>
+                                    @endif
+                                </div>
 
                                 <h4 class="text-left">Popular kids</h4>
                                 <hr>
@@ -118,6 +127,16 @@
                                         <img id="preview-back-image"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="img1_alt_tag" id="img1_alt_tag"
+                                        class="form-control" value="{{ $kid_cms->img1_alt_tag ?? '' }}">
+                                    @if ($errors->has('img1_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('img1_alt_tag') }}</div>
                                     @endif
                                 </div>
 

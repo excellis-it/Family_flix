@@ -72,6 +72,17 @@ class CmsController extends Controller
         $home_cms->entertainment_title = $request->entertainment_title;
         $home_cms->entertainment_description = $request->entertainment_description;
 
+        $home_cms->section1_main_img_alt_tag = $request->section1_main_img_alt_tag;
+        $home_cms->section1_back_img_alt_tag = $request->section1_back_img_alt_tag;
+        $home_cms->section2_main_img_alt_tag = $request->section2_main_img_alt_tag;
+        $home_cms->section2_back_img_alt_tag = $request->section2_back_img_alt_tag;
+        $home_cms->section3_main_img_alt_tag = $request->section3_main_img_alt_tag;
+        $home_cms->section3_back_img_alt_tag = $request->section3_back_img_alt_tag;
+        $home_cms->section4_back_img_alt_tag = $request->section4_back_img_alt_tag;
+        $home_cms->section5_back_img_alt_tag = $request->section5_back_img_alt_tag;
+        $home_cms->section5_main_img_alt_tag = $request->section5_main_img_alt_tag;
+        $home_cms->plan_section_back_img_alt_tag = $request->plan_section_back_img_alt_tag;
+
         $home_cms->meta_title = $request->meta_title;
         $home_cms->meta_keyword = $request->meta_keyword;
         $home_cms->meta_description = $request->meta_description;
@@ -205,8 +216,10 @@ class CmsController extends Controller
                     $entertainment_add = new EntertainmentCms();
                     $entertainment_add->image = $file_path1;
                     $entertainment_add->image_name = $request->image_name[$keys];
+                    $entertainment_add->image_alt_tag = $request->image_alt_tag[$keys] ?? null;
                     $entertainment_add->save();
                 }
+                return $entertainment_add;
             }
         }
 
@@ -285,7 +298,6 @@ class CmsController extends Controller
             $image_path19 = $request->file('plan_section_back_image')->store('home', 'public');
             $home_cms->plan_section_back_image = $image_path19;
         }
-
         $home_cms->update();
         return redirect()->back()->with('message', 'Home Created Successfully');
     }
@@ -360,6 +372,13 @@ class CmsController extends Controller
         $aboutUs_update->section3_description2 = $request->section3_description2;
         $aboutUs_update->section3_title3 = $request->section3_title3;
         $aboutUs_update->section3_description3 = $request->section3_description3;
+
+        $aboutUs_update->section1_img_alt_tag = $request->section1_img_alt_tag;
+        $aboutUs_update->section2_img_alt_tag = $request->section2_img_alt_tag;
+        $aboutUs_update->section3_back_img_alt_tag = $request->section3_back_img_alt_tag;
+        $aboutUs_update->section3_img1_alt_tag = $request->section3_img1_alt_tag;
+        $aboutUs_update->section3_img2_alt_tag = $request->section3_img2_alt_tag;
+        $aboutUs_update->section3_img3_alt_tag = $request->section3_img3_alt_tag;
 
 
         $aboutUs_update->meta_title = $request->meta_title;
@@ -630,6 +649,8 @@ class CmsController extends Controller
             $image_path06 = $request->file('footer_background')->store('footer', 'public');
             $footer_cms_update->footer_background = $image_path06;
         }
+        $footer_cms_update->footer_logo_img_alt_tag = $request->footer_logo_img_alt_tag;
+        $footer_cms_update->footer_image_img_alt_tag = $request->footer_image_img_alt_tag;
 
         $footer_cms_update->update();
 
