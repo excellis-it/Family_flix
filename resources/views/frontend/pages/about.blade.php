@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="abt-img">
-          <img src="{{ Storage::url($about_cms->section1_img)}}" alt="" />
+          <img src="{{ Storage::url($about_cms->section1_img)}}" alt="{{$about_cms->section1_img_alt_tag ?? ''}}" />
         </div>
       </section>
       <section class="commitment-sec">
@@ -93,7 +93,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="commitment-img">
-                  <img src="{{ Storage::url($about_cms->section2_img2)}}" alt="" />
+                  <img src="{{ Storage::url($about_cms->section2_img2)}}" alt="{{$about_cms->section2_img_alt_tag ?? ''}}" />
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@
       </section>
       <section class="entertainment-sec abt-entertaiment">
         <div class="entertainment-bg">
-          <img src="{{ Storage::url($about_cms->section3_back_img)}}" alt="" />
+          <img src="{{ Storage::url($about_cms->section3_back_img)}}" alt="{{$about_cms->section3_back_img_alt_tag ?? ''}}" />
         </div>
         <div class="sets-apart-sec">
           <div class="container">
@@ -118,7 +118,7 @@
                     <div class="sets-apart-box">
                       <div class="shows-slider-box">
                         <div class="shows-slider-img">
-                          <img src="{{ Storage::url($about_cms->section3_image1)}}" alt="" />
+                          <img src="{{ Storage::url($about_cms->section3_image1)}}" alt="{{$about_cms->section3_img1_alt_tag ?? ''}}" />
                           <div class="sets-apart-text">
                             <h3>{{ $about_cms->section3_title1 }}</h3>
                             <p>{{ $about_cms->section3_description1 }}</p>
@@ -134,7 +134,7 @@
                     <div class="sets-apart-box">
                       <div class="shows-slider-box">
                         <div class="shows-slider-img">
-                          <img src="{{ Storage::url($about_cms->section3_image1)}}" alt="" />
+                          <img src="{{ Storage::url($about_cms->section3_image1)}}" alt="{{$about_cms->section3_img2_alt_tag ?? ''}}" />
                           <div class="sets-apart-text">
                             <h3>{{ $about_cms->section3_title2 }}</h3>
                             <p>{{ $about_cms->section3_description2 }}</p>
@@ -150,7 +150,7 @@
                     <div class="sets-apart-box">
                       <div class="shows-slider-box">
                         <div class="shows-slider-img">
-                          <img src="{{ Storage::url($about_cms->section3_image3)}}" alt="" />
+                          <img src="{{ Storage::url($about_cms->section3_image3)}}" alt="{{$about_cms->section3_img3_alt_tag ?? ''}}" />
                           <div class="sets-apart-text">
                             <h3>{{ $about_cms->section3_title3 }}</h3>
                             <p>{{ $about_cms->section3_description3 }}</p>

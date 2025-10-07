@@ -84,6 +84,15 @@
                                 @endif
 
                                 <div class="form-group col-md-6 mb-3">
+                                    <label>Banner Image Alt Tag</label>
+                                    <input type="text" name="img_alt_tag" id="img_alt_tag" class="form-control" value="{{ $banner_detail->img_alt_tag ?? '' }}">
+                                    @if ($errors->has('img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
                                     <label>Small text<span style="color: red;">*</span></label>
                                     <input type="text" name="small_text" value="{{ $banner_detail->small_text }}"
                                         placeholder="Enter small text" class="form-control">

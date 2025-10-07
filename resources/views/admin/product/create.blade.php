@@ -61,6 +61,16 @@
                                         alt="preview image" style="max-height: 180px;">
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Image Alt Tag</label>
+                                    <input type="text" name="img_alt_tag" id="img_alt_tag" class="form-control">
+                                    @if ($errors->has('img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+                            </div>
 
 
                             <div class="w-100 text-end">

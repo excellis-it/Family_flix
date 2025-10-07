@@ -118,6 +118,26 @@
                                     @endif
                                 </div>
 
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Top 10 Show Section Background Image Alt Tag</label>
+                                    <input type="text" name="img_alt_tag" id="img_alt_tag"
+                                        class="form-control" value="{{ $show_cms->img_alt_tag ?? '' }}">
+                                    @if ($errors->has('img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Popular kids Section Background Image Alt Tag</label>
+                                    <input type="text" name="img1_alt_tag" id="img1_alt_tag"
+                                        class="form-control" value="{{ $show_cms->img1_alt_tag ?? '' }}">
+                                    @if ($errors->has('img1_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('img1_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
                             </div>
                             <div class="row">
                                 <h4 class="text-left">SEO Section</h4>

@@ -107,6 +107,15 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
+                                    <label>Section1 Image Alt Tag</label>
+                                    <input type="text" name="section1_img_alt_tag" id="section1_img_alt_tag" class="form-control" value="{{ $about_cms->section1_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section1_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section1_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
                                     <label>Section2 Title1<span style="color: red;">*</span></label>
                                     <input type="text" name="section2_title1" value="{{ $about_cms->section2_title1 }}"
                                         class="form-control" placeholder="Enter section2 title1">
@@ -147,6 +156,15 @@
                                     @endif
                                 </div>
 
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Section2 Image2 Alt Tag</label>
+                                    <input type="text" name="section2_img_alt_tag" id="section2_img_alt_tag" class="form-control" value="{{ $about_cms->section2_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section2_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section2_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
                                 <h4 class="text-left">Bottom Section</h4>
                                 <hr>
 
@@ -178,6 +196,15 @@
                                         <img id="preview-back-image"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Background Image Alt Tag</label>
+                                    <input type="text" name="section3_back_img_alt_tag" id="section3_back_img_alt_tag" class="form-control" value="{{ $about_cms->section3_back_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('section3_back_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section3_back_img_alt_tag') }}</div>
                                     @endif
                                 </div>
 
@@ -223,6 +250,15 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
+                                    <label>Image1 Alt Tag</label>
+                                    <input type="text" name="section3_img1_alt_tag" id="section3_img1_alt_tag" class="form-control" value="{{ $about_cms->section3_img1_alt_tag ?? '' }}">
+                                    @if ($errors->has('section3_img1_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section3_img1_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
                                     <label>Title2<span style="color: red;">*</span></label>
                                     <input type="text" name="section3_title2" value="{{ $about_cms->section3_title2 }}"
                                         class="form-control" placeholder="Enter section3 title1">
@@ -264,6 +300,15 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
+                                    <label>Image2 Alt Tag</label>
+                                    <input type="text" name="section3_img2_alt_tag" id="section3_img2_alt_tag" class="form-control" value="{{ $about_cms->section3_img2_alt_tag ?? '' }}">
+                                    @if ($errors->has('section3_img2_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section3_img2_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
                                     <label>Title3<span style="color: red;">*</span></label>
                                     <input type="text" name="section3_title3" value="{{ $about_cms->section3_title3 }}"
                                         class="form-control" placeholder="Enter section3 title1">
@@ -301,6 +346,15 @@
                                         <img id="preview-back-image"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Image3 Alt Tag</label>
+                                    <input type="text" name="section3_img3_alt_tag" id="section3_img3_alt_tag" class="form-control" value="{{ $about_cms->section3_img3_alt_tag ?? '' }}">
+                                    @if ($errors->has('section3_img3_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section3_img3_alt_tag') }}</div>
                                     @endif
                                 </div>
 

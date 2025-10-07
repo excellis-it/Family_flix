@@ -18,19 +18,19 @@ class entertainmentCmsSeeder extends Seeder
 
         $entertainments = [
             [
-    
+
                 'image' => 'entertainment/en-1.png',
                 'image_name' => 'On Your TV',
             ],
             [
                 'image' => 'entertainment/en-2.png',
                 'image_name' => 'Mobiles & Tablets',
-                
+
             ],
             [
                 'image' => 'entertainment/en-3.png',
                 'image_name' => 'On Firestick & Firecube',
-                
+
             ],
         ];
 

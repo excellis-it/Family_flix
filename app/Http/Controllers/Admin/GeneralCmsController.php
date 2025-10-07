@@ -128,6 +128,8 @@ class GeneralCmsController extends Controller
          $kid_cms->meta_title = $request->meta_title;
         $kid_cms->meta_keyword = $request->meta_keyword;
         $kid_cms->meta_description = $request->meta_description;
+        $kid_cms->img_alt_tag = $request->img_alt_tag;
+        $kid_cms->img1_alt_tag = $request->img1_alt_tag;
 
         //banner_img upload
         if ($request->hasFile('banner_img')) {
@@ -190,6 +192,8 @@ class GeneralCmsController extends Controller
         $show_cms->meta_title = $request->meta_title;
         $show_cms->meta_keyword = $request->meta_keyword;
         $show_cms->meta_description = $request->meta_description;
+        $show_cms->img_alt_tag = $request->img_alt_tag;
+        $show_cms->img1_alt_tag = $request->img1_alt_tag;
         //banner_img upload
         if ($request->hasFile('banner_img')) {
             $request->validate([
@@ -248,9 +252,11 @@ class GeneralCmsController extends Controller
         $movie_cms = ContentTypeCms::where('id', $request->id)->where('type', 'movie')->first();
         $movie_cms->heading = $request->heading;
         $movie_cms->small_description = $request->small_description;
-         $movie_cms->meta_title = $request->meta_title;
+        $movie_cms->meta_title = $request->meta_title;
         $movie_cms->meta_keyword = $request->meta_keyword;
         $movie_cms->meta_description = $request->meta_description;
+        $movie_cms->img_alt_tag = $request->img_alt_tag;
+        $movie_cms->img1_alt_tag = $request->img1_alt_tag;
 
         //banner_img upload
         if ($request->hasFile('banner_img')) {

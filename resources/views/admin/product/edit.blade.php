@@ -36,7 +36,7 @@
                                     <label>Product For<span
                                         style="color: red;">*</span></label>
                                     <select name="type" class="form-control">
-                                       
+
                                         <option value="shows" {{ $product_edit->type == 'shows' ? 'selected':'' }}>Shows</option>
                                         <option value="movie" {{ $product_edit->type == 'movie' ? 'selected':'' }}>Movies</option>
                                         <option value="kids" {{ $product_edit->type == 'kids' ? 'selected':'' }}>Kids</option>
@@ -65,6 +65,17 @@
                                     src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                     style="max-height: 150px;">
                             @endif
+
+                            <div class="row">
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Image Alt Tag</label>
+                                    <input type="text" name="img_alt_tag" id="img_alt_tag" class="form-control" value="{{ $product_edit->img_alt_tag ?? ''}}">
+                                    @if ($errors->has('img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+                            </div>
 
 
                             <div class="w-100 text-end">

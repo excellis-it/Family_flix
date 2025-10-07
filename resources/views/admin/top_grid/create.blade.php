@@ -29,7 +29,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            
+
                             <div class="form-group col-md-6 mb-3">
                                 <label>Icon<span style="color: red;">*</span></label>
                                 <input type="file" name="icon" id="banner-img" class="form-control">
@@ -42,6 +42,15 @@
                             <div class="form-group col-md-6 mb-3">
                                 <img id="preview-banner-image" src="{{ asset('admin_assets/images/NoImageFound.jpg') }}"
                                     alt="preview image" style="max-height: 180px;">
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label>Icon Alt Tag</label>
+                                <input type="text" name="img_alt_tag" placeholder="Enter icon alt tag"
+                                    class="form-control">
+                                @if ($errors->has('img_alt_tag'))
+                                    <div class="error" style="color:red;">
+                                        {{ $errors->first('img_alt_tag') }}</div>
+                                @endif
                             </div>
 
                             <div class="form-group col-md-6 mb-3">
@@ -87,5 +96,5 @@
         });
 
     </script>
-  
+
 @endpush

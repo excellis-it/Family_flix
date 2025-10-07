@@ -33,7 +33,7 @@ class TopGridController extends Controller
 
             return response()->json(['data' => view('admin.top_grid.filter', compact('top_grids'))->render()]);
         }
-       
+
     }
 
     /**
@@ -65,18 +65,19 @@ class TopGridController extends Controller
         $top_grid = new TopGrid();
         $top_grid->title = $request->title;
         $top_grid->description = $request->description;
+        $top_grid->img_alt_tag = $request->img_alt_tag;
 
         if ($request->hasFile('icon')) {
             $request->validate([
                 'icon' => 'required|mimes:jpeg,jpg,png,gif',
             ]);
-            
+
             $file15 = $request->file('icon');
             $filename15 = date('YmdHi').$file15->getClientOriginalName();
             $image_path15 = $request->file('icon')->store('grid', 'public');
             $top_grid->icon = $image_path15;
         }
-        
+
         $top_grid->save();
 
         return redirect()->route('top-grid.index')->with('message','top grid added successfully');
@@ -122,17 +123,19 @@ class TopGridController extends Controller
         $update_top_grid = TopGrid::where('id',$request->id)->first();
         $update_top_grid->title = $request->title;
         $update_top_grid->description = $request->description;
-    
+        $update_top_grid->img_alt_tag = $request->img_alt_tag;
+
         if ($request->hasFile('icon')) {
             $request->validate([
                 'icon' => 'required',
             ]);
-            
+
             $file1= $request->file('icon');
             $filename1= date('YmdHi').$file1->getClientOriginalName();
             $image_path1 = $request->file('icon')->store('grid', 'public');
             $description->icon = $image_path1;
         }
+        $update_top_grid->save();
 
         return redirect()->route('top-grid.index')->with('message','top grid updated successfully');
 

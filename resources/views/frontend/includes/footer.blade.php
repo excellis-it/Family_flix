@@ -1,7 +1,7 @@
 
 @php
-$contact_details = App\Models\ContactDetails::get(); 
-$footer_cms =  App\Models\FooterCms::first(); 
+$contact_details = App\Models\ContactDetails::get();
+$footer_cms =  App\Models\FooterCms::first();
 @endphp
 
 
@@ -15,7 +15,7 @@ $footer_cms =  App\Models\FooterCms::first();
           <div class="row justify-content-between">
             <div class="col-lg-3 col-md-6 col-12">
               <div class="footer-logo">
-                <a href=""><img src="{{ Storage::url($footer_cms->footer_logo)}}" alt="" /></a>
+                <a href=""><img src="{{ Storage::url($footer_cms->footer_logo)}}" alt="{{$footer_cms->footer_logo_img_alt_tag ?? ''}}" /></a>
               </div>
             </div>
 
@@ -83,7 +83,7 @@ $footer_cms =  App\Models\FooterCms::first();
                 <div class="ftr-link ftr-btm-img text-center">
                   <img
                     src="{{ Storage::url($footer_cms->footer_image)}}"
-                    alt=""
+                    alt="{{$footer_cms->footer_image_img_alt_tag ?? ''}}"
                   />
                 </div>
               </div>

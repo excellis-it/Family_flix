@@ -28,7 +28,7 @@
 
                             <input type="hidden" value="{{ $footer_cms->id }}" name="id">
                             <div class="row">
-                              
+
                                 <div class="form-group col-md-6 mb-3">
                                     <label>Logo<span style="color: red;">*</span></label>
                                     <input type="file" name="footer_logo" id="footer_logo" class="form-control">
@@ -69,6 +69,25 @@
                                         <img id="preview-back-image"
                                             src="{{ asset('admin_assets/images/NoImageFound.jpg') }}" alt="preview image"
                                             style="max-height: 180px;">
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Logo Image Alt Tag</label>
+                                    <input type="text" name="footer_logo_img_alt_tag" id="footer_logo_img_alt_tag" class="form-control" value="{{ $footer_cms->footer_logo_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('footer_logo_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('footer_logo_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label>Image Alt Tag<span style="color: red;">*</span></label>
+                                    <input type="text" name="footer_image_img_alt_tag" id="footer_image_img_alt_tag"
+                                        class="form-control" value="{{ $footer_cms->footer_image_img_alt_tag ?? '' }}">
+                                    @if ($errors->has('footer_image_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('footer_image_img_alt_tag') }}</div>
                                     @endif
                                 </div>
 
