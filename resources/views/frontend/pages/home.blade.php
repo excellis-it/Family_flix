@@ -106,7 +106,7 @@
                                                                 <div class="eael-circle-content">
                                                                     <img decoding="async" style="width: 200px"
                                                                         src="{{ Storage::url($home_cms->section2_main_icon) }}"
-                                                                        alt="Logo" />
+                                                                        alt="The Family Flix streaming service" />
                                                                 </div>
                                                             </div>
                                                             @foreach ($ott_icons as $index => $ott_icon)

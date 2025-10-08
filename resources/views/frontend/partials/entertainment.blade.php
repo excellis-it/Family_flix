@@ -17,7 +17,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="entertainment-img-wrap">
                     <div class="entertainment-img">
-                        <img src="{{ Storage::url($entertainment->image) }}" alt="" />
+                        <img src="{{ Storage::url($entertainment->image) }}" alt="{{$entertainment->image_alt_tag ?? ''}}" />
                     </div>
                     <div class="entertainment-img-text">
                         <h4>{{ $entertainment->image_name }}</h4>
