@@ -583,6 +583,7 @@ class CmsController extends Controller
         $subscriptionUs_update->subscribe_title = $request->subscribe_title;
         $subscriptionUs_update->subscription_placeholder = $request->subscription_placeholder;
         $subscriptionUs_update->button_name = $request->button_name;
+        $subscriptionUs_update->section1_background_img_alt_tag = $request->section1_background_img_alt_tag;
         //section1_background_img upload
         if ($request->hasFile('section1_background_img')) {
             $request->validate([

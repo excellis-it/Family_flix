@@ -5,7 +5,7 @@
 <div class="shows-slider-wrap">
     <div class="shows-slider-box">
         <div class="shows-slider-img">
-            <img src="{{ Storage::url($show->product_image) }}" alt="" />
+            <img src="{{ Storage::url($show->product_image) }}" alt="{{$show->img_alt_tag ?? ''}}" />
             <div class="show-num">
                 <h2>{{ $index +1 }}</h2>
             </div>

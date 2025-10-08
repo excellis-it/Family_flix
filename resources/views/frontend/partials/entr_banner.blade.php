@@ -4,7 +4,7 @@
             <div class="imdb-slider-wrap">
                 <div class="imdb-slide-box">
                     <div class="imdb-slide-img">
-                        <img src="{{ Storage::url($banner->banner_image) }}" alt="" />
+                        <img src="{{ Storage::url($banner->banner_image) }}" alt="{{$banner->img_alt_tag ?? ''}}" />
                         <div class="imdb-slide-text">
                             <div class="imdb-slide-movie">
                                 <img src="{{ Storage::url($banner->banner_logo) }}" alt="" />
@@ -47,6 +47,6 @@
                 </div>
             </div>
         @endforeach
-       
+
     </div>
 </section>

@@ -48,6 +48,15 @@
                                 </div>
 
                                 <div class="form-group col-md-6 mb-3">
+                                    <label> Background Image Alt Tag</label>
+                                    <input type="text" name="section1_background_img_alt_tag" id="section1_background_img_alt_tag" class="form-control" value="{{ $subscription_cms->section1_background_img_alt_tag }}" placeholder="Enter image alt tag">
+                                    @if ($errors->has('section1_background_img_alt_tag'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('section1_background_img_alt_tag') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
                                     <label> Title<span style="color: red;">*</span></label>
                                     <input type="text" name="section1_title" value="{{ $subscription_cms->section1_title }}"
                                         class="form-control" placeholder="Enter title">

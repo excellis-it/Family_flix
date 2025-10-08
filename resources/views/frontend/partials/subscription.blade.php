@@ -1,6 +1,6 @@
 <section class="experience-sec" style="">
     <div class="experience-bg">
-        <img src="{{ Storage::url($subscriptions->section1_background_img) }}" alt="" />
+        <img src="{{ Storage::url($subscriptions->section1_background_img) }}" alt="{{$subscriptions->section1_background_img_alt_tag ?? ''}}" />
     </div>
     <div class="experience-box">
         <div class="container">
