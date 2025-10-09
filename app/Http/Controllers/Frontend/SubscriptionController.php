@@ -30,7 +30,9 @@ use App\Mail\UserSubscriptionMail;
 use App\Mail\AdminSubscriptionMail;
 use Illuminate\Support\Facades\DB;
 use App\Models\PaymentDetailMail;
+use App\Models\PaypalCredential;
 use App\Models\Plan as ModelsPlan;
+use App\Models\StripeCredential;
 use Braintree\Gateway;
 use Braintree\Transaction;
 use Braintree\Plan;
@@ -44,11 +46,19 @@ class SubscriptionController extends Controller
 
     public function __construct()
     {
-        $this->gateway = new Gateway([
-            'environment' => env('BRAINTREE_ENV'),
-            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
-            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
-            'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        // $this->gateway = new Gateway([
+        //     'environment' => env('BRAINTREE_ENV'),
+        //     'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+        //     'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+        //     'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        // ]);
+        $braintree = StripeCredential::where('status', 1)->first();
+
+         $this->gateway = new Gateway([
+            'environment' => $braintree->credential_name,
+            'merchantId' => $braintree->merchant_id,
+            'publicKey' => $braintree->stripe_key,
+            'privateKey' => $braintree->stripe_secret,
         ]);
     }
 
@@ -158,7 +168,7 @@ class SubscriptionController extends Controller
             ]);
 
             // throw new \Exception($customer);
-            // dd($customer);
+
             if ($customer->success) {
                 $customerId = $customer->customer->id;
 

@@ -10,6 +10,7 @@ class PaypalCredential extends Model
     use HasFactory;
 
     protected $fillable = [
+        'merchant_id',
         'client_id',
         'client_secret',
         'credential_name',

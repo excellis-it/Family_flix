@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    Paypal Credential Update
+    Braintree Credential Update
 @endsection
 @push('styles')
 @endpush
@@ -11,12 +11,12 @@
                 <div class="arrow_left"><a href="{{ route('credentials.index') }}" class="text-white"><i
                             class="ti ti-arrow-left"></i></a></div>
                 <div class="">
-                    <h3>Update Paypal {{Ucfirst($credential->credential_name)}} Credential</h3>
+                    <h3>Update Braintree {{Ucfirst($credential->credential_name)}} Credential</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                         <li><span class="bread-blod"><a href="{{ route('credentials.index') }}">
-                            Paypal Credential</a></span><span class="bread-slash">/</span></li>
-                        <li><span class="bread-blod">Update Paypal {{Ucfirst($credential->credential_name)}} Credential</span></li>
+                            Braintree Credential</a></span><span class="bread-slash">/</span></li>
+                        <li><span class="bread-blod">Update Braintree {{Ucfirst($credential->credential_name)}} Credential</span></li>
                     </ul>
                 </div>
             </div>
@@ -32,20 +32,30 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-4 mb-3">
-                                    <label for="inputEnterYourName" class="col-form-label"> Paypal Key<span
+                                    <label for="inputEnterYourName" class="col-form-label"> Merchant Id<span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" name="merchant_id" id="" class="form-control"
+                                        value="{{ $credential['merchant_id'] }}" placeholder="Enter Braintree Merchant Key">
+                                    @if ($errors->has('merchant_id'))
+                                        <div class="error" style="color:red;">
+                                            {{ $errors->first('merchant_id') }}</div>
+                                    @endif
+                                </div>
+                                <div class="form-group col-md-4 mb-3">
+                                    <label for="inputEnterYourName" class="col-form-label"> Braintree Key<span
                                             style="color: red;">*</span></label>
                                     <input type="text" name="client_id" id="" class="form-control"
-                                        value="{{ $credential['client_id'] }}" placeholder="Enter Paypal Key">
+                                        value="{{ $credential['client_id'] }}" placeholder="Enter Braintree Key">
                                     @if ($errors->has('client_id'))
                                         <div class="error" style="color:red;">
                                             {{ $errors->first('client_id') }}</div>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-4 mb-3">
-                                    <label for="inputEnterYourName" class="col-form-label">Paypal Secret <span style="color: red;">*</span></label>
+                                    <label for="inputEnterYourName" class="col-form-label">Braintree Secret <span style="color: red;">*</span></label>
                                     <div class="input-group">
                                         <input type="password" name="client_secret" id="client_secret" class="form-control"
-                                               value="{{ $credential['client_secret'] }}" placeholder="Enter Paypal Secret" autocomplete="off">
+                                               value="{{ $credential['client_secret'] }}" placeholder="Enter Braintree Secret" autocomplete="off">
                                         <span class="input-group-text" id="toggleClientSecret"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                                     </div>
                                     @if ($errors->has('client_secret'))

@@ -27,6 +27,7 @@ class PaypalCredentialController extends Controller
             $query = str_replace(" ", "%", $query);
             $credentials = PaypalCredential::where(function ($queryBuilder) use ($query) {
                 $queryBuilder->where('client_id', 'like', '%' . $query . '%')
+                    ->orWhere('merchant_id', 'like', '%' . $query . '%')
                     ->orWhere('client_secret', 'like', '%' . $query . '%')
                     ->orWhere('credential_name', 'like', '%' . $query . '%');
             })
@@ -98,6 +99,7 @@ class PaypalCredentialController extends Controller
         ]);
 
         $credential = PaypalCredential::find($id);
+        $credential->merchant_id = $request->merchant_id;
         $credential->client_id = $request->client_id;
         $credential->client_secret = $request->client_secret;
         $credential->status = $request->status;
@@ -118,7 +120,7 @@ class PaypalCredentialController extends Controller
             }
         }
 
-        return redirect()->route('credentials.index')->with('message', 'Paypal Credential Updated Successfully');
+        return redirect()->route('credentials.index')->with('message', 'Braintree Credential Updated Successfully');
     }
 
     /**
