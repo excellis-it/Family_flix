@@ -324,7 +324,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-right">
                                             <div class="step-div">
-                                                <h3>Your Oder</h3>
+                                                <h3>Your Order</h3>
                                             </div>
                                             <div class="form-right-table">
                                                 <table class="table">
@@ -388,7 +388,7 @@
                                                         <div class="cupon-div">
                                                             <div class="">
                                                                 <input type="text" class="form-control"
-                                                                    id="coupon_code" placeholder="Cupon Code">
+                                                                    id="coupon_code" placeholder="Coupon Code">
                                                             </div>
                                                         </div>
                                                     </div>
