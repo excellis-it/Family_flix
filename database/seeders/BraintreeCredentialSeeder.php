@@ -18,32 +18,32 @@ class BraintreeCredentialSeeder extends Seeder
     {
        $credintial_array = [
             // [
-            //     'merchant_id' => '63wmxg6vmsqrbs8w',
-            //     'client_id' => '3b53hcdj6x5c2jby',
-            //     'client_secret' => 'e6c9dfc48b7e83813df1df20f3168574',
+            //     'merchant_id' => 'zxhm28ppxmzfvqwd',
+            //     'client_id' => '84c5hbbky7jqrdmg',
+            //     'client_secret' => 'd0eed9a987abce9e171eabb1ae2233d7',
             //     'credential_name' => 'sandbox',
             //     'status' => 1
             // ],
             // [
-            //     'merchant_id' => '63wmxg6vmsqrbs8w',
-            //     'client_id' => '3b53hcdj6x5c2jby',
-            //     'client_secret' => 'e6c9dfc48b7e83813df1df20f3168574',
+            //     'merchant_id' => 'zxhm28ppxmzfvqwd',
+            //     'client_id' => '84c5hbbky7jqrdmg',
+            //     'client_secret' => 'd0eed9a987abce9e171eabb1ae2233d7',
             //     'credential_name' => 'live',
             //     'status' => 0
             // ],
 
             [
-                'merchant_id' => '63wmxg6vmsqrbs8w',
-                'stripe_key' => '3b53hcdj6x5c2jby',
-                'stripe_secret' => 'e6c9dfc48b7e83813df1df20f3168574',
+                'merchant_id' => 'zxhm28ppxmzfvqwd',
+                'stripe_key' => '84c5hbbky7jqrdmg',
+                'stripe_secret' => 'd0eed9a987abce9e171eabb1ae2233d7',
                 'credential_name' => 'sandbox',
                 'status' => 1
             ],
 
             [
-                'merchant_id' => '63wmxg6vmsqrbs8w',
-                'stripe_key' => '3b53hcdj6x5c2jby',
-                'stripe_secret' => 'e6c9dfc48b7e83813df1df20f3168574',
+                'merchant_id' => 'zxhm28ppxmzfvqwd',
+                'stripe_key' => '84c5hbbky7jqrdmg',
+                'stripe_secret' => 'd0eed9a987abce9e171eabb1ae2233d7',
                 'credential_name' => 'live',
                 'status' => 0
             ]
