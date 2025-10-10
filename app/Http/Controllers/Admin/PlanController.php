@@ -10,6 +10,8 @@ use App\Models\PlanSpecification;
 use App\Traits\PayPalTrait;
 use Carbon\Carbon;
 use App\Helpers\Helper;
+use App\Models\PaypalCredential;
+use App\Models\StripeCredential;
 use Stripe\Stripe;
 use Stripe\Product;
 use Stripe\Price;
@@ -25,11 +27,18 @@ class PlanController extends Controller
 
     public function __construct()
     {
-        $this->gateway = new Gateway([
-            'environment' => env('BRAINTREE_ENV'),
-            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
-            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
-            'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        // $this->gateway = new Gateway([
+        //     'environment' => env('BRAINTREE_ENV'),
+        //     'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+        //     'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+        //     'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        // ]);
+        $braintree = StripeCredential::where('status', 1)->first();
+         $this->gateway = new Gateway([
+            'environment' => $braintree->credential_name,
+            'merchantId' => $braintree->merchant_id,
+            'publicKey' => $braintree->stripe_key,
+            'privateKey' => $braintree->stripe_secret,
         ]);
     }
 

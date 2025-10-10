@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Paypal Credential List
+Braintree Credential List
 @endsection
 @push('styles')
 <style>
@@ -15,7 +15,7 @@ Paypal Credential List
         <div class="breadcome-list">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <h3>Paypal Credential</h3>
+                    <h3>Braintree Credential</h3>
                     <ul class="breadcome-menu mb-0">
                         <li><a href="{{ route('admin.dashboard') }}">Home</a> <span class="bread-slash">/</span></li>
                         <li><span class="bread-blod"> List</span></li>
@@ -56,8 +56,9 @@ Paypal Credential List
                                 id="myTable">
                                 <thead class="text-white fs-4 bg_blue">
                                     <tr>
-                                        <th><span class="fs-4 fw-semibold mb-0">Paypal Key</span></th>
-                                        <th><span class="fs-4 fw-semibold mb-0">Paypal Secret</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Merchant Id</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Braintree Key</span></th>
+                                        <th><span class="fs-4 fw-semibold mb-0">Braintree Secret</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Type</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Status</span></th>
                                         <th><span class="fs-4 fw-semibold mb-0">Action</span></th>

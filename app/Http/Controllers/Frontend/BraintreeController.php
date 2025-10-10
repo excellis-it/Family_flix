@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use App\Models\PaymentDetailMail;
+use App\Models\PaypalCredential;
 use App\Models\UserSubscriptionRecurring;
 use App\Traits\PayPalTrait;
 use Carbon\Carbon;
@@ -47,12 +48,19 @@ class BraintreeController extends Controller
 
     public function __construct()
     {
-        $this->gateway = new Gateway([
-            'environment' => env('BRAINTREE_ENV'),
-            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
-            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
-            'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+         $braintree = StripeCredential::where('status', 1)->first();
+         $this->gateway = new Gateway([
+            'environment' => $braintree->credential_name,
+            'merchantId' => $braintree->merchant_id,
+            'publicKey' => $braintree->stripe_key,
+            'privateKey' => $braintree->stripe_secret,
         ]);
+        // $this->gateway = new Gateway([
+        //     'environment' => env('BRAINTREE_ENV'),
+        //     'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+        //     'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+        //     'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        // ]);
     }
 
 

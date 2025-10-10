@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\AffiliateMarketer;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaypalCredential;
 use Illuminate\Http\Request;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StripeConnect;
+use App\Models\StripeCredential;
 use App\Models\User;
 use App\Models\WalletMoneyTransaction;
 use Braintree\Gateway;
@@ -21,13 +23,20 @@ class WalletController extends Controller
     protected $gateway;
     public function __construct()
     {
-        $this->stripe = new StripeClient(env('STRIPE_SECRET'));
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-        $this->gateway = new Gateway([
-            'environment' => env('BRAINTREE_ENV'),
-            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
-            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
-            'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        // $this->stripe = new StripeClient(env('STRIPE_SECRET'));
+        // Stripe::setApiKey(env('STRIPE_SECRET'));
+        // $this->gateway = new Gateway([
+        //     'environment' => env('BRAINTREE_ENV'),
+        //     'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+        //     'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+        //     'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+        // ]);
+        $braintree = StripeCredential::where('status', 1)->first();
+         $this->gateway = new Gateway([
+            'environment' => $braintree->credential_name,
+            'merchantId' => $braintree->merchant_id,
+            'publicKey' => $braintree->stripe_key,
+            'privateKey' => $braintree->stripe_secret,
         ]);
     }
 
