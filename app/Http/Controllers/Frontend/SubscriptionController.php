@@ -65,6 +65,7 @@ class SubscriptionController extends Controller
 
     public function createSubscriptionBraintree(Request $request)
     {
+        //dd(1);
         $rules = [
             'email' => 'required|email',
             'first_name' => 'required|string|max:255',
@@ -75,7 +76,7 @@ class SubscriptionController extends Controller
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
             'post_code' => 'required|string|max:20',
-            'phone' => 'required|numeric',
+            'phone' => 'required|numeric|unique:users,phone',
             'payment_method_nonce' => 'required|string',
             'plan_id' => 'required|integer',
         ];
@@ -334,7 +335,6 @@ class SubscriptionController extends Controller
     //
     public function createSubscription(Request $request)
     {
-
         $rules = [
             'email' => 'required|email',
             'first_name' => 'required|string|max:255',
