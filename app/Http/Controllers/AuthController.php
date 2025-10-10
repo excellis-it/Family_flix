@@ -39,7 +39,6 @@ class AuthController extends Controller
 
     public function registerStore(Request $request)
     {
-
         $request->validate([
             'full_name'     => 'required',
             'email'    => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
@@ -54,9 +53,9 @@ class AuthController extends Controller
 
 
 
-        if ($request->input('captcha') !== session('captcha')) {
-            return back()->withErrors(['captcha' => 'Invalid CAPTCHA. Please try again.']);
-        }
+        // if ($request->input('captcha') != session('captcha')) {
+        //     return back()->withErrors(['captcha' => 'Invalid CAPTCHA. Please try again.']);
+        // }
 
         $input = $request->all();
         $user = new User;
@@ -88,7 +87,7 @@ class AuthController extends Controller
 
     public function loginCheck(Request $request)
     {
-        
+
         $request->validate([
             'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'password' => 'required|min:8',
@@ -129,5 +128,5 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-   
+
 }
