@@ -24,11 +24,11 @@ class ProfileController extends Controller
 
     public function customerProfileUpdate(Request $request)
     {
-        
-        
         $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' => 'required|min:8|same:password',
         ]);
 
         if ($request->hasFile('image')) {
@@ -54,14 +54,10 @@ class ProfileController extends Controller
 
         //password update
         if ($request->password) {
-            $request->validate([
-                'password' => 'required|min:8|password_confirmation',
-            ]);
-            $user->password = Hash::make($request->password);
+            $user->password = bcrypt($request->password);
         }
         $user->update();
         return redirect()->back()->with('message', 'Profile updated successfully');
-        
     }
 
     public function customerPassword()
@@ -84,6 +80,5 @@ class ProfileController extends Controller
         $data->password = Hash::make($request->new_password);
         $data->update();
         return redirect()->back()->with('message', 'Password updated successfully.');
-        
     }
 }
