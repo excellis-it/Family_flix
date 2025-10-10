@@ -139,6 +139,7 @@
                         required: true,
                         email: true,
                     },
+                    
                     password: {
                         minlength: 8
                     },
