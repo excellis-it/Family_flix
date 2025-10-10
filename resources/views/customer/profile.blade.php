@@ -16,15 +16,18 @@
                         <div class="user-list">
                             <ul>
                                 {{-- <li class="active-1"><a href="">Dashboard</a></li> --}}
-                                <li class="{{ Request::is('customer/subscription*') ? 'active-1' : '' }}"><a href="{{ route('customer.subscription') }}">Subscribtions</a></li>
-                                <li class="{{ Request::is('customer/profile*') ? 'active-1' : '' }}"><a href="{{ route('customer.profile') }}">Account details</a></li>
+                                <li class="{{ Request::is('customer/subscription*') ? 'active-1' : '' }}"><a
+                                        href="{{ route('customer.subscription') }}">Subscriptions</a></li>
+                                <li class="{{ Request::is('customer/profile*') ? 'active-1' : '' }}"><a
+                                        href="{{ route('customer.profile') }}">Account details</a></li>
                                 <li><a href="{{ route('customer.logout') }}">Log out</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <form action="{{ route('customer.profile.update') }}" method="post" enctype="multipart/form-data" id="customer-profile">
-                           @csrf
+                        <form action="{{ route('customer.profile.update') }}" method="post" enctype="multipart/form-data"
+                            id="customer-profile">
+                            @csrf
                             <div class="user-form user-list">
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
@@ -36,8 +39,9 @@
                                                         alt="" /></a>
                                             @else
                                                 <a href="{{ Storage::url(Auth::user()->image) }}" target="_blank">
-                                                    <img src="{{ Storage::url(Auth::user()->image) }}" class="rounded-circle shadow"
-                                                        width="130px" height="130px" alt=""></a>
+                                                    <img src="{{ Storage::url(Auth::user()->image) }}"
+                                                        class="rounded-circle shadow" width="130px" height="130px"
+                                                        alt=""></a>
                                             @endif
                                         </div>
                                     </div>
@@ -45,46 +49,53 @@
                                         <div class="form-group-wrap">
                                             <label for="" class="form-label">Full Name<span class="red">*</span>
                                             </label>
-                                            <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" id="" placeholder="">
+                                            <input type="text" name="name" class="form-control"
+                                                value="{{ Auth::user()->name }}" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group-wrap">
                                             <label for="" class="form-label">Email <span class="red">*</span>
                                             </label>
-                                            <input type="text"  name="email" value="{{ Auth::user()->email }}" class="form-control" id="" placeholder="">
+                                            <input type="text" name="email" value="{{ Auth::user()->email }}"
+                                                class="form-control" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group-wrap">
-                                            <label for="" class="form-label">Phone 
+                                            <label for="" class="form-label">Phone
                                             </label>
-                                            <input type="text" name="phone"  value="{{ Auth::user()->phone }}" class="form-control" id="" placeholder="">
+                                            <input type="text" name="phone" value="{{ Auth::user()->phone }}"
+                                                class="form-control" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group-wrap">
-                                            <label for="" class="form-label">Password 
+                                            <label for="" class="form-label">Password
                                             </label>
-                                            <input type="text" name="password" class="form-control" id="" placeholder="">
+                                            <input type="text" name="password" class="form-control" id=""
+                                                placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group-wrap">
-                                            <label for="" class="form-label">Confirm Password 
+                                            <label for="" class="form-label">Confirm Password
                                             </label>
-                                            <input type="text"  name="password_confirmation" class="form-control" id="" placeholder="">
+                                            <input type="text" name="password_confirmation" class="form-control"
+                                                id="" placeholder="">
                                         </div>
                                     </div>
+
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group-wrap">
                                             <label for="" class="form-label">Profile Picture
                                             </label>
-                                            <input type="file" class="form-control" name="image" id="" placeholder="">
+                                            <input type="file" class="form-control" name="image" id=""
+                                                placeholder="">
                                         </div>
                                     </div>
-                                    
-                                
+
+
                                     <div class="col-xl-12 text-center">
                                         <div class="mt-4">
                                             <button type="submit" class="log-btn">Submit</button>
@@ -98,56 +109,67 @@
             </div>
         </div>
     </section>
-    @endsection
+@endsection
 
-    @push('scripts')
-        <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
+@push('scripts')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-                    reader.onload = function(e) {
-                        $('#blah')
-                            .attr('src', e.target.result);
-                    };
+                reader.onload = function(e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
 
-                    reader.readAsDataURL(input.files[0]);
-                }
+                reader.readAsDataURL(input.files[0]);
             }
-        </script>
+        }
+    </script>
 
-        <script>
+    <script>
+        $(document).ready(function() {
 
-            $(document).ready(function() {
-                
-                $('#customer-profile').validate({
-                    rules: {
-                        name: {
-                            required: true,
-                        },
-                        email: {
-                            required: true,
-                            email: true,
-                        },
-                        
-                        
+            $('#customer-profile').validate({
+                rules: {
+                    name: {
+                        required: true,
                     },
-                    messages: {
-                        name: {
-                            required: "Please enter your name",
-                        },
-                        email: {
-                            required: "Please enter your email",
-                            email: "Please enter a valid email"
-                        },
-                       
+                    email: {
+                        required: true,
+                        email: true,
                     },
-                    submitHandler: function(form) {
-                        form.submit();
+                    password: {
+                        minlength: 8
+                    },
+                    password_confirmation: {
+                        minlength: 8,
+                        equalTo: "[name='password']"
                     }
-                });
+
+
+                },
+                messages: {
+                    name: {
+                        required: "Please enter your name",
+                    },
+                    email: {
+                        required: "Please enter your email",
+                        email: "Please enter a valid email"
+                    },
+                    password: {
+                        minlength: "Password must be at least 8 characters"
+                    },
+                    password_confirmation: {
+                        minlength: "Password must be at least 8 characters",
+                        equalTo: "Password and Confirm Password must be the same"
+                    }
+
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
             });
-
-
-        </script>
-    @endpush
+        });
+    </script>
+@endpush

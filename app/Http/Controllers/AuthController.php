@@ -42,7 +42,7 @@ class AuthController extends Controller
         $request->validate([
             'full_name'     => 'required',
             'email'    => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
-            'phone' => 'required|numeric',
+            'phone' => 'required|numeric|unique:users,phone',
             'password' => 'required|min:8',
             'confirm_password' => 'required|min:8|same:password',
             'captcha' => 'required|captcha'

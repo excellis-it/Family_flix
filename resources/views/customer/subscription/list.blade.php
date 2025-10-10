@@ -1,6 +1,6 @@
 @extends('customer.layouts.master')
 @section('title')
-    Dashboard
+    Subscriptions
 @endsection
 @push('styles')
     <style>
@@ -10,10 +10,10 @@
         }
     </style>
 @endpush
-@section('head')
+{{-- @section('head')
     Dashboard
-@endsection
-@section('content') 
+@endsection --}}
+@section('content')
     @php
         use App\Helpers\Helper;
     @endphp
@@ -87,8 +87,8 @@
                                                             Renewal
                                                         </span>
                                                     @endif
-                                                    
-                                                    
+
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12 mt-4">
+                    {{-- <div class="col-lg-12 mt-4">
                         <div style="height:1500px;">
                             @php
                                 $url = 'https://myfamilycinema.com/en/download-my-family-cinema/';
@@ -127,7 +127,7 @@
                             <iframe src="{{ $content }}" name="iframe_all" scrolling="yes" frameborder="0"
                                 height="100px" width="200px"></iframe>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

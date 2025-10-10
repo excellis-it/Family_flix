@@ -28,7 +28,7 @@
                     <div class="col-lg-8">
                         <div class="user-list">
                             <div class="subscibtion-head">
-                                <h3>Subscribtion details</h3>
+                                <h3>Subscriptions details</h3>
                             </div>
                             <div class="row">
                                 <div class="col-lg-8">
@@ -54,7 +54,7 @@
                                             <li><span class="fw-600">Start date:-</span>{{ date('d M,Y', strtotime($customer_subscription->plan_start_date)) ?? 'N/A' }}</li>
                                             <li><span class="fw-600">Expiry date:-</span>{{ date('d M,Y', strtotime($customer_subscription->plan_expiry_date)) ?? 'N/A' }}</li>
                                             <li>
-                                                
+
                                         </ul>
                                     </div>
                                 </div>

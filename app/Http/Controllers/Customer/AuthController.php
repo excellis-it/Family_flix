@@ -21,12 +21,13 @@ class AuthController extends Controller
 
     public function registerStore(Request $request)
     {
-        
+
         $request->validate([
             'full_name'     => 'required',
             'email'    => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'password' => 'required|min:8',
             'confirm_password' => 'required|min:8|same:password',
+            'phone' => 'required|numeric|unique:users,phone',
             'captcha' => 'required|captcha'
         ], [
             'email.email' => 'The email format is invalid.',
